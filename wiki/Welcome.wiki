@@ -1,0 +1,7 @@
+#summary Welcome to DotNetKicks open source project
+
+= Introduction =
+
+It is early days for this project, please check back soon.
+
+
