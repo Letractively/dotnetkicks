@@ -6,5 +6,4 @@ It is early days for this project, please check back soon.
 
 = Update (31 March 2007) =
 
-I have added some code to svn, more will be coming over this week. 
-
+I have added some code to svn, more will be published over this week. 
