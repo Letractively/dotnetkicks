@@ -1,0 +1,2 @@
+E:\Dev\misc\newbuild>sonic.exe generate /generatedNamespace Incremental.Kick.Dat
+aAccess /out Product\Incremental.Kick\DataAccess\Generated
