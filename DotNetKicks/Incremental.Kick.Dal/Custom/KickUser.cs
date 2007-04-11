@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-namespace Incremental.Kick.DataAccess
+namespace Incremental.Kick.Dal
 {
     public partial class KickUser
     {

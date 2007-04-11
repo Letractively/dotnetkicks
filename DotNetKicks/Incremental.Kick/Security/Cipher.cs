@@ -11,5 +11,14 @@ using System.Security.Cryptography;
 namespace Incremental.Kick.Security
 {
     public class Cipher {
+        internal static string EncryptToBase64(string plainSecurityToken)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static string DecryptFromBase64(string ciphertext)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

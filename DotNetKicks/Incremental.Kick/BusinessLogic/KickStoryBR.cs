@@ -1,6 +1,6 @@
 using System;
 using System.Web;
-using Incremental.Kick.DataAccess;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using System.Text.RegularExpressions;
 using Incremental.Kick.Common.Enums;

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incremental.Kick.DataAccess;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
 

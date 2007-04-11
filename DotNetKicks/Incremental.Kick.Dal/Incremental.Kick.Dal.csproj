@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{485BE7A0-08D8-438D-B5CC-55FB3A010130}</ProjectGuid>
+    <ProjectGuid>{70213D29-4904-4E0A-AA1A-2519C45E8D08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Incremental.Kick</RootNamespace>
-    <AssemblyName>Incremental.Kick</AssemblyName>
+    <RootNamespace>Incremental.Kick.Dal</RootNamespace>
+    <AssemblyName>Incremental.Kick.Dal</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,34 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\KickCommentBR.cs" />
-    <Compile Include="BusinessLogic\KickStoryBR.cs" />
-    <Compile Include="BusinessLogic\KickTagBR.cs" />
-    <Compile Include="BusinessLogic\KickUserBR.cs" />
-    <Compile Include="Caching\CacheHelper.cs" />
-    <Compile Include="Caching\CacheManager.cs" />
-    <Compile Include="Caching\KickCategoryCache.cs" />
-    <Compile Include="Caching\KickHostCache.cs" />
-    <Compile Include="Caching\KickStoryCache.cs" />
-    <Compile Include="Caching\KickTagCache.cs" />
-    <Compile Include="Caching\KickUserCache.cs" />
-    <Compile Include="Helpers\CompressionHelper.cs" />
-    <Compile Include="Helpers\PasswordGenerator.cs" />
-    <Compile Include="Helpers\ThreadSafeRandom.cs" />
+    <Compile Include="Custom\KickComment.cs" />
+    <Compile Include="Custom\KickStory.cs" />
+    <Compile Include="Custom\KickTag.cs" />
+    <Compile Include="Custom\KickUser.cs" />
+    <Compile Include="Generated\AllStructs.cs" />
+    <Compile Include="Generated\KickCategory.cs" />
+    <Compile Include="Generated\KickComment.cs" />
+    <Compile Include="Generated\KickHost.cs" />
+    <Compile Include="Generated\KickStory.cs" />
+    <Compile Include="Generated\KickStoryKick.cs" />
+    <Compile Include="Generated\KickStoryUserHostTag.cs" />
+    <Compile Include="Generated\KickTag.cs" />
+    <Compile Include="Generated\KickUser.cs" />
+    <Compile Include="Generated\StoredProcedures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Cipher.cs" />
-    <Compile Include="Security\Rijndael.cs" />
-    <Compile Include="Security\SecurityToken.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Incremental.Kick.Common\Incremental.Kick.Common.csproj">
-      <Project>{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}</Project>
-      <Name>Incremental.Kick.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Incremental.Kick.Dal\Incremental.Kick.Dal.csproj">
-      <Project>{70213D29-4904-4E0A-AA1A-2519C45E8D08}</Project>
-      <Name>Incremental.Kick.Dal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SubSonic;
-using TempGJ;
 using System.Data;
 
-namespace Incremental.Kick.DataAccess
+namespace Incremental.Kick.Dal
 {
     public partial class KickTag
     {
@@ -42,7 +41,9 @@ namespace Incremental.Kick.DataAccess
         {
             //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             KickTagCollection tags = new KickTagCollection();
-            tags.Load(SPs.GetKickTagsByStoryID(storyID).GetDataSet().Tables[0]);
+
+            //TODO: GJ: implement
+            //tags.Load(SPs.GetKickTagsByStoryID(storyID).GetDataSet().Tables[0]);
             return tags;
         }
 
@@ -50,7 +51,8 @@ namespace Incremental.Kick.DataAccess
         {
             //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             KickTagCollection tags = new KickTagCollection();
-            tags.Load(SPs.GetKickTagsByUserID(userID).GetDataSet().Tables[0]);
+            //TODO: GJ: implement
+            //tags.Load(SPs.GetKickTagsByUserID(userID).GetDataSet().Tables[0]);
             return tags;
         }
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Incremental.Kick.DataAccess
+namespace Incremental.Kick.Dal
 {
     public partial class KickStory
     {
