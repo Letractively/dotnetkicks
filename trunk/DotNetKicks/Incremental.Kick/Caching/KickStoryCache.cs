@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incremental.Kick.DataAccess;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Common.Enums;
 
 namespace Incremental.Kick.Caching
@@ -11,8 +11,8 @@ namespace Incremental.Kick.Caching
 
         public static void RemoveStory(int storyID, string storyIdentifier)
         {
-            GetStoryRowCache().Remove(GetStoryCacheKey(storyIdentifier));
-            GetCommentTableCache().Remove(GetCommentCacheKey(storyID));
+            GetStoryCache().Remove(GetStoryCacheKey(storyIdentifier));
+            GetCommentCollectionCache().Remove(GetCommentCacheKey(storyID));
         }
 
         public static KickStory GetStory(string storyIdentifier)
@@ -46,12 +46,12 @@ namespace Incremental.Kick.Caching
 
             if (comments == null)
             {
-                comments = KickComment.FetchCommentByStoryID(storyID);
+                comments = KickComment.FetchCommentsByStoryID(storyID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                commentCache.Insert(cacheKey, commentTable, 500); //TODO: config
+                commentCache.Insert(cacheKey, comments, 500); //TODO: config
             }
 
-            return commentTable;
+            return comments;
         }
 
         private static string GetCommentCacheKey(int storyID)
@@ -117,7 +117,7 @@ namespace Incremental.Kick.Caching
 
             return count;
         }
-
+        /*
         public static Kick_StoryTable GetUserKickedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)
         {
             string cacheKey = String.Format("Kick_StoryTable_UserKicked_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
@@ -325,6 +325,7 @@ namespace Incremental.Kick.Caching
 
             return storyCount;
         }
+         */
 
 
         private static CacheManager<string, KickStoryCollection> GetStoryCollectionCache()

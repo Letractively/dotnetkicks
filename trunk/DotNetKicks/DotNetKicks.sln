@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Common", "Incremental.Kick.Common\Incremental.Kick.Common.csproj", "{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick", "Incremental.Kick\Incremental.Kick.csproj", "{485BE7A0-08D8-438D-B5CC-55FB3A010130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Dal", "Incremental.Kick.Dal\Incremental.Kick.Dal.csproj", "{70213D29-4904-4E0A-AA1A-2519C45E8D08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{485BE7A0-08D8-438D-B5CC-55FB3A010130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{485BE7A0-08D8-438D-B5CC-55FB3A010130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{485BE7A0-08D8-438D-B5CC-55FB3A010130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{485BE7A0-08D8-438D-B5CC-55FB3A010130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

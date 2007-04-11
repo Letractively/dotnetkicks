@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using Incremental.Kick.DataAccess;
+using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Caching
 {

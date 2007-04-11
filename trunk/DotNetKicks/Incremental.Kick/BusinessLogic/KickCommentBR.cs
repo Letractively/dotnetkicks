@@ -1,5 +1,5 @@
 using System;
-using Incremental.Kick.DataAccess;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.BusinessLogic
