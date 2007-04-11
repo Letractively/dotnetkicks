@@ -71,7 +71,7 @@ namespace Incremental.Kick.Caching
             {
                 stories = new Kick_StoryBR().GetStoriesByIsKickedAndHostID(isKicked, hostID, pageNumber, pageSize).Kick_Story;
 
-                stories = KickStory.
+                //stories = KickStory.
 
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, 500); //TODO: GJ: config
@@ -101,21 +101,17 @@ namespace Incremental.Kick.Caching
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy)
         {
             string cacheKey = String.Format("Kick_PopularStoryCount_{0}_{1}", hostID, sortBy);
-            CacheManager<string, int> countCache = GetCountCache();
+            CacheManager<string, int?> countCache = GetCountCache();
 
-            int count; //TODO: GJ: use nullable count to prevent current race condition
-            if (countCache.ContainsKey(cacheKey))
-            {
-                count = countCache[cacheKey];
-            }
-            else
+            int? count = countCache[cacheKey];
+            if (count == null)
             {
                 count = Kick_StoryBR.GetPopularStoriesCount(hostID, sortBy);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                countCache.Insert(cacheKey, count, WebUIConfigReader.GetConfig().CategoryStoryCountCacheDurationInSeconds);
+                countCache.Insert(cacheKey, count, 500); //TODO: GJ: config
             }
 
-            return count;
+            return count.Value;
         }
         /*
         public static Kick_StoryTable GetUserKickedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)

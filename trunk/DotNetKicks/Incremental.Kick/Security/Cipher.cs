@@ -20,5 +20,15 @@ namespace Incremental.Kick.Security
         {
             throw new Exception("The method or operation is not implemented.");
         }
+
+        internal static string GenerateSalt()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static string Hash(string password, string passwordSalt)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }
