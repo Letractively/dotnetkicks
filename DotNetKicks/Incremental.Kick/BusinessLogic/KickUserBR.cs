@@ -5,16 +5,16 @@ using Incremental.Kick.Security;
 
 namespace Incremental.Kick.BusinessLogic
 {
-    public class KickUserBR
+    public class UserBR
     {
-        public KickUser GetByUserID(int userID)
+        public User GetByUserID(int userID)
         {
             return GetByUserID(userID, false);
         }
 
-        public KickUser GetByUserID(int userID, bool skipUpdateLastActiveOn)
+        public User GetByUserID(int userID, bool skipUpdateLastActiveOn)
         {
-            KickUser user = KickUser.FetchByID(userID);
+            User user = User.FetchByID(userID);
 
 
             if (!skipUpdateLastActiveOn)
@@ -25,13 +25,13 @@ namespace Incremental.Kick.BusinessLogic
         }
 
         //TODO: GJ: if this is not used elsewhere, move inline
-        public static void UpdateLastActiveOn(KickUser user)
+        public static void UpdateLastActiveOn(User user)
         {
             user.LastActiveOn = DateTime.Now;
             user.Save();
         }
 
-        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, KickHost host)
+        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host)
         {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
             username = username.Trim();
@@ -39,16 +39,16 @@ namespace Incremental.Kick.BusinessLogic
 
             //TODO: GJ: extract to method
             //ensure that the username and email is unique
-            if (KickUser.FetchByParameter(KickUser.Columns.Username, username).Read())
+            if (User.FetchByParameter(User.Columns.Username, username).Read())
                 throw new ApplicationException("TEMP: Username already exists");
-            if (KickUser.FetchByParameter(KickUser.Columns.Email, email).Read())
+            if (User.FetchByParameter(User.Columns.Email, email).Read())
                 throw new ApplicationException("TEMP: Email already exists");
 
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
             string passwordHash = Cipher.Hash(password, passwordSalt);
 
-            KickUser user = new KickUser();
+            User user = new User();
             user.Username = username;
             user.Email = email;
             user.Password = passwordHash;
@@ -72,7 +72,7 @@ namespace Incremental.Kick.BusinessLogic
             username = username.Trim();
             password = password.Trim();
 
-            KickUser user = KickUser.FetchUserByUsername(username);
+            User user = User.FetchUserByUsername(username);
             if (user == null)
                 throw new ApplicationException(string.Format("Username [{0}] not found", username));
 
@@ -89,7 +89,7 @@ namespace Incremental.Kick.BusinessLogic
 
         public static void BanUser(string username)
         {
-            KickUser user = KickUser.FetchUserByUsername(username);
+            User user = User.FetchUserByUsername(username);
             user.IsBanned = true;
             user.Save();
 
@@ -99,19 +99,19 @@ namespace Incremental.Kick.BusinessLogic
             //DeleteUserStories(userDS.Kick_User[0].UserID);
         }
 
-        public static void DeleteUserStories(KickUser user)
+        public static void DeleteUserStories(User user)
         {
             //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
             throw new NotImplementedException();
         }
 
-        public static void UpdatePassword(int userID, string newPassword, KickHost host)
+        public static void UpdatePassword(int userID, string newPassword, Host host)
         {
             newPassword = newPassword.Trim();
             string passwordSalt = Cipher.GenerateSalt();
             string passwordHash = Cipher.Hash(newPassword, passwordSalt);
 
-            KickUser user = KickUser.FetchByID(userID);
+            User user = User.FetchByID(userID);
             user.Password = passwordHash;
             user.PasswordSalt = passwordSalt;
             user.IsGeneratedPassword = false;
@@ -125,7 +125,7 @@ namespace Incremental.Kick.BusinessLogic
 
         public static void UpdateAdSenseID(int userID, string adSenseID)
         {
-            KickUser user = KickUser.FetchByID(userID);
+            User user = User.FetchByID(userID);
             user.AdsenseID = adSenseID;
             user.Save(); 
             
@@ -134,17 +134,17 @@ namespace Incremental.Kick.BusinessLogic
             //TODO: send an email
         }
 
-        public static void SendPasswordResetEmail(int userID, KickHost host)
+        public static void SendPasswordResetEmail(int userID, Host host)
         {
-            KickUser user = KickUser.FetchByID(userID);
+            User user = User.FetchByID(userID);
             //TODO: GJ: send email
            // EmailHelper.SendPasswordResetEmail(user.Email, user.Username, user.LastActiveOn, host);
         }
 
-        public static void ResetPassword(int userID, KickHost host)
+        public static void ResetPassword(int userID, Host host)
         {
             //generate a password
-            KickUser user = KickUser.FetchByID(userID);
+            User user = User.FetchByID(userID);
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
             string passwordHash = Cipher.Hash(password, passwordSalt);

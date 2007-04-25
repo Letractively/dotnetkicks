@@ -5,9 +5,9 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.BusinessLogic
 {
-    public class KickTagBR
+    public class TagBR
     {
-        /*public static TagList GetOrInsertTags(string tagString, KickUserProfile user)
+        /*public static TagList GetOrInsertTags(string tagString, UserProfile user)
         {
             List<string> rawTags = TagHelper.DistillTagInput(tagString, user);
 
@@ -17,15 +17,15 @@ namespace Incremental.Kick.BusinessLogic
             foreach (string tag in rawTags)
             {
                 //TODO: GJ: get from cache
-                Kick_TagTable kickTagTable = tagBR.GetTagByTagIdentifier(tag).Kick_Tag;
+                Kick_TagTable TagTable = tagBR.GetTagByTagIdentifier(tag).Kick_Tag;
 
-                if (kickTagTable.Count == 0)
+                if (TagTable.Count == 0)
                 {
                     newTagDS.Kick_Tag.AddRow(tag);
                 }
                 else
                 {
-                    tags.Add(new Tag(kickTagTable[0].TagID, kickTagTable[0].TagIdentifier, 1));
+                    tags.Add(new Tag(TagTable[0].TagID, TagTable[0].TagIdentifier, 1));
                 }
             }
 
@@ -43,20 +43,20 @@ namespace Incremental.Kick.BusinessLogic
 /*
         public TagList GetUserTags(int userID)
         {
-            return KickTagDao.GetUserTags(userID);
+            return TagDao.GetUserTags(userID);
         }
 
         public TagList GetUserHostTags(int userID, int hostID)
         {
-            return KickTagDao.GetUserHostTags(userID, hostID);
+            return TagDao.GetUserHostTags(userID, hostID);
         }
 
         public TagList GetStoryTags(int storyID)
         {
-            return KickTagDao.GetStoryTags(storyID);
+            return TagDao.GetStoryTags(storyID);
         }
 
-        public TagList AddUserStoryTags(string tagString, KickUserProfile user, int storyID, int hostID)
+        public TagList AddUserStoryTags(string tagString, UserProfile user, int storyID, int hostID)
         {
             TagList tags = Kick_TagBR.GetOrInsertTags(tagString, user);
 
@@ -76,7 +76,7 @@ namespace Incremental.Kick.BusinessLogic
         {
             TagList tags = new TagList();
 
-            return KickTagDao.GetUserStoryTags(userID, storyID);
+            return TagDao.GetUserStoryTags(userID, storyID);
         }
 
         public static void DeleteTag(int storyID, int userID, int hostID, int tagID)

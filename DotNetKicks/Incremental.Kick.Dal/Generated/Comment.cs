@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,42 +13,45 @@ using SubSonic;
 using SubSonic.Utilities;
 
 
-//Generated on 11/04/2007 12:11:18 by gjoyce
+//Generated on 25/04/2007 16:27:25 by gjoyce
 
 namespace Incremental.Kick.Dal{
     /// <summary>
-    /// Strongly-typed collection for the KickComment class.
+    /// Strongly-typed collection for the Comment class.
     /// </summary>
     [Serializable]
-    public partial class KickCommentCollection : ActiveList<KickComment> 
+    public partial class CommentCollection : ActiveList<Comment> 
     {
         List<Where> wheres = new List<Where>();
         List<BetweenAnd> betweens = new List<BetweenAnd>();
         SubSonic.OrderBy orderBy;
-        public KickCommentCollection OrderByAsc(string columnName) 
+    	
+        public CommentCollection OrderByAsc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Asc(columnName);
             return this;
         }
 
-        public KickCommentCollection OrderByDesc(string columnName) 
+    	
+        public CommentCollection OrderByDesc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Desc(columnName);
             return this;
         }
 
-	    public KickCommentCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
+	    public CommentCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             return this;
         }
 
-        public KickCommentCollection Where(Where where) 
+        public CommentCollection Where(Where where) 
 	    {
             wheres.Add(where);
             return this;
         }
 
-        public KickCommentCollection Where(string columnName, object value) 
+    	
+        public CommentCollection Where(string columnName, object value) 
 	    {
 		    if(value != DBNull.Value && value != null)
 		    {	
@@ -61,7 +65,8 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        public KickCommentCollection Where(string columnName, Comparison comp, object value) 
+    	
+        public CommentCollection Where(string columnName, Comparison comp, object value) 
 	    {
             Where where = new Where();
             where.ColumnName = columnName;
@@ -71,7 +76,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickCommentCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
+    	
+        public CommentCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             BetweenAnd between = new BetweenAnd();
             between.ColumnName = columnName;
@@ -83,15 +89,17 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickCommentCollection Load() 
+    	
+        public CommentCollection Load() 
         {
-            Query qry = new Query(KickComment.Schema);
+            Query qry = new Query(Comment.Schema);
             CheckLogicalDelete(qry);
             foreach (Where where in wheres) 
             {
                 qry.AddWhere(where);
             }
 
+             
             foreach (BetweenAnd between in betweens)
             {
                 qry.AddBetweenAnd(between);
@@ -108,7 +116,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickCommentCollection() 
+        
+        public CommentCollection() 
 	    {
         }
 
@@ -118,8 +127,9 @@ namespace Incremental.Kick.Dal{
     /// This is an ActiveRecord class which wraps the Kick_Comment table.
     /// </summary>
     [Serializable]
-    public partial class KickComment : ActiveRecord<KickComment>
+    public partial class Comment : ActiveRecord<Comment>
     {
+    
 	    #region Default Settings
 	    protected static void SetSQLProps() 
 	    {
@@ -142,16 +152,17 @@ namespace Incremental.Kick.Dal{
 
         }
 
+    	
         private static void GetTableSchema() 
 	    {
             if(!IsSchemaInitialized)
             {
                 //Schema declaration
-				TableSchema.Table schema = new TableSchema.Table(DataService.GetInstance("DotNetKicks"));
+				TableSchema.Table schema = new TableSchema.Table("Kick_Comment", TableType.Table, DataService.GetInstance("Kick"));
                 schema.Columns = new TableSchema.TableColumnCollection();
-                schema.Name = "Kick_Comment";
                 schema.SchemaName = "dbo";
                 //columns
+                
                 TableSchema.TableColumn colvarCommentID = new TableSchema.TableColumn(schema);
                 colvarCommentID.ColumnName = "CommentID";
                 colvarCommentID.DataType = DbType.Int32;
@@ -161,7 +172,9 @@ namespace Incremental.Kick.Dal{
                 colvarCommentID.IsPrimaryKey = true;
                 colvarCommentID.IsForeignKey = false;
                 colvarCommentID.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarCommentID);
+                
                 TableSchema.TableColumn colvarStoryID = new TableSchema.TableColumn(schema);
                 colvarStoryID.ColumnName = "StoryID";
                 colvarStoryID.DataType = DbType.Int32;
@@ -171,8 +184,11 @@ namespace Incremental.Kick.Dal{
                 colvarStoryID.IsPrimaryKey = false;
                 colvarStoryID.IsForeignKey = true;
                 colvarStoryID.IsReadOnly = false;
+                
 				colvarStoryID.ForeignKeyTableName = "Kick_Story";
+                
                 schema.Columns.Add(colvarStoryID);
+                
                 TableSchema.TableColumn colvarUserID = new TableSchema.TableColumn(schema);
                 colvarUserID.ColumnName = "UserID";
                 colvarUserID.DataType = DbType.Int32;
@@ -182,8 +198,11 @@ namespace Incremental.Kick.Dal{
                 colvarUserID.IsPrimaryKey = false;
                 colvarUserID.IsForeignKey = true;
                 colvarUserID.IsReadOnly = false;
+                
 				colvarUserID.ForeignKeyTableName = "Kick_User";
+                
                 schema.Columns.Add(colvarUserID);
+                
                 TableSchema.TableColumn colvarUsername = new TableSchema.TableColumn(schema);
                 colvarUsername.ColumnName = "Username";
                 colvarUsername.DataType = DbType.String;
@@ -193,17 +212,21 @@ namespace Incremental.Kick.Dal{
                 colvarUsername.IsPrimaryKey = false;
                 colvarUsername.IsForeignKey = false;
                 colvarUsername.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarUsername);
-                TableSchema.TableColumn colvarComment = new TableSchema.TableColumn(schema);
-                colvarComment.ColumnName = "Comment";
-                colvarComment.DataType = DbType.String;
-                colvarComment.MaxLength = 4000;
-                colvarComment.AutoIncrement = false;
-                colvarComment.IsNullable = false;
-                colvarComment.IsPrimaryKey = false;
-                colvarComment.IsForeignKey = false;
-                colvarComment.IsReadOnly = false;
-                schema.Columns.Add(colvarComment);
+                
+                TableSchema.TableColumn colvarCommentX = new TableSchema.TableColumn(schema);
+                colvarCommentX.ColumnName = "Comment";
+                colvarCommentX.DataType = DbType.String;
+                colvarCommentX.MaxLength = 4000;
+                colvarCommentX.AutoIncrement = false;
+                colvarCommentX.IsNullable = false;
+                colvarCommentX.IsPrimaryKey = false;
+                colvarCommentX.IsForeignKey = false;
+                colvarCommentX.IsReadOnly = false;
+                
+                schema.Columns.Add(colvarCommentX);
+                
                 TableSchema.TableColumn colvarCreatedOn = new TableSchema.TableColumn(schema);
                 colvarCreatedOn.ColumnName = "CreatedOn";
                 colvarCreatedOn.DataType = DbType.DateTime;
@@ -213,16 +236,19 @@ namespace Incremental.Kick.Dal{
                 colvarCreatedOn.IsPrimaryKey = false;
                 colvarCreatedOn.IsForeignKey = false;
                 colvarCreatedOn.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarCreatedOn);
+                
                 BaseSchema = schema;
                 //add this schema to the provider
                 //so we can query it later
-                DataService.Providers["DotNetKicks"].AddSchema("Kick_Comment",schema);
+                DataService.Providers["Kick"].AddSchema("Kick_Comment",schema);
             }
 
         }
 
         #endregion
+        
         #region Query Accessor
 	    public static Query CreateQuery()
 	    {
@@ -230,28 +256,36 @@ namespace Incremental.Kick.Dal{
 	    }
 
 	    #endregion
+	    
 	    #region .ctors
-	    public KickComment()
+	    public Comment()
 	    {
             SetSQLProps();
             SetDefaults();
             MarkNew();
         }
 
-	    public KickComment(object keyID)
+	    public Comment(object keyID)
 	    {
 		    SetSQLProps();
+            SetDefaults();
 		    LoadByKey(keyID);
 	    }
 
-	    public KickComment(string columnName, object columnValue)
+    	 
+	    public Comment(string columnName, object columnValue)
         {
             SetSQLProps();
+            SetDefaults();
             LoadByParam(columnName,columnValue);
         }
 
+        
 	    #endregion
+	    
 	    #region Props
+	    
+          
         [XmlAttribute("CommentID")]
         public int CommentID 
 	    {
@@ -265,6 +299,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("StoryID")]
         public int StoryID 
 	    {
@@ -278,6 +313,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("UserID")]
         public int UserID 
 	    {
@@ -291,6 +327,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("Username")]
         public string Username 
 	    {
@@ -304,8 +341,9 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        [XmlAttribute("Comment")]
-        public string Comment 
+	      
+        [XmlAttribute("CommentX")]
+        public string CommentX 
 	    {
 		    get { return GetColumnValue<string>("Comment"); }
 
@@ -317,6 +355,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("CreatedOn")]
         public DateTime CreatedOn 
 	    {
@@ -330,14 +369,23 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
 	    #endregion
-	    #region ForeignKey Methods
+	    
+	    
+	 	
+			
+	    
+	    
+	    
+	    #region ForeignKey Properties
+	    
         /// <summary>
-        /// Returns a KickStory ActiveRecord object related to this KickComment
+        /// Returns a Story ActiveRecord object related to this Comment
         /// </summary>
-	    public KickStory KickStory
+	    public Incremental.Kick.Dal.Story Story
         {
-	        get { return KickStory.FetchByID(this.StoryID); }
+	        get { return Incremental.Kick.Dal.Story.FetchByID(this.StoryID); }
 
 	        set
 	        {
@@ -347,12 +395,14 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
+	    
         /// <summary>
-        /// Returns a KickUser ActiveRecord object related to this KickComment
+        /// Returns a User ActiveRecord object related to this Comment
         /// </summary>
-	    public KickUser KickUser
+	    public Incremental.Kick.Dal.User User
         {
-	        get { return KickUser.FetchByID(this.UserID); }
+	        get { return Incremental.Kick.Dal.User.FetchByID(this.UserID); }
 
 	        set
 	        {
@@ -362,38 +412,61 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
+	    
 	    #endregion
+	    
+	    
+	    
 	    //no ManyToMany tables defined (0)
+	    
 	    #region ObjectDataSource support
+    	
+    	
 	    /// <summary>
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
-	    public static void Insert(int varStoryID,int varUserID,string varUsername,string varComment,DateTime varCreatedOn)
+	    public static void Insert(int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
 	    {
-		    KickComment item = new KickComment();
+		    Comment item = new Comment();
+		    
             item.StoryID = varStoryID;
+            
             item.UserID = varUserID;
+            
             item.Username = varUsername;
-            item.Comment = varComment;
+            
+            item.CommentX = varCommentX;
+            
             item.CreatedOn = varCreatedOn;
+            
+	    
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
 		    else
 			    item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
 	    }
 
+    	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
-	    public static void Update(int varCommentID,int varStoryID,int varUserID,string varUsername,string varComment,DateTime varCreatedOn)
+	    public static void Update(int varCommentID,int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
 	    {
-		    KickComment item = new KickComment();
+		    Comment item = new Comment();
+		    
                 item.CommentID = varCommentID;
+				
                 item.StoryID = varStoryID;
+				
                 item.UserID = varUserID;
+				
                 item.Username = varUsername;
-                item.Comment = varComment;
+				
+                item.CommentX = varCommentX;
+				
                 item.CreatedOn = varCreatedOn;
+				
 		    item.IsNew = false;
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -405,12 +478,20 @@ namespace Incremental.Kick.Dal{
 	    #region Columns Struct
 	    public struct Columns
 	    {
+		    
+		    
             public static string CommentID = @"CommentID";
+            
             public static string StoryID = @"StoryID";
+            
             public static string UserID = @"UserID";
+            
             public static string Username = @"Username";
-            public static string Comment = @"Comment";
+            
+            public static string CommentX = @"CommentX";
+            
             public static string CreatedOn = @"CreatedOn";
+            
 	    }
 
 	    #endregion
