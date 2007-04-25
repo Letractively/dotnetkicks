@@ -7,11 +7,11 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Caching
 {
     //TODO: implement category dictionary?
-    public class KickCategoryCache
+    public class CategoryCache
     {
         public static short GetCategoryID(string categoryIdentifier, int hostID)
         {
-            foreach (KickCategory category in GetCategories(hostID))
+            foreach (Category category in GetCategories(hostID))
             {
                 if (category.CategoryIdentifier == categoryIdentifier)
                     return category.CategoryID;
@@ -22,7 +22,7 @@ namespace Incremental.Kick.Caching
 
         public static string GetCategoryIdentifier(short categoryID, int hostID)
         {
-            foreach (KickCategory category in GetCategories(hostID))
+            foreach (Category category in GetCategories(hostID))
             {
                 if (category.CategoryID == categoryID)
                     return category.CategoryIdentifier;
@@ -33,7 +33,7 @@ namespace Incremental.Kick.Caching
 
         public static string GetCategoryName(short categoryID, int hostID)
         {
-            foreach (KickCategory category in GetCategories(hostID))
+            foreach (Category category in GetCategories(hostID))
             {
                 if (category.CategoryID == categoryID)
                     return category.Name;
@@ -42,16 +42,16 @@ namespace Incremental.Kick.Caching
             throw new ApplicationException("Invalid CategoryID:" + categoryID);
         }
 
-        public static KickCategoryCollection GetCategories(int hostID)
+        public static CategoryCollection GetCategories(int hostID)
         {
-            CacheManager<string, KickCategoryCollection> categoryCache = GetCache();
+            CacheManager<string, CategoryCollection> categoryCache = GetCache();
             string cacheKey = String.Format("KickCategories_{0}", hostID);
-            KickCategoryCollection categories = categoryCache[cacheKey];
+            CategoryCollection categories = categoryCache[cacheKey];
 
             if (categories == null)
             {
-                categories = new KickCategoryCollection();
-                categories.LoadAndCloseReader(KickCategory.FetchByParameter(KickCategory.Columns.HostID, hostID));
+                categories = new CategoryCollection();
+                categories.LoadAndCloseReader(Category.FetchByParameter(Category.Columns.HostID, hostID));
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 categoryCache.Insert(cacheKey, categories, 500); //TODO: GJ: cache duration from config
             }
@@ -59,9 +59,9 @@ namespace Incremental.Kick.Caching
             return categories;
         }
 
-        private static CacheManager<string, KickCategoryCollection> GetCache()
+        private static CacheManager<string, CategoryCollection> GetCache()
         {
-            return CacheManager<string, KickCategoryCollection>.GetInstance();
+            return CacheManager<string, CategoryCollection>.GetInstance();
         }
     }
 }

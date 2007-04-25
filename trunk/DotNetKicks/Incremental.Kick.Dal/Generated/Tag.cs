@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,42 +13,45 @@ using SubSonic;
 using SubSonic.Utilities;
 
 
-//Generated on 11/04/2007 12:11:20 by gjoyce
+//Generated on 25/04/2007 16:27:26 by gjoyce
 
 namespace Incremental.Kick.Dal{
     /// <summary>
-    /// Strongly-typed collection for the KickTag class.
+    /// Strongly-typed collection for the Tag class.
     /// </summary>
     [Serializable]
-    public partial class KickTagCollection : ActiveList<KickTag> 
+    public partial class TagCollection : ActiveList<Tag> 
     {
         List<Where> wheres = new List<Where>();
         List<BetweenAnd> betweens = new List<BetweenAnd>();
         SubSonic.OrderBy orderBy;
-        public KickTagCollection OrderByAsc(string columnName) 
+    	
+        public TagCollection OrderByAsc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Asc(columnName);
             return this;
         }
 
-        public KickTagCollection OrderByDesc(string columnName) 
+    	
+        public TagCollection OrderByDesc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Desc(columnName);
             return this;
         }
 
-	    public KickTagCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
+	    public TagCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             return this;
         }
 
-        public KickTagCollection Where(Where where) 
+        public TagCollection Where(Where where) 
 	    {
             wheres.Add(where);
             return this;
         }
 
-        public KickTagCollection Where(string columnName, object value) 
+    	
+        public TagCollection Where(string columnName, object value) 
 	    {
 		    if(value != DBNull.Value && value != null)
 		    {	
@@ -61,7 +65,8 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        public KickTagCollection Where(string columnName, Comparison comp, object value) 
+    	
+        public TagCollection Where(string columnName, Comparison comp, object value) 
 	    {
             Where where = new Where();
             where.ColumnName = columnName;
@@ -71,7 +76,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickTagCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
+    	
+        public TagCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             BetweenAnd between = new BetweenAnd();
             between.ColumnName = columnName;
@@ -83,15 +89,17 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickTagCollection Load() 
+    	
+        public TagCollection Load() 
         {
-            Query qry = new Query(KickTag.Schema);
+            Query qry = new Query(Tag.Schema);
             CheckLogicalDelete(qry);
             foreach (Where where in wheres) 
             {
                 qry.AddWhere(where);
             }
 
+             
             foreach (BetweenAnd between in betweens)
             {
                 qry.AddBetweenAnd(between);
@@ -108,7 +116,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickTagCollection() 
+        
+        public TagCollection() 
 	    {
         }
 
@@ -118,8 +127,9 @@ namespace Incremental.Kick.Dal{
     /// This is an ActiveRecord class which wraps the Kick_Tag table.
     /// </summary>
     [Serializable]
-    public partial class KickTag : ActiveRecord<KickTag>
+    public partial class Tag : ActiveRecord<Tag>
     {
+    
 	    #region Default Settings
 	    protected static void SetSQLProps() 
 	    {
@@ -142,16 +152,17 @@ namespace Incremental.Kick.Dal{
 
         }
 
+    	
         private static void GetTableSchema() 
 	    {
             if(!IsSchemaInitialized)
             {
                 //Schema declaration
-				TableSchema.Table schema = new TableSchema.Table(DataService.GetInstance("DotNetKicks"));
+				TableSchema.Table schema = new TableSchema.Table("Kick_Tag", TableType.Table, DataService.GetInstance("Kick"));
                 schema.Columns = new TableSchema.TableColumnCollection();
-                schema.Name = "Kick_Tag";
                 schema.SchemaName = "dbo";
                 //columns
+                
                 TableSchema.TableColumn colvarTagID = new TableSchema.TableColumn(schema);
                 colvarTagID.ColumnName = "TagID";
                 colvarTagID.DataType = DbType.Int32;
@@ -161,7 +172,9 @@ namespace Incremental.Kick.Dal{
                 colvarTagID.IsPrimaryKey = true;
                 colvarTagID.IsForeignKey = false;
                 colvarTagID.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarTagID);
+                
                 TableSchema.TableColumn colvarTagIdentifier = new TableSchema.TableColumn(schema);
                 colvarTagIdentifier.ColumnName = "TagIdentifier";
                 colvarTagIdentifier.DataType = DbType.String;
@@ -171,16 +184,19 @@ namespace Incremental.Kick.Dal{
                 colvarTagIdentifier.IsPrimaryKey = false;
                 colvarTagIdentifier.IsForeignKey = false;
                 colvarTagIdentifier.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarTagIdentifier);
+                
                 BaseSchema = schema;
                 //add this schema to the provider
                 //so we can query it later
-                DataService.Providers["DotNetKicks"].AddSchema("Kick_Tag",schema);
+                DataService.Providers["Kick"].AddSchema("Kick_Tag",schema);
             }
 
         }
 
         #endregion
+        
         #region Query Accessor
 	    public static Query CreateQuery()
 	    {
@@ -188,28 +204,36 @@ namespace Incremental.Kick.Dal{
 	    }
 
 	    #endregion
+	    
 	    #region .ctors
-	    public KickTag()
+	    public Tag()
 	    {
             SetSQLProps();
             SetDefaults();
             MarkNew();
         }
 
-	    public KickTag(object keyID)
+	    public Tag(object keyID)
 	    {
 		    SetSQLProps();
+            SetDefaults();
 		    LoadByKey(keyID);
 	    }
 
-	    public KickTag(string columnName, object columnValue)
+    	 
+	    public Tag(string columnName, object columnValue)
         {
             SetSQLProps();
+            SetDefaults();
             LoadByParam(columnName,columnValue);
         }
 
+        
 	    #endregion
+	    
 	    #region Props
+	    
+          
         [XmlAttribute("TagID")]
         public int TagID 
 	    {
@@ -223,6 +247,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("TagIdentifier")]
         public string TagIdentifier 
 	    {
@@ -236,38 +261,59 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
 	    #endregion
-			#region PrimaryKey Methods
-				public KickStoryUserHostTagCollection KickStoryUserHostTagRecords()
-				{
-					return new KickStoryUserHostTagCollection().Where(KickStoryUserHostTag.Columns.TagID, TagID).Load();
-				}
+	    
+	    
+	    #region PrimaryKey Methods
+	    
+		public Incremental.Kick.Dal.StoryUserHostTagCollection StoryUserHostTagRecords()
+		{
+			return new Incremental.Kick.Dal.StoryUserHostTagCollection().Where(StoryUserHostTag.Columns.TagID, TagID).Load();
+		}
 
-			#endregion
+		#endregion
+		
+	 	
+			
+	    
 	    //no foreign key tables defined (0)
+	    
+	    
+	    
 	    //no ManyToMany tables defined (0)
+	    
 	    #region ObjectDataSource support
+    	
+    	
 	    /// <summary>
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
 	    public static void Insert(string varTagIdentifier)
 	    {
-		    KickTag item = new KickTag();
+		    Tag item = new Tag();
+		    
             item.TagIdentifier = varTagIdentifier;
+            
+	    
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
 		    else
 			    item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
 	    }
 
+    	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
 	    public static void Update(int varTagID,string varTagIdentifier)
 	    {
-		    KickTag item = new KickTag();
+		    Tag item = new Tag();
+		    
                 item.TagID = varTagID;
+				
                 item.TagIdentifier = varTagIdentifier;
+				
 		    item.IsNew = false;
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -279,8 +325,12 @@ namespace Incremental.Kick.Dal{
 	    #region Columns Struct
 	    public struct Columns
 	    {
+		    
+		    
             public static string TagID = @"TagID";
+            
             public static string TagIdentifier = @"TagIdentifier";
+            
 	    }
 
 	    #endregion

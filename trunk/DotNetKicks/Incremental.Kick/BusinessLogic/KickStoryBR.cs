@@ -7,9 +7,9 @@ using Incremental.Kick.Common.Enums;
 
 namespace Incremental.Kick.BusinessLogic
 {
-    public class KickStoryBR
+    public class StoryBR
     {
-        public static string AddStory(int hostID, string title, string description, string url, short categoryID, KickUser user)
+        public static string AddStory(int hostID, string title, string description, string url, short categoryID, User user)
         {
             if (user.IsBanned)
                 return GetStoryIdentifier(title); //to stop the spammers
@@ -33,7 +33,7 @@ namespace Incremental.Kick.BusinessLogic
             title = HttpUtility.HtmlEncode(title);
             description = HttpUtility.HtmlEncode(description);
 
-            KickStory story = new KickStory();
+            Story story = new Story();
             story.HostID = hostID;
             story.StoryIdentifier = storyIdentifier;
             story.Title = title;
@@ -53,7 +53,7 @@ namespace Incremental.Kick.BusinessLogic
 
 
             //now auto-kick it
-            //Kick_StoryKickBR.KickStory(storyDS.Kick_Story[0].StoryID, userID, hostID);
+            //Kick_StoryKickBR.Story(storyDS.Kick_Story[0].StoryID, userID, hostID);
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
@@ -91,8 +91,8 @@ namespace Incremental.Kick.BusinessLogic
                 if (iteration > 0)
                     identifier = title + "_" + iteration;
 
-                KickStoryCollection stories = new KickStoryCollection();
-                stories.LoadAndCloseReader(KickStory.FetchByParameter(KickStory.Columns.StoryIdentifier, identifier));
+                StoryCollection stories = new StoryCollection();
+                stories.LoadAndCloseReader(Story.FetchByParameter(Story.Columns.StoryIdentifier, identifier));
 
                 if (stories.Count == 0)
                     return identifier;
@@ -103,9 +103,9 @@ namespace Incremental.Kick.BusinessLogic
             throw new Exception("The story identifier [" + title + "] was not unique");
         }
 
-        public static KickStoryKick AddStoryKick(int storyID, int userID, int hostID)
+        public static StoryKick AddStoryKick(int storyID, int userID, int hostID)
         {
-            KickStoryKick storyKick = new KickStoryKick();
+            StoryKick storyKick = new StoryKick();
             storyKick.StoryID = storyID;
             storyKick.UserID = userID;
             storyKick.HostID = hostID;
@@ -185,21 +185,21 @@ namespace Incremental.Kick.BusinessLogic
 
         public static void IncrementStoryCommentCount(int storyID)
         {
-            KickStory story = KickStory.FetchByID(storyID);
+            Story story = Story.FetchByID(storyID);
             story.CommentCount++;
             story.Save();
         }
 
         public static void IncrementSpamCount(int storyID)
         {
-            KickStory story = KickStory.FetchByID(storyID);
+            Story story = Story.FetchByID(storyID);
             story.SpamCount++;
             story.Save();
         }
 
         public static void IncrementViewCount(int storyID, short viewCount)
         {
-            KickStory story = KickStory.FetchByID(storyID);
+            Story story = Story.FetchByID(storyID);
             story.ViewCount += viewCount;
             story.Save();
         }
@@ -207,16 +207,16 @@ namespace Incremental.Kick.BusinessLogic
         public static void DeleteStory(int storyID, int hostID)
         {
             //NOTE: GJ: why do we care about the host?
-            KickStory story = KickStory.FetchByID(storyID);
+            Story story = Story.FetchByID(storyID);
             if (story.HostID != hostID)
                 throw new ArgumentException("The story does not belong to the host");
             else
-                KickStory.Delete(storyID);
+                Story.Delete(storyID);
         }
 
-        private static bool IsWeakStory(KickStory story, KickHost host)
+        private static bool IsWeakStory(Story story, Host host)
         {
-            if ((story.KickCount < host.PublishMinimumStoryKickCount) || (story.CommentCount < host.PublishMinimumStoryCommentCount))
+            if ((story.KickCount < host.Publish_MinimumStoryKickCount) || (story.CommentCount < host.Publish_MinimumStoryCommentCount))
                 return true;
 
             //TODO: check the average kicks and comments per hour
@@ -226,79 +226,81 @@ namespace Incremental.Kick.BusinessLogic
         }
 
 
-        private static int GetStoryScore(KickStory story, KickHost host)
+        private static int GetStoryScore(Story story, Host host)
         {
             int score = 0;
-            score += story.KickCount * host.PublishKickScore;
-            score += story.CommentCount * host.PublishCommentScore;
+            score += story.KickCount * host.Publish_KickScore;
+            score += story.CommentCount * host.Publish_CommentScore;
             System.Diagnostics.Trace.WriteLine("Pub: Score of [" + score + "] for storyID " + story.StoryID);
             return score;
         }
 
         public static void PublishStory(int storyID)
         {
-            KickStory story = KickStory.FetchByID(storyID);
+            Story story = Story.FetchByID(storyID);
             story.IsPublished = true;
             story.PublishedOn = DateTime.Now;
         }
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate)
         {
-            //return KickStoryDao.GetStoryCount(hostID, isPublished, startDate, endDate);
+            //return StoryDao.GetStoryCount(hostID, isPublished, startDate, endDate);
+
+           // Story.CreateQuery().GetCount(Story.Schema.Name, k
             throw new NotImplementedException();
         }
 
         public static int GetTaggedStoryCount(string tagIdentifier, int hostID)
         {
-            //return KickStoryDao.GetStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
+            //return StoryDao.GetStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize)
+        public static Story GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize)
         {
             //return Kick_StoryDAO.GetUserKickedStories(userID, hostID, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize)
+        public static Story GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize)
         {
-            //return KickStoryDao.GetTaggedStories(TagCache.GetTagID(tagIdentifier), hostID, pageNumber, pageSize);
+            //return StoryDao.GetTaggedStories(TagCache.GetTagID(tagIdentifier), hostID, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetTaggedStories(int tagID, int hostID, int pageNumber, int pageSize)
+        public static Story GetTaggedStories(int tagID, int hostID, int pageNumber, int pageSize)
         {
-            //return KickStoryDao.GetTaggedStories(tagID, hostID, pageNumber, pageSize);
+            //return StoryDao.GetTaggedStories(tagID, hostID, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetUserTaggedStories(string tagIdentifier, int userID, int hostID, int pageNumber, int pageSize)
+        public static Story GetUserTaggedStories(string tagIdentifier, int userID, int hostID, int pageNumber, int pageSize)
         {
-            //return KickStoryDao.GetUserTaggedStories(TagCache.GetTagID(tagIdentifier), userID, hostID, pageNumber, pageSize);
+            //return StoryDao.GetUserTaggedStories(TagCache.GetTagID(tagIdentifier), userID, hostID, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetUserTaggedStories(int tagID, int userID, int hostID, int pageNumber, int pageSize)
+        public static Story GetUserTaggedStories(int tagID, int userID, int hostID, int pageNumber, int pageSize)
         {
-            //return KickStoryDao.GetUserTaggedStories(tagID, userID, hostID, pageNumber, pageSize);
+            //return StoryDao.GetUserTaggedStories(tagID, userID, hostID, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
         public static int GetUserTaggedStoryCount(string tagIdentifier, int userID, int hostID)
         {
-            //return KickStoryDao.GetUserTaggedStoryCount(TagCache.GetTagID(tagIdentifier), userID, hostID);
+            //return StoryDao.GetUserTaggedStoryCount(TagCache.GetTagID(tagIdentifier), userID, hostID);
             throw new NotImplementedException();
         }
 
-        public static KickStory GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize)
+        public static Story GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize)
         {
-            //return KickStoryDao.GetPopularStories(hostID, GetStartDate(sortBy), DateTime.Now, pageNumber, pageSize);
+            //return StoryDao.GetPopularStories(hostID, GetStartDate(sortBy), DateTime.Now, pageNumber, pageSize);
             throw new NotImplementedException();
         }
 
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy)
         {
-            //return KickStoryDao.GetPopularStoriesCount(hostID, GetStartDate(sortBy), DateTime.Now);
+            //return StoryDao.GetPopularStoriesCount(hostID, GetStartDate(sortBy), DateTime.Now);
             throw new NotImplementedException();
         }
 

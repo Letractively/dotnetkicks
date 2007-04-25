@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,42 +13,45 @@ using SubSonic;
 using SubSonic.Utilities;
 
 
-//Generated on 11/04/2007 12:11:20 by gjoyce
+//Generated on 25/04/2007 16:27:26 by gjoyce
 
 namespace Incremental.Kick.Dal{
     /// <summary>
-    /// Strongly-typed collection for the KickUser class.
+    /// Strongly-typed collection for the User class.
     /// </summary>
     [Serializable]
-    public partial class KickUserCollection : ActiveList<KickUser> 
+    public partial class UserCollection : ActiveList<User> 
     {
         List<Where> wheres = new List<Where>();
         List<BetweenAnd> betweens = new List<BetweenAnd>();
         SubSonic.OrderBy orderBy;
-        public KickUserCollection OrderByAsc(string columnName) 
+    	
+        public UserCollection OrderByAsc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Asc(columnName);
             return this;
         }
 
-        public KickUserCollection OrderByDesc(string columnName) 
+    	
+        public UserCollection OrderByDesc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Desc(columnName);
             return this;
         }
 
-	    public KickUserCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
+	    public UserCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             return this;
         }
 
-        public KickUserCollection Where(Where where) 
+        public UserCollection Where(Where where) 
 	    {
             wheres.Add(where);
             return this;
         }
 
-        public KickUserCollection Where(string columnName, object value) 
+    	
+        public UserCollection Where(string columnName, object value) 
 	    {
 		    if(value != DBNull.Value && value != null)
 		    {	
@@ -61,7 +65,8 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        public KickUserCollection Where(string columnName, Comparison comp, object value) 
+    	
+        public UserCollection Where(string columnName, Comparison comp, object value) 
 	    {
             Where where = new Where();
             where.ColumnName = columnName;
@@ -71,7 +76,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickUserCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
+    	
+        public UserCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             BetweenAnd between = new BetweenAnd();
             between.ColumnName = columnName;
@@ -83,15 +89,17 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickUserCollection Load() 
+    	
+        public UserCollection Load() 
         {
-            Query qry = new Query(KickUser.Schema);
+            Query qry = new Query(User.Schema);
             CheckLogicalDelete(qry);
             foreach (Where where in wheres) 
             {
                 qry.AddWhere(where);
             }
 
+             
             foreach (BetweenAnd between in betweens)
             {
                 qry.AddBetweenAnd(between);
@@ -108,7 +116,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickUserCollection() 
+        
+        public UserCollection() 
 	    {
         }
 
@@ -118,8 +127,9 @@ namespace Incremental.Kick.Dal{
     /// This is an ActiveRecord class which wraps the Kick_User table.
     /// </summary>
     [Serializable]
-    public partial class KickUser : ActiveRecord<KickUser>
+    public partial class User : ActiveRecord<User>
     {
+    
 	    #region Default Settings
 	    protected static void SetSQLProps() 
 	    {
@@ -142,16 +152,17 @@ namespace Incremental.Kick.Dal{
 
         }
 
+    	
         private static void GetTableSchema() 
 	    {
             if(!IsSchemaInitialized)
             {
                 //Schema declaration
-				TableSchema.Table schema = new TableSchema.Table(DataService.GetInstance("DotNetKicks"));
+				TableSchema.Table schema = new TableSchema.Table("Kick_User", TableType.Table, DataService.GetInstance("Kick"));
                 schema.Columns = new TableSchema.TableColumnCollection();
-                schema.Name = "Kick_User";
                 schema.SchemaName = "dbo";
                 //columns
+                
                 TableSchema.TableColumn colvarUserID = new TableSchema.TableColumn(schema);
                 colvarUserID.ColumnName = "UserID";
                 colvarUserID.DataType = DbType.Int32;
@@ -161,7 +172,9 @@ namespace Incremental.Kick.Dal{
                 colvarUserID.IsPrimaryKey = true;
                 colvarUserID.IsForeignKey = false;
                 colvarUserID.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarUserID);
+                
                 TableSchema.TableColumn colvarUsername = new TableSchema.TableColumn(schema);
                 colvarUsername.ColumnName = "Username";
                 colvarUsername.DataType = DbType.String;
@@ -171,7 +184,9 @@ namespace Incremental.Kick.Dal{
                 colvarUsername.IsPrimaryKey = false;
                 colvarUsername.IsForeignKey = false;
                 colvarUsername.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarUsername);
+                
                 TableSchema.TableColumn colvarEmail = new TableSchema.TableColumn(schema);
                 colvarEmail.ColumnName = "Email";
                 colvarEmail.DataType = DbType.String;
@@ -181,7 +196,9 @@ namespace Incremental.Kick.Dal{
                 colvarEmail.IsPrimaryKey = false;
                 colvarEmail.IsForeignKey = false;
                 colvarEmail.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarEmail);
+                
                 TableSchema.TableColumn colvarPassword = new TableSchema.TableColumn(schema);
                 colvarPassword.ColumnName = "Password";
                 colvarPassword.DataType = DbType.String;
@@ -191,7 +208,9 @@ namespace Incremental.Kick.Dal{
                 colvarPassword.IsPrimaryKey = false;
                 colvarPassword.IsForeignKey = false;
                 colvarPassword.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarPassword);
+                
                 TableSchema.TableColumn colvarPasswordSalt = new TableSchema.TableColumn(schema);
                 colvarPasswordSalt.ColumnName = "PasswordSalt";
                 colvarPasswordSalt.DataType = DbType.String;
@@ -201,7 +220,9 @@ namespace Incremental.Kick.Dal{
                 colvarPasswordSalt.IsPrimaryKey = false;
                 colvarPasswordSalt.IsForeignKey = false;
                 colvarPasswordSalt.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarPasswordSalt);
+                
                 TableSchema.TableColumn colvarIsGeneratedPassword = new TableSchema.TableColumn(schema);
                 colvarIsGeneratedPassword.ColumnName = "IsGeneratedPassword";
                 colvarIsGeneratedPassword.DataType = DbType.Boolean;
@@ -211,7 +232,9 @@ namespace Incremental.Kick.Dal{
                 colvarIsGeneratedPassword.IsPrimaryKey = false;
                 colvarIsGeneratedPassword.IsForeignKey = false;
                 colvarIsGeneratedPassword.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarIsGeneratedPassword);
+                
                 TableSchema.TableColumn colvarIsValidated = new TableSchema.TableColumn(schema);
                 colvarIsValidated.ColumnName = "IsValidated";
                 colvarIsValidated.DataType = DbType.Boolean;
@@ -221,7 +244,9 @@ namespace Incremental.Kick.Dal{
                 colvarIsValidated.IsPrimaryKey = false;
                 colvarIsValidated.IsForeignKey = false;
                 colvarIsValidated.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarIsValidated);
+                
                 TableSchema.TableColumn colvarIsBanned = new TableSchema.TableColumn(schema);
                 colvarIsBanned.ColumnName = "IsBanned";
                 colvarIsBanned.DataType = DbType.Boolean;
@@ -231,7 +256,9 @@ namespace Incremental.Kick.Dal{
                 colvarIsBanned.IsPrimaryKey = false;
                 colvarIsBanned.IsForeignKey = false;
                 colvarIsBanned.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarIsBanned);
+                
                 TableSchema.TableColumn colvarAdsenseID = new TableSchema.TableColumn(schema);
                 colvarAdsenseID.ColumnName = "AdsenseID";
                 colvarAdsenseID.DataType = DbType.String;
@@ -241,7 +268,9 @@ namespace Incremental.Kick.Dal{
                 colvarAdsenseID.IsPrimaryKey = false;
                 colvarAdsenseID.IsForeignKey = false;
                 colvarAdsenseID.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarAdsenseID);
+                
                 TableSchema.TableColumn colvarReceiveEmailNewsletter = new TableSchema.TableColumn(schema);
                 colvarReceiveEmailNewsletter.ColumnName = "ReceiveEmailNewsletter";
                 colvarReceiveEmailNewsletter.DataType = DbType.Boolean;
@@ -251,7 +280,9 @@ namespace Incremental.Kick.Dal{
                 colvarReceiveEmailNewsletter.IsPrimaryKey = false;
                 colvarReceiveEmailNewsletter.IsForeignKey = false;
                 colvarReceiveEmailNewsletter.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarReceiveEmailNewsletter);
+                
                 TableSchema.TableColumn colvarRoles = new TableSchema.TableColumn(schema);
                 colvarRoles.ColumnName = "Roles";
                 colvarRoles.DataType = DbType.String;
@@ -261,7 +292,9 @@ namespace Incremental.Kick.Dal{
                 colvarRoles.IsPrimaryKey = false;
                 colvarRoles.IsForeignKey = false;
                 colvarRoles.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarRoles);
+                
                 TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
                 colvarHostID.ColumnName = "HostID";
                 colvarHostID.DataType = DbType.Int32;
@@ -271,7 +304,9 @@ namespace Incremental.Kick.Dal{
                 colvarHostID.IsPrimaryKey = false;
                 colvarHostID.IsForeignKey = false;
                 colvarHostID.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarHostID);
+                
                 TableSchema.TableColumn colvarLastActiveOn = new TableSchema.TableColumn(schema);
                 colvarLastActiveOn.ColumnName = "LastActiveOn";
                 colvarLastActiveOn.DataType = DbType.DateTime;
@@ -281,7 +316,9 @@ namespace Incremental.Kick.Dal{
                 colvarLastActiveOn.IsPrimaryKey = false;
                 colvarLastActiveOn.IsForeignKey = false;
                 colvarLastActiveOn.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarLastActiveOn);
+                
                 TableSchema.TableColumn colvarCreatedOn = new TableSchema.TableColumn(schema);
                 colvarCreatedOn.ColumnName = "CreatedOn";
                 colvarCreatedOn.DataType = DbType.DateTime;
@@ -291,7 +328,9 @@ namespace Incremental.Kick.Dal{
                 colvarCreatedOn.IsPrimaryKey = false;
                 colvarCreatedOn.IsForeignKey = false;
                 colvarCreatedOn.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarCreatedOn);
+                
                 TableSchema.TableColumn colvarModifiedOn = new TableSchema.TableColumn(schema);
                 colvarModifiedOn.ColumnName = "ModifiedOn";
                 colvarModifiedOn.DataType = DbType.DateTime;
@@ -301,16 +340,19 @@ namespace Incremental.Kick.Dal{
                 colvarModifiedOn.IsPrimaryKey = false;
                 colvarModifiedOn.IsForeignKey = false;
                 colvarModifiedOn.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarModifiedOn);
+                
                 BaseSchema = schema;
                 //add this schema to the provider
                 //so we can query it later
-                DataService.Providers["DotNetKicks"].AddSchema("Kick_User",schema);
+                DataService.Providers["Kick"].AddSchema("Kick_User",schema);
             }
 
         }
 
         #endregion
+        
         #region Query Accessor
 	    public static Query CreateQuery()
 	    {
@@ -318,28 +360,36 @@ namespace Incremental.Kick.Dal{
 	    }
 
 	    #endregion
+	    
 	    #region .ctors
-	    public KickUser()
+	    public User()
 	    {
             SetSQLProps();
             SetDefaults();
             MarkNew();
         }
 
-	    public KickUser(object keyID)
+	    public User(object keyID)
 	    {
 		    SetSQLProps();
+            SetDefaults();
 		    LoadByKey(keyID);
 	    }
 
-	    public KickUser(string columnName, object columnValue)
+    	 
+	    public User(string columnName, object columnValue)
         {
             SetSQLProps();
+            SetDefaults();
             LoadByParam(columnName,columnValue);
         }
 
+        
 	    #endregion
+	    
 	    #region Props
+	    
+          
         [XmlAttribute("UserID")]
         public int UserID 
 	    {
@@ -353,6 +403,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("Username")]
         public string Username 
 	    {
@@ -366,6 +417,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("Email")]
         public string Email 
 	    {
@@ -379,6 +431,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("Password")]
         public string Password 
 	    {
@@ -392,6 +445,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("PasswordSalt")]
         public string PasswordSalt 
 	    {
@@ -405,6 +459,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("IsGeneratedPassword")]
         public bool IsGeneratedPassword 
 	    {
@@ -418,6 +473,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("IsValidated")]
         public bool IsValidated 
 	    {
@@ -431,6 +487,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("IsBanned")]
         public bool IsBanned 
 	    {
@@ -444,6 +501,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("AdsenseID")]
         public string AdsenseID 
 	    {
@@ -457,6 +515,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("ReceiveEmailNewsletter")]
         public bool ReceiveEmailNewsletter 
 	    {
@@ -470,6 +529,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("Roles")]
         public string Roles 
 	    {
@@ -483,6 +543,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("HostID")]
         public int HostID 
 	    {
@@ -496,6 +557,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("LastActiveOn")]
         public DateTime LastActiveOn 
 	    {
@@ -509,6 +571,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("CreatedOn")]
         public DateTime CreatedOn 
 	    {
@@ -522,6 +585,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("ModifiedOn")]
         public DateTime ModifiedOn 
 	    {
@@ -535,79 +599,126 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
 	    #endregion
-			#region PrimaryKey Methods
-				public KickCommentCollection KickCommentRecords()
-				{
-					return new KickCommentCollection().Where(KickComment.Columns.UserID, UserID).Load();
-				}
+	    
+	    
+	    #region PrimaryKey Methods
+	    
+		public Incremental.Kick.Dal.CommentCollection CommentRecords()
+		{
+			return new Incremental.Kick.Dal.CommentCollection().Where(Comment.Columns.UserID, UserID).Load();
+		}
 
-				public KickStoryCollection KickStoryRecords()
-				{
-					return new KickStoryCollection().Where(KickStory.Columns.UserID, UserID).Load();
-				}
+		public Incremental.Kick.Dal.StoryCollection StoryRecords()
+		{
+			return new Incremental.Kick.Dal.StoryCollection().Where(Story.Columns.UserID, UserID).Load();
+		}
 
-				public KickStoryKickCollection KickStoryKickRecords()
-				{
-					return new KickStoryKickCollection().Where(KickStoryKick.Columns.UserID, UserID).Load();
-				}
+		public Incremental.Kick.Dal.StoryKickCollection StoryKickRecords()
+		{
+			return new Incremental.Kick.Dal.StoryKickCollection().Where(StoryKick.Columns.UserID, UserID).Load();
+		}
 
-				public KickStoryUserHostTagCollection KickStoryUserHostTagRecords()
-				{
-					return new KickStoryUserHostTagCollection().Where(KickStoryUserHostTag.Columns.UserID, UserID).Load();
-				}
+		public Incremental.Kick.Dal.StoryUserHostTagCollection StoryUserHostTagRecords()
+		{
+			return new Incremental.Kick.Dal.StoryUserHostTagCollection().Where(StoryUserHostTag.Columns.UserID, UserID).Load();
+		}
 
-			#endregion
+		#endregion
+		
+	 	
+			
+	    
 	    //no foreign key tables defined (0)
+	    
+	    
+	    
 	    //no ManyToMany tables defined (0)
+	    
 	    #region ObjectDataSource support
+    	
+    	
 	    /// <summary>
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
 	    public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn)
 	    {
-		    KickUser item = new KickUser();
+		    User item = new User();
+		    
             item.Username = varUsername;
+            
             item.Email = varEmail;
+            
             item.Password = varPassword;
+            
             item.PasswordSalt = varPasswordSalt;
+            
             item.IsGeneratedPassword = varIsGeneratedPassword;
+            
             item.IsValidated = varIsValidated;
+            
             item.IsBanned = varIsBanned;
+            
             item.AdsenseID = varAdsenseID;
+            
             item.ReceiveEmailNewsletter = varReceiveEmailNewsletter;
+            
             item.Roles = varRoles;
+            
             item.HostID = varHostID;
+            
             item.LastActiveOn = varLastActiveOn;
+            
             item.CreatedOn = varCreatedOn;
+            
             item.ModifiedOn = varModifiedOn;
+            
+	    
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
 		    else
 			    item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
 	    }
 
+    	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
 	    public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn)
 	    {
-		    KickUser item = new KickUser();
+		    User item = new User();
+		    
                 item.UserID = varUserID;
+				
                 item.Username = varUsername;
+				
                 item.Email = varEmail;
+				
                 item.Password = varPassword;
+				
                 item.PasswordSalt = varPasswordSalt;
+				
                 item.IsGeneratedPassword = varIsGeneratedPassword;
+				
                 item.IsValidated = varIsValidated;
+				
                 item.IsBanned = varIsBanned;
+				
                 item.AdsenseID = varAdsenseID;
+				
                 item.ReceiveEmailNewsletter = varReceiveEmailNewsletter;
+				
                 item.Roles = varRoles;
+				
                 item.HostID = varHostID;
+				
                 item.LastActiveOn = varLastActiveOn;
+				
                 item.CreatedOn = varCreatedOn;
+				
                 item.ModifiedOn = varModifiedOn;
+				
 		    item.IsNew = false;
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -619,21 +730,38 @@ namespace Incremental.Kick.Dal{
 	    #region Columns Struct
 	    public struct Columns
 	    {
+		    
+		    
             public static string UserID = @"UserID";
+            
             public static string Username = @"Username";
+            
             public static string Email = @"Email";
+            
             public static string Password = @"Password";
+            
             public static string PasswordSalt = @"PasswordSalt";
+            
             public static string IsGeneratedPassword = @"IsGeneratedPassword";
+            
             public static string IsValidated = @"IsValidated";
+            
             public static string IsBanned = @"IsBanned";
+            
             public static string AdsenseID = @"AdsenseID";
+            
             public static string ReceiveEmailNewsletter = @"ReceiveEmailNewsletter";
+            
             public static string Roles = @"Roles";
+            
             public static string HostID = @"HostID";
+            
             public static string LastActiveOn = @"LastActiveOn";
+            
             public static string CreatedOn = @"CreatedOn";
+            
             public static string ModifiedOn = @"ModifiedOn";
+            
 	    }
 
 	    #endregion

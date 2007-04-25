@@ -6,7 +6,7 @@ using Incremental.Kick.Common.Enums;
 
 namespace Incremental.Kick.Caching
 {
-    public class KickStoryCache
+    public class StoryCache
     {
 
         public static void RemoveStory(int storyID, string storyIdentifier)
@@ -15,16 +15,16 @@ namespace Incremental.Kick.Caching
             GetCommentCollectionCache().Remove(GetCommentCacheKey(storyID));
         }
 
-        public static KickStory GetStory(string storyIdentifier)
+        public static Story GetStory(string storyIdentifier)
         {
             string cacheKey = GetStoryCacheKey(storyIdentifier);
-            CacheManager<string, KickStory> storyCache = GetStoryCache();
+            CacheManager<string, Story> storyCache = GetStoryCache();
 
-            KickStory story = storyCache[cacheKey];
+            Story story = storyCache[cacheKey];
 
             if (story == null)
             {
-                story = KickStory.FetchStoryByIdentifier(storyIdentifier);
+                story = Story.FetchStoryByIdentifier(storyIdentifier);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, story, 500); //TODO: config
             }
@@ -34,19 +34,19 @@ namespace Incremental.Kick.Caching
 
         private static string GetStoryCacheKey(string storyIdentifier)
         {
-            return String.Format("KickStory_{0}", storyIdentifier); ;
+            return String.Format("Story_{0}", storyIdentifier); ;
         }
 
-        public static KickCommentCollection GetComments(int storyID)
+        public static CommentCollection GetComments(int storyID)
         {
             string cacheKey = GetCommentCacheKey(storyID);
-            CacheManager<string, KickCommentCollection> commentCache = GetCommentCollectionCache();
+            CacheManager<string, CommentCollection> commentCache = GetCommentCollectionCache();
 
-            KickCommentCollection comments = commentCache[cacheKey];
+            CommentCollection comments = commentCache[cacheKey];
 
             if (comments == null)
             {
-                comments = KickComment.FetchCommentsByStoryID(storyID);
+                comments = Comment.FetchCommentsByStoryID(storyID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 commentCache.Insert(cacheKey, comments, 500); //TODO: config
             }
@@ -56,46 +56,43 @@ namespace Incremental.Kick.Caching
 
         private static string GetCommentCacheKey(int storyID)
         {
-            return String.Format("KickCommentCollection_{0}", storyID);
+            return String.Format("CommentCollection_{0}", storyID);
         }
 
 
-        public static KickStoryCollection GetAllStories(bool isKicked, int hostID, int pageNumber, int pageSize)
+        public static StoryCollection GetAllStories(bool isKicked, int hostID, int pageNumber, int pageSize)
         {
-            string cacheKey = String.Format("KickStoryCollection_{0}_{1}_{2}_{3}", isKicked, hostID, pageNumber, pageSize);
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isKicked, hostID, pageNumber, pageSize);
 
-            CacheManager<string, KickStoryCollection> storyCache = GetStoryCollectionCache();
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
-            KickStoryCollection stories = storyCache[cacheKey];
+            StoryCollection stories = storyCache[cacheKey];
             if (stories == null)
             {
-                stories = new Kick_StoryBR().GetStoriesByIsKickedAndHostID(isKicked, hostID, pageNumber, pageSize).Kick_Story;
-
-                //stories = KickStory.
-
+                stories = Story.GetStoriesByIsKickedAndHostID(isKicked, hostID, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, 500); //TODO: GJ: config
             }
 
-            return storyTable;
+            return stories;
         }
 
-        public static KickStoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize)
+        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize)
         {
-            string cacheKey = String.Format("KickStoryCollection_{0}_{1}_{2}_{3}", hostID, sortBy, pageNumber, pageSize);
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", hostID, sortBy, pageNumber, pageSize);
 
-            CacheManager<string, KickStoryCollection> storyCache = GetStoryTableCache();
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
-            KickStoryCollection stories = storyCache[cacheKey];
+            StoryCollection stories = storyCache[cacheKey];
             if (stories == null)
             {
-                stories = Kick_StoryBR.GetPopularStories(hostID, sortBy, pageNumber, pageSize);
+                stories = Story.GetPopularStories(hostID, sortBy, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, 500); //TODO: GJ: config
             }
 
 
-            return storyTable;
+            return stories;
         }
 
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy)
@@ -106,7 +103,7 @@ namespace Incremental.Kick.Caching
             int? count = countCache[cacheKey];
             if (count == null)
             {
-                count = Kick_StoryBR.GetPopularStoriesCount(hostID, sortBy);
+                count = Story.GetPopularStoriesCount(hostID, sortBy);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, 500); //TODO: GJ: config
             }
@@ -324,19 +321,19 @@ namespace Incremental.Kick.Caching
          */
 
 
-        private static CacheManager<string, KickStoryCollection> GetStoryCollectionCache()
+        private static CacheManager<string, StoryCollection> GetStoryCollectionCache()
         {
-            return CacheManager<string, KickStoryCollection>.GetInstance();
+            return CacheManager<string, StoryCollection>.GetInstance();
         }
 
-        private static CacheManager<string, KickStory> GetStoryCache()
+        private static CacheManager<string, Story> GetStoryCache()
         {
-            return CacheManager<string, KickStory>.GetInstance();
+            return CacheManager<string, Story>.GetInstance();
         }
 
-        private static CacheManager<string, KickCommentCollection> GetCommentCollectionCache()
+        private static CacheManager<string, CommentCollection> GetCommentCollectionCache()
         {
-            return CacheManager<string, KickCommentCollection>.GetInstance();
+            return CacheManager<string, CommentCollection>.GetInstance();
         }
 
         private static CacheManager<string, int?> GetCountCache()

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,42 +13,45 @@ using SubSonic;
 using SubSonic.Utilities;
 
 
-//Generated on 11/04/2007 12:11:20 by gjoyce
+//Generated on 25/04/2007 16:27:26 by gjoyce
 
 namespace Incremental.Kick.Dal{
     /// <summary>
-    /// Strongly-typed collection for the KickStoryUserHostTag class.
+    /// Strongly-typed collection for the StoryKick class.
     /// </summary>
     [Serializable]
-    public partial class KickStoryUserHostTagCollection : ActiveList<KickStoryUserHostTag> 
+    public partial class StoryKickCollection : ActiveList<StoryKick> 
     {
         List<Where> wheres = new List<Where>();
         List<BetweenAnd> betweens = new List<BetweenAnd>();
         SubSonic.OrderBy orderBy;
-        public KickStoryUserHostTagCollection OrderByAsc(string columnName) 
+    	
+        public StoryKickCollection OrderByAsc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Asc(columnName);
             return this;
         }
 
-        public KickStoryUserHostTagCollection OrderByDesc(string columnName) 
+    	
+        public StoryKickCollection OrderByDesc(string columnName) 
 	    {
             this.orderBy = SubSonic.OrderBy.Desc(columnName);
             return this;
         }
 
-	    public KickStoryUserHostTagCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
+	    public StoryKickCollection WhereDatesBetween(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             return this;
         }
 
-        public KickStoryUserHostTagCollection Where(Where where) 
+        public StoryKickCollection Where(Where where) 
 	    {
             wheres.Add(where);
             return this;
         }
 
-        public KickStoryUserHostTagCollection Where(string columnName, object value) 
+    	
+        public StoryKickCollection Where(string columnName, object value) 
 	    {
 		    if(value != DBNull.Value && value != null)
 		    {	
@@ -61,7 +65,8 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        public KickStoryUserHostTagCollection Where(string columnName, Comparison comp, object value) 
+    	
+        public StoryKickCollection Where(string columnName, Comparison comp, object value) 
 	    {
             Where where = new Where();
             where.ColumnName = columnName;
@@ -71,7 +76,8 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickStoryUserHostTagCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
+    	
+        public StoryKickCollection BetweenAnd(string columnName, DateTime dateStart, DateTime dateEnd) 
 	    {
             BetweenAnd between = new BetweenAnd();
             between.ColumnName = columnName;
@@ -83,15 +89,17 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickStoryUserHostTagCollection Load() 
+    	
+        public StoryKickCollection Load() 
         {
-            Query qry = new Query(KickStoryUserHostTag.Schema);
+            Query qry = new Query(StoryKick.Schema);
             CheckLogicalDelete(qry);
             foreach (Where where in wheres) 
             {
                 qry.AddWhere(where);
             }
 
+             
             foreach (BetweenAnd between in betweens)
             {
                 qry.AddBetweenAnd(between);
@@ -108,18 +116,20 @@ namespace Incremental.Kick.Dal{
             return this;
         }
 
-        public KickStoryUserHostTagCollection() 
+        
+        public StoryKickCollection() 
 	    {
         }
 
     }
 
     /// <summary>
-    /// This is an ActiveRecord class which wraps the Kick_StoryUserHostTag table.
+    /// This is an ActiveRecord class which wraps the Kick_StoryKick table.
     /// </summary>
     [Serializable]
-    public partial class KickStoryUserHostTag : ActiveRecord<KickStoryUserHostTag>
+    public partial class StoryKick : ActiveRecord<StoryKick>
     {
+    
 	    #region Default Settings
 	    protected static void SetSQLProps() 
 	    {
@@ -142,26 +152,29 @@ namespace Incremental.Kick.Dal{
 
         }
 
+    	
         private static void GetTableSchema() 
 	    {
             if(!IsSchemaInitialized)
             {
                 //Schema declaration
-				TableSchema.Table schema = new TableSchema.Table(DataService.GetInstance("DotNetKicks"));
+				TableSchema.Table schema = new TableSchema.Table("Kick_StoryKick", TableType.Table, DataService.GetInstance("Kick"));
                 schema.Columns = new TableSchema.TableColumnCollection();
-                schema.Name = "Kick_StoryUserHostTag";
                 schema.SchemaName = "dbo";
                 //columns
-                TableSchema.TableColumn colvarStoryUserHostTagID = new TableSchema.TableColumn(schema);
-                colvarStoryUserHostTagID.ColumnName = "StoryUserHostTagID";
-                colvarStoryUserHostTagID.DataType = DbType.Int32;
-                colvarStoryUserHostTagID.MaxLength = 0;
-                colvarStoryUserHostTagID.AutoIncrement = true;
-                colvarStoryUserHostTagID.IsNullable = false;
-                colvarStoryUserHostTagID.IsPrimaryKey = true;
-                colvarStoryUserHostTagID.IsForeignKey = false;
-                colvarStoryUserHostTagID.IsReadOnly = false;
-                schema.Columns.Add(colvarStoryUserHostTagID);
+                
+                TableSchema.TableColumn colvarStoryKickID = new TableSchema.TableColumn(schema);
+                colvarStoryKickID.ColumnName = "StoryKickID";
+                colvarStoryKickID.DataType = DbType.Int32;
+                colvarStoryKickID.MaxLength = 0;
+                colvarStoryKickID.AutoIncrement = true;
+                colvarStoryKickID.IsNullable = false;
+                colvarStoryKickID.IsPrimaryKey = true;
+                colvarStoryKickID.IsForeignKey = false;
+                colvarStoryKickID.IsReadOnly = false;
+                
+                schema.Columns.Add(colvarStoryKickID);
+                
                 TableSchema.TableColumn colvarStoryID = new TableSchema.TableColumn(schema);
                 colvarStoryID.ColumnName = "StoryID";
                 colvarStoryID.DataType = DbType.Int32;
@@ -171,8 +184,11 @@ namespace Incremental.Kick.Dal{
                 colvarStoryID.IsPrimaryKey = false;
                 colvarStoryID.IsForeignKey = true;
                 colvarStoryID.IsReadOnly = false;
+                
 				colvarStoryID.ForeignKeyTableName = "Kick_Story";
+                
                 schema.Columns.Add(colvarStoryID);
+                
                 TableSchema.TableColumn colvarUserID = new TableSchema.TableColumn(schema);
                 colvarUserID.ColumnName = "UserID";
                 colvarUserID.DataType = DbType.Int32;
@@ -182,8 +198,11 @@ namespace Incremental.Kick.Dal{
                 colvarUserID.IsPrimaryKey = false;
                 colvarUserID.IsForeignKey = true;
                 colvarUserID.IsReadOnly = false;
+                
 				colvarUserID.ForeignKeyTableName = "Kick_User";
+                
                 schema.Columns.Add(colvarUserID);
+                
                 TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
                 colvarHostID.ColumnName = "HostID";
                 colvarHostID.DataType = DbType.Int32;
@@ -191,21 +210,11 @@ namespace Incremental.Kick.Dal{
                 colvarHostID.AutoIncrement = false;
                 colvarHostID.IsNullable = false;
                 colvarHostID.IsPrimaryKey = false;
-                colvarHostID.IsForeignKey = true;
+                colvarHostID.IsForeignKey = false;
                 colvarHostID.IsReadOnly = false;
-				colvarHostID.ForeignKeyTableName = "Kick_Host";
+                
                 schema.Columns.Add(colvarHostID);
-                TableSchema.TableColumn colvarTagID = new TableSchema.TableColumn(schema);
-                colvarTagID.ColumnName = "TagID";
-                colvarTagID.DataType = DbType.Int32;
-                colvarTagID.MaxLength = 0;
-                colvarTagID.AutoIncrement = false;
-                colvarTagID.IsNullable = false;
-                colvarTagID.IsPrimaryKey = false;
-                colvarTagID.IsForeignKey = true;
-                colvarTagID.IsReadOnly = false;
-				colvarTagID.ForeignKeyTableName = "Kick_Tag";
-                schema.Columns.Add(colvarTagID);
+                
                 TableSchema.TableColumn colvarCreatedOn = new TableSchema.TableColumn(schema);
                 colvarCreatedOn.ColumnName = "CreatedOn";
                 colvarCreatedOn.DataType = DbType.DateTime;
@@ -215,16 +224,19 @@ namespace Incremental.Kick.Dal{
                 colvarCreatedOn.IsPrimaryKey = false;
                 colvarCreatedOn.IsForeignKey = false;
                 colvarCreatedOn.IsReadOnly = false;
+                
                 schema.Columns.Add(colvarCreatedOn);
+                
                 BaseSchema = schema;
                 //add this schema to the provider
                 //so we can query it later
-                DataService.Providers["DotNetKicks"].AddSchema("Kick_StoryUserHostTag",schema);
+                DataService.Providers["Kick"].AddSchema("Kick_StoryKick",schema);
             }
 
         }
 
         #endregion
+        
         #region Query Accessor
 	    public static Query CreateQuery()
 	    {
@@ -232,41 +244,50 @@ namespace Incremental.Kick.Dal{
 	    }
 
 	    #endregion
+	    
 	    #region .ctors
-	    public KickStoryUserHostTag()
+	    public StoryKick()
 	    {
             SetSQLProps();
             SetDefaults();
             MarkNew();
         }
 
-	    public KickStoryUserHostTag(object keyID)
+	    public StoryKick(object keyID)
 	    {
 		    SetSQLProps();
+            SetDefaults();
 		    LoadByKey(keyID);
 	    }
 
-	    public KickStoryUserHostTag(string columnName, object columnValue)
+    	 
+	    public StoryKick(string columnName, object columnValue)
         {
             SetSQLProps();
+            SetDefaults();
             LoadByParam(columnName,columnValue);
         }
 
+        
 	    #endregion
+	    
 	    #region Props
-        [XmlAttribute("StoryUserHostTagID")]
-        public int StoryUserHostTagID 
+	    
+          
+        [XmlAttribute("StoryKickID")]
+        public int StoryKickID 
 	    {
-		    get { return GetColumnValue<int>("StoryUserHostTagID"); }
+		    get { return GetColumnValue<int>("StoryKickID"); }
 
             set 
 		    {
 			    MarkDirty();
-			    SetColumnValue("StoryUserHostTagID", value);
+			    SetColumnValue("StoryKickID", value);
             }
 
         }
 
+	      
         [XmlAttribute("StoryID")]
         public int StoryID 
 	    {
@@ -280,6 +301,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("UserID")]
         public int UserID 
 	    {
@@ -293,6 +315,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	      
         [XmlAttribute("HostID")]
         public int HostID 
 	    {
@@ -306,19 +329,7 @@ namespace Incremental.Kick.Dal{
 
         }
 
-        [XmlAttribute("TagID")]
-        public int TagID 
-	    {
-		    get { return GetColumnValue<int>("TagID"); }
-
-            set 
-		    {
-			    MarkDirty();
-			    SetColumnValue("TagID", value);
-            }
-
-        }
-
+	      
         [XmlAttribute("CreatedOn")]
         public DateTime CreatedOn 
 	    {
@@ -332,29 +343,23 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
 	    #endregion
-	    #region ForeignKey Methods
+	    
+	    
+	 	
+			
+	    
+	    
+	    
+	    #region ForeignKey Properties
+	    
         /// <summary>
-        /// Returns a KickHost ActiveRecord object related to this KickStoryUserHostTag
+        /// Returns a Story ActiveRecord object related to this StoryKick
         /// </summary>
-	    public KickHost KickHost
+	    public Incremental.Kick.Dal.Story Story
         {
-	        get { return KickHost.FetchByID(this.HostID); }
-
-	        set
-	        {
-		        MarkDirty();
-		        SetColumnValue("HostID", value.HostID);
-	        }
-
-        }
-
-        /// <summary>
-        /// Returns a KickStory ActiveRecord object related to this KickStoryUserHostTag
-        /// </summary>
-	    public KickStory KickStory
-        {
-	        get { return KickStory.FetchByID(this.StoryID); }
+	        get { return Incremental.Kick.Dal.Story.FetchByID(this.StoryID); }
 
 	        set
 	        {
@@ -364,27 +369,14 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
+	    
         /// <summary>
-        /// Returns a KickTag ActiveRecord object related to this KickStoryUserHostTag
+        /// Returns a User ActiveRecord object related to this StoryKick
         /// </summary>
-	    public KickTag KickTag
+	    public Incremental.Kick.Dal.User User
         {
-	        get { return KickTag.FetchByID(this.TagID); }
-
-	        set
-	        {
-		        MarkDirty();
-		        SetColumnValue("TagID", value.TagID);
-	        }
-
-        }
-
-        /// <summary>
-        /// Returns a KickUser ActiveRecord object related to this KickStoryUserHostTag
-        /// </summary>
-	    public KickUser KickUser
-        {
-	        get { return KickUser.FetchByID(this.UserID); }
+	        get { return Incremental.Kick.Dal.User.FetchByID(this.UserID); }
 
 	        set
 	        {
@@ -394,38 +386,57 @@ namespace Incremental.Kick.Dal{
 
         }
 
+	    
+	    
 	    #endregion
+	    
+	    
+	    
 	    //no ManyToMany tables defined (0)
+	    
 	    #region ObjectDataSource support
+    	
+    	
 	    /// <summary>
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
-	    public static void Insert(int varStoryID,int varUserID,int varHostID,int varTagID,DateTime varCreatedOn)
+	    public static void Insert(int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn)
 	    {
-		    KickStoryUserHostTag item = new KickStoryUserHostTag();
+		    StoryKick item = new StoryKick();
+		    
             item.StoryID = varStoryID;
+            
             item.UserID = varUserID;
+            
             item.HostID = varHostID;
-            item.TagID = varTagID;
+            
             item.CreatedOn = varCreatedOn;
+            
+	    
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
 		    else
 			    item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
 	    }
 
+    	
 	    /// <summary>
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
-	    public static void Update(int varStoryUserHostTagID,int varStoryID,int varUserID,int varHostID,int varTagID,DateTime varCreatedOn)
+	    public static void Update(int varStoryKickID,int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn)
 	    {
-		    KickStoryUserHostTag item = new KickStoryUserHostTag();
-                item.StoryUserHostTagID = varStoryUserHostTagID;
+		    StoryKick item = new StoryKick();
+		    
+                item.StoryKickID = varStoryKickID;
+				
                 item.StoryID = varStoryID;
+				
                 item.UserID = varUserID;
+				
                 item.HostID = varHostID;
-                item.TagID = varTagID;
+				
                 item.CreatedOn = varCreatedOn;
+				
 		    item.IsNew = false;
 		    if (System.Web.HttpContext.Current != null)
 			    item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -437,12 +448,18 @@ namespace Incremental.Kick.Dal{
 	    #region Columns Struct
 	    public struct Columns
 	    {
-            public static string StoryUserHostTagID = @"StoryUserHostTagID";
+		    
+		    
+            public static string StoryKickID = @"StoryKickID";
+            
             public static string StoryID = @"StoryID";
+            
             public static string UserID = @"UserID";
+            
             public static string HostID = @"HostID";
-            public static string TagID = @"TagID";
+            
             public static string CreatedOn = @"CreatedOn";
+            
 	    }
 
 	    #endregion

@@ -5,16 +5,16 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Caching
 {
-    public class KickHostCache
+    public class HostCache
     {
-        public static KickHost GetHost(string hostAndPort)
+        public static Host GetHost(string hostAndPort)
         {
-            return KickHosts[hostAndPort];
+            return Hosts[hostAndPort];
         }
 
-        public static KickHost GetHost(int hostID)
+        public static Host GetHost(int hostID)
         {
-            foreach (KickHost host in KickHosts.Values)
+            foreach (Host host in Hosts.Values)
             {
                 if (host.HostID == hostID)
                     return host;
@@ -23,21 +23,21 @@ namespace Incremental.Kick.Caching
             throw new Exception("Invalid hostID:" + hostID);
         }
 
-        public static Dictionary<string, KickHost> KickHosts
+        public static Dictionary<string, Host> Hosts
         {
             get
             {
-                CacheManager<string, Dictionary<string, KickHost>> cache = GetHostProfileCache();
-                string cacheKey = "KickHosts";
-                Dictionary<string, KickHost> hostDictionary = cache[cacheKey];
+                CacheManager<string, Dictionary<string, Host>> cache = GetHostProfileCache();
+                string cacheKey = "Hosts";
+                Dictionary<string, Host> hostDictionary = cache[cacheKey];
 
                 if (hostDictionary == null)
                 {
-                    hostDictionary = new Dictionary<string, KickHost>();
-                    KickHostCollection hosts = new KickHostCollection();
-                    hosts.LoadAndCloseReader(KickHost.FetchAll());
+                    hostDictionary = new Dictionary<string, Host>();
+                    HostCollection hosts = new HostCollection();
+                    hosts.LoadAndCloseReader(Host.FetchAll());
 
-                    foreach(KickHost host in hosts) {
+                    foreach(Host host in hosts) {
                         hostDictionary.Add(host.HostName, host);
                     }
 
@@ -49,9 +49,9 @@ namespace Incremental.Kick.Caching
             }
         }
 
-        private static CacheManager<string, Dictionary<string, KickHost>> GetHostProfileCache()
+        private static CacheManager<string, Dictionary<string, Host>> GetHostProfileCache()
         {
-            return CacheManager<string, Dictionary<string, KickHost>>.GetInstance();
+            return CacheManager<string, Dictionary<string, Host>>.GetInstance();
         }
     }
 }

@@ -5,28 +5,28 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Caching
 {
-    public class KickTagCache
+    public class TagCache
     {
-        public static KickTagCollection GetHostTags(int hostID)
+        public static TagCollection GetHostTags(int hostID)
         {
             return GetHostTags(hostID, 100);
         }
 
-        public static KickTagCollection GetHostTags(int hostID, double maximumDaysOld)
+        public static TagCollection GetHostTags(int hostID, double maximumDaysOld)
         {
             return GetHostTags(hostID, DateTime.Now.AddDays(-maximumDaysOld), DateTime.Now);
         }
 
-        public static KickTagCollection GetHostTags(int hostID, DateTime createdOnLower, DateTime createdOnUpper)
+        public static TagCollection GetHostTags(int hostID, DateTime createdOnLower, DateTime createdOnUpper)
         {
             string cacheKey = GetCacheKey("HostTags", hostID, createdOnLower, createdOnUpper);
-            CacheManager<string, KickTagCollection> tagCache = GetTagCollectionCache();
+            CacheManager<string, TagCollection> tagCache = GetTagCollectionCache();
 
-            KickTagCollection tags = tagCache[cacheKey];
+            TagCollection tags = tagCache[cacheKey];
 
             if (tags == null)
             {
-                tags = KickTag.FetchTags(hostID, createdOnLower, createdOnUpper);
+                tags = Tag.FetchTags(hostID, createdOnLower, createdOnUpper);
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, 500); //TODO: config
@@ -35,12 +35,12 @@ namespace Incremental.Kick.Caching
             return tags;
         }
 
-        public static KickTagCollection GetTopHostTags(int hostID, int numberOfTags)
+        public static TagCollection GetTopHostTags(int hostID, int numberOfTags)
         {
             string cacheKey = String.Format("TopHostTags_{0}_{1}", hostID, numberOfTags);
-            CacheManager<string, KickTagCollection> tagCache = GetTagCollectionCache();
+            CacheManager<string, TagCollection> tagCache = GetTagCollectionCache();
 
-            KickTagCollection tags = tagCache[cacheKey];
+            TagCollection tags = tagCache[cacheKey];
 
             if (tags == null)
             {
@@ -53,25 +53,25 @@ namespace Incremental.Kick.Caching
             return tags;
         }
 
-        public static KickTagCollection GetUserTags(string userIdentifier)
+        public static TagCollection GetUserTags(string userIdentifier)
         {
-            return GetUserTags(KickUserCache.GetUserID(userIdentifier));
+            return GetUserTags(UserCache.GetUserID(userIdentifier));
         }
 
-        public static KickTagCollection GetUserHostTags(string userIdentifier, int hostID)
+        public static TagCollection GetUserHostTags(string userIdentifier, int hostID)
         {
-            return GetUserHostTags(KickUserCache.GetUserID(userIdentifier), hostID);
+            return GetUserHostTags(UserCache.GetUserID(userIdentifier), hostID);
         }
 
-        public static KickTagCollection GetUserHostTags(int userID, int hostID)
+        public static TagCollection GetUserHostTags(int userID, int hostID)
         {
             string cacheKey = String.Format("UserHostTags_{0}_{1}", userID, hostID);
-            CacheManager<string, KickTagCollection> tagCache = GetTagCollectionCache();
+            CacheManager<string, TagCollection> tagCache = GetTagCollectionCache();
 
-            KickTagCollection tags = tagCache[cacheKey];
+            TagCollection tags = tagCache[cacheKey];
             if (tags == null)
             {
-                tags = KickTag.FetchTags(userID, hostID);
+                tags = Tag.FetchTags(userID, hostID);
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, 500); //TODO: config
@@ -81,16 +81,16 @@ namespace Incremental.Kick.Caching
         }
 
 
-        public static KickTagCollection GetStoryTags(int storyID)
+        public static TagCollection GetStoryTags(int storyID)
         {
             string cacheKey = GetCacheKey("StoryTags", storyID);
-            CacheManager<string, KickTagCollection> tagCache = GetTagCollectionCache();
+            CacheManager<string, TagCollection> tagCache = GetTagCollectionCache();
 
-            KickTagCollection tags = tagCache[cacheKey];
+            TagCollection tags = tagCache[cacheKey];
 
             if (tags == null)
             {
-                tags = KickTag.FetchStoryTags(storyID);
+                tags = Tag.FetchStoryTags(storyID);
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, 500); //TODO: config
@@ -108,7 +108,7 @@ namespace Incremental.Kick.Caching
 
             if (tagID == null)
             {
-                tagID = KickTag.FetchTagByIdentifier(tagIdentifier).TagID;
+                tagID = Tag.FetchTagByIdentifier(tagIdentifier).TagID;
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tagID.Value, 500); //TODO: config
             }
@@ -116,16 +116,16 @@ namespace Incremental.Kick.Caching
             return tagID.Value;
         }
 
-        public static KickTagCollection GetUserTags(int userID)
+        public static TagCollection GetUserTags(int userID)
         {
             string cacheKey = GetCacheKey("UserTags", userID);
-            CacheManager<string, KickTagCollection> tagCache = GetTagCollectionCache();
+            CacheManager<string, TagCollection> tagCache = GetTagCollectionCache();
 
-            KickTagCollection tags = tagCache[cacheKey];
+            TagCollection tags = tagCache[cacheKey];
 
             if (tags == null)
             {
-                tags = KickTag.FetchUserTags(userID);
+                tags = Tag.FetchUserTags(userID);
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, 500); //TODO: config
@@ -145,9 +145,9 @@ namespace Incremental.Kick.Caching
             return String.Format("{0}_{1}_{2}_{3}", prefix, id, CacheHelper.DateTimeToCacheKey(startDate), CacheHelper.DateTimeToCacheKey(endDate));
         }
 
-        private static CacheManager<string, KickTagCollection> GetTagCollectionCache()
+        private static CacheManager<string, TagCollection> GetTagCollectionCache()
         {
-            return CacheManager<string, KickTagCollection>.GetInstance();
+            return CacheManager<string, TagCollection>.GetInstance();
         }
 
         private static CacheManager<string, int?> GetTagIDCache()

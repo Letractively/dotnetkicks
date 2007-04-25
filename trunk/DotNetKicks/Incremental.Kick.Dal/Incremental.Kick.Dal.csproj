@@ -30,7 +30,7 @@
   <ItemGroup>
     <Reference Include="SubSonic, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\SubSonic\2.0.1 beta\Build 21014\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\2.0.1 beta\Build 21574\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -39,21 +39,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Custom\KickComment.cs" />
-    <Compile Include="Custom\KickStory.cs" />
-    <Compile Include="Custom\KickTag.cs" />
-    <Compile Include="Custom\KickUser.cs" />
+    <Compile Include="Custom\Comment.cs" />
+    <Compile Include="Custom\Story.cs" />
+    <Compile Include="Custom\Tag.cs" />
+    <Compile Include="Custom\User.cs" />
     <Compile Include="Generated\AllStructs.cs" />
-    <Compile Include="Generated\KickCategory.cs" />
-    <Compile Include="Generated\KickComment.cs" />
-    <Compile Include="Generated\KickHost.cs" />
-    <Compile Include="Generated\KickStory.cs" />
-    <Compile Include="Generated\KickStoryKick.cs" />
-    <Compile Include="Generated\KickStoryUserHostTag.cs" />
-    <Compile Include="Generated\KickTag.cs" />
-    <Compile Include="Generated\KickUser.cs" />
+    <Compile Include="Generated\Category.cs" />
+    <Compile Include="Generated\Comment.cs" />
+    <Compile Include="Generated\Host.cs" />
     <Compile Include="Generated\StoredProcedures.cs" />
+    <Compile Include="Generated\Story.cs" />
+    <Compile Include="Generated\StoryKick.cs" />
+    <Compile Include="Generated\StoryUserHostTag.cs" />
+    <Compile Include="Generated\Tag.cs" />
+    <Compile Include="Generated\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Incremental.Kick.Common\Incremental.Kick.Common.csproj">
+      <Project>{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}</Project>
+      <Name>Incremental.Kick.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

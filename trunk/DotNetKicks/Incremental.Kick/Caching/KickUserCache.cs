@@ -7,16 +7,16 @@ using Incremental.Kick.BusinessLogic;
 
 namespace Incremental.Kick.Caching
 {
-    public class KickUserCache
+    public class UserCache
     {
-        public static KickUser GetUser(string securityToken)
+        public static User GetUser(string securityToken)
         {
             int? userID = null;
 
             if (!String.IsNullOrEmpty(securityToken))
                 userID = SecurityToken.FromString(securityToken).UserID;
 
-            KickUser user;
+            User user;
             if (userID.HasValue)
                 user = GetUser(userID.Value);
             else
@@ -26,17 +26,17 @@ namespace Incremental.Kick.Caching
         }
 
         private static object _getUserLock = new object();
-        private static KickUser GetUser(int userID)
+        private static User GetUser(int userID)
         {
-            CacheManager<string, KickUser> userCache = GetUserCache();
+            CacheManager<string, User> userCache = GetUserCache();
             string cacheKey = GetUserProfileCacheKey(userID);
-            KickUser user = userCache[cacheKey];
+            User user = userCache[cacheKey];
 
             lock (_getUserLock)
             {
                 if (user == null)
                 {
-                    user = KickUser.FetchByID(userID);
+                    user = User.FetchByID(userID);
                     System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                     userCache.Insert(cacheKey, user, 500); //TODO: GJ: config
                 }
@@ -54,7 +54,7 @@ namespace Incremental.Kick.Caching
             int? userID = userIDCache[cacheKey];
             if (!userID.HasValue)
             {
-                userID = KickUser.FetchUserByUsername(username).UserID;
+                userID = User.FetchUserByUsername(username).UserID;
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 userIDCache.Insert(cacheKey, userID, 500); //TODO: Config
             }
@@ -78,10 +78,10 @@ namespace Incremental.Kick.Caching
         }
 
         //TODO: GJ: some major improvements are needed here.
-        public static int KickStory(int storyID, int userID, int hostID)
+        public static int Story(int storyID, int userID, int hostID)
         {
             //TODO: GJ: implement
-            KickStoryKick storyKick = KickStoryBR.AddStoryKick(storyID, userID, hostID);
+            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
     
                 //merge with the cache
               /*  GetUserStoryKicks(userID).Merge(storyKickTable);
@@ -97,10 +97,10 @@ namespace Incremental.Kick.Caching
           
         }
 
-        public static int UnKickStory(int storyID, int userID, int hostID)
+        public static int UnStory(int storyID, int userID, int hostID)
         {
             //TODO: GJ: implement
-            KickStoryBR.DeleteStoryKick(storyID, userID, hostID);
+            StoryBR.DeleteStoryKick(storyID, userID, hostID);
             /*
 
                 //now remove from the cache
@@ -168,9 +168,9 @@ namespace Incremental.Kick.Caching
             return CacheManager<string, Kick_StoryKickTable>.GetInstance();
         }*/
 
-        private static CacheManager<string, KickUser> GetUserCache()
+        private static CacheManager<string, User> GetUserCache()
         {
-            return CacheManager<string, KickUser>.GetInstance();
+            return CacheManager<string, User>.GetInstance();
         }
 
         private static CacheManager<string, int?> GetUserIDCache()

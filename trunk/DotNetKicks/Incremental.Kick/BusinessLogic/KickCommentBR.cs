@@ -4,7 +4,7 @@ using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.BusinessLogic
 {
-    public class KickCommentBR
+    public class CommentBR
     {
 
         public static int CreateComment(int storyID, int userID, string username, string comment)
@@ -17,19 +17,20 @@ namespace Incremental.Kick.BusinessLogic
             //TODO: add a word filter (a series of RegExs)
             comment = comment.Replace("\n", "<br/>");
 
-            KickComment kickComment = new KickComment();
-            kickComment.StoryID = storyID;
-            kickComment.UserID = userID;
-            kickComment.Username = username;
-            kickComment.Comment = comment;
-            kickComment.Save();
+            Comment Comment = new Comment();
+            Comment.StoryID = storyID;
+            Comment.UserID = userID;
+            Comment.Username = username;
+            //TODO: GJ: rename comment as it is the same as the table name
+            Comment.CommentX = comment;
+            Comment.Save();
 
 
             //TODO: Increment
             //now increase the comment count on the story
             //Kick_StoryBR.IncrementStoryCommentCount(storyID);
 
-            return kickComment.CommentID;
+            return Comment.CommentID;
         }
     }
 }
