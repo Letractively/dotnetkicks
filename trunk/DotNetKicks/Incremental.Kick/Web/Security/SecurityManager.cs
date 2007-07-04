@@ -66,7 +66,7 @@ namespace Incremental.Kick.Web.Security {
                 try {
                     userProfile = UserCache.GetUser(urlParameters.SecurityToken);
                     principal = new AuthenticatedKickPrincipal(identity, userProfile);
-                } catch (Exception ex) {
+                } catch {
                     //TODO: Log an exception
                     FormsAuthentication.SignOut();
                     principal = new AnonymousKickPrincipal(new GuestIdentity(), UserCache.GetUser(null));
