@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick", "Increme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Dal", "Incremental.Kick.Dal\Incremental.Kick.Dal.csproj", "{70213D29-4904-4E0A-AA1A-2519C45E8D08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplication1", "WindowsApplication1\WindowsApplication1.csproj", "{371D49CB-E4DC-46A9-BC26-DD380BC2EDFE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +25,6 @@ Global
 		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70213D29-4904-4E0A-AA1A-2519C45E8D08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{371D49CB-E4DC-46A9-BC26-DD380BC2EDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{371D49CB-E4DC-46A9-BC26-DD380BC2EDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{371D49CB-E4DC-46A9-BC26-DD380BC2EDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{371D49CB-E4DC-46A9-BC26-DD380BC2EDFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
