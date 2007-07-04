@@ -158,5 +158,9 @@ namespace Incremental.Kick.BusinessLogic
             //TODO: GJ: send email
            // EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
+
+        internal static string AuthenticateUser(string username, string password) {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }
