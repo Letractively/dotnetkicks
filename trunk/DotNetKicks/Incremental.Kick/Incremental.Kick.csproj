@@ -28,6 +28,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="SubSonic, Version=2.0.2.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\144\SubSonic.dll</HintPath>
@@ -36,6 +44,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -45,11 +54,33 @@
     <Compile Include="BusinessLogic\KickUserBR.cs" />
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
-    <Compile Include="Caching\KickCategoryCache.cs" />
-    <Compile Include="Caching\KickHostCache.cs" />
-    <Compile Include="Caching\KickStoryCache.cs" />
-    <Compile Include="Caching\KickTagCache.cs" />
-    <Compile Include="Caching\KickUserCache.cs" />
+    <Compile Include="Caching\CategoryCache.cs" />
+    <Compile Include="Caching\HostCache.cs" />
+    <Compile Include="Caching\StoryCache.cs" />
+    <Compile Include="Caching\TagCache.cs" />
+    <Compile Include="Caching\UserCache.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Enums\StoryListSortBy.cs" />
+    <Compile Include="Config\ConfigReaderBase.cs" />
+    <Compile Include="Config\WebUIConfig.cs" />
+    <Compile Include="Dal\Custom\Comment.cs" />
+    <Compile Include="Dal\Custom\Story.cs" />
+    <Compile Include="Dal\Custom\Tag.cs" />
+    <Compile Include="Dal\Custom\User.cs" />
+    <Compile Include="Dal\Entities\HostProfile.cs" />
+    <Compile Include="Dal\Entities\Tag.cs" />
+    <Compile Include="Dal\Entities\TagList.cs" />
+    <Compile Include="Dal\Entities\UserProfile.cs" />
+    <Compile Include="Dal\Generated\AllStructs.cs" />
+    <Compile Include="Dal\Generated\Category.cs" />
+    <Compile Include="Dal\Generated\Comment.cs" />
+    <Compile Include="Dal\Generated\Host.cs" />
+    <Compile Include="Dal\Generated\StoredProcedures.cs" />
+    <Compile Include="Dal\Generated\Story.cs" />
+    <Compile Include="Dal\Generated\StoryKick.cs" />
+    <Compile Include="Dal\Generated\StoryUserHostTag.cs" />
+    <Compile Include="Dal\Generated\Tag.cs" />
+    <Compile Include="Dal\Generated\User.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Helpers\ThreadSafeRandom.cs" />
@@ -57,16 +88,84 @@
     <Compile Include="Security\Cipher.cs" />
     <Compile Include="Security\Rijndael.cs" />
     <Compile Include="Security\SecurityToken.cs" />
+    <Compile Include="Web\Controls\Base\JavaScriptFeedHandler.cs" />
+    <Compile Include="Web\Controls\Base\KickApiPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickAsyncPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickHtmlControl.cs" />
+    <Compile Include="Web\Controls\Base\KickHttpHandler.cs" />
+    <Compile Include="Web\Controls\Base\KickMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickRssPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickUIPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Base\KickWebControl.cs" />
+    <Compile Include="Web\Controls\Base\KickWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\Debug\DebugInformation.cs" />
+    <Compile Include="Web\Controls\Docs\JavaScriptFeedList.cs" />
+    <Compile Include="Web\Helpers\HostHelper.cs" />
+    <Compile Include="Web\Helpers\PasswordGenerator.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\ExceptionCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssCategoryCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssChannelCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssFeedCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssItemCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssModuleCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssModuleItemCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\Collections\RssModuleItemCollectionCollection.cs" />
+    <Compile Include="Web\Helpers\Rss\RssChannel\RssChannel.cs" />
+    <Compile Include="Web\Helpers\Rss\RssChannel\RssCloud.cs" />
+    <Compile Include="Web\Helpers\Rss\RssChannel\RssImage.cs" />
+    <Compile Include="Web\Helpers\Rss\RssChannel\RssTextInput.cs" />
+    <Compile Include="Web\Helpers\Rss\RssFeed.cs" />
+    <Compile Include="Web\Helpers\Rss\RssItem\RssEnclosure.cs" />
+    <Compile Include="Web\Helpers\Rss\RssItem\RssGuid.cs" />
+    <Compile Include="Web\Helpers\Rss\RssItem\RssItem.cs" />
+    <Compile Include="Web\Helpers\Rss\RssItem\RssSource.cs" />
+    <Compile Include="Web\Helpers\Rss\RssModule.cs" />
+    <Compile Include="Web\Helpers\Rss\RssModuleItem.cs" />
+    <Compile Include="Web\Helpers\Rss\RssModules\RssBlogChannel.cs" />
+    <Compile Include="Web\Helpers\Rss\RssModules\RssCreativeCommon.cs" />
+    <Compile Include="Web\Helpers\Rss\RssModules\RssPhotoAlbum.cs" />
+    <Compile Include="Web\Helpers\Rss\RssReader.cs" />
+    <Compile Include="Web\Helpers\Rss\RssWriter.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\DBBool.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\RssCategory.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\RssCompact.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\RssDefault.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\RssElement.cs" />
+    <Compile Include="Web\Helpers\Rss\Shared\RssEnumerators.cs" />
+    <Compile Include="Web\Helpers\Rss\StoryDataTableToRss2.cs" />
+    <Compile Include="Web\Helpers\ThreadSafeRandom.cs" />
+    <Compile Include="Web\Helpers\UrlFactory.cs" />
+    <Compile Include="Web\Helpers\UrlParameters.cs" />
+    <Compile Include="Web\Helpers\UrlParametersHelper.cs" />
+    <Compile Include="Web\Security\Principal\AnonymousKickPrincipal.cs" />
+    <Compile Include="Web\Security\Principal\ApiIdentity.cs" />
+    <Compile Include="Web\Security\Principal\AuthenticatedKickPrincipal.cs" />
+    <Compile Include="Web\Security\Principal\GuestIdentity.cs" />
+    <Compile Include="Web\Security\Principal\IKickPrincipal.cs" />
+    <Compile Include="Web\Security\Principal\KickPrincipal.cs" />
+    <Compile Include="Web\Security\SecurityManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Incremental.Kick.Common\Incremental.Kick.Common.csproj">
-      <Project>{E7C46BBB-EF90-4E5D-9AB2-8EB3A0F4CFD2}</Project>
-      <Name>Incremental.Kick.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Incremental.Kick.Dal\Incremental.Kick.Dal.csproj">
-      <Project>{70213D29-4904-4E0A-AA1A-2519C45E8D08}</Project>
-      <Name>Incremental.Kick.Dal</Name>
-    </ProjectReference>
+    <None Include="Config\Atweb.Kick.config" />
+    <None Include="Config\webui.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
