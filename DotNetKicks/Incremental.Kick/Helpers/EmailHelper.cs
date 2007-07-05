@@ -9,8 +9,8 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Helpers {
     public class EmailHelper {
 
-        public static void SendNewUserEmail(string toEmail, string username, string password, Host hostProfile) {
-            Send(hostProfile.Email, toEmail, "Welcome to " + hostProfile.SiteTitle + " " + username, 
+        public static void SendNewUserEmail(string toEmail, string username, string password, Host host) {
+            Send(host.Email, toEmail, "Welcome to " + host.SiteTitle + " " + username, 
                 String.Format(@"
                 Welcome to {3}.
                 
@@ -24,11 +24,11 @@ namespace Incremental.Kick.Helpers {
                 You can log in to kick at the following location : {2}
 
                 Thanks for joining our site,
-                {3}", username, password, hostProfile.RootUrl + "/login", hostProfile.SiteTitle));
+                {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
         }
 
-        public static void SendChangedPasswordEmail(string toEmail, string username, string password, Host hostProfile) {
-            Send(hostProfile.Email, toEmail, "Your " + hostProfile.SiteTitle + " password has been changed",
+        public static void SendChangedPasswordEmail(string toEmail, string username, string password, Host host) {
+            Send(host.Email, toEmail, "Your " + host.SiteTitle + " password has been changed",
                 String.Format(@"
                 As requested, you password has been changed.                
                 
@@ -42,35 +42,34 @@ namespace Incremental.Kick.Helpers {
                 You can log in to kick at the following location : {2}
 
                 Thanks,
-                {3}", username, password, hostProfile.RootUrl + "/login", hostProfile.SiteTitle));
+                {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
         }
 
 
-        public static void Send(MailMessage message) {
-            //TODO: GJ: host configuration 
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.Credentials = new NetworkCredential("auto@dotnetkicks.com", "somepasswordhere");
+        public static void Send(MailMessage message, Host host) {
+            SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort.Value);
+            smtpClient.Credentials = new NetworkCredential(host.SmtpUsername, host.SmtpPassword);
             smtpClient.EnableSsl = true;
             smtpClient.Send(message);
         }
 
-        public static void Send(string from, string to, string subject, string body) {
-            Send(new MailMessage(from, to, subject, body));
+        public static void Send(string from, string to, string subject, string body, Host host) {
+            Send(new MailMessage(from, to, subject, body), host);
         }
 
-        internal static void SendPasswordResetEmail(string toEmail, string username, DateTime createdDateTime, Host hostProfile) {
-            Send(hostProfile.Email, toEmail, "Reset you " + hostProfile.SiteTitle + " password",
+        internal static void SendPasswordResetEmail(string toEmail, string username, DateTime createdDateTime, Host host) {
+            Send(host.Email, toEmail, "Reset you " + host.SiteTitle + " password",
                 String.Format(@"
                 Please follow the link below to reset your password:
 
                 {0}               
 
                 Thanks,
-                {1}", hostProfile.RootUrl + "/resetpassword/" + username + "/" + createdDateTime.Ticks.GetHashCode().ToString(), hostProfile.SiteTitle));
+                {1}", host.RootUrl + "/resetpassword/" + username + "/" + createdDateTime.Ticks.GetHashCode().ToString(), host.SiteTitle), host);
         }
 
-        public static void SendPasswordEmail(string toEmail, string username, string password, Host hostProfile) {
-            Send(hostProfile.Email, toEmail, "Your new " + hostProfile.SiteTitle + " password",
+        public static void SendPasswordEmail(string toEmail, string username, string password, Host host) {
+            Send(host.Email, toEmail, "Your new " + host.SiteTitle + " password",
                 String.Format(@"
                 
                 Please keep this email for your records. Your account information is as follows:
@@ -82,7 +81,7 @@ namespace Incremental.Kick.Helpers {
 
                 You can log in to kick at the following location : {2}
 
-                {3}", username, password, hostProfile.RootUrl + "/login", hostProfile.SiteTitle));
+                {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
         }
     }
 }

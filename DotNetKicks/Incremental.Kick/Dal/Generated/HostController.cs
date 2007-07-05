@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedDateTime,string BlogUrl,string Email,string Skin,string Theme,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml)
+	    public void Insert(string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedDateTime,string BlogUrl,string Email,string Skin,string Theme,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string SmtpHost,int? SmtpPort,string SmtpUsername,string SmtpPassword,bool? SmtpEnableSsl)
 	    {
 		    Host item = new Host();
 		    
@@ -148,6 +148,16 @@ namespace Incremental.Kick.Dal
             
             item.TrackingHtml = TrackingHtml;
             
+            item.SmtpHost = SmtpHost;
+            
+            item.SmtpPort = SmtpPort;
+            
+            item.SmtpUsername = SmtpUsername;
+            
+            item.SmtpPassword = SmtpPassword;
+            
+            item.SmtpEnableSsl = SmtpEnableSsl;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -157,7 +167,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int HostID,string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedDateTime,string BlogUrl,string Email,string Skin,string Theme,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml)
+	    public void Update(int HostID,string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedDateTime,string BlogUrl,string Email,string Skin,string Theme,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string SmtpHost,int? SmtpPort,string SmtpUsername,string SmtpPassword,bool? SmtpEnableSsl)
 	    {
 		    Host item = new Host();
 		    
@@ -216,6 +226,16 @@ namespace Incremental.Kick.Dal
 				item.AdsenseID = AdsenseID;
 				
 				item.TrackingHtml = TrackingHtml;
+				
+				item.SmtpHost = SmtpHost;
+				
+				item.SmtpPort = SmtpPort;
+				
+				item.SmtpUsername = SmtpUsername;
+				
+				item.SmtpPassword = SmtpPassword;
+				
+				item.SmtpEnableSsl = SmtpEnableSsl;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

@@ -29,10 +29,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Intelligencia.UrlRewriter, Version=2.0.0.3, Culture=neutral, PublicKeyToken=0573f3650687980d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\UrlRewriter.Net\2.0\beta 4\Intelligencia.UrlRewriter.dll</HintPath>
-    </Reference>
     <Reference Include="SubSonic, Version=2.0.2.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\144\SubSonic.dll</HintPath>
@@ -46,6 +42,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="UrlRewritingNet.UrlRewriter, Version=1.1.60329.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\UrlRewriter.Net\1.1\UrlRewritingNet.UrlRewriter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
