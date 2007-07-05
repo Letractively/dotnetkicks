@@ -47,8 +47,9 @@ namespace Incremental.Kick.Helpers {
 
 
         public static void Send(MailMessage message) {
+            //TODO: GJ: host configuration 
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.Credentials = new NetworkCredential("auto@dotnetkicks.com", "11Q864");
+            smtpClient.Credentials = new NetworkCredential("auto@dotnetkicks.com", "somepasswordhere");
             smtpClient.EnableSsl = true;
             smtpClient.Send(message);
         }
