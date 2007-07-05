@@ -63,8 +63,7 @@ namespace Incremental.Kick.BusinessLogic
 
             user.Save();
 
-            //TODO: GJ: send email
-            //EmailHelper.SendNewUserEmail(email, username, password, host);
+            EmailHelper.SendNewUserEmail(email, username, password, host);
         }
 
         public static string GetSecurityToken(string username, string password)
@@ -122,7 +121,7 @@ namespace Incremental.Kick.BusinessLogic
             System.Diagnostics.Trace.WriteLine("UpdatePassword: " + userID);
 
             //TODO: GJ: send email
-            //EmailHelper.SendChangedPasswordEmail(user.Email, user.Username, newPassword, host);
+            EmailHelper.SendChangedPasswordEmail(user.Email, user.Username, newPassword, host);
         }
 
         public static void UpdateAdSenseID(int userID, string adSenseID)
@@ -139,8 +138,8 @@ namespace Incremental.Kick.BusinessLogic
         public static void SendPasswordResetEmail(int userID, Host host)
         {
             User user = User.FetchByID(userID);
-            //TODO: GJ: send email
-           // EmailHelper.SendPasswordResetEmail(user.Email, user.Username, user.LastActiveOn, host);
+
+            EmailHelper.SendPasswordResetEmail(user.Email, user.Username, user.LastActiveOn, host);
         }
 
         public static void ResetPassword(int userID, Host host)
@@ -156,10 +155,8 @@ namespace Incremental.Kick.BusinessLogic
             user.LastActiveOn = DateTime.Now;
             user.IsGeneratedPassword = true;
             user.Save();
-
-   
-            //TODO: GJ: send email
-           // EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
+               
+            EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
 
         public static string AuthenticateUser(string username, string password) {

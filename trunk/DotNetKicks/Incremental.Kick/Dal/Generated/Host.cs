@@ -477,6 +477,71 @@ namespace Incremental.Kick.Dal
 				colvarTrackingHtml.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarTrackingHtml);
 				
+				TableSchema.TableColumn colvarSmtpHost = new TableSchema.TableColumn(schema);
+				colvarSmtpHost.ColumnName = "SmtpHost";
+				colvarSmtpHost.DataType = DbType.String;
+				colvarSmtpHost.MaxLength = 255;
+				colvarSmtpHost.AutoIncrement = false;
+				colvarSmtpHost.IsNullable = true;
+				colvarSmtpHost.IsPrimaryKey = false;
+				colvarSmtpHost.IsForeignKey = false;
+				colvarSmtpHost.IsReadOnly = false;
+				colvarSmtpHost.DefaultSetting = @"";
+				colvarSmtpHost.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpHost);
+				
+				TableSchema.TableColumn colvarSmtpPort = new TableSchema.TableColumn(schema);
+				colvarSmtpPort.ColumnName = "SmtpPort";
+				colvarSmtpPort.DataType = DbType.Int32;
+				colvarSmtpPort.MaxLength = 0;
+				colvarSmtpPort.AutoIncrement = false;
+				colvarSmtpPort.IsNullable = true;
+				colvarSmtpPort.IsPrimaryKey = false;
+				colvarSmtpPort.IsForeignKey = false;
+				colvarSmtpPort.IsReadOnly = false;
+				colvarSmtpPort.DefaultSetting = @"";
+				colvarSmtpPort.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpPort);
+				
+				TableSchema.TableColumn colvarSmtpUsername = new TableSchema.TableColumn(schema);
+				colvarSmtpUsername.ColumnName = "SmtpUsername";
+				colvarSmtpUsername.DataType = DbType.String;
+				colvarSmtpUsername.MaxLength = 50;
+				colvarSmtpUsername.AutoIncrement = false;
+				colvarSmtpUsername.IsNullable = true;
+				colvarSmtpUsername.IsPrimaryKey = false;
+				colvarSmtpUsername.IsForeignKey = false;
+				colvarSmtpUsername.IsReadOnly = false;
+				colvarSmtpUsername.DefaultSetting = @"";
+				colvarSmtpUsername.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpUsername);
+				
+				TableSchema.TableColumn colvarSmtpPassword = new TableSchema.TableColumn(schema);
+				colvarSmtpPassword.ColumnName = "SmtpPassword";
+				colvarSmtpPassword.DataType = DbType.String;
+				colvarSmtpPassword.MaxLength = 50;
+				colvarSmtpPassword.AutoIncrement = false;
+				colvarSmtpPassword.IsNullable = true;
+				colvarSmtpPassword.IsPrimaryKey = false;
+				colvarSmtpPassword.IsForeignKey = false;
+				colvarSmtpPassword.IsReadOnly = false;
+				colvarSmtpPassword.DefaultSetting = @"";
+				colvarSmtpPassword.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpPassword);
+				
+				TableSchema.TableColumn colvarSmtpEnableSsl = new TableSchema.TableColumn(schema);
+				colvarSmtpEnableSsl.ColumnName = "SmtpEnableSsl";
+				colvarSmtpEnableSsl.DataType = DbType.Boolean;
+				colvarSmtpEnableSsl.MaxLength = 0;
+				colvarSmtpEnableSsl.AutoIncrement = false;
+				colvarSmtpEnableSsl.IsNullable = true;
+				colvarSmtpEnableSsl.IsPrimaryKey = false;
+				colvarSmtpEnableSsl.IsForeignKey = false;
+				colvarSmtpEnableSsl.IsReadOnly = false;
+				colvarSmtpEnableSsl.DefaultSetting = @"";
+				colvarSmtpEnableSsl.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpEnableSsl);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -769,6 +834,56 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("SmtpHost")]
+		public string SmtpHost 
+		{
+			get { return GetColumnValue<string>("SmtpHost"); }
+
+			set { SetColumnValue("SmtpHost", value); }
+
+		}
+
+		  
+		[XmlAttribute("SmtpPort")]
+		public int? SmtpPort 
+		{
+			get { return GetColumnValue<int?>("SmtpPort"); }
+
+			set { SetColumnValue("SmtpPort", value); }
+
+		}
+
+		  
+		[XmlAttribute("SmtpUsername")]
+		public string SmtpUsername 
+		{
+			get { return GetColumnValue<string>("SmtpUsername"); }
+
+			set { SetColumnValue("SmtpUsername", value); }
+
+		}
+
+		  
+		[XmlAttribute("SmtpPassword")]
+		public string SmtpPassword 
+		{
+			get { return GetColumnValue<string>("SmtpPassword"); }
+
+			set { SetColumnValue("SmtpPassword", value); }
+
+		}
+
+		  
+		[XmlAttribute("SmtpEnableSsl")]
+		public bool? SmtpEnableSsl 
+		{
+			get { return GetColumnValue<bool?>("SmtpEnableSsl"); }
+
+			set { SetColumnValue("SmtpEnableSsl", value); }
+
+		}
+
 		
 		#endregion
 		
@@ -815,7 +930,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -873,6 +988,16 @@ namespace Incremental.Kick.Dal
 			
 			item.TrackingHtml = varTrackingHtml;
 			
+			item.SmtpHost = varSmtpHost;
+			
+			item.SmtpPort = varSmtpPort;
+			
+			item.SmtpUsername = varSmtpUsername;
+			
+			item.SmtpPassword = varSmtpPassword;
+			
+			item.SmtpEnableSsl = varSmtpEnableSsl;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -884,7 +1009,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -944,6 +1069,16 @@ namespace Incremental.Kick.Dal
 				
 				item.TrackingHtml = varTrackingHtml;
 				
+				item.SmtpHost = varSmtpHost;
+				
+				item.SmtpPort = varSmtpPort;
+				
+				item.SmtpUsername = varSmtpUsername;
+				
+				item.SmtpPassword = varSmtpPassword;
+				
+				item.SmtpEnableSsl = varSmtpEnableSsl;
+				
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -983,6 +1118,11 @@ namespace Incremental.Kick.Dal
 			 public static string Publish_CommentScore = @"Publish_CommentScore";
 			 public static string AdsenseID = @"AdsenseID";
 			 public static string TrackingHtml = @"TrackingHtml";
+			 public static string SmtpHost = @"SmtpHost";
+			 public static string SmtpPort = @"SmtpPort";
+			 public static string SmtpUsername = @"SmtpUsername";
+			 public static string SmtpPassword = @"SmtpPassword";
+			 public static string SmtpEnableSsl = @"SmtpEnableSsl";
 						
 		}
 
