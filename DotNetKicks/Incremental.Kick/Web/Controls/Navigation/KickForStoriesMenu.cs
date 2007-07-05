@@ -122,7 +122,7 @@ namespace Incremental.Kick.Web.Controls {
                     <a href=""{0}"">{2}</a>
                     <span class=""LightLink""><a href=""{0}/upcoming"">[find]</a></span></div>",
                         UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier),
-                        this.KickPage.StaticIconRootUrl + "/" + category.CategoryIdentifier + ".png",
+                        this.KickPage.StaticIconRootUrl + "/" + category.IconName,
                         category.Name);
                 }
 

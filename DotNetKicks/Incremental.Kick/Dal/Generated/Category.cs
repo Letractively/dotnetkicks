@@ -164,6 +164,19 @@ namespace Incremental.Kick.Dal
 				colvarDescription.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarDescription);
 				
+				TableSchema.TableColumn colvarIconName = new TableSchema.TableColumn(schema);
+				colvarIconName.ColumnName = "IconName";
+				colvarIconName.DataType = DbType.String;
+				colvarIconName.MaxLength = 50;
+				colvarIconName.AutoIncrement = false;
+				colvarIconName.IsNullable = true;
+				colvarIconName.IsPrimaryKey = false;
+				colvarIconName.IsForeignKey = false;
+				colvarIconName.IsReadOnly = false;
+				colvarIconName.DefaultSetting = @"";
+				colvarIconName.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIconName);
+				
 				TableSchema.TableColumn colvarOrderPriority = new TableSchema.TableColumn(schema);
 				colvarOrderPriority.ColumnName = "OrderPriority";
 				colvarOrderPriority.DataType = DbType.Int16;
@@ -241,6 +254,16 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
+		[XmlAttribute("IconName")]
+		public string IconName 
+		{
+			get { return GetColumnValue<string>("IconName"); }
+
+			set { SetColumnValue("IconName", value); }
+
+		}
+
+		  
 		[XmlAttribute("OrderPriority")]
 		public short OrderPriority 
 		{
@@ -296,7 +319,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varCategoryIdentifier,string varName,string varDescription,short varOrderPriority)
+		public static void Insert(int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority)
 		{
 			Category item = new Category();
 			
@@ -307,6 +330,8 @@ namespace Incremental.Kick.Dal
 			item.Name = varName;
 			
 			item.Description = varDescription;
+			
+			item.IconName = varIconName;
 			
 			item.OrderPriority = varOrderPriority;
 			
@@ -321,7 +346,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(short varCategoryID,int varHostID,string varCategoryIdentifier,string varName,string varDescription,short varOrderPriority)
+		public static void Update(short varCategoryID,int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority)
 		{
 			Category item = new Category();
 			
@@ -334,6 +359,8 @@ namespace Incremental.Kick.Dal
 				item.Name = varName;
 				
 				item.Description = varDescription;
+				
+				item.IconName = varIconName;
 				
 				item.OrderPriority = varOrderPriority;
 				
@@ -353,6 +380,7 @@ namespace Incremental.Kick.Dal
 			 public static string CategoryIdentifier = @"CategoryIdentifier";
 			 public static string Name = @"Name";
 			 public static string Description = @"Description";
+			 public static string IconName = @"IconName";
 			 public static string OrderPriority = @"OrderPriority";
 						
 		}
