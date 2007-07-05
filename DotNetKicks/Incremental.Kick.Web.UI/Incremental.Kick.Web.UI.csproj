@@ -475,6 +475,74 @@
       <DependentUpon>ViewTags.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Constants.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Constants.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Scripts\Constants.aspx.designer.cs">
+      <DependentUpon>Constants.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Ajax\AddUserStoryTags.aspx.cs">
+      <DependentUpon>AddUserStoryTags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\GetPopularStories.aspx.cs">
+      <DependentUpon>GetPopularStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\GetUserStoryTags.aspx.cs">
+      <DependentUpon>GetUserStoryTags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\KickIt.aspx.cs">
+      <DependentUpon>KickIt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\Moderator\DeleteStory.aspx.cs">
+      <DependentUpon>DeleteStory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\RemoveUserStoryTag.aspx.cs">
+      <DependentUpon>RemoveUserStoryTag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ReportAsSpam.aspx.cs">
+      <DependentUpon>ReportAsSpam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ReportAsSpam.aspx.designer.cs">
+      <DependentUpon>ReportAsSpam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Ajax\ViewIt.aspx.cs">
+      <DependentUpon>ViewIt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ViewIt.aspx.designer.cs">
+      <DependentUpon>ViewIt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\CategoryKickedFeed.aspx.cs">
+      <DependentUpon>CategoryKickedFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\CategoryNewFeed.aspx.cs">
+      <DependentUpon>CategoryNewFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\MainFeed.aspx.cs">
+      <DependentUpon>MainFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\NewStories.aspx.cs">
+      <DependentUpon>NewStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\UserKickedStoriesFeed.aspx.cs">
+      <DependentUpon>UserKickedStoriesFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Images\KickItImageGenerator.ashx.cs">
+      <DependentUpon>KickItImageGenerator.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Default\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -518,6 +586,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Constants.aspx" />
+    <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
+    <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
+    <Content Include="Services\Images\KickItImageGenerator.ashx" />
     <None Include="Static\Scripts\2.0.1\Admin\.svn\empty-file" />
     <None Include="Static\Scripts\2.0.1\Admin\.svn\entries" />
     <None Include="Static\Scripts\2.0.1\Admin\.svn\format" />
@@ -564,6 +636,19 @@
     <Content Include="Pages\User\View.aspx" />
     <Content Include="Pages\User\ViewTag.aspx" />
     <Content Include="Pages\User\ViewTags.aspx" />
+    <Content Include="Services\Ajax\AddUserStoryTags.aspx" />
+    <Content Include="Services\Ajax\GetPopularStories.aspx" />
+    <Content Include="Services\Ajax\GetUserStoryTags.aspx" />
+    <Content Include="Services\Ajax\KickIt.aspx" />
+    <Content Include="Services\Ajax\Moderator\DeleteStory.aspx" />
+    <Content Include="Services\Ajax\RemoveUserStoryTag.aspx" />
+    <Content Include="Services\Ajax\ReportAsSpam.aspx" />
+    <Content Include="Services\Ajax\ViewIt.aspx" />
+    <Content Include="Services\Feeds\Rss\CategoryKickedFeed.aspx" />
+    <Content Include="Services\Feeds\Rss\CategoryNewFeed.aspx" />
+    <Content Include="Services\Feeds\Rss\MainFeed.aspx" />
+    <Content Include="Services\Feeds\Rss\NewStories.aspx" />
+    <Content Include="Services\Feeds\Rss\UserKickedStoriesFeed.aspx" />
     <Content Include="Templates\Default\MasterPage.Master" />
     <Content Include="Templates\Default\SideAds.ascx" />
     <Content Include="Templates\Default\TopAds.ascx" />

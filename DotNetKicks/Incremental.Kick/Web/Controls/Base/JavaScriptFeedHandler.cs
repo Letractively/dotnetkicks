@@ -2,11 +2,11 @@ using System;
 using System.Web;
 using System.Collections.Generic;
 using System.Text;
-//using Atweb.Kick.Common.Entities;
-//using Atweb.Kick.Common.DataSets.Tables;
-//using Atweb.Kick.Common.DataSets.Rows;
-//using Atweb.Kick.Caching;
-//using Atweb.Kick.Web.Helpers;
+//using Incremental.Kick.Common.Entities;
+//using Incremental.Kick.Common.DataSets.Tables;
+//using Incremental.Kick.Common.DataSets.Rows;
+//using Incremental.Kick.Caching;
+//using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.Controls {
     //public abstract class JavaScriptFeedHandler : IHttpHandler {

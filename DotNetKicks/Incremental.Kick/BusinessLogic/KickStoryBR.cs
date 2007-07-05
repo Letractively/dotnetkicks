@@ -189,6 +189,10 @@ namespace Incremental.Kick.BusinessLogic {
             story.Save();
         }
 
+        public static void IncrementViewCount(int storyID) {
+            IncrementViewCount(storyID, 1);
+        }
+
         public static void IncrementViewCount(int storyID, short viewCount) {
             Story story = Story.FetchByID(storyID);
             story.ViewCount += viewCount;

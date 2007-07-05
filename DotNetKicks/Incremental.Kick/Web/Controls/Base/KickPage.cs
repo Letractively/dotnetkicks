@@ -11,11 +11,11 @@ using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security.Principal;
-//using Atweb.Kick.Config;
-//using Atweb.Kick.Caching;
-//using Atweb.Kick.Common.DataSets.Rows;
-//using Atweb.Kick.Common.Entities;
-//using Atweb.Kick.Security.Principal;
+//using Incremental.Kick.Config;
+//using Incremental.Kick.Caching;
+//using Incremental.Kick.Common.DataSets.Rows;
+//using Incremental.Kick.Common.Entities;
+//using Incremental.Kick.Security.Principal;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickPage : System.Web.UI.Page {

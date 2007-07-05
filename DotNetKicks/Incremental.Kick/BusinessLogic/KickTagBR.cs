@@ -83,5 +83,8 @@ namespace Incremental.Kick.BusinessLogic
         {
             new Kick_StoryUserHostTagDAO().DeleteByID(storyID, userID, hostID, tagID);
         }*/
+        public static void DeleteTag(int storyID, int p, int p_3, int tagID) {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

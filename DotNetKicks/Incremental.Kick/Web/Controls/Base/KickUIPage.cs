@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-//using Atweb.Kick.Web.Helpers;
-//using Atweb.Kick.Config;
-//using Atweb.Kick.Common.DataSets.Rows;
-//using Atweb.Kick.Common.Entities;
+//using Incremental.Kick.Web.Helpers;
+//using Incremental.Kick.Config;
+//using Incremental.Kick.Common.DataSets.Rows;
+//using Incremental.Kick.Common.Entities;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickUIPage : KickPage {

@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Dal;
-//using Atweb.Kick.Common.Entities;
+//using Incremental.Kick.Common.Entities;
 
 namespace Incremental.Kick.Web.Helpers {
     public class UrlFactory {

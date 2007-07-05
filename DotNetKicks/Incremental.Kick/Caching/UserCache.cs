@@ -84,26 +84,26 @@ namespace Incremental.Kick.Caching
         }
 
         //TODO: GJ: some major improvements are needed here.
-        public static int Story(int storyID, int userID, int hostID)
+        public static int KickStory(int storyID, int userID, int hostID)
         {
-            //TODO: GJ: implement
-            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
+            ////TODO: GJ: implement
+            //StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
     
-                //merge with the cache
-              /*  GetUserStoryKicks(userID).Merge(storyKickTable);
+            //    //merge with the cache
+            //    GetUserStoryKicks(userID).Merge(storyKickTable);
                  
 
-                //increment the story kick count in the db (could be a db trigger?)
-                Kick_StoryDataSet storyDS = new Kick_StoryBR().GetByStoryID(storyID);
-                storyDS.Kick_Story[0].KickCount++;
-                new Kick_StoryBR().Persist(storyDS);
+            //    //increment the story kick count in the db (could be a db trigger?)
+            //    Kick_StoryDataSet storyDS = new Kick_StoryBR().GetByStoryID(storyID);
+            //    storyDS.Kick_Story[0].KickCount++;
+            //    new Kick_StoryBR().Persist(storyDS);
 
-                return storyDS.Kick_Story[0].KickCount; */
+            //    return storyDS.Kick_Story[0].KickCount; 
             return 999;
           
         }
 
-        public static int UnStory(int storyID, int userID, int hostID)
+        public static int UnKickStory(int storyID, int userID, int hostID)
         {
             //TODO: GJ: implement
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
@@ -148,31 +148,31 @@ namespace Incremental.Kick.Caching
             catch { }*/
         }
 
-       /* public static Kick_StoryKickTable GetUserStoryKicks(int userID)
+        public static StoryKickCollection GetUserStoryKicks(int userID)
         {
             string cacheKey = String.Format("Kick_StoryKickTable_{0}", userID);
 
-            CacheManager<string, Kick_StoryKickTable> storyKickCache = GetStoryKickCache();
+            CacheManager<string, StoryKickCollection> storyKickCache = GetStoryKickCache();
 
-            Kick_StoryKickTable storyKickTable = storyKickCache[cacheKey];
+            StoryKickCollection storyKicks = storyKickCache[cacheKey];
 
-            if (storyKickTable == null)
+            if (storyKicks == null)
             {
                 //TODO: get the latest n kicks for this userIdentifier
-                storyKickTable = new Kick_StoryKickBR().GetAllByUserID(userID).Kick_StoryKick;
+                storyKicks = StoryKickBR.GetAllByUserID(userID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyKickCache.Insert(cacheKey, storyKickTable, WebUIConfigReader.GetConfig().CategoryStoryListCacheDurationInSeconds);
+                storyKickCache.Insert(cacheKey, storyKicks, 500); //TODO: GJ: config
             }
 
-            return storyKickTable;
-        }*/
+            return storyKicks;
+        }
 
 
 
-        /*private static CacheManager<string, Kick_StoryKickTable> GetStoryKickCache()
+        private static CacheManager<string, StoryKickCollection> GetStoryKickCache()
         {
-            return CacheManager<string, Kick_StoryKickTable>.GetInstance();
-        }*/
+            return CacheManager<string, StoryKickCollection>.GetInstance();
+        }
 
         private static CacheManager<string, User> GetUserCache()
         {
