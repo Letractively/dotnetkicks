@@ -50,7 +50,7 @@ namespace Incremental.Kick.Web.UI.Controls {
             //add a new story
             short categoryID = short.Parse(this.Category.SelectedValue);
             string storyIdentifier = StoryBR.AddStory(this.KickPage.HostProfile.HostID, this.Title.Text, this.Description.Text, this.Url.Text,
-                categoryID, this.KickPage.KickUserProfile, false);
+                categoryID, this.KickPage.KickUserProfile);
 
             NewStoryPanel.Visible = false;
             SuccessPanel.Visible = true;

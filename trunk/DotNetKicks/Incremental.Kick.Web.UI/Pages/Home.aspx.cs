@@ -32,7 +32,7 @@ namespace Incremental.Kick.Web.UI.Pages {
 
             switch (this.UrlParameters.StoryListSortBy) {
                 case StoryListSortBy.RecentlyPromoted:
-                    this.PopularStoryNavigator.DataBind(StoryCache.GetAllStories(true, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetStoryCount(true, this.HostProfile.HostID));
+                    this.PopularStoryNavigator.DataBind(StoryCache.GetAllStories(true, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetStoryCount(this.HostProfile.HostID, true));
                     break;
                 default:
                     this.PopularStoryNavigator.DataBind(StoryCache.GetPopularStories(this.HostProfile.HostID, this.UrlParameters.StoryListSortBy, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetPopularStoriesCount(this.HostProfile.HostID, this.UrlParameters.StoryListSortBy));

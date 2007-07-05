@@ -60,16 +60,16 @@ namespace Incremental.Kick.Caching
         }
 
 
-        public static StoryCollection GetAllStories(bool isKicked, int hostID, int pageNumber, int pageSize)
+        public static StoryCollection GetAllStories(bool isPublished, int hostID, int pageNumber, int pageSize)
         {
-            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isKicked, hostID, pageNumber, pageSize);
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
             StoryCollection stories = storyCache[cacheKey];
             if (stories == null)
             {
-                stories = Story.GetStoriesByIsKickedAndHostID(isKicked, hostID, pageNumber, pageSize);
+                stories = Story.GetStoriesByIsPublishedAndHostID(isPublished, hostID, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, 500); //TODO: GJ: config
             }
@@ -273,25 +273,7 @@ namespace Incremental.Kick.Caching
             return storyCount;
         }
 
-        public static int GetStoryCount(bool isPublished, int hostID)
-        {
-            string cacheKey = String.Format("Kick_StoryCount_{0}_{1}", isPublished, hostID);
-            CacheManager<string, int> storyCountCache = GetCountCache();
-
-            int storyCount;
-            if (storyCountCache.ContainsKey(cacheKey))
-            {
-                storyCount = storyCountCache[cacheKey];
-            }
-            else
-            {
-                storyCount = new Kick_StoryBR().GetStoriesByIsKickedAndHostID_Count(isPublished, hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyCountCache.Insert(cacheKey, storyCount, WebUIConfigReader.GetConfig().CategoryStoryCountCacheDurationInSeconds);
-            }
-
-            return storyCount;
-        }
+        
 
         public static int GetUpcomingStoryCount(HostProfile hostProfile)
         {
@@ -299,27 +281,40 @@ namespace Incremental.Kick.Caching
         }
 
 
-        public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate)
-        {
-            string cacheKey = String.Format("Kick_StoryCount_{0}_{1}_{2}_{3}", isPublished, hostID, CacheHelper.DateTimeToCacheKey(startDate), CacheHelper.DateTimeToCacheKey(endDate));
-            CacheManager<string, int> storyCountCache = GetCountCache();
+        
+         */
+
+        public static int GetStoryCount(int hostID, bool isPublished) {
+            string cacheKey = String.Format("Kick_StoryCount_{0}_{1}", isPublished, hostID);
+            CacheManager<string, int?> storyCountCache = GetCountCache();
 
             int storyCount;
-            if (storyCountCache.ContainsKey(cacheKey))
-            {
-                storyCount = storyCountCache[cacheKey];
-            }
-            else
-            {
-                storyCount = Kick_StoryBR.GetStoryCount(hostID, isPublished, startDate, endDate);
+            if (storyCountCache.ContainsKey(cacheKey)) {
+                storyCount = storyCountCache[cacheKey].Value;
+            } else {
+                storyCount = Story.GetStoryCount(hostID, isPublished);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyCountCache.Insert(cacheKey, storyCount, WebUIConfigReader.GetConfig().CategoryStoryCountCacheDurationInSeconds);
+                storyCountCache.Insert(cacheKey, storyCount, 500);
             }
 
             return storyCount;
         }
-         */
 
+        public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
+            string cacheKey = String.Format("Kick_StoryCount_{0}_{1}_{2}_{3}", isPublished, hostID, CacheHelper.DateTimeToCacheKey(startDate), CacheHelper.DateTimeToCacheKey(endDate));
+            CacheManager<string, int?> storyCountCache = GetCountCache();
+
+            int storyCount;
+            if (storyCountCache.ContainsKey(cacheKey)) {
+                storyCount = storyCountCache[cacheKey].Value;
+            } else {
+                storyCount = Story.GetStoryCount(hostID, isPublished, startDate, endDate);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyCountCache.Insert(cacheKey, storyCount, 500);
+            }
+
+            return storyCount;
+        }
 
         private static CacheManager<string, StoryCollection> GetStoryCollectionCache()
         {
@@ -343,10 +338,6 @@ namespace Incremental.Kick.Caching
 
         public static int GetUpcomingStoryCount(Host host)
         {
-            return 999; //TODO: GJ: implement
-        }
-
-        public static int GetStoryCount(bool isPublished, int hostID) {
             return 999; //TODO: GJ: implement
         }
 

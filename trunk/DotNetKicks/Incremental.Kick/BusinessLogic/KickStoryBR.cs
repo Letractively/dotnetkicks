@@ -8,6 +8,7 @@ using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic {
     public class StoryBR {
+
         public static string AddStory(int hostID, string title, string description, string url, short categoryID, User user) {
             if (user.IsBanned)
                 return GetStoryIdentifier(title); //to stop the spammers
@@ -46,11 +47,12 @@ namespace Incremental.Kick.BusinessLogic {
             story.IsPublished = false;
             story.IsSpam = false;
             story.AdsenseID = adsenseID;
+            story.PublishedOn = DateTime.Now;
             story.Save();
 
 
             //now auto-kick it
-            //Kick_StoryKickBR.Story(storyDS.Kick_Story[0].StoryID, userID, hostID);
+            StoryBR.AddStoryKick(story.StoryID, userID, hostID);
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
@@ -289,8 +291,6 @@ namespace Incremental.Kick.BusinessLogic {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public static string AddStory(int p, string p_2, string p_3, string p_4, short categoryID, User user, bool p_7) {
-            throw new Exception("The method or operation is not implemented.");
-        }
+        
     }
 }

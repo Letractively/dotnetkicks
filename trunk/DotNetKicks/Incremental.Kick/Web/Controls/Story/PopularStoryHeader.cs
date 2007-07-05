@@ -22,7 +22,7 @@ namespace Incremental.Kick.Web.Controls {
         protected override void Render(HtmlTextWriter writer) {
 
             writer.WriteLine(@"<table class=""SimpleTable""><tr><td>");
-            writer.WriteLine(@"<div class=""PopularStoryListHeader""><img src=""{0}/new.gif"" width=""28"" height=""11""/> Sort By: ", this.KickPage.StaticIconRootUrl);
+            writer.WriteLine(@"<div class=""PopularStoryListHeader"">Sort By: ", this.KickPage.StaticIconRootUrl);
 
             this.RenderLink(StoryListSortBy.RecentlyPromoted, "Latest Stories", writer);
             this.RenderLink(StoryListSortBy.Today, "Top Today", writer);
@@ -36,8 +36,6 @@ namespace Incremental.Kick.Web.Controls {
 
             writer.WriteLine(@"</div>");
             writer.WriteLine(@"</td><td align=""right"">{0}</td></tr></table>", this.KickPage.SubCaption);
-
-
         }
 
         private void RenderLink(StoryListSortBy linkSortBy, string caption, HtmlTextWriter writer) {
@@ -58,6 +56,5 @@ namespace Incremental.Kick.Web.Controls {
 
             writer.WriteLine(@"<a id=""StoryListHeader_{0}"" href=""{1}"" {2} class=""{3}"">{4}</a>", sortByText, url, javaScript, cssClass, caption);
         }
-       
     }
 }

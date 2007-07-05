@@ -17,31 +17,78 @@ namespace Incremental.Kick.Dal {
             return t[0];
         }
 
-        public static StoryCollection GetStoriesByIsKickedAndHostID(bool isKicked, int hostID, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: implement
+        public static StoryCollection GetStoriesByIsPublishedAndHostID(bool isPublished, int hostID, int pageIndex, int pageSize) {
+            Query query = GetStoryQuery(hostID, isPublished);
+            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
         }
 
-        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: implement
+        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageIndex, int pageSize) {
+            Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
+            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
         }
 
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
-            return 1234; //TODO: GJ: implement
+            Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
+            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
+            return query.GetCount(Story.Columns.StoryID);
+        }
+        
+        public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
+            return (int)GetStoryQuery(hostID, isPublished, startDate, endDate).GetCount("StoryID");
         }
 
-        public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
+        public static int GetStoryCount(int hostID, bool isPublished) {
             Query query = new Query(Story.Schema).WHERE("HostID", hostID).AND("IsPublished", isPublished);
-            if (isPublished)
-                query = query.AddBetweenValues("PublishedOn", startDate, endDate);
-            else
-                query = query.AddBetweenValues("CreatedOn", startDate, endDate);
-
-            return (int)query.GetCount("StoryID");
+            return (int)GetStoryQuery(hostID, isPublished).GetCount("StoryID");
         }
 
         public static int GetStoryCount(int tagID, int hostID) {
             return 0; //TODO: GJ: return the story count for a tag and host
         }
 
+        private static Query GetStoryQuery(int hostID) {
+            return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
+        }
+        
+        private static Query GetStoryQuery(int hostID, bool isPublished) {
+            return GetStoryQuery(hostID).AND(Story.Columns.IsPublished, isPublished);
+        }
+
+        private static Query GetStoryQuery(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
+            Query query = GetStoryQuery(hostID, isPublished);
+            if (isPublished)
+                query = query.AddBetweenValues("PublishedOn", startDate, endDate);
+            else
+                query = query.AddBetweenValues("CreatedOn", startDate, endDate);
+            return query;
+        }
+
+        private static DateTime GetStartDate(StoryListSortBy sortBy) {
+            switch (sortBy) {
+                case StoryListSortBy.Today:
+                    return DateTime.Now.AddDays(-1);
+                case StoryListSortBy.PastWeek:
+                    return DateTime.Now.AddDays(-7);
+                case StoryListSortBy.PastTenDays:
+                    return DateTime.Now.AddDays(-10);
+                case StoryListSortBy.PastMonth:
+                    return DateTime.Now.AddDays(-31);
+                case StoryListSortBy.PastYear:
+                    return DateTime.Now.AddDays(-365);
+                default:
+                    throw new ArgumentException("Invalid sortBy");
+            }
+        }
     }
 }

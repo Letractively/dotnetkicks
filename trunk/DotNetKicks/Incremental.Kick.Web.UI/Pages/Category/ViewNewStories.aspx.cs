@@ -35,7 +35,7 @@ namespace Incremental.Kick.Web.UI.Pages.Category {
 
             if (!this.UrlParameters.CategoryIdentifierSpecified) {
                 this.StoryList.DataBind(StoryCache.GetAllStories(false, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
-                this.Paging.RecordCount = StoryCache.GetStoryCount(false, this.HostProfile.HostID);
+                this.Paging.RecordCount = StoryCache.GetStoryCount(this.HostProfile.HostID, false);
                 this.Paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Home) + "/upcoming";
             } else {
                 this.StoryList.DataBind(StoryCache.GetCategoryStories(this.UrlParameters.CategoryID, false, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
