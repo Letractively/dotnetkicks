@@ -3,32 +3,116 @@ using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Helpers;
 using System.Security.Cryptography;
+using Obviex.CipherLite;
 
-//NOTE: GJ: COPYRIGHT: this can not be published.
-//see : http://www.obviex.com/samples/Code.aspx?Source=EncryptionCS&Title=Symmetric%20Key%20Encryption&Lang=C%23
-//TODO: GJ: find alternative for this class
-
-namespace Incremental.Kick.Security
-{
+namespace Incremental.Kick.Security {
     public class Cipher {
-        internal static string EncryptToBase64(string plainSecurityToken)
-        {
-            throw new Exception("The method or operation is not implemented.");
+        private const char COMPRESSED = 'C';
+        private const char NOTCOMPRESSED = 'P';
+        private const int MINIMUM_LENGTH_FOR_COMPRESSION = 512;
+
+        private const string PASS_PHRASE = "todo:thisisthepassphrase";
+        private const string SALT = "todo:thisisthesale";
+        private const string HASH_ALGORITHM = "SHA1";
+        private const int PASSWORD_ITERATIONS = 2;
+        private const string INIT_VECTOR = "ufhry4758dksnfir";
+        private const int KEY_SIZE = 256;
+
+
+        public static string EncryptToBase64(string plaintext) {
+            byte[] plainBytes = CompressonHelper.StringToBytes(plaintext);
+            byte[] cipherBytes = Encrypt(plainBytes);
+            return Convert.ToBase64String(cipherBytes);
         }
 
-        internal static string DecryptFromBase64(string ciphertext)
-        {
-            throw new Exception("The method or operation is not implemented.");
+        public static string GenerateSalt() {
+            byte[] bytes = new byte[0x10];
+            new RNGCryptoServiceProvider().GetBytes(bytes);
+            return Convert.ToBase64String(bytes);
         }
 
-        internal static string GenerateSalt()
-        {
-            throw new Exception("The method or operation is not implemented.");
+        public static byte[] Hash(byte[] value, byte[] salt) {
+            byte[] bytes = new byte[value.Length + salt.Length];
+            Buffer.BlockCopy(salt, 0, bytes, 0, salt.Length);
+            Buffer.BlockCopy(value, 0, bytes, salt.Length, value.Length);
+            return (new SHA1CryptoServiceProvider()).ComputeHash(bytes);
         }
 
-        internal static string Hash(string password, string passwordSalt)
-        {
-            throw new Exception("The method or operation is not implemented.");
+        public static string Hash(string value, string salt) {
+            byte[] valueBytes = Encoding.Unicode.GetBytes(value);
+            byte[] saltBytes = Convert.FromBase64String(salt);
+            return Convert.ToBase64String(Hash(valueBytes, saltBytes));
+        }
+
+        public static string Encrypt(string plaintext) {
+            return Encrypt(plaintext, true);
+        }
+
+        public static byte[] Encrypt(byte[] plainbytes) {
+            return Encrypt(plainbytes, true);
+        }
+
+        public static string Encrypt(string plaintext, bool compress) {
+            return CompressonHelper.BytesToString(Encrypt(CompressonHelper.StringToBytes(plaintext), compress));
+        }
+
+        public static byte[] Encrypt(byte[] plainbytes, bool compress) {
+
+            byte[] buffer;
+            byte compressFlag;
+            if (plainbytes.Length > MINIMUM_LENGTH_FOR_COMPRESSION) {
+                compressFlag = Convert.ToByte(COMPRESSED);
+                buffer = CompressonHelper.Deflate(plainbytes);
+            } else {
+                compressFlag = Convert.ToByte(NOTCOMPRESSED);
+                buffer = plainbytes;
+            }
+
+            byte[] encryptedBytes = Obviex.CipherLite.Rijndael.Encrypt(CompressonHelper.BytesToString(buffer),
+                PASS_PHRASE, INIT_VECTOR, KEY_SIZE, PASSWORD_ITERATIONS, SALT, HASH_ALGORITHM);
+            byte[] toReturn = new byte[encryptedBytes.Length + 1];
+
+            int index = 0;
+            toReturn[index++] = compressFlag;
+            for (int i = 0; i < encryptedBytes.Length; i++) {
+                toReturn[index++] = encryptedBytes[i];
+            }
+
+            return toReturn;
+        }
+
+        public static string DecryptFromBase64(string ciphertext) {
+            byte[] cipherBytes = Convert.FromBase64String(ciphertext);
+            return Decrypt(cipherBytes);
+        }
+
+        public static string Decrypt(string ciphertext) {
+            return Decrypt(ciphertext, true);
+        }
+
+        public static string Decrypt(byte[] cipherbytes) {
+            return Decrypt(cipherbytes, true);
+        }
+
+        public static string Decrypt(string ciphertext, bool compress) {
+            return Decrypt(CompressonHelper.StringToBytes(ciphertext), compress);
+        }
+
+        public static string Decrypt(byte[] cipherbytes, bool compress) {
+
+            byte[] buffer = new byte[cipherbytes.Length - 1];
+            int index = 0;
+            for (int i = 1; i < cipherbytes.Length; i++) {
+                buffer[index++] = cipherbytes[i];
+            }
+
+            string decrypted = Obviex.CipherLite.Rijndael.Decrypt(buffer, PASS_PHRASE, INIT_VECTOR, KEY_SIZE, PASSWORD_ITERATIONS, SALT, HASH_ALGORITHM);
+
+            if (cipherbytes[0] == COMPRESSED) {
+                return CompressonHelper.Inflate(decrypted);
+            } else {
+                return decrypted;
+            }
         }
     }
 }

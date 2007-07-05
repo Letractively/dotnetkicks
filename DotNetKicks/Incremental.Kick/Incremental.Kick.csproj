@@ -28,6 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CipherLite, Version=1.5.0.0, Culture=neutral, PublicKeyToken=29e81a0118de2e3b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>

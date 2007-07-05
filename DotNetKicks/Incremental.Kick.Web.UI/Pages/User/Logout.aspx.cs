@@ -13,15 +13,9 @@ using Incremental.Kick.Web.Security;
 
 namespace Incremental.Kick.Web.UI.Pages.User {
     public partial class Logout : Incremental.Kick.Web.Controls.KickPage {
-
         protected void Page_Init(object sender, EventArgs e) {
-            //TODO: call SecurityManager.Logout with the security token
-            FormsAuthentication.SignOut();
+            SecurityManager.Logout();
             Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Home));
-        }
-
-        protected void Page_Load(object sender, EventArgs e) {
-
         }
     }
 }

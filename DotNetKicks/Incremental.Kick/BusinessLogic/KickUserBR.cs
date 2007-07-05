@@ -2,6 +2,8 @@ using System;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
+using Incremental.Kick.Common.Exceptions;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic
 {
@@ -40,9 +42,9 @@ namespace Incremental.Kick.BusinessLogic
             //TODO: GJ: extract to method
             //ensure that the username and email is unique
             if (User.FetchByParameter(User.Columns.Username, username).Read())
-                throw new ApplicationException("TEMP: Username already exists");
+                throw new KickUsernameAlreadyExistsException();
             if (User.FetchByParameter(User.Columns.Email, email).Read())
-                throw new ApplicationException("TEMP: Email already exists");
+                throw new KickEmailAlreadyExistsException();
 
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
@@ -155,20 +157,43 @@ namespace Incremental.Kick.BusinessLogic
             user.IsGeneratedPassword = true;
             user.Save();
 
+   
             //TODO: GJ: send email
            // EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
 
         public static string AuthenticateUser(string username, string password) {
-            throw new Exception("The method or operation is not implemented.");
+            System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
+
+            username = username.Trim();
+            password = password.Trim();
+
+            User user = UserBR.GetUserByUsername(username);
+
+            if (user == null)
+                throw new Exception("Username [" + username + "] not found");
+
+            string passwordHash = Cipher.Hash(password, user.PasswordSalt);
+
+            if (!passwordHash.Equals(user.Password))
+                throw new Exception("Invalid password for username [" + username + "]");
+
+            if (!user.IsValidated) {
+                user.IsValidated = true;
+            }
+
+            user.LastActiveOn = DateTime.Now;
+            user.Save();
+
+            return new SecurityToken(user.UserID).ToString();
         }
 
         public static User GetUserByUsername(string username) {
-            throw new Exception("The method or operation is not implemented.");
+            return User.FetchUserByUsername(username);
         }
 
-        public static User GetUserByEmail(string p) {
-            throw new Exception("The method or operation is not implemented.");
+        public static User GetUserByEmail(string email) {
+            return User.FetchUserByParameter(User.Columns.Email, email);
         }
 
 

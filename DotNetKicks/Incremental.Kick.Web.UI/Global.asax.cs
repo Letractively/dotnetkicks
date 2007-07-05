@@ -10,6 +10,8 @@ namespace Incremental.Kick.Web.UI {
     public class Global : System.Web.HttpApplication {
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e) {
+            object ff = HttpContext.Current.Request.Cookies;
+
             Incremental.Kick.Web.Security.SecurityManager.SetPrincipal();
         }
 
