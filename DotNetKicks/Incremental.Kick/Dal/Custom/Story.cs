@@ -57,6 +57,15 @@ namespace Incremental.Kick.Dal {
             return 0; //TODO: GJ: return the story count for a tag and host
         }
 
+        public static StoryCollection GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize) {
+            return new StoryCollection(); //TODO: GJ: implement
+        }
+
+        //TODO: GJ: rename to GetUserKickedStoriesCount?
+        public static int GetStoryKicksByUserIDAndHostID_Count(int userID, int hostID) {
+            return 0; //TODO: GJ: implement
+        }
+
         private static Query GetStoryQuery(int hostID) {
             return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
         }
@@ -89,6 +98,30 @@ namespace Incremental.Kick.Dal {
                 default:
                     throw new ArgumentException("Invalid sortBy");
             }
+        }
+
+        internal static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isKicked, int hostID, int pageNumber, int pageSize) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static StoryCollection GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static StoryCollection GetUserTaggedStories(string tagIdentifier, int userID, int hostID, int pageNumber, int pageSize) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static int? GetUserTaggedStoryCount(string tagIdentifier, int userID, int hostID) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static int? GetStoriesByCategoryKickedStateAndHostID_Count(short categoryID, bool isKicked, int hostID) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal static int? GetTaggedStoryCount(string tagIdentifier, int hostID) {
+            throw new Exception("The method or operation is not implemented.");
         }
     }
 }
