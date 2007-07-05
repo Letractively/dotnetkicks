@@ -15,9 +15,15 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Web.Security {
     public class SecurityManager {
-        public static void Logout(string securityToken) {
-            UserCache.RemoveUser(securityToken);
+        
+        public static void Logout() {
+            //TODO: GJ: get the security token
+            UserCache.RemoveUser(SecurityToken);
             FormsAuthentication.SignOut();
+        }
+
+        public static string SecurityToken {
+            get { return ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.UserData; }
         }
 
         public static bool Login(string username, string password) {
@@ -34,7 +40,6 @@ namespace Incremental.Kick.Web.Security {
                 else
                     expiryDate = expiryDate.AddDays(1);
 
-                WebUIConfig webConfig = WebUIConfigReader.GetConfig(); //TODO: get mins and version number from config
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                      1, username, DateTime.Now, expiryDate, isPersistant,
                      securityToken, FormsAuthentication.FormsCookiePath);
@@ -44,7 +49,7 @@ namespace Incremental.Kick.Web.Security {
 
                 if (isPersistant)
                     cookie.Expires = expiryDate;
-
+                
                 HttpContext.Current.Response.Cookies.Add(cookie);
 
                 return true;

@@ -22,9 +22,9 @@ namespace Incremental.Kick.Web.UI.Controls {
                 this.KickPage.Caption = "Thank you";
                 RegisterPanel.Visible = false;
                 SuccessPanel.Visible = true;
-            } catch (KickUsernameAlreadyExistsException ex) {
+            } catch (KickUsernameAlreadyExistsException) {
                 UsernameNotUniqueMessage.Visible = true;
-            } catch (KickEmailAlreadyExistsException ex) {
+            } catch (KickEmailAlreadyExistsException) {
                 EmailNotUniqueMessage.Visible = true;
             }
         }
