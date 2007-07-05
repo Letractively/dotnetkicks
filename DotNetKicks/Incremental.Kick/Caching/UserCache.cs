@@ -36,7 +36,13 @@ namespace Incremental.Kick.Caching
             {
                 if (user == null)
                 {
-                    user = User.FetchByID(userID);
+                    if (userID == 0) {
+                        //TODO: GJ: construct an anonymous user object
+                        user = new User(0);
+                        user.Username = "Anonymous";
+                    } else {
+                        user = User.FetchByID(userID);
+                    }
                     System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                     userCache.Insert(cacheKey, user, 500); //TODO: GJ: config
                 }

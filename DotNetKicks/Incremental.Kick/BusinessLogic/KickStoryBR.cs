@@ -284,5 +284,13 @@ namespace Incremental.Kick.BusinessLogic {
                     throw new ArgumentException("Invalid sortBy");
             }
         }
+
+        public static Story GetStoryByUrl(string url) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static string AddStory(int p, string p_2, string p_3, string p_4, short categoryID, User user, bool p_7) {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

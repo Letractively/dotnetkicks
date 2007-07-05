@@ -29,6 +29,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Intelligencia.UrlRewriter, Version=2.0.0.3, Culture=neutral, PublicKeyToken=0573f3650687980d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\UrlRewriter.Net\2.0\beta 4\Intelligencia.UrlRewriter.dll</HintPath>
+    </Reference>
     <Reference Include="SubSonic, Version=2.0.2.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\144\SubSonic.dll</HintPath>
@@ -229,12 +233,246 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Story\AddComment.ascx.cs">
+      <DependentUpon>AddComment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Story\AddComment.ascx.designer.cs">
+      <DependentUpon>AddComment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Story\SubmitNewStory.ascx.cs">
+      <DependentUpon>SubmitNewStory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Story\SubmitNewStory.ascx.designer.cs">
+      <DependentUpon>SubmitNewStory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\User\ChangePassword.ascx.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\ChangePassword.ascx.designer.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\User\ForgotPassword.ascx.cs">
+      <DependentUpon>ForgotPassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\ForgotPassword.ascx.designer.cs">
+      <DependentUpon>ForgotPassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\User\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\User\Register.ascx.cs">
+      <DependentUpon>Register.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\Register.ascx.designer.cs">
+      <DependentUpon>Register.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Category\ViewKickedStories.aspx.cs">
+      <DependentUpon>ViewKickedStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Category\ViewKickedStories.aspx.designer.cs">
+      <DependentUpon>ViewKickedStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Category\ViewNewStories.aspx.cs">
+      <DependentUpon>ViewNewStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Category\ViewNewStories.aspx.designer.cs">
+      <DependentUpon>ViewNewStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Docs\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Docs\Contribute.aspx.cs">
+      <DependentUpon>Contribute.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\Contribute.aspx.designer.cs">
+      <DependentUpon>Contribute.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Docs\EarnMoney.aspx.cs">
+      <DependentUpon>EarnMoney.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\EarnMoney.aspx.designer.cs">
+      <DependentUpon>EarnMoney.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Docs\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\InProgress.aspx.cs">
+      <DependentUpon>InProgress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\JavaScriptFeeds.aspx.cs">
+      <DependentUpon>JavaScriptFeeds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\Privacy.aspx.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\SiteMap.aspx.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\Terms.aspx.cs">
+      <DependentUpon>Terms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\Tools.aspx.cs">
+      <DependentUpon>Tools.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\New.aspx.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\New.aspx.designer.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\Redirect.aspx.cs">
+      <DependentUpon>Redirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\Redirect.aspx.designer.cs">
+      <DependentUpon>Redirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\ViewOrAdd.aspx.cs">
+      <DependentUpon>ViewOrAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\ViewOrAdd.aspx.designer.cs">
+      <DependentUpon>ViewOrAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tag\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Tag\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tag\ViewAll.aspx.cs">
+      <DependentUpon>ViewAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Tag\ViewAll.aspx.designer.cs">
+      <DependentUpon>ViewAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\LoginSwitch.aspx.cs">
+      <DependentUpon>LoginSwitch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\LoginSwitch.aspx.designer.cs">
+      <DependentUpon>LoginSwitch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\ViewTag.aspx.cs">
+      <DependentUpon>ViewTag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ViewTag.aspx.designer.cs">
+      <DependentUpon>ViewTag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\ViewTags.aspx.cs">
+      <DependentUpon>ViewTags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ViewTags.aspx.designer.cs">
+      <DependentUpon>ViewTags.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\Default\MasterPage.Master.cs">
@@ -289,6 +527,43 @@
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\format" />
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.svn-base" />
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.uncompressed.js.svn-base" />
+    <Content Include="Controls\Story\AddComment.ascx" />
+    <Content Include="Controls\Story\SubmitNewStory.ascx" />
+    <Content Include="Controls\User\ChangePassword.ascx" />
+    <Content Include="Controls\User\ForgotPassword.ascx" />
+    <Content Include="Controls\User\Login.ascx" />
+    <Content Include="Controls\User\Register.ascx" />
+    <Content Include="Global.asax" />
+    <Content Include="Pages\Category\ViewKickedStories.aspx" />
+    <Content Include="Pages\Category\ViewNewStories.aspx" />
+    <Content Include="Pages\Docs\About.aspx" />
+    <Content Include="Pages\Docs\Contribute.aspx" />
+    <Content Include="Pages\Docs\EarnMoney.aspx" />
+    <Content Include="Pages\Docs\Error.aspx" />
+    <Content Include="Pages\Docs\InProgress.aspx" />
+    <Content Include="Pages\Docs\JavaScriptFeeds.aspx" />
+    <Content Include="Pages\Docs\Privacy.aspx" />
+    <Content Include="Pages\Docs\SiteMap.aspx" />
+    <Content Include="Pages\Docs\Terms.aspx" />
+    <Content Include="Pages\Docs\Tools.aspx" />
+    <Content Include="Pages\Home.aspx" />
+    <Content Include="Pages\Story\New.aspx" />
+    <Content Include="Pages\Story\Redirect.aspx" />
+    <Content Include="Pages\Story\Search.aspx" />
+    <Content Include="Pages\Story\View.aspx" />
+    <Content Include="Pages\Story\ViewOrAdd.aspx" />
+    <Content Include="Pages\Tag\View.aspx" />
+    <Content Include="Pages\Tag\ViewAll.aspx" />
+    <Content Include="Pages\User\ChangePassword.aspx" />
+    <Content Include="Pages\User\ForgotPassword.aspx" />
+    <Content Include="Pages\User\Login.aspx" />
+    <Content Include="Pages\User\LoginSwitch.aspx" />
+    <Content Include="Pages\User\Logout.aspx" />
+    <Content Include="Pages\User\Register.aspx" />
+    <Content Include="Pages\User\ResetPassword.aspx" />
+    <Content Include="Pages\User\View.aspx" />
+    <Content Include="Pages\User\ViewTag.aspx" />
+    <Content Include="Pages\User\ViewTags.aspx" />
     <Content Include="Templates\Default\MasterPage.Master" />
     <Content Include="Templates\Default\SideAds.ascx" />
     <Content Include="Templates\Default\TopAds.ascx" />
@@ -325,8 +600,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1707</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>8080</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

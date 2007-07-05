@@ -89,7 +89,7 @@ namespace Incremental.Kick.Web.Controls {
         protected override void OnPreInit(EventArgs e) {
             this.MasterPageFile = "~/Templates/" + this.HostProfile.Skin + "/MasterPage.master";
             // System.Diagnostics.Trace.WriteLine("The masterpage is " + this.MasterPageFile);
-            this.Theme = this.HostProfile.Skin;
+            //this.Theme = this.HostProfile.Skin; //NOTE: GJ: should we remove themes?
             // System.Diagnostics.Trace.WriteLine("The page theme is " + this.HostProfile.Skin);
 
             base.OnPreInit(e);

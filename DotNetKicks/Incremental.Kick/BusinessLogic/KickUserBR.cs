@@ -159,8 +159,18 @@ namespace Incremental.Kick.BusinessLogic
            // EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
 
-        internal static string AuthenticateUser(string username, string password) {
+        public static string AuthenticateUser(string username, string password) {
             throw new Exception("The method or operation is not implemented.");
         }
+
+        public static User GetUserByUsername(string username) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static User GetUserByEmail(string p) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+
     }
 }

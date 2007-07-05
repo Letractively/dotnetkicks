@@ -1,5 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TopMenu.ascx.cs" Inherits="Incremental.Kick.Web.UI.Templates.Default.TopMenu" %>
-<%@ Import Namespace="Atweb.Kick.Web.Helpers" %>
+<%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 
 <div id="header">
 

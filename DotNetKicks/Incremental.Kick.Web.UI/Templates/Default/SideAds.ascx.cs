@@ -10,7 +10,8 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 namespace Incremental.Kick.Web.UI.Templates.Default {
-    public partial class SideAds : System.Web.UI.UserControl {
+    public partial class SideAds : Incremental.Kick.Web.Controls.KickUserControl
+    {
         protected void Page_Load(object sender, EventArgs e) {
 
         }

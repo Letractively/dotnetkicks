@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Incremental.Kick.Common;
 
-namespace Incremental.Kick.Common.Entities {
-    public class Tag {
+namespace Incremental.Kick.Dal.Entities {
+    public class WeightedTag {
 
-        public Tag() {}
+        public WeightedTag() {}
 
-        public Tag(int tagID, string tagIdentifier, int usageCount) {
+        public WeightedTag(int tagID, string tagIdentifier, int usageCount) {
             this._tagID = tagID;
             this._tagIdentifier = tagIdentifier;
             this._usageCount = usageCount;
