@@ -56,6 +56,7 @@
     <Compile Include="BusinessLogic\KickStoryBR.cs" />
     <Compile Include="BusinessLogic\KickTagBR.cs" />
     <Compile Include="BusinessLogic\KickUserBR.cs" />
+    <Compile Include="BusinessLogic\StoryKickBR.cs" />
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\CategoryCache.cs" />
