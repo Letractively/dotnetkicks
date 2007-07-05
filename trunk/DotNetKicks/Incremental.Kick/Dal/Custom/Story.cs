@@ -18,15 +18,15 @@ namespace Incremental.Kick.Dal {
         }
 
         public static StoryCollection GetStoriesByIsKickedAndHostID(bool isKicked, int hostID, int pageNumber, int pageSize) {
-            throw new NotImplementedException();
+            return new StoryCollection(); //TODO: GJ: implement
         }
 
         public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize) {
-            throw new NotImplementedException();
+            return new StoryCollection(); //TODO: GJ: implement
         }
 
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
-            throw new NotImplementedException();
+            return 1234; //TODO: GJ: implement
         }
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {

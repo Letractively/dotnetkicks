@@ -9,9 +9,86 @@
 //------------------------------------------------------------------------------
 
 namespace Incremental.Kick.Web.UI.Templates.Default {
-
+    
+    
+    /// <summary>
+    /// MasterPage class.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated class.
+    /// </remarks>
     public partial class MasterPage {
-        protected System.Web.UI.HtmlControls.HtmlForm form1;
-        protected System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        
+        /// <summary>
+        /// TopMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.UI.Templates.Default.TopMenu TopMenu;
+        
+        /// <summary>
+        /// Breadcrumbs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.Breadcrumbs Breadcrumbs;
+        
+        /// <summary>
+        /// TopAds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.UI.Templates.Default.TopAds TopAds;
+        
+        /// <summary>
+        /// RssFeedIcon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.RssFeedIcon RssFeedIcon;
+        
+        /// <summary>
+        /// MainContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        
+        /// <summary>
+        /// LeftContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContent;
+        
+        /// <summary>
+        /// RightContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightContent;
+        
+        /// <summary>
+        /// SideAds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.UI.Templates.Default.SideAds SideAds;
     }
 }

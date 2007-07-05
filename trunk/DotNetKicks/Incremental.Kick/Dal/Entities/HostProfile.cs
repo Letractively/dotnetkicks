@@ -4,7 +4,7 @@ using System.Text;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Common.Entities {
-    public class HostProfile {
+    public class HostProfileOLD {
 
         //TODO: This can be removed - use Host active record instead 
         public int HostID;
@@ -34,7 +34,7 @@ namespace Incremental.Kick.Common.Entities {
         public short Publish_CommentScore;
  
 
-        public HostProfile(Host host) {
+        public HostProfileOLD(Host host) {
             this.HostID = host.HostID;
             this.HostName = host.HostName;
             this.RootUrl = host.RootUrl;

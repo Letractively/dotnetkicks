@@ -10,7 +10,8 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 namespace Incremental.Kick.Web.UI.Templates.Default {
-    public partial class MasterPage : System.Web.UI.MasterPage {
+    public partial class MasterPage : Incremental.Kick.Web.Controls.KickMasterPage
+    {
         protected void Page_Load(object sender, EventArgs e) {
 
         }

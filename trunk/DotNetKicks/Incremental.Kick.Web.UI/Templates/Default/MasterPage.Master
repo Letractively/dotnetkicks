@@ -3,7 +3,7 @@
 <%@ Register Src="TopMenu.ascx" TagName="TopMenu" TagPrefix="uc1" %>
 <%@ Register Src="TopAds.ascx" TagName="TopAds" TagPrefix="uc1" %>
 <%@ Register Src="SideAds.ascx" TagName="SideAds" TagPrefix="uc1" %>
-<%@ Import Namespace="Atweb.Kick.Web.Helpers" %>
+<%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <asp:Content ID="PageHead" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
 </asp:Content>
@@ -57,7 +57,7 @@
 </asp:Content>
 <asp:Content ID="Footer" ContentPlaceHolderID="Footer" runat="server">
     </tr> </table>    <div id="Footer">
-        Copyright © 2006 Atweb Publishing Ltd. All rights reserved. &nbsp;
+        <a href="http://www.incremental.ie/">Incremental Systems</a>&nbsp;
     </div>
 <%=this.KickPage.HostProfile.TrackingHtml%>
 </asp:Content>

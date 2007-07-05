@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using Incremental.Kick.Common.Entities;
+using Incremental.Kick.Dal;
 //using Atweb.Kick.Common.Entities;
 
 namespace Incremental.Kick.Web.Helpers {
@@ -128,7 +129,7 @@ namespace Incremental.Kick.Web.Helpers {
             }
         }
 
-        public static string CreateUrl(PageName pageName, string storyIdentifier, string categoryIdentifier, HostProfile hostProfile) {
+        public static string CreateUrl(PageName pageName, string storyIdentifier, string categoryIdentifier, Host hostProfile) {
             switch (pageName) {
                 case PageName.ViewStory:
                     return hostProfile.RootUrl + String.Format("/{0}/{1}", categoryIdentifier, storyIdentifier);

@@ -340,5 +340,46 @@ namespace Incremental.Kick.Caching
         {
             return CacheManager<string, int?>.GetInstance();
         }
+
+        public static int GetUpcomingStoryCount(Host host)
+        {
+            return 999; //TODO: GJ: implement
+        }
+
+        public static int GetStoryCount(bool isPublished, int hostID) {
+            return 999; //TODO: GJ: implement
+        }
+
+        public static StoryCollection GetTaggedStories(string p, int p_2, int p_3, int p_4) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static int GetTaggedStoryCount(string p, int p_2) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static StoryCollection GetUserTaggedStories(string p, int p_2, int p_3, int p_4, int p_5) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static int GetUserTaggedStoryCount(string p, int p_2, int p_3) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static StoryCollection GetUserKickedStories(string p, int p_2, int p_3, int p_4) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static int GetUserKickedStoriesCount(string p, int p_2) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static StoryCollection GetCategoryStories(short p, bool p_2, int p_3, int p_4, int p_5) {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public static int GetCategoryStoryCount(short p, bool p_2, int p_3) {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }

@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Incremental.Kick.Common.Entities {
+namespace Incremental.Kick.Dal.Entities {
 
     //TODO: GJ: sort this using the ReverseComparer
-    public class TagList : List<Tag> {
+    public class WeightedTagList : List<WeightedTag> {
 
         public int TotalTagUsageCount {
             get {
                 int total = 0;
-                foreach (Tag tag in this) {
+                foreach (WeightedTag tag in this) {
                     total += tag.UsageCount;
                 }
 
@@ -64,11 +64,11 @@ namespace Incremental.Kick.Common.Entities {
         }
 
 
-        public TagList GetTopTags(int tagCount) {
+        public WeightedTagList GetTopTags(int tagCount) {
             if (tagCount > this.Count)
                 tagCount = this.Count;
 
-            TagList topTags = new TagList();
+            WeightedTagList topTags = new WeightedTagList();
             for (int i = 0; i < tagCount; i++) {
                 topTags.Add(this[i]);
             }
@@ -76,14 +76,14 @@ namespace Incremental.Kick.Common.Entities {
             return topTags;
         }
 
-        public class UsageCountComparer : IComparer<Tag> {
-            int IComparer<Tag>.Compare(Tag x, Tag y) {
+        public class UsageCountComparer : IComparer<WeightedTag> {
+            int IComparer<WeightedTag>.Compare(WeightedTag x, WeightedTag y) {
                 return y.UsageCount.CompareTo(x.UsageCount);
             }
         }
 
-        public class AlphabeticalComparer : IComparer<Tag> {
-            int IComparer<Tag>.Compare(Tag x, Tag y) {
+        public class AlphabeticalComparer : IComparer<WeightedTag> {
+            int IComparer<WeightedTag>.Compare(WeightedTag x, WeightedTag y) {
                 return x.TagName.CompareTo(y.TagName);
             }
         }
