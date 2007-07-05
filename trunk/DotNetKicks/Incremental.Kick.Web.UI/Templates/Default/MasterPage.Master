@@ -47,7 +47,7 @@
 </asp:Content>
 <asp:Content ID="RightContent" ContentPlaceHolderID="RightContent" runat="server">
     <td class="RightContentTD">
-    <a href="http://www.codeplex.com/actionpack" title="SubSonic - the zero code DAL" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
+    <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>
         <% if(false) { %>
