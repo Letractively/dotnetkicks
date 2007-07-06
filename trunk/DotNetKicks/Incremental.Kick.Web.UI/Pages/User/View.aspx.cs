@@ -22,7 +22,6 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.RssFeedUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUserRss, this.UrlParameters.UserIdentifier);
         }
 
-
         protected void Page_Load(object sender, EventArgs e) {
             this.StoryListControl.Title = "Stories kicked by " + this.UrlParameters.UserIdentifier;
             this.StoryListControl.DataBind(StoryCache.GetUserKickedStories(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
@@ -36,10 +35,10 @@ namespace Incremental.Kick.Web.UI.Pages.User {
         }
 
         protected void BanUser_Click(object sender, EventArgs e) {
-            if (this.KickUserProfile.IsAdministrator)
+            if (this.KickUserProfile.IsAdministrator) {
                 UserBR.BanUser(this.UrlParameters.UserIdentifier);
-
-            Response.Write("The user has been banned");
+                Response.Write("The user has been banned");
+            }
         }
 }
 }

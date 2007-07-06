@@ -177,7 +177,6 @@ namespace Incremental.Kick.Caching {
             string cacheKey = String.Format("Kick_TaggedStoryCount_{0}_{1}", tagIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
-            //TODO: GJ: use nullable types to remove the race condition
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetTaggedStoryCount(tagIdentifier, hostID);
@@ -276,9 +275,5 @@ namespace Incremental.Kick.Caching {
         private static CacheManager<string, int?> GetCountCache() {
             return CacheManager<string, int?>.GetInstance();
         }
-
-
-
-       
     }
 }
