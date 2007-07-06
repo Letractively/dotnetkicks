@@ -136,7 +136,7 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         public string MasterPageBaseUrl {
-            get { return this.StaticRootUrl + "/Templates"; }
+            get { return this.HostProfile.RootUrl + "/Templates"; }
         }
 
         public string MasterPageBaseCssUrl {
