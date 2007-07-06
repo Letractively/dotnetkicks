@@ -12,25 +12,25 @@ using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Web.Controls;
 using Incremental.Common.Web.Helpers;
 using Incremental.Kick.BusinessLogic;
+using Incremental.Kick.Dal.Entities;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     public partial class GetUserStoryTags : Incremental.Kick.Web.Controls.KickApiPage {
         protected void Page_Load(object sender, EventArgs e) {
-            //TODO :GJ: implement
-            //int storyID = int.Parse(Request["storyID"]);
+            int storyID = int.Parse(Request["storyID"]);
 
-            //if (this.IsAuthenticated) {
-            //    //TODO: GJ: get user story tags (cached?)
-            //    TagList tags = new Kick_StoryUserHostTagBR().GetUserStoryTags(this.KickUserProfile.UserID, storyID);
+            if (this.IsAuthenticated) {
+                //TODO: GJ: get user story tags (cached?)
+                WeightedTagList tags = TagBR.GetUserStoryTags(this.KickUserProfile.UserID, storyID);
 
-            //    UserEditableTagList userTagList = new UserEditableTagList();
+                UserEditableTagList userTagList = new UserEditableTagList();
 
-            //    userTagList.DataBind(tags, storyID);
-            //    this.Controls.Add(userTagList);
-            //} else {
+                userTagList.DataBind(tags, storyID);
+                this.Controls.Add(userTagList);
+            } else {
 
-            //    Response.Write("login or signup to tag this story");
-            //}
+                Response.Write("login or signup to tag this story");
+            }
         }
     }
 }
