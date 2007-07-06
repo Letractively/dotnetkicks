@@ -4,6 +4,8 @@
 </asp:Content>
 <asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">
     
+    <strong>Warning: this template may hurt your eyes</strong>
+    <br />
    [Header /]
 
 </asp:Content>
