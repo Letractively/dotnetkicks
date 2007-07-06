@@ -18,19 +18,16 @@ public partial class Services_Ajax_KickIt : Incremental.Kick.Web.Controls.KickAp
         int userID = this.KickUserProfile.UserID;
 
         System.Diagnostics.Debug.WriteLine(String.Format("Ajax.KickIt({0}, {1}) by [{2}]", storyID, isKick, userID));
-
-        try {
-            if (this.IsAuthenticated) {
-                if (isKick) {
-                    Response.Write(UserCache.KickStory(storyID, userID, this.HostProfile.HostID));
-                } else {
-                    Response.Write(UserCache.UnKickStory(storyID, userID, this.HostProfile.HostID));
-                }
+        
+        if (this.IsAuthenticated) {
+            if (isKick) {
+                Response.Write(UserCache.KickStory(storyID, userID, this.HostProfile.HostID));
             } else {
-                Response.Write("");
+                Response.Write(UserCache.UnKickStory(storyID, userID, this.HostProfile.HostID));
             }
-        } catch { //return an empty string
+        } else {
             Response.Write("");
         }
+
     }
 }

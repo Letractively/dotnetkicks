@@ -6,6 +6,9 @@ using SubSonic;
 
 namespace Incremental.Kick.Dal {
     public partial class Story {
+
+ 
+
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
         }

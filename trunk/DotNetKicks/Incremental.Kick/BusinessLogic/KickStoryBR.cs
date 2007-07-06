@@ -110,8 +110,7 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static void DeleteStoryKick(int storyID, int userID, int hostID) {
-            throw new NotImplementedException();
-            //TODO: GJ: Delete by ids
+            StoryKick.Destroy(storyID, userID, hostID);
         }
 
         public static void PublishStoryProcess() {
@@ -177,26 +176,44 @@ namespace Incremental.Kick.BusinessLogic {
              }*/
         }
 
-        public static void IncrementStoryCommentCount(int storyID) {
+        public static int IncrementStoryCommentCount(int storyID) {
             Story story = Story.FetchByID(storyID);
             story.CommentCount++;
             story.Save();
+            return story.CommentCount;
         }
 
-        public static void IncrementSpamCount(int storyID) {
+        public static int IncrementSpamCount(int storyID) {
             Story story = Story.FetchByID(storyID);
             story.SpamCount++;
             story.Save();
+            return story.SpamCount;
         }
 
-        public static void IncrementViewCount(int storyID) {
-            IncrementViewCount(storyID, 1);
+        public static int IncrementViewCount(int storyID) {
+            return IncrementViewCount(storyID, 1);
         }
 
-        public static void IncrementViewCount(int storyID, short viewCount) {
+        public static int IncrementViewCount(int storyID, short delta) {
             Story story = Story.FetchByID(storyID);
-            story.ViewCount += viewCount;
+            story.ViewCount += delta;
             story.Save();
+            return story.ViewCount;
+        }
+
+        public static int IncrementKickCount(int storyID) {
+            return IncrementKickCount(storyID, 1);
+        }
+
+        public static int DecrementKickCount(int storyID) {
+            return IncrementKickCount(storyID, -1);
+        }
+
+        public static int IncrementKickCount(int storyID, short delta) {
+            Story story = Story.FetchByID(storyID);
+            story.KickCount += delta;
+            story.Save();
+            return story.KickCount;
         }
 
         public static void DeleteStory(int storyID, int hostID) {
@@ -295,6 +312,6 @@ namespace Incremental.Kick.BusinessLogic {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        
+
     }
 }
