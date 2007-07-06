@@ -66,7 +66,9 @@ namespace Incremental.Kick.Dal {
         }
 
         public static StoryCollection GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: implement
+            StoryCollection stories = new StoryCollection();
+            stories.Load(SPs._Kick_Get_User_Kicked_Stories_Paged(userID, hostID, pageNumber, pageSize).GetReader());
+            return stories;
         }
 
         //TODO: GJ: rename to GetUserKickedStoriesCount?
