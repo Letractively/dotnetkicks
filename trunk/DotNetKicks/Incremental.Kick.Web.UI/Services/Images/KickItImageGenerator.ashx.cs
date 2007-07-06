@@ -41,7 +41,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             g.DrawString("kick it", f, new SolidBrush(Color.White), 1, 1);
 
 
-            Story story = StoryBR.GetStoryByUrl(url);
+            Story story = Story.FetchStoryByUrl(url);
             if ((story == null) || (!story.IsPublished)) 
                 f = new Font("Verdana", 10, FontStyle.Regular);
              string count = this.GetKickCountDisplayCharacters(story);
