@@ -52,11 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\KickCommentBR.cs" />
-    <Compile Include="BusinessLogic\KickStoryBR.cs" />
-    <Compile Include="BusinessLogic\KickTagBR.cs" />
-    <Compile Include="BusinessLogic\KickUserBR.cs" />
+    <Compile Include="BusinessLogic\CommentBR.cs" />
+    <Compile Include="BusinessLogic\StoryBR.cs" />
     <Compile Include="BusinessLogic\StoryKickBR.cs" />
+    <Compile Include="BusinessLogic\TagBR.cs" />
+    <Compile Include="BusinessLogic\UserBR.cs" />
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\CategoryCache.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="Dal\Custom\Comment.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
     <Compile Include="Dal\Custom\StoryKick.cs" />
-    <Compile Include="Dal\Custom\StoryKickCollection.cs" />
     <Compile Include="Dal\Custom\Tag.cs" />
     <Compile Include="Dal\Custom\TagCollection.cs" />
     <Compile Include="Dal\Custom\User.cs" />

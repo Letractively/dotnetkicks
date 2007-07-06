@@ -2,13 +2,11 @@ using System;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 
-namespace Incremental.Kick.BusinessLogic
-{
-    public class CommentBR
-    {
+namespace Incremental.Kick.BusinessLogic {
+    //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
+    public class CommentBR {
 
-        public static int CreateComment(int storyID, int userID, string username, string comment)
-        {
+        public static int CreateComment(int storyID, int userID, string username, string comment) {
             comment = System.Web.HttpUtility.HtmlEncode(comment);
 
             if (comment.Length > 4000)

@@ -4,6 +4,7 @@ using System.Text;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.BusinessLogic {
+    //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class StoryKickBR {
         public static StoryKickCollection KickStory(int storyID, int userID, int hostID) {
             //TODO: (GJ) we could score some performance goodness here if we move this logic to the database. (triggers or sp?)
