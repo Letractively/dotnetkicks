@@ -120,7 +120,7 @@ namespace Incremental.Kick.Caching {
 
             if (storyKicks == null) {
                 //TODO: get the latest n kicks for this userIdentifier
-                storyKicks = StoryKickBR.GetAllByUserID(userID);
+                storyKicks = StoryKick.FetchByUserID(userID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyKickCache.Insert(cacheKey, storyKicks, 500); //TODO: GJ: config
             }
