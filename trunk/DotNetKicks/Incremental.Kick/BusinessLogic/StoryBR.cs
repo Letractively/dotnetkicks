@@ -59,12 +59,10 @@ namespace Incremental.Kick.BusinessLogic {
 
             //TODO: GJ: trackback
             //now send a trackback ping
-            /*HostProfile hostProfile = HostCache.GetHostProfile(hostID);
-            string storyUrl = hostProfile.RootUrl + "/" + CategoryCache.GetCategoryIdentifier(categoryID, hostID) + "/" +
-                storyDS.Kick_Story[0].StoryIdentifier;
-            TrackbackHelper.SendTrackbackPing_Begin(url, title, storyUrl, "You've been kicked (a good thing) - Trackback from " + hostProfile.SiteTitle, hostProfile.SiteTitle);
-            */
-
+            Host host = HostCache.GetHost(hostID);
+            string storyUrl = host.RootUrl + "/" + CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier + "/" + story.StoryIdentifier;
+            TrackbackHelper.SendTrackbackPing_Begin(url, title, storyUrl, "You've been kicked (a good thing) - Trackback from " + host.SiteTitle, host.SiteTitle);
+            
             return story.StoryIdentifier;
         }
 
