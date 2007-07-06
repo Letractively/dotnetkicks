@@ -13,6 +13,11 @@ namespace Incremental.Kick.Dal {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
         }
 
+        public static Story FetchStoryByUrl(string url) {
+            return Story.FetchStoryByParameter(Story.Columns.Url, url);
+        }
+
+
         public static Story FetchStoryByParameter(string columnName, object value) {
             //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
             StoryCollection t = new StoryCollection();

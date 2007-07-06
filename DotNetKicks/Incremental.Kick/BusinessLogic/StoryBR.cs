@@ -101,6 +101,8 @@ namespace Incremental.Kick.BusinessLogic {
             throw new Exception("The story identifier [" + title + "] was not unique");
         }
 
+       
+
         public static StoryKick AddStoryKick(int storyID, int userID, int hostID) {
             StoryKick storyKick = new StoryKick();
             storyKick.StoryID = storyID;
@@ -308,11 +310,5 @@ namespace Incremental.Kick.BusinessLogic {
                     throw new ArgumentException("Invalid sortBy");
             }
         }
-
-        public static Story GetStoryByUrl(string url) {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-
     }
 }

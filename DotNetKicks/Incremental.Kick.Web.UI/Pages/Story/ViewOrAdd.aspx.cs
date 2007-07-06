@@ -27,7 +27,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
             title = title.Trim();
 
             //TODO: GJ: we could improve performance here (better story cache)
-            Incremental.Kick.Dal.Story story = StoryBR.GetStoryByUrl(url);
+            Incremental.Kick.Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(url);
 
             if (story == null) {
                 this.Response.Redirect("~/submit/?url=" + HttpUtility.UrlEncode(url) + "&title=" + HttpUtility.UrlEncode(title));
