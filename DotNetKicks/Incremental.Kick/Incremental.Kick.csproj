@@ -71,6 +71,8 @@
     <Compile Include="Config\WebUIConfig.cs" />
     <Compile Include="Dal\Custom\Comment.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
+    <Compile Include="Dal\Custom\StoryKick.cs" />
+    <Compile Include="Dal\Custom\StoryKickCollection.cs" />
     <Compile Include="Dal\Custom\Tag.cs" />
     <Compile Include="Dal\Custom\TagCollection.cs" />
     <Compile Include="Dal\Custom\User.cs" />
