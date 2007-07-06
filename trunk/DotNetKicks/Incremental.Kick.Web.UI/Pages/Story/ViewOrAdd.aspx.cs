@@ -33,7 +33,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
                 this.Response.Redirect("~/submit/?url=" + HttpUtility.UrlEncode(url) + "&title=" + HttpUtility.UrlEncode(title));
             } else {
                 //TODO: GJ: should we auto kick???
-                this.Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, CategoryCache.GetCategoryIdentifier(story.CategoryID, this.HostProfile.HostID)));
+                this.Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, CategoryCache.GetCategory(story.CategoryID, this.HostProfile.HostID).CategoryIdentifier));
             }
         }
     }

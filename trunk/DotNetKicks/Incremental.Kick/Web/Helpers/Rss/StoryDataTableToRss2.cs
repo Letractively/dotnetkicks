@@ -34,7 +34,7 @@ namespace Incremental.Kick.Web.Helpers.Rss {
             } else {
 
                 foreach (Story story in stories) {
-                    string storyUrl = host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, CategoryCache.GetCategoryIdentifier(story.CategoryID, host.HostID));
+                    string storyUrl = host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, CategoryCache.GetCategory(story.CategoryID, host.HostID).CategoryIdentifier);
 
                     //TODO: GJ: add category info
 

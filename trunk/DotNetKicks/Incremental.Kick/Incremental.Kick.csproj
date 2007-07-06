@@ -69,6 +69,7 @@
     <Compile Include="Common\Exceptions\Exceptions.cs" />
     <Compile Include="Config\ConfigReaderBase.cs" />
     <Compile Include="Config\WebUIConfig.cs" />
+    <Compile Include="Dal\Custom\Category.cs" />
     <Compile Include="Dal\Custom\Comment.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
     <Compile Include="Dal\Custom\StoryKick.cs" />

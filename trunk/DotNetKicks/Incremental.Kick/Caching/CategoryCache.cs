@@ -4,52 +4,36 @@ using System.Text;
 using System.Data;
 using Incremental.Kick.Dal;
 
-namespace Incremental.Kick.Caching
-{
+namespace Incremental.Kick.Caching {
     //TODO: implement category dictionary?
-    public class CategoryCache
-    {
-        public static short GetCategoryID(string categoryIdentifier, int hostID)
-        {
-            foreach (Category category in GetCategories(hostID))
-            {
+    public class CategoryCache {
+        public static Category GetCategory(string categoryIdentifier, int hostID) {
+            foreach (Category category in GetCategories(hostID)) {
                 if (category.CategoryIdentifier == categoryIdentifier)
-                    return category.CategoryID;
+                    return category;
             }
 
-            throw new ApplicationException("Invalid CategoryIdentifier:" + categoryIdentifier);
+            return Category.UnknownCategory;
         }
 
-        public static string GetCategoryIdentifier(short categoryID, int hostID)
-        {
-            foreach (Category category in GetCategories(hostID))
-            {
+        public static Category GetCategory(short categoryID, int hostID) {
+            foreach (Category category in GetCategories(hostID)) {
                 if (category.CategoryID == categoryID)
-                    return category.CategoryIdentifier;
+                    return category;
             }
 
-            throw new ApplicationException("Invalid CategoryID:" + categoryID);
+            return Category.UnknownCategory;
         }
 
-        public static string GetCategoryName(short categoryID, int hostID)
-        {
-            foreach (Category category in GetCategories(hostID))
-            {
-                if (category.CategoryID == categoryID)
-                    return category.Name;
-            }
 
-            throw new ApplicationException("Invalid CategoryID:" + categoryID);
-        }
 
-        public static CategoryCollection GetCategories(int hostID)
-        {
+
+        public static CategoryCollection GetCategories(int hostID) {
             CacheManager<string, CategoryCollection> categoryCache = GetCache();
             string cacheKey = String.Format("KickCategories_{0}", hostID);
             CategoryCollection categories = categoryCache[cacheKey];
 
-            if (categories == null)
-            {
+            if (categories == null) {
                 categories = new CategoryCollection();
                 categories.LoadAndCloseReader(Category.FetchByParameter(Category.Columns.HostID, hostID));
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
@@ -59,8 +43,7 @@ namespace Incremental.Kick.Caching
             return categories;
         }
 
-        private static CacheManager<string, CategoryCollection> GetCache()
-        {
+        private static CacheManager<string, CategoryCollection> GetCache() {
             return CacheManager<string, CategoryCollection>.GetInstance();
         }
     }

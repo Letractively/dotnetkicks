@@ -55,7 +55,7 @@ namespace Incremental.Kick.Web.UI.Controls {
             NewStoryPanel.Visible = false;
             SuccessPanel.Visible = true;
 
-            string categoryName = CategoryCache.GetCategoryIdentifier(categoryID, this.KickPage.HostProfile.HostID);
+            string categoryName = CategoryCache.GetCategory(categoryID, this.KickPage.HostProfile.HostID).CategoryIdentifier;
             UpcomingStoryQueue.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.NewStories);
             UpcomingStoryQueue.Text = "upcoming queue";
             StoryLink.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, storyIdentifier, categoryName);
