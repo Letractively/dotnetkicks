@@ -6,16 +6,16 @@ using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.Controls {
     public class Comment : KickWebControl {
-        private Incremental.Kick.Dal.Comment _commentRow;
+        private Incremental.Kick.Dal.Comment _comment;
         private bool _useAlternativeStyle;
 
-        public void DataBind(Incremental.Kick.Dal.Comment commentRow, bool useAlternativeStyle) {
-            this._commentRow = commentRow;
+        public void DataBind(Incremental.Kick.Dal.Comment comment, bool useAlternativeStyle) {
+            this._comment = comment;
             this._useAlternativeStyle = useAlternativeStyle;
         }
 
-        public void DataBind(Incremental.Kick.Dal.Comment commentRow) {
-            this._commentRow = commentRow;
+        public void DataBind(Incremental.Kick.Dal.Comment comment) {
+            this._comment = comment;
         }
 
         protected override void Render(HtmlTextWriter writer) {
@@ -26,13 +26,13 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine(@"<div class=""Comment {0}"">
                     <div class=""CommentText"">{1}</div>
                     <div class=""CommentAuthor"">posted by 
-            ", alternativeCssClass, this._commentRow);
+            ", alternativeCssClass, this._comment.CommentX);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(this._commentRow.Username);
+            userLink.DataBind(this._comment.Username);
             userLink.RenderControl(writer);
 
-            writer.WriteLine(@"{0}</div></div>", DateHelper.ConverDateToTimeAgo(this._commentRow.CreatedOn));
+            writer.WriteLine(@"{0}</div></div>", DateHelper.ConverDateToTimeAgo(this._comment.CreatedOn));
             
             
         }
