@@ -66,6 +66,47 @@ namespace Incremental.Kick.Dal{
         }
 
         
+        /// <summary>
+        /// Creates an object wrapper for the GetKickTags_ByUserIDAndStoryID Procedure
+        /// </summary>
+        public static StoredProcedure GetKickTags_ByUserIDAndStoryID(int? UserID, int? StoryID)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByUserIDAndStoryID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@StoryID", StoryID,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the GetKickTags_ByUserID Procedure
+        /// </summary>
+        public static StoredProcedure GetKickTags_ByUserID(int? UserID)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByUserID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the GetKickTags_ByStoryID Procedure
+        /// </summary>
+        public static StoredProcedure GetKickTags_ByStoryID(int? StoryID)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByStoryID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@StoryID", StoryID,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
     }
 
     

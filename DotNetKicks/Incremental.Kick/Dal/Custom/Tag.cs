@@ -21,33 +21,33 @@ namespace Incremental.Kick.Dal {
         }
 
         public static TagCollection FetchTags(int hostID, DateTime createdOnLower, DateTime createdOnUpper) {
-            //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByHostIDAndCreatedOnRange(hostID, createdOnLower, createdOnUpper).GetDataSet().Tables[0]);
+            tags.Load(SPs.GetKickTags_ByHostIDAndCreatedOnRange(hostID, createdOnLower, createdOnUpper).GetReader());
             return tags;
         }
 
         public static TagCollection FetchTags(int userID, int hostID) {
-            //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByUserIDAndHostID(userID, hostID).GetDataSet().Tables[0]);
+            tags.Load(SPs.GetKickTags_ByUserIDAndHostID(userID, hostID).GetReader());
             return tags;
         }
 
         public static TagCollection FetchStoryTags(int storyID) {
-            //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             TagCollection tags = new TagCollection();
-
-            //TODO: GJ: implement
-            //tags.Load(SPs.GetTagsByStoryID(storyID).GetDataSet().Tables[0]);
+            tags.Load(SPs.GetKickTags_ByStoryID(storyID).GetReader());
             return tags;
         }
 
         public static TagCollection FetchUserTags(int userID) {
-            //NOTE: GJ: DataReader is throwing an exception, using DataTable instead (for now)
             TagCollection tags = new TagCollection();
-            //TODO: GJ: implement
-            //tags.Load(SPs.GetTagsByUserID(userID).GetDataSet().Tables[0]);
+            tags.Load(SPs.GetKickTags_ByUserID(userID).GetReader());
+            return tags;
+        }
+
+
+         public static TagCollection FetchUserStoryTags(int userID, int storyID) {
+            TagCollection tags = new TagCollection();
+            tags.Load(SPs.GetKickTags_ByUserIDAndStoryID(userID, storyID).GetReader());
             return tags;
         }
 

@@ -4,7 +4,6 @@ using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI;
 using System.Web;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Web.Controls {

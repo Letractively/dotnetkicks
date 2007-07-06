@@ -6,21 +6,13 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security.Principal;
-//using Incremental.Kick.Config;
-//using Incremental.Kick.Caching;
-//using Incremental.Kick.Common.DataSets.Rows;
-//using Incremental.Kick.Common.Entities;
-//using Incremental.Kick.Security.Principal;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickPage : System.Web.UI.Page {
-
-
 
         private bool _isMemberPage = false;
         //private bool _isCachedPage = false;   
@@ -143,12 +135,12 @@ namespace Incremental.Kick.Web.Controls {
             get { return this.MasterPageBaseUrl + @"/Default.css"; }
         }
 
-        public string MasterPageSkinUrl {
-            get { return this.MasterPageBaseUrl + "/" + this.HostProfile.Skin; }
+        public string MasterPageTemplateUrl {
+            get { return this.MasterPageBaseUrl + "/" + this.HostProfile.Template; }
         }
 
-        public string MasterPageSkinCssUrl {
-            get { return this.MasterPageSkinUrl + @"/Template.css"; }
+        public string MasterPageTemplateCssUrl {
+            get { return this.MasterPageTemplateUrl + @"/Template.css"; }
         }
         private bool _displayAds = true;
         public bool DisplayAds {

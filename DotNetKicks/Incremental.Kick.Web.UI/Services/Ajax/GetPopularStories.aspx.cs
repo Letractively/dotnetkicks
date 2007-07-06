@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Web.Controls;
 using Incremental.Common.Web.Helpers;
 using Incremental.Kick.BusinessLogic;

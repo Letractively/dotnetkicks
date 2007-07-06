@@ -190,19 +190,19 @@ namespace Incremental.Kick.Dal
 				colvarLogoPath.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarLogoPath);
 				
-				TableSchema.TableColumn colvarCreatedDateTime = new TableSchema.TableColumn(schema);
-				colvarCreatedDateTime.ColumnName = "CreatedDateTime";
-				colvarCreatedDateTime.DataType = DbType.DateTime;
-				colvarCreatedDateTime.MaxLength = 0;
-				colvarCreatedDateTime.AutoIncrement = false;
-				colvarCreatedDateTime.IsNullable = false;
-				colvarCreatedDateTime.IsPrimaryKey = false;
-				colvarCreatedDateTime.IsForeignKey = false;
-				colvarCreatedDateTime.IsReadOnly = false;
+				TableSchema.TableColumn colvarCreatedOn = new TableSchema.TableColumn(schema);
+				colvarCreatedOn.ColumnName = "CreatedOn";
+				colvarCreatedOn.DataType = DbType.DateTime;
+				colvarCreatedOn.MaxLength = 0;
+				colvarCreatedOn.AutoIncrement = false;
+				colvarCreatedOn.IsNullable = false;
+				colvarCreatedOn.IsPrimaryKey = false;
+				colvarCreatedOn.IsForeignKey = false;
+				colvarCreatedOn.IsReadOnly = false;
 				
-						colvarCreatedDateTime.DefaultSetting = @"(getdate())";
-				colvarCreatedDateTime.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarCreatedDateTime);
+						colvarCreatedOn.DefaultSetting = @"(getdate())";
+				colvarCreatedOn.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarCreatedOn);
 				
 				TableSchema.TableColumn colvarBlogUrl = new TableSchema.TableColumn(schema);
 				colvarBlogUrl.ColumnName = "BlogUrl";
@@ -230,31 +230,18 @@ namespace Incremental.Kick.Dal
 				colvarEmail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarEmail);
 				
-				TableSchema.TableColumn colvarSkin = new TableSchema.TableColumn(schema);
-				colvarSkin.ColumnName = "Skin";
-				colvarSkin.DataType = DbType.String;
-				colvarSkin.MaxLength = 50;
-				colvarSkin.AutoIncrement = false;
-				colvarSkin.IsNullable = false;
-				colvarSkin.IsPrimaryKey = false;
-				colvarSkin.IsForeignKey = false;
-				colvarSkin.IsReadOnly = false;
-				colvarSkin.DefaultSetting = @"";
-				colvarSkin.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSkin);
-				
-				TableSchema.TableColumn colvarTheme = new TableSchema.TableColumn(schema);
-				colvarTheme.ColumnName = "Theme";
-				colvarTheme.DataType = DbType.String;
-				colvarTheme.MaxLength = 50;
-				colvarTheme.AutoIncrement = false;
-				colvarTheme.IsNullable = false;
-				colvarTheme.IsPrimaryKey = false;
-				colvarTheme.IsForeignKey = false;
-				colvarTheme.IsReadOnly = false;
-				colvarTheme.DefaultSetting = @"";
-				colvarTheme.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarTheme);
+				TableSchema.TableColumn colvarTemplate = new TableSchema.TableColumn(schema);
+				colvarTemplate.ColumnName = "Template";
+				colvarTemplate.DataType = DbType.String;
+				colvarTemplate.MaxLength = 50;
+				colvarTemplate.AutoIncrement = false;
+				colvarTemplate.IsNullable = false;
+				colvarTemplate.IsPrimaryKey = false;
+				colvarTemplate.IsForeignKey = false;
+				colvarTemplate.IsReadOnly = false;
+				colvarTemplate.DefaultSetting = @"";
+				colvarTemplate.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarTemplate);
 				
 				TableSchema.TableColumn colvarShowAds = new TableSchema.TableColumn(schema);
 				colvarShowAds.ColumnName = "ShowAds";
@@ -625,12 +612,12 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("CreatedDateTime")]
-		public DateTime CreatedDateTime 
+		[XmlAttribute("CreatedOn")]
+		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedDateTime"); }
+			get { return GetColumnValue<DateTime>("CreatedOn"); }
 
-			set { SetColumnValue("CreatedDateTime", value); }
+			set { SetColumnValue("CreatedOn", value); }
 
 		}
 
@@ -655,22 +642,12 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("Skin")]
-		public string Skin 
+		[XmlAttribute("Template")]
+		public string Template 
 		{
-			get { return GetColumnValue<string>("Skin"); }
+			get { return GetColumnValue<string>("Template"); }
 
-			set { SetColumnValue("Skin", value); }
-
-		}
-
-		  
-		[XmlAttribute("Theme")]
-		public string Theme 
-		{
-			get { return GetColumnValue<string>("Theme"); }
-
-			set { SetColumnValue("Theme", value); }
+			set { SetColumnValue("Template", value); }
 
 		}
 
@@ -930,7 +907,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -946,15 +923,13 @@ namespace Incremental.Kick.Dal
 			
 			item.LogoPath = varLogoPath;
 			
-			item.CreatedDateTime = varCreatedDateTime;
+			item.CreatedOn = varCreatedOn;
 			
 			item.BlogUrl = varBlogUrl;
 			
 			item.Email = varEmail;
 			
-			item.Skin = varSkin;
-			
-			item.Theme = varTheme;
+			item.Template = varTemplate;
 			
 			item.ShowAds = varShowAds;
 			
@@ -1009,7 +984,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedDateTime,string varBlogUrl,string varEmail,string varSkin,string varTheme,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -1027,15 +1002,13 @@ namespace Incremental.Kick.Dal
 				
 				item.LogoPath = varLogoPath;
 				
-				item.CreatedDateTime = varCreatedDateTime;
+				item.CreatedOn = varCreatedOn;
 				
 				item.BlogUrl = varBlogUrl;
 				
 				item.Email = varEmail;
 				
-				item.Skin = varSkin;
-				
-				item.Theme = varTheme;
+				item.Template = varTemplate;
 				
 				item.ShowAds = varShowAds;
 				
@@ -1097,11 +1070,10 @@ namespace Incremental.Kick.Dal
 			 public static string SiteDescription = @"SiteDescription";
 			 public static string TagLine = @"TagLine";
 			 public static string LogoPath = @"LogoPath";
-			 public static string CreatedDateTime = @"CreatedDateTime";
+			 public static string CreatedOn = @"CreatedOn";
 			 public static string BlogUrl = @"BlogUrl";
 			 public static string Email = @"Email";
-			 public static string Skin = @"Skin";
-			 public static string Theme = @"Theme";
+			 public static string Template = @"Template";
 			 public static string ShowAds = @"ShowAds";
 			 public static string Culture = @"Culture";
 			 public static string UICulture = @"UICulture";

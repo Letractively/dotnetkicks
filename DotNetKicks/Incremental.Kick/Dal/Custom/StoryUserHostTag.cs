@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SubSonic;
+using Incremental.Kick.Dal.Entities;
 
 namespace Incremental.Kick.Dal {
     public partial class StoryUserHostTag {
@@ -11,6 +12,11 @@ namespace Incremental.Kick.Dal {
             StoryUserHostTag storyUserHostTag = new StoryUserHostTag();
             storyUserHostTag.LoadAndCloseReader(StoryUserHostTag.FetchByQuery(query));
             StoryKick.Destroy(storyUserHostTag.StoryUserHostTagID);
+        }
+
+        public static WeightedTagList GetUserStoryTags(int userID, int storyID) {
+            //TODO: GJ: use a sproc to improve performance
+            return new WeightedTagList();
         }
     }
 }

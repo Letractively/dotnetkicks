@@ -59,10 +59,9 @@ namespace Incremental.Kick.BusinessLogic {
         public static WeightedTagList AddUserStoryTags(string tagString, User user, int storyID, int hostID) {
             WeightedTagList tags = GetOrInsertTags(tagString, user);
 
-            //Kick_StoryUserHostTagDataSet userStoryTagsDS = new Kick_StoryUserHostTagDataSet();
             StoryUserHostTagCollection storyUserHostTags = new StoryUserHostTagCollection();
             foreach (WeightedTag tag in tags) {
-                StoryUserHostTag storyUserHostTag = new StoryUserHostTag(); //TODO: GJ: move to WeightedTag (ToStoryUserHostTag())
+                StoryUserHostTag storyUserHostTag = new StoryUserHostTag(); //TODO: GJ: move to WeightedTag.ToStoryUserHostTag()
                 storyUserHostTag.StoryID = storyID;
                 storyUserHostTag.HostID = hostID;
                 storyUserHostTag.UserID = user.UserID;
@@ -73,14 +72,6 @@ namespace Incremental.Kick.BusinessLogic {
 
             storyUserHostTags.BatchSave();
             return tags;
-        }
-
-        public static WeightedTagList GetUserStoryTags(int userID, int storyID) {
-            //TagList tags = new TagList();
-
-            //return TagDao.GetUserStoryTags(userID, storyID);
-            return new WeightedTagList();
-
         }
     }
 }
