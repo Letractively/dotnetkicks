@@ -2,88 +2,85 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Dal.Entities;
+using Incremental.Kick.Helpers;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class TagBR {
-        /*public static TagList GetOrInsertTags(string tagString, UserProfile user)
-        {
+        public static WeightedTagList GetOrInsertTags(string tagString, User user) {
             List<string> rawTags = TagHelper.DistillTagInput(tagString, user);
 
-            TagList tags = new TagList();
-            Kick_TagBR tagBR = new Kick_TagBR();
-            Kick_TagDataSet newTagDS = new Kick_TagDataSet();
-            foreach (string tag in rawTags)
-            {
+            WeightedTagList tags = new WeightedTagList();
+            TagCollection newTags = new TagCollection();
+            foreach (string tagIdentifier in rawTags) {
                 //TODO: GJ: get from cache
-                Kick_TagTable TagTable = tagBR.GetTagByTagIdentifier(tag).Kick_Tag;
+                Tag tag = Tag.FetchTagByIdentifier(tagIdentifier);
 
-                if (TagTable.Count == 0)
-                {
-                    newTagDS.Kick_Tag.AddRow(tag);
-                }
-                else
-                {
-                    tags.Add(new Tag(TagTable[0].TagID, TagTable[0].TagIdentifier, 1));
+                if (tag == null) {
+                    tag = new Tag();
+                    tag.TagIdentifier = tagIdentifier;
+                    newTags.Add(tag);
+                } else {
+                    tags.Add(new WeightedTag(tag.TagID, tag.TagIdentifier, 1));
                 }
             }
 
-            //now add any new tags (note: if we are calling the cache, we need to ensure that these are not in the db)
-            newTagDS = tagBR.Persist(newTagDS);
-            foreach (Kick_TagRow tagRow in newTagDS.Kick_Tag.Rows)
-            {
-                tags.Add(new Tag(tagRow.TagID, tagRow.TagIdentifier, 1));
+            // newTags.BatchSave(); //TODO: GJ: does BatchSave update identity colums after save?
+
+            foreach (Tag newTag in newTags) {
+                newTag.Save(); //TODO: GJ: does BatchSave update identity colums after save?
+                tags.Add(new WeightedTag(newTag.TagID, newTag.TagIdentifier, 1));
             }
 
             return tags;
-        }*/
+        }
 
 
-        /*
-                public TagList GetUserTags(int userID)
-                {
-                    return TagDao.GetUserTags(userID);
-                }
 
-                public TagList GetUserHostTags(int userID, int hostID)
-                {
-                    return TagDao.GetUserHostTags(userID, hostID);
-                }
+        public WeightedTagList GetUserTags(int userID) {
+            //return TagDao.GetUserTags(userID);
+            return new WeightedTagList();
+        }
 
-                public TagList GetStoryTags(int storyID)
-                {
-                    return TagDao.GetStoryTags(storyID);
-                }
+        public WeightedTagList GetUserHostTags(int userID, int hostID) {
+            // return TagDao.GetUserHostTags(userID, hostID);
+            return new WeightedTagList();
 
-                public TagList AddUserStoryTags(string tagString, UserProfile user, int storyID, int hostID)
-                {
-                    TagList tags = Kick_TagBR.GetOrInsertTags(tagString, user);
+        }
 
-                    Kick_StoryUserHostTagDataSet userStoryTagsDS = new Kick_StoryUserHostTagDataSet();
-                    foreach (Tag tag in tags)
-                    {
-                        userStoryTagsDS.Kick_StoryUserHostTag.AddRow(storyID, user.UserID, hostID, tag.TagID, DateTime.Now);
-                        StoryCache.ClearUserTaggedStories(tag.TagName, user.UserID, storyID);
-                    }
+        public WeightedTagList GetStoryTags(int storyID) {
+            //return TagDao.GetStoryTags(storyID);
+            return new WeightedTagList();
 
-                    userStoryTagsDS = this.Persist(userStoryTagsDS);
+        }
 
-                    return tags;
-                }
+        public static WeightedTagList AddUserStoryTags(string tagString, User user, int storyID, int hostID) {
+            WeightedTagList tags = GetOrInsertTags(tagString, user);
 
-                public TagList GetUserStoryTags(int userID, int storyID)
-                {
-                    TagList tags = new TagList();
+            //Kick_StoryUserHostTagDataSet userStoryTagsDS = new Kick_StoryUserHostTagDataSet();
+            StoryUserHostTagCollection storyUserHostTags = new StoryUserHostTagCollection();
+            foreach (WeightedTag tag in tags) {
+                StoryUserHostTag storyUserHostTag = new StoryUserHostTag(); //TODO: GJ: move to WeightedTag (ToStoryUserHostTag())
+                storyUserHostTag.StoryID = storyID;
+                storyUserHostTag.HostID = hostID;
+                storyUserHostTag.UserID = user.UserID;
+                storyUserHostTag.TagID = tag.TagID;
+                storyUserHostTags.Add(storyUserHostTag);
+                StoryCache.ClearUserTaggedStories(tag.TagName, user.UserID, storyID);
+            }
 
-                    return TagDao.GetUserStoryTags(userID, storyID);
-                }
+            storyUserHostTags.BatchSave();
+            return tags;
+        }
 
-                public static void DeleteTag(int storyID, int userID, int hostID, int tagID)
-                {
-                    new Kick_StoryUserHostTagDAO().DeleteByID(storyID, userID, hostID, tagID);
-                }*/
-        public static void DeleteTag(int storyID, int p, int p_3, int tagID) {
-            throw new Exception("The method or operation is not implemented.");
+        public static WeightedTagList GetUserStoryTags(int userID, int storyID) {
+            //TagList tags = new TagList();
+
+            //return TagDao.GetUserStoryTags(userID, storyID);
+            return new WeightedTagList();
+
         }
     }
 }
