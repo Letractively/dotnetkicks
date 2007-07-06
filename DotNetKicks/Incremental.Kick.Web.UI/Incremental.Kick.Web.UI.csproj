@@ -578,6 +578,13 @@
     <Compile Include="Templates\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Simple\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Simple\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Incremental.Kick\Incremental.Kick.csproj">
@@ -599,6 +606,7 @@
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\format" />
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.svn-base" />
     <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.uncompressed.js.svn-base" />
+    <Content Include="Templates\Simple\MasterPage.Master" />
     <Content Include="Controls\Story\AddComment.ascx" />
     <Content Include="Controls\Story\SubmitNewStory.ascx" />
     <Content Include="Controls\User\ChangePassword.ascx" />
