@@ -1,5 +1,4 @@
 using System.Security.Principal;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Dal.Entities;
 using Incremental.Kick.Dal;
 

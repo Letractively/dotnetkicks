@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Dal.Entities;
 
 namespace Incremental.Kick.Web.Controls {

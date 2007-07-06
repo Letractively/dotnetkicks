@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Mail;
-using Incremental.Kick.Common.Entities;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Helpers {

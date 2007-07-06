@@ -87,17 +87,13 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         protected override void OnPreInit(EventArgs e) {
-            this.MasterPageFile = "~/Templates/" + this.HostProfile.Skin + "/MasterPage.master";
-            // System.Diagnostics.Trace.WriteLine("The masterpage is " + this.MasterPageFile);
-            //this.Theme = this.HostProfile.Skin; //NOTE: GJ: should we remove themes?
-            // System.Diagnostics.Trace.WriteLine("The page theme is " + this.HostProfile.Skin);
-
+            this.MasterPageFile = "~/Templates/" + this.HostProfile.Template + "/MasterPage.master";
             base.OnPreInit(e);
         }
 
         protected override void OnPreRender(EventArgs e) {
             this.AddStyleSheet(this.MasterPageBaseCssUrl);
-            this.AddStyleSheet(this.MasterPageSkinCssUrl);
+            this.AddStyleSheet(this.MasterPageTemplateCssUrl);
 
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Dojo/Dojo.js");
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
