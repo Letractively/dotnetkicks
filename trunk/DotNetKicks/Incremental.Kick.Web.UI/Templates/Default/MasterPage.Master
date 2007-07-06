@@ -4,10 +4,10 @@
 <%@ Register Src="TopAds.ascx" TagName="TopAds" TagPrefix="uc1" %>
 <%@ Register Src="SideAds.ascx" TagName="SideAds" TagPrefix="uc1" %>
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
-<asp:Content ID="PageHead" ContentPlaceHolderID="PageHeadContent" runat="server">
+<asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
 </asp:Content>
-<asp:Content ID="Header" ContentPlaceHolderID="Header" runat="server">
+<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">
     
     <div id="LoadingSpan" class="Hidden">Loading...</div>
     
@@ -17,7 +17,7 @@
     <table>
         <tr>
 </asp:Content>
-<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
     <td class="MainContentTD">
     
     <uc1:TopAds ID="TopAds" runat="server" />
@@ -38,14 +38,14 @@
         </asp:ContentPlaceHolder>
     </td>
 </asp:Content>
-<asp:Content ID="LeftContent" ContentPlaceHolderID="LeftContent" runat="server">
+<asp:Content ID="LeftContentOutline" ContentPlaceHolderID="LeftContent" runat="server">
     <td class="LeftContentTD">
         <asp:ContentPlaceHolder ID="LeftContent" runat="server">
         </asp:ContentPlaceHolder>
         
     </td>
 </asp:Content>
-<asp:Content ID="RightContent" ContentPlaceHolderID="RightContent" runat="server">
+<asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
     <td class="RightContentTD">
     <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
@@ -55,7 +55,7 @@
         <% } %>
     </td>
 </asp:Content>
-<asp:Content ID="Footer" ContentPlaceHolderID="Footer" runat="server">
+<asp:Content ID="FooterOutline" ContentPlaceHolderID="Footer" runat="server">
     </tr> </table>    <div id="Footer">
         <a href="http://www.incremental.ie/">Incremental Systems</a>&nbsp;
     </div>
