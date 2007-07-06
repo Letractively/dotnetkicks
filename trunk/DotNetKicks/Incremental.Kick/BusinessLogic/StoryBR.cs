@@ -7,6 +7,7 @@ using Incremental.Kick.Common.Enums;
 using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic {
+    //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class StoryBR {
 
         public static string AddStory(int hostID, string title, string description, string url, short categoryID, User user) {

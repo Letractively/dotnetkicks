@@ -5,17 +5,14 @@ using Incremental.Kick.Security;
 using Incremental.Kick.Common.Exceptions;
 using Incremental.Kick.Caching;
 
-namespace Incremental.Kick.BusinessLogic
-{
-    public class UserBR
-    {
-        public User GetByUserID(int userID)
-        {
+namespace Incremental.Kick.BusinessLogic {
+    //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
+    public class UserBR {
+        public User GetByUserID(int userID) {
             return GetByUserID(userID, false);
         }
 
-        public User GetByUserID(int userID, bool skipUpdateLastActiveOn)
-        {
+        public User GetByUserID(int userID, bool skipUpdateLastActiveOn) {
             User user = User.FetchByID(userID);
 
 
@@ -27,14 +24,12 @@ namespace Incremental.Kick.BusinessLogic
         }
 
         //TODO: GJ: if this is not used elsewhere, move inline
-        public static void UpdateLastActiveOn(User user)
-        {
+        public static void UpdateLastActiveOn(User user) {
             user.LastActiveOn = DateTime.Now;
             user.Save();
         }
 
-        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host)
-        {
+        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
             username = username.Trim();
             email = email.Trim();
@@ -66,8 +61,7 @@ namespace Incremental.Kick.BusinessLogic
             EmailHelper.SendNewUserEmail(email, username, password, host);
         }
 
-        public static string GetSecurityToken(string username, string password)
-        {
+        public static string GetSecurityToken(string username, string password) {
             System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
 
             username = username.Trim();
@@ -77,8 +71,8 @@ namespace Incremental.Kick.BusinessLogic
             if (user == null)
                 throw new ApplicationException(string.Format("Username [{0}] not found", username));
 
-            string passwordHash = Cipher.Hash(password, user.PasswordSalt);   
-            if(!passwordHash.Equals(user.Password))
+            string passwordHash = Cipher.Hash(password, user.PasswordSalt);
+            if (!passwordHash.Equals(user.Password))
                 throw new ApplicationException("Invalid password for username [" + username + "]");
 
             if (!user.IsValidated)
@@ -88,26 +82,23 @@ namespace Incremental.Kick.BusinessLogic
             return new SecurityToken(user.UserID).ToString();
         }
 
-        public static void BanUser(string username)
-        {
+        public static void BanUser(string username) {
             User user = User.FetchUserByUsername(username);
             user.IsBanned = true;
             user.Save();
 
-  
+
 
             //TODO: GJ :delete their stories
             //DeleteUserStories(userDS.Kick_User[0].UserID);
         }
 
-        public static void DeleteUserStories(User user)
-        {
+        public static void DeleteUserStories(User user) {
             //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
             throw new NotImplementedException();
         }
 
-        public static void UpdatePassword(int userID, string newPassword, Host host)
-        {
+        public static void UpdatePassword(int userID, string newPassword, Host host) {
             newPassword = newPassword.Trim();
             string passwordSalt = Cipher.GenerateSalt();
             string passwordHash = Cipher.Hash(newPassword, passwordSalt);
@@ -124,26 +115,23 @@ namespace Incremental.Kick.BusinessLogic
             EmailHelper.SendChangedPasswordEmail(user.Email, user.Username, newPassword, host);
         }
 
-        public static void UpdateAdSenseID(int userID, string adSenseID)
-        {
+        public static void UpdateAdSenseID(int userID, string adSenseID) {
             User user = User.FetchByID(userID);
             user.AdsenseID = adSenseID;
-            user.Save(); 
-            
+            user.Save();
+
             System.Diagnostics.Trace.WriteLine("UpdateAdsenseID: " + userID + " - " + adSenseID);
 
             //TODO: send an email
         }
 
-        public static void SendPasswordResetEmail(int userID, Host host)
-        {
+        public static void SendPasswordResetEmail(int userID, Host host) {
             User user = User.FetchByID(userID);
 
             EmailHelper.SendPasswordResetEmail(user.Email, user.Username, user.LastActiveOn, host);
         }
 
-        public static void ResetPassword(int userID, Host host)
-        {
+        public static void ResetPassword(int userID, Host host) {
             //generate a password
             User user = User.FetchByID(userID);
             string password = PasswordGenerator.Generate(8);
@@ -155,7 +143,7 @@ namespace Incremental.Kick.BusinessLogic
             user.LastActiveOn = DateTime.Now;
             user.IsGeneratedPassword = true;
             user.Save();
-               
+
             EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
 
