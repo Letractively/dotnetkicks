@@ -30,11 +30,12 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         protected override void Render(HtmlTextWriter writer) {
-            string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, CategoryCache.GetCategoryIdentifier(this._story.CategoryID, this.KickPage.HostProfile.HostID));
+            Category category = CategoryCache.GetCategory(this._story.CategoryID, this.KickPage.HostProfile.HostID);
+            string categoryIdentifier = category.CategoryIdentifier;
+            string categoryName = category.Name;
+            string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, categoryIdentifier);
             string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUser, this._story.Username);
-
-            string categoryIdentifier = CategoryCache.GetCategoryIdentifier(this._story.CategoryID, this.KickPage.HostProfile.HostID);
-            string categoryName = CategoryCache.GetCategoryName(this._story.CategoryID, this.KickPage.HostProfile.HostID);
+                        
             string categoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, categoryIdentifier);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);
 
@@ -48,11 +49,6 @@ namespace Incremental.Kick.Web.Controls {
             }
 
             string adminHtml = "";
-            /*if (this.KickPage.KickUserProfile.IsAdministrator) {
-                adminHtml = String.Format(@"<p align=""center""><input type=""button"" value=""{0}"" onclick=""SetAutoKickCount({1});""/></p>",
-                    this._storyRow.AutoKickCount, this._storyRow.StoryID);
-            }*/
-
             
             string tableClass = "storySummaryTable storySummaryTable";
             if (this._isOddRow)
@@ -113,9 +109,9 @@ namespace Incremental.Kick.Web.Controls {
 
 
             writer.WriteLine(@" | 
-                            category: <a href=""{0}""><img src=""{3}/{1}.png"" width=""16"" height=""16"" border=""0"" /></a>
+                            category: <a href=""{0}""><img src=""{3}/{4}"" width=""16"" height=""16"" border=""0"" /></a>
                             <a href=""{0}"" rel=""tag"">{2}</a>
-            ", categoryUrl, categoryIdentifier, categoryName, this.KickPage.StaticIconRootUrl);
+            ", categoryUrl, categoryIdentifier, categoryName, this.KickPage.StaticIconRootUrl, CategoryCache.GetCategory(this._story.CategoryID, this._story.HostID).IconName);
 
             writer.WriteLine(@" |
                             <span class=""ReportAsSpamLink""><a href=""javascript:ReportAsSpam({0});"">report as spam</a></span>

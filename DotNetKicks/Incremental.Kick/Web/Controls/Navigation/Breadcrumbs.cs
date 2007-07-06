@@ -19,16 +19,20 @@ namespace Incremental.Kick.Web.Controls {
 
             RenderBreadcrumb("home", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
 
+            string categoryName = "";
+            if(this.KickPage.UrlParameters.CategoryID != null)
+                CategoryCache.GetCategory(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).Name.ToLower();
+
             switch (this.KickPage.PageName) {
                 case UrlFactory.PageName.ViewCategory :
                     this.RenderSpacer(writer);
-                    this.RenderBreadcrumb(CategoryCache.GetCategoryName(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).ToLower(), writer);
+                    this.RenderBreadcrumb(categoryName, writer);
                     break;
                 case UrlFactory.PageName.ViewCategoryNewStories :
                     this.RenderSpacer(writer);
 
                     if (this.KickPage.UrlParameters.CategoryIdentifierSpecified) {
-                        this.RenderBreadcrumb(CategoryCache.GetCategoryName(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).ToLower(),
+                        this.RenderBreadcrumb(categoryName,
                         UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, this.KickPage.UrlParameters.CategoryIdentifier), writer);
                         this.RenderSpacer(writer);
                     }
@@ -37,7 +41,7 @@ namespace Incremental.Kick.Web.Controls {
                     break;
                 case UrlFactory.PageName.ViewStory :
                     this.RenderSpacer(writer);
-                    this.RenderBreadcrumb(CategoryCache.GetCategoryName(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).ToLower(),
+                    this.RenderBreadcrumb(categoryName,
                         UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, this.KickPage.UrlParameters.CategoryIdentifier), writer);
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("view story", writer);

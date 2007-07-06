@@ -44,7 +44,7 @@ namespace Incremental.Kick.Web.Helpers {
         }
 
         public short CategoryID {
-            get { return CategoryCache.GetCategoryID(this.CategoryIdentifier, HostCache.Hosts[this._hostName].HostID); }
+            get { return CategoryCache.GetCategory(this.CategoryIdentifier, HostCache.Hosts[this._hostName].HostID).CategoryID; }
         }
 
         public string StoryIdentifier {

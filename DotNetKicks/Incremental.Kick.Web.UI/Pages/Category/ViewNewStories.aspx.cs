@@ -19,7 +19,7 @@ namespace Incremental.Kick.Web.UI.Pages.Category {
                 this.Caption = "Upcoming stories";
                 this.Title = this.HostProfile.SiteTitle + " - " + this.Caption;
             } else {
-                this.Caption = "Upcoming " + CategoryCache.GetCategoryName(this.UrlParameters.CategoryID, this.HostProfile.HostID) + " stories";
+                this.Caption = "Upcoming " + CategoryCache.GetCategory(this.UrlParameters.CategoryID, this.HostProfile.HostID).Name + " stories";
                 this.Title = this.HostProfile.SiteTitle + " - " + this.Caption;
             }
 

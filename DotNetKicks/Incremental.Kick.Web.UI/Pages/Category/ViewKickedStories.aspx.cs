@@ -15,7 +15,7 @@ namespace Incremental.Kick.Web.UI.Pages.Category {
     public partial class ViewKickedStories : Incremental.Kick.Web.Controls.KickUIPage {
 
         protected void Page_Init(object sender, EventArgs e) {
-            this.Caption = "Latest " + CategoryCache.GetCategoryName(this.UrlParameters.CategoryID, this.HostProfile.HostID) + " stories";
+            this.Caption = "Latest " + CategoryCache.GetCategory(this.UrlParameters.CategoryID, this.HostProfile.HostID).Name + " stories";
             this.Title = this.HostProfile.SiteTitle + " - " + this.Caption;
             this.PageName = UrlFactory.PageName.ViewCategory;
             this.RssFeedUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategoryRss, this.UrlParameters.CategoryIdentifier);
