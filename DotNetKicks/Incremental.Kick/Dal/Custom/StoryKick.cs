@@ -13,5 +13,11 @@ namespace Incremental.Kick.Dal {
             storyKick.LoadAndCloseReader(StoryKick.FetchByQuery(query));
             StoryKick.Destroy(storyKick.StoryKickID);
         }
+
+        public static StoryKickCollection FetchByUserID(int userID) {
+            StoryKickCollection storyKicks = new StoryKickCollection();
+            storyKicks.LoadAndCloseReader(StoryKick.FetchByParameter(StoryKick.Columns.UserID, userID));
+            return storyKicks;
+        }
     }
 }
