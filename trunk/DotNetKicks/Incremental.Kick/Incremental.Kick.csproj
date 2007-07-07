@@ -77,8 +77,6 @@
     <Compile Include="Dal\Custom\Tag.cs" />
     <Compile Include="Dal\Custom\TagCollection.cs" />
     <Compile Include="Dal\Custom\User.cs" />
-    <Compile Include="Dal\Entities\HostProfile.cs" />
-    <Compile Include="Dal\Entities\UserProfile.cs" />
     <Compile Include="Dal\Entities\WeightedTag.cs" />
     <Compile Include="Dal\Entities\WeightedTagList.cs" />
     <Compile Include="Dal\Generated\AllStructs.cs" />

@@ -23,10 +23,7 @@ namespace Incremental.Kick.BusinessLogic {
             Comment.CommentX = comment;
             Comment.Save();
 
-
-            //TODO: Increment
-            //now increase the comment count on the story
-            //Kick_StoryBR.IncrementStoryCommentCount(storyID);
+            StoryBR.IncrementStoryCommentCount(storyID);
 
             return Comment.CommentID;
         }

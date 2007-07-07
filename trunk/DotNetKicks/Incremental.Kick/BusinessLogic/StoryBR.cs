@@ -57,7 +57,6 @@ namespace Incremental.Kick.BusinessLogic {
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
-            //TODO: GJ: trackback
             //now send a trackback ping
             Host host = HostCache.GetHost(hostID);
             string storyUrl = host.RootUrl + "/" + CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier + "/" + story.StoryIdentifier;
@@ -257,56 +256,6 @@ namespace Incremental.Kick.BusinessLogic {
 
         public static int GetTaggedStoryCount(string tagIdentifier, int hostID) {
             return Story.GetTaggedStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
-        }
-
-        public static StoryCollection GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: return a paged list of kicked stories for a user
-        }
-
-        public static StoryCollection GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize) {
-            return GetTaggedStories(TagCache.GetTagID(tagIdentifier), hostID, pageNumber, pageSize);
-        }
-
-        public static StoryCollection GetTaggedStories(int tagID, int hostID, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: return a paged list of tagged stories
-        }
-
-        public static StoryCollection GetUserTaggedStories(string tagIdentifier, int userID, int hostID, int pageNumber, int pageSize) {
-            return GetUserTaggedStories(TagCache.GetTagID(tagIdentifier), userID, hostID, pageNumber, pageSize);
-        }
-
-        public static StoryCollection GetUserTaggedStories(int tagID, int userID, int hostID, int pageNumber, int pageSize) {
-            return new StoryCollection(); //TODO: GJ: return a paged list of tagged stories of a user
-        }
-
-        public static int GetUserTaggedStoryCount(string tagIdentifier, int userID, int hostID) {
-            return 0; //TODO: GJ: implement
-        }
-
-        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize) {
-            //return StoryDao.GetPopularStories(hostID, GetStartDate(sortBy), DateTime.Now, pageNumber, pageSize);
-            return new StoryCollection(); //TODO: GJ: implement
-        }
-
-        public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
-            return 0; //TODO: GJ: implement
-        }
-
-        private static DateTime GetStartDate(StoryListSortBy sortBy) {
-            switch (sortBy) {
-                case StoryListSortBy.Today:
-                    return DateTime.Now.AddDays(-1);
-                case StoryListSortBy.PastWeek:
-                    return DateTime.Now.AddDays(-7);
-                case StoryListSortBy.PastTenDays:
-                    return DateTime.Now.AddDays(-10);
-                case StoryListSortBy.PastMonth:
-                    return DateTime.Now.AddDays(-31);
-                case StoryListSortBy.PastYear:
-                    return DateTime.Now.AddDays(-365);
-                default:
-                    throw new ArgumentException("Invalid sortBy");
-            }
         }
     }
 }
