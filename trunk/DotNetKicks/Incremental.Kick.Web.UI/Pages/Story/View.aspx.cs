@@ -40,11 +40,10 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
             if (!String.IsNullOrEmpty(story.AdsenseID)) {
                 if (this.KickUserProfile.UserID != story.UserID) {
                     //flick a coin
-                    //TODO: GJ: turn back on the coin flip when traffic is up
-                    //if (ThreadSafeRandom.FlickCoin()) {
+                    if (ThreadSafeRandom.FlickCoin()) {
                         System.Diagnostics.Debug.WriteLine("Showing author ads " + story.AdsenseID);
                         this.AdSenseID = story.AdsenseID;
-                    //}
+                    }
                 }
             }
         }
