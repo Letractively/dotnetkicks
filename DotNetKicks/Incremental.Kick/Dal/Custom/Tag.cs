@@ -22,36 +22,32 @@ namespace Incremental.Kick.Dal {
 
         public static TagCollection FetchTags(int hostID, DateTime createdOnLower, DateTime createdOnUpper) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByHostIDAndCreatedOnRange(hostID, createdOnLower, createdOnUpper).GetReader());
+            tags.Load(SPs.Kick_GetTagsByHostIDAndCreatedOnRange(hostID, createdOnLower, createdOnUpper).GetReader());
             return tags;
         }
 
         public static TagCollection FetchTags(int userID, int hostID) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByUserIDAndHostID(userID, hostID).GetReader());
+            tags.Load(SPs.Kick_GetTagsByUserIDAndHostID(userID, hostID).GetReader());
             return tags;
         }
 
         public static TagCollection FetchStoryTags(int storyID) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByStoryID(storyID).GetReader());
+            tags.Load(SPs.Kick_GetTagsByStoryID(storyID).GetReader());
             return tags;
         }
 
         public static TagCollection FetchUserTags(int userID) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByUserID(userID).GetReader());
+            tags.Load(SPs.Kick_GetTagsByUserID(userID).GetReader());
             return tags;
         }
-
 
          public static TagCollection FetchUserStoryTags(int userID, int storyID) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.GetKickTags_ByUserIDAndStoryID(userID, storyID).GetReader());
+            tags.Load(SPs.Kick_GetTagsByUserIDAndStoryID(userID, storyID).GetReader());
             return tags;
         }
-
-        
-
     }
 }

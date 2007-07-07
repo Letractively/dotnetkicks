@@ -256,7 +256,7 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static int GetTaggedStoryCount(string tagIdentifier, int hostID) {
-            return Story.GetStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
+            return Story.GetTaggedStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
         }
 
         public static StoryCollection GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize) {

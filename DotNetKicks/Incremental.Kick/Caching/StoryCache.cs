@@ -118,7 +118,7 @@ namespace Incremental.Kick.Caching {
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetStoryKicksByUserIDAndHostID_Count(UserCache.GetUserID(userIdentifier), hostID);
+                count = Story.GetUserKickedStoriesCount(UserCache.GetUserID(userIdentifier), hostID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -165,7 +165,7 @@ namespace Incremental.Kick.Caching {
             StoryCollection stories = storyCache[cacheKey];
 
             if (stories == null) {
-                stories = Story.GetTaggedStories(tagIdentifier, hostID, pageNumber, pageSize);
+                stories = Story.GetTaggedStories(TagCache.GetTagID(tagIdentifier), hostID, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -179,7 +179,7 @@ namespace Incremental.Kick.Caching {
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetTaggedStoryCount(tagIdentifier, hostID);
+                count = Story.GetTaggedStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -201,7 +201,7 @@ namespace Incremental.Kick.Caching {
             StoryCollection stories = storyCache[cacheKey];
 
             if (stories == null) {
-                stories = Story.GetUserTaggedStories(tagIdentifier, userID, hostID, pageNumber, pageSize);
+                stories = Story.GetUserTaggedStories(TagCache.GetTagID(tagIdentifier), userID, hostID, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -215,7 +215,7 @@ namespace Incremental.Kick.Caching {
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetUserTaggedStoryCount(tagIdentifier, userID, hostID);
+                count = Story.GetUserTaggedStoryCount(TagCache.GetTagID(tagIdentifier), userID, hostID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
