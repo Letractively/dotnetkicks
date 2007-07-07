@@ -31,14 +31,13 @@ namespace Incremental.Kick.Caching {
             lock (_getUserLock) {
                 if (user == null) {
                     if (userID == 0) {
-                        //TODO: GJ: construct an anonymous user object
                         user = new User(0);
                         user.Username = "Anonymous";
                     } else {
                         user = User.FetchByID(userID);
                     }
                     System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                    userCache.Insert(cacheKey, user, 500); //TODO: GJ: config
+                    userCache.Insert(cacheKey, user, CacheHelper.CACHE_DURATION_IN_SECONDS);
                 }
             }
 
@@ -54,7 +53,7 @@ namespace Incremental.Kick.Caching {
             if (!userID.HasValue) {
                 userID = User.FetchUserByUsername(username).UserID;
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                userIDCache.Insert(cacheKey, userID, 500); //TODO: Config
+                userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return userID.Value;
@@ -122,14 +121,12 @@ namespace Incremental.Kick.Caching {
                 //TODO: get the latest n kicks for this userIdentifier
                 storyKicks = StoryKick.FetchByUserID(userID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyKickCache.Insert(cacheKey, storyKicks, 500); //TODO: GJ: config
+                storyKickCache.Insert(cacheKey, storyKicks, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return storyKicks;
         }
-
-
-
+        
         private static CacheManager<string, StoryKickCollection> GetStoryKickCache() {
             return CacheManager<string, StoryKickCollection>.GetInstance();
         }
