@@ -24,7 +24,7 @@ namespace Incremental.Kick.Caching {
                 tags = Tag.FetchTags(hostID, createdOnLower, createdOnUpper).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tags, 500); //TODO: config
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;
@@ -40,7 +40,7 @@ namespace Incremental.Kick.Caching {
                 tags = GetHostTags(hostID);
                 //TODO: GJ: sort by usagecount, get top x, then sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tags, 500); //TODO: config
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;
@@ -63,7 +63,7 @@ namespace Incremental.Kick.Caching {
                 tags = Tag.FetchTags(userID, hostID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tags, 500); //TODO: config
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;
@@ -80,7 +80,7 @@ namespace Incremental.Kick.Caching {
                 tags = Tag.FetchStoryTags(storyID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tags, 500); //TODO: config
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;
@@ -95,7 +95,7 @@ namespace Incremental.Kick.Caching {
             if (tagID == null) {
                 tagID = Tag.FetchTagByIdentifier(tagIdentifier).TagID;
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tagID.Value, 500); //TODO: config
+                tagCache.Insert(cacheKey, tagID.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tagID.Value;
@@ -111,7 +111,7 @@ namespace Incremental.Kick.Caching {
                 tags = Tag.FetchUserTags(userID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                tagCache.Insert(cacheKey, tags, 500); //TODO: config
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;

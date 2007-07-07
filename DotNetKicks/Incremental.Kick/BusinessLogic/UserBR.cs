@@ -17,16 +17,12 @@ namespace Incremental.Kick.BusinessLogic {
 
 
             if (!skipUpdateLastActiveOn)
-                if (user.LastActiveOn < System.DateTime.Now.AddHours(-1))
-                    UpdateLastActiveOn(user);
+                if (user.LastActiveOn < System.DateTime.Now.AddHours(-1)) {
+                    user.LastActiveOn = DateTime.Now;
+                    user.Save();
+                }
 
             return user;
-        }
-
-        //TODO: GJ: if this is not used elsewhere, move inline
-        public static void UpdateLastActiveOn(User user) {
-            user.LastActiveOn = DateTime.Now;
-            user.Save();
         }
 
         public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
@@ -111,7 +107,6 @@ namespace Incremental.Kick.BusinessLogic {
 
             System.Diagnostics.Trace.WriteLine("UpdatePassword: " + userID);
 
-            //TODO: GJ: send email
             EmailHelper.SendChangedPasswordEmail(user.Email, user.Username, newPassword, host);
         }
 

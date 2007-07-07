@@ -13,10 +13,5 @@ namespace Incremental.Kick.Dal {
             storyUserHostTag.LoadAndCloseReader(StoryUserHostTag.FetchByQuery(query));
             StoryKick.Destroy(storyUserHostTag.StoryUserHostTagID);
         }
-
-        public static WeightedTagList GetUserStoryTags(int userID, int storyID) {
-            //TODO: GJ: use a sproc to improve performance
-            return new WeightedTagList();
-        }
     }
 }
