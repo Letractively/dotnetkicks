@@ -6,9 +6,6 @@ using SubSonic;
 
 namespace Incremental.Kick.Dal {
     public partial class Story {
-
- 
-
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
         }
@@ -48,7 +45,6 @@ namespace Incremental.Kick.Dal {
 
         public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
             Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
-            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
             return query.GetCount(Story.Columns.StoryID);
         }
         
@@ -57,23 +53,19 @@ namespace Incremental.Kick.Dal {
         }
 
         public static int GetStoryCount(int hostID, bool isPublished) {
-            Query query = new Query(Story.Schema).WHERE("HostID", hostID).AND("IsPublished", isPublished);
+            Query query = GetStoryQuery(hostID, isPublished);
             return (int)GetStoryQuery(hostID, isPublished).GetCount("StoryID");
-        }
-
-        public static int GetStoryCount(int tagID, int hostID) {
-            return 0; //TODO: GJ: return the story count for a tag and host
         }
 
         public static StoryCollection GetUserKickedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
-            stories.Load(SPs._Kick_Get_User_Kicked_Stories_Paged(userID, hostID, pageNumber, pageSize).GetReader());
+            stories.Load(SPs.Kick_GetPagedKickedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
 
-        //TODO: GJ: rename to GetUserKickedStoriesCount?
-        public static int GetStoryKicksByUserIDAndHostID_Count(int userID, int hostID) {
-            return 0; //TODO: GJ: implement
+        public static int GetUserKickedStoriesCount(int userID, int hostID) {
+            Query query = new Query(StoryKick.Schema).WHERE(StoryKick.Columns.UserID, userID).AND(StoryKick.Columns.HostID, hostID);
+            return (int)query.GetCount(StoryKick.Columns.StoryKickID);
         }
 
         public static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isPublished, int hostID, int pageIndex, int pageSize) {
@@ -89,6 +81,28 @@ namespace Incremental.Kick.Dal {
         public static int GetStoriesByCategoryKickedStateAndHostID_Count(short categoryID, bool isPublished, int hostID) {
             return (int)GetStoryQuery(hostID, isPublished, categoryID).GetCount(Story.Columns.StoryID);
         }
+
+        public static StoryCollection GetTaggedStories(int tagID, int hostID, int pageNumber, int pageSize) {
+            StoryCollection stories = new StoryCollection();
+            stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostID(tagID, hostID, pageNumber, pageSize).GetReader());
+            return stories;
+        }
+        public static int GetTaggedStoryCount(int tagID, int hostID) {
+            Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.TagID, tagID).AND(StoryUserHostTag.Columns.HostID, hostID);
+            return (int)query.GetCount(StoryUserHostTag.Columns.StoryUserHostTagID);
+        }
+
+        public static StoryCollection GetUserTaggedStories(int tagID, int userID, int hostID, int pageNumber, int pageSize) {
+            StoryCollection stories = new StoryCollection();
+            stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostIDAndUserID(tagID, hostID, userID, pageNumber, pageSize).GetReader());
+            return stories;
+        }
+
+        public static int GetUserTaggedStoryCount(int tagID, int userID, int hostID) {
+            Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.TagID, tagID).AND(StoryUserHostTag.Columns.HostID, hostID).AND(StoryUserHostTag.Columns.UserID, userID);
+            return (int)query.GetCount(StoryUserHostTag.Columns.StoryUserHostTagID);
+        }
+
 
         private static Query GetStoryQuery(int hostID) {
             return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
@@ -126,26 +140,6 @@ namespace Incremental.Kick.Dal {
                 default:
                     throw new ArgumentException("Invalid sortBy");
             }
-        }
-
-        
-
-        internal static StoryCollection GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize) {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        internal static StoryCollection GetUserTaggedStories(string tagIdentifier, int userID, int hostID, int pageNumber, int pageSize) {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        internal static int? GetUserTaggedStoryCount(string tagIdentifier, int userID, int hostID) {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        
-
-        internal static int? GetTaggedStoryCount(string tagIdentifier, int hostID) {
-            throw new Exception("The method or operation is not implemented.");
         }
     }
 }

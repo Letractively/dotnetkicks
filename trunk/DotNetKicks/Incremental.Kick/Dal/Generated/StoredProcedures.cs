@@ -16,11 +16,11 @@ namespace Incremental.Kick.Dal{
     public partial class SPs{
         
         /// <summary>
-        /// Creates an object wrapper for the _Kick_Get_User_Kicked_Stories_Paged Procedure
+        /// Creates an object wrapper for the Kick_GetPagedKickedStoriesByUserIDAndHostID Procedure
         /// </summary>
-        public static StoredProcedure _Kick_Get_User_Kicked_Stories_Paged(int? UserID, int? HostID, int? PageNumber, int? PageSize)
+        public static StoredProcedure Kick_GetPagedKickedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("_Kick_Get_User_Kicked_Stories_Paged" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedKickedStoriesByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
@@ -35,11 +35,11 @@ namespace Incremental.Kick.Dal{
 
         
         /// <summary>
-        /// Creates an object wrapper for the GetKickTags_ByUserIDAndHostID Procedure
+        /// Creates an object wrapper for the Kick_GetTagsByUserIDAndHostID Procedure
         /// </summary>
-        public static StoredProcedure GetKickTags_ByUserIDAndHostID(int? UserID, int? HostID)
+        public static StoredProcedure Kick_GetTagsByUserIDAndHostID(int? UserID, int? HostID)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTagsByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
@@ -50,11 +50,11 @@ namespace Incremental.Kick.Dal{
 
         
         /// <summary>
-        /// Creates an object wrapper for the GetKickTags_ByHostIDAndCreatedOnRange Procedure
+        /// Creates an object wrapper for the Kick_GetTagsByHostIDAndCreatedOnRange Procedure
         /// </summary>
-        public static StoredProcedure GetKickTags_ByHostIDAndCreatedOnRange(int? HostID, DateTime? CreatedOn_Lower, DateTime? CreatedOn_Upper)
+        public static StoredProcedure Kick_GetTagsByHostIDAndCreatedOnRange(int? HostID, DateTime? CreatedOn_Lower, DateTime? CreatedOn_Upper)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByHostIDAndCreatedOnRange" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTagsByHostIDAndCreatedOnRange" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
         	    
@@ -67,11 +67,11 @@ namespace Incremental.Kick.Dal{
 
         
         /// <summary>
-        /// Creates an object wrapper for the GetKickTags_ByUserIDAndStoryID Procedure
+        /// Creates an object wrapper for the Kick_GetTagsByUserIDAndStoryID Procedure
         /// </summary>
-        public static StoredProcedure GetKickTags_ByUserIDAndStoryID(int? UserID, int? StoryID)
+        public static StoredProcedure Kick_GetTagsByUserIDAndStoryID(int? UserID, int? StoryID)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByUserIDAndStoryID" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTagsByUserIDAndStoryID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
@@ -82,11 +82,11 @@ namespace Incremental.Kick.Dal{
 
         
         /// <summary>
-        /// Creates an object wrapper for the GetKickTags_ByUserID Procedure
+        /// Creates an object wrapper for the Kick_GetTagsByUserID Procedure
         /// </summary>
-        public static StoredProcedure GetKickTags_ByUserID(int? UserID)
+        public static StoredProcedure Kick_GetTagsByUserID(int? UserID)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByUserID" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTagsByUserID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
@@ -95,13 +95,53 @@ namespace Incremental.Kick.Dal{
 
         
         /// <summary>
-        /// Creates an object wrapper for the GetKickTags_ByStoryID Procedure
+        /// Creates an object wrapper for the Kick_GetTagsByStoryID Procedure
         /// </summary>
-        public static StoredProcedure GetKickTags_ByStoryID(int? StoryID)
+        public static StoredProcedure Kick_GetTagsByStoryID(int? StoryID)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("GetKickTags_ByStoryID" , DataService.GetInstance("DotNetKicks"));
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTagsByStoryID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@StoryID", StoryID,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedStoriesByTagIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedStoriesByTagIDAndHostID(int? TagID, int? HostID, int? PageNumber, int? PageSize)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedStoriesByTagIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@TagID", TagID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedStoriesByTagIDAndHostIDAndUserID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedStoriesByTagIDAndHostIDAndUserID(int? TagID, int? HostID, int? UserID, int? PageNumber, int? PageSize)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedStoriesByTagIDAndHostIDAndUserID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@TagID", TagID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
         	    
             return sp;
         }
