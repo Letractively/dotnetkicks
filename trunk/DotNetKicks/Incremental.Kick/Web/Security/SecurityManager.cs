@@ -16,7 +16,6 @@ namespace Incremental.Kick.Web.Security {
     public class SecurityManager {
         
         public static void Logout() {
-            //TODO: GJ: get the security token
             UserCache.RemoveUser(SecurityToken);
             FormsAuthentication.SignOut();
         }
