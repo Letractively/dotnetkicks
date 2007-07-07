@@ -63,7 +63,6 @@ namespace Incremental.Kick.Dal.Entities {
 
         }
 
-
         public WeightedTagList GetTopTags(int tagCount) {
             if (tagCount > this.Count)
                 tagCount = this.Count;
@@ -87,7 +86,18 @@ namespace Incremental.Kick.Dal.Entities {
                 return x.TagName.CompareTo(y.TagName);
             }
         }
-    }
 
-    
+        public void AddWeightedTag(WeightedTag weightedTag) {
+            //NOTE: GJ: the old DNK retuned tag weightings from the sproc - we should do this is the near future
+            //NOTE: GJ: in the mean time I am going to sacrafice some performance with a cheap and nasty solution
+            foreach (WeightedTag exisitingTag in this) {
+                if (exisitingTag.TagID == weightedTag.TagID) {
+                    exisitingTag.UsageCount += weightedTag.UsageCount;
+                    return;
+                }
+            }
+
+            this.Add(weightedTag);
+        }
+    }
 }
