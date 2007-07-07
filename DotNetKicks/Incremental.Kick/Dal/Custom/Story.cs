@@ -76,12 +76,30 @@ namespace Incremental.Kick.Dal {
             return 0; //TODO: GJ: implement
         }
 
+        public static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isPublished, int hostID, int pageIndex, int pageSize) {
+            Query query = GetStoryQuery(hostID, isPublished, categoryID);
+            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
+        }
+
+        public static int GetStoriesByCategoryKickedStateAndHostID_Count(short categoryID, bool isPublished, int hostID) {
+            return (int)GetStoryQuery(hostID, isPublished, categoryID).GetCount(Story.Columns.StoryID);
+        }
+
         private static Query GetStoryQuery(int hostID) {
             return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
         }
         
         private static Query GetStoryQuery(int hostID, bool isPublished) {
             return GetStoryQuery(hostID).AND(Story.Columns.IsPublished, isPublished);
+        }
+
+        private static Query GetStoryQuery(int hostID, bool isPublished, short categoryID) {
+            return GetStoryQuery(hostID).AND(Story.Columns.IsPublished, isPublished).AND(Story.Columns.CategoryID, categoryID);
         }
 
         private static Query GetStoryQuery(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
@@ -110,9 +128,7 @@ namespace Incremental.Kick.Dal {
             }
         }
 
-        internal static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isKicked, int hostID, int pageNumber, int pageSize) {
-            throw new Exception("The method or operation is not implemented.");
-        }
+        
 
         internal static StoryCollection GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize) {
             throw new Exception("The method or operation is not implemented.");
@@ -126,9 +142,7 @@ namespace Incremental.Kick.Dal {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        internal static int? GetStoriesByCategoryKickedStateAndHostID_Count(short categoryID, bool isKicked, int hostID) {
-            throw new Exception("The method or operation is not implemented.");
-        }
+        
 
         internal static int? GetTaggedStoryCount(string tagIdentifier, int hostID) {
             throw new Exception("The method or operation is not implemented.");
