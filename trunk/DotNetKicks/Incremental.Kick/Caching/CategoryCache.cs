@@ -37,7 +37,7 @@ namespace Incremental.Kick.Caching {
                 categories = new CategoryCollection();
                 categories.LoadAndCloseReader(Category.FetchByParameter(Category.Columns.HostID, hostID));
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                categoryCache.Insert(cacheKey, categories, 500); //TODO: GJ: cache duration from config
+                categoryCache.Insert(cacheKey, categories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return categories;
