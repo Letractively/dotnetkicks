@@ -16,7 +16,6 @@ using Incremental.Kick.Dal.Entities;
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     public partial class AddUserStoryTags : Incremental.Kick.Web.Controls.KickApiPage {
         protected void Page_Load(object sender, EventArgs e) {
-            //TODO: GJ: implement
             int storyID = int.Parse(Request["storyID"]);
             string tagString = HttpUtility.UrlDecode(Request["tags"]);
 
