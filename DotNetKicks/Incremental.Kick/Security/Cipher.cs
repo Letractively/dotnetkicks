@@ -11,6 +11,7 @@ namespace Incremental.Kick.Security {
         private const char NOTCOMPRESSED = 'P';
         private const int MINIMUM_LENGTH_FOR_COMPRESSION = 512;
 
+        //TODO: GJ: move these values to config file or database
         private const string PASS_PHRASE = "todo:thisisthepassphrase";
         private const string SALT = "todo:thisisthesale";
         private const string HASH_ALGORITHM = "SHA1";
