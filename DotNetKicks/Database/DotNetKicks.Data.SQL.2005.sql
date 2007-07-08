@@ -53,7 +53,7 @@ GO
 
 -- [dbo].[Kick_Story] (1 rows)
 SET IDENTITY_INSERT [dbo].[Kick_Story] ON
-INSERT INTO [dbo].[Kick_Story] ([StoryID], [HostID], [StoryIdentifier], [Title], [Description], [Url], [CategoryID], [UserID], [Username], [KickCount], [SpamCount], [ViewCount], [CommentCount], [IsPublished], [IsSpam], [AdsenseID], [CreatedOn], [PublishedOn]) VALUES (1, 1, N'DotNetKicks_to_be_Open_Sourced', N'DotNetKicks to be Open Sourced?', N'It has been months since Gavin announced his plan to open source the DotNetKicks.com codebase. Very little has been heard on the subject recently. Will we ever get to see the code?', N'http://weblogs.asp.net/gavinjoyce/archive/2007/03/20/dotnetkicks-to-be-open-source.aspx', 2, 1, N'admin', 2, 0, 0, 1, 1, 0, N'', '2007-07-06T10:43:04', '2007-07-06T10:43:04')
+INSERT INTO [dbo].[Kick_Story] ([StoryID], [HostID], [StoryIdentifier], [Title], [Description], [Url], [CategoryID], [UserID], [Username], [KickCount], [SpamCount], [ViewCount], [CommentCount], [IsPublishedToHomepage], [IsSpam], [AdsenseID], [CreatedOn], [PublishedOn]) VALUES (1, 1, N'DotNetKicks_to_be_Open_Sourced', N'DotNetKicks to be Open Sourced?', N'It has been months since Gavin announced his plan to open source the DotNetKicks.com codebase. Very little has been heard on the subject recently. Will we ever get to see the code?', N'http://weblogs.asp.net/gavinjoyce/archive/2007/03/20/dotnetkicks-to-be-open-source.aspx', 2, 1, N'admin', 2, 0, 0, 1, 1, 0, N'', '2007-07-06T10:43:04', '2007-07-06T10:43:04')
 SET IDENTITY_INSERT [dbo].[Kick_Story] OFF
 GO
 
