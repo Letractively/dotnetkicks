@@ -38,7 +38,9 @@ namespace Incremental.Kick.Caching {
 
             if (tags == null) {
                 tags = GetHostTags(hostID);
-                //TODO: GJ: sort by usagecount, get top x, then sort by alpha
+                tags.Sort(new WeightedTagList.UsageCountComparer());
+                tags = tags.GetTopTags(numberOfTags);
+                tags.Sort(new WeightedTagList.AlphabeticalComparer());
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
