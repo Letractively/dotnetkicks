@@ -42,7 +42,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
 
 
             Story story = Story.FetchStoryByUrl(url);
-            if ((story == null) || (!story.IsPublished)) 
+            if ((story == null) || (!story.IsPublishedToHomepage)) 
                 f = new Font("Verdana", 10, FontStyle.Regular);
              string count = this.GetKickCountDisplayCharacters(story);
             float countWidth = g.MeasureString(count, f).Width;

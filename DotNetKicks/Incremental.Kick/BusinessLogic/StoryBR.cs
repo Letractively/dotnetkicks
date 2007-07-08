@@ -5,6 +5,8 @@ using Incremental.Kick.Helpers;
 using System.Text.RegularExpressions;
 using Incremental.Kick.Common.Enums;
 using Incremental.Kick.Caching;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
@@ -45,7 +47,7 @@ namespace Incremental.Kick.BusinessLogic {
             story.SpamCount = 0;
             story.ViewCount = 0;
             story.CommentCount = 0;
-            story.IsPublished = false;
+            story.IsPublishedToHomepage = false;
             story.IsSpam = false;
             story.AdsenseID = adsenseID;
             story.PublishedOn = DateTime.Now;
@@ -61,7 +63,7 @@ namespace Incremental.Kick.BusinessLogic {
             Host host = HostCache.GetHost(hostID);
             string storyUrl = host.RootUrl + "/" + CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier + "/" + story.StoryIdentifier;
             TrackbackHelper.SendTrackbackPing_Begin(url, title, storyUrl, "You've been kicked (a good thing) - Trackback from " + host.SiteTitle, host.SiteTitle);
-            
+
             return story.StoryIdentifier;
         }
 
@@ -98,7 +100,7 @@ namespace Incremental.Kick.BusinessLogic {
             throw new Exception("The story identifier [" + title + "] was not unique");
         }
 
-       
+
 
         public static StoryKick AddStoryKick(int storyID, int userID, int hostID) {
             StoryKick storyKick = new StoryKick();
@@ -114,66 +116,48 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static void PublishStoryProcess() {
-            throw new NotImplementedException();
-            //promote stories to the various hosts homepages
-            /* foreach (string hostKey in HostCache.HostProfiles.Keys)
-             {
-                 HostProfile hostProfile = HostCache.HostProfiles[hostKey];
-                 Trace.Write("Pub: Processing " + hostProfile.HostName);
+            // promote stories to the various hosts homepages
+            foreach (string hostKey in HostCache.Hosts.Keys) {
+                Host host = HostCache.Hosts[hostKey];
+                Trace.Write("Pub: Processing " + host.HostName);
 
-                 //get unkicked stories within the maximumStoryAgeInHours
-                 DateTime startDate = DateTime.Now.AddHours(-hostProfile.Publish_MinimumStoryAgeInHours);
-                 DateTime endDate = DateTime.Now.AddHours(-hostProfile.Publish_MaximumStoryAgeInHours);
+                //get unkicked stories within the maximumStoryAgeInHours
+                DateTime startDate = DateTime.Now.AddHours(-host.Publish_MinimumStoryAgeInHours);
+                DateTime endDate = DateTime.Now.AddHours(-host.Publish_MaximumStoryAgeInHours);
 
-                 //now get a dataset containing all these (NOTE: perf: we could use paging here to reduce the memory footprint)
-                 Kick_StoryDataSet storyDS = storyBR.GetStoriesByIsKickedHostIDAndPostedDateTime(false, hostProfile.HostID, endDate, startDate);
-                 Trace.Write("Pub: There are now " + storyDS.Kick_Story.Count + " candidate stories.");
+                //now get a dataset containing all these (NOTE: perf: we could use paging here to reduce the memory footprint)
+                StoryCollection stories = Story.GetStoriesByIsPublishedAndHostIDAndPublishedDate(host.HostID, false, endDate, startDate);
+                Trace.Write("Pub: There are now " + stories.Count + " candidate stories.");
 
-                 //pass 1: remove any weak candidate stories
-                 for (int i = 0; i < storyDS.Kick_Story.Count; i++)
-                 {
-                     Kick_StoryRow story = storyDS.Kick_Story[i];
-                     if (IsWeakStory(story, hostProfile))
-                     {
-                         //remove it from the dataset
-                         Trace.Write("Pub: Removing story " + story.StoryID);
-                         storyDS.Kick_Story[i].Delete();
-                     }
-                     else
-                     {
-                         //Debug.Write("Pub: Keeping story " + story.StoryID);
-                     }
-                 }
-                 storyDS.AcceptChanges();
+                //pass 1: remove any weak candidate stories 
+                StoryCollection candidateStories = new StoryCollection();
+                foreach (Story story in stories) {
+                    if (!IsWeakStory(story, host))
+                        candidateStories.Add(story);
+                }
 
-                 Trace.Write("Pub: There are now " + storyDS.Kick_Story.Count + " candidate stories.");
+                Trace.Write("Pub: There are now " + candidateStories.Count + " candidate stories.");
 
-                 //pass 2: calculate scores for each story
-                 SortedList<int, int> storyScoreList = new SortedList<int, int>();
-                 foreach (Kick_StoryRow story in storyDS.Kick_Story)
-                 {
-                     storyScoreList[GetStoryScore(story, hostProfile)] = story.StoryID;
-                 }
+                //pass 2: calculate scores for each story
+                SortedList<int, int> storyScoreList = new SortedList<int, int>();
+                foreach (Story story in candidateStories) {
+                    storyScoreList[GetStoryScore(story, host)] = story.StoryID;
+                }
 
-                 //pass 3: should the top story be published?
-                 if (storyScoreList.Count > 0)
-                 {
-                     for (int i = 0; i < hostProfile.Publish_MaximumSimiltanousStoryPublishCount; i++)
-                     {
-                         if (storyScoreList.Count > i)
-                         {
-
-                             int storyIndex = storyScoreList.Count - 1 - i; //we have to work backwards as the lowest are first
-                             if (storyScoreList.Keys[storyIndex] >= hostProfile.Publish_MinimumStoryScore)
-                             {
-                                 //publish this story
-                                 Trace.Write("Pub: Publishing storyID:" + storyScoreList.Values[storyIndex]);
-                                 PublishStory(storyScoreList.Values[storyIndex]);
-                             }
-                         }
-                     }
-                 }
-             }*/
+                //pass 3: should the top story be published?
+                if (storyScoreList.Count > 0) {
+                    for (int i = 0; i < host.Publish_MaximumSimultaneousStoryPublishCount; i++) {
+                        if (storyScoreList.Count > i) {
+                            int storyIndex = storyScoreList.Count - 1 - i; //we have to work backwards as the lowest are first
+                            if (storyScoreList.Keys[storyIndex] >= host.Publish_MinimumStoryScore) {
+                                //publish this story
+                                Trace.Write("Pub: Publishing storyID:" + storyScoreList.Values[storyIndex]);
+                                PublishStory(storyScoreList.Values[storyIndex]);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static int IncrementStoryCommentCount(int storyID) {
@@ -246,8 +230,9 @@ namespace Incremental.Kick.BusinessLogic {
 
         public static void PublishStory(int storyID) {
             Story story = Story.FetchByID(storyID);
-            story.IsPublished = true;
+            story.IsPublishedToHomepage = true;
             story.PublishedOn = DateTime.Now;
+            story.Save();
         }
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {

@@ -69,8 +69,8 @@ namespace Incremental.Kick.Web.Controls {
 
 
             string publishedHtml = "";
-            if (this._story.IsPublished) {
-                publishedHtml = "published " + DateHelper.ConverDateToTimeAgo(this._story.PublishedOn.Value) + ", ";
+            if (this._story.IsPublishedToHomepage) {
+                publishedHtml = "published " + DateHelper.ConverDateToTimeAgo(this._story.PublishedOn) + ", ";
             }
             //TODO: remove inline style from table
             writer.WriteLine(@"

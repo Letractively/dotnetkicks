@@ -47,7 +47,7 @@ namespace Incremental.Kick.Dal {
             Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
             return query.GetCount(Story.Columns.StoryID);
         }
-        
+
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
             return (int)GetStoryQuery(hostID, isPublished, startDate, endDate).GetCount("StoryID");
         }
@@ -102,18 +102,22 @@ namespace Incremental.Kick.Dal {
             Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.TagID, tagID).AND(StoryUserHostTag.Columns.HostID, hostID).AND(StoryUserHostTag.Columns.UserID, userID);
             return (int)query.GetCount(StoryUserHostTag.Columns.StoryUserHostTagID);
         }
-
+        public static StoryCollection GetStoriesByIsPublishedAndHostIDAndPublishedDate(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
+            StoryCollection stories = new StoryCollection();
+            stories.Load(GetStoryQuery(hostID, isPublished, startDate, endDate).ExecuteReader());
+            return stories;
+        }
 
         private static Query GetStoryQuery(int hostID) {
             return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
         }
         
         private static Query GetStoryQuery(int hostID, bool isPublished) {
-            return GetStoryQuery(hostID).AND(Story.Columns.IsPublished, isPublished);
+            return GetStoryQuery(hostID).AND(Story.Columns.IsPublishedToHomepage, isPublished);
         }
 
         private static Query GetStoryQuery(int hostID, bool isPublished, short categoryID) {
-            return GetStoryQuery(hostID).AND(Story.Columns.IsPublished, isPublished).AND(Story.Columns.CategoryID, categoryID);
+            return GetStoryQuery(hostID).AND(Story.Columns.IsPublishedToHomepage, isPublished).AND(Story.Columns.CategoryID, categoryID);
         }
 
         private static Query GetStoryQuery(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {

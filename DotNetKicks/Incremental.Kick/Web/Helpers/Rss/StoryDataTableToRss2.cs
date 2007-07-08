@@ -41,7 +41,7 @@ namespace Incremental.Kick.Web.Helpers.Rss {
                     RssItem item = new RssItem();
                     item.Title = story.Title;
                     item.Description = story.Description + " <br /><br /><br />" + Incremental.Common.Web.Helpers.ControlHelper.RenderControl(new Incremental.Kick.Web.Controls.StoryDynamicImage(story.Url, host));
-                    item.PubDate = story.PublishedOn.Value.ToUniversalTime();
+                    item.PubDate = story.PublishedOn.ToUniversalTime();
                     RssGuid guid = new RssGuid();
                     guid.Name = storyUrl;
                     guid.PermaLink = true;
