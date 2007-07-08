@@ -15,6 +15,12 @@ namespace Incremental.Kick.Web.UI {
             Incremental.Kick.Web.Security.SecurityManager.SetPrincipal();
         }
 
+        protected void Application_Error(object sender, EventArgs e) {
+            //TODO: log this exception
+            System.Diagnostics.Debug.WriteLine("Application_Error:" + Context.Error.GetBaseException().ToString());
+            Response.Redirect("~/error");
+        }
+
         protected void Application_Start(object sender, EventArgs e) {
 
         }

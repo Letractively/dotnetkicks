@@ -271,18 +271,18 @@ namespace Incremental.Kick.Dal
 				colvarCommentCount.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarCommentCount);
 				
-				TableSchema.TableColumn colvarIsPublished = new TableSchema.TableColumn(schema);
-				colvarIsPublished.ColumnName = "IsPublished";
-				colvarIsPublished.DataType = DbType.Boolean;
-				colvarIsPublished.MaxLength = 0;
-				colvarIsPublished.AutoIncrement = false;
-				colvarIsPublished.IsNullable = false;
-				colvarIsPublished.IsPrimaryKey = false;
-				colvarIsPublished.IsForeignKey = false;
-				colvarIsPublished.IsReadOnly = false;
-				colvarIsPublished.DefaultSetting = @"";
-				colvarIsPublished.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarIsPublished);
+				TableSchema.TableColumn colvarIsPublishedToHomepage = new TableSchema.TableColumn(schema);
+				colvarIsPublishedToHomepage.ColumnName = "IsPublishedToHomepage";
+				colvarIsPublishedToHomepage.DataType = DbType.Boolean;
+				colvarIsPublishedToHomepage.MaxLength = 0;
+				colvarIsPublishedToHomepage.AutoIncrement = false;
+				colvarIsPublishedToHomepage.IsNullable = false;
+				colvarIsPublishedToHomepage.IsPrimaryKey = false;
+				colvarIsPublishedToHomepage.IsForeignKey = false;
+				colvarIsPublishedToHomepage.IsReadOnly = false;
+				colvarIsPublishedToHomepage.DefaultSetting = @"";
+				colvarIsPublishedToHomepage.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIsPublishedToHomepage);
 				
 				TableSchema.TableColumn colvarIsSpam = new TableSchema.TableColumn(schema);
 				colvarIsSpam.ColumnName = "IsSpam";
@@ -329,7 +329,7 @@ namespace Incremental.Kick.Dal
 				colvarPublishedOn.DataType = DbType.DateTime;
 				colvarPublishedOn.MaxLength = 0;
 				colvarPublishedOn.AutoIncrement = false;
-				colvarPublishedOn.IsNullable = true;
+				colvarPublishedOn.IsNullable = false;
 				colvarPublishedOn.IsPrimaryKey = false;
 				colvarPublishedOn.IsForeignKey = false;
 				colvarPublishedOn.IsReadOnly = false;
@@ -480,12 +480,12 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("IsPublished")]
-		public bool IsPublished 
+		[XmlAttribute("IsPublishedToHomepage")]
+		public bool IsPublishedToHomepage 
 		{
-			get { return GetColumnValue<bool>("IsPublished"); }
+			get { return GetColumnValue<bool>("IsPublishedToHomepage"); }
 
-			set { SetColumnValue("IsPublished", value); }
+			set { SetColumnValue("IsPublishedToHomepage", value); }
 
 		}
 
@@ -521,9 +521,9 @@ namespace Incremental.Kick.Dal
 
 		  
 		[XmlAttribute("PublishedOn")]
-		public DateTime? PublishedOn 
+		public DateTime PublishedOn 
 		{
-			get { return GetColumnValue<DateTime?>("PublishedOn"); }
+			get { return GetColumnValue<DateTime>("PublishedOn"); }
 
 			set { SetColumnValue("PublishedOn", value); }
 
@@ -619,7 +619,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublished,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime? varPublishedOn)
+		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
 		{
 			Story item = new Story();
 			
@@ -647,7 +647,7 @@ namespace Incremental.Kick.Dal
 			
 			item.CommentCount = varCommentCount;
 			
-			item.IsPublished = varIsPublished;
+			item.IsPublishedToHomepage = varIsPublishedToHomepage;
 			
 			item.IsSpam = varIsSpam;
 			
@@ -668,7 +668,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublished,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime? varPublishedOn)
+		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
 		{
 			Story item = new Story();
 			
@@ -698,7 +698,7 @@ namespace Incremental.Kick.Dal
 				
 				item.CommentCount = varCommentCount;
 				
-				item.IsPublished = varIsPublished;
+				item.IsPublishedToHomepage = varIsPublishedToHomepage;
 				
 				item.IsSpam = varIsSpam;
 				
@@ -732,7 +732,7 @@ namespace Incremental.Kick.Dal
 			 public static string SpamCount = @"SpamCount";
 			 public static string ViewCount = @"ViewCount";
 			 public static string CommentCount = @"CommentCount";
-			 public static string IsPublished = @"IsPublished";
+			 public static string IsPublishedToHomepage = @"IsPublishedToHomepage";
 			 public static string IsSpam = @"IsSpam";
 			 public static string AdsenseID = @"AdsenseID";
 			 public static string CreatedOn = @"CreatedOn";
