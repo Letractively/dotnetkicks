@@ -38,7 +38,7 @@ namespace Incremental.Kick.Dal {
 
         public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageIndex, int pageSize) {
             Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
-            query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
+            query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
             query.PageIndex = pageIndex;
             query.PageSize = pageSize;
             StoryCollection stories = new StoryCollection();
