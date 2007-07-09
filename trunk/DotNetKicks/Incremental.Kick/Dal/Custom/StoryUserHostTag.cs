@@ -11,7 +11,7 @@ namespace Incremental.Kick.Dal {
             Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.StoryID, storyID).AND(StoryUserHostTag.Columns.UserID, userID).AND(StoryUserHostTag.Columns.HostID, hostID).AND(StoryUserHostTag.Columns.TagID, tagID);
             StoryUserHostTag storyUserHostTag = new StoryUserHostTag();
             storyUserHostTag.LoadAndCloseReader(StoryUserHostTag.FetchByQuery(query));
-            StoryKick.Destroy(storyUserHostTag.StoryUserHostTagID);
+            StoryUserHostTag.Destroy(storyUserHostTag.StoryUserHostTagID);
         }
     }
 }
