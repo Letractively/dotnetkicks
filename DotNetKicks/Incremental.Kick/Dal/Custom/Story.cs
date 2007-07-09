@@ -19,7 +19,10 @@ namespace Incremental.Kick.Dal {
             //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
             StoryCollection t = new StoryCollection();
             t.Load(Story.FetchByParameter(columnName, value));
-            return t[0];
+            if (t.Count == 0)
+                return null;
+            else
+                return t[0];
         }
 
         public static StoryCollection GetStoriesByIsPublishedAndHostID(bool isPublished, int hostID, int pageIndex, int pageSize) {
