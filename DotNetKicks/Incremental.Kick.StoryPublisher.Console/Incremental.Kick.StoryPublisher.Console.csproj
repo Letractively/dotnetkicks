@@ -30,7 +30,7 @@
   <ItemGroup>
     <Reference Include="SubSonic, Version=2.0.2.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\SubSonic\144\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\146\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
