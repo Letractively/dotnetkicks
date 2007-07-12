@@ -43,7 +43,7 @@ namespace Incremental.Kick.BusinessLogic {
             story.CategoryID = categoryID;
             story.UserID = userID;
             story.Username = username;
-            story.KickCount = 1;
+            story.KickCount = 0;
             story.SpamCount = 0;
             story.ViewCount = 0;
             story.CommentCount = 0;
@@ -54,8 +54,7 @@ namespace Incremental.Kick.BusinessLogic {
             story.Save();
 
 
-            //now auto-kick it
-            StoryBR.AddStoryKick(story.StoryID, userID, hostID);
+            UserCache.KickStory(story.StoryID, userID, hostID);
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
