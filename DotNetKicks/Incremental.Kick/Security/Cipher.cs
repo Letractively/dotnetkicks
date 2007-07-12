@@ -4,19 +4,15 @@ using System.Text;
 using Incremental.Kick.Helpers;
 using System.Security.Cryptography;
 using Obviex.CipherLite;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Security {
     public class Cipher {
         private const char COMPRESSED = 'C';
         private const char NOTCOMPRESSED = 'P';
         private const int MINIMUM_LENGTH_FOR_COMPRESSION = 512;
-
-        //TODO: GJ: move these values to config file or database
-        private const string PASS_PHRASE = "todo:thisisthepassphrase";
-        private const string SALT = "todo:thisisthesale";
         private const string HASH_ALGORITHM = "SHA1";
         private const int PASSWORD_ITERATIONS = 2;
-        private const string INIT_VECTOR = "ufhry4758dksnfir";
         private const int KEY_SIZE = 256;
 
 
@@ -70,7 +66,7 @@ namespace Incremental.Kick.Security {
             }
 
             byte[] encryptedBytes = Obviex.CipherLite.Rijndael.Encrypt(CompressonHelper.BytesToString(buffer),
-                PASS_PHRASE, INIT_VECTOR, KEY_SIZE, PASSWORD_ITERATIONS, SALT, HASH_ALGORITHM);
+                SettingsCache.GetSetting("Security.Cipher.PassPhrase"), SettingsCache.GetSetting("Security.Cipher.InitVector"), KEY_SIZE, PASSWORD_ITERATIONS, SettingsCache.GetSetting("Security.Cipher.Salt"), HASH_ALGORITHM);
             byte[] toReturn = new byte[encryptedBytes.Length + 1];
 
             int index = 0;
@@ -107,7 +103,7 @@ namespace Incremental.Kick.Security {
                 buffer[index++] = cipherbytes[i];
             }
 
-            string decrypted = Obviex.CipherLite.Rijndael.Decrypt(buffer, PASS_PHRASE, INIT_VECTOR, KEY_SIZE, PASSWORD_ITERATIONS, SALT, HASH_ALGORITHM);
+            string decrypted = Obviex.CipherLite.Rijndael.Decrypt(buffer, SettingsCache.GetSetting("Security.Cipher.PassPhrase"), SettingsCache.GetSetting("Security.Cipher.InitVector"), KEY_SIZE, PASSWORD_ITERATIONS, SettingsCache.GetSetting("Security.Cipher.Salt"), HASH_ALGORITHM);
 
             if (cipherbytes[0] == COMPRESSED) {
                 return CompressonHelper.Inflate(decrypted);
