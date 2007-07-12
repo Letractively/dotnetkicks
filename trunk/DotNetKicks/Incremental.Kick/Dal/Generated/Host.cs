@@ -464,6 +464,19 @@ namespace Incremental.Kick.Dal
 				colvarTrackingHtml.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarTrackingHtml);
 				
+				TableSchema.TableColumn colvarAnnouncementHtml = new TableSchema.TableColumn(schema);
+				colvarAnnouncementHtml.ColumnName = "AnnouncementHtml";
+				colvarAnnouncementHtml.DataType = DbType.String;
+				colvarAnnouncementHtml.MaxLength = 2147483647;
+				colvarAnnouncementHtml.AutoIncrement = false;
+				colvarAnnouncementHtml.IsNullable = true;
+				colvarAnnouncementHtml.IsPrimaryKey = false;
+				colvarAnnouncementHtml.IsForeignKey = false;
+				colvarAnnouncementHtml.IsReadOnly = false;
+				colvarAnnouncementHtml.DefaultSetting = @"";
+				colvarAnnouncementHtml.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAnnouncementHtml);
+				
 				TableSchema.TableColumn colvarSmtpHost = new TableSchema.TableColumn(schema);
 				colvarSmtpHost.ColumnName = "SmtpHost";
 				colvarSmtpHost.DataType = DbType.String;
@@ -812,6 +825,16 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
+		[XmlAttribute("AnnouncementHtml")]
+		public string AnnouncementHtml 
+		{
+			get { return GetColumnValue<string>("AnnouncementHtml"); }
+
+			set { SetColumnValue("AnnouncementHtml", value); }
+
+		}
+
+		  
 		[XmlAttribute("SmtpHost")]
 		public string SmtpHost 
 		{
@@ -907,7 +930,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -963,6 +986,8 @@ namespace Incremental.Kick.Dal
 			
 			item.TrackingHtml = varTrackingHtml;
 			
+			item.AnnouncementHtml = varAnnouncementHtml;
+			
 			item.SmtpHost = varSmtpHost;
 			
 			item.SmtpPort = varSmtpPort;
@@ -984,7 +1009,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -1042,6 +1067,8 @@ namespace Incremental.Kick.Dal
 				
 				item.TrackingHtml = varTrackingHtml;
 				
+				item.AnnouncementHtml = varAnnouncementHtml;
+				
 				item.SmtpHost = varSmtpHost;
 				
 				item.SmtpPort = varSmtpPort;
@@ -1090,6 +1117,7 @@ namespace Incremental.Kick.Dal
 			 public static string Publish_CommentScore = @"Publish_CommentScore";
 			 public static string AdsenseID = @"AdsenseID";
 			 public static string TrackingHtml = @"TrackingHtml";
+			 public static string AnnouncementHtml = @"AnnouncementHtml";
 			 public static string SmtpHost = @"SmtpHost";
 			 public static string SmtpPort = @"SmtpPort";
 			 public static string SmtpUsername = @"SmtpUsername";
