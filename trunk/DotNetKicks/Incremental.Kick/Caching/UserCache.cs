@@ -73,6 +73,8 @@ namespace Incremental.Kick.Caching {
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
         public static int KickStory(int storyID, int userID, int hostID) {
+            //TODO: GJ: ensure the user hasn't already kicked the story
+
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
 
