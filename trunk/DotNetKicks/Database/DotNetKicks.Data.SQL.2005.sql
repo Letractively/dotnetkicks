@@ -29,6 +29,8 @@ ALTER TABLE [dbo].[Kick_StoryKick] NOCHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Kick_StoryKick] DISABLE TRIGGER    ALL
 ALTER TABLE [dbo].[Kick_User] NOCHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Kick_User] DISABLE TRIGGER    ALL
+ALTER TABLE [dbo].[Kick_Setting] NOCHECK CONSTRAINT ALL
+ALTER TABLE [dbo].[Kick_Setting] DISABLE TRIGGER    ALL
 GO
 
 -- [dbo].[Kick_Category] (3 rows)
@@ -70,6 +72,13 @@ INSERT INTO [dbo].[Kick_User] ([UserID], [Username], [Email], [Password], [Passw
 INSERT INTO [dbo].[Kick_User] ([UserID], [Username], [Email], [Password], [PasswordSalt], [IsGeneratedPassword], [IsValidated], [IsBanned], [AdsenseID], [ReceiveEmailNewsletter], [Roles], [HostID], [LastActiveOn], [CreatedOn], [ModifiedOn]) VALUES (3, N'user1', N'user1@gavinjoyce.com', N'qWRcJUMbLhtceS27Ua7BcvOc8Lw=', N'IxtyBW7CpTZoI8VSXjKyDA==', 0, 1, 0, N'', 1, N'', 1, '2007-07-06T10:43:51', '2007-07-06T10:37:20', '2007-07-06T10:43:51')
 SET IDENTITY_INSERT [dbo].[Kick_User] OFF
 GO
+-- [dbo].[Kick_Setting] (3 rows)
+SET IDENTITY_INSERT [dbo].[Kick_Setting] ON
+INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (1, N'Security.Cipher.PassPhrase', N'TODO**change')
+INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (2, N'Security.Cipher.Salt', N'TODO**change')
+INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (3, N'Security.Cipher.InitVector', N'abcdefghijklmnop')
+SET IDENTITY_INSERT [dbo].[Kick_Setting] OFF
+GO
 
 
 -- [Constraints ENABLE]
@@ -81,6 +90,8 @@ ALTER TABLE [dbo].[Kick_Host] CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Kick_Host] ENABLE TRIGGER    ALL
 ALTER TABLE [dbo].[Kick_Story] CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Kick_Story] ENABLE TRIGGER    ALL
+ALTER TABLE [dbo].[Kick_Setting] CHECK CONSTRAINT ALL
+ALTER TABLE [dbo].[Kick_Setting] ENABLE TRIGGER    ALL
 ALTER TABLE [dbo].[Kick_StoryKick] CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Kick_StoryKick] ENABLE TRIGGER    ALL
 ALTER TABLE [dbo].[Kick_User] CHECK CONSTRAINT ALL
