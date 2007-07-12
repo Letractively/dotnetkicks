@@ -360,3 +360,32 @@ body, td, th, h3, textarea, input, select {
 	border-color: #AAAAAA;
 }
 
+
+.flash {
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin: 0px 0px 8px 0px;
+}
+
+.flash-notice {
+	background: #fff6bf url(images/icons/exclamation.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #ffd324;
+	border-bottom-color: #ffd324;
+}
+
+.flash-information {
+	background: #b4ffb7 url(images/icons/information.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: green;
+	border-bottom-color: green;
+}
+
+.flash-error {
+	background: #ffd1c4 url(images/icons/error.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #f00;
+	border-bottom-color: #f00;
+}
