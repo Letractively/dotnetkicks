@@ -88,7 +88,7 @@ namespace Incremental.Kick.Web.Helpers {
                 case PageName.ViewCategory:
                     return MapPath(String.Format("/{0}", value));
                 case PageName.ViewCategoryRss:
-                    return MapPath(String.Format("/{0}/rss", value));
+                    return MapPath(String.Format("/{0}/feeds/rss", value));
                 case PageName.ViewCategoryNewStories:
                     return MapPath(String.Format("/{0}/upcoming", value));
                 case PageName.ViewCategoryNewStoriesRss:
