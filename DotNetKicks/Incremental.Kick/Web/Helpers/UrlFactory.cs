@@ -33,7 +33,8 @@ namespace Incremental.Kick.Web.Helpers {
             ViewTags,
             NewStories,
             ViewStory,
-            SubmitStory
+            SubmitStory,
+            ViewTagRss
         }
 
         public static string CreateUrl(PageName pageName) {
@@ -101,7 +102,8 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath("/loginswitch");
                 case PageName.ViewTag:
                     return MapPath(String.Format("/tags/{0}", value));
-
+                case PageName.ViewTagRss:
+                    return MapPath(String.Format("/tags/{0}/feeds/rss", value));
                 default:
                     throw new Exception("not enough params to create url");
             }
