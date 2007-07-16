@@ -54,12 +54,15 @@
 </asp:Content>
 <asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
     <td class="RightContentTD">
-    <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
+    <%= this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml %>
+        <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
+    
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>
         <% if(false) { %>
             <uc1:SideAds ID="SideAds" runat="server" />
         <% } %>
+        
     </td>
 </asp:Content>
 <asp:Content ID="FooterOutline" ContentPlaceHolderID="Footer" runat="server">

@@ -71,10 +71,7 @@ namespace Incremental.Kick.Web.Controls {
                         <a href=""{0}"">Earn money</a> </div>
                     ", UrlFactory.CreateUrl(UrlFactory.PageName.EarnMoney),
                     this.KickPage.StaticIconRootUrl);
-
-
                 }
-
  
                 editorPanel.RenderBottom(writer);
             }
@@ -131,43 +128,43 @@ namespace Incremental.Kick.Web.Controls {
             }
 
 
-            if (this.DisplayOtherKickSites) {
-                StyledPanel otherLinksPanel = new StyledPanel();
-                otherLinksPanel.Caption = "Other kick sites:";
-                otherLinksPanel.RenderTop(writer);
+//            if (this.DisplayOtherKickSites) {
+//                StyledPanel otherLinksPanel = new StyledPanel();
+//                otherLinksPanel.Caption = "Other kick sites:";
+//                otherLinksPanel.RenderTop(writer);
 
-                writer.WriteLine(@"
+//                writer.WriteLine(@"
+//
+//                <div class=""SideBarLink""><img src=""{0}/teamsystem.png"" width=""16"" height=""16"" border=""0""/>
+//                <a href=""http://www.dotnetkicks.com/"">DotNetKicks.com</a></div>
+//
+//                <div class=""SideBarLink""><img src=""{0}/customization.png"" width=""16"" height=""16"" border=""0""/>
+//                <a href=""http://www.sharepointkicks.com/"">SharePointKicks.com</a></div>
+//               
+//                <div class=""SideBarLink""><img src=""{0}/security.png"" width=""16"" height=""16"" border=""0""/>
+//                <a href=""http://www.securitykicks.com/"">SecurityKicks.com</a></div>
+//
+//                <div class=""SideBarLink""><img src=""{0}/community.png"" width=""16"" height=""16"" border=""0""/>
+//                <a href=""http://www.kick.ie/"">Kick.ie</a></div>
+//
+//                <br />
+//                Your login will work with all these sites.
+// 
+//                </div>
+//            ", this.KickPage.StaticIconRootUrl);
+//                otherLinksPanel.RenderBottom(writer);
+//            }
 
-                <div class=""SideBarLink""><img src=""{0}/teamsystem.png"" width=""16"" height=""16"" border=""0""/>
-                <a href=""http://www.dotnetkicks.com/"">DotNetKicks.com</a></div>
+//            StyledPanel friendsPanel = new StyledPanel();
+//            friendsPanel.Caption = "Our friends:";
+//            friendsPanel.RenderTop(writer);
 
-                <div class=""SideBarLink""><img src=""{0}/customization.png"" width=""16"" height=""16"" border=""0""/>
-                <a href=""http://www.sharepointkicks.com/"">SharePointKicks.com</a></div>
-               
-                <div class=""SideBarLink""><img src=""{0}/security.png"" width=""16"" height=""16"" border=""0""/>
-                <a href=""http://www.securitykicks.com/"">SecurityKicks.com</a></div>
-
-                <div class=""SideBarLink""><img src=""{0}/community.png"" width=""16"" height=""16"" border=""0""/>
-                <a href=""http://www.kick.ie/"">Kick.ie</a></div>
-
-                <br />
-                Your login will work with all these sites.
- 
-                </div>
-            ", this.KickPage.StaticIconRootUrl);
-                otherLinksPanel.RenderBottom(writer);
-            }
-
-            StyledPanel friendsPanel = new StyledPanel();
-            friendsPanel.Caption = "Our friends:";
-            friendsPanel.RenderTop(writer);
-
-            writer.WriteLine(@"
-                <div class=""SideBarLink"">  
-                <img src=""{1}/external.png"" width=""10"" height=""10"" border=""0""/>
-                <a href=""{0}"">SubSonic</a></div>
-            ", "http://www.codeplex.com/actionpack/", this.KickPage.StaticIconRootUrl);
-            friendsPanel.RenderBottom(writer);
+//            writer.WriteLine(@"
+//                <div class=""SideBarLink"">  
+//                <img src=""{1}/external.png"" width=""10"" height=""10"" border=""0""/>
+//                <a href=""{0}"">SubSonic</a></div>
+//            ", "http://www.codeplex.com/actionpack/", this.KickPage.StaticIconRootUrl);
+//            friendsPanel.RenderBottom(writer);
 
 
             if (this.DisplayWhatElse) {

@@ -23,7 +23,11 @@ namespace Incremental.Kick.Web.UI.Pages {
             this.Title = this.HostProfile.SiteTitle + " - " + this.HostProfile.TagLine + ".";
             this.Caption = "Latest popular stories";
             this.PageName = UrlFactory.PageName.Home;
-            this.RssFeedUrl = UrlFactory.CreateUrl(UrlFactory.PageName.HomeRss);
+
+            if (string.IsNullOrEmpty(this.HostProfile.FeedBurnerMainRssFeedUrl))
+                this.RssFeedUrl = UrlFactory.CreateUrl(UrlFactory.PageName.HomeRss);
+            else
+                this.RssFeedUrl = this.HostProfile.FeedBurnerMainRssFeedUrl;
         }
 
         protected void Page_Load(object sender, EventArgs e) {

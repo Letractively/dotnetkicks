@@ -27,7 +27,7 @@ namespace Incremental.Kick.Web.Controls {
         private string _rssFeedUrl;
         public string RssFeedUrl {
             get { return this._rssFeedUrl; }
-            set { this._rssFeedUrl = value.Replace(@"//", @"/"); }
+            set { this._rssFeedUrl = value; }
         }
 
         public bool HasRssFeed {
