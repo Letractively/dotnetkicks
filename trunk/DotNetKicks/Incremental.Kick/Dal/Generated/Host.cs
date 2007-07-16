@@ -542,6 +542,32 @@ namespace Incremental.Kick.Dal
 				colvarSmtpEnableSsl.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpEnableSsl);
 				
+				TableSchema.TableColumn colvarFeedBurnerMainRssFeedUrl = new TableSchema.TableColumn(schema);
+				colvarFeedBurnerMainRssFeedUrl.ColumnName = "FeedBurnerMainRssFeedUrl";
+				colvarFeedBurnerMainRssFeedUrl.DataType = DbType.String;
+				colvarFeedBurnerMainRssFeedUrl.MaxLength = 255;
+				colvarFeedBurnerMainRssFeedUrl.AutoIncrement = false;
+				colvarFeedBurnerMainRssFeedUrl.IsNullable = true;
+				colvarFeedBurnerMainRssFeedUrl.IsPrimaryKey = false;
+				colvarFeedBurnerMainRssFeedUrl.IsForeignKey = false;
+				colvarFeedBurnerMainRssFeedUrl.IsReadOnly = false;
+				colvarFeedBurnerMainRssFeedUrl.DefaultSetting = @"";
+				colvarFeedBurnerMainRssFeedUrl.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarFeedBurnerMainRssFeedUrl);
+				
+				TableSchema.TableColumn colvarFeedBurnerMainRssFeedCountHtml = new TableSchema.TableColumn(schema);
+				colvarFeedBurnerMainRssFeedCountHtml.ColumnName = "FeedBurnerMainRssFeedCountHtml";
+				colvarFeedBurnerMainRssFeedCountHtml.DataType = DbType.String;
+				colvarFeedBurnerMainRssFeedCountHtml.MaxLength = 500;
+				colvarFeedBurnerMainRssFeedCountHtml.AutoIncrement = false;
+				colvarFeedBurnerMainRssFeedCountHtml.IsNullable = true;
+				colvarFeedBurnerMainRssFeedCountHtml.IsPrimaryKey = false;
+				colvarFeedBurnerMainRssFeedCountHtml.IsForeignKey = false;
+				colvarFeedBurnerMainRssFeedCountHtml.IsReadOnly = false;
+				colvarFeedBurnerMainRssFeedCountHtml.DefaultSetting = @"";
+				colvarFeedBurnerMainRssFeedCountHtml.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarFeedBurnerMainRssFeedCountHtml);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -884,6 +910,26 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("FeedBurnerMainRssFeedUrl")]
+		public string FeedBurnerMainRssFeedUrl 
+		{
+			get { return GetColumnValue<string>("FeedBurnerMainRssFeedUrl"); }
+
+			set { SetColumnValue("FeedBurnerMainRssFeedUrl", value); }
+
+		}
+
+		  
+		[XmlAttribute("FeedBurnerMainRssFeedCountHtml")]
+		public string FeedBurnerMainRssFeedCountHtml 
+		{
+			get { return GetColumnValue<string>("FeedBurnerMainRssFeedCountHtml"); }
+
+			set { SetColumnValue("FeedBurnerMainRssFeedCountHtml", value); }
+
+		}
+
 		
 		#endregion
 		
@@ -930,7 +976,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml)
 		{
 			Host item = new Host();
 			
@@ -998,6 +1044,10 @@ namespace Incremental.Kick.Dal
 			
 			item.SmtpEnableSsl = varSmtpEnableSsl;
 			
+			item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
+			
+			item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -1009,7 +1059,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml)
 		{
 			Host item = new Host();
 			
@@ -1079,6 +1129,10 @@ namespace Incremental.Kick.Dal
 				
 				item.SmtpEnableSsl = varSmtpEnableSsl;
 				
+				item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
+				
+				item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
+				
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -1123,6 +1177,8 @@ namespace Incremental.Kick.Dal
 			 public static string SmtpUsername = @"SmtpUsername";
 			 public static string SmtpPassword = @"SmtpPassword";
 			 public static string SmtpEnableSsl = @"SmtpEnableSsl";
+			 public static string FeedBurnerMainRssFeedUrl = @"FeedBurnerMainRssFeedUrl";
+			 public static string FeedBurnerMainRssFeedCountHtml = @"FeedBurnerMainRssFeedCountHtml";
 						
 		}
 
