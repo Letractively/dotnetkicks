@@ -526,6 +526,13 @@
       <DependentUpon>NewStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Services\Feeds\Rss\TagFeed.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>TagFeed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Feeds\Rss\TagFeed.aspx.designer.cs">
+      <DependentUpon>TagFeed.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Feeds\Rss\UserKickedStoriesFeed.aspx.cs">
       <DependentUpon>UserKickedStoriesFeed.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -587,6 +594,7 @@
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
+    <Content Include="Services\Feeds\Rss\TagFeed.aspx" />
     <Content Include="Services\Images\KickItImageGenerator.ashx" />
     <None Include="Static\Scripts\2.0.1\Admin\.svn\empty-file" />
     <None Include="Static\Scripts\2.0.1\Admin\.svn\entries" />

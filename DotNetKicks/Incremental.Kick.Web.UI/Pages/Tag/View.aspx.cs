@@ -18,6 +18,7 @@ namespace Incremental.Kick.Web.UI.Pages.Tag {
             this.Title = this.HostProfile.SiteTitle + " : " + this.Caption;
             this.PageName = UrlFactory.PageName.ViewTag;
             this.DisplayAds = true;
+            this.RssFeedUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewTagRss, this.UrlParameters.TagIdentifier);
         }
 
         protected void Page_Load(object sender, EventArgs e) {
