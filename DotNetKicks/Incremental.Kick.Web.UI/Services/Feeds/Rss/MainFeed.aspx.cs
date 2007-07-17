@@ -15,7 +15,7 @@ using Rss;
 public partial class Services_Feeds_Rss_MainFeed : Incremental.Kick.Web.Controls.KickRssPage {
         
     protected void Page_Load(object sender, EventArgs e) {
-        if (string.IsNullOrEmpty(this.HostProfile.FeedBurnerMainRssFeedUrl)) {
+        if (string.IsNullOrEmpty(this.HostProfile.FeedBurnerMainRssFeedUrl) || Request.QueryString["Redirect" ]== "0") {
             this.RenderRssChannel(StoryDataTableToRss.ConvertToRssChannel(
             StoryCache.GetAllStories(true, this.HostProfile.HostID, 1, 25),
             this.HostProfile.SiteTitle, "the latest published stories from " + this.HostProfile.SiteTitle, this.HostProfile.RootUrl + "/", this.HostProfile));
