@@ -7,6 +7,6 @@ using Incremental.Kick.Web.Controls;
 
 public class MainFeed : JavaScriptFeedHandler {
     protected override void GetStoryData(HttpContext context) {
-        this._storyTable = StoryCache.GetAllStories(true, this._hostProfile.HostID, 1, 25);
+        this._stories = StoryCache.GetAllStories(true, this._hostProfile.HostID, 1, 25);
     }
 }
