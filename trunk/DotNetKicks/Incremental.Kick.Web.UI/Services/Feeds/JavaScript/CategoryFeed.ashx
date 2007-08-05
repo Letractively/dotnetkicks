@@ -9,6 +9,6 @@ public class CategoryFeed : JavaScriptFeedHandler {
     protected override void GetStoryData(HttpContext context) {
         string categoryIdentifier = context.Request["categoryidentifier"];
         short categoryID = CategoryCache.GetCategoryID(categoryIdentifier, this._hostProfile.HostID);
-        this._storyTable = StoryCache.GetCategoryStories(categoryID, true, this._hostProfile.HostID, 1, 25);
+        this._stories = StoryCache.GetCategoryStories(categoryID, true, this._hostProfile.HostID, 1, 25);
     }
 }
