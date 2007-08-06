@@ -7,6 +7,7 @@ using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Dal.Entities;
+using System.Web;
 
 namespace Incremental.Kick.Web.Controls {
 
@@ -129,7 +130,7 @@ namespace Incremental.Kick.Web.Controls {
 
             //writer.WriteLine(@"</td><td width=""94""><a href=""http://{0}""><img src=""http://thumboo.com/?size=t&url={0}"" width=""92"" height=""70"" class=""Thumbnail"" /></a></td></tr></table>", this._storyRow.Url.Replace("http://", ""));
             // writer.WriteLine(@"</td><td width=""94""><a href=""{0}""><img src=""http://images.websnapr.com/?size=t&url={0}"" width=""92"" height=""70"" class=""Thumbnail"" /></a></td></tr></table>", this._story.Url);
-            writer.WriteLine(@"</td><td width=""94""><a href=""{0}""><img src=""http://dotnetkicks.kwiboo.com/getimage.aspx?size=thumb&url={0}"" width=""92"" height=""70"" class=""Thumbnail"" /></a>", this._story.Url);
+            writer.WriteLine(@"</td><td width=""94""><a href=""{0}""><img src=""http://dotnetkicks.kwiboo.com/getimage.aspx?size=thumb&url={1}"" width=""92"" height=""70"" class=""Thumbnail"" /></a>", this._story.Url, HttpUtility.UrlEncode(this._story.Url));
             writer.WriteLine(@"</td></tr></table>", this._story.Url);
             
             writer.WriteLine(@"<span class=""TagListSummary"">");
