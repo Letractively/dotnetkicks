@@ -1,0 +1,9 @@
+E:\Dev\misc\newbuild>sonic.exe generate /generatedNamespace Incremental.Kick.Dat
+aAccess /out Product\Incremental.Kick\DataAccess\Generated
+
+
+
+sonic.exe generate /config sonic.exe.config  /out ..\..\..\DotNetKicks\Incremental.Kick\Dal\Generated
+
+
+sonic.exe generate /config sonic.exe.config 
