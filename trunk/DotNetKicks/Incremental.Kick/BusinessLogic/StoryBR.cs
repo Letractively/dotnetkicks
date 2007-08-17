@@ -7,6 +7,7 @@ using Incremental.Kick.Common.Enums;
 using Incremental.Kick.Caching;
 using System.Diagnostics;
 using System.Collections.Generic;
+using SubSonic;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
@@ -240,6 +241,15 @@ namespace Incremental.Kick.BusinessLogic {
 
         public static int GetTaggedStoryCount(string tagIdentifier, int hostID) {
             return Story.GetTaggedStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
+        }
+
+        internal static bool DoesStoryKickNotExist(int storyID, int userID, int hostID) {
+            return !DoesStoryKickExist(storyID, userID, hostID);
+        }
+
+        internal static bool DoesStoryKickExist(int storyID, int userID, int hostID) {
+            Query query = new Query(StoryKick.Schema).WHERE(StoryKick.Columns.StoryID, storyID).AND(StoryKick.Columns.UserID, userID).AND(StoryKick.Columns.HostID, hostID);
+            return query.GetCount(StoryKick.Columns.StoryKickID) == 1;
         }
     }
 }

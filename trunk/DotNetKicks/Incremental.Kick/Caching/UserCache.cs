@@ -73,22 +73,24 @@ namespace Incremental.Kick.Caching {
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
         public static int KickStory(int storyID, int userID, int hostID) {
-            //TODO: GJ: ensure the user hasn't already kicked the story
-
-            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
-            GetUserStoryKicks(userID).Add(storyKick);
-
-            //increment the story kick count in the db (could be a db trigger?)
-            return StoryBR.IncrementKickCount(storyID);
+            if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID)) {
+                StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
+                GetUserStoryKicks(userID).Add(storyKick);
+                //increment the story kick count in the db (could be a db trigger?)
+                return StoryBR.IncrementKickCount(storyID);
+            } else {
+                return 0; //NOTE: GJ: not very elegant, will revisit later
+            }
         }
 
         public static int UnKickStory(int storyID, int userID, int hostID) {
-            StoryBR.DeleteStoryKick(storyID, userID, hostID);
-
-            //now remove from the cache
-            RemoveStoryKick(storyID, userID, hostID);
-
-            return StoryBR.DecrementKickCount(storyID);
+            if (StoryBR.DoesStoryKickExist(storyID, userID, hostID)) {
+                StoryBR.DeleteStoryKick(storyID, userID, hostID);
+                RemoveStoryKick(storyID, userID, hostID);
+                return StoryBR.DecrementKickCount(storyID);
+            } else {
+                return 0;
+            }
         }
 
         public static bool HasUserKickedStory(int storyID, int userID) {
