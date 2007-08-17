@@ -93,7 +93,5 @@
     Tip: If you have firefox, use our new <a href="<%=this.ToolsUrl%>">submit a story bookmarklet</a> to rapidly post new stories to <%=this.KickPage.HostProfile.SiteTitle%>.
 </div>
 
-
-
-
+<Subtext:InvisibleCaptcha ID="captcha" runat="server" />
 
