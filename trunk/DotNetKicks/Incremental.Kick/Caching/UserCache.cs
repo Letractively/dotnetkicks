@@ -4,6 +4,7 @@ using System.Text;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
+using System.Security;
 
 namespace Incremental.Kick.Caching {
     public class UserCache {
@@ -73,24 +74,21 @@ namespace Incremental.Kick.Caching {
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
         public static int KickStory(int storyID, int userID, int hostID) {
-            if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID)) {
-                StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
-                GetUserStoryKicks(userID).Add(storyKick);
-                //increment the story kick count in the db (could be a db trigger?)
-                return StoryBR.IncrementKickCount(storyID);
-            } else {
-                return 0; //NOTE: GJ: not very elegant, will revisit later
-            }
+            if (StoryBR.DoesStoryKickExist(storyID, userID, hostID))
+                throw new SecurityException("The story has already been kicked!");
+
+            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
+            GetUserStoryKicks(userID).Add(storyKick);
+            return StoryBR.IncrementKickCount(storyID);
         }
 
         public static int UnKickStory(int storyID, int userID, int hostID) {
-            if (StoryBR.DoesStoryKickExist(storyID, userID, hostID)) {
-                StoryBR.DeleteStoryKick(storyID, userID, hostID);
-                RemoveStoryKick(storyID, userID, hostID);
-                return StoryBR.DecrementKickCount(storyID);
-            } else {
-                return 0;
-            }
+            if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID)) 
+                throw new SecurityException("There is no kick to unkick!");
+            
+            StoryBR.DeleteStoryKick(storyID, userID, hostID);
+            RemoveStoryKick(storyID, userID, hostID);
+            return StoryBR.DecrementKickCount(storyID);
         }
 
         public static bool HasUserKickedStory(int storyID, int userID) {
