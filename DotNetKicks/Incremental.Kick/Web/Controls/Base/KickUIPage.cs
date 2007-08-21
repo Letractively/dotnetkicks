@@ -111,8 +111,12 @@ namespace Incremental.Kick.Web.Controls {
             if (this.KickUserProfile.IsAdministrator)
                 this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Admin/Kick.js");
 
-            if (!String.IsNullOrEmpty(this.RssFeedUrl))
-                this.AddRssUrl(this.HostProfile.RootUrl + this.RssFeedUrl);
+            if (!String.IsNullOrEmpty(this.RssFeedUrl)) {
+                if(this.RssFeedUrl.StartsWith("http:"))
+                    this.AddRssUrl(this.RssFeedUrl);
+                else
+                    this.AddRssUrl(this.HostProfile.RootUrl + this.RssFeedUrl);
+            }
 
             if (this.KickUserProfile.IsDebugger) {
                 DebugInformation debugInfo = new DebugInformation();
