@@ -59,7 +59,11 @@ namespace Incremental.Kick.Dal.Entities {
         public decimal GetTagWeight(int tagUsageCount) {
             decimal dd = (decimal)0.05;
             decimal oneandten = (tagUsageCount / this.TagUsageCountDistributionStepSize); //this should be a number between 1 and 10
-            return Math.Round(oneandten * dd + 1, 1);
+            decimal result = Math.Round(oneandten * dd + 1, 1);
+            if (result > 3) //NOTE: GJ: Imposing a maximum size
+                result = 3;
+
+            return result;
 
         }
 
