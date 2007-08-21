@@ -10,7 +10,7 @@
                 <asp:TextBox ID="Url" Text="http://" width="100%" runat="server"></asp:TextBox>
                 <span class="ValidationMessage"><asp:RegularExpressionValidator ID="UrlValidator" runat="server" ErrorMessage="Please enter a valid URL." ControlToValidate="Url" ValidationExpression="^http\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,4}(/\S*)?$" Display="Dynamic"></asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="UrlRequired" runat="server" ControlToValidate="Url"
-                    ErrorMessage="Please enter the URL of the story." Display="Dynamic"></asp:RequiredFieldValidator>
+                    ErrorMessage="Please enter the URL of the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 </span>
                 <br /><span class="FormHelp">The URL to the story.</span>
             </td>
@@ -20,7 +20,7 @@
             <td class="FormInput FormTD">
                 <asp:TextBox ID="Title" size="60" maxlength="70" runat="server"></asp:TextBox>
                 <asp:Label ID="TitleNoteLabel" runat="server" EnableViewState="False" ForeColor="Blue"></asp:Label><span class="ValidationMessage"><asp:RequiredFieldValidator ID="TitleRequired" runat="server" ControlToValidate="Title"
-                    ErrorMessage="Please enter a title for the story." Display="Dynamic"></asp:RequiredFieldValidator>
+                    ErrorMessage="Please enter a title for the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 </span>
                 <br /><span class="FormHelp">The title of the story.</span>
             </td>
@@ -31,7 +31,7 @@
                 <asp:TextBox ID="Description" TextMode="MultiLine" Columns="60" Rows="7" runat="server"></asp:TextBox>
                 <span class="ValidationMessage">
                 <asp:RequiredFieldValidator ID="DescriptionRequired" runat="server" ControlToValidate="Description"
-                    ErrorMessage="Please enter a description for the story." Display="Dynamic"></asp:RequiredFieldValidator>
+                    ErrorMessage="Please enter a description for the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 </span>
                 <br /><span class="FormHelp">In your own word, provide a brief description of the story.</span>
             </td>
@@ -42,7 +42,7 @@
             <td class="FormInput FormTD">
                 <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" />
                 <asp:RequiredFieldValidator ID="CategoryRequired" runat="server" ControlToValidate="Category"
-                    ErrorMessage="Please choose a category for this story." Display="Dynamic"></asp:RequiredFieldValidator>
+                    ErrorMessage="Please choose a category for this story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 
                 <br /><span class="FormHelp">Select the best category that this story belong to.</span>
             </td>
@@ -50,7 +50,15 @@
         <tr>
             <td></td>
             <td class="FormButtons FormTD">
-                <asp:Button ID="SubmitStory" runat="server" Text="Submit Story" OnClick="SubmitStory_Click" />
+            
+                <Subkismet:InvisibleCaptcha id="captcha" 
+                    runat="server" 
+                    ErrorMessage="Oops! You must be bad at maths." 
+                    Display="dynamic" 
+                    ValidationGroup="SubmitStoryValidation" /><br />
+            
+                <asp:Button ID="SubmitStory" runat="server" Text="Submit Story" OnClick="SubmitStory_Click" ValidationGroup="SubmitStoryValidation" />
+              
             </td>
          </tr>
     </table>
@@ -76,7 +84,7 @@
     
     <br />
     <br />
-    <asp:TextBox ID="LiveImage" runat="server" Columns="80" rows="4" TextMode="MultiLine"/>
+    <asp:TextBox ID="LiveImage" runat="server" Columns="80" rows="4" TextMode="MultiLine" />
     
     </p>
     
@@ -93,5 +101,6 @@
     Tip: If you have firefox, use our new <a href="<%=this.ToolsUrl%>">submit a story bookmarklet</a> to rapidly post new stories to <%=this.KickPage.HostProfile.SiteTitle%>.
 </div>
 
-<Subtext:InvisibleCaptcha ID="captcha" runat="server" />
+
+
 

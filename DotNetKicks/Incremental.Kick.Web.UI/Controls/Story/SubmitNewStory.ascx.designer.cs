@@ -119,6 +119,15 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator CategoryRequired;
         
         /// <summary>
+        /// captcha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Subkismet.Captcha.InvisibleCaptcha captcha;
+        
+        /// <summary>
         /// SubmitStory control.
         /// </summary>
         /// <remarks>
@@ -162,14 +171,5 @@ namespace Incremental.Kick.Web.UI.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox LiveImage;
-        
-        /// <summary>
-        /// captcha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Subtext.Web.Controls.InvisibleCaptcha captcha;
     }
 }
