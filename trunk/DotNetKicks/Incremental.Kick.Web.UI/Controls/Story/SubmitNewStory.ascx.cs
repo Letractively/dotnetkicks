@@ -45,22 +45,21 @@ namespace Incremental.Kick.Web.UI.Controls {
         }
 
         protected void SubmitStory_Click(object sender, EventArgs e) {
-            //TODO: validation
+            if (Page.IsValid) {
+                short categoryID = short.Parse(this.Category.SelectedValue);
+                string storyIdentifier = StoryBR.AddStory(this.KickPage.HostProfile.HostID, this.Title.Text, this.Description.Text, this.Url.Text,
+                    categoryID, this.KickPage.KickUserProfile);
 
-            //add a new story
-            short categoryID = short.Parse(this.Category.SelectedValue);
-            string storyIdentifier = StoryBR.AddStory(this.KickPage.HostProfile.HostID, this.Title.Text, this.Description.Text, this.Url.Text,
-                categoryID, this.KickPage.KickUserProfile);
+                NewStoryPanel.Visible = false;
+                SuccessPanel.Visible = true;
 
-            NewStoryPanel.Visible = false;
-            SuccessPanel.Visible = true;
+                string categoryName = CategoryCache.GetCategory(categoryID, this.KickPage.HostProfile.HostID).CategoryIdentifier;
+                UpcomingStoryQueue.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.NewStories);
+                UpcomingStoryQueue.Text = "upcoming queue";
+                StoryLink.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, storyIdentifier, categoryName);
 
-            string categoryName = CategoryCache.GetCategory(categoryID, this.KickPage.HostProfile.HostID).CategoryIdentifier;
-            UpcomingStoryQueue.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.NewStories);
-            UpcomingStoryQueue.Text = "upcoming queue";
-            StoryLink.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, storyIdentifier, categoryName);
-
-            LiveImage.Text = ControlHelper.RenderControl(new Incremental.Kick.Web.Controls.StoryDynamicImage(HttpUtility.UrlPathEncode(this.Url.Text), this.KickPage.HostProfile));
+                LiveImage.Text = ControlHelper.RenderControl(new Incremental.Kick.Web.Controls.StoryDynamicImage(HttpUtility.UrlPathEncode(this.Url.Text), this.KickPage.HostProfile));
+            }
         }
 
         protected string NewStoryUrl {
