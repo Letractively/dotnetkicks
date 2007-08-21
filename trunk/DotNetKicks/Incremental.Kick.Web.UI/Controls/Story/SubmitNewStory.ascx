@@ -56,6 +56,14 @@
                     ErrorMessage="Oops! You must be bad at maths." 
                     Display="dynamic" 
                     ValidationGroup="SubmitStoryValidation" /><br />
+                    
+                    <Subkismet:CaptchaControl id="captcha2" 
+                        runat="server" 
+                        ErrorMessage="Oops! You must be bad at reading." 
+                        Display="dynamic"
+                        CaptchaLength="4"
+                        ValidationGroup="SubmitStoryValidation" />
+    <br />
             
                 <asp:Button ID="SubmitStory" runat="server" Text="Submit Story" OnClick="SubmitStory_Click" ValidationGroup="SubmitStoryValidation" />
               
