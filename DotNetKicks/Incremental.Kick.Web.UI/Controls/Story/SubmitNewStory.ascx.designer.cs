@@ -128,6 +128,15 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::Subkismet.Captcha.InvisibleCaptcha captcha;
         
         /// <summary>
+        /// captcha2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Subkismet.Captcha.CaptchaControl captcha2;
+        
+        /// <summary>
         /// SubmitStory control.
         /// </summary>
         /// <remarks>
