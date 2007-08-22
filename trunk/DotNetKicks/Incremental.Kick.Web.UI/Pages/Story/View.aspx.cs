@@ -32,8 +32,9 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
             this.StorySummary.ShowMoreLink = false;
             this.CommentList.DataBind(commentTable);
             this.AddComment.DataBind(story.StoryID);
+            this.DisplayAds = true;
 
-            this.KickMenu.DisplayAds = false;
+            this.KickMenu.DisplayAds = true;
             this.KickMenu.DisplayCategories = false;    
             this.KickMenu.DisplayWhatElse = false;
 
