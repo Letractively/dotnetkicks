@@ -16,7 +16,7 @@ namespace Incremental.Kick.Web.UI.Pages {
     public partial class Home : Incremental.Kick.Web.Controls.KickUIPage {
         protected Home() {
             //this.IsCachedPage = true;
-            this.DisplayAds = true; //and watch the millions pour in!!!
+            this.DisplayAds = false; //TODO: GJ: set to true and watch the millions pour in!!!
         }
 
         protected void Page_Init(object sender, EventArgs e) {
