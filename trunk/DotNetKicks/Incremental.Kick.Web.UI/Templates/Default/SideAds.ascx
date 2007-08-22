@@ -3,7 +3,7 @@
 <% if (this.KickPage.DisplayAds && this.KickPage.DisplaySideAds) { %>
 <div id="sideAds">
 <script type="text/javascript"><!--
-google_ad_client = "pub-2786188635346157";
+google_ad_client = "<%=this.KickPage.AdSenseID %>";
 google_ad_width = 160;
 google_ad_height = 600;
 google_ad_format = "160x600_as";
