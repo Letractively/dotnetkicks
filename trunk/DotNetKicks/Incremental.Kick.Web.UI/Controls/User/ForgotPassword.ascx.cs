@@ -10,22 +10,31 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using Incremental.Kick.BusinessLogic;
 
-namespace Incremental.Kick.Web.UI.Controls.User {
-    public partial class ForgotPassword : Incremental.Kick.Web.Controls.KickUserControl {
-        protected void Page_Load(object sender, EventArgs e) {
+namespace Incremental.Kick.Web.UI.Controls.User
+{
+    public partial class ForgotPassword : Incremental.Kick.Web.Controls.KickUserControl
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
         }
 
-        protected void ResetPassword_Click(object sender, EventArgs e) {
+        protected void ResetPassword_Click(object sender, EventArgs e)
+        {
             //send an email to the user
-            Incremental.Kick.Dal.User userTable = UserBR.GetUserByEmail(this.Email.Text.Trim());
+            try
+            {
+                Incremental.Kick.Dal.User userTable = UserBR.GetUserByEmail(this.Email.Text.Trim());
 
-            if (userTable == null) {
-                MessageLabel.Text = "Sorry, we have no account with that email address";
-            } else {
+
                 //send a mail to the user with a link to change the password
                 UserBR.SendPasswordResetEmail(userTable.UserID, this.KickPage.HostProfile);
-                MessageLabel.Text = "An email has been sent to " + this.Email.Text + ", please check you mail.";
+                ConfirmationMessageLabel.Text = "An email has been sent to " + this.Email.Text + ", please check you mail.";
+
+            }
+            catch (Exception)
+            {
+                ErrorMessageLabel.Text = "Sorry, we have no account with that email address";
             }
         }
     }
