@@ -25,6 +25,13 @@ namespace Incremental.Kick.BusinessLogic {
             return user;
         }
 
+        public static UserCollection GetUsersWhoKicked(int? storyId)
+        {
+            UserCollection users = new UserCollection();
+            users.Load(SPs.Kick_GetUsersWhoKicked(storyId).GetReader());
+            return users;
+        }
+
         public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
             username = username.Trim();
