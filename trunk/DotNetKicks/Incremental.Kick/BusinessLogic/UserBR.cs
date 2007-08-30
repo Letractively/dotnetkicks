@@ -90,8 +90,6 @@ namespace Incremental.Kick.BusinessLogic {
             user.IsBanned = true;
             user.Save();
 
-
-
             //TODO: GJ :delete their stories
             //DeleteUserStories(userDS.Kick_User[0].UserID);
         }
