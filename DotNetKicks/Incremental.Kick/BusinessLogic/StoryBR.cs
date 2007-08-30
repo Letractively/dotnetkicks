@@ -201,7 +201,6 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static void DeleteStory(int storyID, int hostID) {
-            //NOTE: GJ: why do we care about the host?
             Story story = Story.FetchByID(storyID);
             if (story.HostID != hostID)
                 throw new ArgumentException("The story does not belong to the host");

@@ -44,6 +44,19 @@ namespace Incremental.Kick.Helpers {
                 {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
         }
 
+        public static void SendStoryDeletedEmail(Story story, Host host) {
+            Send(host.Email, story.User.Email, "[" + host.SiteTitle + "]",
+                String.Format(@"
+                Your post 
+
+                '{0}'
+                '{1}'
+
+                was deleted by a moderator.
+
+                Please let us know if you think this was in error.", story.Title, story.Description), host);
+        }
+
 
         public static void Send(MailMessage message, Host host) {
             SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort.Value);

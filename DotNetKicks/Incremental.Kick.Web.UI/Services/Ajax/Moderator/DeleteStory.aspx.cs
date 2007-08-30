@@ -10,6 +10,9 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Security;
 using Incremental.Kick.BusinessLogic;
+using Incremental.Kick.Caching;
+using Incremental.Kick.Dal;
+using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax.Moderator {
     public partial class DeleteStory : Incremental.Kick.Web.Controls.KickApiPage {
@@ -21,6 +24,8 @@ namespace Incremental.Kick.Web.UI.Services.Ajax.Moderator {
             if(!this.IsHostModerator) {
                 throw new SecurityException("");
             }
+
+            EmailHelper.SendStoryDeletedEmail(Story.FetchByID(storyID), this.HostProfile);
 
             StoryBR.DeleteStory(storyID, this.HostProfile.HostID);
         }
