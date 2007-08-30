@@ -82,6 +82,7 @@ namespace Incremental.Kick.Caching {
             return StoryBR.IncrementKickCount(storyID);
         }
 
+
         public static int UnKickStory(int storyID, int userID, int hostID) {
             if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID)) 
                 throw new SecurityException("There is no kick to unkick!");
@@ -128,6 +129,33 @@ namespace Incremental.Kick.Caching {
 
             return storyKicks;
         }
+
+        public static UserCollection GetUsersWhoKicked(int? storyId)
+        {
+            string cacheKey = String.Format("UsersWhoKicked_Story_{0}", storyId);
+            CacheManager<string, UserCollection> userCollCache = GetUserCollectionCache();
+            UserCollection users;
+
+            if (userCollCache.ContainsKey(cacheKey))
+            {
+                users = userCollCache[cacheKey];
+            }
+            else
+            {
+                users = UserBR.GetUsersWhoKicked(storyId);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userCollCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return users;
+        }
+
+
+        private static CacheManager<string, UserCollection> GetUserCollectionCache()
+        {
+            return CacheManager<string, UserCollection>.GetInstance();
+        }
+
         
         private static CacheManager<string, StoryKickCollection> GetStoryKickCache() {
             return CacheManager<string, StoryKickCollection>.GetInstance();
