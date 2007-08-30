@@ -19,6 +19,16 @@ body, td, th, h3, textarea, input, select {
 
 .smallText { font-size: small; }
 
+.UsersWhoKicked
+{
+	border-style: solid;
+	border-color: #CCCCCC;
+	background: #f7f7f7;
+	border-width: 1px;
+	padding: 12px 12px 12px 12px; margin-top: 8px;
+}
+
+
 #wrap {
 	position: relative;
 	text-align: left;
