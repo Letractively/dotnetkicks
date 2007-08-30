@@ -25,7 +25,7 @@ namespace Incremental.Kick.Web.Controls
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(@"<br /><div class=""PageSmallCaption"">User(s) who kicked this story:</div>");
+            sb.Append(@"<br /><div class=""PageSmallCaption"">Users who kicked this story:</div>");
 
             sb.Append(@"<div class=""UsersWhoKicked"">");
 
