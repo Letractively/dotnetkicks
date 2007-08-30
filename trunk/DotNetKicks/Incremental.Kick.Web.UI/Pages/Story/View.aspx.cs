@@ -25,9 +25,11 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
         protected void Page_Load(object sender, EventArgs e) {
             Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier);
             Incremental.Kick.Dal.CommentCollection commentTable = StoryCache.GetComments(story.StoryID);
+            Incremental.Kick.Dal.UserCollection users = UserCache.GetUsersWhoKicked(story.StoryID);
 
             this.Title = story.Title;
             this.Caption = "";
+            this.UsersWhoKicked.DataBind(users);
             this.StorySummary.DataBind(story);
             this.StorySummary.ShowMoreLink = false;
             this.CommentList.DataBind(commentTable);

@@ -10,16 +10,9 @@
 
 namespace Incremental.Kick.Web.UI.Pages.Story {
     
-    
-    /// <summary>
-    /// View class.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated class.
-    /// </remarks>
     public partial class View {
-
         protected Incremental.Kick.Web.Controls.StorySummary StorySummary;
+        protected Incremental.Kick.Web.Controls.UsersWhoKicked UsersWhoKicked;
         protected Incremental.Kick.Web.Controls.CommentList CommentList;
         protected Incremental.Kick.Web.UI.Controls.AddComment AddComment;
         protected Incremental.Kick.Web.Controls.KickForStoriesMenu KickMenu;

@@ -4,6 +4,7 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
      
     <Kick:StorySummary id="StorySummary" runat="server" />
+    <Kick:UsersWhoKicked id="UsersWhoKicked" runat="server" />
     <Kick:CommentList id="CommentList" runat="server" />
     <uc1:AddComment ID="AddComment" runat="server" />
     
