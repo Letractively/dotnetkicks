@@ -48,6 +48,18 @@ namespace Incremental.Kick.Dal{
             return sp;
         }
 
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetUsersWhoKicked Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetUsersWhoKicked(int? storyId)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetUsersWhoKicked", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@StoryId", storyId, DbType.Int32);
+
+            return sp;
+        }
+
         
         /// <summary>
         /// Creates an object wrapper for the Kick_GetTagsByHostIDAndCreatedOnRange Procedure
