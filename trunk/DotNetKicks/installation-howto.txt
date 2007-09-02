@@ -1,6 +1,6 @@
-1. Create SQL 2005 Database called 'DotNetKicks'
+1. Create a new SQL 2005 Database called 'DotNetKicks'
 
-2. Execute the 'DotNetKicks.DB.SQL.2005.sql' script against the new 'DotNetKicks' database
+2. Execute the 'DotNetKicks.Schema.SQL.2005.sql' script against the new 'DotNetKicks' database
 
 	Scripts can be found in 'svn:\\trunk\DotNetKicks\Database'
 
@@ -8,7 +8,7 @@
 
 4. Open 'DotNetKicks.sln' in Visual Studio 2005.
 
-5. Update the 'DotNetKicks' connection string in the web.config to relect your SQL server name
+5. Update the 'DotNetKicks' connection string in the web.config to reflect your SQL server name
 
 6. Build the solution
 
