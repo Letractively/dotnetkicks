@@ -1,6 +1,6 @@
 1. Create a new SQL 2005 Database called 'DotNetKicks'
 
-2. Execute the 'DotNetKicks.Schema.SQL.2005.sql' script against the new 'DotNetKicks' database
+2. Execute the 'DotNetKicks.Schema.SQL.2005.sql' and 'Elmah.Schema.2005.sql' scripts against the new 'DotNetKicks' database
 
 	Scripts can be found in 'svn:\\trunk\DotNetKicks\Database'
 
