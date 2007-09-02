@@ -29,6 +29,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.0.8925.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Elmah\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="Subkismet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Subkismet\0.2.2.beta\Subkismet.dll</HintPath>
@@ -594,6 +598,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="elmah.axd" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
