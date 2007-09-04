@@ -211,13 +211,11 @@
     <Content Include="Static\Images\StyledPanel\whiteTL.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTM.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTR.gif" />
-    <Content Include="Static\Scripts\2.0.1\Admin\.svn\README.txt" />
     <Content Include="Static\Scripts\2.0.1\Admin\Kick.js" />
     <Content Include="Static\Scripts\2.0.1\Ajax.js" />
     <Content Include="Static\Scripts\2.0.1\Common.js" />
     <Content Include="Static\Scripts\2.0.1\Controls\PopularStoryHeader.js" />
     <Content Include="Static\Scripts\2.0.1\Controls\PopularStoryNavigator.js" />
-    <Content Include="Static\Scripts\2.0.1\Dojo\.svn\README.txt" />
     <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js" />
     <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js.uncompressed.js" />
     <Content Include="Static\Scripts\2.0.1\Dojo\jsTrace.js" />
@@ -605,15 +603,6 @@
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
     <Content Include="Services\Feeds\Rss\TagFeed.aspx" />
     <Content Include="Services\Images\KickItImageGenerator.ashx" />
-    <None Include="Static\Scripts\2.0.1\Admin\.svn\empty-file" />
-    <None Include="Static\Scripts\2.0.1\Admin\.svn\entries" />
-    <None Include="Static\Scripts\2.0.1\Admin\.svn\format" />
-    <None Include="Static\Scripts\2.0.1\Admin\.svn\text-base\Kick.js.svn-base" />
-    <None Include="Static\Scripts\2.0.1\Dojo\.svn\empty-file" />
-    <None Include="Static\Scripts\2.0.1\Dojo\.svn\entries" />
-    <None Include="Static\Scripts\2.0.1\Dojo\.svn\format" />
-    <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.svn-base" />
-    <None Include="Static\Scripts\2.0.1\Dojo\.svn\text-base\dojo.js.uncompressed.js.svn-base" />
     <Content Include="Templates\Default.css" />
     <Content Include="Templates\Default\images\divider.gif" />
     <Content Include="Templates\Default\images\gradients\blue.gif" />
@@ -685,20 +674,6 @@
     <Content Include="Templates\Simple\Template.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\prop-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\props\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\tmp\prop-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\tmp\props\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\tmp\text-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\tmp\wcprops\" />
-    <Folder Include="Static\Scripts\2.0.1\Admin\.svn\wcprops\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\prop-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\props\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\tmp\prop-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\tmp\props\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\tmp\text-base\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\tmp\wcprops\" />
-    <Folder Include="Static\Scripts\2.0.1\Dojo\.svn\wcprops\" />
     <Folder Include="Templates\Simple\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
