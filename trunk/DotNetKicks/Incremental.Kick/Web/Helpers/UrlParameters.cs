@@ -23,6 +23,7 @@ namespace Incremental.Kick.Web.Helpers {
         private string _securityToken;
         private string _hostName;
         private StoryListSortBy _storyListSortBy = StoryListSortBy.RecentlyPromoted;
+        private StoryListSortBy _upcomingstorylistsortby = StoryListSortBy.LatestUpcoming;
 
 
         public string UserIdentifier {
@@ -104,6 +105,12 @@ namespace Incremental.Kick.Web.Helpers {
         public StoryListSortBy StoryListSortBy {
             get { return this._storyListSortBy; }
             set { this._storyListSortBy = value; }
+        }
+
+        public StoryListSortBy UpcomingStoryListSortBy
+        {
+            get { return this._upcomingstorylistsortby; }
+            set { this._upcomingstorylistsortby = value; }
         }
 
     }
