@@ -25,6 +25,14 @@ namespace Incremental.Kick.Caching {
             return Category.UnknownCategory;
         }
 
+        public static Category GetCategoryByIdentifier(string categoryIdentifier, int hostID) {
+            foreach (Category category in GetCategories(hostID)) {
+                if (category.CategoryIdentifier == categoryIdentifier)
+                    return category;
+            }
+
+            return Category.UnknownCategory;
+        }
 
 
 
