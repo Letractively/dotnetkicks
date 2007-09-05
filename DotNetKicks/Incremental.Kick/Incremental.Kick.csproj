@@ -151,6 +151,7 @@
     <Compile Include="Web\Controls\Story\StoryList.cs" />
     <Compile Include="Web\Controls\Story\StorySummary.cs" />
     <Compile Include="Web\Controls\Story\StoryTagList.cs" />
+    <Compile Include="Web\Controls\Story\UpcomingStoryListHeader.cs" />
     <Compile Include="Web\Controls\Story\UsersWhoKicked.cs" />
     <Compile Include="Web\Controls\Tags\EditableTagList.cs" />
     <Compile Include="Web\Controls\Tags\TagCloud.cs" />

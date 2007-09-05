@@ -40,6 +40,8 @@ namespace Incremental.Kick.Web.Helpers {
             if (!String.IsNullOrEmpty(request["storyListSortBy"]))
                 urlParameters.StoryListSortBy = (StoryListSortBy)System.Enum.Parse(typeof(StoryListSortBy), request["storyListSortBy"], true);
 
+            if (!String.IsNullOrEmpty(request["upcomingStoryListSortBy"]))
+                urlParameters.StoryListSortBy = (StoryListSortBy)System.Enum.Parse(typeof(StoryListSortBy), request["upcomingStoryListSortBy"], true);
 
             return urlParameters;
         }
