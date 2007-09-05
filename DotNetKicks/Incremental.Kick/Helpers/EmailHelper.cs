@@ -45,7 +45,7 @@ namespace Incremental.Kick.Helpers {
         }
 
         public static void SendStoryDeletedEmail(Story story, Host host) {
-            Send(host.Email, story.User.Email, "[" + host.SiteTitle + "]",
+            Send_Begin(host.Email, story.User.Email, "[" + host.SiteTitle + "]",
                 String.Format(@"
                 Your post 
 
@@ -57,7 +57,6 @@ namespace Incremental.Kick.Helpers {
                 Please let us know if you think this was in error.", story.Title, story.Description), host);
         }
 
-
         public static void Send(MailMessage message, Host host) {
             SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort.Value);
             smtpClient.Credentials = new NetworkCredential(host.SmtpUsername, host.SmtpPassword);
@@ -67,6 +66,11 @@ namespace Incremental.Kick.Helpers {
 
         public static void Send(string from, string to, string subject, string body, Host host) {
             Send(new MailMessage(from, to, subject, body), host);
+        }
+
+        delegate void SendDelegate(string from, string to, string subject, string body, Host host);
+        public static void Send_Begin(string from, string to, string subject, string body, Host host) {
+            AsyncHelper.FireAndForget(new SendDelegate(Send), from, to, subject, body, host);
         }
 
         internal static void SendPasswordResetEmail(string toEmail, string username, DateTime createdDateTime, Host host) {
