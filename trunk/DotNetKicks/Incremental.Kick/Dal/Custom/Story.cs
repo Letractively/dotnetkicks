@@ -36,6 +36,44 @@ namespace Incremental.Kick.Dal {
             return stories;
         }
 
+        public static StoryCollection GetUpComingStoriesToday(bool isPublished, int hostID, int pageIndex, int pageSize )
+        {
+            Query query = GetStoryQuery(hostID, isPublished);
+            string startDate = DateTime.Now.ToShortDateString();
+            string endDate = DateTime.Now.AddDays(1).ToShortDateString();
+            query = query.BETWEEN_AND(Story.Columns.CreatedOn, startDate,endDate);
+            query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
+            query = query.ORDER_BY(Story.Columns.CreatedOn, "DESC");
+
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+
+            string sql = query.GetSql();
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
+        }
+
+        public static StoryCollection GetUpComingStoriesThisWeek(bool isPublished, int hostID, int pageIndex, int pageSize )
+        {
+            Query query = GetStoryQuery(hostID, isPublished);
+            DateTime startDate = DateTime.Now.AddDays(-7);
+            DateTime endDate = DateTime.Now;
+            query = query.BETWEEN_AND(Story.Columns.CreatedOn, startDate, endDate);
+            query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
+            query = query.ORDER_BY(Story.Columns.CreatedOn, "DESC");
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+
+            string sql = query.Inspect();
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
+        }
+
+
         public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageIndex, int pageSize) {
             Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
             query = query.ORDER_BY(Story.Columns.KickCount, "DESC");

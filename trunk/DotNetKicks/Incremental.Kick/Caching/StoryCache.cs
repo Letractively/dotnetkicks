@@ -66,6 +66,40 @@ namespace Incremental.Kick.Caching {
             return stories;
         }
 
+        public static StoryCollection GetAllStoriesThisWeek(bool isPublished, int hostID, int pageNumber, int pageSize)
+        {
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
+
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
+
+            StoryCollection stories = storyCache[cacheKey];
+            if (stories == null) 
+            {
+                stories = Story.GetUpComingStoriesThisWeek(isPublished, hostID, pageNumber, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return stories;
+        }
+
+        public static StoryCollection GetAllStoriesToday(bool isPublished, int hostID, int pageNumber, int pageSize) 
+        {
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
+
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
+
+            StoryCollection stories = storyCache[cacheKey];
+            if (stories == null) 
+            {
+                stories = Story.GetUpComingStoriesToday(isPublished, hostID, pageNumber, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return stories;
+        }
+
         public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize) {
             string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", hostID, sortBy, pageNumber, pageSize);
 
