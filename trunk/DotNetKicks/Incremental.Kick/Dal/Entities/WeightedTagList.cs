@@ -60,8 +60,10 @@ namespace Incremental.Kick.Dal.Entities {
             decimal dd = (decimal)0.05;
             decimal oneandten = (tagUsageCount / this.TagUsageCountDistributionStepSize); //this should be a number between 1 and 10
             decimal result = Math.Round(oneandten * dd + 1, 1);
-            if (result > 3) //NOTE: GJ: Imposing a maximum size
-                result = 3;
+            if (result > 2) //NOTE: GJ: Imposing a minimum maximum size
+                result = 2;
+            else if (result < (decimal)0.6)
+                result = (decimal)0.6;
 
             return result;
 
