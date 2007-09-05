@@ -55,20 +55,18 @@
 <asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
     <td class="RightContentTD">
     <%= this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml %>
-        <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
-    
+        
         <br />
-      
-   
+        <!-- DNK TheLounge -->
+        <script type="text/javascript">(function(){document.write('<div id="wedje_div_thelounge"></div>');s=document.createElement('script');s.type="text/javascript";s.src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d=" + (new Date().getTime());setTimeout("document.getElementById('wedje_div_thelounge').appendChild(s)",1);})()</script>
+        <p class="tlp"><a href='http://www.montylounge.com/thelounge/' class="adsvia">Ads Via The Lounge</a></p>
+        <hr />
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>
+        
+        <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer" /><img border="0" src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" /></a>
+        <br />
             <uc1:SideAds ID="SideAds" runat="server" />
-
-        <br /><hr />
-        <div class="loungead">
-        <!-- TheLounge -->
-        <script type="text/javascript">(function(){document.write('<div id="wedje_div_thelounge"></div>');s=document.createElement('script');s.type="text/javascript";s.src="http://montylounge.com/TheLounge/BackDoor/NETOS/COMMUNITY/Entrance.ashx?d=" + (new Date().getTime());setTimeout("document.getElementById('wedje_div_thelounge').appendChild(s)",1);})()</script>
-        <p class="adsvia"><a href='http://www.montylounge.com/thelounge/'>Ads Via The Lounge</a></p> 
     </div>
         
     </td>

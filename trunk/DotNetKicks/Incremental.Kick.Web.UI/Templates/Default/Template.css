@@ -399,3 +399,22 @@ body, td, th, h3, textarea, input, select {
 	border-top-color: #f00;
 	border-bottom-color: #f00;
 }
+
+
+/* The Lounge CSS */
+.tlp, .adsvia{ font-size: 10px; font-family: verdana, arial;}    
+.tli{ 
+    float: none;
+    margin-left: 0px;
+    margin-right: 10px;
+    margin-top: 5px;    
+}
+.tlp{ 
+    display: block;
+    font-size: 10px;
+    line-height: 15px;
+    margin-top: 5px;
+}
+
+#wedje_div_thelounge{ width: 140px; }
+.adsvia{ margin-top: 10px;}
