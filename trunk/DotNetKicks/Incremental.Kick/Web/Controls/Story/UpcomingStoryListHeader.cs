@@ -46,7 +46,7 @@ namespace Incremental.Kick.Web.Controls
             if (linkSortBy != StoryListSortBy.LatestUpcoming)
                 url += "/upcoming/popular/" + sortByText;
 
-            if (linkSortBy == this.KickPage.UrlParameters.UpcomingStoryListSortBy)
+            if (linkSortBy == this.KickPage.UrlParameters.StoryListSortBy)
                 cssClass += " PopularStoryHeaderLinkSelected";
 
             //if (this.UseAjaxLinks)
