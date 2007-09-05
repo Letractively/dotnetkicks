@@ -107,11 +107,14 @@ namespace Incremental.Kick.Web.Helpers {
             set { this._storyListSortBy = value; }
         }
 
-        public StoryListSortBy UpcomingStoryListSortBy
+        /*
+         * NOTE: GJ: can we just reuse the StoryListSortBy property?
+         * 
+         * public StoryListSortBy UpcomingStoryListSortBy
         {
             get { return this._upcomingstorylistsortby; }
             set { this._upcomingstorylistsortby = value; }
-        }
+        }*/
 
     }
 }
