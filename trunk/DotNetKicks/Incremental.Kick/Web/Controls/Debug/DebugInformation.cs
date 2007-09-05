@@ -30,11 +30,11 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine("<br/>StoryIdentifier: {0}", this.KickPage.UrlParameters.StoryIdentifier);
             writer.WriteLine("<br/>PageNumber: {0}", this.KickPage.UrlParameters.PageNumber);
             writer.WriteLine("<br/>PageSize: {0}", this.KickPage.UrlParameters.PageSize);
+            writer.WriteLine("<br/>StoryListSortBy: {0}", this.KickPage.UrlParameters.StoryListSortBy);
             writer.WriteLine("<br/>Skin: {0}", this.KickPage.UrlParameters.Skin);
             writer.WriteLine("<br/>AppDomainID: {0}", AppDomain.CurrentDomain.Id);
             writer.WriteLine("<br/>AdsenseID: {0}", this.KickUIPage.AdSenseID);
             writer.WriteLine("<br/>Url: {0}", this.KickPage.Request.Url);
-
         }
     }
 }
