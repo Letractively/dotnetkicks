@@ -400,6 +400,13 @@
     <Compile Include="Pages\Tag\ViewAll.aspx.designer.cs">
       <DependentUpon>ViewAll.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Upcoming.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Upcoming.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Upcoming.aspx.designer.cs">
+      <DependentUpon>Upcoming.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -590,14 +597,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Incremental.Kick\Incremental.Kick.csproj">
-      <Project>{485BE7A0-08D8-438D-B5CC-55FB3A010130}</Project>
-      <Name>Incremental.Kick</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="favicon.ico" />
+    <Content Include="Pages\Upcoming.aspx" />
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
@@ -672,6 +674,12 @@
     <Content Include="Templates\Default\TopMenu.ascx" />
     <Content Include="Templates\MasterPage.Master" />
     <Content Include="Templates\Simple\Template.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Incremental.Kick\Incremental.Kick.csproj">
+      <Project>{485BE7A0-08D8-438D-B5CC-55FB3A010130}</Project>
+      <Name>Incremental.Kick</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Templates\Simple\images\" />
