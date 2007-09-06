@@ -3,7 +3,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 
-This will be the host admin page
+    <SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_Host" />
     
 </asp:Content>
 

@@ -3,9 +3,7 @@
 
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
-
-This will be the story admin page
-    
+  <SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_Story" />
 </asp:Content>
 
 <asp:Content id="RightContent" ContentPlaceHolderID="RightContent" runat="Server">

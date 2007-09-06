@@ -4,7 +4,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 
-This will be the user admin page
+<SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_User" />
     
 </asp:Content>
 
