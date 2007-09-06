@@ -13,7 +13,6 @@ namespace Incremental.Kick.Common.Enums
         PastMonth,
         PastYear,
         AllTime,
-        LatestUpcoming,
-        ThisWeek
+        LatestUpcoming
     }
 }

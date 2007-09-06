@@ -30,7 +30,7 @@ namespace Incremental.Kick.Web.Controls
 
             this.RenderLink(StoryListSortBy.LatestUpcoming, "Latest Upcoming Stories", writer);
             this.RenderLink(StoryListSortBy.Today, "Top Kicked Today", writer);
-            this.RenderLink(StoryListSortBy.ThisWeek, "This Week ", writer);
+            this.RenderLink(StoryListSortBy.PastWeek, "This Week ", writer);
 
             writer.WriteLine(@"</div>");
             writer.WriteLine(@"</td><td align=""right"">{0}</td></tr></table>", this.KickPage.SubCaption);

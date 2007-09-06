@@ -33,7 +33,7 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     storyNavigator.DataBind(StoryCache.GetAllStories(true, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetStoryCount(this.HostProfile.HostID, true));
                     break;
                 default:
-                    storyNavigator.DataBind(StoryCache.GetPopularStories(this.HostProfile.HostID, this.UrlParameters.StoryListSortBy, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetPopularStoriesCount(this.HostProfile.HostID, this.UrlParameters.StoryListSortBy));
+                    storyNavigator.DataBind(StoryCache.GetPopularStories(this.HostProfile.HostID, true, this.UrlParameters.StoryListSortBy, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetPopularStoriesCount(this.HostProfile.HostID, true, this.UrlParameters.StoryListSortBy));
                     break;
             }
 	            
