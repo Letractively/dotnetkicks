@@ -13,21 +13,29 @@ using Incremental.Kick.Security.Principal;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickPage : System.Web.UI.Page {
-
-        private bool _isMemberPage = false;
-        //private bool _isCachedPage = false;   
-        //private bool _isCachedAuthenticatedPage = false;
-
         private UrlFactory.PageName _pageName;
         public UrlFactory.PageName PageName {
             get { return this._pageName; }
             set { this._pageName = value; }
         }
 
+        private List<string> _requiredRoles = new List<string>();
+        public List<string> RequiredRoles {
+            get { return this._requiredRoles; }
+            set { this._requiredRoles = value; }
+        }
+        public void RequiresAdministratorRole() {
+            this.RequiredRoles.Add("administrator");
+        }
+        public void RequiresModeratorRole() {
+            this.RequiredRoles.Add("moderator");
+        }
+
         public bool IsAuthenticated {
             get { return this.User.Identity.IsAuthenticated; }
         }
 
+        private bool _isMemberPage = false;
         public bool IsMemberPage {
             get { return this._isMemberPage; }
             set { this._isMemberPage = value; }
@@ -145,60 +153,33 @@ namespace Incremental.Kick.Web.Controls {
         private bool _displayAds = true;
         public bool DisplayAds {
             get {
-                if (this._displayAds) {
-                    //TEMP: remove when we have added a show ads to the KickUserProfile
-                    if (this.IsAuthenticated) {
-                        if (this.KickUserProfile.Username == "gavinjoyce") {
-                            return false;
-                        }
-                    }
-
+                if (this._displayAds) 
                     return this.HostProfile.ShowAds;
-                } else {
+                else 
                     return false;
-                }
             }
             set { this._displayAds = value; }
         }
 
-        private bool _displaySideAds = false;
+        private bool _displaySideAds = true;
         public bool DisplaySideAds {
-            get {
-                if (this._displaySideAds) {
-                    return this.WebUIConfig.ShowGoogleAds;
-                } else {
-                    return false;
-                }
-            }
+            get { return this._displaySideAds; }
             set { this._displaySideAds = value; }
         }
 
         protected override void OnInitComplete(EventArgs e) {
-            //perform permission checks here
-            if (this.IsMemberPage && !this.IsAuthenticated)
-                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login)); //TODO: pass the current url here so we can redirect
-
-
-
+            this.PerformSecurityChecks();
             base.OnInitComplete(e);
         }
 
-        protected override void OnLoad(EventArgs e) {
+        private void PerformSecurityChecks() {
+            if (this.IsMemberPage && !this.IsAuthenticated)
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login)); //TODO: pass the current url here so we can redirect
 
-            // if (this.IsCachedPage)
-            //    Response.Cache.AddValidationCallback(new HttpCacheValidateHandler(this.CacheValidator), null);
+            if (!this.KickUserProfile.HasRoles(this.RequiredRoles))
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
 
-            base.OnLoad(e);
         }
-
-        /* public void CacheValidator(HttpContext context, Object data, ref HttpValidationStatus status) {
-             if (context.User.Identity.IsAuthenticated)
-                 status = HttpValidationStatus.IgnoreThisRequest;
-             else
-                 status = HttpValidationStatus.Valid;
-         }*/
-
-
 
     }
 }

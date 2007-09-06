@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-namespace Incremental.Kick.Dal
-{
-    public partial class User
-    {
-        public static User FetchUserByUsername(string username)
-        {
+namespace Incremental.Kick.Dal {
+    public partial class User {
+        public static User FetchUserByUsername(string username) {
             return User.FetchUserByParameter(User.Columns.Username, username);
         }
 
-        public static User FetchUserByParameter(string columnName, object value)
-        {
+        public static User FetchUserByParameter(string columnName, object value) {
             //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
             UserCollection f = new UserCollection();
             f.Load(User.FetchByParameter(columnName, value));
@@ -61,14 +57,11 @@ namespace Incremental.Kick.Dal
             return IsModerator || this.IsInRole(hostName + ":moderator");
         }
 
-        //public User() {
-        //    this.UserID = 0;
-        //    this.Username = "Anonymous";
-        //    this.Email = "";
-        //    this.AdSenseID = "";
-        //    this.IsBanned = false;
-        //    this.IsGeneratedPassword = false;
-        //    this.CreatedOn = new DateTime();
-        //}
+        public bool HasRoles(List<string> roles) {
+            foreach (string role in roles)
+                if (!this.IsInRole(role))
+                    return false;
+            return true;
+        }
     }
 }
