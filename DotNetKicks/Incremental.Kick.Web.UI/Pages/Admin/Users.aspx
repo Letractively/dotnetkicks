@@ -3,8 +3,8 @@
 
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
-
-    <SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_User" />
+     NOTE: GJ: we can't use scaffold here as it doesn't support server side paging
+    <!--<SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_User" />-->
     
 </asp:Content>
 
