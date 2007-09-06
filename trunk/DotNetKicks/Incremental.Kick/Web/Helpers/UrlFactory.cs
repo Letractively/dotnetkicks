@@ -34,7 +34,9 @@ namespace Incremental.Kick.Web.Helpers {
             NewStories,
             ViewStory,
             SubmitStory,
-            ViewTagRss
+            ViewTagRss,
+            NotAuthorised,
+            Admin
         }
 
         public static string CreateUrl(PageName pageName) {
@@ -73,6 +75,10 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath("/changepassword");
                 case PageName.ViewTags:
                     return MapPath("/tags");
+                case PageName.NotAuthorised:
+                    return MapPath("/notauthorised");
+                case PageName.Admin:
+                    return MapPath("/admin");
                 default:
                     throw new Exception("not enough params to create url");
             }
