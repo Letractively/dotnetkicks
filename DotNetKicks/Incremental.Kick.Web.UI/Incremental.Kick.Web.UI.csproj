@@ -229,6 +229,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Admin\AdminMenu.ascx.cs">
+      <DependentUpon>AdminMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Admin\AdminMenu.ascx.designer.cs">
+      <DependentUpon>AdminMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Story\AddComment.ascx.cs">
       <DependentUpon>AddComment.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -280,6 +287,34 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Hosts.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Hosts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Hosts.aspx.designer.cs">
+      <DependentUpon>Hosts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Stories.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Stories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Stories.aspx.designer.cs">
+      <DependentUpon>Stories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Users.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Category\ViewKickedStories.aspx.cs">
       <DependentUpon>ViewKickedStories.aspx</DependentUpon>
@@ -442,6 +477,13 @@
     <Compile Include="Pages\User\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\NotAuthorised.aspx.cs">
+      <DependentUpon>NotAuthorised.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\NotAuthorised.aspx.designer.cs">
+      <DependentUpon>NotAuthorised.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -598,8 +640,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="favicon.ico" />
+    <Content Include="Pages\Admin\Default.aspx" />
+    <Content Include="Pages\Admin\Hosts.aspx" />
+    <Content Include="Pages\Admin\Stories.aspx" />
+    <Content Include="Pages\Admin\Users.aspx" />
     <Content Include="Pages\Upcoming.aspx" />
+    <Content Include="Pages\User\NotAuthorised.aspx" />
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />

@@ -12,11 +12,17 @@
         <td align="right">
             <span id="headerLinks">
                 <% if (this.Page.User.Identity.IsAuthenticated) { %>
-                    <% if(false) { %>
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.ViewUser, this.Page.User.Identity.Name)%>">
                     your profile</a>
-                    <% } %>
-                     <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Logout)%>">logout</a>
+                
+                <% if (this.KickPage.KickUserProfile.IsAdministrator) { %>
+                     <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Admin)%>">admin</a>
+                 <% } %> 
+                    
+                <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Logout)%>">logout</a>
+                     
+                 
+                 
                 <% } else { %>
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Login)%>">login</a> <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Register)%>">
                     register</a>
