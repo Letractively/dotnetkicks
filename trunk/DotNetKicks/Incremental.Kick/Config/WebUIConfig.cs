@@ -27,9 +27,6 @@ namespace Incremental.Kick.Config {
 
         [XmlAttribute("userProfileCacheDurationInSeconds")]
         public int UserProfileCacheDurationInSeconds;
-
-        [XmlAttribute("showGoogleAds")]
-        public bool ShowGoogleAds;
     }
 
     public class WebUIConfigReader : ConfigReaderBase {
