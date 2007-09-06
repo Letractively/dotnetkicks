@@ -76,7 +76,8 @@ namespace Incremental.Kick.Web.Controls {
                 editorPanel.RenderBottom(writer);
             }
 
-            if (this.DisplayAds && this.KickPage.DisplayAds) {
+            /* NOTE: GJ: removing ads from here - they should be set in the template
+             * if (this.DisplayAds && this.KickPage.DisplayAds) {
                 StyledPanel adsPanel = new StyledPanel();
                 adsPanel.StyledPanelStyle = StyledPanelStyle.GreenPanelPlain;
                 adsPanel.Caption = "";
@@ -87,7 +88,7 @@ namespace Incremental.Kick.Web.Controls {
                 googleAds.RenderControl(writer);
 
                 adsPanel.RenderBottom(writer);
-            }
+            }*/
 
             if (this.DisplayTags) {
                 StyledPanel categoryPanel = new StyledPanel();
