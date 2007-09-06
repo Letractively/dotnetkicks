@@ -36,6 +36,7 @@ namespace Incremental.Kick.Dal {
             return stories;
         }
 
+        /*
         public static StoryCollection GetUpComingStoriesToday(bool isPublished, int hostID, int pageIndex, int pageSize )
         {
             Query query = GetStoryQuery(hostID, isPublished);
@@ -71,11 +72,11 @@ namespace Incremental.Kick.Dal {
             StoryCollection stories = new StoryCollection();
             stories.Load(query.ExecuteReader());
             return stories;
-        }
+        }*/
 
 
-        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageIndex, int pageSize) {
-            Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
+        public static StoryCollection GetPopularStories(int hostID, bool isPublished, StoryListSortBy sortBy, int pageIndex, int pageSize) {
+            Query query = GetStoryQuery(hostID, isPublished, GetStartDate(sortBy), DateTime.Now);
             query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
             query.PageIndex = pageIndex;
             query.PageSize = pageSize;
@@ -84,10 +85,11 @@ namespace Incremental.Kick.Dal {
             return stories;
         }
 
-        public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
-            Query query = GetStoryQuery(hostID, true, GetStartDate(sortBy), DateTime.Now);
+        public static int GetPopularStoriesCount(int hostID, bool isPublished, StoryListSortBy sortBy) {
+            Query query = GetStoryQuery(hostID, isPublished, GetStartDate(sortBy), DateTime.Now);
             return query.GetCount(Story.Columns.StoryID);
         }
+
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {
             return (int)GetStoryQuery(hostID, isPublished, startDate, endDate).GetCount("StoryID");
@@ -152,7 +154,7 @@ namespace Incremental.Kick.Dal {
         private static Query GetStoryQuery(int hostID) {
             return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
         }
-        
+
         private static Query GetStoryQuery(int hostID, bool isPublished) {
             return GetStoryQuery(hostID).AND(Story.Columns.IsPublishedToHomepage, isPublished);
         }

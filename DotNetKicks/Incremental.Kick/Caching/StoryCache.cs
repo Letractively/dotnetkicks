@@ -66,7 +66,7 @@ namespace Incremental.Kick.Caching {
             return stories;
         }
 
-        public static StoryCollection GetAllStoriesThisWeek(bool isPublished, int hostID, int pageNumber, int pageSize)
+        /*public static StoryCollection GetAllStoriesThisWeek(bool isPublished, int hostID, int pageNumber, int pageSize)
         {
             string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
 
@@ -98,16 +98,16 @@ namespace Incremental.Kick.Caching {
             }
 
             return stories;
-        }
+        }*/
 
-        public static StoryCollection GetPopularStories(int hostID, StoryListSortBy sortBy, int pageNumber, int pageSize) {
-            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", hostID, sortBy, pageNumber, pageSize);
+        public static StoryCollection GetPopularStories(int hostID, bool isPublished, StoryListSortBy sortBy, int pageNumber, int pageSize) {
+            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}_{4}", hostID, isPublished, sortBy, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
             StoryCollection stories = storyCache[cacheKey];
             if (stories == null) {
-                stories = Story.GetPopularStories(hostID, sortBy, pageNumber, pageSize);
+                stories = Story.GetPopularStories(hostID, isPublished, sortBy, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -116,13 +116,13 @@ namespace Incremental.Kick.Caching {
             return stories;
         }
 
-        public static int GetPopularStoriesCount(int hostID, StoryListSortBy sortBy) {
-            string cacheKey = String.Format("Kick_PopularStoryCount_{0}_{1}", hostID, sortBy);
+        public static int GetPopularStoriesCount(int hostID, bool isPublished, StoryListSortBy sortBy) {
+            string cacheKey = String.Format("Kick_PopularStoryCount_{0}_{1}_{2}", hostID, isPublished, sortBy);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetPopularStoriesCount(hostID, sortBy);
+                count = Story.GetPopularStoriesCount(hostID, isPublished, sortBy);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
