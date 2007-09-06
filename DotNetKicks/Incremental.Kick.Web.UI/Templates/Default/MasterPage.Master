@@ -56,8 +56,11 @@
         <% if(this.KickPage.DisplaySideAds) { %>
             <br />
             <!-- DNK TheLounge -->
-            <script type="text/javascript">(function(){document.write('<div id="wedje_div_thelounge"></div>');s=document.createElement('script');s.type="text/javascript";s.src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d=" + (new Date().getTime());setTimeout("document.getElementById('wedje_div_thelounge').appendChild(s)",1);})()</script>
-            <p class="tlp"><a href='http://www.montylounge.com/thelounge/' class="adsvia">Ads Via The Lounge</a></p>
+            <div id="wedje_div_thelounge"></div>
+            <script type="text/javascript" src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d=" defer="defer"></script>
+            <p class="tlp">
+	            <a href='http://www.montylounge.com/thelounge/' title="Ads via the lounge" class="adsvia">Ads Via The Lounge</a>    
+            </p>
             <hr />
         <% } %>
         
