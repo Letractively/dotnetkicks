@@ -199,8 +199,7 @@ namespace Incremental.Kick.Caching {
 
             if (comments == null)
             {
-                //TODO There's no Host_Id value in comments table
-                comments = Comment.FetchCommentsByUser(UserCache.GetUserID(userIdentifier));
+                comments = Comment.GetUserComments(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 if(comments!=null)
                     commentCache.Insert(cacheKey, comments, CacheHelper.CACHE_DURATION_IN_SECONDS);
