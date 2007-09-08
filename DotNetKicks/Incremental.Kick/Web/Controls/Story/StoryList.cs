@@ -43,7 +43,7 @@ namespace Incremental.Kick.Web.Controls {
                 writer.WriteLine(@"
                     <div class=""HelpDiv"">
                         <img src=""{0}/information.png"" /> 
-                        There are currently no stories in this category. 
+                        There are currently no stories here. 
                         <br /><br />Would you like to be the first to <a href=""{1}"">submit a story</a>?
                     </div>
                 ", this.KickPage.StaticIconRootUrl, UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory));

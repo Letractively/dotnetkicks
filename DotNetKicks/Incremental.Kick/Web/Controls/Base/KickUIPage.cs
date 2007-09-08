@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-//using Incremental.Kick.Web.Helpers;
-//using Incremental.Kick.Config;
-//using Incremental.Kick.Common.DataSets.Rows;
-//using Incremental.Kick.Common.Entities;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickUIPage : KickPage {
@@ -22,8 +18,6 @@ namespace Incremental.Kick.Web.Controls {
             set { this._adSenseID = value; }
         }
 
-
-
         private string _rssFeedUrl;
         public string RssFeedUrl {
             get { return this._rssFeedUrl; }
@@ -33,20 +27,6 @@ namespace Incremental.Kick.Web.Controls {
         public bool HasRssFeed {
             get { return !String.IsNullOrEmpty(this.RssFeedUrl); }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public void AddJavaScript(string relativeUrl) {
             HtmlGenericControl script = new HtmlGenericControl("script");
@@ -121,9 +101,6 @@ namespace Incremental.Kick.Web.Controls {
             if (this.KickUserProfile.IsDebugger) {
                 DebugInformation debugInfo = new DebugInformation();
                 this.Controls.Add(debugInfo);
-
-                // this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Dojo/jsTrace.js");
-
             }
 
             base.OnPreRender(e);

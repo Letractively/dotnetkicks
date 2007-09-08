@@ -12,12 +12,11 @@ using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Web.UI.Pages.User {
-    public partial class ViewTag : Incremental.Kick.Web.Controls.KickUIPage {
+    public partial class ViewTag : Incremental.Kick.Web.Controls.KickUserProfilePage {
         protected void Page_Init(object sender, EventArgs e) {
             this.Caption = "Stories tagged '" + this.UrlParameters.TagIdentifier + "' by " + this.UrlParameters.UserIdentifier;
             this.Title = this.HostProfile.SiteTitle + " : " + this.Caption;
-            this.PageName = UrlFactory.PageName.ViewUserTag;
-            this.DisplayAds = true;
+            this.PageName = UrlFactory.PageName.UserTag;
         }
 
 
@@ -26,7 +25,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.Paging.RecordCount = StoryCache.GetUserTaggedStoryCount(this.UrlParameters.TagIdentifier, this.KickUserProfile.UserID, this.HostProfile.HostID);
             this.Paging.PageNumber = UrlParameters.PageNumber;
             this.Paging.PageSize = UrlParameters.PageSize;
-            this.Paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUserTag, this.KickUserProfile.Username, this.UrlParameters.TagIdentifier);
+            this.Paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserTag, this.KickUserProfile.Username, this.UrlParameters.TagIdentifier);
         }
     }
 }

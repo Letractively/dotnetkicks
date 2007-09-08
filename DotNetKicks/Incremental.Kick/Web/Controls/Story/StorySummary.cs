@@ -35,7 +35,7 @@ namespace Incremental.Kick.Web.Controls {
             string categoryIdentifier = category.CategoryIdentifier;
             string categoryName = category.Name;
             string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, categoryIdentifier);
-            string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUser, this._story.Username);
+            string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this._story.Username);
                         
             string categoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, categoryIdentifier);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);

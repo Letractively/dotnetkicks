@@ -95,7 +95,7 @@ namespace Incremental.Kick.Web.Controls {
 
                 string userTagsUrl;
                 if(this.KickPage.KickUserProfile.IsValidated)
-                    userTagsUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUserTags, this.KickPage.KickUserProfile.Username);
+                    userTagsUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserTags, this.KickPage.KickUserProfile.Username);
                 else
                     userTagsUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Login);
 
