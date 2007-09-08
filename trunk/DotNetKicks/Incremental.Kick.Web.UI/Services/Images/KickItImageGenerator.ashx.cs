@@ -53,6 +53,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             MemoryStream s = new MemoryStream();
             img.Save(s, ImageFormat.Png);
 
+            context.Response.ContentType = "image/PNG";
             context.Response.BinaryWrite(s.GetBuffer());
         }
 
