@@ -4,7 +4,7 @@ function KickIt(storyID, isAuthenticated) {
         HideElement(GetStoryKickItElement(storyID));
         Ajax_KickStory(storyID, true, KickIt_End, Failure);
     } else {
-        document.location = WEB_BASE_URL + "login";
+        document.location = WEB_BASE_URL + "login?ReturnUrl=" + document.URL;
     }
 }
 
