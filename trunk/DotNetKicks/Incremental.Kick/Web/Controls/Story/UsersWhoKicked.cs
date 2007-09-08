@@ -30,6 +30,7 @@ namespace Incremental.Kick.Web.Controls {
                 foreach (User user in _users) {
                     userLink.DataBind(user);
                     userLink.RenderControl(writer);
+                    writer.Write(" - ");
                 }
             }
 
