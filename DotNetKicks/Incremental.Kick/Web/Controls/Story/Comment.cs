@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.Controls {
     public class Comment : KickWebControl {
@@ -31,25 +33,21 @@ namespace Incremental.Kick.Web.Controls {
             if (this._useAlternativeStyle)
                 alternativeCssClass = "CommentAlt";
 
-            writer.WriteLine(@"<div class=""Comment {0}"">", alternativeCssClass);
+            writer.WriteLine(@"<a name=""Comment_{0}""></a><div class=""Comment {0}"">", this._comment.CommentID, alternativeCssClass);
 
             //when displaying user comments
             //need to show which story they commented on
             if (_displayStoryTitle)
             {
-                string publishedHtml = "";
-                if (this._comment.Story.IsPublishedToHomepage)
-                    publishedHtml = "published " + DateHelper.ConverDateToTimeAgo(this._comment.Story.PublishedOn) + ", ";
+                //build local URL to story
+                Category category = CategoryCache.GetCategory(this._comment.Story.CategoryID, this.KickPage.HostProfile.HostID);
+                string categoryIdentifier = category.CategoryIdentifier;
+                string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._comment.Story.StoryIdentifier, categoryIdentifier);
 
                 //story title
-                writer.Write(@"<div class=""storyTitle""><a href=""{0}"">{1}</a> <a href=""{0}""><img src=""{2}/external.png"" width=""10"" height=""10"" border=""0""/></a></div><div class=""storySubmitted"">{3} submitted by",
-                        this._comment.Story.Url, this._comment.Story.Title, this.KickPage.StaticIconRootUrl, publishedHtml);
+                writer.Write(@"<div class=""storyTitle""><a href=""{0}#Comment_{1}"">{2}</a></div><br/>",
+                        kickStoryUrl, this._comment.CommentID, this._comment.Story.Title);
 
-                //submitted by
-                UserLink storySubmitterUserLink = new UserLink();
-                storySubmitterUserLink.DataBind(UserCache.GetUserByUsername(this._comment.Story.Username));
-                storySubmitterUserLink.RenderControl(writer);
-                writer.WriteLine("</div><br/>");
 
             }
             writer.WriteLine(@"<div class=""CommentText"">{0}</div>

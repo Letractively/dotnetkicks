@@ -12,29 +12,19 @@ namespace Incremental.Kick.Dal
         {
             return Story.FetchByID(storyID).CommentRecords();
         }
-        public static CommentCollection FetchCommentsByUser(int userId)
-        {
-            return Comment.FetchCommentsByParameter(Comment.Columns.UserID, userId);
-        }
 
-        public static CommentCollection FetchCommentsByIdentifier(string commentIdentifier)
-        {
-            return Comment.FetchCommentsByParameter(Comment.Columns.CommentID, commentIdentifier);
-        }
-
-        public static CommentCollection FetchCommentsByParameter(string columnName, object value)
-        {
-            //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
-            CommentCollection t = new CommentCollection();
-            t.Load(Comment.FetchByParameter(columnName, value));
-            return t;
-        }
         public static int GetUserCommentsCount(int userID, int hostID)
         {
             //TODO .AND(Comment.Columns.HostID, hostID)
             //HACK there's no HOST ID for comments
             Query query = new Query(Comment.Schema).WHERE(Comment.Columns.UserID, userID);
             return (int)query.GetCount(Comment.Columns.CommentID);
+        }
+
+        public static CommentCollection GetUserComments(int userID, int hostID, int pageNumber, int pageSize) {
+            CommentCollection comments = new CommentCollection();
+            comments.Load(SPs.Kick_GetPagedCommentsByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
+            return comments;
         }
 
     }
