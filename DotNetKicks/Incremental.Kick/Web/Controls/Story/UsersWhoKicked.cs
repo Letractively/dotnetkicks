@@ -41,7 +41,7 @@ namespace Incremental.Kick.Web.Controls
                 {
                     string anchor = "<a href=\"{0}\" title=\"Views {1}\">{1}</a>";
                     string username = _users[i].Username;
-                    string url = UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile,username); 
+                    string url = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, username); 
                     sb.Append(String.Format(anchor,url,username));
 
                     if (i + 1 != count) sb.Append(", ");

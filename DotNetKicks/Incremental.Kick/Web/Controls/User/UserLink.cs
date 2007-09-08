@@ -12,7 +12,7 @@ namespace Incremental.Kick.Web.Controls {
             this._username = username;
         }
         protected override void Render(HtmlTextWriter writer) {
-            writer.WriteLine(@"<a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this._username), this._username);
+            writer.WriteLine(@"<a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._username), this._username);
         }
     }
 }
