@@ -81,7 +81,7 @@ namespace Incremental.Kick.Web.Controls {
             ", this._story.Url, this._story.Title, publishedHtml, this.KickPage.StaticIconRootUrl);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(this._story.Username);
+            userLink.DataBind(UserCache.GetUserByUsername(this._story.Username));
             userLink.RenderControl(writer);
 
             string moreLink = "";

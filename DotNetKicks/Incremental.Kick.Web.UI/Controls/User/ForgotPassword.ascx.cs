@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using Incremental.Kick.BusinessLogic;
 
-namespace Incremental.Kick.Web.UI.Controls.User
+namespace Incremental.Kick.Web.UI.Controls
 {
     public partial class ForgotPassword : Incremental.Kick.Web.Controls.KickUserControl
     {

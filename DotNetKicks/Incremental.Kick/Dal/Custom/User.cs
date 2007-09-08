@@ -16,6 +16,19 @@ namespace Incremental.Kick.Dal {
             return f[0];
         }
 
+        public string GravatarEmail {
+            get {
+                if (this.UseGravatar) {
+                    if (String.IsNullOrEmpty(this.GravatarCustomEmail))
+                        return this.Email;
+                    else
+                        return this.GravatarCustomEmail;
+                } else {
+                    return "";
+                }
+            }
+        }
+
         public bool IsNewMember {
             get { return this.CreatedOn.AddDays(1) > DateTime.Now; }
         }

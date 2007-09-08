@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Helpers;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Web.Controls {
     public class Comment : KickWebControl {
@@ -29,7 +30,7 @@ namespace Incremental.Kick.Web.Controls {
             ", alternativeCssClass, this._comment.CommentX);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(this._comment.Username);
+            userLink.DataBind(UserCache.GetUserByUsername(this._comment.Username));
             userLink.RenderControl(writer);
 
             writer.WriteLine(@"{0}</div></div>", DateHelper.ConverDateToTimeAgo(this._comment.CreatedOn));

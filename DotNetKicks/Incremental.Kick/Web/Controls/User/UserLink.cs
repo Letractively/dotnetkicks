@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Web.Controls {
     public class UserLink : KickWebControl {
-        private string _username;
+        private User _user;
 
-        public void DataBind(string username) {
-            this._username = username;
+        public void DataBind(User user) {
+            this._user = user;
         }
         protected override void Render(HtmlTextWriter writer) {
-            writer.WriteLine(@"<a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._username), this._username);
+            if (this._user.UseGravatar) {
+                Gravatar gravatar = new Gravatar();
+                gravatar.Size = 16;
+                gravatar.Email = this._user.GravatarEmail;
+                gravatar.Rating = Gravatar.GravatarRating.R;
+                gravatar.RenderControl(writer);
+            }
+            
+            writer.WriteLine(@" <a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._user.Username), this._user.Username);
         }
     }
 }
