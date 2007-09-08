@@ -498,6 +498,13 @@
     <Compile Include="Pages\User\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\Submitted.aspx.cs">
+      <DependentUpon>Submitted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Submitted.aspx.designer.cs">
+      <DependentUpon>Submitted.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -648,6 +655,7 @@
     <Content Include="Pages\Admin\Users.aspx" />
     <Content Include="Pages\Upcoming.aspx" />
     <Content Include="Pages\User\NotAuthorised.aspx" />
+    <Content Include="Pages\User\Submitted.aspx" />
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
