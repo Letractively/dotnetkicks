@@ -24,6 +24,10 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
 
         protected void Page_Load(object sender, EventArgs e) {
             Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier);
+
+            if (story == null)
+                Response.Redirect("/missingstory");
+
             Incremental.Kick.Dal.CommentCollection commentTable = StoryCache.GetComments(story.StoryID);
             Incremental.Kick.Dal.UserCollection users = UserCache.GetUsersWhoKicked(story.StoryID);
 

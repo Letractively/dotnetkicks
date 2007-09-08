@@ -363,6 +363,13 @@
       <DependentUpon>JavaScriptFeeds.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\Docs\MissingStory.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>MissingStory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Docs\MissingStory.aspx.designer.cs">
+      <DependentUpon>MissingStory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Docs\Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -667,6 +674,7 @@
     <Content Include="Pages\Admin\Hosts.aspx" />
     <Content Include="Pages\Admin\Stories.aspx" />
     <Content Include="Pages\Admin\Users.aspx" />
+    <Content Include="Pages\Docs\MissingStory.aspx" />
     <Content Include="Pages\Upcoming.aspx" />
     <Content Include="Pages\User\CommentsMade.aspx" />
     <Content Include="Pages\User\KickedStories.aspx" />
