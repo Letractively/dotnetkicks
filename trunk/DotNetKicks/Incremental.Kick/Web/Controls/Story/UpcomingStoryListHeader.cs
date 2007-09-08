@@ -29,7 +29,7 @@ namespace Incremental.Kick.Web.Controls
             writer.WriteLine(@"<div class=""PopularStoryListHeader"">Sort By: ", this.KickPage.StaticIconRootUrl);
 
             this.RenderLink(StoryListSortBy.LatestUpcoming, "Latest Upcoming Stories", writer);
-            this.RenderLink(StoryListSortBy.Today, "Top Kicked Today", writer);
+            this.RenderLink(StoryListSortBy.Today, "Top Today", writer);
             this.RenderLink(StoryListSortBy.PastWeek, "This Week ", writer);
 
             writer.WriteLine(@"</div>");
