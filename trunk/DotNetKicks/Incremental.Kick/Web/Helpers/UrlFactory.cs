@@ -20,6 +20,7 @@ namespace Incremental.Kick.Web.Helpers {
             JavaScriptFeeds,
             Tools,
             Search,
+            UserHome,
             UserProfile,
             UserKickedStories,
             UserKickedStoriesRss,
@@ -91,8 +92,10 @@ namespace Incremental.Kick.Web.Helpers {
 
         public static string CreateUrl(PageName pageName, string value) {
             switch (pageName) {
-                case PageName.UserProfile:
+                case PageName.UserHome:
                     return MapPath(String.Format("/users/{0}", value));
+                case PageName.UserProfile:
+                    return MapPath(String.Format("/users/{0}/profile", value));
                 case PageName.UserKickedStories:
                     return MapPath(String.Format("/users/{0}/kicked", value));
                 case PageName.UserKickedStoriesRss:
