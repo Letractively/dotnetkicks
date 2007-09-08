@@ -62,8 +62,8 @@ namespace Incremental.Kick.Dal.Entities {
             decimal result = Math.Round(oneandten * dd + 1, 1);
             if (result > 2) //NOTE: GJ: Imposing a minimum maximum size
                 result = 2;
-            else if (result < (decimal)0.6)
-                result = (decimal)0.6;
+            else if (result < (decimal)0.9)
+                result = (decimal)0.9;
 
             return result;
 
