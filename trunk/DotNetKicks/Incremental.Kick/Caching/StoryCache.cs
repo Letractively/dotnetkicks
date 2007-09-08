@@ -21,7 +21,8 @@ namespace Incremental.Kick.Caching {
             if (story == null) {
                 story = Story.FetchStoryByIdentifier(storyIdentifier);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyCache.Insert(cacheKey, story, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                if(story != null) 
+                    storyCache.Insert(cacheKey, story, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return story;
