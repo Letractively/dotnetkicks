@@ -17,7 +17,7 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         protected override void Render(System.Web.UI.HtmlTextWriter writer) {
-            writer.Write(@"<span class=""Gravatar Hidden"">{0}</span>", FormsAuthentication.HashPasswordForStoringInConfigFile(Email, "MD5").ToLower() + "," + this._size.ToString());
+            writer.Write(@"<img src=""/Services/Images/ViewGravitar.ashx?gravatar_id={0}&size={1}"" width=""{1}"" height=""{1}"" />", FormsAuthentication.HashPasswordForStoringInConfigFile(Email, "MD5").ToLower(), this._size.ToString());
         }
     }
 }

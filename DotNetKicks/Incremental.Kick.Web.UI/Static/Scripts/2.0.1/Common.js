@@ -146,26 +146,3 @@ function Trace(message){
     jsTrace.send(message);
   }
 }
-
-var Gravatar = {
-  replaceElement: function(element) {
-    args = element.innerHTML.split(',');
-    element.innerHTML = "<img src=\"http://www.gravatar.com/avatar.php?gravatar_id=" + args[0] + "&size=" + args[1] + "\" width='" + args[1] + "' height='" + args[1] + "' alt=\"\" />";
-  },
-
-  replaceAll: function() {
-    gravatarElements = getElementsByClass("Gravatar");
-    for(g=0; g<gravatarElements.length; g++) {
-        var gravitar = gravatarElements[g];
-        Gravatar.replaceElement(gravitar);
-        ToggleElement(gravitar);
-    }
-  }  
-}
-
-
-
-
-replaceGravatars = function() { setTimeout(Gravatar.replaceAll, 1); };
-dojo.event.connect(window, "onload", "replaceGravatars");
-

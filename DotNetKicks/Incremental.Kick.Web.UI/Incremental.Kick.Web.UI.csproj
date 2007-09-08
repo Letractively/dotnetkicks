@@ -630,6 +630,9 @@
     <Compile Include="Services\Images\KickItImageGenerator.ashx.cs">
       <DependentUpon>KickItImageGenerator.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Images\ViewGravitar.ashx.cs">
+      <DependentUpon>ViewGravitar.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Default\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -675,6 +678,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />
     <Content Include="favicon.ico" />
