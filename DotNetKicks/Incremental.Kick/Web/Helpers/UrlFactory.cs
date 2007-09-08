@@ -104,8 +104,8 @@ namespace Incremental.Kick.Web.Helpers {
                     else
                         return MapPath(String.Format("/{0}/upcoming/rss", value));
                 case PageName.LoginSwitch:
-                    //return MapPath(String.Format("/loginswitch/?url={0}", HttpUtility.UrlEncode(value)));
-                    return MapPath("/loginswitch");
+                    return MapPath(String.Format("/loginswitch/?url={0}", HttpUtility.UrlEncode(value)));
+                    //return MapPath("/loginswitch");
                 case PageName.ViewTag:
                     return MapPath(String.Format("/tags/{0}", value));
                 case PageName.ViewTagRss:
