@@ -33,23 +33,103 @@ namespace Incremental.Kick.Dal{
             return sp;
         }
 
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetUsersWhoKicked Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetUsersWhoKicked(int? storyId)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetUsersWhoKicked" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@storyId", storyId,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the ELMAH_GetErrorXml Procedure
+        /// </summary>
+        public static StoredProcedure Elmah_GetErrorXml(string Application, Guid? ErrorId)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("ELMAH_GetErrorXml" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@Application", Application,DbType.String);
+        	    
+            sp.Command.AddParameter("@ErrorId", ErrorId,DbType.Guid);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the ELMAH_GetErrorsXml Procedure
+        /// </summary>
+        public static StoredProcedure Elmah_GetErrorsXml(string Application, int? PageIndex, int? PageSize, int? TotalCount)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("ELMAH_GetErrorsXml" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@Application", Application,DbType.String);
+        	    
+            sp.Command.AddParameter("@PageIndex", PageIndex,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
+            sp.Command.AddOutputParameter("@TotalCount",DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the ELMAH_LogError Procedure
+        /// </summary>
+        public static StoredProcedure Elmah_LogError(Guid? ErrorId, string Application, string Host, string Type, string Source, string Message, string User, string AllXml, int? StatusCode, DateTime? TimeUtc)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("ELMAH_LogError" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@ErrorId", ErrorId,DbType.Guid);
+        	    
+            sp.Command.AddParameter("@Application", Application,DbType.String);
+        	    
+            sp.Command.AddParameter("@Host", Host,DbType.String);
+        	    
+            sp.Command.AddParameter("@Type", Type,DbType.String);
+        	    
+            sp.Command.AddParameter("@Source", Source,DbType.String);
+        	    
+            sp.Command.AddParameter("@Message", Message,DbType.String);
+        	    
+            sp.Command.AddParameter("@User", User,DbType.String);
+        	    
+            sp.Command.AddParameter("@AllXml", AllXml,DbType.String);
+        	    
+            sp.Command.AddParameter("@StatusCode", StatusCode,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@TimeUtc", TimeUtc,DbType.DateTime);
+        	    
+            return sp;
+        }
+
+        
         /// <summary>
         /// Creates an object wrapper for the Kick_GetPagedSubmittedStoriesByUserIDAndHostID Procedure
         /// </summary>
         public static StoredProcedure Kick_GetPagedSubmittedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedSubmittedStoriesByUserIDAndHostID", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@PageNumber", PageNumber, DbType.Int32);
-
-            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32);
-
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedSubmittedStoriesByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
             return sp;
         }
+
         
         /// <summary>
         /// Creates an object wrapper for the Kick_GetTagsByUserIDAndHostID Procedure
@@ -62,18 +142,6 @@ namespace Incremental.Kick.Dal{
         	    
             sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
         	    
-            return sp;
-        }
-
-        /// <summary>
-        /// Creates an object wrapper for the Kick_GetUsersWhoKicked Procedure
-        /// </summary>
-        public static StoredProcedure Kick_GetUsersWhoKicked(int? storyId)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetUsersWhoKicked", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@StoryId", storyId, DbType.Int32);
-
             return sp;
         }
 
@@ -180,5 +248,4 @@ namespace Incremental.Kick.Dal{
 
     
 }
-
 

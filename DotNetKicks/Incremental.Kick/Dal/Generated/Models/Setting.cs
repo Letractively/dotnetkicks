@@ -153,9 +153,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SettingID")]
 		public int SettingID 
 		{
-			get { return GetColumnValue<int>("SettingID"); }
+			get { return GetColumnValue<int>(Columns.SettingID); }
 
-			set { SetColumnValue("SettingID", value); }
+			set { SetColumnValue(Columns.SettingID, value); }
 
 		}
 
@@ -163,9 +163,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Name")]
 		public string Name 
 		{
-			get { return GetColumnValue<string>("Name"); }
+			get { return GetColumnValue<string>(Columns.Name); }
 
-			set { SetColumnValue("Name", value); }
+			set { SetColumnValue(Columns.Name, value); }
 
 		}
 
@@ -173,9 +173,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("ValueX")]
 		public string ValueX 
 		{
-			get { return GetColumnValue<string>("Value"); }
+			get { return GetColumnValue<string>(Columns.ValueX); }
 
-			set { SetColumnValue("Value", value); }
+			set { SetColumnValue(Columns.ValueX, value); }
 
 		}
 
@@ -221,11 +221,11 @@ namespace Incremental.Kick.Dal
 			Setting item = new Setting();
 			
 				item.SettingID = varSettingID;
-				
+			
 				item.Name = varName;
-				
+			
 				item.ValueX = varValueX;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

@@ -312,9 +312,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
-			get { return GetColumnValue<int>("UserID"); }
+			get { return GetColumnValue<int>(Columns.UserID); }
 
-			set { SetColumnValue("UserID", value); }
+			set { SetColumnValue(Columns.UserID, value); }
 
 		}
 
@@ -322,9 +322,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Username")]
 		public string Username 
 		{
-			get { return GetColumnValue<string>("Username"); }
+			get { return GetColumnValue<string>(Columns.Username); }
 
-			set { SetColumnValue("Username", value); }
+			set { SetColumnValue(Columns.Username, value); }
 
 		}
 
@@ -332,9 +332,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Email")]
 		public string Email 
 		{
-			get { return GetColumnValue<string>("Email"); }
+			get { return GetColumnValue<string>(Columns.Email); }
 
-			set { SetColumnValue("Email", value); }
+			set { SetColumnValue(Columns.Email, value); }
 
 		}
 
@@ -342,9 +342,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Password")]
 		public string Password 
 		{
-			get { return GetColumnValue<string>("Password"); }
+			get { return GetColumnValue<string>(Columns.Password); }
 
-			set { SetColumnValue("Password", value); }
+			set { SetColumnValue(Columns.Password, value); }
 
 		}
 
@@ -352,9 +352,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("PasswordSalt")]
 		public string PasswordSalt 
 		{
-			get { return GetColumnValue<string>("PasswordSalt"); }
+			get { return GetColumnValue<string>(Columns.PasswordSalt); }
 
-			set { SetColumnValue("PasswordSalt", value); }
+			set { SetColumnValue(Columns.PasswordSalt, value); }
 
 		}
 
@@ -362,9 +362,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IsGeneratedPassword")]
 		public bool IsGeneratedPassword 
 		{
-			get { return GetColumnValue<bool>("IsGeneratedPassword"); }
+			get { return GetColumnValue<bool>(Columns.IsGeneratedPassword); }
 
-			set { SetColumnValue("IsGeneratedPassword", value); }
+			set { SetColumnValue(Columns.IsGeneratedPassword, value); }
 
 		}
 
@@ -372,9 +372,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IsValidated")]
 		public bool IsValidated 
 		{
-			get { return GetColumnValue<bool>("IsValidated"); }
+			get { return GetColumnValue<bool>(Columns.IsValidated); }
 
-			set { SetColumnValue("IsValidated", value); }
+			set { SetColumnValue(Columns.IsValidated, value); }
 
 		}
 
@@ -382,9 +382,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IsBanned")]
 		public bool IsBanned 
 		{
-			get { return GetColumnValue<bool>("IsBanned"); }
+			get { return GetColumnValue<bool>(Columns.IsBanned); }
 
-			set { SetColumnValue("IsBanned", value); }
+			set { SetColumnValue(Columns.IsBanned, value); }
 
 		}
 
@@ -392,9 +392,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("AdsenseID")]
 		public string AdsenseID 
 		{
-			get { return GetColumnValue<string>("AdsenseID"); }
+			get { return GetColumnValue<string>(Columns.AdsenseID); }
 
-			set { SetColumnValue("AdsenseID", value); }
+			set { SetColumnValue(Columns.AdsenseID, value); }
 
 		}
 
@@ -402,9 +402,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("ReceiveEmailNewsletter")]
 		public bool ReceiveEmailNewsletter 
 		{
-			get { return GetColumnValue<bool>("ReceiveEmailNewsletter"); }
+			get { return GetColumnValue<bool>(Columns.ReceiveEmailNewsletter); }
 
-			set { SetColumnValue("ReceiveEmailNewsletter", value); }
+			set { SetColumnValue(Columns.ReceiveEmailNewsletter, value); }
 
 		}
 
@@ -412,9 +412,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Roles")]
 		public string Roles 
 		{
-			get { return GetColumnValue<string>("Roles"); }
+			get { return GetColumnValue<string>(Columns.Roles); }
 
-			set { SetColumnValue("Roles", value); }
+			set { SetColumnValue(Columns.Roles, value); }
 
 		}
 
@@ -422,9 +422,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -432,9 +432,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("LastActiveOn")]
 		public DateTime LastActiveOn 
 		{
-			get { return GetColumnValue<DateTime>("LastActiveOn"); }
+			get { return GetColumnValue<DateTime>(Columns.LastActiveOn); }
 
-			set { SetColumnValue("LastActiveOn", value); }
+			set { SetColumnValue(Columns.LastActiveOn, value); }
 
 		}
 
@@ -442,9 +442,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -452,9 +452,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("ModifiedOn")]
 		public DateTime ModifiedOn 
 		{
-			get { return GetColumnValue<DateTime>("ModifiedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.ModifiedOn); }
 
-			set { SetColumnValue("ModifiedOn", value); }
+			set { SetColumnValue(Columns.ModifiedOn, value); }
 
 		}
 
@@ -560,35 +560,35 @@ namespace Incremental.Kick.Dal
 			User item = new User();
 			
 				item.UserID = varUserID;
-				
+			
 				item.Username = varUsername;
-				
+			
 				item.Email = varEmail;
-				
+			
 				item.Password = varPassword;
-				
+			
 				item.PasswordSalt = varPasswordSalt;
-				
+			
 				item.IsGeneratedPassword = varIsGeneratedPassword;
-				
+			
 				item.IsValidated = varIsValidated;
-				
+			
 				item.IsBanned = varIsBanned;
-				
+			
 				item.AdsenseID = varAdsenseID;
-				
+			
 				item.ReceiveEmailNewsletter = varReceiveEmailNewsletter;
-				
+			
 				item.Roles = varRoles;
-				
+			
 				item.HostID = varHostID;
-				
+			
 				item.LastActiveOn = varLastActiveOn;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 				item.ModifiedOn = varModifiedOn;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

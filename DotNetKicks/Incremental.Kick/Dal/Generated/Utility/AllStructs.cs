@@ -18,6 +18,8 @@ namespace Incremental.Kick.Dal
 	public partial struct Tables
 	{
 		
+		public static string Elmah_Error = @"ELMAH_Error";
+        
 		public static string Category = @"Kick_Category";
         
 		public static string Comment = @"Kick_Comment";

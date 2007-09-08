@@ -196,9 +196,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryUserHostTagID")]
 		public int StoryUserHostTagID 
 		{
-			get { return GetColumnValue<int>("StoryUserHostTagID"); }
+			get { return GetColumnValue<int>(Columns.StoryUserHostTagID); }
 
-			set { SetColumnValue("StoryUserHostTagID", value); }
+			set { SetColumnValue(Columns.StoryUserHostTagID, value); }
 
 		}
 
@@ -206,9 +206,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryID")]
 		public int StoryID 
 		{
-			get { return GetColumnValue<int>("StoryID"); }
+			get { return GetColumnValue<int>(Columns.StoryID); }
 
-			set { SetColumnValue("StoryID", value); }
+			set { SetColumnValue(Columns.StoryID, value); }
 
 		}
 
@@ -216,9 +216,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
-			get { return GetColumnValue<int>("UserID"); }
+			get { return GetColumnValue<int>(Columns.UserID); }
 
-			set { SetColumnValue("UserID", value); }
+			set { SetColumnValue(Columns.UserID, value); }
 
 		}
 
@@ -226,9 +226,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -236,9 +236,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("TagID")]
 		public int TagID 
 		{
-			get { return GetColumnValue<int>("TagID"); }
+			get { return GetColumnValue<int>(Columns.TagID); }
 
-			set { SetColumnValue("TagID", value); }
+			set { SetColumnValue(Columns.TagID, value); }
 
 		}
 
@@ -246,9 +246,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -358,17 +358,17 @@ namespace Incremental.Kick.Dal
 			StoryUserHostTag item = new StoryUserHostTag();
 			
 				item.StoryUserHostTagID = varStoryUserHostTagID;
-				
+			
 				item.StoryID = varStoryID;
-				
+			
 				item.UserID = varUserID;
-				
+			
 				item.HostID = varHostID;
-				
+			
 				item.TagID = varTagID;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
