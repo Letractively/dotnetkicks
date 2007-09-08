@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Pages.User {
+namespace Incremental.Kick.Web.UI.Controls {
     
     
     /// <summary>
@@ -20,21 +20,12 @@ namespace Incremental.Kick.Web.UI.Pages.User {
     public partial class Profile {
         
         /// <summary>
-        /// UserProfileMenu control.
+        /// gravatar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserProfileMenu UserProfileMenu;
-        
-        /// <summary>
-        /// Profile1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Profile Profile1;
+        protected global::Incremental.Kick.Web.Controls.Gravatar gravatar;
     }
 }

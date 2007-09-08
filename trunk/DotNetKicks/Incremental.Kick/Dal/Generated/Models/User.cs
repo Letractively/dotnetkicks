@@ -296,6 +296,85 @@ namespace Incremental.Kick.Dal
 				colvarModifiedOn.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarModifiedOn);
 				
+				TableSchema.TableColumn colvarLocation = new TableSchema.TableColumn(schema);
+				colvarLocation.ColumnName = "Location";
+				colvarLocation.DataType = DbType.String;
+				colvarLocation.MaxLength = 255;
+				colvarLocation.AutoIncrement = false;
+				colvarLocation.IsNullable = true;
+				colvarLocation.IsPrimaryKey = false;
+				colvarLocation.IsForeignKey = false;
+				colvarLocation.IsReadOnly = false;
+				colvarLocation.DefaultSetting = @"";
+				colvarLocation.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarLocation);
+				
+				TableSchema.TableColumn colvarUseGravatar = new TableSchema.TableColumn(schema);
+				colvarUseGravatar.ColumnName = "UseGravatar";
+				colvarUseGravatar.DataType = DbType.Boolean;
+				colvarUseGravatar.MaxLength = 0;
+				colvarUseGravatar.AutoIncrement = false;
+				colvarUseGravatar.IsNullable = false;
+				colvarUseGravatar.IsPrimaryKey = false;
+				colvarUseGravatar.IsForeignKey = false;
+				colvarUseGravatar.IsReadOnly = false;
+				
+						colvarUseGravatar.DefaultSetting = @"((0))";
+				colvarUseGravatar.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarUseGravatar);
+				
+				TableSchema.TableColumn colvarGravatarCustomEmail = new TableSchema.TableColumn(schema);
+				colvarGravatarCustomEmail.ColumnName = "GravatarCustomEmail";
+				colvarGravatarCustomEmail.DataType = DbType.String;
+				colvarGravatarCustomEmail.MaxLength = 255;
+				colvarGravatarCustomEmail.AutoIncrement = false;
+				colvarGravatarCustomEmail.IsNullable = true;
+				colvarGravatarCustomEmail.IsPrimaryKey = false;
+				colvarGravatarCustomEmail.IsForeignKey = false;
+				colvarGravatarCustomEmail.IsReadOnly = false;
+				colvarGravatarCustomEmail.DefaultSetting = @"";
+				colvarGravatarCustomEmail.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarGravatarCustomEmail);
+				
+				TableSchema.TableColumn colvarWebsiteURL = new TableSchema.TableColumn(schema);
+				colvarWebsiteURL.ColumnName = "WebsiteURL";
+				colvarWebsiteURL.DataType = DbType.String;
+				colvarWebsiteURL.MaxLength = 1000;
+				colvarWebsiteURL.AutoIncrement = false;
+				colvarWebsiteURL.IsNullable = true;
+				colvarWebsiteURL.IsPrimaryKey = false;
+				colvarWebsiteURL.IsForeignKey = false;
+				colvarWebsiteURL.IsReadOnly = false;
+				colvarWebsiteURL.DefaultSetting = @"";
+				colvarWebsiteURL.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarWebsiteURL);
+				
+				TableSchema.TableColumn colvarBlogURL = new TableSchema.TableColumn(schema);
+				colvarBlogURL.ColumnName = "BlogURL";
+				colvarBlogURL.DataType = DbType.String;
+				colvarBlogURL.MaxLength = 1000;
+				colvarBlogURL.AutoIncrement = false;
+				colvarBlogURL.IsNullable = true;
+				colvarBlogURL.IsPrimaryKey = false;
+				colvarBlogURL.IsForeignKey = false;
+				colvarBlogURL.IsReadOnly = false;
+				colvarBlogURL.DefaultSetting = @"";
+				colvarBlogURL.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarBlogURL);
+				
+				TableSchema.TableColumn colvarBlogFeedURL = new TableSchema.TableColumn(schema);
+				colvarBlogFeedURL.ColumnName = "BlogFeedURL";
+				colvarBlogFeedURL.DataType = DbType.String;
+				colvarBlogFeedURL.MaxLength = 1000;
+				colvarBlogFeedURL.AutoIncrement = false;
+				colvarBlogFeedURL.IsNullable = true;
+				colvarBlogFeedURL.IsPrimaryKey = false;
+				colvarBlogFeedURL.IsForeignKey = false;
+				colvarBlogFeedURL.IsReadOnly = false;
+				colvarBlogFeedURL.DefaultSetting = @"";
+				colvarBlogFeedURL.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarBlogFeedURL);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -458,6 +537,66 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("Location")]
+		public string Location 
+		{
+			get { return GetColumnValue<string>(Columns.Location); }
+
+			set { SetColumnValue(Columns.Location, value); }
+
+		}
+
+		  
+		[XmlAttribute("UseGravatar")]
+		public bool UseGravatar 
+		{
+			get { return GetColumnValue<bool>(Columns.UseGravatar); }
+
+			set { SetColumnValue(Columns.UseGravatar, value); }
+
+		}
+
+		  
+		[XmlAttribute("GravatarCustomEmail")]
+		public string GravatarCustomEmail 
+		{
+			get { return GetColumnValue<string>(Columns.GravatarCustomEmail); }
+
+			set { SetColumnValue(Columns.GravatarCustomEmail, value); }
+
+		}
+
+		  
+		[XmlAttribute("WebsiteURL")]
+		public string WebsiteURL 
+		{
+			get { return GetColumnValue<string>(Columns.WebsiteURL); }
+
+			set { SetColumnValue(Columns.WebsiteURL, value); }
+
+		}
+
+		  
+		[XmlAttribute("BlogURL")]
+		public string BlogURL 
+		{
+			get { return GetColumnValue<string>(Columns.BlogURL); }
+
+			set { SetColumnValue(Columns.BlogURL, value); }
+
+		}
+
+		  
+		[XmlAttribute("BlogFeedURL")]
+		public string BlogFeedURL 
+		{
+			get { return GetColumnValue<string>(Columns.BlogFeedURL); }
+
+			set { SetColumnValue(Columns.BlogFeedURL, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -512,7 +651,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL)
 		{
 			User item = new User();
 			
@@ -544,6 +683,18 @@ namespace Incremental.Kick.Dal
 			
 			item.ModifiedOn = varModifiedOn;
 			
+			item.Location = varLocation;
+			
+			item.UseGravatar = varUseGravatar;
+			
+			item.GravatarCustomEmail = varGravatarCustomEmail;
+			
+			item.WebsiteURL = varWebsiteURL;
+			
+			item.BlogURL = varBlogURL;
+			
+			item.BlogFeedURL = varBlogFeedURL;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -555,7 +706,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL)
 		{
 			User item = new User();
 			
@@ -589,6 +740,18 @@ namespace Incremental.Kick.Dal
 			
 				item.ModifiedOn = varModifiedOn;
 			
+				item.Location = varLocation;
+			
+				item.UseGravatar = varUseGravatar;
+			
+				item.GravatarCustomEmail = varGravatarCustomEmail;
+			
+				item.WebsiteURL = varWebsiteURL;
+			
+				item.BlogURL = varBlogURL;
+			
+				item.BlogFeedURL = varBlogFeedURL;
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -615,6 +778,12 @@ namespace Incremental.Kick.Dal
 			 public static string LastActiveOn = @"LastActiveOn";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string ModifiedOn = @"ModifiedOn";
+			 public static string Location = @"Location";
+			 public static string UseGravatar = @"UseGravatar";
+			 public static string GravatarCustomEmail = @"GravatarCustomEmail";
+			 public static string WebsiteURL = @"WebsiteURL";
+			 public static string BlogURL = @"BlogURL";
+			 public static string BlogFeedURL = @"BlogFeedURL";
 						
 		}
 

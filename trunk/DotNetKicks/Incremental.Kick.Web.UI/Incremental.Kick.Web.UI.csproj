@@ -271,6 +271,13 @@
     <Compile Include="Controls\User\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\Profile.ascx.cs">
+      <DependentUpon>Profile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\Profile.ascx.designer.cs">
+      <DependentUpon>Profile.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\User\Register.ascx.cs">
       <DependentUpon>Register.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -669,6 +676,7 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
+    <Content Include="Controls\User\Profile.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="Pages\Admin\Default.aspx" />
     <Content Include="Pages\Admin\Hosts.aspx" />

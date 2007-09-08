@@ -173,6 +173,7 @@
     <Compile Include="Web\Controls\Tags\UserEditableTagList.cs" />
     <Compile Include="Web\Controls\UI\StyledPanel.cs" />
     <Compile Include="Web\Controls\User\CreateUserWizard.cs" />
+    <Compile Include="Web\Controls\User\Gravatar.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
     <Compile Include="Web\Controls\User\UserProfileMenu.cs" />

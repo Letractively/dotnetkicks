@@ -60,6 +60,11 @@ namespace Incremental.Kick.Caching {
             return userID.Value;
         }
 
+        public static User GetUserByUsername(string username) {
+            return GetUser(GetUserID(username));
+        }
+
+
         public static void RemoveUser(string securityToken) {
             GetUserCache().Remove(GetUserProfileCacheKey(SecurityToken.FromString(securityToken).UserID));
         }

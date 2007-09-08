@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Controls.User {
+namespace Incremental.Kick.Web.UI.Controls {
     
     
     /// <summary>
