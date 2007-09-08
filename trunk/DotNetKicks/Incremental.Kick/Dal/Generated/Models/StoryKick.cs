@@ -183,9 +183,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryKickID")]
 		public int StoryKickID 
 		{
-			get { return GetColumnValue<int>("StoryKickID"); }
+			get { return GetColumnValue<int>(Columns.StoryKickID); }
 
-			set { SetColumnValue("StoryKickID", value); }
+			set { SetColumnValue(Columns.StoryKickID, value); }
 
 		}
 
@@ -193,9 +193,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryID")]
 		public int StoryID 
 		{
-			get { return GetColumnValue<int>("StoryID"); }
+			get { return GetColumnValue<int>(Columns.StoryID); }
 
-			set { SetColumnValue("StoryID", value); }
+			set { SetColumnValue(Columns.StoryID, value); }
 
 		}
 
@@ -203,9 +203,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
-			get { return GetColumnValue<int>("UserID"); }
+			get { return GetColumnValue<int>(Columns.UserID); }
 
-			set { SetColumnValue("UserID", value); }
+			set { SetColumnValue(Columns.UserID, value); }
 
 		}
 
@@ -213,9 +213,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -223,9 +223,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -305,15 +305,15 @@ namespace Incremental.Kick.Dal
 			StoryKick item = new StoryKick();
 			
 				item.StoryKickID = varStoryKickID;
-				
+			
 				item.StoryID = varStoryID;
-				
+			
 				item.UserID = varUserID;
-				
+			
 				item.HostID = varHostID;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

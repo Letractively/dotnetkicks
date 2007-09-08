@@ -584,9 +584,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -594,9 +594,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostName")]
 		public string HostName 
 		{
-			get { return GetColumnValue<string>("HostName"); }
+			get { return GetColumnValue<string>(Columns.HostName); }
 
-			set { SetColumnValue("HostName", value); }
+			set { SetColumnValue(Columns.HostName, value); }
 
 		}
 
@@ -604,9 +604,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("RootUrl")]
 		public string RootUrl 
 		{
-			get { return GetColumnValue<string>("RootUrl"); }
+			get { return GetColumnValue<string>(Columns.RootUrl); }
 
-			set { SetColumnValue("RootUrl", value); }
+			set { SetColumnValue(Columns.RootUrl, value); }
 
 		}
 
@@ -614,9 +614,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SiteTitle")]
 		public string SiteTitle 
 		{
-			get { return GetColumnValue<string>("SiteTitle"); }
+			get { return GetColumnValue<string>(Columns.SiteTitle); }
 
-			set { SetColumnValue("SiteTitle", value); }
+			set { SetColumnValue(Columns.SiteTitle, value); }
 
 		}
 
@@ -624,9 +624,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SiteDescription")]
 		public string SiteDescription 
 		{
-			get { return GetColumnValue<string>("SiteDescription"); }
+			get { return GetColumnValue<string>(Columns.SiteDescription); }
 
-			set { SetColumnValue("SiteDescription", value); }
+			set { SetColumnValue(Columns.SiteDescription, value); }
 
 		}
 
@@ -634,9 +634,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("TagLine")]
 		public string TagLine 
 		{
-			get { return GetColumnValue<string>("TagLine"); }
+			get { return GetColumnValue<string>(Columns.TagLine); }
 
-			set { SetColumnValue("TagLine", value); }
+			set { SetColumnValue(Columns.TagLine, value); }
 
 		}
 
@@ -644,9 +644,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("LogoPath")]
 		public string LogoPath 
 		{
-			get { return GetColumnValue<string>("LogoPath"); }
+			get { return GetColumnValue<string>(Columns.LogoPath); }
 
-			set { SetColumnValue("LogoPath", value); }
+			set { SetColumnValue(Columns.LogoPath, value); }
 
 		}
 
@@ -654,9 +654,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -664,9 +664,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("BlogUrl")]
 		public string BlogUrl 
 		{
-			get { return GetColumnValue<string>("BlogUrl"); }
+			get { return GetColumnValue<string>(Columns.BlogUrl); }
 
-			set { SetColumnValue("BlogUrl", value); }
+			set { SetColumnValue(Columns.BlogUrl, value); }
 
 		}
 
@@ -674,9 +674,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Email")]
 		public string Email 
 		{
-			get { return GetColumnValue<string>("Email"); }
+			get { return GetColumnValue<string>(Columns.Email); }
 
-			set { SetColumnValue("Email", value); }
+			set { SetColumnValue(Columns.Email, value); }
 
 		}
 
@@ -684,9 +684,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Template")]
 		public string Template 
 		{
-			get { return GetColumnValue<string>("Template"); }
+			get { return GetColumnValue<string>(Columns.Template); }
 
-			set { SetColumnValue("Template", value); }
+			set { SetColumnValue(Columns.Template, value); }
 
 		}
 
@@ -694,9 +694,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("ShowAds")]
 		public bool ShowAds 
 		{
-			get { return GetColumnValue<bool>("ShowAds"); }
+			get { return GetColumnValue<bool>(Columns.ShowAds); }
 
-			set { SetColumnValue("ShowAds", value); }
+			set { SetColumnValue(Columns.ShowAds, value); }
 
 		}
 
@@ -704,9 +704,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Culture")]
 		public string Culture 
 		{
-			get { return GetColumnValue<string>("Culture"); }
+			get { return GetColumnValue<string>(Columns.Culture); }
 
-			set { SetColumnValue("Culture", value); }
+			set { SetColumnValue(Columns.Culture, value); }
 
 		}
 
@@ -714,9 +714,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UICulture")]
 		public string UICulture 
 		{
-			get { return GetColumnValue<string>("UICulture"); }
+			get { return GetColumnValue<string>(Columns.UICulture); }
 
-			set { SetColumnValue("UICulture", value); }
+			set { SetColumnValue(Columns.UICulture, value); }
 
 		}
 
@@ -724,9 +724,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumStoryAgeInHours")]
 		public short Publish_MinimumStoryAgeInHours 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumStoryAgeInHours"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumStoryAgeInHours); }
 
-			set { SetColumnValue("Publish_MinimumStoryAgeInHours", value); }
+			set { SetColumnValue(Columns.Publish_MinimumStoryAgeInHours, value); }
 
 		}
 
@@ -734,9 +734,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MaximumStoryAgeInHours")]
 		public short Publish_MaximumStoryAgeInHours 
 		{
-			get { return GetColumnValue<short>("Publish_MaximumStoryAgeInHours"); }
+			get { return GetColumnValue<short>(Columns.Publish_MaximumStoryAgeInHours); }
 
-			set { SetColumnValue("Publish_MaximumStoryAgeInHours", value); }
+			set { SetColumnValue(Columns.Publish_MaximumStoryAgeInHours, value); }
 
 		}
 
@@ -744,9 +744,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MaximumSimultaneousStoryPublishCount")]
 		public short Publish_MaximumSimultaneousStoryPublishCount 
 		{
-			get { return GetColumnValue<short>("Publish_MaximumSimultaneousStoryPublishCount"); }
+			get { return GetColumnValue<short>(Columns.Publish_MaximumSimultaneousStoryPublishCount); }
 
-			set { SetColumnValue("Publish_MaximumSimultaneousStoryPublishCount", value); }
+			set { SetColumnValue(Columns.Publish_MaximumSimultaneousStoryPublishCount, value); }
 
 		}
 
@@ -754,9 +754,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumStoryScore")]
 		public short Publish_MinimumStoryScore 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumStoryScore"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumStoryScore); }
 
-			set { SetColumnValue("Publish_MinimumStoryScore", value); }
+			set { SetColumnValue(Columns.Publish_MinimumStoryScore, value); }
 
 		}
 
@@ -764,9 +764,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumStoryKickCount")]
 		public short Publish_MinimumStoryKickCount 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumStoryKickCount"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumStoryKickCount); }
 
-			set { SetColumnValue("Publish_MinimumStoryKickCount", value); }
+			set { SetColumnValue(Columns.Publish_MinimumStoryKickCount, value); }
 
 		}
 
@@ -774,9 +774,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumStoryCommentCount")]
 		public short Publish_MinimumStoryCommentCount 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumStoryCommentCount"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumStoryCommentCount); }
 
-			set { SetColumnValue("Publish_MinimumStoryCommentCount", value); }
+			set { SetColumnValue(Columns.Publish_MinimumStoryCommentCount, value); }
 
 		}
 
@@ -784,9 +784,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumAverageStoryKicksPerHour")]
 		public short Publish_MinimumAverageStoryKicksPerHour 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumAverageStoryKicksPerHour"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumAverageStoryKicksPerHour); }
 
-			set { SetColumnValue("Publish_MinimumAverageStoryKicksPerHour", value); }
+			set { SetColumnValue(Columns.Publish_MinimumAverageStoryKicksPerHour, value); }
 
 		}
 
@@ -794,9 +794,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimunAverageCommentsPerHour")]
 		public short Publish_MinimunAverageCommentsPerHour 
 		{
-			get { return GetColumnValue<short>("Publish_MinimunAverageCommentsPerHour"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimunAverageCommentsPerHour); }
 
-			set { SetColumnValue("Publish_MinimunAverageCommentsPerHour", value); }
+			set { SetColumnValue(Columns.Publish_MinimunAverageCommentsPerHour, value); }
 
 		}
 
@@ -804,9 +804,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_MinimumViewCount")]
 		public short Publish_MinimumViewCount 
 		{
-			get { return GetColumnValue<short>("Publish_MinimumViewCount"); }
+			get { return GetColumnValue<short>(Columns.Publish_MinimumViewCount); }
 
-			set { SetColumnValue("Publish_MinimumViewCount", value); }
+			set { SetColumnValue(Columns.Publish_MinimumViewCount, value); }
 
 		}
 
@@ -814,9 +814,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_KickScore")]
 		public short Publish_KickScore 
 		{
-			get { return GetColumnValue<short>("Publish_KickScore"); }
+			get { return GetColumnValue<short>(Columns.Publish_KickScore); }
 
-			set { SetColumnValue("Publish_KickScore", value); }
+			set { SetColumnValue(Columns.Publish_KickScore, value); }
 
 		}
 
@@ -824,9 +824,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Publish_CommentScore")]
 		public short Publish_CommentScore 
 		{
-			get { return GetColumnValue<short>("Publish_CommentScore"); }
+			get { return GetColumnValue<short>(Columns.Publish_CommentScore); }
 
-			set { SetColumnValue("Publish_CommentScore", value); }
+			set { SetColumnValue(Columns.Publish_CommentScore, value); }
 
 		}
 
@@ -834,9 +834,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("AdsenseID")]
 		public string AdsenseID 
 		{
-			get { return GetColumnValue<string>("AdsenseID"); }
+			get { return GetColumnValue<string>(Columns.AdsenseID); }
 
-			set { SetColumnValue("AdsenseID", value); }
+			set { SetColumnValue(Columns.AdsenseID, value); }
 
 		}
 
@@ -844,9 +844,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("TrackingHtml")]
 		public string TrackingHtml 
 		{
-			get { return GetColumnValue<string>("TrackingHtml"); }
+			get { return GetColumnValue<string>(Columns.TrackingHtml); }
 
-			set { SetColumnValue("TrackingHtml", value); }
+			set { SetColumnValue(Columns.TrackingHtml, value); }
 
 		}
 
@@ -854,9 +854,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("AnnouncementHtml")]
 		public string AnnouncementHtml 
 		{
-			get { return GetColumnValue<string>("AnnouncementHtml"); }
+			get { return GetColumnValue<string>(Columns.AnnouncementHtml); }
 
-			set { SetColumnValue("AnnouncementHtml", value); }
+			set { SetColumnValue(Columns.AnnouncementHtml, value); }
 
 		}
 
@@ -864,9 +864,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SmtpHost")]
 		public string SmtpHost 
 		{
-			get { return GetColumnValue<string>("SmtpHost"); }
+			get { return GetColumnValue<string>(Columns.SmtpHost); }
 
-			set { SetColumnValue("SmtpHost", value); }
+			set { SetColumnValue(Columns.SmtpHost, value); }
 
 		}
 
@@ -874,9 +874,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SmtpPort")]
 		public int? SmtpPort 
 		{
-			get { return GetColumnValue<int?>("SmtpPort"); }
+			get { return GetColumnValue<int?>(Columns.SmtpPort); }
 
-			set { SetColumnValue("SmtpPort", value); }
+			set { SetColumnValue(Columns.SmtpPort, value); }
 
 		}
 
@@ -884,9 +884,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SmtpUsername")]
 		public string SmtpUsername 
 		{
-			get { return GetColumnValue<string>("SmtpUsername"); }
+			get { return GetColumnValue<string>(Columns.SmtpUsername); }
 
-			set { SetColumnValue("SmtpUsername", value); }
+			set { SetColumnValue(Columns.SmtpUsername, value); }
 
 		}
 
@@ -894,9 +894,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SmtpPassword")]
 		public string SmtpPassword 
 		{
-			get { return GetColumnValue<string>("SmtpPassword"); }
+			get { return GetColumnValue<string>(Columns.SmtpPassword); }
 
-			set { SetColumnValue("SmtpPassword", value); }
+			set { SetColumnValue(Columns.SmtpPassword, value); }
 
 		}
 
@@ -904,9 +904,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SmtpEnableSsl")]
 		public bool? SmtpEnableSsl 
 		{
-			get { return GetColumnValue<bool?>("SmtpEnableSsl"); }
+			get { return GetColumnValue<bool?>(Columns.SmtpEnableSsl); }
 
-			set { SetColumnValue("SmtpEnableSsl", value); }
+			set { SetColumnValue(Columns.SmtpEnableSsl, value); }
 
 		}
 
@@ -914,9 +914,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("FeedBurnerMainRssFeedUrl")]
 		public string FeedBurnerMainRssFeedUrl 
 		{
-			get { return GetColumnValue<string>("FeedBurnerMainRssFeedUrl"); }
+			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedUrl); }
 
-			set { SetColumnValue("FeedBurnerMainRssFeedUrl", value); }
+			set { SetColumnValue(Columns.FeedBurnerMainRssFeedUrl, value); }
 
 		}
 
@@ -924,9 +924,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("FeedBurnerMainRssFeedCountHtml")]
 		public string FeedBurnerMainRssFeedCountHtml 
 		{
-			get { return GetColumnValue<string>("FeedBurnerMainRssFeedCountHtml"); }
+			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedCountHtml); }
 
-			set { SetColumnValue("FeedBurnerMainRssFeedCountHtml", value); }
+			set { SetColumnValue(Columns.FeedBurnerMainRssFeedCountHtml, value); }
 
 		}
 
@@ -1064,75 +1064,75 @@ namespace Incremental.Kick.Dal
 			Host item = new Host();
 			
 				item.HostID = varHostID;
-				
+			
 				item.HostName = varHostName;
-				
+			
 				item.RootUrl = varRootUrl;
-				
+			
 				item.SiteTitle = varSiteTitle;
-				
+			
 				item.SiteDescription = varSiteDescription;
-				
+			
 				item.TagLine = varTagLine;
-				
+			
 				item.LogoPath = varLogoPath;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 				item.BlogUrl = varBlogUrl;
-				
+			
 				item.Email = varEmail;
-				
+			
 				item.Template = varTemplate;
-				
+			
 				item.ShowAds = varShowAds;
-				
+			
 				item.Culture = varCulture;
-				
+			
 				item.UICulture = varUICulture;
-				
+			
 				item.Publish_MinimumStoryAgeInHours = varPublish_MinimumStoryAgeInHours;
-				
+			
 				item.Publish_MaximumStoryAgeInHours = varPublish_MaximumStoryAgeInHours;
-				
+			
 				item.Publish_MaximumSimultaneousStoryPublishCount = varPublish_MaximumSimultaneousStoryPublishCount;
-				
+			
 				item.Publish_MinimumStoryScore = varPublish_MinimumStoryScore;
-				
+			
 				item.Publish_MinimumStoryKickCount = varPublish_MinimumStoryKickCount;
-				
+			
 				item.Publish_MinimumStoryCommentCount = varPublish_MinimumStoryCommentCount;
-				
+			
 				item.Publish_MinimumAverageStoryKicksPerHour = varPublish_MinimumAverageStoryKicksPerHour;
-				
+			
 				item.Publish_MinimunAverageCommentsPerHour = varPublish_MinimunAverageCommentsPerHour;
-				
+			
 				item.Publish_MinimumViewCount = varPublish_MinimumViewCount;
-				
+			
 				item.Publish_KickScore = varPublish_KickScore;
-				
+			
 				item.Publish_CommentScore = varPublish_CommentScore;
-				
+			
 				item.AdsenseID = varAdsenseID;
-				
+			
 				item.TrackingHtml = varTrackingHtml;
-				
+			
 				item.AnnouncementHtml = varAnnouncementHtml;
-				
+			
 				item.SmtpHost = varSmtpHost;
-				
+			
 				item.SmtpPort = varSmtpPort;
-				
+			
 				item.SmtpUsername = varSmtpUsername;
-				
+			
 				item.SmtpPassword = varSmtpPassword;
-				
+			
 				item.SmtpEnableSsl = varSmtpEnableSsl;
-				
+			
 				item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
-				
+			
 				item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

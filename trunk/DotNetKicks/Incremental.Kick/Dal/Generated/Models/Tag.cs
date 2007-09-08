@@ -140,9 +140,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("TagID")]
 		public int TagID 
 		{
-			get { return GetColumnValue<int>("TagID"); }
+			get { return GetColumnValue<int>(Columns.TagID); }
 
-			set { SetColumnValue("TagID", value); }
+			set { SetColumnValue(Columns.TagID, value); }
 
 		}
 
@@ -150,9 +150,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("TagIdentifier")]
 		public string TagIdentifier 
 		{
-			get { return GetColumnValue<string>("TagIdentifier"); }
+			get { return GetColumnValue<string>(Columns.TagIdentifier); }
 
-			set { SetColumnValue("TagIdentifier", value); }
+			set { SetColumnValue(Columns.TagIdentifier, value); }
 
 		}
 
@@ -208,9 +208,9 @@ namespace Incremental.Kick.Dal
 			Tag item = new Tag();
 			
 				item.TagID = varTagID;
-				
+			
 				item.TagIdentifier = varTagIdentifier;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

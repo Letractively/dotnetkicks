@@ -194,9 +194,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CommentID")]
 		public int CommentID 
 		{
-			get { return GetColumnValue<int>("CommentID"); }
+			get { return GetColumnValue<int>(Columns.CommentID); }
 
-			set { SetColumnValue("CommentID", value); }
+			set { SetColumnValue(Columns.CommentID, value); }
 
 		}
 
@@ -204,9 +204,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryID")]
 		public int StoryID 
 		{
-			get { return GetColumnValue<int>("StoryID"); }
+			get { return GetColumnValue<int>(Columns.StoryID); }
 
-			set { SetColumnValue("StoryID", value); }
+			set { SetColumnValue(Columns.StoryID, value); }
 
 		}
 
@@ -214,9 +214,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
-			get { return GetColumnValue<int>("UserID"); }
+			get { return GetColumnValue<int>(Columns.UserID); }
 
-			set { SetColumnValue("UserID", value); }
+			set { SetColumnValue(Columns.UserID, value); }
 
 		}
 
@@ -224,9 +224,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Username")]
 		public string Username 
 		{
-			get { return GetColumnValue<string>("Username"); }
+			get { return GetColumnValue<string>(Columns.Username); }
 
-			set { SetColumnValue("Username", value); }
+			set { SetColumnValue(Columns.Username, value); }
 
 		}
 
@@ -234,9 +234,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CommentX")]
 		public string CommentX 
 		{
-			get { return GetColumnValue<string>("Comment"); }
+			get { return GetColumnValue<string>(Columns.CommentX); }
 
-			set { SetColumnValue("Comment", value); }
+			set { SetColumnValue(Columns.CommentX, value); }
 
 		}
 
@@ -244,9 +244,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -328,17 +328,17 @@ namespace Incremental.Kick.Dal
 			Comment item = new Comment();
 			
 				item.CommentID = varCommentID;
-				
+			
 				item.StoryID = varStoryID;
-				
+			
 				item.UserID = varUserID;
-				
+			
 				item.Username = varUsername;
-				
+			
 				item.CommentX = varCommentX;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

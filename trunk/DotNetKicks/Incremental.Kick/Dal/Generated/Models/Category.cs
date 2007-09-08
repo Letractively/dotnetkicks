@@ -207,9 +207,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CategoryID")]
 		public short CategoryID 
 		{
-			get { return GetColumnValue<short>("CategoryID"); }
+			get { return GetColumnValue<short>(Columns.CategoryID); }
 
-			set { SetColumnValue("CategoryID", value); }
+			set { SetColumnValue(Columns.CategoryID, value); }
 
 		}
 
@@ -217,9 +217,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -227,9 +227,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CategoryIdentifier")]
 		public string CategoryIdentifier 
 		{
-			get { return GetColumnValue<string>("CategoryIdentifier"); }
+			get { return GetColumnValue<string>(Columns.CategoryIdentifier); }
 
-			set { SetColumnValue("CategoryIdentifier", value); }
+			set { SetColumnValue(Columns.CategoryIdentifier, value); }
 
 		}
 
@@ -237,9 +237,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Name")]
 		public string Name 
 		{
-			get { return GetColumnValue<string>("Name"); }
+			get { return GetColumnValue<string>(Columns.Name); }
 
-			set { SetColumnValue("Name", value); }
+			set { SetColumnValue(Columns.Name, value); }
 
 		}
 
@@ -247,9 +247,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Description")]
 		public string Description 
 		{
-			get { return GetColumnValue<string>("Description"); }
+			get { return GetColumnValue<string>(Columns.Description); }
 
-			set { SetColumnValue("Description", value); }
+			set { SetColumnValue(Columns.Description, value); }
 
 		}
 
@@ -257,9 +257,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IconName")]
 		public string IconName 
 		{
-			get { return GetColumnValue<string>("IconName"); }
+			get { return GetColumnValue<string>(Columns.IconName); }
 
-			set { SetColumnValue("IconName", value); }
+			set { SetColumnValue(Columns.IconName, value); }
 
 		}
 
@@ -267,9 +267,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("OrderPriority")]
 		public short OrderPriority 
 		{
-			get { return GetColumnValue<short>("OrderPriority"); }
+			get { return GetColumnValue<short>(Columns.OrderPriority); }
 
-			set { SetColumnValue("OrderPriority", value); }
+			set { SetColumnValue(Columns.OrderPriority, value); }
 
 		}
 
@@ -351,19 +351,19 @@ namespace Incremental.Kick.Dal
 			Category item = new Category();
 			
 				item.CategoryID = varCategoryID;
-				
+			
 				item.HostID = varHostID;
-				
+			
 				item.CategoryIdentifier = varCategoryIdentifier;
-				
+			
 				item.Name = varName;
-				
+			
 				item.Description = varDescription;
-				
+			
 				item.IconName = varIconName;
-				
+			
 				item.OrderPriority = varOrderPriority;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);

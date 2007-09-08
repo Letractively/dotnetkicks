@@ -353,9 +353,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryID")]
 		public int StoryID 
 		{
-			get { return GetColumnValue<int>("StoryID"); }
+			get { return GetColumnValue<int>(Columns.StoryID); }
 
-			set { SetColumnValue("StoryID", value); }
+			set { SetColumnValue(Columns.StoryID, value); }
 
 		}
 
@@ -363,9 +363,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("HostID")]
 		public int HostID 
 		{
-			get { return GetColumnValue<int>("HostID"); }
+			get { return GetColumnValue<int>(Columns.HostID); }
 
-			set { SetColumnValue("HostID", value); }
+			set { SetColumnValue(Columns.HostID, value); }
 
 		}
 
@@ -373,9 +373,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("StoryIdentifier")]
 		public string StoryIdentifier 
 		{
-			get { return GetColumnValue<string>("StoryIdentifier"); }
+			get { return GetColumnValue<string>(Columns.StoryIdentifier); }
 
-			set { SetColumnValue("StoryIdentifier", value); }
+			set { SetColumnValue(Columns.StoryIdentifier, value); }
 
 		}
 
@@ -383,9 +383,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Title")]
 		public string Title 
 		{
-			get { return GetColumnValue<string>("Title"); }
+			get { return GetColumnValue<string>(Columns.Title); }
 
-			set { SetColumnValue("Title", value); }
+			set { SetColumnValue(Columns.Title, value); }
 
 		}
 
@@ -393,9 +393,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Description")]
 		public string Description 
 		{
-			get { return GetColumnValue<string>("Description"); }
+			get { return GetColumnValue<string>(Columns.Description); }
 
-			set { SetColumnValue("Description", value); }
+			set { SetColumnValue(Columns.Description, value); }
 
 		}
 
@@ -403,9 +403,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Url")]
 		public string Url 
 		{
-			get { return GetColumnValue<string>("Url"); }
+			get { return GetColumnValue<string>(Columns.Url); }
 
-			set { SetColumnValue("Url", value); }
+			set { SetColumnValue(Columns.Url, value); }
 
 		}
 
@@ -413,9 +413,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CategoryID")]
 		public short CategoryID 
 		{
-			get { return GetColumnValue<short>("CategoryID"); }
+			get { return GetColumnValue<short>(Columns.CategoryID); }
 
-			set { SetColumnValue("CategoryID", value); }
+			set { SetColumnValue(Columns.CategoryID, value); }
 
 		}
 
@@ -423,9 +423,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
-			get { return GetColumnValue<int>("UserID"); }
+			get { return GetColumnValue<int>(Columns.UserID); }
 
-			set { SetColumnValue("UserID", value); }
+			set { SetColumnValue(Columns.UserID, value); }
 
 		}
 
@@ -433,9 +433,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("Username")]
 		public string Username 
 		{
-			get { return GetColumnValue<string>("Username"); }
+			get { return GetColumnValue<string>(Columns.Username); }
 
-			set { SetColumnValue("Username", value); }
+			set { SetColumnValue(Columns.Username, value); }
 
 		}
 
@@ -443,9 +443,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("KickCount")]
 		public int KickCount 
 		{
-			get { return GetColumnValue<int>("KickCount"); }
+			get { return GetColumnValue<int>(Columns.KickCount); }
 
-			set { SetColumnValue("KickCount", value); }
+			set { SetColumnValue(Columns.KickCount, value); }
 
 		}
 
@@ -453,9 +453,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("SpamCount")]
 		public int SpamCount 
 		{
-			get { return GetColumnValue<int>("SpamCount"); }
+			get { return GetColumnValue<int>(Columns.SpamCount); }
 
-			set { SetColumnValue("SpamCount", value); }
+			set { SetColumnValue(Columns.SpamCount, value); }
 
 		}
 
@@ -463,9 +463,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("ViewCount")]
 		public int ViewCount 
 		{
-			get { return GetColumnValue<int>("ViewCount"); }
+			get { return GetColumnValue<int>(Columns.ViewCount); }
 
-			set { SetColumnValue("ViewCount", value); }
+			set { SetColumnValue(Columns.ViewCount, value); }
 
 		}
 
@@ -473,9 +473,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CommentCount")]
 		public int CommentCount 
 		{
-			get { return GetColumnValue<int>("CommentCount"); }
+			get { return GetColumnValue<int>(Columns.CommentCount); }
 
-			set { SetColumnValue("CommentCount", value); }
+			set { SetColumnValue(Columns.CommentCount, value); }
 
 		}
 
@@ -483,9 +483,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IsPublishedToHomepage")]
 		public bool IsPublishedToHomepage 
 		{
-			get { return GetColumnValue<bool>("IsPublishedToHomepage"); }
+			get { return GetColumnValue<bool>(Columns.IsPublishedToHomepage); }
 
-			set { SetColumnValue("IsPublishedToHomepage", value); }
+			set { SetColumnValue(Columns.IsPublishedToHomepage, value); }
 
 		}
 
@@ -493,9 +493,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("IsSpam")]
 		public bool IsSpam 
 		{
-			get { return GetColumnValue<bool>("IsSpam"); }
+			get { return GetColumnValue<bool>(Columns.IsSpam); }
 
-			set { SetColumnValue("IsSpam", value); }
+			set { SetColumnValue(Columns.IsSpam, value); }
 
 		}
 
@@ -503,9 +503,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("AdsenseID")]
 		public string AdsenseID 
 		{
-			get { return GetColumnValue<string>("AdsenseID"); }
+			get { return GetColumnValue<string>(Columns.AdsenseID); }
 
-			set { SetColumnValue("AdsenseID", value); }
+			set { SetColumnValue(Columns.AdsenseID, value); }
 
 		}
 
@@ -513,9 +513,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("CreatedOn")]
 		public DateTime CreatedOn 
 		{
-			get { return GetColumnValue<DateTime>("CreatedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.CreatedOn); }
 
-			set { SetColumnValue("CreatedOn", value); }
+			set { SetColumnValue(Columns.CreatedOn, value); }
 
 		}
 
@@ -523,9 +523,9 @@ namespace Incremental.Kick.Dal
 		[XmlAttribute("PublishedOn")]
 		public DateTime PublishedOn 
 		{
-			get { return GetColumnValue<DateTime>("PublishedOn"); }
+			get { return GetColumnValue<DateTime>(Columns.PublishedOn); }
 
-			set { SetColumnValue("PublishedOn", value); }
+			set { SetColumnValue(Columns.PublishedOn, value); }
 
 		}
 
@@ -673,41 +673,41 @@ namespace Incremental.Kick.Dal
 			Story item = new Story();
 			
 				item.StoryID = varStoryID;
-				
+			
 				item.HostID = varHostID;
-				
+			
 				item.StoryIdentifier = varStoryIdentifier;
-				
+			
 				item.Title = varTitle;
-				
+			
 				item.Description = varDescription;
-				
+			
 				item.Url = varUrl;
-				
+			
 				item.CategoryID = varCategoryID;
-				
+			
 				item.UserID = varUserID;
-				
+			
 				item.Username = varUsername;
-				
+			
 				item.KickCount = varKickCount;
-				
+			
 				item.SpamCount = varSpamCount;
-				
+			
 				item.ViewCount = varViewCount;
-				
+			
 				item.CommentCount = varCommentCount;
-				
+			
 				item.IsPublishedToHomepage = varIsPublishedToHomepage;
-				
+			
 				item.IsSpam = varIsSpam;
-				
+			
 				item.AdsenseID = varAdsenseID;
-				
+			
 				item.CreatedOn = varCreatedOn;
-				
+			
 				item.PublishedOn = varPublishedOn;
-				
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
