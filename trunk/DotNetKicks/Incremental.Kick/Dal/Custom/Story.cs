@@ -121,6 +121,7 @@ namespace Incremental.Kick.Dal {
             Query query = new Query(Story.Schema).WHERE(Story.Columns.UserID, userID).AND(Story.Columns.HostID, hostID);
             return (int)query.GetCount(Story.Columns.StoryID);
         }
+    
         public static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isPublished, int hostID, int pageIndex, int pageSize) {
             Query query = GetStoryQuery(hostID, isPublished, categoryID);
             query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
