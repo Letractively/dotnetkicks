@@ -770,6 +770,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Static\Scripts\2.0.1\NewFolder1\" />
     <Folder Include="Templates\Simple\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
