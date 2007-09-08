@@ -190,6 +190,46 @@ namespace Incremental.Kick.Caching {
             return count.Value;
         }
 
+        public static CommentCollection GetUserComments(string userIdentifier, int hostID, int pageNumber, int pageSize)
+        {
+            string cacheKey = GetUserCommentsCacheKey(userIdentifier, hostID, pageNumber, pageSize);
+            CacheManager<string, CommentCollection> commentCache = GetCommentCollectionCache();
+
+            CommentCollection comments = commentCache[cacheKey];
+
+            if (comments == null)
+            {
+                //TODO There's no Host_Id value in comments table
+                comments = Comment.FetchCommentsByUser(UserCache.GetUserID(userIdentifier));
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                if(comments!=null)
+                    commentCache.Insert(cacheKey, comments, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return comments;
+        }
+        public static int GetUserCommentsCount(string userIdentifier, int hostID)
+        {
+            string cacheKey = String.Format("Kick_Story_UserCommentsCount_{0}_{1}", userIdentifier, hostID);
+            CacheManager<string, int?> countCache = GetCountCache();
+
+            int? count = countCache[cacheKey];
+            if (count == null)
+            {
+                //TODO There's no Host_Id value in comments table
+                count = Comment.GetUserCommentsCount(UserCache.GetUserID(userIdentifier), hostID);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+
+        private static string GetUserCommentsCacheKey(string userIdentifier, int hostID, int pageNumber, int pageSize)
+        {
+            return String.Format("UserCommentCollection_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
+        }
+
         public static StoryCollection GetCategoryStories(short categoryID, bool isKicked, int hostID, int pageNumber, int pageSize) {
             string cacheKey = String.Format("Kick_StoryTable_{0}_{1}_{2}_{3}_{4}", categoryID, isKicked, hostID, pageNumber, pageSize);
 

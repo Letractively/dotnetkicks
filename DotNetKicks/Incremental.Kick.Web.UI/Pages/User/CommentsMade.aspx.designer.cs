@@ -27,5 +27,23 @@ namespace Incremental.Kick.Web.UI.Pages.User {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Incremental.Kick.Web.Controls.UserProfileMenu UserProfileMenu;
+        
+        /// <summary>
+        /// CommentList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.CommentList CommentList;
+        
+        /// <summary>
+        /// Paging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.Paging Paging;
     }
 }
