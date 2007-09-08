@@ -28,6 +28,8 @@ body, td, th, h3, textarea, input, select {
 	padding: 12px 12px 12px 12px; margin-top: 8px;
 }
 
+.User { padding: 2px; }
+.Gravatar { }
 
 #wrap {
 	position: relative;
