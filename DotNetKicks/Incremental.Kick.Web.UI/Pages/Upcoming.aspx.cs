@@ -15,7 +15,7 @@ using Incremental.Kick.Caching;
 namespace Incremental.Kick.Web.UI.Pages {
     public partial class Upcoming : Incremental.Kick.Web.Controls.KickUIPage {
         protected Upcoming() {
-            this.DisplayAds = true;
+            this.DisplayAds = false;
         }
 
         protected void Page_Init(object sender, EventArgs e) {
