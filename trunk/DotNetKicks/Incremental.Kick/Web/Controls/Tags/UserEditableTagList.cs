@@ -33,7 +33,7 @@ namespace Incremental.Kick.Web.Controls {
                         tagClass = "oddTag";
 
                     writer.WriteLine(@"<span class=""EditableTag {3}"" id=""{0}""><a href=""{1}"" class=""tag {3}"">{2}</a>",
-                        spanID, UrlFactory.CreateUrl(UrlFactory.PageName.ViewUserTag, this.KickPage.KickUserProfile.Username, tag.TagIdentifier), tag.TagName, tagClass);
+                        spanID, UrlFactory.CreateUrl(UrlFactory.PageName.UserTag, this.KickPage.KickUserProfile.Username, tag.TagIdentifier), tag.TagName, tagClass);
 
                     writer.WriteLine(@" [<a href=""javascript:RemoveUserStoryTag({0}, {1});"">x</a>]<br /></span>",
                         this._storyID, tag.TagID);

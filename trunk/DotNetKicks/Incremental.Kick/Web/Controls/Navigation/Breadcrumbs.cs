@@ -46,7 +46,7 @@ namespace Incremental.Kick.Web.Controls {
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("view story", writer);
                     break;
-                case UrlFactory.PageName.ViewUser:
+                case UrlFactory.PageName.UserProfile:
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("users", "#", writer);
                     this.RenderSpacer(writer);
@@ -83,7 +83,7 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine(@"</td><td align=""right"">&nbsp;&nbsp;&nbsp;");
             
             if(this.KickPage.User.Identity.IsAuthenticated)
-                writer.WriteLine(@"Welcome <a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.ViewUser, this.KickPage.KickUserProfile.Username), this.KickPage.KickUserProfile.Username);
+                writer.WriteLine(@"Welcome <a href=""{0}"">{1}</a>", UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.KickPage.KickUserProfile.Username), this.KickPage.KickUserProfile.Username);
             else
                 writer.WriteLine(@"Why not <a href=""{0}"">join our community?</a>", UrlFactory.CreateUrl(UrlFactory.PageName.Register));
 

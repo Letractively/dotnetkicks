@@ -111,15 +111,13 @@ namespace Incremental.Kick.Dal {
             return (int)query.GetCount(StoryKick.Columns.StoryKickID);
         }
 
-        public static StoryCollection GetUserSubmittedStories(int userID, int hostID, int pageNumber, int pageSize)
-        {
+        public static StoryCollection GetUserSubmittedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
             stories.Load(SPs.Kick_GetPagedSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
 
-        public static int GetUserSubmittedStoriesCount(int userID, int hostID)
-        {
+        public static int GetUserSubmittedStoriesCount(int userID, int hostID) {
             Query query = new Query(Story.Schema).WHERE(Story.Columns.UserID, userID).AND(Story.Columns.HostID, hostID);
             return (int)query.GetCount(Story.Columns.StoryID);
         }

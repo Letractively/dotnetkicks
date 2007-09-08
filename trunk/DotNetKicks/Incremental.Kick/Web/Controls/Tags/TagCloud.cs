@@ -34,7 +34,7 @@ namespace Incremental.Kick.Web.Controls {
 
                     string tagUrl;
                     if (this.KickPage.UrlParameters.UserIdentifierSpecified)
-                        tagUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewUserTag, this.KickPage.UrlParameters.UserIdentifier, HttpUtility.UrlEncode(tag.TagIdentifier));
+                        tagUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserTag, this.KickPage.UrlParameters.UserIdentifier, HttpUtility.UrlEncode(tag.TagIdentifier));
                     else
                         tagUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewTag, HttpUtility.UrlEncode(tag.TagIdentifier));
 

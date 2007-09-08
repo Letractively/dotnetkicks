@@ -449,12 +449,26 @@
     <Compile Include="Pages\User\ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\CommentsMade.aspx.cs">
+      <DependentUpon>CommentsMade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\CommentsMade.aspx.designer.cs">
+      <DependentUpon>CommentsMade.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\User\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\KickedStories.aspx.cs">
+      <DependentUpon>KickedStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\KickedStories.aspx.designer.cs">
+      <DependentUpon>KickedStories.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -484,6 +498,13 @@
     <Compile Include="Pages\User\NotAuthorised.aspx.designer.cs">
       <DependentUpon>NotAuthorised.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\Profile.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -498,19 +519,12 @@
     <Compile Include="Pages\User\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\User\Submitted.aspx.cs">
-      <DependentUpon>Submitted.aspx</DependentUpon>
+    <Compile Include="Pages\User\SubmittedStories.aspx.cs">
+      <DependentUpon>SubmittedStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\User\Submitted.aspx.designer.cs">
-      <DependentUpon>Submitted.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\View.aspx.cs">
-      <DependentUpon>View.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\User\View.aspx.designer.cs">
-      <DependentUpon>View.aspx</DependentUpon>
+    <Compile Include="Pages\User\SubmittedStories.aspx.designer.cs">
+      <DependentUpon>SubmittedStories.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\ViewTag.aspx.cs">
       <DependentUpon>ViewTag.aspx</DependentUpon>
@@ -654,8 +668,11 @@
     <Content Include="Pages\Admin\Stories.aspx" />
     <Content Include="Pages\Admin\Users.aspx" />
     <Content Include="Pages\Upcoming.aspx" />
+    <Content Include="Pages\User\CommentsMade.aspx" />
+    <Content Include="Pages\User\KickedStories.aspx" />
     <Content Include="Pages\User\NotAuthorised.aspx" />
-    <Content Include="Pages\User\Submitted.aspx" />
+    <Content Include="Pages\User\Profile.aspx" />
+    <Content Include="Pages\User\SubmittedStories.aspx" />
     <Content Include="Scripts\Constants.aspx" />
     <Content Include="Services\Feeds\JavaScript\CategoryFeed.ashx" />
     <Content Include="Services\Feeds\JavaScript\MainFeed.ashx" />
@@ -708,7 +725,6 @@
     <Content Include="Pages\User\Logout.aspx" />
     <Content Include="Pages\User\Register.aspx" />
     <Content Include="Pages\User\ResetPassword.aspx" />
-    <Content Include="Pages\User\View.aspx" />
     <Content Include="Pages\User\ViewTag.aspx" />
     <Content Include="Pages\User\ViewTags.aspx" />
     <Content Include="Services\Ajax\AddUserStoryTags.aspx" />

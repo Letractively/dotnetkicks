@@ -12,12 +12,12 @@ namespace Incremental.Kick.Web.UI.Pages.User {
     
     
     /// <summary>
-    /// ViewTag class.
+    /// Profile class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class ViewTag {
+    public partial class Profile {
         
         /// <summary>
         /// UserProfileMenu control.
@@ -27,23 +27,5 @@ namespace Incremental.Kick.Web.UI.Pages.User {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Incremental.Kick.Web.Controls.UserProfileMenu UserProfileMenu;
-        
-        /// <summary>
-        /// StoryList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.StoryList StoryList;
-        
-        /// <summary>
-        /// Paging control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.Paging Paging;
     }
 }

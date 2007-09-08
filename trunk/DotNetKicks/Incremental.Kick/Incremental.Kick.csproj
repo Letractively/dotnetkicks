@@ -133,6 +133,9 @@
     <Compile Include="Web\Controls\Base\KickUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Web\Controls\Base\KickUserProfilePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Web\Controls\Base\KickWebControl.cs" />
     <Compile Include="Web\Controls\Base\KickWebService.cs">
       <SubType>Component</SubType>
@@ -161,6 +164,7 @@
     <Compile Include="Web\Controls\User\CreateUserWizard.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
+    <Compile Include="Web\Controls\User\UserProfileMenu.cs" />
     <Compile Include="Web\Helpers\HostHelper.cs" />
     <Compile Include="Web\Helpers\PasswordGenerator.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\ExceptionCollection.cs" />

@@ -20,10 +20,15 @@ namespace Incremental.Kick.Web.Helpers {
             JavaScriptFeeds,
             Tools,
             Search,
-            ViewUser,
-            ViewUserRss,
-            ViewUserTag,
-            ViewUserTags,
+            UserProfile,
+            UserKickedStories,
+            UserKickedStoriesRss,
+            UserSubmittedStories,
+            UserSubmittedStoriesRss,
+            UserComments,
+            UserCommentsRss,
+            UserTag,
+            UserTags,
             Users,
             ViewCategory,
             ViewCategoryRss,
@@ -86,11 +91,21 @@ namespace Incremental.Kick.Web.Helpers {
 
         public static string CreateUrl(PageName pageName, string value) {
             switch (pageName) {
-                case PageName.ViewUser:
+                case PageName.UserProfile:
                     return MapPath(String.Format("/users/{0}", value));
-                case PageName.ViewUserRss:
-                    return MapPath(String.Format("/users/{0}/rss", value));
-                case PageName.ViewUserTags:
+                case PageName.UserKickedStories:
+                    return MapPath(String.Format("/users/{0}/kicked", value));
+                case PageName.UserKickedStoriesRss:
+                    return MapPath(String.Format("/users/{0}/kicked/rss", value));
+                case PageName.UserSubmittedStories:
+                    return MapPath(String.Format("/users/{0}/submitted", value));
+                case PageName.UserSubmittedStoriesRss:
+                    return MapPath(String.Format("/users/{0}/submitted/rss", value));
+                case PageName.UserComments:
+                    return MapPath(String.Format("/users/{0}/comments", value));
+                case PageName.UserCommentsRss:
+                    return MapPath(String.Format("/users/{0}/comments/rss", value));
+                case PageName.UserTags:
                     return MapPath(String.Format("/users/{0}/tags", value));
                 case PageName.ViewCategory:
                     return MapPath(String.Format("/{0}", value));
@@ -105,7 +120,6 @@ namespace Incremental.Kick.Web.Helpers {
                         return MapPath(String.Format("/{0}/upcoming/rss", value));
                 case PageName.LoginSwitch:
                     return MapPath(String.Format("/loginswitch/?url={0}", HttpUtility.UrlEncode(value)));
-                    //return MapPath("/loginswitch");
                 case PageName.ViewTag:
                     return MapPath(String.Format("/tags/{0}", value));
                 case PageName.ViewTagRss:
@@ -121,7 +135,7 @@ namespace Incremental.Kick.Web.Helpers {
             switch (pageName) {
                 case PageName.ViewStory:
                     return MapPath(String.Format("/{1}/{0}", identifier1, identifier2));
-                case PageName.ViewUserTag:
+                case PageName.UserTag:
                     return MapPath(String.Format("/users/{0}/tags/{1}", identifier1, identifier2));
                 default:
                     throw new Exception("not enough params to create url");
