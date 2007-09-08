@@ -110,6 +110,8 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/tags/{0}", value));
                 case PageName.ViewTagRss:
                     return MapPath(String.Format("/tags/{0}/feeds/rss", value));
+                case PageName.Login:
+                    return MapPath(String.Format("/login?ReturnUrl={0}", HttpUtility.UrlEncode(value)));
                 default:
                     throw new Exception("not enough params to create url");
             }

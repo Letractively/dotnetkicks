@@ -174,12 +174,10 @@ namespace Incremental.Kick.Web.Controls {
 
         private void PerformSecurityChecks() {
             if (this.IsMemberPage && !this.IsAuthenticated)
-                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login)); //TODO: pass the current url here so we can redirect
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login, this.Request.Url.ToString()));
 
             if (!this.KickUserProfile.HasRoles(this.RequiredRoles))
                 Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
-
         }
-
     }
 }
