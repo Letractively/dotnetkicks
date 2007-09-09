@@ -2,6 +2,9 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 
     <h1>Who's Online:</h1>
-    <Kick:UserList id="UserList" runat="server" />
+    <Kick:UserList id="UserOnlineList" runat="server" />
+    
+    <h1>Who was here today:</h1>
+    <Kick:UserList id="UserTodayList" runat="server" />
     
 </asp:Content>

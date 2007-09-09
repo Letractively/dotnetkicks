@@ -20,12 +20,21 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
     public partial class WhoIsOnline {
         
         /// <summary>
-        /// UserList control.
+        /// UserOnlineList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserList UserList;
+        protected global::Incremental.Kick.Web.Controls.UserList UserOnlineList;
+        
+        /// <summary>
+        /// UserTodayList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.UserList UserTodayList;
     }
 }

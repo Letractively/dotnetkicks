@@ -15,7 +15,8 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
         protected void Page_Load(object sender, EventArgs e) {
             this.DisplayAds = false;
 
-            this.UserList.DataBind(UserCache.GetOnlineUsers());
+            this.UserOnlineList.DataBind(UserCache.GetOnlineUsers(30));
+            this.UserTodayList.DataBind(UserCache.GetOnlineUsers(1440));
         }
     }
 }
