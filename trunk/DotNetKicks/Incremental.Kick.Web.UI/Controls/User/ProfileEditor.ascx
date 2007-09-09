@@ -1,21 +1,44 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProfileEditor.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.ProfileEditor" %>
-this is the profile editor
-<br />
-<br />
-use gravatar:
-<asp:CheckBox ID="UseGravatar" runat="server" /><br />
-custom gravatar email:
-<asp:TextBox ID="GravatarCustomEmail" runat="server"></asp:TextBox>
-(leave blank if you wish to use
-<asp:Label ID="UserEmail" runat="server"></asp:Label>)<br />
-location:
-<asp:TextBox ID="Location" runat="server"></asp:TextBox><br />
-website url:
-<asp:TextBox ID="WebsiteURL" runat="server"></asp:TextBox><br />
-blog url:
-<asp:TextBox ID="BlogUrl" runat="server"></asp:TextBox><br />
-blog feed url:
-<asp:TextBox ID="BlogFeedUrl" runat="server"></asp:TextBox><br />
-<br />
-<asp:Button ID="UpdateProfile" runat="server" Text="Update Profile" OnClick="UpdateProfile_Click" />
+
+
+<table class="FormTable">
+    <tr>
+        <td class="FormTitle FormTD">
+            Display Gravatar:</td>
+        <td class="FormInput FormTD">
+            <asp:CheckBox ID="UseGravatar" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Custom Gravatar Email:</td>
+        <td class="FormInput FormTD"><asp:TextBox ID="GravatarCustomEmail" runat="server" size="60"></asp:TextBox>
+        <br><span class="FormHelp">(leave blank if you wish to use <em><asp:Label ID="UserEmail" runat="server" /></em>)</span>
+</td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Location:</td>
+        <td class="FormInput FormTD"><asp:TextBox ID="Location" runat="server" size="60"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Website:</td>
+        <td class="FormInput FormTD"><asp:TextBox ID="WebsiteURL" runat="server" size="60"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Blog</td>
+        <td class="FormInput FormTD"><asp:TextBox ID="BlogUrl" runat="server" size="60"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Blog Feed</td>
+        <td class="FormInput FormTD"><asp:TextBox ID="BlogFeedUrl" runat="server" size="60"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD"></td>
+        <td class="FormInput FormTD"><asp:Button ID="UpdateProfile" runat="server" Text="Update Profile" OnClick="UpdateProfile_Click" /></td>
+    </tr>
+</table>
+
+
+
+
+
 

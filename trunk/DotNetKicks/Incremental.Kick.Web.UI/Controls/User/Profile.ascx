@@ -1,12 +1,63 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Profile.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Profile" %>
-
-<p>location: <%= Server.HtmlEncode(this.UserProfile.Location) %></p>
-<p>website: <%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %></p>
-<p>blog: <%= Server.HtmlEncode(this.UserProfile.BlogURL) %></p>
-<p>blog feed: <%= Server.HtmlEncode(this.UserProfile.BlogFeedURL) %></p>
-<p>useGravatar: <%= this.UserProfile.UseGravatar%></p>
- 
- 
-<% if(this.KickPage.KickUserProfile.UserID == this.UserProfile.UserID) { %>
- <h1><a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a></h1>
+<%@ Control Language="C#" AutoEventWireup="true" Codebehind="Profile.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Profile" %>
+<table class="FormTable">
+    <tr>
+        <td class="FormTitle FormTD">
+            Member Since:</td>
+        <td class="FormInput FormTD">
+            <%= this.UserProfile.CreatedOn.ToLongDateString()%>
+        </td>
+    </tr>
+    <% if (!String.IsNullOrEmpty(this.UserProfile.Location)) { %>
+    <tr>
+        <td class="FormTitle FormTD">
+            Location:</td>
+        <td class="FormInput FormTD">
+            <%= Server.HtmlEncode(this.UserProfile.Location) %>
+        </td>
+    </tr>
+    <% } %>
+    <% if (!String.IsNullOrEmpty(this.UserProfile.WebsiteURL)) { %>
+    <tr>
+        <td class="FormTitle FormTD">
+            Website:</td>
+        <td class="FormInput FormTD">
+            <a href="<%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %>" nofollow>
+                <%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %>
+            </a>
+        </td>
+    </tr>
+    <% } %>
+    <% if (!String.IsNullOrEmpty(this.UserProfile.BlogURL)) { %>
+    <tr>
+        <td class="FormTitle FormTD">
+            Blog:</td>
+        <td class="FormInput FormTD">
+            <a href="<%= Server.HtmlEncode(this.UserProfile.BlogURL) %>" nofollow>
+                <%= Server.HtmlEncode(this.UserProfile.BlogURL) %>
+            </a>
+            <% if (!String.IsNullOrEmpty(this.UserProfile.BlogFeedURL)) { %>
+            &nbsp; <a href="<%= Server.HtmlEncode(this.UserProfile.BlogFeedURL) %>" nofollow>
+                <img src="/static/images/icons/rss.jpg" border="0" width="16" height="16" /></a>
+            <% } %>
+        </td>
+    </tr>
+    <% } %>
+    <tr>
+        <td class="FormTitle FormTD">
+        </td>
+        <td class="FormInput FormTD">
+        </td>
+    </tr>
+</table>
+<% if (this.KickPage.KickUserProfile.UserID == this.UserProfile.UserID) { %>
+<table class="FormTable">
+    <tr>
+        <td class="FormTitle FormTD">
+        </td>
+        <td class="FormInput FormTD">
+            <h2>
+                <a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a></h2>
+        </td>
+    </tr>
+</table>
 <% } %>
