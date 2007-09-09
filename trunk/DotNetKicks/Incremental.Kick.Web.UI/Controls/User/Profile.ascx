@@ -4,7 +4,14 @@
         <td class="FormTitle FormTD">
             Member Since:</td>
         <td class="FormInput FormTD">
-            <%= this.UserProfile.CreatedOn.ToLongDateString()%>
+            <%= this.UserProfile.CreatedOn.ToLongDateString()%> <em>(<%= SubSonic.Sugar.Dates.ReadableDiff(this.UserProfile.CreatedOn, DateTime.Now)%>)</em>
+        </td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">
+            Last Seen:</td>
+        <td class="FormInput FormTD">
+            <%= SubSonic.Sugar.Dates.ReadableDiff(this.UserProfile.LastActiveOn, DateTime.Now)%>
         </td>
     </tr>
     <% if (!String.IsNullOrEmpty(this.UserProfile.Location)) { %>
