@@ -15,9 +15,13 @@ namespace Incremental.Kick.Helpers {
             return html;
         }
 
-        public static void DownloadFile(string uri, string targetPath) {
+        public static void DownloadFile(string uri, string targetFilePath) {
+            string targetDirectory = Path.GetDirectoryName(targetFilePath);
+            if (!Directory.Exists(targetDirectory))
+                Directory.CreateDirectory(targetDirectory);
+
             using(WebClient client = new WebClient()) {
-                client.DownloadFile(uri, targetPath);
+                client.DownloadFile(uri, targetFilePath);
             }           
         }
     }
