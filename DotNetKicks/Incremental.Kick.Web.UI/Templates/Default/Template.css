@@ -28,8 +28,8 @@ body, td, th, h3, textarea, input, select {
 	padding: 12px 12px 12px 12px; margin-top: 8px;
 }
 
-.User { padding: 2px; }
-.Gravatar { }
+
+
 
 #wrap {
 	position: relative;
@@ -189,6 +189,7 @@ body, td, th, h3, textarea, input, select {
 .storyTitle { font-size: 1.4em;font-family: "Trebuchet MS", Sans-Serif, Verdana; }
 .storySubmitted { font-size: .85em; margin-left: 8px; }
 .storyActions { font-size: .85em; }
+.storyActions a { text-decoration: none; }
 
 .storyTags 
 {
