@@ -15,9 +15,7 @@ namespace Incremental.Kick.Dal
 
         public static int GetUserCommentsCount(int userID, int hostID)
         {
-            //TODO .AND(Comment.Columns.HostID, hostID)
-            //HACK there's no HOST ID for comments
-            Query query = new Query(Comment.Schema).WHERE(Comment.Columns.UserID, userID);
+            Query query = new Query(Comment.Schema).WHERE(Comment.Columns.UserID, userID).AND(Comment.Columns.HostID, hostID);
             return (int)query.GetCount(Comment.Columns.CommentID);
         }
 
