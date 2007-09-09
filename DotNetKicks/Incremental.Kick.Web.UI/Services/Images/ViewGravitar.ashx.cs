@@ -16,8 +16,8 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             int size = int.Parse(context.Request["size"]);
             string gravatarID = context.Request["gravatar_id"];
 
-            if (size != 16 && size != 40 && size != 80)
-                throw new ArgumentException("The size must be either 16, 40 or 80");
+            if (size != 16 && size != 50 && size != 80)
+                throw new ArgumentException("The size must be either 16, 50 or 80");
 
             string gravatarFileName = String.Format("{0}_{1}.jpg", gravatarID, size);
             string cachedGravatarFolderPath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\Gravatars\");

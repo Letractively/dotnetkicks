@@ -20,7 +20,7 @@
 <asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
     <td class="MainContentTD">
     
-    <% if (!String.IsNullOrEmpty(this.KickPage.HostProfile.AnnouncementHtml)) { %>
+    <% if ((this.KickPage.DisplayAnnouncement) && (!String.IsNullOrEmpty(this.KickPage.HostProfile.AnnouncementHtml))) { %>
     <div class="flash flash-information">
         <%= this.KickPage.HostProfile.AnnouncementHtml %>
     </div>

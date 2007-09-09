@@ -12,12 +12,12 @@ namespace Incremental.Kick.Web.UI.Pages.User {
     
     
     /// <summary>
-    /// CommentsMade class.
+    /// EditProfile class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class CommentsMade {
+    public partial class EditProfile {
         
         /// <summary>
         /// UserProfileHeader control.
@@ -29,21 +29,12 @@ namespace Incremental.Kick.Web.UI.Pages.User {
         protected global::Incremental.Kick.Web.Controls.UserProfileHeader UserProfileHeader;
         
         /// <summary>
-        /// CommentList control.
+        /// ProfileEditor1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.CommentList CommentList;
-        
-        /// <summary>
-        /// Paging control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.Paging Paging;
+        protected global::Incremental.Kick.Web.UI.Controls.ProfileEditor ProfileEditor1;
     }
 }

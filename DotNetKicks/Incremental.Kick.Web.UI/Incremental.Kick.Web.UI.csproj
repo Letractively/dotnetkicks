@@ -278,6 +278,13 @@
     <Compile Include="Controls\User\Profile.ascx.designer.cs">
       <DependentUpon>Profile.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\ProfileEditor.ascx.cs">
+      <DependentUpon>ProfileEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\ProfileEditor.ascx.designer.cs">
+      <DependentUpon>ProfileEditor.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\User\Register.ascx.cs">
       <DependentUpon>Register.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -469,6 +476,13 @@
     </Compile>
     <Compile Include="Pages\User\CommentsMade.aspx.designer.cs">
       <DependentUpon>CommentsMade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\EditProfile.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\EditProfile.aspx.designer.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
@@ -678,6 +692,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\User\ProfileEditor.ascx" />
+    <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />

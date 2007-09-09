@@ -5,9 +5,6 @@ using System.Collections;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Caching;
 
@@ -22,10 +19,7 @@ namespace Incremental.Kick.Web.UI.Controls {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-            if (this._userProfile.UseGravatar) {
-                this.gravatar.Visible = true;
-                this.gravatar.User = this._userProfile;
-            }
+
         }
     }
 }
