@@ -10,7 +10,8 @@ namespace Incremental.Kick.Web.UI {
     public class Global : System.Web.HttpApplication {
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e) {
-            Incremental.Kick.Web.Security.SecurityManager.SetPrincipal();
+            if(Request.PhysicalPath.EndsWith(".aspx"))
+                Incremental.Kick.Web.Security.SecurityManager.SetPrincipal();
         }
 
         protected void Application_Error(object sender, EventArgs e) {
