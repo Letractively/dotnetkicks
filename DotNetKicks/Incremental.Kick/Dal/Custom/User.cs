@@ -16,6 +16,13 @@ namespace Incremental.Kick.Dal {
             return f[0];
         }
 
+        public void UpdateLastActiveOn() {
+            if (this.LastActiveOn.AddMinutes(30) < DateTime.Now) {
+                this.LastActiveOn = DateTime.Now;
+                this.Save();
+            }
+        }
+
         public string GravatarEmail {
             get {
                 if (this.UseGravatar) {

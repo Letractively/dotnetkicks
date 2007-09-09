@@ -68,6 +68,7 @@ namespace Incremental.Kick.Web.Security {
                 urlParameters.SecurityToken = (((FormsIdentity)identity).Ticket).UserData;
                 try {
                     userProfile = UserCache.GetUser(urlParameters.SecurityToken);
+                    userProfile.UpdateLastActiveOn();                    
                     principal = new AuthenticatedKickPrincipal(identity, userProfile);
                 } catch {
                     //TODO: Log an exception
