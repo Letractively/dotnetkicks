@@ -1,10 +1,10 @@
 1. Create a new SQL 2005 Database called 'DotNetKicks'
 
-2. Execute the '001.DotNetKicks.Schema.SQL.2005.sql' and '003.Elmah.Schema.2005.sql' scripts against the new 'DotNetKicks' database
+2. Execute the '001.DotNetKicks.Schema.SQL.2005.sql' each additional script in order of its number prefix - these scripts will be rolled up for major releases.
 
 	Scripts can be found in 'svn:\\trunk\DotNetKicks\Database'
 
-3. Execute the '002.DotNetKicks.Data.SQL.2005.sql' script against the database
+3. Execute the '999.DotNetKicks.Data.SQL.2005.sql' script against the database
 
 4. Open 'DotNetKicks.sln' in Visual Studio 2005.
 
