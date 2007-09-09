@@ -21,6 +21,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
 
 
         protected void Page_Load(object sender, EventArgs e) {
+            this.UserProfileHeader.User = this.UserProfile;
             this.StoryList.DataBind(StoryCache.GetUserTaggedStories(this.UrlParameters.TagIdentifier, this.KickUserProfile.UserID, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
             this.Paging.RecordCount = StoryCache.GetUserTaggedStoryCount(this.UrlParameters.TagIdentifier, this.KickUserProfile.UserID, this.HostProfile.HostID);
             this.Paging.PageNumber = UrlParameters.PageNumber;

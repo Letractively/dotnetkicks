@@ -390,10 +390,11 @@ body, td, th, h3, textarea, input, select {
 }
 
 .flash-information {
-	background: #b4ffb7 url(images/icons/information.png) center no-repeat;
+	background: #eee url(images/icons/information.png) center no-repeat;
 	background-position: 15px 50%;
-	border-top-color: green;
-	border-bottom-color: green;
+	border-top-color: #bbb;
+	border-bottom-color: #bbb;
+	margin: 16px;
 }
 
 .flash-error {

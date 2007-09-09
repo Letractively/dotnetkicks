@@ -7,6 +7,11 @@ using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.Controls {
     public class UserProfileMenu : KickWebControl {
+        public UserProfileMenu() { }
+        public UserProfileMenu(string caption) {
+            this.Caption = caption;
+        }
+        
         private string _caption = "";
         public string Caption {
             get { return this._caption; }

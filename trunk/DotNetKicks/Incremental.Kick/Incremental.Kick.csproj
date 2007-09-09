@@ -177,6 +177,7 @@
     <Compile Include="Web\Controls\User\Gravatar.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
+    <Compile Include="Web\Controls\User\UserProfileHeader.cs" />
     <Compile Include="Web\Controls\User\UserProfileMenu.cs" />
     <Compile Include="Web\Helpers\GravatarHelper.cs" />
     <Compile Include="Web\Helpers\HostHelper.cs" />

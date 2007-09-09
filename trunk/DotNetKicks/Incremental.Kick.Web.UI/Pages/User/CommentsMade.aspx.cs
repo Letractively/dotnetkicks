@@ -18,16 +18,16 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.PageName = UrlFactory.PageName.UserComments;
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e) {
             //TODO Will need to modify the Comment & CommentList web controls to show related story
+            this.UserProfileHeader.User = this.UserProfile;
             Incremental.Kick.Dal.CommentCollection commentTable = StoryCache.GetUserComments(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize);
             this.CommentList.DisplayStoryTitle = true;
             this.CommentList.DataBind(commentTable);
             this.Paging.RecordCount = StoryCache.GetUserCommentsCount(this.UrlParameters.UserIdentifier, this.HostProfile.HostID);
             this.Paging.PageNumber = UrlParameters.PageNumber;
             this.Paging.PageSize = UrlParameters.PageSize;
-            this.Paging.BaseUrl = UrlFactory.CreateUrl(this.PageName, this.UrlParameters.UserIdentifier); 
+            this.Paging.BaseUrl = UrlFactory.CreateUrl(this.PageName, this.UrlParameters.UserIdentifier);
         }
     }
 }

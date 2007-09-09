@@ -167,6 +167,12 @@ namespace Incremental.Kick.Web.Controls {
             set { this._displaySideAds = value; }
         }
 
+        private bool _displayAnnouncement = true;
+        public bool DisplayAnnouncement {
+            get { return this._displayAnnouncement; }
+            set { this._displayAnnouncement = value; }
+        }
+
         protected override void OnInitComplete(EventArgs e) {
             this.PerformSecurityChecks();
             base.OnInitComplete(e);
@@ -177,7 +183,11 @@ namespace Incremental.Kick.Web.Controls {
                 Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login, this.Request.Url.ToString()));
 
             if (!this.KickUserProfile.HasRoles(this.RequiredRoles))
-                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
+                this.NotAuthorisedRedirect();
+        }
+
+        public void NotAuthorisedRedirect() {
+            Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
         }
     }
 }

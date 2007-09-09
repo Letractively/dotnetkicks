@@ -19,6 +19,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
 
 
         protected void Page_Load(object sender, EventArgs e) {
+            this.UserProfileHeader.User = this.UserProfile;
             this.TagCloud.DataBind(TagCache.GetUserHostTags(this.UrlParameters.UserIdentifier, this.HostProfile.HostID));
         }
     }

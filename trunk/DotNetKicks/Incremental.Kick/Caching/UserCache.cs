@@ -66,8 +66,13 @@ namespace Incremental.Kick.Caching {
 
 
         public static void RemoveUser(string securityToken) {
-            GetUserCache().Remove(GetUserProfileCacheKey(SecurityToken.FromString(securityToken).UserID));
+            RemoveUser(SecurityToken.FromString(securityToken).UserID);
         }
+
+        public static void RemoveUser(int userID) {
+            GetUserCache().Remove(GetUserProfileCacheKey(userID));
+        }
+
 
         private static string GetUserProfileCacheKey() {
             return "UserProfile_Anonymous";
