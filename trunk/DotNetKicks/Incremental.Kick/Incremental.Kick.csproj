@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\CommentBR.cs" />
+    <Compile Include="BusinessLogic\Maintenance\DataUpdater.cs" />
     <Compile Include="BusinessLogic\StoryBR.cs" />
     <Compile Include="BusinessLogic\StoryKickBR.cs" />
     <Compile Include="BusinessLogic\TagBR.cs" />
