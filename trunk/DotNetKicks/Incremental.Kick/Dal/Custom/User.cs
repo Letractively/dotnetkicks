@@ -17,7 +17,7 @@ namespace Incremental.Kick.Dal {
         }
 
         public void UpdateLastActiveOn() {
-            if (this.LastActiveOn.AddMinutes(30) < DateTime.Now) {
+            if (this.LastActiveOn.AddMinutes(15) < DateTime.Now) {
                 this.LastActiveOn = DateTime.Now;
                 this.Save();
             }
