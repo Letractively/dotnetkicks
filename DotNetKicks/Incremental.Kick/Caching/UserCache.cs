@@ -154,13 +154,13 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static UserCollection GetOnlineUsers(int minutesSinceLastActive) {
-            string cacheKey = String.Format("OnlineUsers_{0}", minutesSinceLastActive);
+        public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID) {
+            string cacheKey = String.Format("OnlineUsers_{0}_{1}", minutesSinceLastActive, hostID);
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection users = userCollectionCache[cacheKey];
 
             if(users == null) {
-                users = User.FetchOnlineUsers(minutesSinceLastActive);
+                users = User.FetchOnlineUsers(minutesSinceLastActive, hostID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 userCollectionCache.Insert(cacheKey, users, 60);
             }
@@ -168,8 +168,8 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static int GetOnlineUsersCount(int minutesSinceLastActive) {
-            return GetOnlineUsers(minutesSinceLastActive).Count;
+        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID) {
+            return GetOnlineUsers(minutesSinceLastActive, hostID).Count;
         }
 
 

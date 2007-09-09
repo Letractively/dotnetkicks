@@ -87,7 +87,7 @@ namespace Incremental.Kick.Web.Controls {
             else
                 writer.WriteLine(@"Why not <a href=""{0}"">join our community?</a>", UrlFactory.CreateUrl(UrlFactory.PageName.Register));
 
-            writer.Write(@", there are <a href=""/whoisonline"">{0} users online</a>", UserCache.GetOnlineUsersCount(30));
+            writer.Write(@", there are <a href=""/whoisonline"">{0} users online</a>", UserCache.GetOnlineUsersCount(30, this.KickPage.HostProfile.HostID));
 
             writer.WriteLine(@"</tr></table></div>");
         }
