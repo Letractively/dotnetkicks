@@ -31,9 +31,6 @@ namespace Incremental.Kick.Web.UI.Pages {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-            if (this.UrlParameters.PageNumber == 1)
-                this.PopularStoryListHeader.UseAjaxLinks = true;
-
             switch (this.UrlParameters.StoryListSortBy) {
                 case StoryListSortBy.RecentlyPromoted:
                     this.PopularStoryNavigator.DataBind(StoryCache.GetAllStories(true, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize), StoryCache.GetStoryCount(this.HostProfile.HostID, true));

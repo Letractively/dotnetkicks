@@ -13,12 +13,6 @@ namespace Incremental.Kick.Web.Controls {
             set { this._caption = value; }
         }
 
-        private bool _useAjaxLinks = false;
-        public bool UseAjaxLinks {
-            get { return this._useAjaxLinks; }
-            set { this._useAjaxLinks = value; }
-        }
-
         protected override void Render(HtmlTextWriter writer) {
 
             writer.WriteLine(@"<table class=""SimpleTable""><tr><td>");
@@ -49,9 +43,6 @@ namespace Incremental.Kick.Web.Controls {
 
             if(linkSortBy == this.KickPage.UrlParameters.StoryListSortBy)
                 cssClass += " PopularStoryHeaderLinkSelected";
-
-            if(this.UseAjaxLinks)
-                javaScript += String.Format(@"onclick=""PopularStoryHeader_GetPopularStories('{0}', this);return false;"" ", sortByText);
 
 
             writer.WriteLine(@"<a id=""StoryListHeader_{0}"" href=""{1}"" {2} class=""{3}"">{4}</a>", sortByText, url, javaScript, cssClass, caption);
