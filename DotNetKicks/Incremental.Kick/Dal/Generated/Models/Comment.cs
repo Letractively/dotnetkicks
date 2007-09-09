@@ -110,7 +110,21 @@ namespace Incremental.Kick.Dal
 				colvarCommentID.DefaultSetting = @"";
 				colvarCommentID.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarCommentID);
-				
+
+                TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
+                colvarHostID.ColumnName = "HostID";
+                colvarHostID.DataType = DbType.Int32;
+                colvarHostID.MaxLength = 0;
+                colvarHostID.AutoIncrement = false;
+                colvarHostID.IsNullable = false;
+                colvarHostID.IsPrimaryKey = false;
+                colvarHostID.IsForeignKey = true;
+                colvarHostID.IsReadOnly = false;
+                colvarHostID.DefaultSetting = @"";
+
+                colvarHostID.ForeignKeyTableName = "Kick_Host";
+                schema.Columns.Add(colvarHostID);
+
 				TableSchema.TableColumn colvarStoryID = new TableSchema.TableColumn(schema);
 				colvarStoryID.ColumnName = "StoryID";
 				colvarStoryID.DataType = DbType.Int32;
@@ -200,6 +214,14 @@ namespace Incremental.Kick.Dal
 
 		}
 
+        [XmlAttribute("HostID")]
+        public int HostID
+        {
+            get { return GetColumnValue<int>(Columns.HostID); }
+
+            set { SetColumnValue(Columns.HostID, value); }
+
+        }
 		  
 		[XmlAttribute("StoryID")]
 		public int StoryID 
@@ -298,10 +320,12 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
+		public static void Insert(int varStoryID,int varHostID, int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
 		{
 			Comment item = new Comment();
-			
+
+            item.HostID = varHostID;
+
 			item.StoryID = varStoryID;
 			
 			item.UserID = varUserID;
@@ -323,12 +347,14 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varCommentID,int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
+		public static void Update(int varCommentID, int varHostID, int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn)
 		{
 			Comment item = new Comment();
 			
 				item.CommentID = varCommentID;
-			
+
+                item.HostID = varHostID;
+
 				item.StoryID = varStoryID;
 			
 				item.UserID = varUserID;
@@ -351,6 +377,7 @@ namespace Incremental.Kick.Dal
 		public struct Columns
 		{
 			 public static string CommentID = @"CommentID";
+             public static string HostID = @"HostID";
 			 public static string StoryID = @"StoryID";
 			 public static string UserID = @"UserID";
 			 public static string Username = @"Username";

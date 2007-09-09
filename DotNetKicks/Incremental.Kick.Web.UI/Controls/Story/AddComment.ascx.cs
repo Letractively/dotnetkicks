@@ -49,7 +49,7 @@ namespace Incremental.Kick.Web.UI.Controls {
             if (Comment.Text.Length < 4) {
                 InvalidComment.Visible = true;
             } else {
-                int commentID = CommentBR.CreateComment(this._storyID, this.KickPage.KickUserProfile.UserID, this.KickPage.KickUserProfile.Username, Comment.Text);
+                int commentID = CommentBR.CreateComment(this.KickPage.HostProfile.HostID, this._storyID, this.KickPage.KickUserProfile.UserID, this.KickPage.KickUserProfile.Username, Comment.Text);
 
                 //now clear the cache for this story (NOTE: in the future, we can just update the cache too)
                 StoryCache.RemoveStory(this._storyID, this.KickPage.UrlParameters.StoryIdentifier);
