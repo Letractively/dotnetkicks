@@ -24,7 +24,7 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected void Page_Load(object sender, EventArgs e) {
             if (this._userProfile.UseGravatar) {
                 this.gravatar.Visible = true;
-                this.gravatar.Email = this._userProfile.GravatarEmail;
+                this.gravatar.User = this._userProfile;
             }
         }
     }

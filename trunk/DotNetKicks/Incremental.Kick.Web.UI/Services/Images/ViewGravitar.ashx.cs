@@ -21,6 +21,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
 
             string gravatarFileName = String.Format("{0}_{1}.jpg", gravatarID, size);
             string cachedGravatarFolderPath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\Gravatars\");
+            string defaultGravatarFolderPath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\DefaultGravatars\");
             string cachedGravatarFilePath = Path.Combine(cachedGravatarFolderPath, gravatarFileName);
 
             string gravatarToReturnPath = cachedGravatarFilePath;
@@ -28,9 +29,9 @@ namespace Incremental.Kick.Web.UI.Services.Images {
                 //TODO: GJ: set some response caching attributes
                 //TODO: GJ: replace the cached gravatar if more than x hours old
             } else {
-                gravatarToReturnPath = Path.Combine(cachedGravatarFolderPath, String.Format("gravatar_{0}.jpg", size));
+                gravatarToReturnPath = Path.Combine(defaultGravatarFolderPath, String.Format("gravatar_{0}.jpg", size));
                 if (!File.Exists(cachedGravatarFilePath))
-                    gravatarToReturnPath = Path.Combine(cachedGravatarFolderPath, "gravatar_80.jpg");
+                    gravatarToReturnPath = Path.Combine(defaultGravatarFolderPath, "gravatar_80.jpg");
 
                 //Asynchronously download the gravatars to the cache
                 GravatarHelper.DownloadGravatar_Begin(gravatarID, size, cachedGravatarFilePath);
@@ -39,7 +40,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             try {
                 context.Response.WriteFile(gravatarToReturnPath);
             } catch(System.IO.IOException) { //The file may be locked
-                context.Response.WriteFile( Path.Combine(cachedGravatarFolderPath, "gravatar_80.jpg"));
+                context.Response.WriteFile(Path.Combine(defaultGravatarFolderPath, "gravatar_80.jpg"));
             }
         }
 
