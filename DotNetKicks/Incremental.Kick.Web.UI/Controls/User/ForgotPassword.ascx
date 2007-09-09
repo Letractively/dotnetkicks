@@ -1,5 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" Codebehind="ForgotPassword.ascx.cs"
-    Inherits="Incremental.Kick.Web.UI.Controls.User.ForgotPassword" %>
+<%@ Control Language="C#" AutoEventWireup="true" Codebehind="ForgotPassword.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.ForgotPassword" %>
     <div style="text-align: center;">
         <table border="0" cellpadding="4">
             <tbody>
