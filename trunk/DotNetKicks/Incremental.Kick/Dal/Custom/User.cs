@@ -17,8 +17,8 @@ namespace Incremental.Kick.Dal {
             return f[0];
         }
 
-        public static UserCollection FetchOnlineUsers(int minutesSinceLastActivity) {
-            Query query = new Query(User.Schema).BETWEEN_VALUES(User.Columns.LastActiveOn, DateTime.Now.AddMinutes(-minutesSinceLastActivity), DateTime.Now);
+        public static UserCollection FetchOnlineUsers(int minutesSinceLastActivity, int hostID) {
+            Query query = new Query(User.Schema).WHERE(User.Columns.HostID, hostID).AddBetweenValues(User.Columns.LastActiveOn, DateTime.Now.AddMinutes(-minutesSinceLastActivity), DateTime.Now);
             query.OrderBy = SubSonic.OrderBy.Desc(User.Columns.LastActiveOn);
             UserCollection users = new UserCollection();
             users.Load(query.ExecuteReader());
