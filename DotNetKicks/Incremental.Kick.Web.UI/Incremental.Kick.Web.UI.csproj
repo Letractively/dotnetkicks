@@ -37,9 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Subkismet\0.2.2.beta\Subkismet.dll</HintPath>
     </Reference>
-    <Reference Include="SubSonic, Version=2.0.2.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
+    <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\SubSonic\153\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\185\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
