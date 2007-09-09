@@ -23,20 +23,6 @@ namespace Incremental.Kick.Dal {
             UserCollection users = new UserCollection();
             users.Load(query.ExecuteReader());
             return users;
-
-          /*  Query query = GetStoryQuery(hostID, isPublished, GetStartDate(sortBy), DateTime.Now);
-            query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
-            query.PageIndex = pageIndex;
-            query.PageSize = pageSize;
-            StoryCollection stories = new StoryCollection();
-            stories.Load(query.ExecuteReader());
-            return stories;
-            Query query = GetStoryQuery(hostID, isPublished);
-            if (isPublished)
-                query = query.AddBetweenValues("PublishedOn", startDate, endDate);
-            else
-                query = query.AddBetweenValues("CreatedOn", startDate, endDate);
-            return query;*/
         }
 
         public void UpdateLastActiveOn() {
