@@ -29,10 +29,13 @@ namespace Incremental.Kick.Web.Controls {
                 writer.Write("No users");
             } else {
                 UserLink userLink = new UserLink();
-                foreach (User user in _users) {
-                    userLink.DataBind(user);
+                int totalUserCount = _users.Count;
+                for (int i = 0; i < totalUserCount; i++)
+                {
+                    userLink.DataBind(_users[i]);
                     userLink.RenderControl(writer);
-                    writer.Write(" - ");
+                    if(i < totalUserCount - 1)
+                        writer.Write(" - ");
                 }
             }
 
