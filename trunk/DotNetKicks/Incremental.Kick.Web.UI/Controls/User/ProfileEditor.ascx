@@ -7,7 +7,7 @@
             Display Gravatar:</td>
         <td class="FormInput FormTD">
             <asp:CheckBox ID="UseGravatar" runat="server" />
-            <em>Gravatars are 80x80 images and are provided by this free service: <a href="http://site.gravatar.com/">http://site.gravatar.com/</a></em>
+            <em class="smallerText">Gravatars are 80x80 images and are provided by this free service: <a href="http://site.gravatar.com/">http://site.gravatar.com/</a></em>
         </td>
     </tr>
     <tr>

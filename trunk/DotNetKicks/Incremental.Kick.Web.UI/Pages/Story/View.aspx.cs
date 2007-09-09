@@ -28,15 +28,12 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
             if (story == null)
                 Response.Redirect("/missingstory");
 
-            Incremental.Kick.Dal.CommentCollection commentTable = StoryCache.GetComments(story.StoryID);
-            Incremental.Kick.Dal.UserCollection users = UserCache.GetUsersWhoKicked(story.StoryID);
-
             this.Title = story.Title;
             this.Caption = "";
-            this.UsersWhoKicked.DataBind(users);
+            this.UsersWhoKicked.DataBind(UserCache.GetUsersWhoKicked(story.StoryID));
             this.StorySummary.DataBind(story);
             this.StorySummary.ShowMoreLink = false;
-            this.CommentList.DataBind(commentTable);
+            this.CommentList.DataBind(StoryCache.GetComments(story.StoryID));
             this.AddComment.DataBind(story.StoryID);
             this.DisplayAds = true;
 

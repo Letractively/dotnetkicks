@@ -18,9 +18,9 @@ body, td, th, h3, textarea, input, select {
 }
 
 .smallText { font-size: small; }
+.smallerText { font-size: smaller; }
 
-.UsersWhoKicked
-{
+.Users {
 	border-style: solid;
 	border-color: #CCCCCC;
 	background: #f7f7f7;

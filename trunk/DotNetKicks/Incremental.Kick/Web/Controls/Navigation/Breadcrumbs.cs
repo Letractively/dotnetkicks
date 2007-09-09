@@ -87,11 +87,11 @@ namespace Incremental.Kick.Web.Controls {
             else
                 writer.WriteLine(@"Why not <a href=""{0}"">join our community?</a>", UrlFactory.CreateUrl(UrlFactory.PageName.Register));
 
+            writer.Write(@", there are <a href=""/whoisonline"">{0} users online</a>", UserCache.GetOnlineUsersCount());
+
             writer.WriteLine(@"</tr></table></div>");
         }
-
-
-
+        
         private void RenderBreadcrumb(string title, string url, HtmlTextWriter writer) {
             writer.WriteLine("<a href=\"{0}\">{1}</a>", url, title);
         }

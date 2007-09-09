@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using SubSonic;
 
 namespace Incremental.Kick.Dal {
     public partial class User {
@@ -14,6 +15,28 @@ namespace Incremental.Kick.Dal {
             UserCollection f = new UserCollection();
             f.Load(User.FetchByParameter(columnName, value));
             return f[0];
+        }
+
+        public static UserCollection FetchOnlineUsers(int minutesSinceLastActivity) {
+            Query query = new Query(User.Schema).BETWEEN_VALUES(User.Columns.LastActiveOn, DateTime.Now.AddMinutes(-minutesSinceLastActivity), DateTime.Now);
+            query.OrderBy = SubSonic.OrderBy.Desc(User.Columns.LastActiveOn);
+            UserCollection users = new UserCollection();
+            users.Load(query.ExecuteReader());
+            return users;
+
+          /*  Query query = GetStoryQuery(hostID, isPublished, GetStartDate(sortBy), DateTime.Now);
+            query = query.ORDER_BY(Story.Columns.KickCount, "DESC");
+            query.PageIndex = pageIndex;
+            query.PageSize = pageSize;
+            StoryCollection stories = new StoryCollection();
+            stories.Load(query.ExecuteReader());
+            return stories;
+            Query query = GetStoryQuery(hostID, isPublished);
+            if (isPublished)
+                query = query.AddBetweenValues("PublishedOn", startDate, endDate);
+            else
+                query = query.AddBetweenValues("CreatedOn", startDate, endDate);
+            return query;*/
         }
 
         public void UpdateLastActiveOn() {

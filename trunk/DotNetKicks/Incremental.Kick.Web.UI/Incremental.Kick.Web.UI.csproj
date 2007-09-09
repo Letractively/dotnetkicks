@@ -568,6 +568,13 @@
     <Compile Include="Pages\User\ViewTags.aspx.designer.cs">
       <DependentUpon>ViewTags.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Community\WhoIsOnline.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\WhoIsOnline.aspx.designer.cs">
+      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Constants.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -694,6 +701,7 @@
     <None Include="elmah.axd" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
     <Content Include="Pages\User\EditProfile.aspx" />
+    <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />
