@@ -12,7 +12,7 @@
         <td align="right">
             <span id="headerLinks">
                 <% if (this.Page.User.Identity.IsAuthenticated) { %>
-                <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your profile</a>
+                <img src="/static/images/icons/new.gif" width="28" height="11" /><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your profile</a>
                 
                 <% if (this.KickPage.KickUserProfile.IsAdministrator) { %>
                      <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Admin)%>">admin</a>
