@@ -180,7 +180,5 @@ namespace Incremental.Kick.BusinessLogic {
         public static User GetUserByEmail(string email) {
             return User.FetchUserByParameter(User.Columns.Email, email);
         }
-
-
     }
 }

@@ -94,9 +94,9 @@ namespace Incremental.Kick.Caching {
 
 
         public static int UnKickStory(int storyID, int userID, int hostID) {
-            if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID)) 
+            if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID))
                 throw new SecurityException("There is no kick to unkick!");
-            
+
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
             return StoryBR.DecrementKickCount(storyID);
@@ -140,32 +140,43 @@ namespace Incremental.Kick.Caching {
             return storyKicks;
         }
 
-        public static UserCollection GetUsersWhoKicked(int? storyId)
-        {
+        public static UserCollection GetUsersWhoKicked(int? storyId) {
             string cacheKey = String.Format("UsersWhoKicked_Story_{0}", storyId);
-            CacheManager<string, UserCollection> userCollCache = GetUserCollectionCache();
-            UserCollection users;
+            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
+            UserCollection users = userCollectionCache[cacheKey];
 
-            if (userCollCache.ContainsKey(cacheKey))
-            {
-                users = userCollCache[cacheKey];
-            }
-            else
-            {
+            if(users == null) {
                 users = UserBR.GetUsersWhoKicked(storyId);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                userCollCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                userCollectionCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return users;
         }
 
+        public static UserCollection GetOnlineUsers() {
+            string cacheKey = String.Format("OnlineUsers");
+            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
+            UserCollection users = userCollectionCache[cacheKey];
 
-        private static CacheManager<string, UserCollection> GetUserCollectionCache()
-        {
-            return CacheManager<string, UserCollection>.GetInstance();
+            if(users == null) {
+                users = User.FetchOnlineUsers(30);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userCollectionCache.Insert(cacheKey, users, 60);
+            }
+
+            return users;
         }
 
+        public static int GetOnlineUsersCount() {
+            return GetOnlineUsers().Count;
+        }
+
+
+
+        private static CacheManager<string, UserCollection> GetUserCollectionCache() {
+            return CacheManager<string, UserCollection>.GetInstance();
+        }
         
         private static CacheManager<string, StoryKickCollection> GetStoryKickCache() {
             return CacheManager<string, StoryKickCollection>.GetInstance();
