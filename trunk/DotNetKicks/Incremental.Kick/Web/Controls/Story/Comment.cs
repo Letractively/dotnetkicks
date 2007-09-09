@@ -57,7 +57,7 @@ namespace Incremental.Kick.Web.Controls {
             userLink.DataBind(UserCache.GetUserByUsername(this._comment.Username));
             userLink.RenderControl(writer);
 
-            writer.WriteLine(@"{0}</div></div>", DateHelper.ConverDateToTimeAgo(this._comment.CreatedOn));
+            writer.WriteLine(@" {0}</div></div>", DateHelper.ConverDateToTimeAgo(this._comment.CreatedOn));
         }
     }
 }
