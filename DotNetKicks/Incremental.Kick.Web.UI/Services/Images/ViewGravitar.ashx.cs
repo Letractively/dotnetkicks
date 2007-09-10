@@ -10,7 +10,7 @@ using Incremental.Kick.Web.Helpers;
 namespace Incremental.Kick.Web.UI.Services.Images {
     public class ViewGravitar : IHttpHandler {
 
-        private const int GRAVATAR_CACHE_DURATION_IN_MINUTES = 60;
+        private const int GRAVATAR_CACHE_DURATION_IN_MINUTES = 5; //TODO: GJ: set to 60 after testing in prodcution
 
         public void ProcessRequest(HttpContext context) {
             context.Response.ContentType = "image/JPEG";
@@ -25,18 +25,28 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             string cachedGravatarFolderPath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\Gravatars\");
             string defaultGravatarFolderPath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\DefaultGravatars\");
             string cachedGravatarFilePath = Path.Combine(cachedGravatarFolderPath, gravatarFileName);
+            string gravatarCopyPath = cachedGravatarFilePath.Replace(".jpg", ".copy.jpg");
 
             string gravatarToReturnPath = cachedGravatarFilePath;
-            if (File.Exists(cachedGravatarFilePath) && (File.GetLastWriteTime(cachedGravatarFilePath).AddMinutes(GRAVATAR_CACHE_DURATION_IN_MINUTES) < DateTime.Now)) {
-                File.Delete(cachedGravatarFilePath);
+            if (File.Exists(gravatarToReturnPath) && (File.GetLastWriteTime(gravatarToReturnPath).AddMinutes(GRAVATAR_CACHE_DURATION_IN_MINUTES) < DateTime.Now)) {
+
+                if(!File.Exists(gravatarCopyPath) && new FileInfo(cachedGravatarFilePath).Length > 0)
+                    File.Copy(cachedGravatarFilePath, gravatarCopyPath, true); //create a copy for tempory serving
+
+                try {
+                    File.Delete(cachedGravatarFilePath);
+                } catch (System.IO.IOException) { }
+
+                gravatarToReturnPath = gravatarCopyPath;
             }
 
-            if (File.Exists(cachedGravatarFilePath)) {
+            if (File.Exists(gravatarToReturnPath)) {
                 //TODO: GJ: set some response caching attributes
-            } else {
-                gravatarToReturnPath = Path.Combine(defaultGravatarFolderPath, String.Format("gravatar_{0}.jpg", size));
-                if (!File.Exists(cachedGravatarFilePath))
-                    gravatarToReturnPath = Path.Combine(defaultGravatarFolderPath, "gravatar_80.jpg");
+            } else {                
+                if (File.Exists(gravatarCopyPath))
+                    gravatarToReturnPath = gravatarCopyPath;
+                else
+                    gravatarToReturnPath = Path.Combine(defaultGravatarFolderPath, String.Format("gravatar_{0}.jpg", size));
 
                 //Asynchronously download the gravatars to the cache
                 GravatarHelper.DownloadGravatar_Begin(gravatarID, size, cachedGravatarFilePath);
@@ -45,7 +55,11 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             try {
                 context.Response.WriteFile(gravatarToReturnPath);
             } catch(System.IO.IOException) { //The file may be locked
-                context.Response.WriteFile(Path.Combine(defaultGravatarFolderPath, "gravatar_80.jpg"));
+                try {
+                    context.Response.WriteFile(gravatarCopyPath);
+                } catch (System.IO.IOException) {
+                    context.Response.WriteFile(Path.Combine(defaultGravatarFolderPath, String.Format("gravatar_{0}.jpg", size)));
+                }
             }
         }
 
