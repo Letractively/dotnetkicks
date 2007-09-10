@@ -32,25 +32,8 @@ namespace Incremental.Kick.Dal{
         	    
             return sp;
         }
-                  
-        /// <summary>
-        /// Creates an object wrapper for the Kick_GetPagedCommentsByUserIDAndHostID Procedure
-        /// </summary>
-        public static StoredProcedure Kick_GetPagedCommentsByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedCommentsByUserIDAndHostID", DataService.GetInstance("DotNetKicks"));
-        	
-            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
-        	    
-            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
-        	    
-            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
-        	    
-            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
-        	    
-            return sp;
-        }
 
+        
         /// <summary>
         /// Creates an object wrapper for the Kick_GetUsersWhoKicked Procedure
         /// </summary>
@@ -135,6 +118,25 @@ namespace Incremental.Kick.Dal{
         public static StoredProcedure Kick_GetPagedSubmittedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
         {
             SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedSubmittedStoriesByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedCommentsByUserIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedCommentsByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedCommentsByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
