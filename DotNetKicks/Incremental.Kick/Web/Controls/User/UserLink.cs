@@ -14,10 +14,12 @@ namespace Incremental.Kick.Web.Controls {
         }
         protected override void Render(HtmlTextWriter writer) {
             writer.Write(@"<span class=""user""><a href=""{0}"">", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._user.Username));
-            if (this._user.UseGravatar)
+            if (this._user.UseGravatar) {
                 new Gravatar(this._user, 16).RenderControl(writer);
+                writer.Write(" ");
+            }
             
-            writer.Write(@" {0}</a></span>", this._user.Username);
+            writer.Write(@"{0}</a></span>", this._user.Username);
         }
     }
 }
