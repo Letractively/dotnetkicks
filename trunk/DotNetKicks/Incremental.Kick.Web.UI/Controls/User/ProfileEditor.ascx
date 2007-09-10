@@ -22,15 +22,18 @@
     </tr>
     <tr>
         <td class="FormTitle FormTD">Website:</td>
-        <td class="FormInput FormTD"><asp:TextBox ID="WebsiteURL" runat="server" size="60"></asp:TextBox></td>
+        <td class="FormInput FormTD"><asp:TextBox ID="WebsiteURL" runat="server" size="60" />
+        <br><span class="FormHelp">eg. <em>http://www.dotnetkicks.com/</em></span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD">Blog</td>
-        <td class="FormInput FormTD"><asp:TextBox ID="BlogUrl" runat="server" size="60"></asp:TextBox></td>
+        <td class="FormInput FormTD"><asp:TextBox ID="BlogUrl" runat="server" size="60" />
+        <br><span class="FormHelp">eg. <em>http://blog.incremental.ie/</em></span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD">Blog Feed</td>
-        <td class="FormInput FormTD"><asp:TextBox ID="BlogFeedUrl" runat="server" size="60"></asp:TextBox></td>
+        <td class="FormInput FormTD"><asp:TextBox ID="BlogFeedUrl" runat="server" size="60" />
+        <br><span class="FormHelp">eg. <em>http://feeds.feedburner.com/dotnetkicks</em></span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD"></td>
