@@ -15,7 +15,7 @@ input, select, textarea{  }
 
 
 
-.user { padding: padding: 3px 0 0 0; }
+.user { padding: padding: 3px 0 0 0; white-space: nowrap; }
 .user a { text-decoration: none; }
 .userGravatar {
 	border: 1px solid #ddd;
