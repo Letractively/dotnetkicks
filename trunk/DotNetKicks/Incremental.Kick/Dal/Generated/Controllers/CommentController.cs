@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int StoryID,int UserID,string Username,string CommentX,DateTime CreatedOn)
+	    public void Insert(int StoryID,int UserID,string Username,string CommentX,DateTime CreatedOn,int HostID)
 	    {
 		    Comment item = new Comment();
 		    
@@ -104,6 +104,8 @@ namespace Incremental.Kick.Dal
             
             item.CreatedOn = CreatedOn;
             
+            item.HostID = HostID;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -113,7 +115,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int CommentID,int StoryID,int UserID,string Username,string CommentX,DateTime CreatedOn)
+	    public void Update(int CommentID,int StoryID,int UserID,string Username,string CommentX,DateTime CreatedOn,int HostID)
 	    {
 		    Comment item = new Comment();
 		    
@@ -128,6 +130,8 @@ namespace Incremental.Kick.Dal
 				item.CommentX = CommentX;
 				
 				item.CreatedOn = CreatedOn;
+				
+				item.HostID = HostID;
 				
 		    item.MarkOld();
 		    item.Save(UserName);
