@@ -10,7 +10,7 @@ using Incremental.Kick.Web.Helpers;
 namespace Incremental.Kick.Web.UI.Services.Images {
     public class ViewGravitar : IHttpHandler {
 
-        private const int GRAVATAR_CACHE_DURATION_IN_MINUTES = 5; //TODO: GJ: set to 60 after testing in prodcution
+        private const int GRAVATAR_CACHE_DURATION_IN_MINUTES = 60;
 
         public void ProcessRequest(HttpContext context) {
             context.Response.ContentType = "image/JPEG";
@@ -41,7 +41,9 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             }
 
             if (File.Exists(gravatarToReturnPath)) {
-                //TODO: GJ: set some response caching attributes
+                context.Response.Cache.SetExpires(DateTime.Now.AddHours(24));
+                context.Response.Cache.SetValidUntilExpires(true);
+                context.Response.Cache.SetCacheability(HttpCacheability.Public);
             } else {                
                 if (File.Exists(gravatarCopyPath))
                     gravatarToReturnPath = gravatarCopyPath;
