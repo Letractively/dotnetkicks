@@ -90,12 +90,10 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int HostID,int UserID,int FriendID,DateTime CreatedOn)
+	    public void Insert(int UserID,int FriendID,DateTime CreatedOn)
 	    {
 		    UserFriend item = new UserFriend();
 		    
-            item.HostID = HostID;
-            
             item.UserID = UserID;
             
             item.FriendID = FriendID;
@@ -111,13 +109,11 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int UserFriendID,int HostID,int UserID,int FriendID,DateTime CreatedOn)
+	    public void Update(int UserFriendID,int UserID,int FriendID,DateTime CreatedOn)
 	    {
 		    UserFriend item = new UserFriend();
 		    
 				item.UserFriendID = UserFriendID;
-				
-				item.HostID = HostID;
 				
 				item.UserID = UserID;
 				
