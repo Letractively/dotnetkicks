@@ -94,27 +94,21 @@ namespace Incremental.Kick.Dal {
             return true;
         }
 
-        private UserCollection _friends = null;
         public UserCollection Friends {
             get {
-                if (_friends == null) {
-                    _friends = new UserCollection();
-                    foreach (UserFriend friend in this.UserFriendRecordsFromUser())
-                        _friends.Add(UserCache.GetUser(friend.FriendID));
-                }
-                return _friends;
+                UserCollection friends = new UserCollection();
+                foreach (UserFriend friend in this.UserFriendRecordsFromUser())
+                    friends.Add(UserCache.GetUser(friend.FriendID));
+                return friends;
             }
         }
 
-        private UserCollection _friendsBy = null;
         public UserCollection FriendsBy {
             get {
-                if (_friendsBy == null) {
-                    _friendsBy = new UserCollection();
-                    foreach (UserFriend friend in this.UserFriendRecords())
-                        _friendsBy.Add(UserCache.GetUser(friend.UserID));
-                }
-                return _friendsBy;
+                UserCollection friendsBy = new UserCollection();
+                foreach (UserFriend friend in this.UserFriendRecords())
+                    friendsBy.Add(UserCache.GetUser(friend.UserID));
+                return friendsBy;
             }
         }
 
