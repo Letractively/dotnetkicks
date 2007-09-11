@@ -70,9 +70,9 @@
 </table>
 <% } else { %>
 <% if ( this.KickPage.KickUserProfile.IsFriendOf(this.UserProfile.UserID)  )  { %>
-   <p><%= this.KickPage.KickUserProfile.Username %> is your friend!</p>
+   <p><%= this.KickPage.UrlParameters.UserIdentifier %> is your friend!</p>
    <p>
-       <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.UserProfile.Username%> as a Friend</asp:LinkButton>
+       <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.KickPage.UrlParameters.UserIdentifier%> as a Friend</asp:LinkButton>
        * not working yet
    </p>
 <% } else {%>

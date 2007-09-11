@@ -22,13 +22,13 @@ namespace Incremental.Kick.Web.UI.Controls {
 
         }
 
-        protected void lnkAddFriend_Click(object sender, EventArgs e)
-        {
-            this.KickPage.KickUserProfile.AddFriend(this.UserProfile.UserID);
+        protected void lnkAddFriend_Click(object sender, EventArgs e) {
+            this.KickPage.KickUserProfile.AddFriend(this.UserProfile.UserID, this.KickPage.HostProfile.HostID);
+            this.KickPage.Reload();
         }
-        protected void lnkRemoveFriend_Click(object sender, EventArgs e)
-        {
+        protected void lnkRemoveFriend_Click(object sender, EventArgs e) {
             this.KickPage.KickUserProfile.RemoveFriend(this.UserProfile.UserID);
+            this.KickPage.Reload();
         }
     }
 }

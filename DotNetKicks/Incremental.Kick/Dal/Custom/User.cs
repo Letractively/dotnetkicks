@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using SubSonic;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Dal {
     public partial class User {
@@ -62,17 +63,6 @@ namespace Incremental.Kick.Dal {
             return false;
         }
 
-        public bool IsFriendOf(int userId)
-        {
-            bool isFriend = false;
-            UserCollection friends = new UserCollection();
-            friends.Load(SPs.Kick_GetFriends(this.UserID).GetReader());
-            foreach (User user in friends)
-                if (user.UserID == userId)
-                    isFriend = true;
-            return isFriend; 
-        }
-
         public bool IsUser {
             get { return this.IsInRole("user"); }
         }
@@ -104,14 +94,22 @@ namespace Incremental.Kick.Dal {
             return true;
         }
 
-        public void AddFriend(int friendId)
-        {
-            //TODO
-            //UserFriend.Insert(this.HostID, this.UserID, friendId, DateTime.Now);            
+        public bool IsFriendOf(int userID) {
+            //TODO: GJ: ensure that the friend records are lazy-loaded
+            foreach (UserFriend friend in this.UserFriendRecordsFromUser()) {
+                if (friend.FriendID == userID)
+                    return true;
+            }
+            return false;
         }
 
-        public void RemoveFriend(int userId)
-        {
+        public void AddFriend(int friendID, int hostID) {
+            UserFriend.Insert(hostID, this.UserID, friendID, DateTime.Now);
+            UserCache.RemoveUser(this.UserID);
+            UserCache.RemoveUser(friendID);
+        }
+
+        public void RemoveFriend(int userID) {
             //int? keyId = null;
             //need to get userfriendid
             //TODO
