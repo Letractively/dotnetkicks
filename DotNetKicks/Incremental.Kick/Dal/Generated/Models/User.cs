@@ -635,20 +635,20 @@ namespace Incremental.Kick.Dal
 			return colStoryUserHostTagRecords;
 		}
 
-		private Incremental.Kick.Dal.UserFriendCollection colUserFriendRecords;
-		public Incremental.Kick.Dal.UserFriendCollection UserFriendRecords()
+		private Incremental.Kick.Dal.UserFavouriteCollection colUserFavouriteRecords;
+		public Incremental.Kick.Dal.UserFavouriteCollection UserFavouriteRecords()
 		{
-			if(colUserFriendRecords == null)
-				colUserFriendRecords = new Incremental.Kick.Dal.UserFriendCollection().Where(UserFriend.Columns.FriendID, UserID).Load();
-			return colUserFriendRecords;
+			if(colUserFavouriteRecords == null)
+				colUserFavouriteRecords = new Incremental.Kick.Dal.UserFavouriteCollection().Where(UserFavourite.Columns.FavouredUserID, UserID).Load();
+			return colUserFavouriteRecords;
 		}
 
-		private Incremental.Kick.Dal.UserFriendCollection colUserFriendRecordsFromUser;
-		public Incremental.Kick.Dal.UserFriendCollection UserFriendRecordsFromUser()
+		private Incremental.Kick.Dal.UserFavouriteCollection colUserFavouriteRecordsFromUser;
+		public Incremental.Kick.Dal.UserFavouriteCollection UserFavouriteRecordsFromUser()
 		{
-			if(colUserFriendRecordsFromUser == null)
-				colUserFriendRecordsFromUser = new Incremental.Kick.Dal.UserFriendCollection().Where(UserFriend.Columns.UserID, UserID).Load();
-			return colUserFriendRecordsFromUser;
+			if(colUserFavouriteRecordsFromUser == null)
+				colUserFavouriteRecordsFromUser = new Incremental.Kick.Dal.UserFavouriteCollection().Where(UserFavourite.Columns.UserID, UserID).Load();
+			return colUserFavouriteRecordsFromUser;
 		}
 
 		#endregion
