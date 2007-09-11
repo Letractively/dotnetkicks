@@ -26,6 +26,7 @@ namespace Incremental.Kick.Web.UI.Pages.User
         {
             this.UserProfileHeader.User = this.UserProfile;
             this.FriendList.DataBind(this.UserProfile.Friends);
+            this.FriendByList.DataBind(this.UserProfile.FriendsBy);
         }
     }
 }

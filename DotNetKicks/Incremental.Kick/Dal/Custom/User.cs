@@ -106,10 +106,29 @@ namespace Incremental.Kick.Dal {
             }
         }
 
+        private UserCollection _friendsBy = null;
+        public UserCollection FriendsBy {
+            get {
+                if (_friendsBy == null) {
+                    _friendsBy = new UserCollection();
+                    foreach (UserFriend friend in this.UserFriendRecords())
+                        _friendsBy.Add(UserCache.GetUser(friend.UserID));
+                }
+                return _friendsBy;
+            }
+        }
+
         public bool IsFriendOf(int userID) {
-            //TODO: GJ: ensure that the friend records are lazy-loaded
             foreach (UserFriend friend in this.UserFriendRecordsFromUser()) {
                 if (friend.FriendID == userID)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool IsFriendBy(int userID) {
+            foreach (UserFriend friend in this.UserFriendRecords()) {
+                if (friend.UserID == userID)
                     return true;
             }
             return false;
