@@ -32,12 +32,6 @@ namespace Incremental.Kick.BusinessLogic {
             return users;
         }
 
-        public static UserCollection GetFriends(int userId)
-        {
-            UserCollection friends = new UserCollection();
-            friends.Load(SPs.Kick_GetFriends(userId).GetReader());
-            return friends;
-        }
 
         public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)

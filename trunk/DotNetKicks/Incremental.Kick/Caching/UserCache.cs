@@ -145,7 +145,7 @@ namespace Incremental.Kick.Caching {
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection users = userCollectionCache[cacheKey];
 
-            if(users == null) {
+            if (users == null) {
                 users = UserBR.GetUsersWhoKicked(storyId);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 userCollectionCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
@@ -159,7 +159,7 @@ namespace Incremental.Kick.Caching {
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection users = userCollectionCache[cacheKey];
 
-            if(users == null) {
+            if (users == null) {
                 users = User.FetchOnlineUsers(minutesSinceLastActive, hostID);
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 userCollectionCache.Insert(cacheKey, users, 60);
@@ -168,15 +168,15 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static UserCollection GetFriends(int userId, int hostId)
-        {
-            string cacheKey = String.Format("UserFriends_{0}", userId);
+        public static UserCollection GetFriends(int userID, int hostID) {
+            //NOTE: GJ: at some point in the near future, we should store all this in the cached User model
+            string cacheKey = String.Format("UserFriends_{0}", userID);
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection friends = userCollectionCache[cacheKey];
 
-            if (friends == null)
-            {
-                friends = UserBR.GetFriends(userId);
+            if (friends == null) {
+                foreach(UserFriend friend in User.FetchByID(userID).UserFriendRecords())
+                    friends.Add(UserCache.GetUser(userID));
                 System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 userCollectionCache.Insert(cacheKey, friends, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
@@ -193,7 +193,7 @@ namespace Incremental.Kick.Caching {
         private static CacheManager<string, UserCollection> GetUserCollectionCache() {
             return CacheManager<string, UserCollection>.GetInstance();
         }
-        
+
         private static CacheManager<string, StoryKickCollection> GetStoryKickCache() {
             return CacheManager<string, StoryKickCollection>.GetInstance();
         }

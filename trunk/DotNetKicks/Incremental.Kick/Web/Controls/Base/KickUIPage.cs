@@ -105,5 +105,9 @@ namespace Incremental.Kick.Web.Controls {
 
             base.OnPreRender(e);
         }
+
+        public void Reload() { //NOTE: GJ: This is useful to get away from post-postback state of forms
+            Response.Redirect(this.Request.RawUrl);
+        }
     }
 }
