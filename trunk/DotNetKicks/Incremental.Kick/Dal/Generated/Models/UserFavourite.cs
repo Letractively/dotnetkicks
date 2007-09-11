@@ -15,24 +15,24 @@ using SubSonic.Utilities;
 namespace Incremental.Kick.Dal
 {
 	/// <summary>
-	/// Strongly-typed collection for the UserFriend class.
+	/// Strongly-typed collection for the UserFavourite class.
 	/// </summary>
 	[Serializable]
-	public partial class UserFriendCollection : ActiveList<UserFriend, UserFriendCollection> 
+	public partial class UserFavouriteCollection : ActiveList<UserFavourite, UserFavouriteCollection> 
 	{	   
-		public UserFriendCollection() {}
+		public UserFavouriteCollection() {}
 
 	}
 
 	/// <summary>
-	/// This is an ActiveRecord class which wraps the Kick_UserFriend table.
+	/// This is an ActiveRecord class which wraps the Kick_UserFavourite table.
 	/// </summary>
 	[Serializable]
-	public partial class UserFriend : ActiveRecord<UserFriend>
+	public partial class UserFavourite : ActiveRecord<UserFavourite>
 	{
 		#region .ctors and Default Settings
 		
-		public UserFriend()
+		public UserFavourite()
 		{
 		  SetSQLProps();
 		  InitSetDefaults();
@@ -43,7 +43,7 @@ namespace Incremental.Kick.Dal
 		private void InitSetDefaults() { SetDefaults(); }
 
 		
-		public UserFriend(bool useDatabaseDefaults)
+		public UserFavourite(bool useDatabaseDefaults)
 		{
 			SetSQLProps();
 			if(useDatabaseDefaults)
@@ -51,7 +51,7 @@ namespace Incremental.Kick.Dal
 			MarkNew();
 		}
 
-		public UserFriend(object keyID)
+		public UserFavourite(object keyID)
 		{
 			SetSQLProps();
 			InitSetDefaults();
@@ -59,7 +59,7 @@ namespace Incremental.Kick.Dal
 		}
 
 		 
-		public UserFriend(string columnName, object columnValue)
+		public UserFavourite(string columnName, object columnValue)
 		{
 			SetSQLProps();
 			InitSetDefaults();
@@ -93,37 +93,23 @@ namespace Incremental.Kick.Dal
 			if(!IsSchemaInitialized)
 			{
 				//Schema declaration
-				TableSchema.Table schema = new TableSchema.Table("Kick_UserFriend", TableType.Table, DataService.GetInstance("DotNetKicks"));
+				TableSchema.Table schema = new TableSchema.Table("Kick_UserFavourite", TableType.Table, DataService.GetInstance("DotNetKicks"));
 				schema.Columns = new TableSchema.TableColumnCollection();
 				schema.SchemaName = @"dbo";
 				//columns
 				
-				TableSchema.TableColumn colvarUserFriendID = new TableSchema.TableColumn(schema);
-				colvarUserFriendID.ColumnName = "UserFriendID";
-				colvarUserFriendID.DataType = DbType.Int32;
-				colvarUserFriendID.MaxLength = 0;
-				colvarUserFriendID.AutoIncrement = true;
-				colvarUserFriendID.IsNullable = false;
-				colvarUserFriendID.IsPrimaryKey = true;
-				colvarUserFriendID.IsForeignKey = false;
-				colvarUserFriendID.IsReadOnly = false;
-				colvarUserFriendID.DefaultSetting = @"";
-				colvarUserFriendID.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarUserFriendID);
-				
-				TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
-				colvarHostID.ColumnName = "HostID";
-				colvarHostID.DataType = DbType.Int32;
-				colvarHostID.MaxLength = 0;
-				colvarHostID.AutoIncrement = false;
-				colvarHostID.IsNullable = false;
-				colvarHostID.IsPrimaryKey = false;
-				colvarHostID.IsForeignKey = true;
-				colvarHostID.IsReadOnly = false;
-				colvarHostID.DefaultSetting = @"";
-				
-					colvarHostID.ForeignKeyTableName = "Kick_Host";
-				schema.Columns.Add(colvarHostID);
+				TableSchema.TableColumn colvarUserFavouriteID = new TableSchema.TableColumn(schema);
+				colvarUserFavouriteID.ColumnName = "UserFavouriteID";
+				colvarUserFavouriteID.DataType = DbType.Int32;
+				colvarUserFavouriteID.MaxLength = 0;
+				colvarUserFavouriteID.AutoIncrement = true;
+				colvarUserFavouriteID.IsNullable = false;
+				colvarUserFavouriteID.IsPrimaryKey = true;
+				colvarUserFavouriteID.IsForeignKey = false;
+				colvarUserFavouriteID.IsReadOnly = false;
+				colvarUserFavouriteID.DefaultSetting = @"";
+				colvarUserFavouriteID.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarUserFavouriteID);
 				
 				TableSchema.TableColumn colvarUserID = new TableSchema.TableColumn(schema);
 				colvarUserID.ColumnName = "UserID";
@@ -139,19 +125,19 @@ namespace Incremental.Kick.Dal
 					colvarUserID.ForeignKeyTableName = "Kick_User";
 				schema.Columns.Add(colvarUserID);
 				
-				TableSchema.TableColumn colvarFriendID = new TableSchema.TableColumn(schema);
-				colvarFriendID.ColumnName = "FriendID";
-				colvarFriendID.DataType = DbType.Int32;
-				colvarFriendID.MaxLength = 0;
-				colvarFriendID.AutoIncrement = false;
-				colvarFriendID.IsNullable = false;
-				colvarFriendID.IsPrimaryKey = false;
-				colvarFriendID.IsForeignKey = true;
-				colvarFriendID.IsReadOnly = false;
-				colvarFriendID.DefaultSetting = @"";
+				TableSchema.TableColumn colvarFavouredUserID = new TableSchema.TableColumn(schema);
+				colvarFavouredUserID.ColumnName = "FavouredUserID";
+				colvarFavouredUserID.DataType = DbType.Int32;
+				colvarFavouredUserID.MaxLength = 0;
+				colvarFavouredUserID.AutoIncrement = false;
+				colvarFavouredUserID.IsNullable = false;
+				colvarFavouredUserID.IsPrimaryKey = false;
+				colvarFavouredUserID.IsForeignKey = true;
+				colvarFavouredUserID.IsReadOnly = false;
+				colvarFavouredUserID.DefaultSetting = @"";
 				
-					colvarFriendID.ForeignKeyTableName = "Kick_User";
-				schema.Columns.Add(colvarFriendID);
+					colvarFavouredUserID.ForeignKeyTableName = "Kick_User";
+				schema.Columns.Add(colvarFavouredUserID);
 				
 				TableSchema.TableColumn colvarCreatedOn = new TableSchema.TableColumn(schema);
 				colvarCreatedOn.ColumnName = "CreatedOn";
@@ -169,7 +155,7 @@ namespace Incremental.Kick.Dal
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
-				DataService.Providers["DotNetKicks"].AddSchema("Kick_UserFriend",schema);
+				DataService.Providers["DotNetKicks"].AddSchema("Kick_UserFavourite",schema);
 			}
 
 		}
@@ -179,22 +165,12 @@ namespace Incremental.Kick.Dal
 		#region Props
 		
 		  
-		[XmlAttribute("UserFriendID")]
-		public int UserFriendID 
+		[XmlAttribute("UserFavouriteID")]
+		public int UserFavouriteID 
 		{
-			get { return GetColumnValue<int>(Columns.UserFriendID); }
+			get { return GetColumnValue<int>(Columns.UserFavouriteID); }
 
-			set { SetColumnValue(Columns.UserFriendID, value); }
-
-		}
-
-		  
-		[XmlAttribute("HostID")]
-		public int HostID 
-		{
-			get { return GetColumnValue<int>(Columns.HostID); }
-
-			set { SetColumnValue(Columns.HostID, value); }
+			set { SetColumnValue(Columns.UserFavouriteID, value); }
 
 		}
 
@@ -209,12 +185,12 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("FriendID")]
-		public int FriendID 
+		[XmlAttribute("FavouredUserID")]
+		public int FavouredUserID 
 		{
-			get { return GetColumnValue<int>(Columns.FriendID); }
+			get { return GetColumnValue<int>(Columns.FavouredUserID); }
 
-			set { SetColumnValue(Columns.FriendID, value); }
+			set { SetColumnValue(Columns.FavouredUserID, value); }
 
 		}
 
@@ -237,35 +213,21 @@ namespace Incremental.Kick.Dal
 		#region ForeignKey Properties
 		
 		/// <summary>
-		/// Returns a Host ActiveRecord object related to this UserFriend
-		/// 
-		/// </summary>
-		public Incremental.Kick.Dal.Host Host
-		{
-			get { return Incremental.Kick.Dal.Host.FetchByID(this.HostID); }
-
-			set { SetColumnValue("HostID", value.HostID); }
-
-		}
-
-		
-		
-		/// <summary>
-		/// Returns a User ActiveRecord object related to this UserFriend
+		/// Returns a User ActiveRecord object related to this UserFavourite
 		/// 
 		/// </summary>
 		public Incremental.Kick.Dal.User User
 		{
-			get { return Incremental.Kick.Dal.User.FetchByID(this.FriendID); }
+			get { return Incremental.Kick.Dal.User.FetchByID(this.FavouredUserID); }
 
-			set { SetColumnValue("FriendID", value.UserID); }
+			set { SetColumnValue("FavouredUserID", value.UserID); }
 
 		}
 
 		
 		
 		/// <summary>
-		/// Returns a User ActiveRecord object related to this UserFriend
+		/// Returns a User ActiveRecord object related to this UserFavourite
 		/// 
 		/// </summary>
 		public Incremental.Kick.Dal.User UserToUserID
@@ -290,15 +252,13 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,int varUserID,int varFriendID,DateTime varCreatedOn)
+		public static void Insert(int varUserID,int varFavouredUserID,DateTime varCreatedOn)
 		{
-			UserFriend item = new UserFriend();
-			
-			item.HostID = varHostID;
+			UserFavourite item = new UserFavourite();
 			
 			item.UserID = varUserID;
 			
-			item.FriendID = varFriendID;
+			item.FavouredUserID = varFavouredUserID;
 			
 			item.CreatedOn = varCreatedOn;
 			
@@ -313,17 +273,15 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserFriendID,int varHostID,int varUserID,int varFriendID,DateTime varCreatedOn)
+		public static void Update(int varUserFavouriteID,int varUserID,int varFavouredUserID,DateTime varCreatedOn)
 		{
-			UserFriend item = new UserFriend();
+			UserFavourite item = new UserFavourite();
 			
-				item.UserFriendID = varUserFriendID;
-			
-				item.HostID = varHostID;
+				item.UserFavouriteID = varUserFavouriteID;
 			
 				item.UserID = varUserID;
 			
-				item.FriendID = varFriendID;
+				item.FavouredUserID = varFavouredUserID;
 			
 				item.CreatedOn = varCreatedOn;
 			
@@ -338,10 +296,9 @@ namespace Incremental.Kick.Dal
 		#region Columns Struct
 		public struct Columns
 		{
-			 public static string UserFriendID = @"UserFriendID";
-			 public static string HostID = @"HostID";
+			 public static string UserFavouriteID = @"UserFavouriteID";
 			 public static string UserID = @"UserID";
-			 public static string FriendID = @"FriendID";
+			 public static string FavouredUserID = @"FavouredUserID";
 			 public static string CreatedOn = @"CreatedOn";
 						
 		}

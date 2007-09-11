@@ -38,7 +38,7 @@ namespace Incremental.Kick.Dal
         
 		public static string User = @"Kick_User";
         
-		public static string UserFriend = @"Kick_UserFriend";
+		public static string UserFavourite = @"Kick_UserFavourite";
         
 	}
 
