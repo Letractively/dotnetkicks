@@ -111,20 +111,6 @@ namespace Incremental.Kick.Dal
 				colvarUserFriendID.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUserFriendID);
 				
-				TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
-				colvarHostID.ColumnName = "HostID";
-				colvarHostID.DataType = DbType.Int32;
-				colvarHostID.MaxLength = 0;
-				colvarHostID.AutoIncrement = false;
-				colvarHostID.IsNullable = false;
-				colvarHostID.IsPrimaryKey = false;
-				colvarHostID.IsForeignKey = true;
-				colvarHostID.IsReadOnly = false;
-				colvarHostID.DefaultSetting = @"";
-				
-					colvarHostID.ForeignKeyTableName = "Kick_Host";
-				schema.Columns.Add(colvarHostID);
-				
 				TableSchema.TableColumn colvarUserID = new TableSchema.TableColumn(schema);
 				colvarUserID.ColumnName = "UserID";
 				colvarUserID.DataType = DbType.Int32;
@@ -189,16 +175,6 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("HostID")]
-		public int HostID 
-		{
-			get { return GetColumnValue<int>(Columns.HostID); }
-
-			set { SetColumnValue(Columns.HostID, value); }
-
-		}
-
-		  
 		[XmlAttribute("UserID")]
 		public int UserID 
 		{
@@ -235,20 +211,6 @@ namespace Incremental.Kick.Dal
 			
 		
 		#region ForeignKey Properties
-		
-		/// <summary>
-		/// Returns a Host ActiveRecord object related to this UserFriend
-		/// 
-		/// </summary>
-		public Incremental.Kick.Dal.Host Host
-		{
-			get { return Incremental.Kick.Dal.Host.FetchByID(this.HostID); }
-
-			set { SetColumnValue("HostID", value.HostID); }
-
-		}
-
-		
 		
 		/// <summary>
 		/// Returns a User ActiveRecord object related to this UserFriend
@@ -290,11 +252,9 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,int varUserID,int varFriendID,DateTime varCreatedOn)
+		public static void Insert(int varUserID,int varFriendID,DateTime varCreatedOn)
 		{
 			UserFriend item = new UserFriend();
-			
-			item.HostID = varHostID;
 			
 			item.UserID = varUserID;
 			
@@ -313,13 +273,11 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserFriendID,int varHostID,int varUserID,int varFriendID,DateTime varCreatedOn)
+		public static void Update(int varUserFriendID,int varUserID,int varFriendID,DateTime varCreatedOn)
 		{
 			UserFriend item = new UserFriend();
 			
 				item.UserFriendID = varUserFriendID;
-			
-				item.HostID = varHostID;
 			
 				item.UserID = varUserID;
 			
@@ -339,7 +297,6 @@ namespace Incremental.Kick.Dal
 		public struct Columns
 		{
 			 public static string UserFriendID = @"UserFriendID";
-			 public static string HostID = @"HostID";
 			 public static string UserID = @"UserID";
 			 public static string FriendID = @"FriendID";
 			 public static string CreatedOn = @"CreatedOn";

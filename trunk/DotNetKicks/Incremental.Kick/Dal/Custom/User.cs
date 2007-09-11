@@ -115,8 +115,8 @@ namespace Incremental.Kick.Dal {
             return false;
         }
 
-        public void AddFriend(int friendID, int hostID) {
-            UserFriend.Insert(hostID, this.UserID, friendID, DateTime.Now);
+        public void AddFriend(int friendID) {
+            UserFriend.Insert(this.UserID, friendID, DateTime.Now);
             UserCache.RemoveUser(this.UserID);
             UserCache.RemoveUser(friendID);
         }

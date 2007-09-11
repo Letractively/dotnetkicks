@@ -983,14 +983,6 @@ namespace Incremental.Kick.Dal
 			return colStoryUserHostTagRecords;
 		}
 
-		private Incremental.Kick.Dal.UserFriendCollection colUserFriendRecords;
-		public Incremental.Kick.Dal.UserFriendCollection UserFriendRecords()
-		{
-			if(colUserFriendRecords == null)
-				colUserFriendRecords = new Incremental.Kick.Dal.UserFriendCollection().Where(UserFriend.Columns.HostID, HostID).Load();
-			return colUserFriendRecords;
-		}
-
 		#endregion
 		
 			
