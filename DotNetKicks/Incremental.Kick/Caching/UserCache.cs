@@ -168,6 +168,22 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
+        public static UserCollection GetFriends(int userId, int hostId)
+        {
+            string cacheKey = String.Format("UserFriends_{0}", userId);
+            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
+            UserCollection friends = userCollectionCache[cacheKey];
+
+            if (friends == null)
+            {
+                friends = UserBR.GetFriends(userId);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userCollectionCache.Insert(cacheKey, friends, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return friends;
+        }
+
         public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID) {
             return GetOnlineUsers(minutesSinceLastActive, hostID).Count;
         }

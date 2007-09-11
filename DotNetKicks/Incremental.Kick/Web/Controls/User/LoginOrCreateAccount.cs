@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
-using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.Controls {
     public class LoginOrCreateAccount : KickHtmlControl {
