@@ -15,13 +15,13 @@ using SubSonic.Utilities;
 namespace Incremental.Kick.Dal
 {
     /// <summary>
-    /// Controller class for Kick_UserFavourite
+    /// Controller class for Kick_UserFriend
     /// </summary>
     [System.ComponentModel.DataObject]
-    public partial class UserFavouriteController
+    public partial class UserFriendController
     {
         // Preload our schema..
-        UserFavourite thisSchemaLoad = new UserFavourite();
+        UserFriend thisSchemaLoad = new UserFriend();
         private string userName = string.Empty;
         protected string UserName
         {
@@ -47,40 +47,40 @@ namespace Incremental.Kick.Dal
         }
 
         [DataObjectMethod(DataObjectMethodType.Select, true)]
-        public UserFavouriteCollection FetchAll()
+        public UserFriendCollection FetchAll()
         {
-            UserFavouriteCollection coll = new UserFavouriteCollection();
-            Query qry = new Query(UserFavourite.Schema);
+            UserFriendCollection coll = new UserFriendCollection();
+            Query qry = new Query(UserFriend.Schema);
             coll.LoadAndCloseReader(qry.ExecuteReader());
             return coll;
         }
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public UserFavouriteCollection FetchByID(object UserFavouriteID)
+        public UserFriendCollection FetchByID(object UserFriendID)
         {
-            UserFavouriteCollection coll = new UserFavouriteCollection().Where("UserFavouriteID", UserFavouriteID).Load();
+            UserFriendCollection coll = new UserFriendCollection().Where("UserFriendID", UserFriendID).Load();
             return coll;
         }
 
 		
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
-        public UserFavouriteCollection FetchByQuery(Query qry)
+        public UserFriendCollection FetchByQuery(Query qry)
         {
-            UserFavouriteCollection coll = new UserFavouriteCollection();
+            UserFriendCollection coll = new UserFriendCollection();
             coll.LoadAndCloseReader(qry.ExecuteReader()); 
             return coll;
         }
 
         [DataObjectMethod(DataObjectMethodType.Delete, true)]
-        public bool Delete(object UserFavouriteID)
+        public bool Delete(object UserFriendID)
         {
-            return (UserFavourite.Delete(UserFavouriteID) == 1);
+            return (UserFriend.Delete(UserFriendID) == 1);
         }
 
         [DataObjectMethod(DataObjectMethodType.Delete, false)]
-        public bool Destroy(object UserFavouriteID)
+        public bool Destroy(object UserFriendID)
         {
-            return (UserFavourite.Destroy(UserFavouriteID) == 1);
+            return (UserFriend.Destroy(UserFriendID) == 1);
         }
 
         
@@ -90,13 +90,15 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int UserID,int FavouredUserID,DateTime CreatedOn)
+	    public void Insert(int HostID,int UserID,int FriendID,DateTime CreatedOn)
 	    {
-		    UserFavourite item = new UserFavourite();
+		    UserFriend item = new UserFriend();
 		    
+            item.HostID = HostID;
+            
             item.UserID = UserID;
             
-            item.FavouredUserID = FavouredUserID;
+            item.FriendID = FriendID;
             
             item.CreatedOn = CreatedOn;
             
@@ -109,15 +111,17 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int UserFavouriteID,int UserID,int FavouredUserID,DateTime CreatedOn)
+	    public void Update(int UserFriendID,int HostID,int UserID,int FriendID,DateTime CreatedOn)
 	    {
-		    UserFavourite item = new UserFavourite();
+		    UserFriend item = new UserFriend();
 		    
-				item.UserFavouriteID = UserFavouriteID;
+				item.UserFriendID = UserFriendID;
+				
+				item.HostID = HostID;
 				
 				item.UserID = UserID;
 				
-				item.FavouredUserID = FavouredUserID;
+				item.FriendID = FriendID;
 				
 				item.CreatedOn = CreatedOn;
 				
