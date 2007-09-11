@@ -491,6 +491,13 @@
     <Compile Include="Pages\User\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\Friends.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Friends.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Friends.aspx.designer.cs">
+      <DependentUpon>Friends.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\KickedStories.aspx.cs">
       <DependentUpon>KickedStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -702,6 +709,7 @@
     <Content Include="Controls\User\ProfileEditor.ascx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
+    <Content Include="Pages\User\Friends.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />

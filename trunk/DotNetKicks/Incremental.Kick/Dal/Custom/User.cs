@@ -62,6 +62,17 @@ namespace Incremental.Kick.Dal {
             return false;
         }
 
+        public bool IsFriendOf(int userId)
+        {
+            bool isFriend = false;
+            UserCollection friends = new UserCollection();
+            friends.Load(SPs.Kick_GetFriends(this.UserID).GetReader());
+            foreach (User user in friends)
+                if (user.UserID == userId)
+                    isFriend = true;
+            return isFriend; 
+        }
+
         public bool IsUser {
             get { return this.IsInRole("user"); }
         }
@@ -91,6 +102,22 @@ namespace Incremental.Kick.Dal {
                 if (!this.IsInRole(role))
                     return false;
             return true;
+        }
+
+        public void AddFriend(int friendId)
+        {
+            //TODO
+            //UserFriend.Insert(this.HostID, this.UserID, friendId, DateTime.Now);            
+        }
+
+        public void RemoveFriend(int userId)
+        {
+            //int? keyId = null;
+            //need to get userfriendid
+            //TODO
+
+            //if(keyId != null)
+            //    UserFriend.Delete(keyId);
         }
     }
 }

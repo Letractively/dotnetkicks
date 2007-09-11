@@ -21,5 +21,14 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected void Page_Load(object sender, EventArgs e) {
 
         }
+
+        protected void lnkAddFriend_Click(object sender, EventArgs e)
+        {
+            this.KickPage.KickUserProfile.AddFriend(this.UserProfile.UserID);
+        }
+        protected void lnkRemoveFriend_Click(object sender, EventArgs e)
+        {
+            this.KickPage.KickUserProfile.RemoveFriend(this.UserProfile.UserID);
+        }
     }
 }

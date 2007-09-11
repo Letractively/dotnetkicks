@@ -56,6 +56,7 @@
         </td>
     </tr>
 </table>
+
 <% if (this.KickPage.KickUserProfile.UserID == this.UserProfile.UserID) { %>
 <table class="FormTable">
     <tr>
@@ -67,4 +68,15 @@
         </td>
     </tr>
 </table>
-<% } %>
+<% } else { %>
+<% if ( this.KickPage.KickUserProfile.IsFriendOf(this.UserProfile.UserID)  )  { %>
+   <p><%= this.KickPage.KickUserProfile.Username %> is your friend!</p>
+   <p>
+       <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.UserProfile.Username%> as a Friend</asp:LinkButton>
+       * not working yet
+   </p>
+<% } else {%>
+    <p>
+       <asp:LinkButton ID="lnkAddFriend" runat="server" OnClick="lnkAddFriend_Click">Add <%= this.UserProfile.Username%> as a Friend</asp:LinkButton>
+   </p>   
+<% } } %>

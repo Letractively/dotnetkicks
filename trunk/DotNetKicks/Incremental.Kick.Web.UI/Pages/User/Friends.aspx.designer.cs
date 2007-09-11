@@ -8,33 +8,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Controls {
+namespace Incremental.Kick.Web.UI.Pages.User {
     
     
     /// <summary>
-    /// Profile class.
+    /// Friends class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Profile {
+    public partial class Friends {
         
         /// <summary>
-        /// lnkRemoveFriend control.
+        /// UserProfileHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkRemoveFriend;
+        protected global::Incremental.Kick.Web.Controls.UserProfileHeader UserProfileHeader;
         
         /// <summary>
-        /// lnkAddFriend control.
+        /// FriendList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAddFriend;
+        protected global::Incremental.Kick.Web.Controls.UserList FriendList;
     }
 }
