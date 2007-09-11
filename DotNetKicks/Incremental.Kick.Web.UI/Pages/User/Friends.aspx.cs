@@ -25,8 +25,7 @@ namespace Incremental.Kick.Web.UI.Pages.User
         protected void Page_Load(object sender, EventArgs e)
         {
             this.UserProfileHeader.User = this.UserProfile;
-            this.FriendList.DataBind(UserCache.GetFriends(UserCache.GetUserID(this.UrlParameters.UserIdentifier), this.HostProfile.HostID));
-            
+            this.FriendList.DataBind(this.UserProfile.Friends);
         }
     }
 }

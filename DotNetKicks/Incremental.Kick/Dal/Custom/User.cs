@@ -94,6 +94,18 @@ namespace Incremental.Kick.Dal {
             return true;
         }
 
+        private UserCollection _friends = null;
+        public UserCollection Friends {
+            get {
+                if (_friends == null) {
+                    _friends = new UserCollection();
+                    foreach (UserFriend friend in this.UserFriendRecordsFromUser())
+                        _friends.Add(UserCache.GetUser(friend.FriendID));
+                }
+                return _friends;
+            }
+        }
+
         public bool IsFriendOf(int userID) {
             //TODO: GJ: ensure that the friend records are lazy-loaded
             foreach (UserFriend friend in this.UserFriendRecordsFromUser()) {
@@ -109,13 +121,15 @@ namespace Incremental.Kick.Dal {
             UserCache.RemoveUser(friendID);
         }
 
-        public void RemoveFriend(int userID) {
+        public void RemoveFriend(int friendID) {
             //int? keyId = null;
             //need to get userfriendid
             //TODO
 
             //if(keyId != null)
             //    UserFriend.Delete(keyId);
+            UserCache.RemoveUser(this.UserID);
+            UserCache.RemoveUser(friendID);
         }
     }
 }

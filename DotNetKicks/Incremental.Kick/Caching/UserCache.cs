@@ -24,7 +24,7 @@ namespace Incremental.Kick.Caching {
         }
 
         private static object _getUserLock = new object();
-        private static User GetUser(int userID) {
+        public static User GetUser(int userID) {
             CacheManager<string, User> userCache = GetUserCache();
             string cacheKey = GetUserProfileCacheKey(userID);
             User user = userCache[cacheKey];
@@ -168,27 +168,9 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static UserCollection GetFriends(int userID, int hostID) {
-            //NOTE: GJ: at some point in the near future, we should store all this in the cached User model
-            string cacheKey = String.Format("UserFriends_{0}", userID);
-            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
-            UserCollection friends = userCollectionCache[cacheKey];
-
-            if (friends == null) {
-                foreach(UserFriend friend in User.FetchByID(userID).UserFriendRecords())
-                    friends.Add(UserCache.GetUser(userID));
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                userCollectionCache.Insert(cacheKey, friends, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return friends;
-        }
-
         public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID) {
             return GetOnlineUsers(minutesSinceLastActive, hostID).Count;
         }
-
-
 
         private static CacheManager<string, UserCollection> GetUserCollectionCache() {
             return CacheManager<string, UserCollection>.GetInstance();
