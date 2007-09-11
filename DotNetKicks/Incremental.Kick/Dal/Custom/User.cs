@@ -94,31 +94,31 @@ namespace Incremental.Kick.Dal {
             return true;
         }
 
-        private UserCollection _favouriteUsers = null;
-        public UserCollection FavouriteUsers {
+        private UserCollection _friends = null;
+        public UserCollection Friends {
             get {
-                if (_favouriteUsers == null) {
-                    _favouriteUsers = new UserCollection();
-                    foreach (UserFavourite favourite in this.UserFavouriteRecordsFromUser())
-                        _favouriteUsers.Add(UserCache.GetUser(favourite.FavouredUserID));
+                if (_friends == null) {
+                    _friends = new UserCollection();
+                    foreach (UserFriend friend in this.UserFriendRecordsFromUser())
+                        _friends.Add(UserCache.GetUser(friend.FriendID));
                 }
-                return _favouriteUsers;
+                return _friends;
             }
         }
 
         public bool IsFriendOf(int userID) {
             //TODO: GJ: ensure that the friend records are lazy-loaded
-            foreach (UserFavourite favourite in this.UserFavouriteRecordsFromUser()) {
-                if (favourite.FavouredUserID == userID)
+            foreach (UserFriend friend in this.UserFriendRecordsFromUser()) {
+                if (friend.FriendID == userID)
                     return true;
             }
             return false;
         }
 
-        public void AddFriend(int favouredUserID, int hostID) {
-            UserFavourite.Insert(this.UserID, favouredUserID, DateTime.Now);
+        public void AddFriend(int friendID, int hostID) {
+            UserFriend.Insert(hostID, this.UserID, friendID, DateTime.Now);
             UserCache.RemoveUser(this.UserID);
-            UserCache.RemoveUser(favouredUserID);
+            UserCache.RemoveUser(friendID);
         }
 
         public void RemoveFriend(int friendID) {

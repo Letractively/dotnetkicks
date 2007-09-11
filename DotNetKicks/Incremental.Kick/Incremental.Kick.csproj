@@ -92,7 +92,6 @@
     <Compile Include="Dal\Generated\Controllers\StoryUserHostTagController.cs" />
     <Compile Include="Dal\Generated\Controllers\TagController.cs" />
     <Compile Include="Dal\Generated\Controllers\UserController.cs" />
-    <Compile Include="Dal\Generated\Controllers\UserFavouriteController.cs" />
     <Compile Include="Dal\Generated\Models\Category.cs" />
     <Compile Include="Dal\Generated\Models\Comment.cs" />
     <Compile Include="Dal\Generated\Models\Elmah_Error.cs" />
@@ -103,7 +102,7 @@
     <Compile Include="Dal\Generated\Models\StoryUserHostTag.cs" />
     <Compile Include="Dal\Generated\Models\Tag.cs" />
     <Compile Include="Dal\Generated\Models\User.cs" />
-    <Compile Include="Dal\Generated\Models\UserFavourite.cs" />
+    <Compile Include="Dal\Generated\Models\UserFriend.cs" />
     <Compile Include="Dal\Generated\Utility\AllStructs.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
