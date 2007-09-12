@@ -48,6 +48,7 @@ namespace Incremental.Kick.Web.Helpers {
             SubmitStory,
 
             NewStories,
+            NewStoriesRss,
             UpcomingWeek,
             UpcomingToday,
 
@@ -94,6 +95,8 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath("/submit");
                 case PageName.NewStories:
                     return MapPath("/upcoming");
+                case PageName.NewStoriesRss:
+                    return MapPath("/upcoming/rss");
                 case PageName.ChangePassword:
                     return MapPath("/changepassword");
                 case PageName.ViewTags:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
+using SubSonic.Sugar;
 
 namespace Incremental.Kick.Web.Controls {
     public class Breadcrumbs : KickHtmlControl {
@@ -193,7 +194,7 @@ namespace Incremental.Kick.Web.Controls {
             else
                 writer.WriteLine(@"Why not <a href=""{0}"">join our community?</a>", UrlFactory.CreateUrl(UrlFactory.PageName.Register));
 
-            writer.Write(@", there are <a href=""/whoisonline"">{0} users online</a>", UserCache.GetOnlineUsersCount(30, this.KickPage.HostProfile.HostID));
+            writer.Write(@", there are <a href=""/whoisonline"">{0} online</a>", Strings.Pluralize(UserCache.GetOnlineUsersCount(30, this.KickPage.HostProfile.HostID), "user"));
 
             writer.WriteLine(@"</tr></table></div>");
         }

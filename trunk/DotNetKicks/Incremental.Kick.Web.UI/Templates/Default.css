@@ -12,7 +12,7 @@ input, select, textarea{  }
 .Hidden { display: none; visibility: hidden; }
 .Visible { visibility: visible; }
 
-
+.Highlight { background-color: #FFFDDB; padding: 4; font-size: 1.1em;}
 
 
 .user { padding: padding: 3px 0 0 0; white-space: nowrap; }
