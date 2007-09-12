@@ -40,6 +40,25 @@ namespace Incremental.Kick.Web.UI.Pages {
                     break;
             }
 
+            switch (this.UrlParameters.StoryListSortBy) 
+            {
+                case StoryListSortBy.Today:
+                    this.PageName = UrlFactory.PageName.PopularToday;
+                    break;
+                case StoryListSortBy.PastWeek:
+                    this.PageName = UrlFactory.PageName.PopularWeek;
+                    break;
+                case StoryListSortBy.PastTenDays:
+                    this.PageName = UrlFactory.PageName.PopularTenDays;
+                    break;
+                case StoryListSortBy.PastMonth:
+                    this.PageName = UrlFactory.PageName.PopularMonth;
+                    break;
+                case StoryListSortBy.PastYear:
+                    this.PageName = UrlFactory.PageName.PopularYear;
+                    break;
+            }
+
             this.SubCaption = String.Format(@"<a href=""{0}"">View {1} upcoming stories >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), StoryCache.GetUpcomingStoryCount(this.HostProfile));
         }
     }

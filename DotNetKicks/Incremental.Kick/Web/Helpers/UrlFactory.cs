@@ -8,6 +8,7 @@ namespace Incremental.Kick.Web.Helpers {
         public enum PageName {
             Home,
             HomeRss,
+
             Login,
             LoginSwitch,
             Logout,
@@ -20,6 +21,9 @@ namespace Incremental.Kick.Web.Helpers {
             JavaScriptFeeds,
             Tools,
             Search,
+
+            CommunityWhoIsOnline,
+
             UserHome,
             UserProfile,
             UserFriends,
@@ -32,15 +36,27 @@ namespace Incremental.Kick.Web.Helpers {
             UserTag,
             UserTags,
             Users,
+
             ViewCategory,
             ViewCategoryRss,
             ViewCategoryNewStories,
             ViewCategoryNewStoriesRss,
             ViewTag,
             ViewTags,
-            NewStories,
+            
             ViewStory,
             SubmitStory,
+
+            NewStories,
+            UpcomingWeek,
+            UpcomingToday,
+
+            PopularToday,
+            PopularWeek,
+            PopularTenDays,
+            PopularMonth,
+            PopularYear,
+
             ViewTagRss,
             NotAuthorised,
             Admin

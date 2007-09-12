@@ -21,13 +21,51 @@ namespace Incremental.Kick.Web.Controls {
 
             string categoryName = "";
             if(this.KickPage.UrlParameters.CategoryID != null)
-                CategoryCache.GetCategory(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).Name.ToLower();
+                categoryName = CategoryCache.GetCategory(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).Name.ToLower();
 
             switch (this.KickPage.PageName) {
+                
+                //---------------- category trail
                 case UrlFactory.PageName.ViewCategory :
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("category", "#", writer);
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb(categoryName, writer);
                     break;
+
+                    //view popular (main) trail
+                case UrlFactory.PageName.PopularToday:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("today", writer);
+                    break;
+                case UrlFactory.PageName.PopularWeek:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("this week", writer);
+                    break;
+                case UrlFactory.PageName.PopularTenDays:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("past ten days", writer);
+                    break;                    
+                case UrlFactory.PageName.PopularMonth:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("this month", writer);
+                    break;
+                case UrlFactory.PageName.PopularYear:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("this year", writer);
+                    break;
+
+                    //-------------- view upcoming trail
                 case UrlFactory.PageName.ViewCategoryNewStories :
                     this.RenderSpacer(writer);
 
@@ -36,9 +74,23 @@ namespace Incremental.Kick.Web.Controls {
                         UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, this.KickPage.UrlParameters.CategoryIdentifier), writer);
                         this.RenderSpacer(writer);
                     }
-
                     this.RenderBreadcrumb("upcoming stories", writer);
                     break;
+
+                case UrlFactory.PageName.UpcomingWeek:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("upcoming stories", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories) , writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("this week", writer);
+                    break;
+                case UrlFactory.PageName.UpcomingToday:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("upcoming stories", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("top today", writer);
+                    break;
+
+                //----------------- view story trail
                 case UrlFactory.PageName.ViewStory :
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb(categoryName,
@@ -46,6 +98,8 @@ namespace Incremental.Kick.Web.Controls {
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("view story", writer);
                     break;
+
+                //--------------- tag trail
                 case UrlFactory.PageName.ViewTag:
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("tags", UrlFactory.CreateUrl(UrlFactory.PageName.ViewTags), writer);
@@ -73,6 +127,14 @@ namespace Incremental.Kick.Web.Controls {
                 case UrlFactory.PageName.SubmitStory:
                     this.RenderSpacer(writer);
                     RenderBreadcrumb("submit story", writer);
+                    break;
+                
+                //-------------- community pages
+                case UrlFactory.PageName.CommunityWhoIsOnline:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("community", "#", writer);
+                    this.RenderSpacer(writer);
+                    RenderBreadcrumb("online users", writer);
                     break;
 
                 //----------------- user profile trail
