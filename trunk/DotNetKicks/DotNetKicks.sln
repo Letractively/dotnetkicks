@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.StoryPubli
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Tests", "Incremental.Kick.Tests\Incremental.Kick.Tests.csproj", "{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +43,10 @@ Global
 		{054403EB-5B34-4B73-9F4F-4E925E3F6C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{054403EB-5B34-4B73-9F4F-4E925E3F6C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{054403EB-5B34-4B73-9F4F-4E925E3F6C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
