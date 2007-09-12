@@ -17,11 +17,6 @@ namespace Incremental.Kick.BusinessLogic {
             if (user.IsBanned)
                 return GetStoryIdentifier(title); //to stop the spammers
 
-            return AddStory(hostID, title, description, url, categoryID, user.UserID, user.Username, user.AdsenseID);
-        }
-
-
-        public static string AddStory(int hostID, string title, string description, string url, short categoryID, int userID, string username, string adsenseID) {
             //TODO: improve the validation
             string storyIdentifier = GetStoryIdentifier(title);
 
@@ -42,20 +37,22 @@ namespace Incremental.Kick.BusinessLogic {
             story.Description = description;
             story.Url = url;
             story.CategoryID = categoryID;
-            story.UserID = userID;
-            story.Username = username;
+            story.UserID = user.UserID;
+            story.Username = user.Username;
             story.KickCount = 0;
             story.SpamCount = 0;
             story.ViewCount = 0;
             story.CommentCount = 0;
             story.IsPublishedToHomepage = false;
             story.IsSpam = false;
-            story.AdsenseID = adsenseID;
+            story.AdsenseID = user.AdsenseID;
             story.PublishedOn = DateTime.Now;
             story.Save();
 
+            UserCache.KickStory(story.StoryID, user.UserID, hostID);
 
-            UserCache.KickStory(story.StoryID, userID, hostID);
+            TagBR.AddUserStoryTags(CategoryCache.GetCategory(categoryID, hostID).TagIdentifier, user, story.StoryID, hostID);
+
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
@@ -66,6 +63,9 @@ namespace Incremental.Kick.BusinessLogic {
 
             return story.StoryIdentifier;
         }
+
+
+
 
         public static string GetStoryIdentifier(string title) {
             title = Regex.Replace(title, @"[^\w\s]", "_");

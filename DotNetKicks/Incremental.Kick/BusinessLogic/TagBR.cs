@@ -9,8 +9,13 @@ using Incremental.Kick.Caching;
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class TagBR {
-        public static WeightedTagList GetOrInsertTags(string tagString, User user) {
-            List<string> rawTags = TagHelper.DistillTagInput(tagString, user.IsAdministrator);
+
+        public static WeightedTagList GetOrInsertTags(string tagString) {
+            return GetOrInsertTags(tagString, false);
+        }
+        
+        public static WeightedTagList GetOrInsertTags(string tagString, bool isAdministrator) {
+            List<string> rawTags = TagHelper.DistillTagInput(tagString, isAdministrator);
 
             WeightedTagList tags = new WeightedTagList();
             TagCollection newTags = new TagCollection();
@@ -57,7 +62,7 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static WeightedTagList AddUserStoryTags(string tagString, User user, int storyID, int hostID) {
-            WeightedTagList tags = GetOrInsertTags(tagString, user);
+            WeightedTagList tags = GetOrInsertTags(tagString, user.IsAdministrator);
 
             StoryUserHostTagCollection storyUserHostTags = new StoryUserHostTagCollection();
             foreach (WeightedTag tag in tags) {
