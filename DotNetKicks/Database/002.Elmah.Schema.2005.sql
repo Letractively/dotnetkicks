@@ -1,3 +1,6 @@
+USE [DotNetKicks]
+GO
+
 /*
   
    ELMAH - Error Logging Modules and Handlers for ASP.NET
