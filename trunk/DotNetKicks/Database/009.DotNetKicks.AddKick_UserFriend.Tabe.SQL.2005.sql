@@ -7,7 +7,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Kick_UserFriend](
 	[UserFriendID] [int] IDENTITY(1,1) NOT NULL,
-	[HostID] [int] NOT NULL,
 	[UserID] [int] NOT NULL,
 	[FriendID] [int] NOT NULL,
 	[CreatedOn] [datetime] NOT NULL,
