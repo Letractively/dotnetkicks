@@ -33,8 +33,7 @@ namespace Incremental.Kick.Web.Controls {
                         tagClass += " namespaceTag";
 
                         foreach (string tagNamespace in this._tags[i].Namespaces) {
-                            tagIcons += String.Format(@"<img src=""{0}/{1}.png"" width=""16"" height=""16"" border=""0""/> ", this.KickPage.StaticIconRootUrl, tagNamespace);
-                            
+                            //tagIcons += String.Format(@"<img src=""{0}/{1}_{2}.png"" width=""16"" height=""16"" border=""0""/> ", this.KickPage.StaticIconRootUrl, tagNamespace, this._tags[i].TagName);
                             tagClass += " " + tagNamespace + "_NamespaceTag";
                         }
                     }

@@ -43,10 +43,10 @@ namespace Incremental.Kick.Web.Controls {
                         tagClass += " namespaceTag";
 
                         foreach (string tagNamespace in tag.Namespaces) {
-                            tagIcons += String.Format(@"<img src=""{0}/{1}.png"" width=""16"" height=""16"" border=""0""/>", this.KickPage.StaticIconRootUrl, tagNamespace);
+                            //tagIcons += String.Format(@"<img src=""{0}/{1}_{2}.png"" width=""16"" height=""16"" border=""0""/> ", this.KickPage.StaticIconRootUrl, tagNamespace, tag.TagName);
                             tagClass += " " + tagNamespace + "_NamespaceTag";
                         }
-                    }
+                   } 
 
                     writer.WriteLine(@"<span style=""font-size:{0}em;""><a href=""{1}"" class=""tag {3}"" rel=""tag"">{4}{2}</a></span>",
                         fontSize.ToString(), tagUrl, tag.TagName, tagClass, tagIcons);
