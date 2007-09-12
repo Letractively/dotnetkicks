@@ -13,9 +13,13 @@ namespace Incremental.Kick.Dal {
 
         public static User FetchUserByParameter(string columnName, object value) {
             //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
-            UserCollection f = new UserCollection();
-            f.Load(User.FetchByParameter(columnName, value));
-            return f[0];
+            UserCollection users = new UserCollection();
+            users.Load(User.FetchByParameter(columnName, value));
+
+            if (users.Count == 1)
+                return users[0];
+            else
+                return null;
         }
 
         public static UserCollection FetchOnlineUsers(int minutesSinceLastActivity, int hostID) {
