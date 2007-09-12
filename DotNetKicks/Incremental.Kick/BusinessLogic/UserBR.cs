@@ -4,6 +4,7 @@ using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
 using Incremental.Kick.Common.Exceptions;
 using Incremental.Kick.Caching;
+using System.Security;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
@@ -157,12 +158,12 @@ namespace Incremental.Kick.BusinessLogic {
             User user = UserBR.GetUserByUsername(username);
 
             if (user == null)
-                throw new Exception("Username [" + username + "] not found");
+                throw new SecurityException("Username [" + username + "] not found");
 
             string passwordHash = Cipher.Hash(password, user.PasswordSalt);
 
             if (!passwordHash.Equals(user.Password))
-                throw new Exception("Invalid password for username [" + username + "]");
+                throw new SecurityException("Invalid password for username [" + username + "]");
 
             if (!user.IsValidated) {
                 user.IsValidated = true;

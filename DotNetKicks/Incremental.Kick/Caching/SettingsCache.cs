@@ -6,7 +6,10 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Caching {
     public class SettingsCache {
         public static string GetSetting(string name) {
-            return Settings[name].ValueX;
+            if (Settings.ContainsKey(name))
+                return Settings[name].ValueX;
+            else
+                throw new ArgumentException("Invalid Setting name : " + name);
         }
 
         public static Dictionary<string, Setting> Settings {
