@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int HostID,string CategoryIdentifier,string Name,string Description,string IconName,short OrderPriority)
+	    public void Insert(int HostID,string CategoryIdentifier,string Name,string Description,string IconName,short OrderPriority,string TagIdentifier)
 	    {
 		    Category item = new Category();
 		    
@@ -106,6 +106,8 @@ namespace Incremental.Kick.Dal
             
             item.OrderPriority = OrderPriority;
             
+            item.TagIdentifier = TagIdentifier;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -115,7 +117,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(short CategoryID,int HostID,string CategoryIdentifier,string Name,string Description,string IconName,short OrderPriority)
+	    public void Update(short CategoryID,int HostID,string CategoryIdentifier,string Name,string Description,string IconName,short OrderPriority,string TagIdentifier)
 	    {
 		    Category item = new Category();
 		    
@@ -132,6 +134,8 @@ namespace Incremental.Kick.Dal
 				item.IconName = IconName;
 				
 				item.OrderPriority = OrderPriority;
+				
+				item.TagIdentifier = TagIdentifier;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

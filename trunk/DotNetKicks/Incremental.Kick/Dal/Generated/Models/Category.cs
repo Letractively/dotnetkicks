@@ -191,6 +191,20 @@ namespace Incremental.Kick.Dal
 				colvarOrderPriority.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarOrderPriority);
 				
+				TableSchema.TableColumn colvarTagIdentifier = new TableSchema.TableColumn(schema);
+				colvarTagIdentifier.ColumnName = "TagIdentifier";
+				colvarTagIdentifier.DataType = DbType.String;
+				colvarTagIdentifier.MaxLength = 50;
+				colvarTagIdentifier.AutoIncrement = false;
+				colvarTagIdentifier.IsNullable = false;
+				colvarTagIdentifier.IsPrimaryKey = false;
+				colvarTagIdentifier.IsForeignKey = false;
+				colvarTagIdentifier.IsReadOnly = false;
+				
+						colvarTagIdentifier.DefaultSetting = @"('')";
+				colvarTagIdentifier.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarTagIdentifier);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -273,6 +287,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("TagIdentifier")]
+		public string TagIdentifier 
+		{
+			get { return GetColumnValue<string>(Columns.TagIdentifier); }
+
+			set { SetColumnValue(Columns.TagIdentifier, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -319,7 +343,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority)
+		public static void Insert(int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority,string varTagIdentifier)
 		{
 			Category item = new Category();
 			
@@ -335,6 +359,8 @@ namespace Incremental.Kick.Dal
 			
 			item.OrderPriority = varOrderPriority;
 			
+			item.TagIdentifier = varTagIdentifier;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -346,7 +372,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(short varCategoryID,int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority)
+		public static void Update(short varCategoryID,int varHostID,string varCategoryIdentifier,string varName,string varDescription,string varIconName,short varOrderPriority,string varTagIdentifier)
 		{
 			Category item = new Category();
 			
@@ -363,6 +389,8 @@ namespace Incremental.Kick.Dal
 				item.IconName = varIconName;
 			
 				item.OrderPriority = varOrderPriority;
+			
+				item.TagIdentifier = varTagIdentifier;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -382,6 +410,7 @@ namespace Incremental.Kick.Dal
 			 public static string Description = @"Description";
 			 public static string IconName = @"IconName";
 			 public static string OrderPriority = @"OrderPriority";
+			 public static string TagIdentifier = @"TagIdentifier";
 						
 		}
 
