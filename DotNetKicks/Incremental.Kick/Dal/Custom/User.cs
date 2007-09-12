@@ -26,6 +26,11 @@ namespace Incremental.Kick.Dal {
             return users;
         }
 
+        public static int GetTotalCount() {
+            Query query = new Query(User.Schema);
+            return query.GetCount(User.Columns.UserID);
+        }
+
         public void UpdateLastActiveOn() {
             if (this.LastActiveOn.AddMinutes(15) < DateTime.Now) {
                 this.LastActiveOn = DateTime.Now;
@@ -63,16 +68,7 @@ namespace Incremental.Kick.Dal {
             return false;
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is guest.
-        /// </summary>
-        /// <value><c>true</c> if this instance is guest; otherwise, <c>false</c>.</value>
-        /// <remarks>
-        /// Returns true if Identity.IsAuthenticated == false
-        /// Returns false if Identity.IsAuthenticated == true
-        /// </remarks>
-        public bool IsGuest
-        {
+        public bool IsGuest {
             get { return !System.Web.HttpContext.Current.User.Identity.IsAuthenticated; }
         }
 
