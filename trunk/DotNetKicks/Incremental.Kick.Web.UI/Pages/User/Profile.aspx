@@ -1,4 +1,6 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.User.Profile" %>
+
+<%@ Register Src="../../Controls/User/UserAdmin.ascx" TagName="UserAdmin" TagPrefix="uc2" %>
 <%@ Register Src="../../Controls/User/Profile.ascx" TagName="Profile" TagPrefix="uc1" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 
@@ -17,5 +19,8 @@
             </td>
         </tr>
     </table>
+    
+    
+    <uc2:UserAdmin id="UserAdmin" runat="server" Visible="false" />
     
 </asp:Content>

@@ -186,6 +186,11 @@ namespace Incremental.Kick.Web.Controls {
                 this.NotAuthorisedRedirect();
         }
 
+        public void DemandAdministratorRole() {
+            if (!this.KickUserProfile.IsAdministrator)
+                this.NotAuthorisedRedirect();
+        }
+
         public void NotAuthorisedRedirect() {
             Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
         }
