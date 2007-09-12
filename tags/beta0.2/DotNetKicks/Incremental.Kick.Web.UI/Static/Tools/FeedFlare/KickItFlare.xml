@@ -1,0 +1,10 @@
+﻿<FeedFlareUnit>
+  <Catalog>
+    <Title>Kick it</Title>
+    <Description>Kick this story on dotnetkicks.com</Description>
+  </Catalog>
+  <FeedFlare>
+    <Text>Kick it</Text>
+    <Link href="http://www.dotnetkicks.com/kick/?url=${link}" />
+  </FeedFlare>
+</FeedFlareUnit>
