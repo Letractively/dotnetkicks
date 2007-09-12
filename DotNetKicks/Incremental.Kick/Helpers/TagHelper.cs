@@ -10,7 +10,7 @@ using Incremental.Common.Web.Helpers;
 namespace Incremental.Kick.Helpers {
     public class TagHelper {
 
-        public static List<string> DistillTagInput(string rawTagInput, User user) {
+        public static List<string> DistillTagInput(string rawTagInput, bool isAdministrator) {
             rawTagInput = rawTagInput.Replace(",", " ");
 
             //handle any quoted text
@@ -30,17 +30,18 @@ namespace Incremental.Kick.Helpers {
 
             //now remove unwanted characters
             string adminAllowedCharacters = "";
-            if(user.IsAdministrator) 
+            if (isAdministrator) 
                 adminAllowedCharacters += Constants.NAMESPACE_SEPERATOR; //allow the use of namespaces
-            rawTagInput = new Regex(@"[^A-Za-z0-9#_(). /-" + adminAllowedCharacters + "]").Replace(rawTagInput, "");
+            rawTagInput = new Regex(@"[^A-Za-z0-9#_()+. /-" + adminAllowedCharacters + "]").Replace(rawTagInput, "");
 
             string[] tagArray = rawTagInput.Split(" ".ToCharArray());
             List<string> tags = new List<string>();
             foreach (string tag in tagArray) {
                 //TODO: GJ: cut of any characters over 40 
 
-                if(tag.Trim().Length > 1) //NOTE: GJ: should we allow single characters??
-                    tags.Add(tag);
+                if(tag.Trim().Length > 1)  //NOTE: GJ: should we allow single characters??
+                    if(!tags.Contains(tag))
+                        tags.Add(tag);
             }
 
             return tags;

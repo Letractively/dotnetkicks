@@ -10,7 +10,7 @@ namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class TagBR {
         public static WeightedTagList GetOrInsertTags(string tagString, User user) {
-            List<string> rawTags = TagHelper.DistillTagInput(tagString, user);
+            List<string> rawTags = TagHelper.DistillTagInput(tagString, user.IsAdministrator);
 
             WeightedTagList tags = new WeightedTagList();
             TagCollection newTags = new TagCollection();
