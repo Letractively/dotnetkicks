@@ -46,18 +46,14 @@ namespace Incremental.Kick.Web.Controls {
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("view story", writer);
                     break;
-                case UrlFactory.PageName.UserProfile:
-                    this.RenderSpacer(writer);
-                    this.RenderBreadcrumb("users", "#", writer);
-                    this.RenderSpacer(writer);
-                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, writer);
-                    break;
                 case UrlFactory.PageName.ViewTag:
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("tags", UrlFactory.CreateUrl(UrlFactory.PageName.ViewTags), writer);
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb(this.KickPage.UrlParameters.TagIdentifier, writer);
                     break;
+
+                 //---------------- top level trail
                 case UrlFactory.PageName.Login:
                     this.RenderSpacer(writer);
                     RenderBreadcrumb("login", writer);
@@ -77,6 +73,54 @@ namespace Incremental.Kick.Web.Controls {
                 case UrlFactory.PageName.SubmitStory:
                     this.RenderSpacer(writer);
                     RenderBreadcrumb("submit story", writer);
+                    break;
+
+                //----------------- user profile trail
+                case UrlFactory.PageName.UserProfile:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, writer);
+                    break;
+                case UrlFactory.PageName.UserComments:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("comments", writer);
+                    break;
+                case UrlFactory.PageName.UserSubmittedStories:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("submitted stories", writer);
+                    break;
+                case UrlFactory.PageName.UserKickedStories:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("kicked stories", writer);
+                    break;
+                case UrlFactory.PageName.UserFriends:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("friends", writer);
+                    break;
+                case UrlFactory.PageName.UserTags: 
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("tags", writer);
                     break;
             }
 

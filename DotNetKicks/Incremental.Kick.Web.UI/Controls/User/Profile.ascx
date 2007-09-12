@@ -57,26 +57,24 @@
     </tr>
 </table>
 
-<% if (this.KickPage.KickUserProfile.UserID == this.UserProfile.UserID) { %>
 <table class="FormTable">
     <tr>
         <td class="FormTitle FormTD">
         </td>
         <td class="FormInput FormTD">
-            <h2>
-                <a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a></h2>
+        <h2>
+            <asp:MultiView ID="mvProfileViews" runat="server" ActiveViewIndex="0">
+                <asp:View ID="viewProfileEdit" runat="server">
+                    <a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a>
+                </asp:View>
+                <asp:View ID="viewProfileIsAFriend" runat="server">
+                    <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.KickPage.UrlParameters.UserIdentifier%> as a Friend</asp:LinkButton>
+                </asp:View>
+                <asp:View ID="viewProfileIsNotAFriend" runat="server">
+                    <asp:LinkButton ID="lnkAddFriend" runat="server" OnClick="lnkAddFriend_Click">Add <%= this.UserProfile.Username%> as a Friend</asp:LinkButton>
+                </asp:View>
+            </asp:MultiView>
+            </h2>
         </td>
     </tr>
 </table>
-<% } else { %>
-<% if ( this.KickPage.KickUserProfile.IsFriendOf(this.UserProfile.UserID)  )  { %>
-   <p><%= this.KickPage.UrlParameters.UserIdentifier %> is your friend!</p>
-   <p>
-       <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.KickPage.UrlParameters.UserIdentifier%> as a Friend</asp:LinkButton>
-       * not working yet
-   </p>
-<% } else {%>
-    <p>
-       <asp:LinkButton ID="lnkAddFriend" runat="server" OnClick="lnkAddFriend_Click">Add <%= this.UserProfile.Username%> as a Friend</asp:LinkButton>
-   </p>   
-<% } } %>

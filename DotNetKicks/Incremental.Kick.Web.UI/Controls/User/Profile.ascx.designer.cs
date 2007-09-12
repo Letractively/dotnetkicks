@@ -20,6 +20,33 @@ namespace Incremental.Kick.Web.UI.Controls {
     public partial class Profile {
         
         /// <summary>
+        /// mvProfileViews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView mvProfileViews;
+        
+        /// <summary>
+        /// viewProfileEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProfileEdit;
+        
+        /// <summary>
+        /// viewProfileIsAFriend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProfileIsAFriend;
+        
+        /// <summary>
         /// lnkRemoveFriend control.
         /// </summary>
         /// <remarks>
@@ -27,6 +54,15 @@ namespace Incremental.Kick.Web.UI.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkRemoveFriend;
+        
+        /// <summary>
+        /// viewProfileIsNotAFriend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewProfileIsNotAFriend;
         
         /// <summary>
         /// lnkAddFriend control.
