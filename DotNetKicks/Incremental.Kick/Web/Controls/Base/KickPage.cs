@@ -6,7 +6,6 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;
-using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security.Principal;
@@ -100,17 +99,6 @@ namespace Incremental.Kick.Web.Controls {
                 }
 
                 return this._hostProfile;
-            }
-        }
-
-        private WebUIConfig _webUIConfig;
-        public WebUIConfig WebUIConfig {
-            get {
-                if (this._webUIConfig == null) {
-                    this._webUIConfig = WebUIConfigReader.GetConfig();
-                }
-
-                return this._webUIConfig;
             }
         }
 

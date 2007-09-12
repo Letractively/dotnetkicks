@@ -6,7 +6,6 @@ using System.Web.Security;
 using System.Security.Principal;
 using Incremental.Kick.Security.Principal;
 using Incremental.Kick.BusinessLogic;
-using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;

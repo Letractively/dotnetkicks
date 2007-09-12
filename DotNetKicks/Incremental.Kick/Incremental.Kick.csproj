@@ -75,8 +75,6 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Enums\StoryListSortBy.cs" />
     <Compile Include="Common\Exceptions\Exceptions.cs" />
-    <Compile Include="Config\ConfigReaderBase.cs" />
-    <Compile Include="Config\WebUIConfig.cs" />
     <Compile Include="Dal\Custom\Category.cs" />
     <Compile Include="Dal\Custom\Comment.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
@@ -232,10 +230,6 @@
     <Compile Include="Web\Security\Principal\IKickPrincipal.cs" />
     <Compile Include="Web\Security\Principal\KickPrincipal.cs" />
     <Compile Include="Web\Security\SecurityManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Config\Atweb.Kick.config" />
-    <None Include="Config\webui.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
