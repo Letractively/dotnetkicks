@@ -8,6 +8,7 @@ using Incremental.Kick.Caching;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Dal.Entities;
 using System.Web;
+using SubSonic.Sugar;
 
 namespace Incremental.Kick.Web.Controls {
 
@@ -71,7 +72,7 @@ namespace Incremental.Kick.Web.Controls {
 
             string publishedHtml = "";
             if (this._story.IsPublishedToHomepage) {
-                publishedHtml = "published " + DateHelper.ConverDateToTimeAgo(this._story.PublishedOn) + ", ";
+                publishedHtml = "published " + Dates.ReadableDiff(this._story.PublishedOn, DateTime.Now) + ", ";
             }
             //TODO: remove inline style from table
             writer.WriteLine(@"
@@ -95,7 +96,7 @@ namespace Incremental.Kick.Web.Controls {
 
                         <div class=""storyActions"">
                             <a href=""{2}"" class=""commentsLink"">
-            ", DateHelper.ConverDateToTimeAgo(this._story.CreatedOn), this._story.Description + moreLink, kickStoryUrl);
+            ", Dates.ReadableDiff(this._story.CreatedOn, DateTime.Now), this._story.Description + moreLink, kickStoryUrl);
 
             writer.WriteLine(@"<img src=""{0}/comment.png"" alt=""Add a comment"" width=""16"" height=""16"" border=""0"" /> ", this.KickPage.StaticIconRootUrl);
 
