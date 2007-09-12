@@ -4,27 +4,21 @@ using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Common.Enums;
 
-namespace Incremental.Kick.Web.Controls
-{
-    public class UpcomingStoryListHeader : KickWebControl
-    {
+namespace Incremental.Kick.Web.Controls {
+    public class UpcomingStoryListHeader : KickWebControl {
         private string _caption = "";
-        public string Caption
-        {
+        public string Caption {
             get { return this._caption; }
             set { this._caption = value; }
         }
 
         private bool _useAjaxLinks = false;
-        public bool UseAjaxLinks
-        {
+        public bool UseAjaxLinks {
             get { return this._useAjaxLinks; }
             set { this._useAjaxLinks = value; }
         }
 
-        protected override void Render(HtmlTextWriter writer)
-        {
-
+        protected override void Render(HtmlTextWriter writer) {
             writer.WriteLine(@"<table class=""SimpleTable""><tr><td>");
             writer.WriteLine(@"<div class=""PopularStoryListHeader"">Sort By: ", this.KickPage.StaticIconRootUrl);
 
@@ -36,24 +30,19 @@ namespace Incremental.Kick.Web.Controls
             writer.WriteLine(@"</td><td align=""right"">{0}</td></tr></table>", this.KickPage.SubCaption);
         }
 
-        private void RenderLink(StoryListSortBy linkSortBy, string caption, HtmlTextWriter writer)
-        {
-            string url = this.KickPage.HostProfile.RootUrl;
+        private void RenderLink(StoryListSortBy linkSortBy, string caption, HtmlTextWriter writer) {
+            string url = "";
             string cssClass = "PopularStoryHeaderLink";
             string javaScript = "";
             string sortByText = linkSortBy.ToString().ToLower();
 
             if (linkSortBy == StoryListSortBy.LatestUpcoming)
-                url += "/upcoming/";
+                url += "/upcoming";
             if (linkSortBy != StoryListSortBy.LatestUpcoming)
                 url += "/upcoming/popular/" + sortByText;
 
             if (linkSortBy == this.KickPage.UrlParameters.StoryListSortBy)
                 cssClass += " PopularStoryHeaderLinkSelected";
-
-            //if (this.UseAjaxLinks)
-            //    javaScript += String.Format(@"onclick=""PopularStoryHeader_GetPopularStories('{0}', this);return false;"" ", sortByText);
-
 
             writer.WriteLine(@"<a id=""StoryListHeader_{0}"" href=""{1}"" {2} class=""{3}"">{4}</a>", sortByText, url, javaScript, cssClass, caption);
         }
