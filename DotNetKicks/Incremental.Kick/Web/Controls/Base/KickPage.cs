@@ -104,7 +104,7 @@ namespace Incremental.Kick.Web.Controls {
 
         public string StaticRootUrl {
             get {
-                if (this.Host == "localhost")
+                if (!this.HostProfile.UseStaticRoot.GetValueOrDefault() || this.Host == "localhost")
                     return this.ResolveUrl("http://localhost:8080/Static");
                 else
                     return "http://static." + this.Host;
