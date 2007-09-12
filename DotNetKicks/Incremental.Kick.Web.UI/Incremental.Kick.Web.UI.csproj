@@ -298,6 +298,13 @@
     <Compile Include="Controls\User\Register.ascx.designer.cs">
       <DependentUpon>Register.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\UserAdmin.ascx.cs">
+      <DependentUpon>UserAdmin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\UserAdmin.ascx.designer.cs">
+      <DependentUpon>UserAdmin.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -713,6 +720,7 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
+    <Content Include="Controls\User\UserAdmin.ascx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />

@@ -103,6 +103,26 @@ namespace Incremental.Kick.Dal {
             return true;
         }
 
+
+        public void DestroyAllStories() {
+            //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
+            foreach (Story story in this.StoryRecords()) {
+                Story.Destroy(story.StoryID);
+            }
+        }
+
+        public void Ban() {
+            this.IsBanned = true;
+            this.Save();
+            UserCache.RemoveUser(this.UserID);
+        }
+
+        public void UnBan() {
+            this.IsBanned = false;
+            this.Save();
+            UserCache.RemoveUser(this.UserID);
+        }
+
         public UserCollection Friends {
             get {
                 UserCollection friends = new UserCollection();
@@ -148,7 +168,7 @@ namespace Incremental.Kick.Dal {
             UserFriend friend = new UserFriend();
             friend.LoadAndCloseReader(UserFriend.FetchByQuery(query));
             UserFriend.Destroy(friend.UserFriendID);
-                         
+
             UserCache.RemoveUser(this.UserID);
             UserCache.RemoveUser(friendID);
         }

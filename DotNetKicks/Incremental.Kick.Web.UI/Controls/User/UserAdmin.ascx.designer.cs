@@ -8,60 +8,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Pages.User {
+namespace Incremental.Kick.Web.UI.Controls {
     
     
     /// <summary>
-    /// Profile class.
+    /// UserAdmin class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Profile {
+    public partial class UserAdmin {
         
         /// <summary>
-        /// UserProfileHeader control.
+        /// DeleteUserStories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserProfileHeader UserProfileHeader;
+        protected global::System.Web.UI.WebControls.Button DeleteUserStories;
         
         /// <summary>
-        /// Profile1 control.
+        /// BanUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Profile Profile1;
+        protected global::System.Web.UI.WebControls.Button BanUser;
         
         /// <summary>
-        /// FriendList control.
+        /// UnBanUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserList FriendList;
-        
-        /// <summary>
-        /// FriendByList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserList FriendByList;
-        
-        /// <summary>
-        /// UserAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.UserAdmin UserAdmin;
+        protected global::System.Web.UI.WebControls.Button UnBanUser;
     }
 }

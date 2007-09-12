@@ -87,20 +87,6 @@ namespace Incremental.Kick.BusinessLogic {
             return new SecurityToken(user.UserID).ToString();
         }
 
-        public static void BanUser(string username) {
-            User user = User.FetchUserByUsername(username);
-            user.IsBanned = true;
-            user.Save();
-
-            //TODO: GJ :delete their stories
-            //DeleteUserStories(userDS.Kick_User[0].UserID);
-        }
-
-        public static void DeleteUserStories(User user) {
-            //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
-            throw new NotImplementedException();
-        }
-
         public static void UpdatePassword(int userID, string newPassword, Host host) {
             newPassword = newPassword.Trim();
             string passwordSalt = Cipher.GenerateSalt();
