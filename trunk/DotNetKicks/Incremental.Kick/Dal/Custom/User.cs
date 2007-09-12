@@ -63,6 +63,19 @@ namespace Incremental.Kick.Dal {
             return false;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is guest.
+        /// </summary>
+        /// <value><c>true</c> if this instance is guest; otherwise, <c>false</c>.</value>
+        /// <remarks>
+        /// Returns true if Identity.IsAuthenticated == false
+        /// Returns false if Identity.IsAuthenticated == true
+        /// </remarks>
+        public bool IsGuest
+        {
+            get { return !System.Web.HttpContext.Current.User.Identity.IsAuthenticated; }
+        }
+
         public bool IsUser {
             get { return this.IsInRole("user"); }
         }
@@ -135,12 +148,11 @@ namespace Incremental.Kick.Dal {
         }
 
         public void RemoveFriend(int friendID) {
-            //int? keyId = null;
-            //need to get userfriendid
-            //TODO
-
-            //if(keyId != null)
-            //    UserFriend.Delete(keyId);
+            Query query = new Query(UserFriend.Schema).WHERE(UserFriend.Columns.UserID, this.UserID).AND(UserFriend.Columns.FriendID, friendID);
+            UserFriend friend = new UserFriend();
+            friend.LoadAndCloseReader(UserFriend.FetchByQuery(query));
+            UserFriend.Destroy(friend.UserFriendID);
+                         
             UserCache.RemoveUser(this.UserID);
             UserCache.RemoveUser(friendID);
         }
