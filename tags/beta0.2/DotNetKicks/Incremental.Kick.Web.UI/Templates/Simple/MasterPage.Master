@@ -1,0 +1,31 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Incremental.Kick.Web.UI.Templates.Simple.MasterPage" MasterPageFile="~/Templates/MasterPage.master" %>
+<asp:Content ID="PageHead" ContentPlaceHolderID="PageHeadContent" runat="server">
+    <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
+</asp:Content>
+<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">
+    
+    <strong>Warning: this template may hurt your eyes</strong>
+    <br />
+   [Header /]
+
+</asp:Content>
+<asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
+   [Main Content]
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        Content here
+    </asp:ContentPlaceHolder>
+   [/Main Content]
+</asp:Content>
+<asp:Content ID="LeftContentOutline" ContentPlaceHolderID="LeftContent" runat="server">
+    [Left Content]
+    <asp:ContentPlaceHolder ID="LeftContent" runat="server" />
+    [/Left Content]
+</asp:Content>
+<asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
+    [Right Content]
+    <asp:ContentPlaceHolder ID="RightContent" runat="server" />
+    [/Right Content]
+</asp:Content>
+<asp:Content ID="FooterOutline" ContentPlaceHolderID="Footer" runat="server">
+    [Footer /]
+</asp:Content>
