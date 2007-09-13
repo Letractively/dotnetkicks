@@ -111,7 +111,6 @@
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="Helpers\ControlHelper.cs" />
-    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\GoogleVideoHelper.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />

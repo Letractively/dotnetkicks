@@ -116,12 +116,16 @@ namespace Incremental.Kick.Web.Controls {
                 categoryPanel.RenderTop(writer);
                 CategoryCollection categories = CategoryCache.GetCategories(this.KickPage.HostProfile.HostID);
                 foreach (Category category in categories) {
-                    writer.WriteLine(@"<div class=""SideBarLink""><a href=""{0}""><img src=""{1}"" width=""16"" height=""16"" border=""0""/></a>
-                    <a href=""{0}"">{2}</a>
-                    <span class=""LightLink""><a href=""{0}/upcoming"">[find]</a></span></div>",
-                        UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier),
-                        this.KickPage.StaticIconRootUrl + "/" + category.IconName,
-                        category.Name);
+                    string url = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier);
+                    string iconHtml = "";
+                    if (!String.IsNullOrEmpty(category.IconName)) {
+                        iconHtml = String.Format(@"<a href=""{0}""><img src=""{1}"" width=""16"" height=""16"" border=""0""/></a>", url, this.KickPage.StaticIconRootUrl + "/" + category.IconName);
+                    }
+
+                    writer.WriteLine(@"<div class=""SideBarLink"">{0}
+                        <a href=""{1}"">{2}</a>
+                        <span class=""LightLink""><a href=""{1}/upcoming"">[find]</a></span></div>",
+                        iconHtml, url, category.Name);
                 }
 
                 writer.WriteLine(@"<br /><p align=""center""><a href=""mailto:{0}"">Suggest a new category</a></p>", this.KickPage.HostProfile.Email);
