@@ -315,6 +315,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Admin\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -721,6 +728,7 @@
     <None Include="elmah.axd" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
     <Content Include="Controls\User\UserAdmin.ascx" />
+    <Content Include="Pages\Admin\Categories.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />

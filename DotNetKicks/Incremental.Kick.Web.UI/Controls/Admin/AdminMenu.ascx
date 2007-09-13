@@ -5,5 +5,6 @@
     <li><a href="/admin">Home</a></li>
     <li><a href="/admin/stories">Stories</a></li>
     <li><a href="/admin/hosts">Hosts</a></li>
+    <li><a href="/admin/categories">Categories</a></li>
     <li><a href="/admin/users">Users</a></li>
 </ul>

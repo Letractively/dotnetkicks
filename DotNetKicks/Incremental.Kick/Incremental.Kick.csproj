@@ -126,6 +126,9 @@
     <Compile Include="Web\Controls\Ads\GoogleLeaderBoard.cs" />
     <Compile Include="Web\Controls\Ads\GoogleWideSkyscraper.cs" />
     <Compile Include="Web\Controls\Base\JavaScriptFeedHandler.cs" />
+    <Compile Include="Web\Controls\Base\KickAdministrationPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Web\Controls\Base\KickApiPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
