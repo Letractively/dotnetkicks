@@ -24,10 +24,6 @@ namespace Incremental.Kick.Web.Controls {
             get { return this._displayCategories; }
             set { this._displayCategories = value; }
         }
-        public bool DisplayOtherKickSites {
-            get { return this._displayOtherKickSites; }
-            set { this._displayOtherKickSites = value; }
-        }
         public bool DisplayWhatElse {
             get { return this._displayWhatElse; }
             set { this._displayWhatElse = value; }
@@ -36,7 +32,6 @@ namespace Incremental.Kick.Web.Controls {
             get { return this._displayAds; }
             set { this._displayAds = value; }
         }
-
         public bool DisplayTags {
             get { return this._displayTags; }
             set { this._displayTags = value; }
@@ -118,10 +113,9 @@ namespace Incremental.Kick.Web.Controls {
                 foreach (Category category in categories) {
                     string url = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier);
                     string iconHtml = "";
-                    if (!String.IsNullOrEmpty(category.IconName)) {
+                    if (category.IconNameSpecified) 
                         iconHtml = String.Format(@"<a href=""{0}""><img src=""{1}"" width=""16"" height=""16"" border=""0""/></a>", url, this.KickPage.StaticIconRootUrl + "/" + category.IconName);
-                    }
-
+     
                     writer.WriteLine(@"<div class=""SideBarLink"">{0}
                         <a href=""{1}"">{2}</a>
                         <span class=""LightLink""><a href=""{1}/upcoming"">[find]</a></span></div>",
@@ -131,45 +125,6 @@ namespace Incremental.Kick.Web.Controls {
                 writer.WriteLine(@"<br /><p align=""center""><a href=""mailto:{0}"">Suggest a new category</a></p>", this.KickPage.HostProfile.Email);
                 categoryPanel.RenderBottom(writer);
             }
-
-
-//            if (this.DisplayOtherKickSites) {
-//                StyledPanel otherLinksPanel = new StyledPanel();
-//                otherLinksPanel.Caption = "Other kick sites:";
-//                otherLinksPanel.RenderTop(writer);
-
-//                writer.WriteLine(@"
-//
-//                <div class=""SideBarLink""><img src=""{0}/teamsystem.png"" width=""16"" height=""16"" border=""0""/>
-//                <a href=""http://www.dotnetkicks.com/"">DotNetKicks.com</a></div>
-//
-//                <div class=""SideBarLink""><img src=""{0}/customization.png"" width=""16"" height=""16"" border=""0""/>
-//                <a href=""http://www.sharepointkicks.com/"">SharePointKicks.com</a></div>
-//               
-//                <div class=""SideBarLink""><img src=""{0}/security.png"" width=""16"" height=""16"" border=""0""/>
-//                <a href=""http://www.securitykicks.com/"">SecurityKicks.com</a></div>
-//
-//                <div class=""SideBarLink""><img src=""{0}/community.png"" width=""16"" height=""16"" border=""0""/>
-//                <a href=""http://www.kick.ie/"">Kick.ie</a></div>
-//
-//                <br />
-//                Your login will work with all these sites.
-// 
-//                </div>
-//            ", this.KickPage.StaticIconRootUrl);
-//                otherLinksPanel.RenderBottom(writer);
-//            }
-
-//            StyledPanel friendsPanel = new StyledPanel();
-//            friendsPanel.Caption = "Our friends:";
-//            friendsPanel.RenderTop(writer);
-
-//            writer.WriteLine(@"
-//                <div class=""SideBarLink"">  
-//                <img src=""{1}/external.png"" width=""10"" height=""10"" border=""0""/>
-//                <a href=""{0}"">SubSonic</a></div>
-//            ", "http://www.codeplex.com/actionpack/", this.KickPage.StaticIconRootUrl);
-//            friendsPanel.RenderBottom(writer);
 
 
             if (this.DisplayWhatElse) {
