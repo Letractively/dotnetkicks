@@ -13,5 +13,9 @@ namespace Incremental.Kick.Dal {
                 return unknownCategory;
             }
         }
+
+        public bool IconNameSpecified {
+            get { return !String.IsNullOrEmpty(this.IconName); }
+        }
     }
 }

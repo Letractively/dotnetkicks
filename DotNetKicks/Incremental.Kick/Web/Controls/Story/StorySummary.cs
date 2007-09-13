@@ -33,12 +33,10 @@ namespace Incremental.Kick.Web.Controls {
 
         protected override void Render(HtmlTextWriter writer) {
             Category category = CategoryCache.GetCategory(this._story.CategoryID, this.KickPage.HostProfile.HostID);
-            string categoryIdentifier = category.CategoryIdentifier;
-            string categoryName = category.Name;
-            string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, categoryIdentifier);
+            string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, category.CategoryIdentifier);
             string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._story.Username);
-                        
-            string categoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, categoryIdentifier);
+
+            string categoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);
 
             bool isKicked = UserCache.HasUserKickedStory(this._story.StoryID, this.KickPage.KickUserProfile.UserID);
@@ -109,12 +107,13 @@ namespace Incremental.Kick.Web.Controls {
                     writer.WriteLine(@"<a href=""{0}"">{1} comments</a>", kickStoryUrl, this._story.CommentCount);
             }
 
-
+            string categoryIcon = "";
+            if(category.IconNameSpecified) {
+                categoryIcon = String.Format(@"<a href=""{0}""><img src=""{1}/{2}"" width=""16"" height=""16"" border=""0"" /></a>", categoryUrl, this.KickPage.StaticIconRootUrl, category.IconName);
+            }
             writer.WriteLine(@" | 
-                            category: <a href=""{0}""><img src=""{3}/{4}"" width=""16"" height=""16"" border=""0"" /></a>
-                            <a href=""{0}"" rel=""tag"">{2}</a>
-            ", categoryUrl, categoryIdentifier, categoryName, this.KickPage.StaticIconRootUrl, CategoryCache.GetCategory(this._story.CategoryID, this._story.HostID).IconName);
-
+                category: {0} <a href=""{1}"" rel=""tag"">{2}</a>", categoryIcon, categoryUrl, category.Name);
+            
             writer.WriteLine(@" |
                             <span class=""ReportAsSpamLink""><a href=""javascript:ReportAsSpam({0});"">report as spam</a></span>
             ", this._story.StoryID);
