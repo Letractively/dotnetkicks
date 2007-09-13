@@ -17,6 +17,9 @@ input, select, textarea{  }
 
 .user { padding: padding: 3px 0 0 0; white-space: nowrap; }
 .user a { text-decoration: none; }
+.bannedUser a { color: Red; font-size: smaller; }
+.newUser a { color: Green; }
+
 .userGravatar {
 	border: 1px solid #ddd;
 	vertical-align: middle;
