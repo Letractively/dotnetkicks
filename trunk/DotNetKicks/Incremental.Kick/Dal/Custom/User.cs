@@ -138,9 +138,13 @@ namespace Incremental.Kick.Dal {
 
         public UserCollection FriendsBy {
             get {
+                //TODO: GJ: call a custom query to get non-banned friends
                 UserCollection friendsBy = new UserCollection();
-                foreach (UserFriend friend in this.UserFriendRecords())
-                    friendsBy.Add(UserCache.GetUser(friend.UserID));
+                foreach (UserFriend friend in this.UserFriendRecords()) {
+                    User user = UserCache.GetUser(friend.UserID);
+                    if (!user.IsBanned)
+                        friendsBy.Add(user);
+                }
                 return friendsBy;
             }
         }
