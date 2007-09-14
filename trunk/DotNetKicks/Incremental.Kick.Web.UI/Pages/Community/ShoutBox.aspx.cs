@@ -8,12 +8,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using Incremental.Kick.Caching;
 
-namespace Incremental.Kick.Web.UI.Templates.Default {
-    public partial class MasterPage : Incremental.Kick.Web.Controls.KickMasterPage {
+namespace Incremental.Kick.Web.UI.Pages.Community {
+    public partial class ShoutBox : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            
+
         }
     }
 }

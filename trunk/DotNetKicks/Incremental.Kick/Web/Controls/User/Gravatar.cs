@@ -1,16 +1,23 @@
 using System;
 using System.Web.Security;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Web.Controls {
     public class Gravatar : KickWebControl {
 
         public Gravatar() { }
+
         public Gravatar(User user, int size) {
             this._user = user;
             this._size = size;
         }
 
+        public Gravatar(int userID, int size) {
+            this._user = UserCache.GetUser(userID);
+            this._size = size;
+        }
+        
         private User _user;
         public User User {
             get { return _user; }

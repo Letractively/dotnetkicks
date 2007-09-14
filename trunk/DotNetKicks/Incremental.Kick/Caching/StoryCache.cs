@@ -20,8 +20,7 @@ namespace Incremental.Kick.Caching {
 
             if (story == null) {
                 story = Story.FetchStoryByIdentifier(storyIdentifier);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                if(story != null) 
+                if (story != null)
                     storyCache.Insert(cacheKey, story, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -40,7 +39,6 @@ namespace Incremental.Kick.Caching {
 
             if (comments == null) {
                 comments = Comment.FetchCommentsByStoryID(storyID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 commentCache.Insert(cacheKey, comments, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -60,46 +58,11 @@ namespace Incremental.Kick.Caching {
             StoryCollection stories = storyCache[cacheKey];
             if (stories == null) {
                 stories = Story.GetStoriesByIsPublishedAndHostID(isPublished, hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return stories;
         }
-
-        /*public static StoryCollection GetAllStoriesThisWeek(bool isPublished, int hostID, int pageNumber, int pageSize)
-        {
-            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
-
-            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
-
-            StoryCollection stories = storyCache[cacheKey];
-            if (stories == null) 
-            {
-                stories = Story.GetUpComingStoriesThisWeek(isPublished, hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return stories;
-        }
-
-        public static StoryCollection GetAllStoriesToday(bool isPublished, int hostID, int pageNumber, int pageSize) 
-        {
-            string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
-
-            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
-
-            StoryCollection stories = storyCache[cacheKey];
-            if (stories == null) 
-            {
-                stories = Story.GetUpComingStoriesToday(isPublished, hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return stories;
-        }*/
 
         public static StoryCollection GetPopularStories(int hostID, bool isPublished, StoryListSortBy sortBy, int pageNumber, int pageSize) {
             string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}_{4}", hostID, isPublished, sortBy, pageNumber, pageSize);
@@ -109,7 +72,6 @@ namespace Incremental.Kick.Caching {
             StoryCollection stories = storyCache[cacheKey];
             if (stories == null) {
                 stories = Story.GetPopularStories(hostID, isPublished, sortBy, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -124,7 +86,6 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetPopularStoriesCount(hostID, isPublished, sortBy);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -140,72 +101,59 @@ namespace Incremental.Kick.Caching {
 
             if (stories == null) {
                 stories = Story.GetUserKickedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return stories;
         }
 
-        public static StoryCollection GetFriendsKickedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)
-        {
+        public static StoryCollection GetFriendsKickedStories(string userIdentifier, int hostID, int pageNumber, int pageSize) {
             string cacheKey = String.Format("Kick_StoryTable_FriendsKicked_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
             StoryCollection stories = storyCache[cacheKey];
 
-            if (stories == null)
-            {
+            if (stories == null) {
                 stories = Story.GetFriendsKickedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return stories;
         }
-        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID, int pageSize)
-        {
+        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID, int pageSize) {
             string cacheKey = String.Format("Kick_Story_FriendsKickedCount_{0}_{1}", userIdentifier, hostID, pageSize);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
-            if (count == null)
-            {
+            if (count == null) {
                 count = Story.GetFriendsKickedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return count.Value;
         }
-        public static StoryCollection GetFriendsSubmittedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)
-        {
+        public static StoryCollection GetFriendsSubmittedStories(string userIdentifier, int hostID, int pageNumber, int pageSize) {
             string cacheKey = String.Format("Kick_StoryTable_FriendsSubmitted_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
 
             StoryCollection stories = storyCache[cacheKey];
 
-            if (stories == null)
-            {
+            if (stories == null) {
                 stories = Story.GetFriendsSubmittedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return stories;
         }
-        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID, int pageSize)
-        {
+        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID, int pageSize) {
             string cacheKey = String.Format("Kick_Story_FriendsSubmittedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
-            if (count == null)
-            {
+            if (count == null) {
                 count = Story.GetFriendsSubmittedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -219,7 +167,6 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetUserKickedStoriesCount(UserCache.GetUserID(userIdentifier), hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -234,7 +181,6 @@ namespace Incremental.Kick.Caching {
 
             if (stories == null) {
                 stories = Story.GetUserSubmittedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -248,49 +194,40 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetUserSubmittedStoriesCount(UserCache.GetUserID(userIdentifier), hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return count.Value;
         }
 
-        public static CommentCollection GetUserComments(string userIdentifier, int hostID, int pageNumber, int pageSize)
-        {
+        public static CommentCollection GetUserComments(string userIdentifier, int hostID, int pageNumber, int pageSize) {
             string cacheKey = GetUserCommentsCacheKey(userIdentifier, hostID, pageNumber, pageSize);
             CacheManager<string, CommentCollection> commentCache = GetCommentCollectionCache();
 
             CommentCollection comments = commentCache[cacheKey];
 
-            if (comments == null)
-            {
+            if (comments == null) {
                 comments = Comment.GetUserComments(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
-                if(comments!=null)
+                if (comments != null)
                     commentCache.Insert(cacheKey, comments, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return comments;
         }
-        public static int GetUserCommentsCount(string userIdentifier, int hostID)
-        {
+        public static int GetUserCommentsCount(string userIdentifier, int hostID) {
             string cacheKey = String.Format("Kick_Story_UserCommentsCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
-            if (count == null)
-            {
-                //TODO There's no Host_Id value in comments table
+            if (count == null) {
                 count = Comment.GetUserCommentsCount(UserCache.GetUserID(userIdentifier), hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return count.Value;
         }
 
-        private static string GetUserCommentsCacheKey(string userIdentifier, int hostID, int pageNumber, int pageSize)
-        {
+        private static string GetUserCommentsCacheKey(string userIdentifier, int hostID, int pageNumber, int pageSize) {
             return String.Format("UserCommentCollection_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
         }
 
@@ -303,7 +240,6 @@ namespace Incremental.Kick.Caching {
 
             if (stories == null) {
                 stories = Story.GetStoriesByCategoryKickedStateAndHostID(categoryID, isKicked, hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -317,7 +253,6 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetStoriesByCategoryKickedStateAndHostID_Count(categoryID, isKicked, hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -333,7 +268,6 @@ namespace Incremental.Kick.Caching {
 
             if (stories == null) {
                 stories = Story.GetTaggedStories(TagCache.GetTagID(tagIdentifier), hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -347,7 +281,6 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetTaggedStoryCount(TagCache.GetTagID(tagIdentifier), hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -369,7 +302,6 @@ namespace Incremental.Kick.Caching {
 
             if (stories == null) {
                 stories = Story.GetUserTaggedStories(TagCache.GetTagID(tagIdentifier), userID, hostID, pageNumber, pageSize);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -383,7 +315,6 @@ namespace Incremental.Kick.Caching {
             int? count = countCache[cacheKey];
             if (count == null) {
                 count = Story.GetUserTaggedStoryCount(TagCache.GetTagID(tagIdentifier), userID, hostID);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -404,7 +335,6 @@ namespace Incremental.Kick.Caching {
                 storyCount = storyCountCache[cacheKey].Value;
             } else {
                 storyCount = Story.GetStoryCount(hostID, isPublished);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCountCache.Insert(cacheKey, storyCount, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -420,7 +350,6 @@ namespace Incremental.Kick.Caching {
                 storyCount = storyCountCache[cacheKey].Value;
             } else {
                 storyCount = Story.GetStoryCount(hostID, isPublished, startDate, endDate);
-                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 storyCountCache.Insert(cacheKey, storyCount, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 

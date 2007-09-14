@@ -8,42 +8,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Pages.Community {
+namespace Incremental.Kick.Web.UI.Controls {
     
     
     /// <summary>
-    /// WhoIsOnline class.
+    /// ShoutBox class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class WhoIsOnline {
+    public partial class ShoutBox {
         
         /// <summary>
-        /// UserOnlineList control.
+        /// SaySomethingPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserList UserOnlineList;
+        protected global::System.Web.UI.WebControls.Panel SaySomethingPanel;
         
         /// <summary>
-        /// UserTodayList control.
+        /// ShoutList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.UserList UserTodayList;
-        
-        /// <summary>
-        /// Shoutbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.ShoutBox Shoutbox;
+        protected global::Incremental.Kick.Web.Controls.ShoutList ShoutList;
     }
 }

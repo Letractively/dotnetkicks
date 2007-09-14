@@ -28,6 +28,8 @@ namespace Incremental.Kick.Dal
         
 		public static string Setting = @"Kick_Setting";
         
+		public static string Shout = @"Kick_Shout";
+        
 		public static string Story = @"Kick_Story";
         
 		public static string StoryKick = @"Kick_StoryKick";

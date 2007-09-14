@@ -27,3 +27,7 @@ input, select, textarea{  }
 	margin-right: 1px;
 	padding: 1px;
 }
+
+#shoutList { }
+.shout { padding: 5px; font-size: small; }
+.shoutMessage { background-color: #eee; padding: 4px; overflow: hidden;}

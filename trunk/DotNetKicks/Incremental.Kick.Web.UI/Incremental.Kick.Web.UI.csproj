@@ -29,6 +29,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxPro.2, Version=7.7.31.1, Culture=neutral, PublicKeyToken=eabb1b8f6347d5af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Ajax.NET Pro\AjaxPro.2.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah, Version=1.0.8925.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Elmah\Elmah.dll</HintPath>
@@ -298,6 +302,13 @@
     <Compile Include="Controls\User\Register.ascx.designer.cs">
       <DependentUpon>Register.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\ShoutBox.ascx.cs">
+      <DependentUpon>ShoutBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\ShoutBox.ascx.designer.cs">
+      <DependentUpon>ShoutBox.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\User\UserAdmin.ascx.cs">
       <DependentUpon>UserAdmin.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -363,6 +374,13 @@
     </Compile>
     <Compile Include="Pages\Category\ViewNewStories.aspx.designer.cs">
       <DependentUpon>ViewNewStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\ShoutBox.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ShoutBox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\ShoutBox.aspx.designer.cs">
+      <DependentUpon>ShoutBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Docs\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -628,6 +646,13 @@
       <DependentUpon>AddUserStoryTags.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Services\Ajax\AjaxServices.aspx.cs">
+      <DependentUpon>AjaxServices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\AjaxServices.aspx.designer.cs">
+      <DependentUpon>AjaxServices.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Ajax\GetPopularStories.aspx.cs">
       <DependentUpon>GetPopularStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -741,13 +766,16 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
+    <Content Include="Controls\User\ShoutBox.ascx" />
     <Content Include="Controls\User\UserAdmin.ascx" />
     <Content Include="Pages\Admin\Categories.aspx" />
+    <Content Include="Pages\Community\ShoutBox.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />
     <Content Include="Pages\User\FriendsKickedStories.aspx" />
     <Content Include="Pages\User\FriendsSubmittedStories.aspx" />
+    <Content Include="Services\Ajax\AjaxServices.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />
