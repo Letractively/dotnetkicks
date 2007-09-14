@@ -147,6 +147,71 @@ namespace Incremental.Kick.Caching {
             return stories;
         }
 
+        public static StoryCollection GetFriendsKickedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)
+        {
+            string cacheKey = String.Format("Kick_StoryTable_FriendsKicked_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
+
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
+
+            StoryCollection stories = storyCache[cacheKey];
+
+            if (stories == null)
+            {
+                stories = Story.GetFriendsKickedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return stories;
+        }
+        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID, int pageSize)
+        {
+            string cacheKey = String.Format("Kick_Story_FriendsKickedCount_{0}_{1}", userIdentifier, hostID, pageSize);
+            CacheManager<string, int?> countCache = GetCountCache();
+
+            int? count = countCache[cacheKey];
+            if (count == null)
+            {
+                count = Story.GetFriendsKickedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+        public static StoryCollection GetFriendsSubmittedStories(string userIdentifier, int hostID, int pageNumber, int pageSize)
+        {
+            string cacheKey = String.Format("Kick_StoryTable_FriendsSubmitted_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
+
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
+
+            StoryCollection stories = storyCache[cacheKey];
+
+            if (stories == null)
+            {
+                stories = Story.GetFriendsSubmittedStories(UserCache.GetUserID(userIdentifier), hostID, pageNumber, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return stories;
+        }
+        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID, int pageSize)
+        {
+            string cacheKey = String.Format("Kick_Story_FriendsSubmittedCount_{0}_{1}", userIdentifier, hostID);
+            CacheManager<string, int?> countCache = GetCountCache();
+
+            int? count = countCache[cacheKey];
+            if (count == null)
+            {
+                count = Story.GetFriendsSubmittedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+
         public static int GetUserKickedStoriesCount(string userIdentifier, int hostID) {
             string cacheKey = String.Format("Kick_Story_UserKickedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();

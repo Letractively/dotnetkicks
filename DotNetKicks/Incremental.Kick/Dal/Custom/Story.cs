@@ -72,6 +72,31 @@ namespace Incremental.Kick.Dal {
             return (int)query.GetCount(StoryKick.Columns.StoryKickID);
         }
 
+        public static StoryCollection GetFriendsKickedStories(int userID, int hostID, int pageNumber, int pageSize)
+        {
+            StoryCollection stories = new StoryCollection();
+            stories.Load(SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
+            return stories;
+        }
+        public static StoryCollection GetFriendsSubmittedStories(int userID, int hostID, int pageNumber, int pageSize)
+        {
+            StoryCollection stories = new StoryCollection();
+            stories.Load(SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
+            return stories;
+        }
+        public static int GetFriendsKickedStoriesPageCount(int userID, int hostID, int pageSize)
+        {
+            //TODO need new subsonic query here, couldn't figure out the join syntax -jw
+            //return (int)SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDPageCount(userID, hostID, pageSize)
+            return 1;
+        }
+        public static int GetFriendsSubmittedStoriesPageCount(int userID, int hostID, int pageSize)
+        {
+            //TODO need new subsonic query here, couldn't figure out the join syntax -jw
+            //return (int)SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDPageCount(userID, hostID, pageSize).ExecuteScalar();
+            return 1;
+        }
+        
         public static StoryCollection GetUserSubmittedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
             stories.Load(SPs.Kick_GetPagedSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());

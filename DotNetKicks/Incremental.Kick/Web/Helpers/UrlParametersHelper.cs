@@ -15,7 +15,7 @@ namespace Incremental.Kick.Web.Helpers {
         public static UrlParameters GetUrlParameters(HttpRequest request, string hostName) {
             UrlParameters urlParameters = new UrlParameters(hostName);
 
-            //TODO: (GJ): use contant values for these
+            //TODO: (GJ): use constant values for these
             if (!String.IsNullOrEmpty(request["useridentifier"]))
                 urlParameters.UserIdentifier = request["useridentifier"].Replace("/", "");
 
