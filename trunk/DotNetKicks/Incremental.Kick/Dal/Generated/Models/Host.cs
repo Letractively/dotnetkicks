@@ -941,18 +941,16 @@ namespace Incremental.Kick.Dal
 
 			set { SetColumnValue(Columns.FeedBurnerMainRssFeedCountHtml, value); }
 
-		}
+		}  
+        
+        [XmlAttribute("UseStaticRoot")]
+        public bool UseStaticRoot
+        {
+            get { return GetColumnValue<bool>(Columns.UseStaticRoot); }
 
-		  
-		[XmlAttribute("UseStaticRoot")]
-		public bool? UseStaticRoot 
-		{
-			get { return GetColumnValue<bool?>(Columns.UseStaticRoot); }
+            set { SetColumnValue(Columns.UseStaticRoot, value); }
 
-			set { SetColumnValue(Columns.UseStaticRoot, value); }
-
-		}
-
+        }
 		
 		#endregion
 		
@@ -999,7 +997,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool? varUseStaticRoot)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
 		{
 			Host item = new Host();
 			
@@ -1084,7 +1082,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool? varUseStaticRoot)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
 		{
 			Host item = new Host();
 			
