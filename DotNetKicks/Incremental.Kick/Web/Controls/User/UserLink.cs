@@ -4,10 +4,19 @@ using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Web.Controls {
     public class UserLink : KickWebControl {
         private User _user;
+
+        public UserLink() {}
+        public UserLink(int userID) {
+            this.DataBind(UserCache.GetUser(userID));
+        }
+        public UserLink(User user) {
+            this.DataBind(user);
+        }
 
         public void DataBind(User user) {
             this._user = user;

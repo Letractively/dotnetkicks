@@ -28,6 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxPro.2, Version=7.7.31.1, Culture=neutral, PublicKeyToken=eabb1b8f6347d5af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Ajax.NET Pro\AjaxPro.2.dll</HintPath>
+    </Reference>
     <Reference Include="CipherLite, Version=1.5.0.0, Culture=neutral, PublicKeyToken=29e81a0118de2e3b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
@@ -69,6 +73,7 @@
     <Compile Include="Caching\CategoryCache.cs" />
     <Compile Include="Caching\HostCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
+    <Compile Include="Caching\ShoutCache.cs" />
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserCache.cs" />
@@ -77,6 +82,7 @@
     <Compile Include="Common\Exceptions\Exceptions.cs" />
     <Compile Include="Dal\Custom\Category.cs" />
     <Compile Include="Dal\Custom\Comment.cs" />
+    <Compile Include="Dal\Custom\Shout.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
     <Compile Include="Dal\Custom\StoryKick.cs" />
     <Compile Include="Dal\Custom\StoryUserHostTag.cs" />
@@ -90,17 +96,20 @@
     <Compile Include="Dal\Generated\Controllers\Elmah_ErrorController.cs" />
     <Compile Include="Dal\Generated\Controllers\HostController.cs" />
     <Compile Include="Dal\Generated\Controllers\SettingController.cs" />
+    <Compile Include="Dal\Generated\Controllers\ShoutController.cs" />
     <Compile Include="Dal\Generated\Controllers\StoredProcedures.cs" />
     <Compile Include="Dal\Generated\Controllers\StoryController.cs" />
     <Compile Include="Dal\Generated\Controllers\StoryKickController.cs" />
     <Compile Include="Dal\Generated\Controllers\StoryUserHostTagController.cs" />
     <Compile Include="Dal\Generated\Controllers\TagController.cs" />
     <Compile Include="Dal\Generated\Controllers\UserController.cs" />
+    <Compile Include="Dal\Generated\Controllers\UserFriendController.cs" />
     <Compile Include="Dal\Generated\Models\Category.cs" />
     <Compile Include="Dal\Generated\Models\Comment.cs" />
     <Compile Include="Dal\Generated\Models\Elmah_Error.cs" />
     <Compile Include="Dal\Generated\Models\Host.cs" />
     <Compile Include="Dal\Generated\Models\Setting.cs" />
+    <Compile Include="Dal\Generated\Models\Shout.cs" />
     <Compile Include="Dal\Generated\Models\Story.cs" />
     <Compile Include="Dal\Generated\Models\StoryKick.cs" />
     <Compile Include="Dal\Generated\Models\StoryUserHostTag.cs" />
@@ -183,6 +192,7 @@
     <Compile Include="Web\Controls\User\CreateUserWizard.cs" />
     <Compile Include="Web\Controls\User\Gravatar.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
+    <Compile Include="Web\Controls\User\ShoutList.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
     <Compile Include="Web\Controls\User\UserList.cs" />
     <Compile Include="Web\Controls\User\UserProfileHeader.cs" />

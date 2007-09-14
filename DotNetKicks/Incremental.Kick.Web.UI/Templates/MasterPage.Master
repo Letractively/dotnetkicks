@@ -7,6 +7,10 @@
        <meta name="description" content="" />
        <meta name="keywords" content="" />
     </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="/ajaxpro/prototype.ashx"></script>
+    <script type="text/javascript" src="/ajaxpro/core.ashx"></script>
+    <script type="text/javascript" src="/ajaxpro/converter.ashx"></script>
+    <script type="text/javascript" src="/ajaxpro/Incremental.Kick.Web.UI.Services.Ajax.AjaxServices,Incremental.Kick.Web.UI.ashx"></script>
 </head>
 <body>
     <form id="PageForm" runat="server">

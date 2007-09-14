@@ -968,6 +968,14 @@ namespace Incremental.Kick.Dal
 			return colCategoryRecords;
 		}
 
+		private Incremental.Kick.Dal.ShoutCollection colShoutRecords;
+		public Incremental.Kick.Dal.ShoutCollection ShoutRecords()
+		{
+			if(colShoutRecords == null)
+				colShoutRecords = new Incremental.Kick.Dal.ShoutCollection().Where(Shout.Columns.HostID, HostID).Load();
+			return colShoutRecords;
+		}
+
 		private Incremental.Kick.Dal.StoryCollection colStoryRecords;
 		public Incremental.Kick.Dal.StoryCollection StoryRecords()
 		{

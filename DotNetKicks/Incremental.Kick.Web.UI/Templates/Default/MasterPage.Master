@@ -3,6 +3,8 @@
 <%@ Register Src="TopMenu.ascx" TagName="TopMenu" TagPrefix="uc1" %>
 <%@ Register Src="TopAds.ascx" TagName="TopAds" TagPrefix="uc1" %>
 <%@ Register Src="SideAds.ascx" TagName="SideAds" TagPrefix="uc1" %>
+
+
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
@@ -63,6 +65,7 @@
             </p>
             <hr />
         <% } %>
+        
         
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>

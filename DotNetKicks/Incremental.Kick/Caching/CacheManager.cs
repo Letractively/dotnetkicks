@@ -25,7 +25,9 @@ namespace Incremental.Kick.Caching {
         }
 
         public void Insert(K key, V value, int cacheDurationInSeconds) {
-            HttpRuntime.Cache.Insert(CreateKey(key), value, null, DateTime.Now.AddSeconds(cacheDurationInSeconds), Cache.NoSlidingExpiration);
+            string keyString = CreateKey(key);
+            System.Diagnostics.Trace.Write("Cache: inserting [" + keyString + "]");
+            HttpRuntime.Cache.Insert(keyString, value, null, DateTime.Now.AddSeconds(cacheDurationInSeconds), Cache.NoSlidingExpiration);
         }
 
         public void Remove(K key) {
@@ -41,7 +43,7 @@ namespace Incremental.Kick.Caching {
         }
 
         private static string CreateKey(K key) {
-            return typeof(K).ToString() + key.GetHashCode().ToString();
+            return key.ToString() +  typeof(K).ToString() + key.GetHashCode().ToString();
         }
     }
 }
