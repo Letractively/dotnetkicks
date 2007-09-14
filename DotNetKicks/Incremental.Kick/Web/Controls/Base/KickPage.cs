@@ -109,7 +109,7 @@ namespace Incremental.Kick.Web.Controls {
                 else if (this.HostProfile.UseStaticRoot)
                     return "http://static." + this.HostProfile.HostName;
                 else
-                    return this.ResolveUrl("http://" + this.HostProfile.HostName + "/Static");
+                    return this.ResolveUrl("/Static");
             }
         }
 
