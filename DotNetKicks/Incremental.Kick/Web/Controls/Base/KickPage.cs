@@ -102,16 +102,12 @@ namespace Incremental.Kick.Web.Controls {
             }
         }
 
-        public string StaticRootUrl
-        {
-            get
-            {
+        public string StaticRootUrl {
+            get {
                 if (this.Host == "localhost")
                     return this.ResolveUrl("http://localhost:8080/Static");
-
-                else if (this.UseStaticRoot)
+                else if (this.HostProfile.UseStaticRoot)
                     return "http://static." + this.HostProfile.HostName;
-
                 else
                     return this.ResolveUrl("http://" + this.HostProfile.HostName + "/Static");
             }
@@ -147,9 +143,9 @@ namespace Incremental.Kick.Web.Controls {
         private bool _displayAds = true;
         public bool DisplayAds {
             get {
-                if (this._displayAds) 
+                if (this._displayAds)
                     return this.HostProfile.ShowAds;
-                else 
+                else
                     return false;
             }
             set { this._displayAds = value; }
@@ -170,23 +166,6 @@ namespace Incremental.Kick.Web.Controls {
         protected override void OnInitComplete(EventArgs e) {
             this.PerformSecurityChecks();
             base.OnInitComplete(e);
-        }
-
-        private bool _UseStaticRoot = true;
-        public bool UseStaticRoot
-        {
-            get
-            {
-                if (this._UseStaticRoot)
-                {
-                    return this.HostProfile.UseStaticRoot;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            set { this._UseStaticRoot = value; }
         }
 
         private void PerformSecurityChecks() {
