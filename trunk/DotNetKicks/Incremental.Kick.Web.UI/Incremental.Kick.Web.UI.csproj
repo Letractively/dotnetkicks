@@ -518,6 +518,20 @@
     <Compile Include="Pages\User\Friends.aspx.designer.cs">
       <DependentUpon>Friends.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\FriendsKickedStories.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FriendsKickedStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\FriendsKickedStories.aspx.designer.cs">
+      <DependentUpon>FriendsKickedStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\FriendsSubmittedStories.aspx.cs">
+      <DependentUpon>FriendsSubmittedStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\FriendsSubmittedStories.aspx.designer.cs">
+      <DependentUpon>FriendsSubmittedStories.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\KickedStories.aspx.cs">
       <DependentUpon>KickedStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -732,6 +746,8 @@
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />
+    <Content Include="Pages\User\FriendsKickedStories.aspx" />
+    <Content Include="Pages\User\FriendsSubmittedStories.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />
