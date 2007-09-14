@@ -573,11 +573,12 @@ namespace Incremental.Kick.Dal
 				colvarUseStaticRoot.DataType = DbType.Boolean;
 				colvarUseStaticRoot.MaxLength = 0;
 				colvarUseStaticRoot.AutoIncrement = false;
-				colvarUseStaticRoot.IsNullable = true;
+				colvarUseStaticRoot.IsNullable = false;
 				colvarUseStaticRoot.IsPrimaryKey = false;
 				colvarUseStaticRoot.IsForeignKey = false;
 				colvarUseStaticRoot.IsReadOnly = false;
-				colvarUseStaticRoot.DefaultSetting = @"";
+				
+						colvarUseStaticRoot.DefaultSetting = @"((0))";
 				colvarUseStaticRoot.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUseStaticRoot);
 				
@@ -941,16 +942,18 @@ namespace Incremental.Kick.Dal
 
 			set { SetColumnValue(Columns.FeedBurnerMainRssFeedCountHtml, value); }
 
-		}  
-        
-        [XmlAttribute("UseStaticRoot")]
-        public bool UseStaticRoot
-        {
-            get { return GetColumnValue<bool>(Columns.UseStaticRoot); }
+		}
 
-            set { SetColumnValue(Columns.UseStaticRoot, value); }
+		  
+		[XmlAttribute("UseStaticRoot")]
+		public bool UseStaticRoot 
+		{
+			get { return GetColumnValue<bool>(Columns.UseStaticRoot); }
 
-        }
+			set { SetColumnValue(Columns.UseStaticRoot, value); }
+
+		}
+
 		
 		#endregion
 		

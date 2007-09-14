@@ -87,65 +87,7 @@ namespace Incremental.Kick.Dal{
             return sp;
         }
 
-        /// <summary>
-        /// Creates an object wrapper for the Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID Procedure
-        /// </summary>
-        public static StoredProcedure Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@PageNumber", PageNumber, DbType.Int32);
-
-            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32);
-
-            return sp;
-        }
-        /// <summary>
-        /// Creates an object wrapper for the Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID Procedure
-        /// </summary>
-        public static StoredProcedure Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@PageNumber", PageNumber, DbType.Int32);
-
-            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32);
-
-            return sp;
-        }
-        public static StoredProcedure Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDPageCount(int? UserID, int? HostID, int? PageSize)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDPageCount", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32);
-
-            return sp;
-        }
-        public static StoredProcedure Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDPageCount(int? UserID, int? HostID, int? PageSize)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDPageCount", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@PageSize", PageSize, DbType.Int32);
-
-            return sp;
-        }
-
+        
         /// <summary>
         /// Creates an object wrapper for the Kick_GetPagedStoriesByTagIDAndHostID Procedure
         /// </summary>
@@ -308,6 +250,44 @@ namespace Incremental.Kick.Dal{
         public static StoredProcedure Kick_GetPagedCommentsByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
         {
             SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedCommentsByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@HostID", HostID,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageNumber", PageNumber,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@PageSize", PageSize,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID(int? UserID, int? HostID, int? PageNumber, int? PageSize)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID" , DataService.GetInstance("DotNetKicks"));
         	
             sp.Command.AddParameter("@UserID", UserID,DbType.Int32);
         	    
