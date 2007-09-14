@@ -39,6 +39,9 @@ namespace Incremental.Kick.Web.Controls {
             if (!String.IsNullOrEmpty(this.Title)) {
                 writer.WriteLine(@"<div class=""PageSmallCaption"">{0}</div>", this.Title);
             }
+            
+            if (_stories == null)
+                return;
 
             bool isOddRow = true;
             foreach (Story storyRow in this._stories) {
