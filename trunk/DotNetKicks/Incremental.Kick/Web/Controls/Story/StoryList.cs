@@ -15,6 +15,16 @@ namespace Incremental.Kick.Web.Controls {
             set { this._title = value; }
         }
 
+        //default caption
+        private string _caption = string.Format(
+            @"There are currently no stories here.<br/><br/>Would you like to be the first to <a href=""{0}"">submit a story</a>?", 
+            UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory));
+
+        public string NoStoriesCaption
+        {
+            get { return this._caption; }
+            set { this._caption = value; }
+        }
         //private StoryListHeader _header = new StoryListHeader();
         //public StoryListHeader Header {
         //    get { return this._header; }
@@ -43,10 +53,9 @@ namespace Incremental.Kick.Web.Controls {
                 writer.WriteLine(@"
                     <div class=""HelpDiv"">
                         <img src=""{0}/information.png"" /> 
-                        There are currently no stories here. 
-                        <br /><br />Would you like to be the first to <a href=""{1}"">submit a story</a>?
+                        {1}
                     </div>
-                ", this.KickPage.StaticIconRootUrl, UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory));
+                ", this.KickPage.StaticIconRootUrl, _caption);
             }
         }
 
