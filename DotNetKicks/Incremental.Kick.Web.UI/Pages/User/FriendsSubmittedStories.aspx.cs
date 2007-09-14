@@ -24,6 +24,7 @@ namespace Incremental.Kick.Web.UI.Pages.User
         protected void Page_Load(object sender, EventArgs e)
         {
             this.UserProfileHeader.User = this.UserProfile;
+            this.StoryListControl.NoStoriesCaption = string.Format("Friends of {0} have not submitted any stories.", this.UrlParameters.UserIdentifier);
             this.StoryListControl.Title = "Stories submitted by friends of " + this.UrlParameters.UserIdentifier;
             this.StoryListControl.DataBind(StoryCache.GetFriendsSubmittedStories(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
             this.Paging.RecordCount = StoryCache.GetFriendsSubmittedStoriesPageCount  (this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageSize);
