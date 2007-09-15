@@ -2,12 +2,16 @@ using System;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Caching;
+using System.Security;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class CommentBR {
 
-        public static int CreateComment(int hostID, int storyID, int userID, string username, string comment) {
+        public static int CreateComment(int hostID, int storyID, int userID, User user, string comment) {
+            if (user.IsBanned)
+                throw new SecurityException("A banned user can not post a comment");
+
             comment = System.Web.HttpUtility.HtmlEncode(comment);
 
             if (comment.Length > 4000)
@@ -15,12 +19,13 @@ namespace Incremental.Kick.BusinessLogic {
 
             //TODO: add a word filter (a series of RegExs)
             comment = comment.Replace("\n", "<br/>");
+            comment = TextHelper.Urlify(comment);
 
             Comment newComment = new Comment();
             newComment.HostID = hostID;
             newComment.StoryID = storyID;
-            newComment.UserID = userID;
-            newComment.Username = username;
+            newComment.UserID = user.UserID;
+            newComment.Username = user.Username;
             //TODO: GJ: rename comment as it is the same as the table name
             newComment.CommentX = comment;
             newComment.Save();

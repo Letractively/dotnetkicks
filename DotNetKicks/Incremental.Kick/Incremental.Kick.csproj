@@ -127,6 +127,7 @@
     <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Helpers\RegExHelper.cs" />
     <Compile Include="Helpers\TagHelper.cs" />
+    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Helpers\ThreadSafeRandom.cs" />
     <Compile Include="Helpers\TrackbackHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
