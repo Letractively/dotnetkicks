@@ -15,9 +15,11 @@
     
     function refreshShoutbox() {
         //note: gj: a quick hack to get the refresh working
-        //StartLoading();
-        
-        
+        StartLoading();
+        if(forUsername) 
+            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShoutForUser(<%= this.KickPage.HostProfile.HostID %>, '', forUsername, addShout_complete);
+        else
+            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= this.KickPage.HostProfile.HostID %>, '', addShout_complete);       
     }
     
     function addShout_complete(result) {

@@ -49,6 +49,8 @@ namespace Incremental.Kick.BusinessLogic {
             story.PublishedOn = DateTime.Now;
             story.Save();
 
+            SpyCache.GetSpy(hostID).StorySubmission(user, storyIdentifier);
+
             UserCache.KickStory(story.StoryID, user.UserID, hostID);
 
             TagBR.AddUserStoryTags(CategoryCache.GetCategory(categoryID, hostID).TagIdentifier, user, story.StoryID, hostID);
@@ -60,8 +62,6 @@ namespace Incremental.Kick.BusinessLogic {
             Host host = HostCache.GetHost(hostID);
             string storyUrl = host.RootUrl + "/" + CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier + "/" + story.StoryIdentifier;
             TrackbackHelper.SendTrackbackPing_Begin(url, title, storyUrl, "You've been kicked (a good thing) - Trackback from " + host.SiteTitle, host.SiteTitle);
-
-            SpyCache.GetSpy(hostID).StorySubmission(user, storyIdentifier);
 
             return story.StoryIdentifier;
         }

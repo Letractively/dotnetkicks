@@ -77,6 +77,22 @@ namespace Incremental.Kick.Caching {
             this.AddSpyItem(spyItem);
         }
 
+        public void Shout(User user, string message, User forUser) {
+            SpyItem spyItem = new SpyItem();
+            spyItem.Type = SpyItemType.Shout;
+            spyItem.User = user;
+            spyItem.Message = String.Format("shouted something on {0}'s profile", forUser.Username);
+            this.AddSpyItem(spyItem);
+        }
+
+        public void Shout(User user, string message) {
+            SpyItem spyItem = new SpyItem();
+            spyItem.Type = SpyItemType.Shout;
+            spyItem.User = user;
+            spyItem.Message = String.Format("shouted something");
+            this.AddSpyItem(spyItem);
+        }
+
         public void UserRegistration(User user) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.UserRegistration;
