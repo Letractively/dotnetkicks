@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI.HtmlControls;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick;
+using Incremental.Kick.Caching;
 
 
 namespace Incremental.Kick.Web.UI.Pages.User {
@@ -18,6 +19,8 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.FriendList.DataBind(this.UserProfile.Friends);
             this.FriendByList.DataBind(this.UserProfile.FriendsBy);
             this.UserAdmin.DataBind(this.UserProfile);
+            this.Shoutbox.DataBind((ShoutCache.GetLatestShouts(this.HostProfile.HostID, this.UrlParameters.UserIdentifier)));
+
         }
     }
 }

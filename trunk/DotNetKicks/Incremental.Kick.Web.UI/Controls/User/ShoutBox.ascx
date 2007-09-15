@@ -1,15 +1,23 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShoutBox.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.ShoutBox" %>
 
+
+
 <script type="text/javascript">
+    var forUsername = "<%= this.KickPage.UrlParameters.UserIdentifier %>";
+
     function addShout() {
         StartLoading();
-        Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= this.KickPage.HostProfile.HostID %>, $("#shout_message").val(), addShout_complete);
+        if(forUsername) 
+            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShoutForUser(<%= this.KickPage.HostProfile.HostID %>, $("#shout_message").val(), forUsername, addShout_complete);
+        else
+            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= this.KickPage.HostProfile.HostID %>, $("#shout_message").val(), addShout_complete);
     }
     
     function refreshShoutbox() {
         //note: gj: a quick hack to get the refresh working
-        StartLoading();
-        Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= this.KickPage.HostProfile.HostID %>, "", addShout_complete);
+        //StartLoading();
+        
+        
     }
     
     function addShout_complete(result) {
