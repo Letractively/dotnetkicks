@@ -26,8 +26,10 @@ namespace Incremental.Kick.Tests.HelperTests {
                Line 1 <a href=""http://news.bbc.co.uk/"" target=""_new"">http://news.bbc.co.uk/</a>
                Line 2 <a href=""http://ireland.com"" target=""_new"">http://ireland.com</a>")]
         [RowTest]
+        //NOTE: GJ: This test is currently failing - anyone good at RegEx care to take a look?
+        [Row("http://www.aaa.com/page.php?forum_id=15&thread_id=12537&pid=40798#post_40798",
+      @"<a href=""http://www.aaa.com/page.php?forum_id=15&thread_id=12537&pid=40798#post_40798"" target=""_new"">http://www.aaa.com/page.php?forum_id=15&thread_id=12537&pid=40798#post_40798</a>")]       
         public void UrlifyTest(string input, string expected) {
-            input = input.Replace("\n", "<br/>");
             Assert.AreEqual(expected, TextHelper.Urlify(input));
         }
     }
