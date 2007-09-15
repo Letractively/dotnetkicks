@@ -37,8 +37,32 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         }
 
         [AjaxPro.AjaxMethod]
+        public string AddShoutForUser(int hostID, string message, string username) {
+            if (!String.IsNullOrEmpty(message)) {
+                //TODO: GJ: move to model and add some regex replacements (links are good, line breaks become <br>)
+                if (!this.KickUserProfile.IsBanned) {
+                    Shout shout = new Shout();
+                    shout.HostID = hostID;
+                    message = System.Web.HttpUtility.HtmlEncode(message);
+                    message = TextHelper.Urlify(message);
+                    shout.Message = message.Replace("\n", "<br/>");
+                    shout.ToUserID = UserCache.GetUserID(username);
+                    shout.FromUserID = this.KickUserProfile.UserID;
+                    shout.Save();
+                    ShoutCache.Remove(hostID, username);
+                }
+            }
+            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
+        }
+
+        [AjaxPro.AjaxMethod]
         public string GetLatestShouts(int hostID) {
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID)));
+        }
+
+        [AjaxPro.AjaxMethod]
+        public string GetLatestShoutsForUser(int hostID, string username) {
+            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
         }
     }
 }

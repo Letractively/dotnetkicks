@@ -8,6 +8,10 @@ namespace Incremental.Kick.Caching {
             return GetLatestShouts(hostID, null, 1, 50);
         }
 
+        public static ShoutCollection GetLatestShouts(int hostID, string username) {
+            return GetLatestShouts(hostID, UserCache.GetUserID(username), 1, 50);
+        }
+
         private static ShoutCollection GetLatestShouts(int hostID, int pageIndex, int pageSize) {
             return GetLatestShouts(hostID, null, pageIndex, pageSize);
         }
@@ -28,6 +32,10 @@ namespace Incremental.Kick.Caching {
 
         public static void Remove(int hostID) {
             Remove(hostID, null, 1, 50);
+        }
+
+        public static void Remove(int hostID, string username) {
+            Remove(hostID, UserCache.GetUserID(username), 1, 50);
         }
 
         private static void Remove(int hostID, int pageIndex, int pageSize) {
