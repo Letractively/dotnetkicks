@@ -17,7 +17,7 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
             this.DisplayAds = false;
             this.DisplaySideAds = false;
             this.Title = this.HostProfile.SiteTitle + " : Who is online?";
-            this.PageName = UrlFactory.PageName.CommunityWhoIsOnline;
+            this.PageName = UrlFactory.PageName.WhoIsOnline;
             this.UserOnlineList.DataBind(UserCache.GetOnlineUsers(30, this.HostProfile.HostID));
             this.UserTodayList.DataBind(UserCache.GetOnlineUsers(1440, this.HostProfile.HostID));
 

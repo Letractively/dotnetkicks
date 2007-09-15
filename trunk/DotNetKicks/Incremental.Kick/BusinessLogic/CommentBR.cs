@@ -18,8 +18,8 @@ namespace Incremental.Kick.BusinessLogic {
                 comment = comment.Substring(0, 4000);
 
             //TODO: add a word filter (a series of RegExs)
-            comment = comment.Replace("\n", "<br/>");
             comment = TextHelper.Urlify(comment);
+            comment = comment.Replace("\n", "<br/>");
 
             Comment newComment = new Comment();
             newComment.HostID = hostID;

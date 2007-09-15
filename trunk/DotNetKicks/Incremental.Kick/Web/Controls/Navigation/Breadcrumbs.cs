@@ -131,7 +131,7 @@ namespace Incremental.Kick.Web.Controls {
                     break;
                 
                 //-------------- community pages
-                case UrlFactory.PageName.CommunityWhoIsOnline:
+                case UrlFactory.PageName.WhoIsOnline:
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("community", "#", writer);
                     this.RenderSpacer(writer);
