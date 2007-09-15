@@ -61,10 +61,10 @@ namespace Incremental.Kick.BusinessLogic {
             string storyUrl = host.RootUrl + "/" + CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier + "/" + story.StoryIdentifier;
             TrackbackHelper.SendTrackbackPing_Begin(url, title, storyUrl, "You've been kicked (a good thing) - Trackback from " + host.SiteTitle, host.SiteTitle);
 
+            SpyCache.GetSpy(hostID).StorySubmission(user, storyIdentifier);
+
             return story.StoryIdentifier;
         }
-
-
 
 
         public static string GetStoryIdentifier(string title) {

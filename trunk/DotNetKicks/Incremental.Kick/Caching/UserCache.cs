@@ -87,16 +87,18 @@ namespace Incremental.Kick.Caching {
 
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
+
+            SpyCache.GetSpy(hostID).Kick(userID, storyID);
             return StoryBR.IncrementKickCount(storyID);
         }
-
-
+        
         public static int UnKickStory(int storyID, int userID, int hostID) {
             if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID))
                 throw new SecurityException("There is no kick to unkick!");
 
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
+            SpyCache.GetSpy(hostID).UnKick(userID, storyID);
             return StoryBR.DecrementKickCount(storyID);
         }
 

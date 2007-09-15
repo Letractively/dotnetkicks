@@ -246,6 +246,13 @@
     <Compile Include="Controls\Admin\AdminMenu.ascx.designer.cs">
       <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Community\KickSpy.ascx.cs">
+      <DependentUpon>KickSpy.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Community\KickSpy.ascx.designer.cs">
+      <DependentUpon>KickSpy.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Story\AddComment.ascx.cs">
       <DependentUpon>AddComment.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -374,6 +381,13 @@
     </Compile>
     <Compile Include="Pages\Category\ViewNewStories.aspx.designer.cs">
       <DependentUpon>ViewNewStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\KickSpy.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>KickSpy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\KickSpy.aspx.designer.cs">
+      <DependentUpon>KickSpy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Community\ShoutBox.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -765,10 +779,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\Community\KickSpy.ascx" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
     <Content Include="Controls\User\ShoutBox.ascx" />
     <Content Include="Controls\User\UserAdmin.ascx" />
     <Content Include="Pages\Admin\Categories.aspx" />
+    <Content Include="Pages\Community\KickSpy.aspx" />
     <Content Include="Pages\Community\ShoutBox.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />

@@ -1,6 +1,7 @@
 using System;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
@@ -25,6 +26,8 @@ namespace Incremental.Kick.BusinessLogic {
             newComment.Save();
 
             StoryBR.IncrementStoryCommentCount(storyID);
+            SpyCache.GetSpy(hostID).Comment(userID, newComment.CommentID, storyID);
+
 
             return newComment.CommentID;
         }

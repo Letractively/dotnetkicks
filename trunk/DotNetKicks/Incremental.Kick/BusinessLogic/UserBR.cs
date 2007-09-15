@@ -64,6 +64,8 @@ namespace Incremental.Kick.BusinessLogic {
             user.Save();
 
             EmailHelper.SendNewUserEmail(email, username, password, host);
+
+            SpyCache.GetSpy(host.HostID).UserRegistration(user);
         }
 
         public static string GetSecurityToken(string username, string password) {

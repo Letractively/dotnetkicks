@@ -47,6 +47,7 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="CachingTests\SpyCacheTests.cs" />
     <Compile Include="HelperTests\TagHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SanityTests.cs" />
