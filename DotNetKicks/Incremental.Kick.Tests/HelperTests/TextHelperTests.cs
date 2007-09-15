@@ -19,8 +19,15 @@ namespace Incremental.Kick.Tests.HelperTests {
         [Row("http://iol.ie", @"<a href=""http://iol.ie"" target=""_new"">http://iol.ie</a>")]
         [Row("The first link is http://www.dotnetkicks.com/ and the second one is http://www.kick.ie/",
           @"The first link is <a href=""http://www.dotnetkicks.com/"" target=""_new"">http://www.dotnetkicks.com/</a> and the second one is <a href=""http://www.kick.ie/"" target=""_new"">http://www.kick.ie/</a>")]
+        [Row(@"
+               Line 1 http://news.bbc.co.uk/
+               Line 2 http://ireland.com",
+           @"
+               Line 1 <a href=""http://news.bbc.co.uk/"" target=""_new"">http://news.bbc.co.uk/</a>
+               Line 2 <a href=""http://ireland.com"" target=""_new"">http://ireland.com</a>")]
         [RowTest]
         public void UrlifyTest(string input, string expected) {
+            input = input.Replace("\n", "<br/>");
             Assert.AreEqual(expected, TextHelper.Urlify(input));
         }
     }

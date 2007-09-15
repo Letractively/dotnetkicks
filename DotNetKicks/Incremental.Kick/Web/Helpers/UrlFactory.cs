@@ -22,7 +22,8 @@ namespace Incremental.Kick.Web.Helpers {
             Tools,
             Search,
 
-            CommunityWhoIsOnline,
+            WhoIsOnline,
+            KickSpy,
 
             UserHome,
             UserProfile,

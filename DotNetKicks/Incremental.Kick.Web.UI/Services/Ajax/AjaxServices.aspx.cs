@@ -26,8 +26,8 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     Shout shout = new Shout();
                     shout.HostID = hostID;
                     message = System.Web.HttpUtility.HtmlEncode(message);
+                    message = TextHelper.Urlify(message);
                     shout.Message = message.Replace("\n", "<br/>");
-                    shout.Message = TextHelper.Urlify(shout.Message);
                     shout.FromUserID = this.KickUserProfile.UserID;
                     shout.Save();
                     ShoutCache.Remove(hostID);
