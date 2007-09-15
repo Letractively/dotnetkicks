@@ -177,6 +177,26 @@ namespace Incremental.Kick.Web.Controls {
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("friends", writer);
                     break;
+                case UrlFactory.PageName.FriendsKickedStories:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("friends", UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, this.KickPage.UrlParameters.UserIdentifier) , writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("kicked by friends", writer);
+                    break;
+                case UrlFactory.PageName.FriendsSubmittedStories:
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("users", "#", writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb(this.KickPage.UrlParameters.UserIdentifier, UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("friends", UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    this.RenderSpacer(writer);
+                    this.RenderBreadcrumb("submitted by friends", writer);
+                    break;
                 case UrlFactory.PageName.UserTags: 
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("users", "#", writer);
