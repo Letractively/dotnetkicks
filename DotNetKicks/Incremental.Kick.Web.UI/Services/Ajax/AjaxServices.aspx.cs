@@ -18,6 +18,8 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: All out new Ajax services will go here
     public partial class AjaxServices : KickApiPage {
 
+        #region "Shout Box"
+        //NOTE: GJ: Work in progress - lots of refactoring needed
         [AjaxPro.AjaxMethod]
         public string AddShout(int hostID, string message) {
             if (!String.IsNullOrEmpty(message)) {
@@ -31,6 +33,8 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     shout.FromUserID = this.KickUserProfile.UserID;
                     shout.Save();
                     ShoutCache.Remove(hostID);
+
+                    SpyCache.GetSpy(hostID).Shout(this.KickUserProfile, shout.Message);
                 }
             }
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID)));
@@ -46,10 +50,14 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     message = System.Web.HttpUtility.HtmlEncode(message);
                     message = TextHelper.Urlify(message);
                     shout.Message = message.Replace("\n", "<br/>");
-                    shout.ToUserID = UserCache.GetUserID(username);
+                    User forUser = UserCache.GetUserByUsername(username);
+                    shout.ToUserID = forUser.UserID;
                     shout.FromUserID = this.KickUserProfile.UserID;
                     shout.Save();
                     ShoutCache.Remove(hostID, username);
+
+                    SpyCache.GetSpy(hostID).Shout(this.KickUserProfile, shout.Message, forUser);
+
                 }
             }
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
@@ -64,5 +72,7 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         public string GetLatestShoutsForUser(int hostID, string username) {
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
         }
+        #endregion
+
     }
 }
