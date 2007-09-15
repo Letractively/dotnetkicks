@@ -74,6 +74,7 @@
     <Compile Include="Caching\HostCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
     <Compile Include="Caching\ShoutCache.cs" />
+    <Compile Include="Caching\SpyCache.cs" />
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserCache.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Web\Controls\Base\KickWebService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Web\Controls\Community\SpyItemList.cs" />
     <Compile Include="Web\Controls\Debug\DebugInformation.cs" />
     <Compile Include="Web\Controls\Docs\JavaScriptFeedList.cs" />
     <Compile Include="Web\Controls\Navigation\Breadcrumbs.cs" />
@@ -242,6 +244,9 @@
     <Compile Include="Web\Security\Principal\IKickPrincipal.cs" />
     <Compile Include="Web\Security\Principal\KickPrincipal.cs" />
     <Compile Include="Web\Security\SecurityManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Caching\KickSpy\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

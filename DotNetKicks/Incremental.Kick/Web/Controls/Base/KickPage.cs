@@ -102,6 +102,10 @@ namespace Incremental.Kick.Web.Controls {
             }
         }
 
+        public Spy Spy {
+            get { return SpyCache.GetSpy(this.HostProfile.HostID); }
+        }
+
         public string StaticRootUrl {
             get {
                 if (this.Host == "localhost")
