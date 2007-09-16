@@ -56,6 +56,7 @@ namespace Incremental.Kick.Web.Controls {
             else
                 tableClass += "Even";
 
+            //TODO: remove inline style from table
             writer.WriteLine(@"
                 <table class=""" + tableClass + @"""><tr>
                     <td class=""storySummaryKickTD"">
@@ -69,15 +70,19 @@ namespace Incremental.Kick.Web.Controls {
 
 
             string publishedHtml = "";
-            if (this._story.IsPublishedToHomepage) {
+            string linkAttributes = "";
+
+            if (this._story.IsPublishedToHomepage)
                 publishedHtml = "published " + Dates.ReadableDiff(this._story.PublishedOn, DateTime.Now) + ", ";
-            }
+            else
+                linkAttributes = "rel=\"nofollow\"";
+
             //TODO: remove inline style from table
             writer.WriteLine(@"
                     <td class=""storySummaryMainTD""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
-                        <div class=""storyTitle""><a href=""{0}"">{1}</a> <a href=""{0}""><img src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
+                        <div class=""storyTitle""><a href=""{0}"" {4}>{1}</a> <a href=""{0}""><img src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
                         <div class=""storySubmitted"">{2} submitted by 
-            ", this._story.Url, this._story.Title, publishedHtml, this.KickPage.StaticIconRootUrl);
+            ", this._story.Url, this._story.Title, publishedHtml, this.KickPage.StaticIconRootUrl, linkAttributes);
 
             UserLink userLink = new UserLink();
             userLink.DataBind(UserCache.GetUserByUsername(this._story.Username));
