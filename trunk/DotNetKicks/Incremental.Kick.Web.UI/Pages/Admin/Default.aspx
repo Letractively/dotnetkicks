@@ -1,9 +1,12 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Admin.Default" %>
 <%@ Register Src="../../Controls/Admin/AdminMenu.ascx" TagName="AdminMenu" TagPrefix="uc1" %>
+<%@ Register Src="../../Controls/Admin/Tasks.ascx" TagName="Tasks" TagPrefix="uc1" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 
-This will be the admin home page
+
+    <uc1:Tasks id="Tasks" runat="server" />
+
     
 </asp:Content>
 

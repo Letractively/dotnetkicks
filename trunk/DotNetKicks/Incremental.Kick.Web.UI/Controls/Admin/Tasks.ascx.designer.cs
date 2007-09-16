@@ -8,33 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Pages.Admin {
+namespace Incremental.Kick.Web.UI.Controls.Admin {
     
     
     /// <summary>
-    /// Default class.
+    /// Tasks class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Default {
+    public partial class Tasks {
         
         /// <summary>
-        /// Tasks control.
+        /// RunStoryPublisher control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.Tasks Tasks;
-        
-        /// <summary>
-        /// AdminMenu1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.AdminMenu AdminMenu1;
+        protected global::System.Web.UI.WebControls.Button RunStoryPublisher;
     }
 }
