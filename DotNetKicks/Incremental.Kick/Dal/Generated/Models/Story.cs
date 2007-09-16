@@ -206,19 +206,6 @@ namespace Incremental.Kick.Dal
 					colvarUserID.ForeignKeyTableName = "Kick_User";
 				schema.Columns.Add(colvarUserID);
 				
-				TableSchema.TableColumn colvarUsername = new TableSchema.TableColumn(schema);
-				colvarUsername.ColumnName = "Username";
-				colvarUsername.DataType = DbType.String;
-				colvarUsername.MaxLength = 50;
-				colvarUsername.AutoIncrement = false;
-				colvarUsername.IsNullable = false;
-				colvarUsername.IsPrimaryKey = false;
-				colvarUsername.IsForeignKey = false;
-				colvarUsername.IsReadOnly = false;
-				colvarUsername.DefaultSetting = @"";
-				colvarUsername.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarUsername);
-				
 				TableSchema.TableColumn colvarKickCount = new TableSchema.TableColumn(schema);
 				colvarKickCount.ColumnName = "KickCount";
 				colvarKickCount.DataType = DbType.Int32;
@@ -430,16 +417,6 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("Username")]
-		public string Username 
-		{
-			get { return GetColumnValue<string>(Columns.Username); }
-
-			set { SetColumnValue(Columns.Username, value); }
-
-		}
-
-		  
 		[XmlAttribute("KickCount")]
 		public int KickCount 
 		{
@@ -619,7 +596,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
+		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
 		{
 			Story item = new Story();
 			
@@ -636,8 +613,6 @@ namespace Incremental.Kick.Dal
 			item.CategoryID = varCategoryID;
 			
 			item.UserID = varUserID;
-			
-			item.Username = varUsername;
 			
 			item.KickCount = varKickCount;
 			
@@ -668,7 +643,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,string varUsername,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
+		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
 		{
 			Story item = new Story();
 			
@@ -687,8 +662,6 @@ namespace Incremental.Kick.Dal
 				item.CategoryID = varCategoryID;
 			
 				item.UserID = varUserID;
-			
-				item.Username = varUsername;
 			
 				item.KickCount = varKickCount;
 			
@@ -727,7 +700,6 @@ namespace Incremental.Kick.Dal
 			 public static string Url = @"Url";
 			 public static string CategoryID = @"CategoryID";
 			 public static string UserID = @"UserID";
-			 public static string Username = @"Username";
 			 public static string KickCount = @"KickCount";
 			 public static string SpamCount = @"SpamCount";
 			 public static string ViewCount = @"ViewCount";

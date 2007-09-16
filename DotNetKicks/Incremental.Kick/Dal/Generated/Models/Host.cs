@@ -477,71 +477,6 @@ namespace Incremental.Kick.Dal
 				colvarAnnouncementHtml.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarAnnouncementHtml);
 				
-				TableSchema.TableColumn colvarSmtpHost = new TableSchema.TableColumn(schema);
-				colvarSmtpHost.ColumnName = "SmtpHost";
-				colvarSmtpHost.DataType = DbType.String;
-				colvarSmtpHost.MaxLength = 255;
-				colvarSmtpHost.AutoIncrement = false;
-				colvarSmtpHost.IsNullable = false;
-				colvarSmtpHost.IsPrimaryKey = false;
-				colvarSmtpHost.IsForeignKey = false;
-				colvarSmtpHost.IsReadOnly = false;
-                colvarSmtpHost.DefaultSetting = @"('')";
-				colvarSmtpHost.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSmtpHost);
-				
-				TableSchema.TableColumn colvarSmtpPort = new TableSchema.TableColumn(schema);
-				colvarSmtpPort.ColumnName = "SmtpPort";
-				colvarSmtpPort.DataType = DbType.Int32;
-				colvarSmtpPort.MaxLength = 0;
-				colvarSmtpPort.AutoIncrement = false;
-				colvarSmtpPort.IsNullable = false;
-				colvarSmtpPort.IsPrimaryKey = false;
-				colvarSmtpPort.IsForeignKey = false;
-				colvarSmtpPort.IsReadOnly = false;
-				colvarSmtpPort.DefaultSetting = @"((25))";
-				colvarSmtpPort.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSmtpPort);
-				
-				TableSchema.TableColumn colvarSmtpUsername = new TableSchema.TableColumn(schema);
-				colvarSmtpUsername.ColumnName = "SmtpUsername";
-				colvarSmtpUsername.DataType = DbType.String;
-				colvarSmtpUsername.MaxLength = 50;
-				colvarSmtpUsername.AutoIncrement = false;
-				colvarSmtpUsername.IsNullable = false;
-				colvarSmtpUsername.IsPrimaryKey = false;
-				colvarSmtpUsername.IsForeignKey = false;
-				colvarSmtpUsername.IsReadOnly = false;
-                colvarSmtpUsername.DefaultSetting = @"('')";
-				colvarSmtpUsername.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSmtpUsername);
-				
-				TableSchema.TableColumn colvarSmtpPassword = new TableSchema.TableColumn(schema);
-				colvarSmtpPassword.ColumnName = "SmtpPassword";
-				colvarSmtpPassword.DataType = DbType.String;
-				colvarSmtpPassword.MaxLength = 50;
-				colvarSmtpPassword.AutoIncrement = false;
-				colvarSmtpPassword.IsNullable = false;
-				colvarSmtpPassword.IsPrimaryKey = false;
-				colvarSmtpPassword.IsForeignKey = false;
-				colvarSmtpPassword.IsReadOnly = false;
-                colvarSmtpPassword.DefaultSetting = @"('')";
-				colvarSmtpPassword.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSmtpPassword);
-				
-				TableSchema.TableColumn colvarSmtpEnableSsl = new TableSchema.TableColumn(schema);
-				colvarSmtpEnableSsl.ColumnName = "SmtpEnableSsl";
-				colvarSmtpEnableSsl.DataType = DbType.Boolean;
-				colvarSmtpEnableSsl.MaxLength = 0;
-				colvarSmtpEnableSsl.AutoIncrement = false;
-				colvarSmtpEnableSsl.IsNullable = false;
-				colvarSmtpEnableSsl.IsPrimaryKey = false;
-				colvarSmtpEnableSsl.IsForeignKey = false;
-				colvarSmtpEnableSsl.IsReadOnly = false;
-                colvarSmtpEnableSsl.DefaultSetting = @"((0))";
-				colvarSmtpEnableSsl.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarSmtpEnableSsl);
-				
 				TableSchema.TableColumn colvarFeedBurnerMainRssFeedUrl = new TableSchema.TableColumn(schema);
 				colvarFeedBurnerMainRssFeedUrl.ColumnName = "FeedBurnerMainRssFeedUrl";
 				colvarFeedBurnerMainRssFeedUrl.DataType = DbType.String;
@@ -581,6 +516,76 @@ namespace Incremental.Kick.Dal
 						colvarUseStaticRoot.DefaultSetting = @"((0))";
 				colvarUseStaticRoot.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUseStaticRoot);
+				
+				TableSchema.TableColumn colvarSmtpHost = new TableSchema.TableColumn(schema);
+				colvarSmtpHost.ColumnName = "SmtpHost";
+				colvarSmtpHost.DataType = DbType.String;
+				colvarSmtpHost.MaxLength = 255;
+				colvarSmtpHost.AutoIncrement = false;
+				colvarSmtpHost.IsNullable = false;
+				colvarSmtpHost.IsPrimaryKey = false;
+				colvarSmtpHost.IsForeignKey = false;
+				colvarSmtpHost.IsReadOnly = false;
+				
+						colvarSmtpHost.DefaultSetting = @"('')";
+				colvarSmtpHost.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpHost);
+				
+				TableSchema.TableColumn colvarSmtpPort = new TableSchema.TableColumn(schema);
+				colvarSmtpPort.ColumnName = "SmtpPort";
+				colvarSmtpPort.DataType = DbType.Int32;
+				colvarSmtpPort.MaxLength = 0;
+				colvarSmtpPort.AutoIncrement = false;
+				colvarSmtpPort.IsNullable = false;
+				colvarSmtpPort.IsPrimaryKey = false;
+				colvarSmtpPort.IsForeignKey = false;
+				colvarSmtpPort.IsReadOnly = false;
+				
+						colvarSmtpPort.DefaultSetting = @"((25))";
+				colvarSmtpPort.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpPort);
+				
+				TableSchema.TableColumn colvarSmtpUsername = new TableSchema.TableColumn(schema);
+				colvarSmtpUsername.ColumnName = "SmtpUsername";
+				colvarSmtpUsername.DataType = DbType.String;
+				colvarSmtpUsername.MaxLength = 50;
+				colvarSmtpUsername.AutoIncrement = false;
+				colvarSmtpUsername.IsNullable = false;
+				colvarSmtpUsername.IsPrimaryKey = false;
+				colvarSmtpUsername.IsForeignKey = false;
+				colvarSmtpUsername.IsReadOnly = false;
+				
+						colvarSmtpUsername.DefaultSetting = @"('')";
+				colvarSmtpUsername.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpUsername);
+				
+				TableSchema.TableColumn colvarSmtpPassword = new TableSchema.TableColumn(schema);
+				colvarSmtpPassword.ColumnName = "SmtpPassword";
+				colvarSmtpPassword.DataType = DbType.String;
+				colvarSmtpPassword.MaxLength = 50;
+				colvarSmtpPassword.AutoIncrement = false;
+				colvarSmtpPassword.IsNullable = false;
+				colvarSmtpPassword.IsPrimaryKey = false;
+				colvarSmtpPassword.IsForeignKey = false;
+				colvarSmtpPassword.IsReadOnly = false;
+				
+						colvarSmtpPassword.DefaultSetting = @"('')";
+				colvarSmtpPassword.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpPassword);
+				
+				TableSchema.TableColumn colvarSmtpEnableSsl = new TableSchema.TableColumn(schema);
+				colvarSmtpEnableSsl.ColumnName = "SmtpEnableSsl";
+				colvarSmtpEnableSsl.DataType = DbType.Boolean;
+				colvarSmtpEnableSsl.MaxLength = 0;
+				colvarSmtpEnableSsl.AutoIncrement = false;
+				colvarSmtpEnableSsl.IsNullable = false;
+				colvarSmtpEnableSsl.IsPrimaryKey = false;
+				colvarSmtpEnableSsl.IsForeignKey = false;
+				colvarSmtpEnableSsl.IsReadOnly = false;
+				
+						colvarSmtpEnableSsl.DefaultSetting = @"((1))";
+				colvarSmtpEnableSsl.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarSmtpEnableSsl);
 				
 				BaseSchema = schema;
 				//add this schema to the provider
@@ -875,6 +880,36 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
+		[XmlAttribute("FeedBurnerMainRssFeedUrl")]
+		public string FeedBurnerMainRssFeedUrl 
+		{
+			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedUrl); }
+
+			set { SetColumnValue(Columns.FeedBurnerMainRssFeedUrl, value); }
+
+		}
+
+		  
+		[XmlAttribute("FeedBurnerMainRssFeedCountHtml")]
+		public string FeedBurnerMainRssFeedCountHtml 
+		{
+			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedCountHtml); }
+
+			set { SetColumnValue(Columns.FeedBurnerMainRssFeedCountHtml, value); }
+
+		}
+
+		  
+		[XmlAttribute("UseStaticRoot")]
+		public bool UseStaticRoot 
+		{
+			get { return GetColumnValue<bool>(Columns.UseStaticRoot); }
+
+			set { SetColumnValue(Columns.UseStaticRoot, value); }
+
+		}
+
+		  
 		[XmlAttribute("SmtpHost")]
 		public string SmtpHost 
 		{
@@ -921,36 +956,6 @@ namespace Incremental.Kick.Dal
 			get { return GetColumnValue<bool>(Columns.SmtpEnableSsl); }
 
 			set { SetColumnValue(Columns.SmtpEnableSsl, value); }
-
-		}
-
-		  
-		[XmlAttribute("FeedBurnerMainRssFeedUrl")]
-		public string FeedBurnerMainRssFeedUrl 
-		{
-			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedUrl); }
-
-			set { SetColumnValue(Columns.FeedBurnerMainRssFeedUrl, value); }
-
-		}
-
-		  
-		[XmlAttribute("FeedBurnerMainRssFeedCountHtml")]
-		public string FeedBurnerMainRssFeedCountHtml 
-		{
-			get { return GetColumnValue<string>(Columns.FeedBurnerMainRssFeedCountHtml); }
-
-			set { SetColumnValue(Columns.FeedBurnerMainRssFeedCountHtml, value); }
-
-		}
-
-		  
-		[XmlAttribute("UseStaticRoot")]
-		public bool UseStaticRoot 
-		{
-			get { return GetColumnValue<bool>(Columns.UseStaticRoot); }
-
-			set { SetColumnValue(Columns.UseStaticRoot, value); }
 
 		}
 
@@ -1008,7 +1013,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -1066,6 +1071,12 @@ namespace Incremental.Kick.Dal
 			
 			item.AnnouncementHtml = varAnnouncementHtml;
 			
+			item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
+			
+			item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
+			
+			item.UseStaticRoot = varUseStaticRoot;
+			
 			item.SmtpHost = varSmtpHost;
 			
 			item.SmtpPort = varSmtpPort;
@@ -1075,12 +1086,6 @@ namespace Incremental.Kick.Dal
 			item.SmtpPassword = varSmtpPassword;
 			
 			item.SmtpEnableSsl = varSmtpEnableSsl;
-			
-			item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
-			
-			item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
-			
-			item.UseStaticRoot = varUseStaticRoot;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -1093,7 +1098,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl)
 		{
 			Host item = new Host();
 			
@@ -1153,6 +1158,12 @@ namespace Incremental.Kick.Dal
 			
 				item.AnnouncementHtml = varAnnouncementHtml;
 			
+				item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
+			
+				item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
+			
+				item.UseStaticRoot = varUseStaticRoot;
+			
 				item.SmtpHost = varSmtpHost;
 			
 				item.SmtpPort = varSmtpPort;
@@ -1162,12 +1173,6 @@ namespace Incremental.Kick.Dal
 				item.SmtpPassword = varSmtpPassword;
 			
 				item.SmtpEnableSsl = varSmtpEnableSsl;
-			
-				item.FeedBurnerMainRssFeedUrl = varFeedBurnerMainRssFeedUrl;
-			
-				item.FeedBurnerMainRssFeedCountHtml = varFeedBurnerMainRssFeedCountHtml;
-			
-				item.UseStaticRoot = varUseStaticRoot;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1208,14 +1213,14 @@ namespace Incremental.Kick.Dal
 			 public static string AdsenseID = @"AdsenseID";
 			 public static string TrackingHtml = @"TrackingHtml";
 			 public static string AnnouncementHtml = @"AnnouncementHtml";
+			 public static string FeedBurnerMainRssFeedUrl = @"FeedBurnerMainRssFeedUrl";
+			 public static string FeedBurnerMainRssFeedCountHtml = @"FeedBurnerMainRssFeedCountHtml";
+			 public static string UseStaticRoot = @"UseStaticRoot";
 			 public static string SmtpHost = @"SmtpHost";
 			 public static string SmtpPort = @"SmtpPort";
 			 public static string SmtpUsername = @"SmtpUsername";
 			 public static string SmtpPassword = @"SmtpPassword";
 			 public static string SmtpEnableSsl = @"SmtpEnableSsl";
-			 public static string FeedBurnerMainRssFeedUrl = @"FeedBurnerMainRssFeedUrl";
-			 public static string FeedBurnerMainRssFeedCountHtml = @"FeedBurnerMainRssFeedCountHtml";
-			 public static string UseStaticRoot = @"UseStaticRoot";
 						
 		}
 

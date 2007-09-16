@@ -30,6 +30,9 @@ namespace Incremental.Kick.Web.Controls {
         private bool _displayStoryTitle = false;
 
         protected override void Render(HtmlTextWriter writer) {
+            if (this._comment.IsSpam)
+                this._comment.CommentX = "<em>[comment removed]</em>";
+
             string alternativeCssClass = "";
             if (this._useAlternativeStyle)
                 alternativeCssClass = "CommentAlt";
@@ -55,7 +58,7 @@ namespace Incremental.Kick.Web.Controls {
                     <div class=""CommentAuthor"">posted by ", this._comment.CommentX);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(UserCache.GetUserByUsername(this._comment.Username));
+            userLink.DataBind(UserCache.GetUser(this._comment.UserID));
             userLink.RenderControl(writer);
 
             writer.WriteLine(@" {0}</div></div>", Dates.ReadableDiff(this._comment.CreatedOn, DateTime.Now));

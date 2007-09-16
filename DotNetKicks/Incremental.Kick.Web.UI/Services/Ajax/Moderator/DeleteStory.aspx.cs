@@ -22,12 +22,12 @@ namespace Incremental.Kick.Web.UI.Services.Ajax.Moderator {
             System.Diagnostics.Debug.WriteLine(String.Format("Ajax.DeleteStory({0}) by [{1}]", storyID, this.KickUserProfile.Username));
 
             if(!this.IsHostModerator) {
-                throw new SecurityException("");
+                throw new SecurityException();
             }
 
             EmailHelper.SendStoryDeletedEmail(Story.FetchByID(storyID), this.HostProfile);
 
-            StoryBR.DeleteStory(storyID, this.HostProfile.HostID);
+            StoryBR.MarkAsSpam(storyID, this.HostProfile.HostID);
         }
     }
 }

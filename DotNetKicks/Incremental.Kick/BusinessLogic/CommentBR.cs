@@ -25,7 +25,6 @@ namespace Incremental.Kick.BusinessLogic {
             newComment.HostID = hostID;
             newComment.StoryID = storyID;
             newComment.UserID = user.UserID;
-            newComment.Username = user.Username;
             //TODO: GJ: rename comment as it is the same as the table name
             newComment.CommentX = comment;
             newComment.Save();

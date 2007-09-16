@@ -15,7 +15,11 @@
 <body>
     <form id="PageForm" runat="server">
            <div id="wrap">
-            
+                <% if (this.KickPage.KickUserProfile.IsBanned) { %>
+                <div class="flash flash-information">
+                    NOTE: Your account has been BANNED. This is probably due to submitting spam to the site. Please contact us if you feel that this is in error.
+                </div
+                <% } %>
                 <asp:ContentPlaceHolder ID="Header" runat="server">
                 </asp:ContentPlaceHolder>
                     

@@ -14,7 +14,6 @@ namespace Incremental.Kick.Dal {
             return Story.FetchStoryByParameter(Story.Columns.Url, url);
         }
 
-
         public static Story FetchStoryByParameter(string columnName, object value) {
             //NOTE: GJ: maybe we should add support for this in SubSonic? (like rails does)
             StoryCollection t = new StoryCollection();
@@ -149,7 +148,7 @@ namespace Incremental.Kick.Dal {
         }
 
         private static Query GetStoryQuery(int hostID) {
-            return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID);
+            return new Query(Story.Schema).WHERE(Story.Columns.HostID, hostID).AND(Story.Columns.IsSpam, false);
         }
 
         private static Query GetStoryQuery(int hostID, bool isPublished) {

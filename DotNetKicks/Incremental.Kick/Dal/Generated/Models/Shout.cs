@@ -179,6 +179,20 @@ namespace Incremental.Kick.Dal
 				colvarCreatedOn.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarCreatedOn);
 				
+				TableSchema.TableColumn colvarIsSpam = new TableSchema.TableColumn(schema);
+				colvarIsSpam.ColumnName = "IsSpam";
+				colvarIsSpam.DataType = DbType.Boolean;
+				colvarIsSpam.MaxLength = 0;
+				colvarIsSpam.AutoIncrement = false;
+				colvarIsSpam.IsNullable = false;
+				colvarIsSpam.IsPrimaryKey = false;
+				colvarIsSpam.IsForeignKey = false;
+				colvarIsSpam.IsReadOnly = false;
+				
+						colvarIsSpam.DefaultSetting = @"((0))";
+				colvarIsSpam.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIsSpam);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -251,6 +265,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("IsSpam")]
+		public bool IsSpam 
+		{
+			get { return GetColumnValue<bool>(Columns.IsSpam); }
+
+			set { SetColumnValue(Columns.IsSpam, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -313,7 +337,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn)
+		public static void Insert(int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam)
 		{
 			Shout item = new Shout();
 			
@@ -327,6 +351,8 @@ namespace Incremental.Kick.Dal
 			
 			item.CreatedOn = varCreatedOn;
 			
+			item.IsSpam = varIsSpam;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -338,7 +364,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varShoutID,int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn)
+		public static void Update(int varShoutID,int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam)
 		{
 			Shout item = new Shout();
 			
@@ -353,6 +379,8 @@ namespace Incremental.Kick.Dal
 				item.Message = varMessage;
 			
 				item.CreatedOn = varCreatedOn;
+			
+				item.IsSpam = varIsSpam;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -371,6 +399,7 @@ namespace Incremental.Kick.Dal
 			 public static string HostID = @"HostID";
 			 public static string Message = @"Message";
 			 public static string CreatedOn = @"CreatedOn";
+			 public static string IsSpam = @"IsSpam";
 						
 		}
 

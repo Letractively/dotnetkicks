@@ -34,7 +34,7 @@ namespace Incremental.Kick.Web.Controls {
         protected override void Render(HtmlTextWriter writer) {
             Category category = CategoryCache.GetCategory(this._story.CategoryID, this.KickPage.HostProfile.HostID);
             string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, category.CategoryIdentifier);
-            string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this._story.Username);
+            string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, UserCache.GetUser(this._story.UserID).Username);
 
             string categoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, category.CategoryIdentifier);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);
@@ -85,7 +85,7 @@ namespace Incremental.Kick.Web.Controls {
             ", this._story.Url, this._story.Title, publishedHtml, this.KickPage.StaticIconRootUrl, linkAttributes);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(UserCache.GetUserByUsername(this._story.Username));
+            userLink.DataBind(UserCache.GetUser(this._story.UserID));
             userLink.RenderControl(writer);
 
             string moreLink = "";

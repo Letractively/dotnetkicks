@@ -30,6 +30,9 @@ namespace Incremental.Kick.Web.Controls {
             for (int i = 0; i < this._shouts.Count; i++) {
                 if (i < 30) {
                     Shout shout = this._shouts[i];
+                    if (shout.IsSpam)
+                        shout.Message = "<em>[shout removed]</em>";
+
                     writer.WriteLine(@"<div class=""shout"">");
                     new UserLink(shout.FromUserID).RenderControl(writer);
                     writer.WriteLine(@" said <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(shout.CreatedOn, DateTime.Now));
