@@ -8,19 +8,8 @@
 
     <Kick:UserList id="UserOnlineList" runat="server" />
     
-    <table>
-        <tr>
-        <td valign="top" width="50%">
-            <uc1:KickSpy id="KickSpy1" runat="server" />
-        </td>
-        
-            <td valign="top">
-    <h1><%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(1440, this.HostProfile.HostID) %> were here today:</h1>
- <Kick:UserList id="UserTodayList" runat="server" />
-            </td>
-            
-        </tr>
-    </table>
+    <uc1:KickSpy id="KickSpy1" runat="server" />
+    
     
 </asp:content>
 <asp:content id="RightContentOutline" contentplaceholderid="RightContent" runat="server">
