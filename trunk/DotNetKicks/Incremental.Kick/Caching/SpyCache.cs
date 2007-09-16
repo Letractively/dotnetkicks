@@ -14,7 +14,7 @@ namespace Incremental.Kick.Caching {
 
            if (spy == null) {
                spy = new Spy();
-               hostSpyCache.Insert(cacheKey, spy, 999999); //TODO: GJ: allow caching for ever
+               hostSpyCache.Insert(cacheKey, spy, 999999, System.Web.Caching.CacheItemPriority.NotRemovable); //TODO: GJ: allow caching for ever
            }
 
            return spy;

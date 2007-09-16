@@ -29,6 +29,15 @@ namespace Incremental.Kick.Web.UI.Pages.Admin {
         protected global::Incremental.Kick.Web.UI.Controls.Admin.Tasks Tasks;
         
         /// <summary>
+        /// Cache control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.UI.Controls.Admin.Cache Cache;
+        
+        /// <summary>
         /// AdminMenu1 control.
         /// </summary>
         /// <remarks>
