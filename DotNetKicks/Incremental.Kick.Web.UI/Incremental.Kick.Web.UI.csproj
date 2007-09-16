@@ -246,6 +246,13 @@
     <Compile Include="Controls\Admin\AdminMenu.ascx.designer.cs">
       <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Admin\Tasks.ascx.cs">
+      <DependentUpon>Tasks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Admin\Tasks.ascx.designer.cs">
+      <DependentUpon>Tasks.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Community\KickSpy.ascx.cs">
       <DependentUpon>KickSpy.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -779,6 +786,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\Admin\Tasks.ascx" />
     <Content Include="Controls\Community\KickSpy.ascx" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
     <Content Include="Controls\User\ShoutBox.ascx" />
