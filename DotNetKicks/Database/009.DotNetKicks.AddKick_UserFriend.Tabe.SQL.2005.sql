@@ -27,11 +27,6 @@ REFERENCES [dbo].[Kick_User] ([UserID])
 GO
 ALTER TABLE [dbo].[Kick_UserFriend] CHECK CONSTRAINT [FK_Kick_UserFriend_Kick_Friend]
 GO
-ALTER TABLE [dbo].[Kick_UserFriend]  WITH CHECK ADD  CONSTRAINT [FK_Kick_UserFriend_Kick_Host] FOREIGN KEY([HostID])
-REFERENCES [dbo].[Kick_Host] ([HostID])
-GO
-ALTER TABLE [dbo].[Kick_UserFriend] CHECK CONSTRAINT [FK_Kick_UserFriend_Kick_Host]
-GO
 ALTER TABLE [dbo].[Kick_UserFriend]  WITH CHECK ADD  CONSTRAINT [FK_Kick_UserFriend_Kick_User] FOREIGN KEY([UserID])
 REFERENCES [dbo].[Kick_User] ([UserID])
 GO
