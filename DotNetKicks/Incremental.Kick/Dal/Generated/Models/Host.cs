@@ -482,11 +482,11 @@ namespace Incremental.Kick.Dal
 				colvarSmtpHost.DataType = DbType.String;
 				colvarSmtpHost.MaxLength = 255;
 				colvarSmtpHost.AutoIncrement = false;
-				colvarSmtpHost.IsNullable = true;
+				colvarSmtpHost.IsNullable = false;
 				colvarSmtpHost.IsPrimaryKey = false;
 				colvarSmtpHost.IsForeignKey = false;
 				colvarSmtpHost.IsReadOnly = false;
-				colvarSmtpHost.DefaultSetting = @"";
+                colvarSmtpHost.DefaultSetting = @"('')";
 				colvarSmtpHost.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpHost);
 				
@@ -495,11 +495,11 @@ namespace Incremental.Kick.Dal
 				colvarSmtpPort.DataType = DbType.Int32;
 				colvarSmtpPort.MaxLength = 0;
 				colvarSmtpPort.AutoIncrement = false;
-				colvarSmtpPort.IsNullable = true;
+				colvarSmtpPort.IsNullable = false;
 				colvarSmtpPort.IsPrimaryKey = false;
 				colvarSmtpPort.IsForeignKey = false;
 				colvarSmtpPort.IsReadOnly = false;
-				colvarSmtpPort.DefaultSetting = @"";
+				colvarSmtpPort.DefaultSetting = @"((25))";
 				colvarSmtpPort.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpPort);
 				
@@ -508,11 +508,11 @@ namespace Incremental.Kick.Dal
 				colvarSmtpUsername.DataType = DbType.String;
 				colvarSmtpUsername.MaxLength = 50;
 				colvarSmtpUsername.AutoIncrement = false;
-				colvarSmtpUsername.IsNullable = true;
+				colvarSmtpUsername.IsNullable = false;
 				colvarSmtpUsername.IsPrimaryKey = false;
 				colvarSmtpUsername.IsForeignKey = false;
 				colvarSmtpUsername.IsReadOnly = false;
-				colvarSmtpUsername.DefaultSetting = @"";
+                colvarSmtpUsername.DefaultSetting = @"('')";
 				colvarSmtpUsername.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpUsername);
 				
@@ -521,11 +521,11 @@ namespace Incremental.Kick.Dal
 				colvarSmtpPassword.DataType = DbType.String;
 				colvarSmtpPassword.MaxLength = 50;
 				colvarSmtpPassword.AutoIncrement = false;
-				colvarSmtpPassword.IsNullable = true;
+				colvarSmtpPassword.IsNullable = false;
 				colvarSmtpPassword.IsPrimaryKey = false;
 				colvarSmtpPassword.IsForeignKey = false;
 				colvarSmtpPassword.IsReadOnly = false;
-				colvarSmtpPassword.DefaultSetting = @"";
+                colvarSmtpPassword.DefaultSetting = @"('')";
 				colvarSmtpPassword.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpPassword);
 				
@@ -534,11 +534,11 @@ namespace Incremental.Kick.Dal
 				colvarSmtpEnableSsl.DataType = DbType.Boolean;
 				colvarSmtpEnableSsl.MaxLength = 0;
 				colvarSmtpEnableSsl.AutoIncrement = false;
-				colvarSmtpEnableSsl.IsNullable = true;
+				colvarSmtpEnableSsl.IsNullable = false;
 				colvarSmtpEnableSsl.IsPrimaryKey = false;
 				colvarSmtpEnableSsl.IsForeignKey = false;
 				colvarSmtpEnableSsl.IsReadOnly = false;
-				colvarSmtpEnableSsl.DefaultSetting = @"";
+                colvarSmtpEnableSsl.DefaultSetting = @"((0))";
 				colvarSmtpEnableSsl.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpEnableSsl);
 				
@@ -886,9 +886,9 @@ namespace Incremental.Kick.Dal
 
 		  
 		[XmlAttribute("SmtpPort")]
-		public int? SmtpPort 
+		public int SmtpPort 
 		{
-			get { return GetColumnValue<int?>(Columns.SmtpPort); }
+			get { return GetColumnValue<int>(Columns.SmtpPort); }
 
 			set { SetColumnValue(Columns.SmtpPort, value); }
 
@@ -916,9 +916,9 @@ namespace Incremental.Kick.Dal
 
 		  
 		[XmlAttribute("SmtpEnableSsl")]
-		public bool? SmtpEnableSsl 
+		public bool SmtpEnableSsl 
 		{
-			get { return GetColumnValue<bool?>(Columns.SmtpEnableSsl); }
+			get { return GetColumnValue<bool>(Columns.SmtpEnableSsl); }
 
 			set { SetColumnValue(Columns.SmtpEnableSsl, value); }
 
@@ -1008,7 +1008,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
 		{
 			Host item = new Host();
 			
@@ -1093,7 +1093,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int? varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool? varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot)
 		{
 			Host item = new Host();
 			

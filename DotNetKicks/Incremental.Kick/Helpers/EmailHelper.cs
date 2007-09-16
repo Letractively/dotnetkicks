@@ -58,9 +58,9 @@ namespace Incremental.Kick.Helpers {
         }
 
         public static void Send(MailMessage message, Host host) {
-            SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort.Value);
+            SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort);
             smtpClient.Credentials = new NetworkCredential(host.SmtpUsername, host.SmtpPassword);
-            smtpClient.EnableSsl = true;
+            smtpClient.EnableSsl = host.SmtpEnableSsl;
             smtpClient.Send(message);
         }
 
