@@ -25,10 +25,15 @@ namespace Incremental.Kick.Caching {
         }
 
         public void Insert(K key, V value, int cacheDurationInSeconds) {
+            this.Insert(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
+        }
+
+        public void Insert(K key, V value, int cacheDurationInSeconds, CacheItemPriority priority) {
             string keyString = CreateKey(key);
             System.Diagnostics.Trace.Write("Cache: inserting [" + keyString + "]");
-            HttpRuntime.Cache.Insert(keyString, value, null, DateTime.Now.AddSeconds(cacheDurationInSeconds), Cache.NoSlidingExpiration);
+            HttpRuntime.Cache.Insert(keyString, value, null, DateTime.Now.AddSeconds(cacheDurationInSeconds), Cache.NoSlidingExpiration, priority, null);
         }
+
 
         public void Remove(K key) {
             HttpRuntime.Cache.Remove(CreateKey(key));
