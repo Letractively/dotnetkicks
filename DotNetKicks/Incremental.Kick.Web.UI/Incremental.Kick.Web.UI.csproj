@@ -508,6 +508,13 @@
     <Compile Include="Pages\Story\ViewOrAdd.aspx.designer.cs">
       <DependentUpon>ViewOrAdd.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Story\Zeitgeist.aspx.cs">
+      <DependentUpon>Zeitgeist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\Zeitgeist.aspx.designer.cs">
+      <DependentUpon>Zeitgeist.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Tag\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -802,6 +809,7 @@
     <Content Include="Pages\Admin\Categories.aspx" />
     <Content Include="Pages\Community\KickSpy.aspx" />
     <Content Include="Pages\Community\ShoutBox.aspx" />
+    <Content Include="Pages\Story\Zeitgeist.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
     <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />
