@@ -10,7 +10,7 @@ namespace Incremental.Kick.Helpers {
             MatchCollection urlMatches = urlMatchRegex.Matches(input);
 
             foreach (Match match in urlMatches) {
-                input = Regex.Replace(input, match.Value, String.Format(@"<a href=""{0}"" target=""_new"">{0}</a>", match.Value));
+                input = input.Replace(match.Value, String.Format(@"<a href=""{0}"" target=""_new"">{0}</a>", match.Value));
             }
 
             return input;
