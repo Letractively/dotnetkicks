@@ -231,32 +231,13 @@ namespace Incremental.Kick.Caching {
             return String.Format("UserCommentCollection_{0}_{1}_{2}_{3}", userIdentifier, hostID, pageNumber, pageSize);
         }
 
+        //NOTE: GJ: this will be depreciated in favour of tagging
         public static StoryCollection GetCategoryStories(short categoryID, bool isKicked, int hostID, int pageNumber, int pageSize) {
-            string cacheKey = String.Format("Kick_StoryTable_{0}_{1}_{2}_{3}_{4}", categoryID, isKicked, hostID, pageNumber, pageSize);
-
-            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
-
-            StoryCollection stories = storyCache[cacheKey];
-
-            if (stories == null) {
-                stories = Story.GetStoriesByCategoryKickedStateAndHostID(categoryID, isKicked, hostID, pageNumber, pageSize);
-                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return stories;
+            return GetTaggedStories(CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier, hostID, pageNumber, pageSize);
         }
-
+        //NOTE: GJ: this will be depreciated in favour of tagging
         public static int GetCategoryStoryCount(short categoryID, bool isKicked, int hostID) {
-            string cacheKey = String.Format("Kick_CategoryStoryCount_{0}_{1}_{2}", categoryID, isKicked, hostID);
-            CacheManager<string, int?> countCache = GetCountCache();
-
-            int? count = countCache[cacheKey];
-            if (count == null) {
-                count = Story.GetStoriesByCategoryKickedStateAndHostID_Count(categoryID, isKicked, hostID);
-                countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return count.Value;
+            return GetTaggedStoryCount(CategoryCache.GetCategory(categoryID, hostID).CategoryIdentifier, hostID);
         }
 
         public static StoryCollection GetTaggedStories(string tagIdentifier, int hostID, int pageNumber, int pageSize) {
