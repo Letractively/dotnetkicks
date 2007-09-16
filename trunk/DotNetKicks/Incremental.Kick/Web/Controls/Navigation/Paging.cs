@@ -205,8 +205,7 @@ namespace Incremental.Kick.Web.Controls
 
             if (this.RecordCount > 0)
             {
-                writer.WriteBeginTag("ul");
-                writer.Write(HtmlTextWriter.TagRightChar); //close ul
+                writer.RenderBeginTag(HtmlTextWriterTag.Ul);
 
                 //draw previous link
                 if (this.PageNumber > 1)
@@ -235,7 +234,7 @@ namespace Incremental.Kick.Web.Controls
                     WritePageHyperlink(writer, this.PageNumber + 1, "PagingNext disablelink", _nextText);
 
                 //close unordered list
-                writer.WriteEndTag("ul");
+                writer.RenderEndTag();//ul
             }
 
             writer.WriteEndTag("div");
@@ -340,15 +339,14 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="text">The text.</param>
         private void WritePageHyperlink(HtmlTextWriter writer, int pageId, string cssClass, string text)
         {
-            writer.WriteBeginTag("li");
-            writer.Write(HtmlTextWriter.TagRightChar);  //close li
+            writer.RenderBeginTag(HtmlTextWriterTag.Li);
             writer.WriteBeginTag("a");
             writer.WriteAttribute("href", PageUrl(pageId));
             writer.WriteAttribute("class", cssClass);
             writer.Write(HtmlTextWriter.TagRightChar);//close a
             writer.Write(text);
             writer.WriteEndTag("a");
-            writer.WriteEndTag("li");
+            writer.RenderEndTag();//li
         }
 
         /// <summary>
@@ -359,8 +357,8 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="pageId">The page id.</param>
         private void WritePageHyperlink(HtmlTextWriter writer, int pageId)
         {
-            writer.WriteBeginTag("li");
-            writer.Write(HtmlTextWriter.TagRightChar);  //close li
+            writer.RenderBeginTag(HtmlTextWriterTag.Li);
+
             if (pageId < 0)
                 writer.Write("...");            
             else
@@ -377,7 +375,7 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(pageId);
                 writer.WriteEndTag("a");
             }
-            writer.WriteEndTag("li");
+            writer.RenderEndTag();//li
         }
 
         #endregion

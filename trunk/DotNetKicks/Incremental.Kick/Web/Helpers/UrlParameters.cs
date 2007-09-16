@@ -24,7 +24,8 @@ namespace Incremental.Kick.Web.Helpers {
         private string _hostName;
         private StoryListSortBy _storyListSortBy = StoryListSortBy.RecentlyPromoted;
         private StoryListSortBy _upcomingstorylistsortby = StoryListSortBy.LatestUpcoming;
-
+        private int? _year;
+        private int? _month;
 
         public string UserIdentifier {
             get { return this._userIdentifier; }
@@ -92,7 +93,16 @@ namespace Incremental.Kick.Web.Helpers {
             get { return this._skin; }
             set { this._skin = value; }
         }
-
+        public int? Year
+        {
+            get { return this._year; }
+            set { this._year = value; }
+        }
+        public int? Month
+        {
+            get { return this._month; }
+            set { this._month = value; }
+        }
         public bool SkinSpecified {
             get { return !String.IsNullOrEmpty(this.Skin); }
         }

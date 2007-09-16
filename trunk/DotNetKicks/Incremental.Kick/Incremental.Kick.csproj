@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
@@ -187,6 +188,7 @@
     <Compile Include="Web\Controls\Story\StoryTagList.cs" />
     <Compile Include="Web\Controls\Story\UpcomingStoryListHeader.cs" />
     <Compile Include="Web\Controls\Story\UsersWhoKicked.cs" />
+    <Compile Include="Web\Controls\Story\Zeitgeist.cs" />
     <Compile Include="Web\Controls\Tags\EditableTagList.cs" />
     <Compile Include="Web\Controls\Tags\TagCloud.cs" />
     <Compile Include="Web\Controls\Tags\TagCommaList.cs" />

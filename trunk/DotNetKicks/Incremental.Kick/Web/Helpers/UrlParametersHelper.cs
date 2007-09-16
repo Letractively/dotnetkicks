@@ -43,6 +43,12 @@ namespace Incremental.Kick.Web.Helpers {
             if (!String.IsNullOrEmpty(request["upcomingStoryListSortBy"]))
                 urlParameters.StoryListSortBy = (StoryListSortBy)System.Enum.Parse(typeof(StoryListSortBy), request["upcomingStoryListSortBy"], true);
 
+            if (!String.IsNullOrEmpty(request["year"]))
+                urlParameters.Year = int.Parse(request["year"].Replace("/", ""));
+
+            if (!String.IsNullOrEmpty(request["month"]))
+                urlParameters.Month = int.Parse(request["month"].Replace("/", ""));
+
             return urlParameters;
         }
     }

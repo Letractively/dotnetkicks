@@ -14,7 +14,30 @@ using SubSonic.Utilities;
 
 namespace Incremental.Kick.Dal{
     public partial class SPs{
-        
+
+        public static StoredProcedure Kick_GetTopKickedStoriesByYear(int? HostID, int? Year)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYear", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddParameter("@Year", Year, DbType.Int32);
+
+            return sp;
+        }
+        public static StoredProcedure Kick_GetTopKickedStoriesByYearMonth(int? HostID, int? Year, int? Month)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYearMonth", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddParameter("@Year", Year, DbType.Int32);
+
+            sp.Command.AddParameter("@Month", Month, DbType.Int32);
+
+            return sp;
+        }
+
         /// <summary>
         /// Creates an object wrapper for the Kick_GetTagsByUserIDAndHostID Procedure
         /// </summary>
