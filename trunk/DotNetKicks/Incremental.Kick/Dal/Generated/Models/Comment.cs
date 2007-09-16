@@ -139,19 +139,6 @@ namespace Incremental.Kick.Dal
 					colvarUserID.ForeignKeyTableName = "Kick_User";
 				schema.Columns.Add(colvarUserID);
 				
-				TableSchema.TableColumn colvarUsername = new TableSchema.TableColumn(schema);
-				colvarUsername.ColumnName = "Username";
-				colvarUsername.DataType = DbType.String;
-				colvarUsername.MaxLength = 50;
-				colvarUsername.AutoIncrement = false;
-				colvarUsername.IsNullable = false;
-				colvarUsername.IsPrimaryKey = false;
-				colvarUsername.IsForeignKey = false;
-				colvarUsername.IsReadOnly = false;
-				colvarUsername.DefaultSetting = @"";
-				colvarUsername.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarUsername);
-				
 				TableSchema.TableColumn colvarCommentX = new TableSchema.TableColumn(schema);
 				colvarCommentX.ColumnName = "Comment";
 				colvarCommentX.DataType = DbType.String;
@@ -191,6 +178,20 @@ namespace Incremental.Kick.Dal
 						colvarHostID.DefaultSetting = @"((1))";
 				colvarHostID.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarHostID);
+				
+				TableSchema.TableColumn colvarIsSpam = new TableSchema.TableColumn(schema);
+				colvarIsSpam.ColumnName = "IsSpam";
+				colvarIsSpam.DataType = DbType.Boolean;
+				colvarIsSpam.MaxLength = 0;
+				colvarIsSpam.AutoIncrement = false;
+				colvarIsSpam.IsNullable = false;
+				colvarIsSpam.IsPrimaryKey = false;
+				colvarIsSpam.IsForeignKey = false;
+				colvarIsSpam.IsReadOnly = false;
+				
+						colvarIsSpam.DefaultSetting = @"((0))";
+				colvarIsSpam.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIsSpam);
 				
 				BaseSchema = schema;
 				//add this schema to the provider
@@ -235,16 +236,6 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("Username")]
-		public string Username 
-		{
-			get { return GetColumnValue<string>(Columns.Username); }
-
-			set { SetColumnValue(Columns.Username, value); }
-
-		}
-
-		  
 		[XmlAttribute("CommentX")]
 		public string CommentX 
 		{
@@ -271,6 +262,16 @@ namespace Incremental.Kick.Dal
 			get { return GetColumnValue<int>(Columns.HostID); }
 
 			set { SetColumnValue(Columns.HostID, value); }
+
+		}
+
+		  
+		[XmlAttribute("IsSpam")]
+		public bool IsSpam 
+		{
+			get { return GetColumnValue<bool>(Columns.IsSpam); }
+
+			set { SetColumnValue(Columns.IsSpam, value); }
 
 		}
 
@@ -322,7 +323,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn,int varHostID)
+		public static void Insert(int varStoryID,int varUserID,string varCommentX,DateTime varCreatedOn,int varHostID,bool varIsSpam)
 		{
 			Comment item = new Comment();
 			
@@ -330,13 +331,13 @@ namespace Incremental.Kick.Dal
 			
 			item.UserID = varUserID;
 			
-			item.Username = varUsername;
-			
 			item.CommentX = varCommentX;
 			
 			item.CreatedOn = varCreatedOn;
 			
 			item.HostID = varHostID;
+			
+			item.IsSpam = varIsSpam;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -349,7 +350,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varCommentID,int varStoryID,int varUserID,string varUsername,string varCommentX,DateTime varCreatedOn,int varHostID)
+		public static void Update(int varCommentID,int varStoryID,int varUserID,string varCommentX,DateTime varCreatedOn,int varHostID,bool varIsSpam)
 		{
 			Comment item = new Comment();
 			
@@ -359,13 +360,13 @@ namespace Incremental.Kick.Dal
 			
 				item.UserID = varUserID;
 			
-				item.Username = varUsername;
-			
 				item.CommentX = varCommentX;
 			
 				item.CreatedOn = varCreatedOn;
 			
 				item.HostID = varHostID;
+			
+				item.IsSpam = varIsSpam;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -381,10 +382,10 @@ namespace Incremental.Kick.Dal
 			 public static string CommentID = @"CommentID";
 			 public static string StoryID = @"StoryID";
 			 public static string UserID = @"UserID";
-			 public static string Username = @"Username";
 			 public static string CommentX = @"Comment";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string HostID = @"HostID";
+			 public static string IsSpam = @"IsSpam";
 						
 		}
 

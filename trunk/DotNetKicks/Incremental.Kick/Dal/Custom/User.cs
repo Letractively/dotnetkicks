@@ -108,22 +108,36 @@ namespace Incremental.Kick.Dal {
         }
 
 
-        public void DestroyAllStories() {
-            //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
+        public void UpdateStoryCommentShoutSpamStatus(bool isSpam) {
+            //TODO: GJ: PERFORMANCE: update in one sql statement (low priority)
             foreach (Story story in this.StoryRecords()) {
-                Story.Destroy(story.StoryID);
+                story.IsSpam = isSpam;
+                story.Save();
+            }
+            foreach (Comment comment in this.CommentRecords()) {
+                comment.IsSpam = isSpam;
+                comment.Save();
+            }
+            foreach (Shout shout in this.ShoutRecords()) {
+                shout.IsSpam = isSpam;
+                shout.Save();
             }
         }
-
+               
         public void Ban() {
             this.IsBanned = true;
             this.Save();
+            this.UpdateStoryCommentShoutSpamStatus(true);
+
+            //TODO: GJ: flag comments and shouts as spam
             UserCache.RemoveUser(this.UserID);
         }
 
         public void UnBan() {
             this.IsBanned = false;
             this.Save();
+            this.UpdateStoryCommentShoutSpamStatus(false);
+            //TODO: GJ: deflag comments and shouts as spam
             UserCache.RemoveUser(this.UserID);
         }
 

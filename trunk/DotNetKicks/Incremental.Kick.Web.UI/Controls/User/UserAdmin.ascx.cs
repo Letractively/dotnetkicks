@@ -39,11 +39,5 @@ namespace Incremental.Kick.Web.UI.Controls {
             this._user.UnBan();
             this.KickPage.Reload();
         }
-
-        protected void DeleteUserStories_Click(object sender, EventArgs e) {
-            this.KickPage.DemandAdministratorRole();
-
-            this._user.DestroyAllStories();
-        }
     }
 }

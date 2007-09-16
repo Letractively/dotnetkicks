@@ -38,7 +38,6 @@ namespace Incremental.Kick.BusinessLogic {
             story.Url = url;
             story.CategoryID = categoryID;
             story.UserID = user.UserID;
-            story.Username = user.Username;
             story.KickCount = 0;
             story.SpamCount = 0;
             story.ViewCount = 0;
@@ -200,12 +199,14 @@ namespace Incremental.Kick.BusinessLogic {
             return story.KickCount;
         }
 
-        public static void DeleteStory(int storyID, int hostID) {
+        public static void MarkAsSpam(int storyID, int hostID) {
             Story story = Story.FetchByID(storyID);
             if (story.HostID != hostID)
                 throw new ArgumentException("The story does not belong to the host");
-            else
-                Story.Delete(storyID);
+            else {
+                story.IsSpam = true;
+                story.Save();
+            }
         }
 
         private static bool IsWeakStory(Story story, Host host) {

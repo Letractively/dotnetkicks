@@ -25,8 +25,9 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
         protected void Page_Load(object sender, EventArgs e) {
             Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier);
 
-            if (story == null)
+            if (story == null || story.IsSpam)
                 Response.Redirect("/missingstory");
+
 
             this.Title = story.Title;
             this.Caption = "";
