@@ -29,6 +29,15 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
         protected global::Incremental.Kick.Web.Controls.UserList UserOnlineList;
         
         /// <summary>
+        /// KickSpy1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.UI.Controls.Community.KickSpy KickSpy1;
+        
+        /// <summary>
         /// UserTodayList control.
         /// </summary>
         /// <remarks>

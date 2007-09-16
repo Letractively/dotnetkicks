@@ -20,7 +20,7 @@ namespace Incremental.Kick.Web.UI.Controls.Community {
     public partial class KickSpy {
         
         /// <summary>
-        /// ShoutList control.
+        /// SpyItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

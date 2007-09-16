@@ -148,7 +148,7 @@ namespace Incremental.Kick.Caching {
 
     public class SpyList<T> :  IEnumerable<T> {
         private List<T> _list = new List<T>();
-        private int _maxSize = 50;
+        private int _maxSize = 120;
 
         public int MaxSize {
             get { return this._maxSize; }
