@@ -14,52 +14,7 @@ using SubSonic.Utilities;
 
 namespace Incremental.Kick.Dal{
     public partial class SPs{
-
-        public static StoredProcedure Kick_GetTopKickedStoriesByYear(int? HostID, int? Year)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYear", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@Year", Year, DbType.Int32);
-
-            return sp;
-        }
-        public static StoredProcedure Kick_GetTopKickedStoriesByYearMonth(int? HostID, int? Year, int? Month)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYearMonth", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@Year", Year, DbType.Int32);
-
-            sp.Command.AddParameter("@Month", Month, DbType.Int32);
-
-            return sp;
-        }
-        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYear(int? HostID, int? Year)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYear", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@Year", Year, DbType.Int32);
-
-            return sp;
-        }
-        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYearMonth(int? HostID, int? Year, int? Month)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYearMonth", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddParameter("@Year", Year, DbType.Int32);
-
-            sp.Command.AddParameter("@Month", Month, DbType.Int32);
-
-            return sp;
-        }
-
+        
         /// <summary>
         /// Creates an object wrapper for the Kick_GetTagsByUserIDAndHostID Procedure
         /// </summary>
@@ -345,40 +300,70 @@ namespace Incremental.Kick.Dal{
             return sp;
         }
 
+        
         /// <summary>
-        /// Creates an object wrapper for the Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID Procedure
+        /// Creates an object wrapper for the Kick_GetTopKickedStoriesByYear Procedure
         /// </summary>
-        public static StoredProcedure Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount(int? UserID, int? HostID)
+        public static StoredProcedure Kick_GetTopKickedStoriesByYear(int? HostId, int? Year)
         {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32);
-
-            return sp;
-        }
-
-
-        /// <summary>
-        /// Creates an object wrapper for the Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID Procedure
-        /// </summary>
-        public static StoredProcedure Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount(int? UserID, int? HostID)
-        {
-            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount", DataService.GetInstance("DotNetKicks"));
-
-            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
-
-            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
-
-            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32);
-
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYear" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@HostId", HostId,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Year", Year,DbType.Int32);
+        	    
             return sp;
         }
 
         
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetTopKickedStoriesByYearMonth Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetTopKickedStoriesByYearMonth(int? HostId, int? Year, int? Month)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopKickedStoriesByYearMonth" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@HostId", HostId,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Year", Year,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Month", Month,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetTopCommentedOnStoriesByYear Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYear(int? HostId, int? Year)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYear" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@HostId", HostId,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Year", Year,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetTopCommentedOnStoriesByYearMonth Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYearMonth(int? HostId, int? Year, int? Month)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYearMonth" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@HostId", HostId,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Year", Year,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@Month", Month,DbType.Int32);
+        	    
+            return sp;
+        }
+
         
     }
 
