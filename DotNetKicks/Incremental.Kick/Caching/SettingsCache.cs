@@ -27,7 +27,7 @@ namespace Incremental.Kick.Caching {
                         settingDictionary.Add(setting.Name, setting);
                     }
 
-                    cache.Insert(cacheKey, settingDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                    cache.Insert(cacheKey, settingDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
                 }
 
                 return settingDictionary;

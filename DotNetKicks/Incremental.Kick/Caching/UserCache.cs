@@ -37,7 +37,7 @@ namespace Incremental.Kick.Caching {
                     } else {
                         user = User.FetchByID(userID);
                     }
-                    userCache.Insert(cacheKey, user, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                    userCache.Insert(cacheKey, user, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Incremental.Kick.Caching {
             int? userID = userIDCache[cacheKey];
             if (!userID.HasValue) {
                 userID = User.FetchUserByUsername(username).UserID;
-                userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
             }
 
             return userID.Value;
@@ -133,7 +133,7 @@ namespace Incremental.Kick.Caching {
             if (storyKicks == null) {
                 //TODO: get the latest n kicks for this userIdentifier
                 storyKicks = StoryKick.FetchByUserID(userID);
-                storyKickCache.Insert(cacheKey, storyKicks, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                storyKickCache.Insert(cacheKey, storyKicks, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
             }
 
             return storyKicks;
@@ -159,7 +159,7 @@ namespace Incremental.Kick.Caching {
 
             if (users == null) {
                 users = User.FetchOnlineUsers(minutesSinceLastActive, hostID);
-                userCollectionCache.Insert(cacheKey, users, 60);
+                userCollectionCache.Insert(cacheKey, users, 60, System.Web.Caching.CacheItemPriority.NotRemovable);
             }
 
             return users;
