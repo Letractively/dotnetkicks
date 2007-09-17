@@ -10,15 +10,21 @@ namespace Incremental.Kick.Web.Controls {
     class TagCommaList : KickHtmlControl {
         private WeightedTagList _tags;
         private int _storyID;
+        private bool _showTagIt = true;
         public void DataBind(WeightedTagList tags, int storyID) {
+            this.DataBind(tags, storyID, true);
+        }
+        public void DataBind(WeightedTagList tags, int storyID, bool showTagIt) {
             this._tags = tags;
             this._storyID = storyID;
+            this._showTagIt = showTagIt;
         }
 
         protected override void Render(HtmlTextWriter writer) {
 
             if (this._tags.Count > 0) {
-                writer.WriteLine("tags: ");
+                if (_showTagIt)
+                    writer.WriteLine("tags: ");
 
                 string tagClass;
                 //TODO: GJ: refactor the Tag rendering as the code is duplicated
@@ -45,11 +51,10 @@ namespace Incremental.Kick.Web.Controls {
                         writer.Write(", ");
 
                 }
-
-                writer.WriteLine(" | ");
             }
 
-            writer.WriteLine(@"<a href=""javascript:ToggleStoryTags({0});""><strong>tag it</strong></a>", this._storyID);
+            if (_showTagIt)
+                writer.WriteLine(@" | <a href=""javascript:ToggleStoryTags({0});""><strong>tag it</strong></a>", this._storyID);
         }
     }
 }

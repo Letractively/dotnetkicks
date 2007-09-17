@@ -4,6 +4,9 @@ using System.Text;
 using System.Collections;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Dal.Entities;
+using Incremental.Kick.Web.Controls;
+using Incremental.Common.Web.Helpers;
 
 namespace Incremental.Kick.Caching {
    public class SpyCache {
@@ -74,6 +77,20 @@ namespace Incremental.Kick.Caching {
             spyItem.Type = SpyItemType.StorySubmission;
             spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("submitted {0}", this.GetStoryLink(Story.FetchStoryByIdentifier(storyIdentifier)));
+            this.AddSpyItem(spyItem);
+        }
+
+        public void Tag(User user, int storyID, WeightedTagList tags) {
+            SpyItem spyItem = new SpyItem();
+            spyItem.Type = SpyItemType.Tag;
+            spyItem.UserID = user.UserID;
+            spyItem.Message = String.Format("tagged {0} with ", this.GetStoryLink(Story.FetchByID(storyID)));
+
+            TagCommaList tagList = new TagCommaList();
+            tagList.DataBind(tags, storyID, false);
+
+            spyItem.Message += ControlHelper.RenderControl(tagList);
+
             this.AddSpyItem(spyItem);
         }
 
@@ -148,7 +165,7 @@ namespace Incremental.Kick.Caching {
 
     public class SpyList<T> :  IEnumerable<T> {
         private List<T> _list = new List<T>();
-        private int _maxSize = 120;
+        private int _maxSize = 200;
 
         public int MaxSize {
             get { return this._maxSize; }
