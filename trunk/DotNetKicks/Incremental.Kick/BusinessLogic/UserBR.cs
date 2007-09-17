@@ -1,4 +1,5 @@
 using System;
+using System.Transactions;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
@@ -18,7 +19,7 @@ namespace Incremental.Kick.BusinessLogic {
 
 
             if (!skipUpdateLastActiveOn)
-                if (user.LastActiveOn < System.DateTime.Now.AddHours(-1)) {
+                if (user.LastActiveOn < DateTime.Now.AddHours(-1)) {
                     user.LastActiveOn = DateTime.Now;
                     user.Save();
                 }
@@ -61,12 +62,18 @@ namespace Incremental.Kick.BusinessLogic {
             user.ReceiveEmailNewsletter = receiveEmailNewsletter;
             user.HostID = host.HostID;
 
-            user.Save();
+            // Wrap registration into a transaction so that if email sending fails
+            // the user doesn't get registered and vice-versa
+            using (TransactionScope scope = new TransactionScope())
+            {
+                user.Save();
 
-            UserAction.RecordUserRegistration(user.HostID, user);
+                EmailHelper.SendNewUserEmail(email, username, password, host);
+                scope.Complete();
+            }
 
-            EmailHelper.SendNewUserEmail(email, username, password, host);
-       }
+            SpyCache.GetSpy(host.HostID).UserRegistration(user);
+        }
 
         public static string GetSecurityToken(string username, string password) {
             System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
@@ -144,7 +151,7 @@ namespace Incremental.Kick.BusinessLogic {
             username = username.Trim();
             password = password.Trim();
 
-            User user = UserBR.GetUserByUsername(username);
+            User user = GetUserByUsername(username);
 
             if (user == null)
                 throw new SecurityException("Username [" + username + "] not found");
