@@ -29,11 +29,14 @@ namespace Incremental.Kick.Web.Controls {
                 writer.WriteLine(@"<div id=""spyItemList"">");
 
             foreach (SpyItem item in this._spy.AllItems) {
-                writer.WriteLine(@"<div class=""spyItem"">");
-                new UserLink(item.User).RenderControl(writer);
-                writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", item.Message);  
-                writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(item.CreatedOn, DateTime.Now));
-                writer.WriteLine("</div>");
+                User user = UserCache.GetUser(item.UserID);
+                if (!user.IsBanned) {
+                    writer.WriteLine(@"<div class=""spyItem"">");
+                    new UserLink(item.UserID).RenderControl(writer);
+                    writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", item.Message);
+                    writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(item.CreatedOn, DateTime.Now));
+                    writer.WriteLine("</div>");
+                }
             }
             
             if (_renderContainer)
