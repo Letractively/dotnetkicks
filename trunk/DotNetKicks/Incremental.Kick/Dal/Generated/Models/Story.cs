@@ -536,6 +536,14 @@ namespace Incremental.Kick.Dal
 			return colStoryUserHostTagRecords;
 		}
 
+		private Incremental.Kick.Dal.UserActionCollection colUserActionRecords;
+		public Incremental.Kick.Dal.UserActionCollection UserActionRecords()
+		{
+			if(colUserActionRecords == null)
+				colUserActionRecords = new Incremental.Kick.Dal.UserActionCollection().Where(UserAction.Columns.StoryID, StoryID).Load();
+			return colUserActionRecords;
+		}
+
 		#endregion
 		
 			

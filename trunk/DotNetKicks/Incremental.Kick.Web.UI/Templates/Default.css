@@ -77,15 +77,15 @@ input, select, textarea
 }
 
 /* ================ spy ================== */
-#spyItemList {}
-.spyItem { padding: 4px; }
-.spyKick { background-color: #ecffec; }
-.spyUnKick { background-color: #ffeeec; }
-.spyComment { background-color: #ecf7ff; }
-.spyStorySubmission { background-color: #ddebff; }
-.spyTag {}
-.spyShout { background-color: #fcfae1; }
-.spyUserRegistration { background-color: #9efe9e; }
+#userActionList {}
+.userAction { padding: 4px; }
+.userActionKick { background-color: #ecffec; }
+.userActionUnKick { background-color: #ffeeec; }
+.userActionComment { background-color: #ecf7ff; }
+.userActionStorySubmission { background-color: #ddebff; }
+.userActionTag {}
+.userActionShout { background-color: #fcfae1; }
+.userActionUserRegistration { background-color: #9efe9e; }
 
 /* ================ pagination ================== */
 .Paging

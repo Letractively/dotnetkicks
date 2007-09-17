@@ -87,8 +87,8 @@ namespace Incremental.Kick.Caching {
 
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
+            UserAction.RecordKick(hostID, UserCache.GetUser(userID), Story.FetchByID(storyID));
 
-            SpyCache.GetSpy(hostID).Kick(userID, storyID);
             return StoryBR.IncrementKickCount(storyID);
         }
         
@@ -98,7 +98,7 @@ namespace Incremental.Kick.Caching {
 
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
-            SpyCache.GetSpy(hostID).UnKick(userID, storyID);
+            UserAction.RecordUnKick(hostID, UserCache.GetUser(userID), Story.FetchByID(storyID));
             return StoryBR.DecrementKickCount(storyID);
         }
 

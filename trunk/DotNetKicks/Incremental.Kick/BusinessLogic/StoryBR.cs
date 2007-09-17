@@ -48,7 +48,7 @@ namespace Incremental.Kick.BusinessLogic {
             story.PublishedOn = DateTime.Now;
             story.Save();
 
-            SpyCache.GetSpy(hostID).StorySubmission(user, storyIdentifier);
+            UserAction.RecordStorySubmission(hostID, user, story);
 
             UserCache.KickStory(story.StoryID, user.UserID, hostID);
 
@@ -233,6 +233,8 @@ namespace Incremental.Kick.BusinessLogic {
             story.IsPublishedToHomepage = true;
             story.PublishedOn = DateTime.Now;
             story.Save();
+
+            UserAction.RecordStoryPromotion(story.HostID, story);
         }
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {

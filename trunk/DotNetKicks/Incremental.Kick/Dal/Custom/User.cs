@@ -129,7 +129,7 @@ namespace Incremental.Kick.Dal {
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(true);
 
-            //TODO: GJ: flag comments and shouts as spam
+            UserAction.RecordUserBan(this.HostID, this);
             UserCache.RemoveUser(this.UserID);
         }
 
@@ -137,7 +137,6 @@ namespace Incremental.Kick.Dal {
             this.IsBanned = false;
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(false);
-            //TODO: GJ: deflag comments and shouts as spam
             UserCache.RemoveUser(this.UserID);
         }
 

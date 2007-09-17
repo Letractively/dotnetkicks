@@ -77,7 +77,7 @@ namespace Incremental.Kick.BusinessLogic {
 
             storyUserHostTags.BatchSave();
 
-            SpyCache.GetSpy(hostID).Tag(user, storyID, tags);
+            UserAction.RecordTag(hostID, user, Story.FetchByID(storyID), tags);
 
             return tags;
         }

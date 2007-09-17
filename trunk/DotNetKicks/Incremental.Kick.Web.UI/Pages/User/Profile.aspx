@@ -18,12 +18,17 @@
                 <h3>Friends By:</h3>
                 <Kick:UserList id="FriendByList" runat="server" />
                 
+                <h2>Kick Spy:</h2>
+                <Kick:UserActionList id="UserActionList" runat="server" renderContainer="true" />
+                
             </td>
             <td valign="top" style="padding-right: 40px;">
                 <uc1:Shoutbox ID="Shoutbox" runat="server" />               
             </td>
         </tr>
     </table>
+    
+    
 
     <uc2:UserAdmin id="UserAdmin" runat="server" Visible="false" />
 </asp:Content>
