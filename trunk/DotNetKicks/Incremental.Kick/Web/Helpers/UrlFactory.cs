@@ -112,7 +112,9 @@ namespace Incremental.Kick.Web.Helpers {
                 case PageName.NotAuthorised:
                     return MapPath("/notauthorised");
                 case PageName.Admin:
-                    return MapPath("/admin");
+                    return MapPath("/admin");  
+                case PageName.Zeitgeist:
+                    return MapPath("/zeitgeist");  
                 default:
                     throw new Exception("not enough params to create url");
             }

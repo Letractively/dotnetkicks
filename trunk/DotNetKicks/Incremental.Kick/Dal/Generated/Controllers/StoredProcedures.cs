@@ -37,6 +37,28 @@ namespace Incremental.Kick.Dal{
 
             return sp;
         }
+        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYear(int? HostID, int? Year)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYear", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddParameter("@Year", Year, DbType.Int32);
+
+            return sp;
+        }
+        public static StoredProcedure Kick_GetTopCommentedOnStoriesByYearMonth(int? HostID, int? Year, int? Month)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetTopCommentedOnStoriesByYearMonth", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddParameter("@Year", Year, DbType.Int32);
+
+            sp.Command.AddParameter("@Month", Month, DbType.Int32);
+
+            return sp;
+        }
 
         /// <summary>
         /// Creates an object wrapper for the Kick_GetTagsByUserIDAndHostID Procedure
