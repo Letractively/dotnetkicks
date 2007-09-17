@@ -33,7 +33,7 @@ namespace Incremental.Kick.Caching {
                         hostDictionary.Add(host.HostName, host);
                     }
 
-                    cache.Insert(cacheKey, hostDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                    cache.Insert(cacheKey, hostDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
                 }
 
                 return hostDictionary;

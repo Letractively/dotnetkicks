@@ -71,33 +71,29 @@ namespace Incremental.Kick.Dal {
             return (int)query.GetCount(StoryKick.Columns.StoryKickID);
         }
 
-        public static StoryCollection GetFriendsKickedStories(int userID, int hostID, int pageNumber, int pageSize)
-        {
+        public static StoryCollection GetFriendsKickedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
             stories.Load(SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
-        public static StoryCollection GetFriendsSubmittedStories(int userID, int hostID, int pageNumber, int pageSize)
-        {
+        public static StoryCollection GetFriendsSubmittedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
             stories.Load(SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
-        public static int GetFriendsKickedStoriesCount(int userID, int hostID)
-        {
-            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount(userID, hostID);
+        public static int GetFriendsKickedStoriesCount(int userID, int hostID) {
+            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount(userID, hostID, null);
             sp.Execute();
             int recordCount = int.Parse(sp.OutputValues[0].ToString());
             return recordCount;
         }
-        public static int GetFriendsSubmittedStoriesCount(int userID, int hostID)
-        {
-            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount(userID, hostID);
+        public static int GetFriendsSubmittedStoriesCount(int userID, int hostID) {
+            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount(userID, hostID, null);
             sp.Execute();
             int recordCount = int.Parse(sp.OutputValues[0].ToString());
             return recordCount;
         }
-        
+
         public static StoryCollection GetUserSubmittedStories(int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
             stories.Load(SPs.Kick_GetPagedSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
@@ -108,7 +104,7 @@ namespace Incremental.Kick.Dal {
             Query query = new Query(Story.Schema).WHERE(Story.Columns.UserID, userID).AND(Story.Columns.HostID, hostID);
             return (int)query.GetCount(Story.Columns.StoryID);
         }
-    
+
         public static StoryCollection GetStoriesByCategoryKickedStateAndHostID(short categoryID, bool isPublished, int hostID, int pageIndex, int pageSize) {
             Query query = GetStoryQuery(hostID, isPublished, categoryID);
             query = query.ORDER_BY(Story.Columns.PublishedOn, "DESC");
