@@ -121,13 +121,13 @@ namespace Incremental.Kick.Caching {
 
             return stories;
         }
-        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID, int pageSize) {
-            string cacheKey = String.Format("Kick_Story_FriendsKickedCount_{0}_{1}", userIdentifier, hostID, pageSize);
+        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID) {
+            string cacheKey = String.Format("Kick_Story_FriendsKickedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetFriendsKickedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
+                count = Story.GetFriendsKickedStoriesCount(UserCache.GetUserID(userIdentifier), hostID);
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -147,13 +147,13 @@ namespace Incremental.Kick.Caching {
 
             return stories;
         }
-        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID, int pageSize) {
+        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID) {
             string cacheKey = String.Format("Kick_Story_FriendsSubmittedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
             int? count = countCache[cacheKey];
             if (count == null) {
-                count = Story.GetFriendsSubmittedStoriesPageCount(UserCache.GetUserID(userIdentifier), hostID, pageSize);
+                count = Story.GetFriendsSubmittedStoriesCount(UserCache.GetUserID(userIdentifier), hostID);
                 countCache.Insert(cacheKey, count, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 

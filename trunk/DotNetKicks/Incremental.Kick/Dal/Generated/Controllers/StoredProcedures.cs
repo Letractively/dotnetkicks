@@ -345,6 +345,40 @@ namespace Incremental.Kick.Dal{
             return sp;
         }
 
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedFriendsKickedStoriesByUserIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount(int? UserID, int? HostID)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32);
+
+            return sp;
+        }
+
+
+        /// <summary>
+        /// Creates an object wrapper for the Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID Procedure
+        /// </summary>
+        public static StoredProcedure Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount(int? UserID, int? HostID)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount", DataService.GetInstance("DotNetKicks"));
+
+            sp.Command.AddParameter("@UserID", UserID, DbType.Int32);
+
+            sp.Command.AddParameter("@HostID", HostID, DbType.Int32);
+
+            sp.Command.AddOutputParameter("@RecordCount", DbType.Int32);
+
+            return sp;
+        }
+
+        
         
     }
 

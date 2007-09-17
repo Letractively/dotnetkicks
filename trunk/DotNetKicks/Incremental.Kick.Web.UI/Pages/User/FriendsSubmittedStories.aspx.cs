@@ -29,7 +29,7 @@ namespace Incremental.Kick.Web.UI.Pages.User
             if (!this.UserProfile.Friends.Count.Equals(0))
             {
                 this.StoryListControl.DataBind(StoryCache.GetFriendsSubmittedStories(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
-                this.Paging.RecordCount = StoryCache.GetFriendsSubmittedStoriesPageCount(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageSize);
+                this.Paging.RecordCount = StoryCache.GetFriendsSubmittedStoriesPageCount(this.UrlParameters.UserIdentifier, this.HostProfile.HostID);
             }
             this.Paging.PageNumber = UrlParameters.PageNumber;
             this.Paging.PageSize = UrlParameters.PageSize;
