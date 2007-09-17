@@ -7,7 +7,6 @@
 
 <br />
 <br />
-<Kick:SpyItemList id="SpyItemList" runat="server" renderContainer="true" />
 
 <Kick:UserActionList id="UserActionList" runat="server" renderContainer="true" />
 
