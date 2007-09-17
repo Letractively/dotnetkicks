@@ -74,7 +74,6 @@
     <Compile Include="Caching\HostCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
     <Compile Include="Caching\ShoutCache.cs" />
-    <Compile Include="Caching\SpyCache.cs" />
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserActionCache.cs" />
@@ -176,7 +175,6 @@
     <Compile Include="Web\Controls\Base\KickWebService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Web\Controls\Community\SpyItemList.cs" />
     <Compile Include="Web\Controls\Community\UserActionList.cs" />
     <Compile Include="Web\Controls\Debug\DebugInformation.cs" />
     <Compile Include="Web\Controls\Docs\JavaScriptFeedList.cs" />

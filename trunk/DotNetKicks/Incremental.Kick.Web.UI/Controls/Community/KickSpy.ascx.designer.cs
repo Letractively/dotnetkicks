@@ -20,15 +20,6 @@ namespace Incremental.Kick.Web.UI.Controls.Community {
     public partial class KickSpy {
         
         /// <summary>
-        /// SpyItemList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.SpyItemList SpyItemList;
-        
-        /// <summary>
         /// UserActionList control.
         /// </summary>
         /// <remarks>
