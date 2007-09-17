@@ -31,7 +31,7 @@ namespace Incremental.Kick.Web.Controls {
             foreach (SpyItem item in this._spy.AllItems) {
                 User user = UserCache.GetUser(item.UserID);
                 if (!user.IsBanned) {
-                    writer.WriteLine(@"<div class=""spyItem"">");
+                    writer.WriteLine(@"<div class=""spyItem spy{0}"">", item.Type);
                     new UserLink(item.UserID).RenderControl(writer);
                     writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", item.Message);
                     writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(item.CreatedOn, DateTime.Now));
