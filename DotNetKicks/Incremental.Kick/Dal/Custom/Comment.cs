@@ -47,9 +47,7 @@ namespace Incremental.Kick.Dal {
             newComment.Save();
 
             StoryBR.IncrementStoryCommentCount(storyID);
-            SpyCache.GetSpy(hostID).Comment(user.UserID, newComment.CommentID, storyID);
-
-
+            UserAction.RecordComment(hostID, user, Story.FetchByID(storyID), newComment.CommentID);
             return newComment.CommentID;
         }
 

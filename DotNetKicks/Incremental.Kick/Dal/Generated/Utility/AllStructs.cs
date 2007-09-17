@@ -22,6 +22,8 @@ namespace Incremental.Kick.Dal
         
 		public static string Category = @"Kick_Category";
         
+		public static string Chat = @"Kick_Chat";
+        
 		public static string Comment = @"Kick_Comment";
         
 		public static string Host = @"Kick_Host";
@@ -39,6 +41,8 @@ namespace Incremental.Kick.Dal
 		public static string Tag = @"Kick_Tag";
         
 		public static string User = @"Kick_User";
+        
+		public static string UserAction = @"Kick_UserAction";
         
 		public static string UserFriend = @"Kick_UserFriend";
         

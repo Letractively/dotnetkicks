@@ -20,7 +20,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.FriendByList.DataBind(this.UserProfile.FriendsBy);
             this.UserAdmin.DataBind(this.UserProfile);
             this.Shoutbox.DataBind((ShoutCache.GetLatestShouts(this.HostProfile.HostID, this.UrlParameters.UserIdentifier)));
-
+            this.UserActionList.DataBind(UserActionCache.GetLatestUserActions(this.HostProfile.HostID, 1, 10, UserCache.GetUserID(this.UrlParameters.UserIdentifier), null, null, null));
         }
     }
 }

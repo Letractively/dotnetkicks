@@ -42,9 +42,9 @@ namespace Incremental.Kick.BusinessLogic {
             //TODO: GJ: extract to method
             //ensure that the username and email is unique
             if (User.FetchByParameter(User.Columns.Username, username).Read())
-                throw new KickUsernameAlreadyExistsException();
+                throw new ArgumentException("The username already exists");
             if (User.FetchByParameter(User.Columns.Email, email).Read())
-                throw new KickEmailAlreadyExistsException();
+                throw new ArgumentException("The email already exists");
 
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
@@ -65,8 +65,7 @@ namespace Incremental.Kick.BusinessLogic {
 
             EmailHelper.SendNewUserEmail(email, username, password, host);
 
-            SpyCache.GetSpy(host.HostID).UserRegistration(user);
-        }
+       }
 
         public static string GetSecurityToken(string username, string password) {
             System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
@@ -82,8 +81,10 @@ namespace Incremental.Kick.BusinessLogic {
             if (!passwordHash.Equals(user.Password))
                 throw new ApplicationException("Invalid password for username [" + username + "]");
 
-            if (!user.IsValidated)
+            if (!user.IsValidated) {
                 user.IsValidated = true;
+                UserAction.RecordUserRegistration(user.HostID, user);
+            }
 
             user.Save();
             return new SecurityToken(user.UserID).ToString();

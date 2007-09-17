@@ -603,6 +603,14 @@ namespace Incremental.Kick.Dal
 		
 		#region PrimaryKey Methods
 		
+		private Incremental.Kick.Dal.ChatCollection colChatRecords;
+		public Incremental.Kick.Dal.ChatCollection ChatRecords()
+		{
+			if(colChatRecords == null)
+				colChatRecords = new Incremental.Kick.Dal.ChatCollection().Where(Chat.Columns.UserID, UserID).Load();
+			return colChatRecords;
+		}
+
 		private Incremental.Kick.Dal.CommentCollection colCommentRecords;
 		public Incremental.Kick.Dal.CommentCollection CommentRecords()
 		{
@@ -649,6 +657,22 @@ namespace Incremental.Kick.Dal
 			if(colStoryUserHostTagRecords == null)
 				colStoryUserHostTagRecords = new Incremental.Kick.Dal.StoryUserHostTagCollection().Where(StoryUserHostTag.Columns.UserID, UserID).Load();
 			return colStoryUserHostTagRecords;
+		}
+
+		private Incremental.Kick.Dal.UserActionCollection colUserActionRecords;
+		public Incremental.Kick.Dal.UserActionCollection UserActionRecords()
+		{
+			if(colUserActionRecords == null)
+				colUserActionRecords = new Incremental.Kick.Dal.UserActionCollection().Where(UserAction.Columns.ToUserID, UserID).Load();
+			return colUserActionRecords;
+		}
+
+		private Incremental.Kick.Dal.UserActionCollection colUserActionRecordsFromUser;
+		public Incremental.Kick.Dal.UserActionCollection UserActionRecordsFromUser()
+		{
+			if(colUserActionRecordsFromUser == null)
+				colUserActionRecordsFromUser = new Incremental.Kick.Dal.UserActionCollection().Where(UserAction.Columns.UserID, UserID).Load();
+			return colUserActionRecordsFromUser;
 		}
 
 		private Incremental.Kick.Dal.UserFriendCollection colUserFriendRecords;

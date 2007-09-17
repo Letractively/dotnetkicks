@@ -105,5 +105,13 @@ namespace Incremental.Kick.Dal.Entities {
 
             this.Add(weightedTag);
         }
+
+        public string ToCommaDelimitedString() {
+            string result = "";
+            foreach (WeightedTag exisitingTag in this) {
+                result += exisitingTag.TagIdentifier + ",";
+            }
+            return result.Substring(0, result.Length - 1);
+        }
     }
 }

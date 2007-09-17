@@ -55,6 +55,7 @@
     <Compile Include="DalTests\CommentTests.cs" />
     <Compile Include="DalTests\DalTest.cs" />
     <Compile Include="DalTests\StoryTests.cs" />
+    <Compile Include="DalTests\UserActionTests.cs" />
     <Compile Include="DalTests\UserTests.cs" />
     <Compile Include="HelperTests\TagHelperTests.cs" />
     <Compile Include="HelperTests\TextHelperTests.cs" />

@@ -14,6 +14,7 @@ namespace Incremental.Kick.Web.UI.Controls.Community {
     public partial class KickSpy : Incremental.Kick.Web.Controls.KickUserControl {
         protected void Page_Load(object sender, EventArgs e) {
             this.SpyItemList.DataBind(this.KickPage.Spy);
+            this.UserActionList.DataBind(UserActionCache.GetLatestUserActions(this.KickPage.HostProfile.HostID, 1, 200, null, null, null, null));
         }   
     }
 }

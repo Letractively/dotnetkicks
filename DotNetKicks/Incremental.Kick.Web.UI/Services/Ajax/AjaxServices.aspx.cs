@@ -34,7 +34,8 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     shout.Save();
                     ShoutCache.Remove(hostID);
 
-                    SpyCache.GetSpy(hostID).Shout(this.KickUserProfile, shout.Message);
+                    UserAction.RecordShout(hostID, this.KickUserProfile);
+
                 }
             }
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID)));
@@ -56,8 +57,7 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
                     shout.Save();
                     ShoutCache.Remove(hostID, username);
 
-                    SpyCache.GetSpy(hostID).Shout(this.KickUserProfile, shout.Message, forUser);
-
+                    UserAction.RecordShout(hostID, this.KickUserProfile, forUser);
                 }
             }
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
