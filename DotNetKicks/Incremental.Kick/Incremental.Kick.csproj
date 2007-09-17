@@ -63,7 +63,6 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>SolutionVersionInfo.cs</Link>
     </Compile>
-    <Compile Include="BusinessLogic\CommentBR.cs" />
     <Compile Include="BusinessLogic\Maintenance\DataUpdater.cs" />
     <Compile Include="BusinessLogic\StoryBR.cs" />
     <Compile Include="BusinessLogic\StoryKickBR.cs" />

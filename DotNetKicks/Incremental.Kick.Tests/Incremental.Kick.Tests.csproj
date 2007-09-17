@@ -32,6 +32,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\MbUnit\2.4.197\MbUnit.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="MbUnit.Framework.2.0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\MbUnit\2.4.197\MbUnit.Framework.2.0.dll</HintPath>
+    </Reference>
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\186\SubSonic.dll</HintPath>
@@ -48,6 +52,10 @@
       <Link>SolutionVersionInfo.cs</Link>
     </Compile>
     <Compile Include="CachingTests\SpyCacheTests.cs" />
+    <Compile Include="DalTests\CommentTests.cs" />
+    <Compile Include="DalTests\DalTest.cs" />
+    <Compile Include="DalTests\StoryTests.cs" />
+    <Compile Include="DalTests\UserTests.cs" />
     <Compile Include="HelperTests\TagHelperTests.cs" />
     <Compile Include="HelperTests\TextHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
