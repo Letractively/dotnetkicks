@@ -123,9 +123,8 @@ namespace Incremental.Kick.Caching {
             //TODO: GJ: add the item to the categorised list based on SpyItemType
         }
 
-        private string GetStoryLink(Story story) {//TODO: GJ: create a StoryLink server control
-            string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, story.Category.CategoryIdentifier);
-            return string.Format(@"<a href=""{0}"" />{1}</a>", kickStoryUrl, story.Title);
+        private string GetStoryLink(Story story) {
+            return string.Format(@"<a href=""/{0}/{1}"" />{2}</a>", story.Category.CategoryIdentifier, story.StoryIdentifier, story.Title);
         }
     }
 
