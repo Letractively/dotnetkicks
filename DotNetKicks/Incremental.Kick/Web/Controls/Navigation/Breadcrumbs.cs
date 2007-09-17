@@ -108,6 +108,29 @@ namespace Incremental.Kick.Web.Controls {
                     this.RenderBreadcrumb(this.KickPage.UrlParameters.TagIdentifier, writer);
                     break;
 
+                //--------------- zeitgeist trail
+                case UrlFactory.PageName.Zeitgeist:
+                    this.RenderSpacer(writer);
+                    if (this.KickPage.UrlParameters.Year == null)
+                    {
+                        this.RenderBreadcrumb("zeitgeist", writer);
+                    }
+                    else if (this.KickPage.UrlParameters.Month == null)
+                    {
+                        this.RenderBreadcrumb("zeitgeist", UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist), writer);
+                        this.RenderSpacer(writer);
+                        this.RenderBreadcrumb(this.KickPage.UrlParameters.Year.ToString(), writer);
+                    }
+                    else
+                    {
+                        this.RenderBreadcrumb("zeitgeist", UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist), writer);
+                        this.RenderSpacer(writer);
+                        this.RenderBreadcrumb(this.KickPage.UrlParameters.Year.ToString(), UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, this.KickPage.UrlParameters.Year.ToString()), writer);
+                        this.RenderSpacer(writer);
+                        this.RenderBreadcrumb(new DateTime((int)this.KickPage.UrlParameters.Year, (int)this.KickPage.UrlParameters.Month, 1).ToString("MMMM"), writer);
+                    }                
+                    break;
+
                  //---------------- top level trail
                 case UrlFactory.PageName.Login:
                     this.RenderSpacer(writer);
