@@ -63,8 +63,9 @@ namespace Incremental.Kick.BusinessLogic {
 
             user.Save();
 
-            EmailHelper.SendNewUserEmail(email, username, password, host);
+            UserAction.RecordUserRegistration(user.HostID, user);
 
+            EmailHelper.SendNewUserEmail(email, username, password, host);
        }
 
         public static string GetSecurityToken(string username, string password) {
@@ -81,10 +82,9 @@ namespace Incremental.Kick.BusinessLogic {
             if (!passwordHash.Equals(user.Password))
                 throw new ApplicationException("Invalid password for username [" + username + "]");
 
-            if (!user.IsValidated) {
+            if (!user.IsValidated) 
                 user.IsValidated = true;
-                UserAction.RecordUserRegistration(user.HostID, user);
-            }
+
 
             user.Save();
             return new SecurityToken(user.UserID).ToString();
