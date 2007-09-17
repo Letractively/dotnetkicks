@@ -42,7 +42,7 @@ namespace Incremental.Kick.Caching {
         public void Kick(User user, Story story) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.Kick;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("kicked {0}", this.GetStoryLink(story));
             this.AddSpyItem(spyItem);
         }
@@ -56,7 +56,7 @@ namespace Incremental.Kick.Caching {
         public void UnKick(User user, Story story) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.UnKick;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("un-kicked {0}", this.GetStoryLink(story));
             this.AddSpyItem(spyItem);
         }
@@ -64,7 +64,7 @@ namespace Incremental.Kick.Caching {
         public void Comment(int userID, int commentID, int storyID) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.Comment;
-            spyItem.User = UserCache.GetUser(userID);
+            spyItem.UserID = userID;
             spyItem.Message = String.Format("commented on {0}", this.GetStoryLink(Story.FetchByID(storyID)));
             this.AddSpyItem(spyItem);
         }
@@ -72,7 +72,7 @@ namespace Incremental.Kick.Caching {
         public void StorySubmission(User user, string storyIdentifier) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.StorySubmission;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("submitted {0}", this.GetStoryLink(Story.FetchStoryByIdentifier(storyIdentifier)));
             this.AddSpyItem(spyItem);
         }
@@ -80,7 +80,7 @@ namespace Incremental.Kick.Caching {
         public void Shout(User user, string message, User forUser) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.Shout;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("shouted something on {0}'s profile", forUser.Username);
             this.AddSpyItem(spyItem);
         }
@@ -88,7 +88,7 @@ namespace Incremental.Kick.Caching {
         public void Shout(User user, string message) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.Shout;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("shouted something");
             this.AddSpyItem(spyItem);
         }
@@ -96,7 +96,7 @@ namespace Incremental.Kick.Caching {
         public void UserRegistration(User user) {
             SpyItem spyItem = new SpyItem();
             spyItem.Type = SpyItemType.UserRegistration;
-            spyItem.User = user;
+            spyItem.UserID = user.UserID;
             spyItem.Message = String.Format("has joined the site. Welcome!!");
             this.AddSpyItem(spyItem);
         }
@@ -125,7 +125,7 @@ namespace Incremental.Kick.Caching {
     public class SpyItem {
         private SpyItemType _spyItemType;
         private DateTime _createdOn = DateTime.Now;
-        private User _user;
+        private int _userID;
         private string _message = "";
         
         public SpyItemType Type {
@@ -136,9 +136,9 @@ namespace Incremental.Kick.Caching {
             get { return this._createdOn; }
             set { this._createdOn = value; }
         }
-        public User User {
-            get { return this._user; }
-            set { this._user = value; }
+        public int UserID {
+            get { return this._userID; }
+            set { this._userID = value; }
         }
         public string Message {
             get { return this._message; }
