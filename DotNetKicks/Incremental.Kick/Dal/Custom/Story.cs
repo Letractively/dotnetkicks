@@ -83,17 +83,19 @@ namespace Incremental.Kick.Dal {
             stories.Load(SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostID(userID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
-        public static int GetFriendsKickedStoriesPageCount(int userID, int hostID, int pageSize)
+        public static int GetFriendsKickedStoriesCount(int userID, int hostID)
         {
-            //TODO need new subsonic query here, couldn't figure out the join syntax -jw
-            //return (int)SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDPageCount(userID, hostID, pageSize)
-            return 1;
+            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsKickedStoriesByUserIDAndHostIDCount(userID, hostID);
+            sp.Execute();
+            int recordCount = int.Parse(sp.OutputValues[0].ToString());
+            return recordCount;
         }
-        public static int GetFriendsSubmittedStoriesPageCount(int userID, int hostID, int pageSize)
+        public static int GetFriendsSubmittedStoriesCount(int userID, int hostID)
         {
-            //TODO need new subsonic query here, couldn't figure out the join syntax -jw
-            //return (int)SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDPageCount(userID, hostID, pageSize).ExecuteScalar();
-            return 1;
+            SubSonic.StoredProcedure sp = SPs.Kick_GetPagedFriendsSubmittedStoriesByUserIDAndHostIDCount(userID, hostID);
+            sp.Execute();
+            int recordCount = int.Parse(sp.OutputValues[0].ToString());
+            return recordCount;
         }
         
         public static StoryCollection GetUserSubmittedStories(int userID, int hostID, int pageNumber, int pageSize) {
