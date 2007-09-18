@@ -70,9 +70,9 @@ namespace Incremental.Kick.BusinessLogic
             {
                 user.Save();
 
-                UserAction.RecordUserRegistration(user.HostID, user);
-
                 EmailHelper.SendNewUserEmail(email, username, password, host);
+
+                UserAction.RecordUserRegistration(user.HostID, user);
 
                 scope.Complete();
             }
