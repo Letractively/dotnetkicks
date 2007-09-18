@@ -94,11 +94,13 @@ namespace Incremental.Kick.Dal {
         public static UserAction RecordTag(int hostID, User user, Story story, WeightedTagList tags) {
             UserAction userAction = Create(hostID, user.UserID, story.StoryID, ActionType.Tag);
 
-            TagCommaList tagList = new TagCommaList();
-            tagList.DataBind(tags, story.StoryID, false);
+            if (tags.Count > 0) {
+                TagCommaList tagList = new TagCommaList();
+                tagList.DataBind(tags, story.StoryID, false);
 
-            userAction.Message = String.Format("tagged {0} with tags {1}", GetStoryLink(story), ControlHelper.RenderControl(tagList));
-            userAction.Save();
+                userAction.Message = String.Format("tagged {0} with tags {1}", GetStoryLink(story), ControlHelper.RenderControl(tagList));
+                userAction.Save();
+            }
             return userAction;
         }
 
