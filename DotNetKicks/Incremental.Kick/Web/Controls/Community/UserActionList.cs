@@ -33,15 +33,17 @@ namespace Incremental.Kick.Web.Controls {
                 writer.Write("<em>No actions</em>");
 
             foreach (UserAction userAction in _userActions) {
-                if (userAction.UserID != null) { //TODO: GJ: support no user actions
-                    User user = UserCache.GetUser(userAction.UserID.Value);
-                    if (!user.IsBanned) {
-                        writer.WriteLine(@"<div class=""userAction userAction{0}"">", userAction.UserActionType.ToString());
+                User user = null;
+                if (userAction.UserID != null) 
+                    user = UserCache.GetUser(userAction.UserID.Value);
+
+                if(user == null || !user.IsBanned) {
+                    writer.WriteLine(@"<div class=""userAction userAction{0}"">", userAction.UserActionType.ToString());
+                    if(user != null)
                         new UserLink(user).RenderControl(writer);
-                        writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", userAction.Message);
-                        writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(userAction.CreatedOn, DateTime.Now));
-                        writer.WriteLine("</div>");
-                    }
+                    writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", userAction.Message);
+                    writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(userAction.CreatedOn, DateTime.Now));
+                    writer.WriteLine("</div>");
                 }
             }
 

@@ -83,6 +83,8 @@ input, select, textarea
 .userActionUnKick { background-color: #ffeeec; }
 .userActionComment { background-color: #ecf7ff; }
 .userActionStorySubmission { background-color: #ddebff; }
+.userActionStoryPromotion { background-color: #009900; color: White; }
+.userActionStoryPromotion a { color: White; font-weight: bold; }
 .userActionTag {}
 .userActionShout { background-color: #fcfae1; }
 .userActionUserRegistration { background-color: #9efe9e; }

@@ -77,6 +77,7 @@ namespace Incremental.Kick.Dal {
         public static UserAction RecordStoryPromotion(int hostID, Story story) {
             UserAction userAction = new UserAction();
             userAction.HostID = hostID;
+            userAction.StoryID = story.StoryID;
             userAction.UserActionTypeID = (int)ActionType.StoryPromotion;
             userAction.Message = String.Format("{0} was published to homepage", GetStoryLink(story));
             userAction.Save();
