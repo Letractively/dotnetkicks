@@ -154,7 +154,7 @@ namespace Incremental.Kick.Dal
 				TableSchema.TableColumn colvarMessage = new TableSchema.TableColumn(schema);
 				colvarMessage.ColumnName = "Message";
 				colvarMessage.DataType = DbType.String;
-				colvarMessage.MaxLength = 255;
+				colvarMessage.MaxLength = 1000;
 				colvarMessage.AutoIncrement = false;
 				colvarMessage.IsNullable = false;
 				colvarMessage.IsPrimaryKey = false;
