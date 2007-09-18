@@ -16,7 +16,7 @@ namespace Incremental.Kick.Web.UI {
 
         protected void Application_Error(object sender, EventArgs e) {
             System.Diagnostics.Debug.WriteLine("Application_Error:" + Context.Error.GetBaseException().ToString());
-            if(!this.Request.Url.ToString().Contains("http://localhost")) 
+            if (!this.Request.Url.ToString().ToLower().Contains("http://localhost") && !this.Request.Url.ToString().ToLower().Contains("/services/ajax")) 
                 Response.Redirect("~/error");
         }
 
