@@ -29,6 +29,14 @@ namespace Incremental.Kick.Dal {
             get { return (ActionType)this.UserActionTypeID; }
         }
 
+        protected override void BeforeInsert() {
+            if (this.Message.Length > 1000)
+                this.Message = this.Message.Substring(0, 1000);
+            base.BeforeInsert();
+        }
+        
+        #region Create Methods
+
         //NOTE: GJ: Adding custom UserAction constructors was causing funny SubSonic behaviour.
         public static UserAction Create(int hostID, int userID, ActionType userActionType) {
             UserAction userAction = new UserAction();
@@ -44,7 +52,6 @@ namespace Incremental.Kick.Dal {
             return userAction;
         }
 
-        #region Create Methods
 
         public static UserAction RecordKick(int hostID, User user, Story story) {
             UserAction userAction = Create(hostID, user.UserID, story.StoryID, ActionType.Kick);
@@ -86,6 +93,7 @@ namespace Incremental.Kick.Dal {
 
         public static UserAction RecordTag(int hostID, User user, Story story, WeightedTagList tags) {
             UserAction userAction = Create(hostID, user.UserID, story.StoryID, ActionType.Tag);
+
             TagCommaList tagList = new TagCommaList();
             tagList.DataBind(tags, story.StoryID, false);
 
