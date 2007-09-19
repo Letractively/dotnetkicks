@@ -18,6 +18,7 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
             this.DisplaySideAds = false;
             this.Title = this.HostProfile.SiteTitle + " : Kick Spy!";
             this.PageName = UrlFactory.PageName.KickSpy;
+            this.Response.AppendHeader("Refresh", "60");
 
             this.UserOnlineList.DataBind(UserCache.GetOnlineUsers(30, this.HostProfile.HostID));
 
