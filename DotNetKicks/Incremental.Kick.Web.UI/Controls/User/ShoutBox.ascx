@@ -30,9 +30,7 @@
 </script>
 
 <h2>Shoutbox</h2>
-<span style="font-size:smaller; color: green;"><em>TODO: Lots of work to do on this</em></span><br />
 <asp:Panel ID="SaySomethingPanel" runat="server">
-Say Something...
 <textarea id="shout_message" rows="4" cols="20" style="width: 100%;"></textarea><br />
 <input type="button" id="Button1" value="Shout It!" onclick='addShout();' /> <span style="font-size:smaller"><a href="#" onclick="refreshShoutbox()">(refresh)</a></span>
 </asp:Panel>

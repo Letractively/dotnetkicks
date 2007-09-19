@@ -11,7 +11,7 @@
         <td class="FormTitle FormTD">
             Last Seen:</td>
         <td class="FormInput FormTD">
-            <%= SubSonic.Sugar.Dates.ReadableDiff(this.UserProfile.LastActiveOn, DateTime.Now)%> <em><a class="smallerText" href="/whoisonline">Who else is online?</a></em>
+            <%= SubSonic.Sugar.Dates.ReadableDiff(this.UserProfile.LastActiveOn, DateTime.Now)%> <em><a class="smallerText" href="/spy">Who else is online?</a></em>
         </td>
     </tr>
     <% if (!String.IsNullOrEmpty(this.UserProfile.Location)) { %>
