@@ -1,0 +1,37 @@
+<%@ Master Language="C#" AutoEventWireup="true" Codebehind="MasterPage.master.cs"
+    Inherits="Incremental.Kick.Web.UI.Templates.NewDefault.MasterPage" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
+<%-- 
+                        New Default Template 
+--%>
+
+
+<asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
+    <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
+</asp:Content>
+
+
+<asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
+    NewDefault template
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        Content here
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="LeftContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="RightContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+
+
+
+
+<%-- don't need these, leave for now until edit root master page --%>
+<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">   
+</asp:Content>
+<asp:Content ID="LeftContentOutline" ContentPlaceHolderID="LeftContent" runat="server">
+</asp:Content>
+<asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
+</asp:Content>
+<asp:Content ID="FooterOutline" ContentPlaceHolderID="Footer" runat="server">
+</asp:Content>
