@@ -98,7 +98,7 @@ namespace Incremental.Kick.Dal {
                 TagCommaList tagList = new TagCommaList();
                 tagList.DataBind(tags, story.StoryID, false);
 
-                userAction.Message = String.Format("tagged {0} with tags {1}", GetStoryLink(story), ControlHelper.RenderControl(tagList));
+                userAction.Message = String.Format("tagged {0} with {1}", GetStoryLink(story), ControlHelper.RenderControl(tagList));
                 userAction.Save();
             }
             return userAction;
