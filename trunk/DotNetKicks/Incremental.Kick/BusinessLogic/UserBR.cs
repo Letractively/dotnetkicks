@@ -5,24 +5,19 @@ using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
 using System.Security;
 
-namespace Incremental.Kick.BusinessLogic
-{
+namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
-    public class UserBR
-    {
-        public User GetByUserID(int userID)
-        {
+    public class UserBR {
+        public User GetByUserID(int userID) {
             return GetByUserID(userID, false);
         }
 
-        public User GetByUserID(int userID, bool skipUpdateLastActiveOn)
-        {
+        public User GetByUserID(int userID, bool skipUpdateLastActiveOn) {
             User user = User.FetchByID(userID);
 
 
             if (!skipUpdateLastActiveOn)
-                if (user.LastActiveOn < DateTime.Now.AddHours(-1))
-                {
+                if (user.LastActiveOn < DateTime.Now.AddHours(-1)) {
                     user.LastActiveOn = DateTime.Now;
                     user.Save();
                 }
@@ -30,21 +25,19 @@ namespace Incremental.Kick.BusinessLogic
             return user;
         }
 
-        public static UserCollection GetUsersWhoKicked(int? storyId)
-        {
+        public static UserCollection GetUsersWhoKicked(int? storyId) {
             UserCollection users = new UserCollection();
             users.Load(SPs.Kick_GetUsersWhoKicked(storyId).GetReader());
             return users;
         }
 
 
-        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host)
-        {
+        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
             username = username.Trim();
             email = email.Trim();
 
-            //TODO: GJ: extract to method
+            //TODO: We should be handling these exceptions in the UI
             //ensure that the username and email is unique
             if (User.FetchByParameter(User.Columns.Username, username).Read())
                 throw new ArgumentException("The username already exists");
@@ -65,9 +58,9 @@ namespace Incremental.Kick.BusinessLogic
             user.IsBanned = false;
             user.ReceiveEmailNewsletter = receiveEmailNewsletter;
             user.HostID = host.HostID;
+            user.LastActiveOn = DateTime.Now;
 
-            using (TransactionScope scope = new TransactionScope())
-            {
+            using (TransactionScope scope = new TransactionScope()) {
                 user.Save();
 
                 EmailHelper.SendNewUserEmail(email, username, password, host);
@@ -78,8 +71,7 @@ namespace Incremental.Kick.BusinessLogic
             }
         }
 
-        public static string GetSecurityToken(string username, string password)
-        {
+        public static string GetSecurityToken(string username, string password) {
             System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
 
             username = username.Trim();
@@ -101,8 +93,7 @@ namespace Incremental.Kick.BusinessLogic
             return new SecurityToken(user.UserID).ToString();
         }
 
-        public static void UpdatePassword(int userID, string newPassword, Host host)
-        {
+        public static void UpdatePassword(int userID, string newPassword, Host host) {
             newPassword = newPassword.Trim();
             string passwordSalt = Cipher.GenerateSalt();
             string passwordHash = Cipher.Hash(newPassword, passwordSalt);
@@ -118,8 +109,7 @@ namespace Incremental.Kick.BusinessLogic
             EmailHelper.SendChangedPasswordEmail(user.Email, user.Username, newPassword, host);
         }
 
-        public static void UpdateAdSenseID(int userID, string adSenseID)
-        {
+        public static void UpdateAdSenseID(int userID, string adSenseID) {
             User user = User.FetchByID(userID);
             user.AdsenseID = adSenseID;
             user.Save();
@@ -129,15 +119,13 @@ namespace Incremental.Kick.BusinessLogic
             //TODO: send an email
         }
 
-        public static void SendPasswordResetEmail(int userID, Host host)
-        {
+        public static void SendPasswordResetEmail(int userID, Host host) {
             User user = User.FetchByID(userID);
 
             EmailHelper.SendPasswordResetEmail(user.Email, user.Username, user.LastActiveOn, host);
         }
 
-        public static void ResetPassword(int userID, Host host)
-        {
+        public static void ResetPassword(int userID, Host host) {
             //generate a password
             User user = User.FetchByID(userID);
             string password = PasswordGenerator.Generate(8);
@@ -153,8 +141,7 @@ namespace Incremental.Kick.BusinessLogic
             EmailHelper.SendPasswordEmail(user.Email, user.Username, password, host);
         }
 
-        public static string AuthenticateUser(string username, string password)
-        {
+        public static string AuthenticateUser(string username, string password) {
             System.Diagnostics.Trace.WriteLine("AuthenticateUser: " + username);
 
             username = username.Trim();
@@ -170,8 +157,7 @@ namespace Incremental.Kick.BusinessLogic
             if (!passwordHash.Equals(user.Password))
                 throw new SecurityException("Invalid password for username [" + username + "]");
 
-            if (!user.IsValidated)
-            {
+            if (!user.IsValidated) {
                 user.IsValidated = true;
             }
 
@@ -181,13 +167,11 @@ namespace Incremental.Kick.BusinessLogic
             return new SecurityToken(user.UserID).ToString();
         }
 
-        public static User GetUserByUsername(string username)
-        {
+        public static User GetUserByUsername(string username) {
             return User.FetchUserByUsername(username);
         }
 
-        public static User GetUserByEmail(string email)
-        {
+        public static User GetUserByEmail(string email) {
             return User.FetchUserByParameter(User.Columns.Email, email);
         }
     }
