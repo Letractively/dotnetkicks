@@ -807,7 +807,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
-    <Content Include="Templates\NewDefault\Template.css" />
     <Content Include="Templates\NewDefault\MasterPage.Master" />
     <Content Include="Controls\Admin\Cache.ascx" />
     <Content Include="Controls\Admin\Tasks.ascx" />
@@ -857,6 +856,7 @@
     <Content Include="Templates\Default\images\icons\exclamation.png" />
     <Content Include="Templates\Default\images\icons\information.png" />
     <Content Include="Templates\Default\Template.css" />
+    <Content Include="Templates\NewDefault\Template.css" />
     <Content Include="Templates\Simple\MasterPage.Master" />
     <Content Include="Controls\Story\AddComment.ascx" />
     <Content Include="Controls\Story\SubmitNewStory.ascx" />
