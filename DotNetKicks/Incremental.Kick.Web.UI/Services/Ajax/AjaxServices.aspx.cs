@@ -66,6 +66,15 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
 
         #endregion
 
+        #region KickSpy!
+
+        [AjaxMethod]
+        public string GetSpyHtml(int hostID) {
+            return ControlHelper.RenderControl(new UserActionList(UserActionCache.GetLatestUserActions(hostID)));
+        }
+
+        #endregion
+
         #region Story
 
         [AjaxMethod]
