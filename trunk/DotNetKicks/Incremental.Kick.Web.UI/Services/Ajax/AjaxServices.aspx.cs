@@ -8,21 +8,17 @@ using Incremental.Kick.Helpers;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 
-namespace Incremental.Kick.Web.UI.Services.Ajax
-{
-    //NOTE: GJ: All out new Ajax services will go here
-    public partial class AjaxServices : KickApiPage
-    {
+namespace Incremental.Kick.Web.UI.Services.Ajax {
+    //NOTE: GJ: All our new Ajax services will go here
+    public partial class AjaxServices : KickApiPage {
         #region "Shout Box"
 
         //NOTE: GJ: Work in progress - lots of refactoring needed
         [AjaxMethod]
-        public string AddShout(int hostID, string message)
-        {
-            if(!String.IsNullOrEmpty(message))
+        public string AddShout(int hostID, string message) {
+            if (!String.IsNullOrEmpty(message))
                 //TODO: GJ: move to model and add some regex replacements (links are good, line breaks become <br>)
-                if(!KickUserProfile.IsBanned)
-                {
+                if (!KickUserProfile.IsBanned) {
                     Shout shout = new Shout();
                     shout.HostID = hostID;
                     message = HttpUtility.HtmlEncode(message);
@@ -38,12 +34,10 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
         }
 
         [AjaxMethod]
-        public string AddShoutForUser(int hostID, string message, string username)
-        {
-            if(!String.IsNullOrEmpty(message))
+        public string AddShoutForUser(int hostID, string message, string username) {
+            if (!String.IsNullOrEmpty(message))
                 //TODO: GJ: move to model and add some regex replacements (links are good, line breaks become <br>)
-                if(!KickUserProfile.IsBanned)
-                {
+                if (!KickUserProfile.IsBanned) {
                     Shout shout = new Shout();
                     shout.HostID = hostID;
                     message = HttpUtility.HtmlEncode(message);
@@ -61,14 +55,12 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
         }
 
         [AjaxMethod]
-        public string GetLatestShouts(int hostID)
-        {
+        public string GetLatestShouts(int hostID) {
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID)));
         }
 
         [AjaxMethod]
-        public string GetLatestShoutsForUser(int hostID, string username)
-        {
+        public string GetLatestShoutsForUser(int hostID, string username) {
             return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
         }
 
@@ -77,12 +69,9 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
         #region Story
 
         [AjaxMethod]
-        public string FetchStoryByUrl(string url)
-        {
+        public string FetchKickedStoryUrlByUrl(string url) {
             Story story = Story.FetchStoryByUrl(url);
-
-            return
-                story != null
+            return story != null 
                     ? UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, story.Category.CategoryIdentifier)
                     : null;
         }

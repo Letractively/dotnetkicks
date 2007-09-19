@@ -4,7 +4,7 @@
 <script type="text/javascript">
 function checkStoryExists(sender, args)
 {
-    var storyPath = Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchStoryByUrl(args.Value).value;
+    var storyPath = Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value).value;
     
     if(storyPath)
     {
