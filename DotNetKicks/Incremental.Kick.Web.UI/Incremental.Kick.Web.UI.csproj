@@ -797,9 +797,18 @@
     <Compile Include="Templates\Simple\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="Templates\NewDefault\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\NewDefault\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Templates\NewDefault\Template.css" />
+    <Content Include="Templates\NewDefault\MasterPage.Master" />
     <Content Include="Controls\Admin\Cache.ascx" />
     <Content Include="Controls\Admin\Tasks.ascx" />
     <Content Include="Controls\Community\KickSpy.ascx" />
