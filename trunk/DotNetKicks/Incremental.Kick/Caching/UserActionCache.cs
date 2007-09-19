@@ -5,6 +5,10 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Caching {
     public class UserActionCache {
+        
+        public static UserActionCollection GetLatestUserActions(int hostID) {
+            return GetLatestUserActions(hostID, 1, 200, null, null, null, null);
+        }
 
         public static UserActionCollection GetLatestUserActions(int hostID, int pageIndex, int pageSize, int? userID, Nullable<UserAction.ActionType> userActionType, int? storyID, int? chatID) {
             string cacheKey = GetCacheKey(hostID, pageIndex, pageSize, userID, userActionType, storyID, chatID);

@@ -13,7 +13,8 @@ using Incremental.Kick.Caching;
 namespace Incremental.Kick.Web.UI.Controls.Community {
     public partial class KickSpy : Incremental.Kick.Web.Controls.KickUserControl {
         protected void Page_Load(object sender, EventArgs e) {
-            this.UserActionList.DataBind(UserActionCache.GetLatestUserActions(this.KickPage.HostProfile.HostID, 1, 200, null, null, null, null));
+            this.UserActionList.DataBind(UserActionCache.GetLatestUserActions(this.KickPage.HostProfile.HostID));
+            
         }   
     }
 }
