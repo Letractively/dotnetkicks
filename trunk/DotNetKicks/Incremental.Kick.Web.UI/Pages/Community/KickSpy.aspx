@@ -3,7 +3,14 @@
 <%@ Register Src="/Controls/User/ShoutBox.ascx" TagName="ShoutBox" TagPrefix="uc1" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
-   <uc1:KickSpy id="KickSpy1" runat="server" />
+<span style="font-size: 1.2em;"><em>
+<strong><%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(30, this.HostProfile.HostID) %> users are online now, <%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(1440, this.HostProfile.HostID) %> were on today.
+</strong></em></span>
+   
+
+    <Kick:UserList id="UserOnlineList" runat="server" />
+    
+    <uc1:KickSpy id="KickSpy1" runat="server" />
 </asp:Content>
 
 <asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">

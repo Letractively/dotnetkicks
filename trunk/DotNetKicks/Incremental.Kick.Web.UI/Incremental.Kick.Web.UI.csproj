@@ -662,13 +662,6 @@
     <Compile Include="Pages\User\ViewTags.aspx.designer.cs">
       <DependentUpon>ViewTags.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Community\WhoIsOnline.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Community\WhoIsOnline.aspx.designer.cs">
-      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Constants.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -819,7 +812,6 @@
     <Content Include="Pages\Community\ShoutBox.aspx" />
     <Content Include="Pages\Story\Zeitgeist.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
-    <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />
     <Content Include="Pages\User\FriendsKickedStories.aspx" />
     <Content Include="Pages\User\FriendsSubmittedStories.aspx" />

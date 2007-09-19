@@ -16,8 +16,10 @@ namespace Incremental.Kick.Web.UI.Pages.Community {
         protected void Page_Load(object sender, EventArgs e) {
             this.DisplayAds = false;
             this.DisplaySideAds = false;
-            this.Title = this.HostProfile.SiteTitle + " : Kick Spy";
-            this.PageName = UrlFactory.PageName.WhoIsOnline;
+            this.Title = this.HostProfile.SiteTitle + " : Kick Spy!";
+            this.PageName = UrlFactory.PageName.KickSpy;
+
+            this.UserOnlineList.DataBind(UserCache.GetOnlineUsers(30, this.HostProfile.HostID));
 
             this.Shoutbox.DataBind((ShoutCache.GetLatestShouts(this.HostProfile.HostID)));
         }
