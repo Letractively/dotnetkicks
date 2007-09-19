@@ -138,7 +138,7 @@ namespace Incremental.Kick.Dal {
         }
 
         private static string GetStoryLink(Story story, int commentID) {
-            return string.Format(@"<a href=""/{0}/{1}Comment_#{3}"" />{2}</a>", story.Category.CategoryIdentifier, story.StoryIdentifier, story.Title, commentID);
+            return string.Format(@"<a href=""/{0}/{1}#Comment_{3}"" />{2}</a>", story.Category.CategoryIdentifier, story.StoryIdentifier, story.Title, commentID);
         }
 
 
