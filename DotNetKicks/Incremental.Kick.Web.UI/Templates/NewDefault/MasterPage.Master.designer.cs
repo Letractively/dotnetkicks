@@ -20,6 +20,24 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault {
     public partial class MasterPage {
         
         /// <summary>
+        /// hypSiteTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypSiteTitle;
+        
+        /// <summary>
+        /// litSiteTagLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litSiteTagLine;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

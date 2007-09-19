@@ -4,30 +4,62 @@
 <%-- 
                         New Default Template 
 --%>
-
-
 <asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
 </asp:Content>
 
-
 <asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
-    NewDefault template
-    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        Content here
-    </asp:ContentPlaceHolder>
+
+    <div id="LoadingIndicator">Loading...</div>
+    
+    <div id="HeaderContainer">    
+    
+        <h1>
+            <asp:HyperLink ID="hypSiteTitle" runat="server"/></h1>
+        <h2>
+            <asp:Literal ID="litSiteTagLine" runat="server"/></h2>
+        
+        <div id="HeaderNavigation">
+            <ul>
+                <%-- TODO: fix this to code behind --%>
+                <% if (this.Page.User.Identity.IsAuthenticated) { %>
+                    <li><img src="/static/images/icons/new.gif" width="28" height="11" /><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your profile</a></li>                
+                    <% if (this.KickPage.KickUserProfile.IsAdministrator) { %>
+                        <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Admin)%>">admin</a></li>
+                    <% } %>                     
+                    <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Logout)%>">logout</a></li>                                                       
+                <% } else { %>
+                    <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Login)%>">login</a> </li>
+                    <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Register)%>">register</a></li>
+                <% } %>
+                
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory)%>">submit a story</a></li>                
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.About)%>">about</a></li>                
+                <li><%=this.BlogLink%></li>
+            </ul>
+        </div>        
+    </div>
+    
+    <!-- Breadcrumbs -->
+    <div id="BreadcrumbNavigation">
+        <ul>
+            <li class="first">Home</li>
+            <li>Test</li>
+        </ul>
+    </div>
+                
+                
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">    
+    </asp:ContentPlaceHolder>        
     <asp:ContentPlaceHolder ID="LeftContent" runat="server">
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="RightContent" runat="server">
     </asp:ContentPlaceHolder>
+    
+    
 </asp:Content>
-
-
-
-
-
 <%-- don't need these, leave for now until edit root master page --%>
-<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">   
+<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">
 </asp:Content>
 <asp:Content ID="LeftContentOutline" ContentPlaceHolderID="LeftContent" runat="server">
 </asp:Content>
