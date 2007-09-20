@@ -185,7 +185,16 @@ namespace Incremental.Kick.Web.Helpers {
                     throw new Exception("not enough params to create url");
             }
         }
-
+        public static string CreateUrl(PageName pageName, string identifier1, string identifier2, string identifier3)
+        {
+            switch (pageName)
+            {
+                case PageName.Zeitgeist:
+                    return MapPath(String.Format("/zeitgeist/{0}/{1}/{2}", identifier1, identifier2, identifier3 ));
+                default:
+                    throw new Exception("not enough params to create url");
+            }
+        }
         public static string CreateUrl(PageName pageName, string storyIdentifier, string categoryIdentifier, int commentID) {
             switch (pageName) {
                 case PageName.ViewStory:
