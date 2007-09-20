@@ -140,7 +140,7 @@ namespace Incremental.Kick.Dal {
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(false);
 
-            EmailHelper.SendUserBanEmail(this, host);
+            EmailHelper.SendUserUnBanEmail(this, host);
             UserAction.RecordUserUnBan(this.HostID, this, moderator);
             UserCache.RemoveUser(this.UserID);
         }
