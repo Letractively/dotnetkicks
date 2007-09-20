@@ -20,23 +20,23 @@ namespace Incremental.Kick.Web.UI.Controls {
         }
         
         protected void Page_Load(object sender, EventArgs e) {
-            this.Visible = this.KickPage.KickUserProfile.IsAdministrator;
+            this.Visible = this.KickPage.KickUserProfile.IsModerator;
 
             this.BanUser.Visible = !this._user.IsBanned;
             this.UnBanUser.Visible = this._user.IsBanned;
         }
 
         protected void BanUser_Click(object sender, EventArgs e) {
-            this.KickPage.DemandAdministratorRole();
+            this.KickPage.DemandModeratorRole();
 
-            this._user.Ban();
+            this._user.Ban(this.KickPage.KickUserProfile);
             this.KickPage.Reload();
         }
 
         protected void UnBanUser_Click(object sender, EventArgs e) {
-            this.KickPage.DemandAdministratorRole();
+            this.KickPage.DemandModeratorRole();
 
-            this._user.UnBan();
+            this._user.UnBan(this.KickPage.KickUserProfile);
             this.KickPage.Reload();
         }
     }

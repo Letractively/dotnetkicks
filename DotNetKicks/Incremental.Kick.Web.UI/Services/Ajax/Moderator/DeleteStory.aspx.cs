@@ -27,8 +27,7 @@ namespace Incremental.Kick.Web.UI.Services.Ajax.Moderator {
 
             EmailHelper.SendStoryDeletedEmail(Story.FetchByID(storyID), this.HostProfile);
 
-            StoryBR.MarkAsSpam(storyID, this.HostProfile.HostID);
+            StoryBR.MarkAsSpam(storyID, this.HostProfile.HostID, this.KickUserProfile);
         }
     }
 }
-

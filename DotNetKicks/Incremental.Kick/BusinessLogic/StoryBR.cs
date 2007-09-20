@@ -199,13 +199,15 @@ namespace Incremental.Kick.BusinessLogic {
             return story.KickCount;
         }
 
-        public static void MarkAsSpam(int storyID, int hostID) {
+        public static void MarkAsSpam(int storyID, int hostID, User moderator) {
             Story story = Story.FetchByID(storyID);
             if (story.HostID != hostID)
                 throw new ArgumentException("The story does not belong to the host");
             else {
                 story.IsSpam = true;
                 story.Save();
+
+                UserAction.RecordStoryDeletion(hostID, story, moderator);
             }
         }
 

@@ -124,19 +124,21 @@ namespace Incremental.Kick.Dal {
             }
         }
                
-        public void Ban() {
+        public void Ban(User moderator) {
             this.IsBanned = true;
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(true);
 
-            UserAction.RecordUserBan(this.HostID, this);
+            UserAction.RecordUserBan(this.HostID, this, moderator);
             UserCache.RemoveUser(this.UserID);
         }
 
-        public void UnBan() {
+        public void UnBan(User moderator) {
             this.IsBanned = false;
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(false);
+
+            UserAction.RecordUserUnBan(this.HostID, this, moderator);
             UserCache.RemoveUser(this.UserID);
         }
 

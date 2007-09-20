@@ -22,7 +22,9 @@ namespace Incremental.Kick.Dal {
             UserRegistration = 9,
             ChatRoomCreation = 10,
             ChatRoomOpening = 11,
-            ChatRoomClosing = 12
+            ChatRoomClosing = 12,
+            UserUnBan = 13,
+            StoryDeletion = 14
         }
 
         public ActionType UserActionType {
@@ -33,6 +35,10 @@ namespace Incremental.Kick.Dal {
             if (this.Message.Length > 1000)
                 this.Message = this.Message.Substring(0, 1000);
             base.BeforeInsert();
+        }
+
+        public bool IsPublic {
+            get { return ((this.UserActionType != ActionType.UserBan) && (this.UserActionType != ActionType.UserUnBan) && (this.UserActionType != ActionType.StoryDeletion)); }
         }
         
         #region Create Methods
@@ -119,9 +125,20 @@ namespace Incremental.Kick.Dal {
             return userAction;
         }
 
-        public static UserAction RecordUserBan(int hostID, User user) {
-            UserAction userAction = Create(hostID, user.UserID, ActionType.UserBan);
-            userAction.Message = "was banned";
+        public static UserAction RecordUserBan(int hostID, User user, User moderator) {
+            UserAction userAction = Create(hostID, moderator.UserID, ActionType.UserBan);
+            userAction.ToUserID = user.UserID;
+            UserLink userLink = new UserLink(user);
+            userAction.Message = String.Format(" banned {0}", ControlHelper.RenderControl(userLink));
+            userAction.Save();
+            return userAction;
+        }
+
+        public static UserAction RecordUserUnBan(int hostID, User user, User moderator) {
+            UserAction userAction = Create(hostID, moderator.UserID, ActionType.UserUnBan);
+            userAction.ToUserID = user.UserID;
+            UserLink userLink = new UserLink(user);
+            userAction.Message = String.Format(" un-banned {0}", ControlHelper.RenderControl(userLink));
             userAction.Save();
             return userAction;
         }
@@ -129,6 +146,13 @@ namespace Incremental.Kick.Dal {
         public static UserAction RecordUserRegistration(int hostID, User user) {
             UserAction userAction = Create(hostID, user.UserID, ActionType.UserRegistration);
             userAction.Message = "has joined the site. Welcome!!";
+            userAction.Save();
+            return userAction;
+        }
+
+        public static UserAction RecordStoryDeletion(int hostID, Story story, User moderator) {
+            UserAction userAction = Create(hostID, moderator.UserID, ActionType.StoryDeletion);
+            userAction.Message = String.Format(" deleted {0}", GetStoryLink(story));
             userAction.Save();
             return userAction;
         }
