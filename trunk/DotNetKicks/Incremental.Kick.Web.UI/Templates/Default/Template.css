@@ -89,6 +89,7 @@ input, select, textarea
 .userActionTag {}
 .userActionShout { background-color: #fcfae1; }
 .userActionUserRegistration { background-color: #9efe9e; }
+.userActionUserBan, .userActionUserUnBan, .userActionStoryDeletion { text-align: right; background-color: #d7d7d7; }
 
 /* ================ pagination ================== */
 .Paging
