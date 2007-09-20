@@ -114,6 +114,9 @@ namespace Incremental.Kick.Caching
                 month = 12;
             if (day == null || day < 0 || day > DateTime.DaysInMonth(year, month.Value))
                 day = DateTime.DaysInMonth(year, month.Value);
+            if(day!=null)
+                return new DateTime(year, month.Value, day.Value).AddDays(1);
+
             return new DateTime(year, month.Value, day.Value);
         }
     }

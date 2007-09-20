@@ -145,6 +145,8 @@ namespace Incremental.Kick.Web.Controls
 
             _mostKickedStories = ZeitgeistCache.GetMostKickedStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostCommentedOnStories = ZeitgeistCache.GetMostCommentedOnStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
+
+
         }
 
         // [rgn] Protected Methods (1)
@@ -206,6 +208,27 @@ namespace Incremental.Kick.Web.Controls
         }
 
         /// <summary>
+        /// Renders the list of years.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        private void RenderListOfYears(HtmlTextWriter writer)
+        {
+            writer.RenderBeginTag(HtmlTextWriterTag.Ul);
+            //each month of that year
+            for (int y = this.MinimumDate.Year; y <=DateTime.Now.Year; y++)
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.Li);
+                string yearUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, y.ToString() );
+                writer.WriteBeginTag("a");
+                writer.WriteAttribute("href", yearUrl);
+                writer.Write(HtmlTextWriter.TagRightChar);
+                writer.Write(y);   
+                writer.WriteEndTag("a");
+                writer.RenderEndTag();//li year
+            }
+            writer.RenderEndTag();//ul year
+        }
+        /// <summary>
         /// Renders a list of hyperlinked months for the specified year.
         /// </summary>
         /// <param name="writer">The writer.</param>
@@ -230,6 +253,32 @@ namespace Incremental.Kick.Web.Controls
             }
             writer.RenderEndTag();//ul month
         }
+        /// <summary>
+        /// Renders the list of days.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        private void RenderListOfDays(HtmlTextWriter writer, int year, int month)
+        {
+            writer.RenderBeginTag(HtmlTextWriterTag.Ul);
+            //each day of month of that year
+            for (int d = 1; d<= DateTime.DaysInMonth(year, month); d++)
+            {
+                if (year == DateTime.Now.Year && month == DateTime.Now.Month && d >= DateTime.Now.Day)
+                    continue;
+
+                writer.RenderBeginTag(HtmlTextWriterTag.Li);
+                string dayUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, year.ToString(), month.ToString(), d.ToString());
+                writer.WriteBeginTag("a");
+                writer.WriteAttribute("href", dayUrl);
+                writer.Write(HtmlTextWriter.TagRightChar);
+                writer.Write(d.ToString());
+                writer.WriteEndTag("a");
+                writer.RenderEndTag();//li day
+            }
+            writer.RenderEndTag();//ul day
+        }
 
         /// <summary>
         /// Renders the story list items.
@@ -240,6 +289,7 @@ namespace Incremental.Kick.Web.Controls
         private void RenderStoryListItems(HtmlTextWriter writer, StoryCollection stories, string title, string itemType)
         {
             //render top 10 lists
+            writer.RenderBeginTag(HtmlTextWriterTag.H3);
             writer.Write(title);
             writer.Write(" for ");
 
@@ -249,6 +299,7 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(new DateTime(Year.Value, Month.Value, 1).ToString("MMMM yyyy"));
             else
                 writer.Write(new DateTime(Year.Value, Month.Value, Day.Value).ToString("MMMM d, yyyy"));
+            writer.RenderEndTag();
 
             writer.RenderBeginTag(HtmlTextWriterTag.Ol);
             foreach (Story s in stories)
@@ -280,18 +331,48 @@ namespace Incremental.Kick.Web.Controls
         /// </summary>
         /// <param name="writer">The writer.</param>
         private void RenderStoryLists(HtmlTextWriter writer)
-        {
+        {            
+            //navigation system
+            RenderNavigation(writer);
+
+            writer.WriteBeginTag("div");
+            writer.WriteAttribute("class", "ZeitgeistLists");
+            writer.Write(HtmlTextWriter.TagRightChar);
+
             //most kicked during time period
             RenderStoryListItems(writer, _mostKickedStories, "Most Kicked Stories", "kicks");
 
             //do next top 10 list
             RenderStoryListItems(writer, _mostCommentedOnStories, "Most Commented On Stories", "comments");
 
-            writer.Write("<p><i>Counts are calculated based on the specified time period.</i></p>");
+            writer.Write("<p><i>Counts are calculated based on the the story's submission date.</i></p>");
+
+            writer.WriteEndTag("div");
+
+
+
+        }
+
+        private void RenderNavigation(HtmlTextWriter writer)
+        {
+            writer.WriteBeginTag("div");
+            writer.WriteAttribute("class", "ZeitgeistNavigation");
+            writer.Write(HtmlTextWriter.TagRightChar);
+
+            //render year list
+            writer.Write("Browse By Year");
+            RenderListOfYears(writer);
 
             //if just year, then always give user option of drilling down to individual months
             writer.Write("Browse " + Year.ToString() + " By Month");
-            RenderListOfMonths(writer, (int)Year);
+            RenderListOfMonths(writer, Year.Value);
+
+            if (Month != null)
+            {
+                writer.Write("Browse " + new DateTime(Year.Value, Month.Value, 1).ToString("MMMM yyyy") + " By Day");
+                RenderListOfDays(writer, Year.Value, Month.Value);
+            }
+            writer.WriteEndTag("div");
         }
 
         #endregion [rgn]
