@@ -106,13 +106,13 @@ namespace Incremental.Kick.Helpers {
                 String.Format(@"
                 A moderator has banned you from {0}.
 
-                Please let us know if you think this was in error.", host.HostName), host);
+                Please let us know if you think this was in error.", host.SiteTitle), host);
         }
 
         public static void SendUserUnBanEmail(User user, Host host) {
             Send_Begin(host.Email, user.Email, "[" + host.SiteTitle + "]",
                 String.Format(@"
-                A moderator has un-banned you from {0}. Welcome back!!", host.HostName), host);
+                A moderator has un-banned you from {0}. Welcome back!!", host.SiteTitle), host);
         }
     }
 }
