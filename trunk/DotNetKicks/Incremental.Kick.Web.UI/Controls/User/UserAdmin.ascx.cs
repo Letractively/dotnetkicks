@@ -29,14 +29,14 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected void BanUser_Click(object sender, EventArgs e) {
             this.KickPage.DemandModeratorRole();
 
-            this._user.Ban(this.KickPage.KickUserProfile);
+            this._user.Ban(this.KickPage.KickUserProfile, this.KickPage.HostProfile);
             this.KickPage.Reload();
         }
 
         protected void UnBanUser_Click(object sender, EventArgs e) {
             this.KickPage.DemandModeratorRole();
 
-            this._user.UnBan(this.KickPage.KickUserProfile);
+            this._user.UnBan(this.KickPage.KickUserProfile, this.KickPage.HostProfile);
             this.KickPage.Reload();
         }
     }

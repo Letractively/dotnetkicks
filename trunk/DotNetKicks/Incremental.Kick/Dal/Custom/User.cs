@@ -4,6 +4,7 @@ using System.Text;
 using System.Data;
 using SubSonic;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Dal {
     public partial class User {
@@ -123,21 +124,23 @@ namespace Incremental.Kick.Dal {
                 shout.Save();
             }
         }
-               
-        public void Ban(User moderator) {
+
+        public void Ban(User moderator, Host host) {
             this.IsBanned = true;
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(true);
 
+            EmailHelper.SendUserBanEmail(this, host);
             UserAction.RecordUserBan(this.HostID, this, moderator);
             UserCache.RemoveUser(this.UserID);
         }
 
-        public void UnBan(User moderator) {
+        public void UnBan(User moderator, Host host) {
             this.IsBanned = false;
             this.Save();
             this.UpdateStoryCommentShoutSpamStatus(false);
 
+            EmailHelper.SendUserBanEmail(this, host);
             UserAction.RecordUserUnBan(this.HostID, this, moderator);
             UserCache.RemoveUser(this.UserID);
         }
