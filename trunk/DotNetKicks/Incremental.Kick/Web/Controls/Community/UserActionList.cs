@@ -33,17 +33,19 @@ namespace Incremental.Kick.Web.Controls {
                 writer.Write("<em>No actions</em>");
 
             foreach (UserAction userAction in _userActions) {
-                User user = null;
-                if (userAction.UserID != null) 
-                    user = UserCache.GetUser(userAction.UserID.Value);
+                if (userAction.IsPublic || this.KickPage.KickUserProfile.IsModerator) {
+                    User user = null;
+                    if (userAction.UserID != null)
+                        user = UserCache.GetUser(userAction.UserID.Value);
 
-                if(user == null || !user.IsBanned) {
-                    writer.WriteLine(@"<div class=""userAction userAction{0}"">", userAction.UserActionType.ToString());
-                    if(user != null)
-                        new UserLink(user).RenderControl(writer);
-                    writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", userAction.Message);
-                    writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(userAction.CreatedOn, DateTime.Now));
-                    writer.WriteLine("</div>");
+                    if (user == null || (!user.IsBanned || this.KickPage.KickUserProfile.IsModerator)) {
+                        writer.WriteLine(@"<div class=""userAction userAction{0}"">", userAction.UserActionType.ToString());
+                        if (user != null)
+                            new UserLink(user).RenderControl(writer);
+                        writer.WriteLine(@" <span class=""spyItemMessage"">{0}</span>:", userAction.Message);
+                        writer.WriteLine(@" <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(userAction.CreatedOn, DateTime.Now));
+                        writer.WriteLine("</div>");
+                    }
                 }
             }
 
