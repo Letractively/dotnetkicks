@@ -29,7 +29,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story
         protected void Page_Load(object sender, EventArgs e)
         {
             //this.ZeitgeistList.DataBind(this.HostProfile.HostID, null, null);
-            this.ZeitgeistList.DataBind(this.HostProfile.HostID, this.UrlParameters.Year, this.UrlParameters.Month);
+            this.ZeitgeistList.DataBind(this.HostProfile.HostID, this.UrlParameters.Year, this.UrlParameters.Month, this.UrlParameters.Day);
         }
     }
 }

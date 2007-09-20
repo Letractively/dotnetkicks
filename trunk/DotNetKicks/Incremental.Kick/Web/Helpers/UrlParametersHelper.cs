@@ -49,6 +49,9 @@ namespace Incremental.Kick.Web.Helpers {
             if (!String.IsNullOrEmpty(request["month"]))
                 urlParameters.Month = int.Parse(request["month"].Replace("/", ""));
 
+            if (!String.IsNullOrEmpty(request["day"]))
+                urlParameters.Day = int.Parse(request["day"].Replace("/", ""));
+
             return urlParameters;
         }
     }
