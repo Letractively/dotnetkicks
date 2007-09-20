@@ -70,7 +70,9 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
 
         [AjaxMethod]
         public string GetSpyHtml(int hostID) {
-            return ControlHelper.RenderControl(new UserActionList(UserActionCache.GetLatestUserActions(hostID)));
+            UserActionList userActionList = new UserActionList(UserActionCache.GetLatestUserActions(hostID));
+            this.Controls.Add(userActionList);
+            return ControlHelper.RenderControl(userActionList);
         }
 
         #endregion
