@@ -4,13 +4,22 @@
 <script type="text/javascript">
 function checkStoryExists(sender, args)
 {
-    var storyPath = Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value).value;
-    
-    if(storyPath)
+    var context = {sender:sender, args:args};
+
+    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value, checkStoryExistsCallback, context);   
+}
+
+function checkStoryExistsCallback(response)
+{
+    if(response.value)
     {
-        sender.innerHTML = "The story already exists. You may want to <a href='" + storyPath + "'>kick it</a> instead";
-        args.IsValid = false;
+        response.context.sender.innerHTML = "The story already exists. You may want to <a href='" + response.value + "'>kick it</a> instead";
+        response.context.args.IsValid = false;
+        
+        response.context.sender.style.display = '';
     }
+    else
+        response.context.sender.style.display = 'none';    
 }
 </script>
 
