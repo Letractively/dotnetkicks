@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Helpers {
     public class EmailHelper {
@@ -98,6 +99,20 @@ namespace Incremental.Kick.Helpers {
                 You can log in to kick at the following location : {2}
 
                 {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
+        }
+
+        public static void SendUserBanEmail(User user, Host host) {
+            Send_Begin(host.Email, user.Email, "[" + host.SiteTitle + "]",
+                String.Format(@"
+                A moderator has banned you from {0}.
+
+                Please let us know if you think this was in error.", host.HostName), host);
+        }
+
+        public static void SendUserUnBanEmail(User user, Host host) {
+            Send_Begin(host.Email, user.Email, "[" + host.SiteTitle + "]",
+                String.Format(@"
+                A moderator has un-banned you from {0}. Welcome back!!", host.HostName), host);
         }
     }
 }
