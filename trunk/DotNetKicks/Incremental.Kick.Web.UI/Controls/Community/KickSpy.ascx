@@ -20,7 +20,7 @@
 
 <div class="users">
 
-<span style="font-size: smaller; color: green;"><em>It is early stages for <a href="http://code.google.com/p/dotnetkicks/issues/detail?id=86">this feature</a>.</em></span>
+<span style="color: green;"><em>Auto-refreshes every 60 seconds.</em></span>
 
 <br />
 <br />
