@@ -26,6 +26,7 @@ namespace Incremental.Kick.Web.Helpers {
         private StoryListSortBy _upcomingstorylistsortby = StoryListSortBy.LatestUpcoming;
         private int? _year;
         private int? _month;
+        private int? _day;
 
         public string UserIdentifier {
             get { return this._userIdentifier; }
@@ -102,6 +103,11 @@ namespace Incremental.Kick.Web.Helpers {
         {
             get { return this._month; }
             set { this._month = value; }
+        }
+        public int? Day
+        {
+            get { return this._day; }
+            set { this._day = value; }
         }
         public bool SkinSpecified {
             get { return !String.IsNullOrEmpty(this.Skin); }

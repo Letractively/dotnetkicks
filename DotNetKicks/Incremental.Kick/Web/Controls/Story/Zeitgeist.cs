@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Helpers;
-using System.Data;
+using Incremental.Kick.Caching;
+using SubSonic;
 
 namespace Incremental.Kick.Web.Controls
 {
@@ -16,20 +18,32 @@ namespace Incremental.Kick.Web.Controls
     public class Zeitgeist : KickWebControl
     {
 
-        #region [rgn] Fields (6)
+        #region [rgn] Fields (9)
 
         //default caption
         private string _caption = "There are no data available for this time period.";
-        private DateTime _minDate = new DateTime(2005, 10, 1);
+        private int? _day;
+        private DateTime _minDate = new DateTime(2006, 1, 1);
         private int? _month = System.DateTime.Now.Month;
+        private StoryCollection _mostCommentedOnStories;
+        private StoryCollection _mostKickedStories;
         private string _title = "";
         private int? _year;
-        private SubSonic.StoredProcedure mostKicked;
-        private SubSonic.StoredProcedure mostCommentedOn;
+        private int numberOfItems = 10;
 
         #endregion [rgn]
 
-        #region [rgn] Properties (5)
+        #region [rgn] Properties (7)
+
+        /// <summary>
+        /// Gets or sets the day.
+        /// </summary>
+        /// <value>The day.</value>
+        public int? Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
 
         /// <summary>
         /// Gets or sets the minimum date.
@@ -64,6 +78,21 @@ namespace Incremental.Kick.Web.Controls
         {
             get { return this._caption; }
             set { this._caption = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the number of items to show per category.
+        /// </summary>
+        /// <value>The number of items.</value>
+        public int NumberOfItems
+        {
+            get { return numberOfItems; }
+            set
+            {
+                if (value <= 0)
+                    value = 1;
+                numberOfItems = value;
+            }
         }
 
         /// <summary>
@@ -103,7 +132,7 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="hostId">The host id.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
-        public void DataBind(int hostId, int? year, int? month)
+        public void DataBind(int hostId, int? year, int? month, int? day)
         {
             //don't do data bind if year is null
             //just show listing
@@ -112,19 +141,10 @@ namespace Incremental.Kick.Web.Controls
 
             this.Month = month;
             this.Year = year;
+            this.Day = day;
 
-            if (this.Month == null)
-            {
-                //show year stats
-                mostKicked = SPs.Kick_GetTopKickedStoriesByYear(hostId, this.Year);
-                mostCommentedOn = SPs.Kick_GetTopCommentedOnStoriesByYear(hostId, this.Year);
-            }
-            else
-            {
-                //show month stats
-                mostKicked = SPs.Kick_GetTopKickedStoriesByYearMonth(hostId, this.Year, this.Month);
-                mostCommentedOn = SPs.Kick_GetTopCommentedOnStoriesByYearMonth(hostId, this.Year, this.Month);
-            }
+            _mostKickedStories = ZeitgeistCache.GetMostKickedStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
+            _mostCommentedOnStories = ZeitgeistCache.GetMostCommentedOnStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
         }
 
         // [rgn] Protected Methods (1)
@@ -166,9 +186,9 @@ namespace Incremental.Kick.Web.Controls
 
             //start at min year
             //go to now
+            writer.RenderBeginTag(HtmlTextWriterTag.Ul);
             for (int y = MinimumDate.Year; y <= DateTime.Now.Year; y++)
             {
-                writer.RenderBeginTag(HtmlTextWriterTag.Ul);
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
                 string yearUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, y.ToString());
                 writer.WriteBeginTag("a");
@@ -181,9 +201,8 @@ namespace Incremental.Kick.Web.Controls
                 RenderListOfMonths(writer, y);
 
                 writer.RenderEndTag();//li year
-                writer.RenderEndTag();//ul year
-
             }
+            writer.RenderEndTag();//ul year
         }
 
         /// <summary>
@@ -218,36 +237,35 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="writer">The writer.</param>
         /// <param name="title">The title.</param>
         /// <param name="reader">The reader.</param>
-        private void RenderStoryListItems(HtmlTextWriter writer, IDataReader reader, string title, string itemType)
+        private void RenderStoryListItems(HtmlTextWriter writer, StoryCollection stories, string title, string itemType)
         {
             //render top 10 lists
             writer.Write(title);
             writer.Write(" for ");
+
             if (Month == null)
                 writer.Write(Year);
+            else if (Day == null)
+                writer.Write(new DateTime(Year.Value, Month.Value, 1).ToString("MMMM yyyy"));
             else
-                writer.Write(new DateTime((int)Year, (int)Month, 1).ToString("MMMM yyyy"));
-
-            bool hasData = false;
+                writer.Write(new DateTime(Year.Value, Month.Value, Day.Value).ToString("MMMM d, yyyy"));
 
             writer.RenderBeginTag(HtmlTextWriterTag.Ol);
-            while (reader.Read())
+            foreach (Story s in stories)
             {
                 string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
-                        reader["StoryIdentifier"].ToString(),
-                        reader["CategoryIdentifier"].ToString());
+                        s.StoryIdentifier,
+                       s.Category.CategoryIdentifier);
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
                 writer.WriteBeginTag("a");
                 writer.WriteAttribute("href", kickStoryUrl);
                 writer.Write(HtmlTextWriter.TagRightChar);
-                writer.Write(reader["title"]);
+                writer.Write(s.Title);
                 writer.WriteEndTag("a");
-                writer.Write(" [{0} {1}]", reader["ItemCount"].ToString(), itemType);
                 writer.RenderEndTag();
-                hasData = true;
             }
 
-            if (!hasData)
+            if (stories.Count.Equals(0))
             {
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
                 writer.Write(this.NoDataCaption);
@@ -264,14 +282,10 @@ namespace Incremental.Kick.Web.Controls
         private void RenderStoryLists(HtmlTextWriter writer)
         {
             //most kicked during time period
-            IDataReader reader = mostKicked.GetReader();
-            RenderStoryListItems(writer, reader, "Most Kicked Stories", "kicks");
-            reader.Close();
+            RenderStoryListItems(writer, _mostKickedStories, "Most Kicked Stories", "kicks");
 
             //do next top 10 list
-            reader = mostCommentedOn.GetReader();
-            RenderStoryListItems(writer, reader, "Most Commented On Stories", "comments");
-            reader.Close();
+            RenderStoryListItems(writer, _mostCommentedOnStories, "Most Commented On Stories", "comments");
 
             writer.Write("<p><i>Counts are calculated based on the specified time period.</i></p>");
 

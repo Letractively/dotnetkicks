@@ -79,6 +79,7 @@
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserActionCache.cs" />
     <Compile Include="Caching\UserCache.cs" />
+    <Compile Include="Caching\ZeitgeistCache.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Enums\StoryListSortBy.cs" />
     <Compile Include="Common\Exceptions\Exceptions.cs" />
