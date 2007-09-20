@@ -170,6 +170,7 @@ namespace Incremental.Kick.Web.Controls
 
                 //-------------- community pages
                 case UrlFactory.PageName.WhoIsOnline:
+                case UrlFactory.PageName.KickSpy:
                     this.RenderSpacer(writer);
                     this.RenderBreadcrumb("community", "#", writer);
                     this.RenderSpacer(writer);
