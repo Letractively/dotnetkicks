@@ -88,5 +88,19 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         }
 
         #endregion
+
+        #region User
+
+        [AjaxMethod]
+        public bool CheckUsernameExists(string username) {
+            return Incremental.Kick.Dal.User.FetchByParameter(Incremental.Kick.Dal.User.Columns.Username, username).Read();
+        }  
+        
+        [AjaxMethod]
+        public bool CheckEmailExists(string email) {
+            return Incremental.Kick.Dal.User.FetchByParameter(Incremental.Kick.Dal.User.Columns.Email, email).Read();
+        }
+
+        #endregion
     }
 }
