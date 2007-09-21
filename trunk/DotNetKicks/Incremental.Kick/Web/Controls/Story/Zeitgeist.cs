@@ -29,6 +29,8 @@ namespace Incremental.Kick.Web.Controls
         private StoryCollection _mostKickedStories;
         private int _storiesSubmittedCount;
         private int _storiesPublishedCount;
+        private int _kicksCount;
+        private int _commentsCount;
         private string _title = "";
         private int? _year;
         private int numberOfItems = 10;
@@ -150,6 +152,8 @@ namespace Incremental.Kick.Web.Controls
 
             _storiesSubmittedCount = ZeitgeistCache.GetNumberOfStoriesSubmitted(hostId, this.Year.Value, this.Month, this.Day);
             _storiesPublishedCount = ZeitgeistCache.GetNumberOfStoriesPublished(hostId, this.Year.Value, this.Month, this.Day);
+            _kicksCount = ZeitgeistCache.GetNumberOfKicks(hostId, this.Year.Value, this.Month, this.Day);
+            _commentsCount = ZeitgeistCache.GetNumberOfComments(hostId, this.Year.Value, this.Month, this.Day);
 
         }
 
@@ -175,9 +179,16 @@ namespace Incremental.Kick.Web.Controls
                 //navigation system
                 RenderNavigation(writer);
                 //
+                writer.WriteBeginTag("div");
+                writer.WriteAttribute("class", "ZeitgeistTotals");
+                writer.WriteAttribute("style", "display:block;");
+                writer.Write(HtmlTextWriter.TagRightChar);
+
                 RenderDateStatistics(writer);
                 //render top 10/X lists
                 RenderStoryLists(writer);
+
+                writer.WriteEndTag("div");
             }
 
         }
@@ -188,24 +199,39 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="writer">The writer.</param>
         private void RenderDateStatistics(HtmlTextWriter writer)
         {
+            //TODO clean this up using DL/DT/DDs to align ":", etc.
+
             //render single stats, like counters
             writer.WriteBeginTag("div");
             writer.WriteAttribute("class", "ZeitgeistStatistics");
             writer.Write(HtmlTextWriter.TagRightChar);
 
             writer.RenderBeginTag(HtmlTextWriterTag.P);
+            
             writer.Write("Number of Stories Submitted: ");
             writer.Write(_storiesSubmittedCount);
             writer.RenderBeginTag(HtmlTextWriterTag.Br);
+            
             writer.Write("Number of Stories Published: ");
             writer.Write(_storiesPublishedCount);
             writer.RenderBeginTag(HtmlTextWriterTag.Br);
+            
             writer.Write("Submit to Publish Percentage: ");
             if (_storiesPublishedCount > 0 && _storiesPublishedCount <= _storiesSubmittedCount)
                 writer.Write(Math.Round((double)_storiesPublishedCount / _storiesSubmittedCount, 4).ToString("P"));
             else
                 writer.Write("0 %");
             writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+            writer.Write("Number of Story Kicks: ");
+            writer.Write(_kicksCount );
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
+            writer.Write("Number of Story Comments: ");
+            writer.Write(_commentsCount);
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
 
             writer.RenderEndTag();    //p
 
@@ -344,19 +370,21 @@ namespace Incremental.Kick.Web.Controls
             writer.RenderEndTag();
 
             writer.RenderBeginTag(HtmlTextWriterTag.Ol);
-            foreach (Story s in stories)
-            {
-                string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
-                        s.StoryIdentifier,
-                       s.Category.CategoryIdentifier);
-                writer.RenderBeginTag(HtmlTextWriterTag.Li);
-                writer.WriteBeginTag("a");
-                writer.WriteAttribute("href", kickStoryUrl);
-                writer.Write(HtmlTextWriter.TagRightChar);
-                writer.Write(s.Title);
-                writer.WriteEndTag("a");
-                writer.RenderEndTag();
-            }
+
+            //just plain OL with story title links
+            //foreach (Story s in stories)
+            //{
+            //    string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
+            //            s.StoryIdentifier,
+            //           s.Category.CategoryIdentifier);
+            //    writer.RenderBeginTag(HtmlTextWriterTag.Li);
+            //    writer.WriteBeginTag("a");
+            //    writer.WriteAttribute("href", kickStoryUrl);
+            //    writer.Write(HtmlTextWriter.TagRightChar);
+            //    writer.Write(s.Title);
+            //    writer.WriteEndTag("a");
+            //    writer.RenderEndTag();
+            //}
 
             if (stories.Count.Equals(0))
             {
@@ -364,6 +392,22 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(this.NoDataCaption);
                 writer.RenderEndTag();//li
             }
+
+            //do story summary in OL
+            foreach (Story s in stories)
+            {
+                string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
+                        s.StoryIdentifier,
+                       s.Category.CategoryIdentifier);
+                writer.RenderBeginTag(HtmlTextWriterTag.Li);
+                StorySummary ss = new StorySummary();
+                ss.ShowFullSummary = false;
+                ss.DataBind(s);
+                ss.RenderControl(writer);
+                writer.RenderEndTag();
+            }
+
+
             writer.RenderEndTag();
 
         }
@@ -384,7 +428,8 @@ namespace Incremental.Kick.Web.Controls
             //do next top 10 list
             RenderStoryListItems(writer, _mostCommentedOnStories, "Most Commented On Stories", "comments");
 
-            writer.Write("<p><i>Counts are calculated based on the the story's submission date.</i></p>");
+            writer.Write("<p><i>Aggregate statistics are based on the item date. For example, the number of kicks listed is based on the exact time period and are totalled without regard to the story's submission date.</i></p>");
+            writer.Write("<p><i>Story lists are calculated based on the the story's submission date.</i></p>");
 
             writer.WriteEndTag("div");
 

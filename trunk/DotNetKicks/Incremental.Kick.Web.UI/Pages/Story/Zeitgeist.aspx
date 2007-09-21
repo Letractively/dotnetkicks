@@ -8,5 +8,5 @@
 
 
 <asp:Content id="RightContent" ContentPlaceHolderID="RightContent" runat="Server">
-   Show menu navigation for years, months here
+   
 </asp:Content>

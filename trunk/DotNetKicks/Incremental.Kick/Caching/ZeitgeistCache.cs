@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Dal;
@@ -60,7 +61,7 @@ namespace Incremental.Kick.Caching
                 Query qry = new Query(Story.Schema);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                count = qry.GetCount(Story.Columns.StoryID);
+                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
                 countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -83,12 +84,63 @@ namespace Incremental.Kick.Caching
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.IsPublishedToHomepage, true);
-                count = qry.GetCount(Story.Columns.StoryID);
+                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
                 countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return count.Value;
         }
+        /// <summary>
+        /// Gets the number of kicks.
+        /// </summary>
+        /// <param name="hostId">The host id.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        public static int GetNumberOfKicks(int hostId, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_KickCount_{0}_{1}_{2}_{3}", hostId, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
+
+            if (count == null)
+            {
+                Query qry = new Query(StoryKick.Schema);
+                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();// GetCount(StoryKick.Columns.StoryKickID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+        /// <summary>
+        /// Gets the number of comments.
+        /// </summary>
+        /// <param name="hostId">The host id.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        public static int GetNumberOfComments(int hostId, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_CommentCount_{0}_{1}_{2}_{3}", hostId, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
+
+            if (count == null)
+            {
+                Query qry = new Query(Comment.Schema);
+                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();// GetCount(Comment.Columns.CommentID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+
 
         /// <summary>
         /// Gets the most commented on stories.
@@ -137,6 +189,7 @@ namespace Incremental.Kick.Caching
         {
             return CacheManager<string, int?>.GetInstance();
         }
+
         /// <summary>
         /// Gets the starting date for the Zeitgeist query
         /// </summary>
