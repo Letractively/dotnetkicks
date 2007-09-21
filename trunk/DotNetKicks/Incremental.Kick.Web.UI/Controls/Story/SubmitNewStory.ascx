@@ -4,9 +4,11 @@
 <script type="text/javascript">
 function checkStoryExists(sender, args)
 {
+   /*
+   NOTE: GJ: turning off client side validation. We are now using Jayrock and it dosen't seem (on first inspection) to support a content argument 
     var context = {sender:sender, args:args};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value, checkStoryExistsCallback, context);   
+    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value, checkStoryExistsCallback, context); */  
 }
 
 function checkStoryExistsCallback(response)

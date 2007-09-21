@@ -29,13 +29,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxPro.2, Version=7.7.31.1, Culture=neutral, PublicKeyToken=eabb1b8f6347d5af, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Ajax.NET Pro\AjaxPro.2.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah, Version=1.0.8925.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Elmah\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="Subkismet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -674,12 +678,9 @@
       <DependentUpon>AddUserStoryTags.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Services\Ajax\AjaxServices.aspx.cs">
-      <DependentUpon>AjaxServices.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Services\Ajax\AjaxServices.aspx.designer.cs">
-      <DependentUpon>AjaxServices.aspx</DependentUpon>
+    <Compile Include="Services\Ajax\AjaxServices.ashx.cs">
+      <DependentUpon>AjaxServices.ashx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\Ajax\GetPopularStories.aspx.cs">
       <DependentUpon>GetPopularStories.aspx</DependentUpon>
@@ -800,6 +801,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Services\Ajax\AjaxServices.ashx" />
+    <Content Include="Static\Scripts\2.0.1\json.js" />
     <Content Include="Templates\NewDefault\MasterPage.Master" />
     <Content Include="Controls\Admin\Cache.ascx" />
     <Content Include="Controls\Admin\Tasks.ascx" />
@@ -815,7 +818,6 @@
     <Content Include="Pages\User\Friends.aspx" />
     <Content Include="Pages\User\FriendsKickedStories.aspx" />
     <Content Include="Pages\User\FriendsSubmittedStories.aspx" />
-    <Content Include="Services\Ajax\AjaxServices.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />

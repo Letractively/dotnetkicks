@@ -16,6 +16,12 @@ namespace Incremental.Kick.Web.Controls {
             set { _renderContainer = value; }
         }
 
+        private bool _showModeratorActions = false;
+        public bool ShowModeratorActions {
+            get { return _showModeratorActions; }
+            set { _showModeratorActions = value; }
+        }
+
         public UserActionList() { }
         public UserActionList(UserActionCollection userActions) {
             this.DataBind(userActions);
@@ -33,7 +39,7 @@ namespace Incremental.Kick.Web.Controls {
                 writer.Write("<em>No actions</em>");
 
             foreach (UserAction userAction in _userActions) {
-                if (userAction.IsPublic || this.KickPage.KickUserProfile.IsModerator) {
+                if (userAction.IsPublic || _showModeratorActions) {
                     User user = null;
                     if (userAction.UserID != null)
                         user = UserCache.GetUser(userAction.UserID.Value);

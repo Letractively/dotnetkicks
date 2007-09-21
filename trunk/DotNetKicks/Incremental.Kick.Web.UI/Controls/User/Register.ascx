@@ -1,11 +1,14 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="Register.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Register" %>
 
+ 
 <script type="text/javascript">
 function checkUsernameExists(sender, args)
 {
+   /*
+   NOTE: GJ: turning off client side validation. We are now using Jayrock and it dosen't seem (on first inspection) to support a content argument 
     var context = {sender:sender, args:args};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckUsernameExists(args.Value, checkUsernameExistsCallback, context);   
+    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckUsernameExists(args.Value, checkUsernameExistsCallback, context);   */
 }
 
 function checkUsernameExistsCallback(response)
@@ -23,9 +26,9 @@ function checkUsernameExistsCallback(response)
 
 function checkEmailExists(sender, args)
 {
-    var context = {sender:sender, args:args};
+    /*var context = {sender:sender, args:args};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckEmailExists(args.Value, checkEmailExistsCallback, context);   
+    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckEmailExists(args.Value, checkEmailExistsCallback, context);   */
 }
 
 function checkEmailExistsCallback(response)
