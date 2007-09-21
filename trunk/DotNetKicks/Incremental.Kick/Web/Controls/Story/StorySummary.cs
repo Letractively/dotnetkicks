@@ -244,12 +244,13 @@ namespace Incremental.Kick.Web.Controls
             string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, this._story.Category.CategoryIdentifier);
             string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, UserCache.GetUser(this._story.UserID).Username);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);
+            //
 
             //TODO: make this CSS
             writer.WriteLine(@"
-                <div style=""padding-bottom:5px;margin-bottom:10px;border-bottom: solid 1px silver;"">
-                    <div class=""storySummaryKickTD"" style=""float:left;padding-right:15px;"">
-                        <div class=""storyKickCount {2}""><a href=""{0}""><span id=""{3}_KickCount"">{1}</span></a><br /><span class=""smallText"">kicks</span></div>                       
+                <div style=""padding-bottom:5px;margin-bottom:10px;border-bottom: solid 1px silver;display:block"" class=""smallText"">
+                    <div style=""float:left;padding-right:15px;margin:0;width:60px;overflow:hidden;"">
+                        <div class=""storyKickCount {2}""><a href=""{0}""><span id=""{3}_KickCount"">{1}</span></a><br/><span class=""smallText"">kicks</span></div>                       
                     </div>
             ", kickStoryUrl, this._story.KickCount, kickCountClass, this._story.StoryID);
 

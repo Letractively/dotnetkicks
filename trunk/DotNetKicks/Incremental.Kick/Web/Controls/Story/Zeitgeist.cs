@@ -181,7 +181,7 @@ namespace Incremental.Kick.Web.Controls
                 //
                 writer.WriteBeginTag("div");
                 writer.WriteAttribute("class", "ZeitgeistTotals");
-                writer.WriteAttribute("style", "display:block;");
+                writer.WriteAttribute("style", "display:inline-block;");
                 writer.Write(HtmlTextWriter.TagRightChar);
 
                 RenderDateStatistics(writer);
@@ -369,46 +369,47 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(new DateTime(Year.Value, Month.Value, Day.Value).ToString("MMMM d, yyyy"));
             writer.RenderEndTag();
 
-            writer.RenderBeginTag(HtmlTextWriterTag.Ol);
 
             //just plain OL with story title links
-            //foreach (Story s in stories)
-            //{
-            //    string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
-            //            s.StoryIdentifier,
-            //           s.Category.CategoryIdentifier);
-            //    writer.RenderBeginTag(HtmlTextWriterTag.Li);
-            //    writer.WriteBeginTag("a");
-            //    writer.WriteAttribute("href", kickStoryUrl);
-            //    writer.Write(HtmlTextWriter.TagRightChar);
-            //    writer.Write(s.Title);
-            //    writer.WriteEndTag("a");
-            //    writer.RenderEndTag();
-            //}
-
-            if (stories.Count.Equals(0))
-            {
-                writer.RenderBeginTag(HtmlTextWriterTag.Li);
-                writer.Write(this.NoDataCaption);
-                writer.RenderEndTag();//li
-            }
-
-            //do story summary in OL
+            writer.RenderBeginTag(HtmlTextWriterTag.Ol);
             foreach (Story s in stories)
             {
                 string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
                         s.StoryIdentifier,
                        s.Category.CategoryIdentifier);
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
-                StorySummary ss = new StorySummary();
-                ss.ShowFullSummary = false;
-                ss.DataBind(s);
-                ss.RenderControl(writer);
+                writer.WriteBeginTag("a");
+                writer.WriteAttribute("href", kickStoryUrl);
+                writer.Write(HtmlTextWriter.TagRightChar);
+                writer.Write(s.Title);
+                writer.WriteEndTag("a");
+                writer.RenderEndTag();
+            }
+            writer.RenderEndTag();
+
+            if (stories.Count.Equals(0))
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.P);
+                writer.Write(this.NoDataCaption);
                 writer.RenderEndTag();
             }
 
+            //do story summary in OL
+            //foreach (Story s in stories)
+            //{
+            //    string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory,
+            //            s.StoryIdentifier,
+            //           s.Category.CategoryIdentifier);
+            //    writer.RenderBeginTag(HtmlTextWriterTag.Li);
+            //    StorySummary ss = new StorySummary();
+            //    ss.ShowFullSummary = false;
+            //    ss.DataBind(s);
+            //    ss.RenderControl(writer);
+            //    writer.RenderEndTag();
+            //}
 
-            writer.RenderEndTag();
+
+          
 
         }
 
