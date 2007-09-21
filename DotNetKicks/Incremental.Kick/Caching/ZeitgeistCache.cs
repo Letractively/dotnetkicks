@@ -34,6 +34,7 @@ namespace Incremental.Kick.Caching
                 Query qry = new Query(Story.Schema);
                 qry.Top = storyCount.ToString();
                 qry.OrderBy = OrderBy.Desc(Story.Columns.KickCount);
+                qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.KickCount, Comparison.GreaterOrEquals, 1);
@@ -59,6 +60,7 @@ namespace Incremental.Kick.Caching
             if (count == null)
             {
                 Query qry = new Query(Story.Schema);
+                qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
@@ -81,6 +83,7 @@ namespace Incremental.Kick.Caching
             if (count == null)
             {
                 Query qry = new Query(Story.Schema);
+                qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.IsPublishedToHomepage, true);
@@ -162,6 +165,7 @@ namespace Incremental.Kick.Caching
                 Query qry = new Query(Story.Schema);
                 qry.Top = storyCount.ToString();
                 qry.OrderBy = OrderBy.Desc(Story.Columns.CommentCount);
+                qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CommentCount, Comparison.GreaterOrEquals, 1);
