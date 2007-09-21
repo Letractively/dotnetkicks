@@ -35,6 +35,7 @@ namespace Incremental.Kick.Caching
                 qry.Top = storyCount.ToString();
                 qry.OrderBy = OrderBy.Desc(Story.Columns.KickCount);
                 qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.KickCount, Comparison.GreaterOrEquals, 1);
@@ -61,6 +62,7 @@ namespace Incremental.Kick.Caching
             {
                 Query qry = new Query(Story.Schema);
                 qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
@@ -74,9 +76,9 @@ namespace Incremental.Kick.Caching
         /// </summary>
         /// <param name="hostId">The host id.</param>
         /// <returns></returns>
-        public static int GetNumberOfStoriesPublished(int hostId, int year, int? month, int? day)
+        public static int GetNumberOfStoriesPublished(int hostID, int year, int? month, int? day)
         {
-            string cacheKey = String.Format("Zeitgeist_PublishedCount_{0}_{1}_{2}_{3}", hostId, year, month, day);
+            string cacheKey = String.Format("Zeitgeist_PublishedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
             CacheManager<string, int?> countCache = GetStoryCountCache();
             int? count = countCache[cacheKey];
 
@@ -84,6 +86,7 @@ namespace Incremental.Kick.Caching
             {
                 Query qry = new Query(Story.Schema);
                 qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.IsPublishedToHomepage, true);
@@ -101,15 +104,16 @@ namespace Incremental.Kick.Caching
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns></returns>
-        public static int GetNumberOfKicks(int hostId, int year, int? month, int? day)
+        public static int GetNumberOfKicks(int hostID, int year, int? month, int? day)
         {
-            string cacheKey = String.Format("Zeitgeist_KickCount_{0}_{1}_{2}_{3}", hostId, year, month, day);
+            string cacheKey = String.Format("Zeitgeist_KickCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
             CacheManager<string, int?> countCache = GetStoryCountCache();
             int? count = countCache[cacheKey];
 
             if (count == null)
             {
                 Query qry = new Query(StoryKick.Schema);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 count = qry.GetRecordCount();// GetCount(StoryKick.Columns.StoryKickID);
@@ -126,15 +130,16 @@ namespace Incremental.Kick.Caching
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns></returns>
-        public static int GetNumberOfComments(int hostId, int year, int? month, int? day)
+        public static int GetNumberOfComments(int hostID, int year, int? month, int? day)
         {
-            string cacheKey = String.Format("Zeitgeist_CommentCount_{0}_{1}_{2}_{3}", hostId, year, month, day);
+            string cacheKey = String.Format("Zeitgeist_CommentCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
             CacheManager<string, int?> countCache = GetStoryCountCache();
             int? count = countCache[cacheKey];
 
             if (count == null)
             {
                 Query qry = new Query(Comment.Schema);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Comment.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Comment.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 count = qry.GetRecordCount();// GetCount(Comment.Columns.CommentID);
@@ -166,6 +171,7 @@ namespace Incremental.Kick.Caching
                 qry.Top = storyCount.ToString();
                 qry.OrderBy = OrderBy.Desc(Story.Columns.CommentCount);
                 qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CommentCount, Comparison.GreaterOrEquals, 1);
