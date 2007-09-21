@@ -4,11 +4,11 @@
  <script type="text/javascript">
     function refreshSpy() {
         StartLoading();
-        Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.GetSpyHtml(<%= KickPage.HostProfile.HostID %>, getSpyHtml_complete);
+        new AjaxServices().getSpyHtml(<%= KickPage.HostProfile.HostID %>, getSpyHtml_complete);
     }
     
-    function getSpyHtml_complete(result) {
-        $("#userActionList").html(result.value);
+    function getSpyHtml_complete(response) {
+        $("#userActionList").html(response.result);
         FinishLoading();
         setTimeout("refreshSpy()", 60000)
     }

@@ -7,24 +7,24 @@
 
     function addShout() {
         StartLoading();
-        if(forUsername) 
-            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShoutForUser(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), forUsername, addShout_complete);
+        if(forUsername)
+            new AjaxServices().addShoutForUser(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), forUsername, addShout_complete);
         else
-            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), addShout_complete);
+            new AjaxServices().addShout(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), addShout_complete);
     }
     
     function refreshShoutbox() {
         //note: gj: a quick hack to get the refresh working
         StartLoading();
         if(forUsername) 
-            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShoutForUser(<%= KickPage.HostProfile.HostID %>, '', forUsername, addShout_complete);
+            new AjaxServices().addShoutForUser(<%= KickPage.HostProfile.HostID %>, '', forUsername, addShout_complete);
         else
-            Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.AddShout(<%= KickPage.HostProfile.HostID %>, '', addShout_complete);       
+            new AjaxServices().addShout(<%= KickPage.HostProfile.HostID %>, '', addShout_complete);       
     }
     
-    function addShout_complete(result) {
+    function addShout_complete(response) {
         $("#shout_message").val("");
-        $("#shoutList").html(result.value);
+        $("#shoutList").html(response.result);
         FinishLoading();
     }
 </script>

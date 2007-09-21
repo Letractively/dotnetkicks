@@ -28,13 +28,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxPro.2, Version=7.7.31.1, Culture=neutral, PublicKeyToken=eabb1b8f6347d5af, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Ajax.NET Pro\AjaxPro.2.dll</HintPath>
-    </Reference>
     <Reference Include="CipherLite, Version=1.5.0.0, Culture=neutral, PublicKeyToken=29e81a0118de2e3b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -155,6 +159,9 @@
     </Compile>
     <Compile Include="Web\Controls\Base\KickHtmlControl.cs" />
     <Compile Include="Web\Controls\Base\KickHttpHandler.cs" />
+    <Compile Include="Web\Controls\Base\KickJsonRpcHandler.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Web\Controls\Base\KickMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
