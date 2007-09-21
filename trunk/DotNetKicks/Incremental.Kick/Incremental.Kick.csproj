@@ -208,6 +208,7 @@
     <Compile Include="Web\Controls\User\UserList.cs" />
     <Compile Include="Web\Controls\User\UserProfileHeader.cs" />
     <Compile Include="Web\Controls\User\UserProfileMenu.cs" />
+    <Compile Include="Web\Controls\User\UserWelcome.cs" />
     <Compile Include="Web\Helpers\GravatarHelper.cs" />
     <Compile Include="Web\Helpers\HostHelper.cs" />
     <Compile Include="Web\Helpers\PasswordGenerator.cs" />

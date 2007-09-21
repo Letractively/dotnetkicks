@@ -14,7 +14,11 @@
     <div id="LoadingSpan" class="Hidden">Loading...</div>
     
     <uc1:TopMenu ID="TopMenu" runat="server" />
-    <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />
+    
+    <div id="BreadcrumbsNavigationAndWelcome" class="visualIEFloatFix">
+        <Kick:UserWelcome id="UserWelcomeMessage" runat="server" />
+        <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />        
+    </div>    
     
     <table>
         <tr>
