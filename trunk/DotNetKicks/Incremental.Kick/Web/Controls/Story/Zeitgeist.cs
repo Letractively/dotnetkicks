@@ -27,6 +27,8 @@ namespace Incremental.Kick.Web.Controls
         private int? _month = System.DateTime.Now.Month;
         private StoryCollection _mostCommentedOnStories;
         private StoryCollection _mostKickedStories;
+        private int _storiesSubmittedCount;
+        private int _storiesPublishedCount;
         private string _title = "";
         private int? _year;
         private int numberOfItems = 10;
@@ -146,6 +148,8 @@ namespace Incremental.Kick.Web.Controls
             _mostKickedStories = ZeitgeistCache.GetMostKickedStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostCommentedOnStories = ZeitgeistCache.GetMostCommentedOnStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
 
+            _storiesSubmittedCount = ZeitgeistCache.GetNumberOfStoriesSubmitted(hostId, this.Year.Value, this.Month, this.Day);
+            _storiesPublishedCount = ZeitgeistCache.GetNumberOfStoriesPublished(hostId, this.Year.Value, this.Month, this.Day);
 
         }
 
@@ -168,11 +172,49 @@ namespace Incremental.Kick.Web.Controls
             }
             else
             {
+                //navigation system
+                RenderNavigation(writer);
+                //
+                RenderDateStatistics(writer);
+                //render top 10/X lists
                 RenderStoryLists(writer);
             }
 
-
         }
+
+        /// <summary>
+        /// Renders the date statistics.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        private void RenderDateStatistics(HtmlTextWriter writer)
+        {
+            //render single stats, like counters
+            writer.WriteBeginTag("div");
+            writer.WriteAttribute("class", "ZeitgeistStatistics");
+            writer.Write(HtmlTextWriter.TagRightChar);
+
+            writer.RenderBeginTag(HtmlTextWriterTag.P);
+            writer.Write("Number of Stories Submitted: ");
+            writer.Write(_storiesSubmittedCount);
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+            writer.Write("Number of Stories Published: ");
+            writer.Write(_storiesPublishedCount);
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+            writer.Write("Submit to Publish Percentage: ");
+            if (_storiesPublishedCount > 0 && _storiesPublishedCount <= _storiesSubmittedCount)
+                writer.Write(Math.Round((double)_storiesPublishedCount / _storiesSubmittedCount, 4).ToString("P"));
+            else
+                writer.Write("0 %");
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
+            writer.RenderEndTag();    //p
+
+            writer.WriteEndTag("div");
+
+            //writer.RenderBeginTag(HtmlTextWriterTag.Br);//msie hack
+        }
+
+      
 
         // [rgn] Private Methods (4)
 
@@ -215,14 +257,14 @@ namespace Incremental.Kick.Web.Controls
         {
             writer.RenderBeginTag(HtmlTextWriterTag.Ul);
             //each month of that year
-            for (int y = this.MinimumDate.Year; y <=DateTime.Now.Year; y++)
+            for (int y = this.MinimumDate.Year; y <= DateTime.Now.Year; y++)
             {
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
-                string yearUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, y.ToString() );
+                string yearUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, y.ToString());
                 writer.WriteBeginTag("a");
                 writer.WriteAttribute("href", yearUrl);
                 writer.Write(HtmlTextWriter.TagRightChar);
-                writer.Write(y);   
+                writer.Write(y);
                 writer.WriteEndTag("a");
                 writer.RenderEndTag();//li year
             }
@@ -263,7 +305,7 @@ namespace Incremental.Kick.Web.Controls
         {
             writer.RenderBeginTag(HtmlTextWriterTag.Ul);
             //each day of month of that year
-            for (int d = 1; d<= DateTime.DaysInMonth(year, month); d++)
+            for (int d = 1; d <= DateTime.DaysInMonth(year, month); d++)
             {
                 if (year == DateTime.Now.Year && month == DateTime.Now.Month && d >= DateTime.Now.Day)
                     continue;
@@ -331,10 +373,7 @@ namespace Incremental.Kick.Web.Controls
         /// </summary>
         /// <param name="writer">The writer.</param>
         private void RenderStoryLists(HtmlTextWriter writer)
-        {            
-            //navigation system
-            RenderNavigation(writer);
-
+        {
             writer.WriteBeginTag("div");
             writer.WriteAttribute("class", "ZeitgeistLists");
             writer.Write(HtmlTextWriter.TagRightChar);
@@ -353,6 +392,10 @@ namespace Incremental.Kick.Web.Controls
 
         }
 
+        /// <summary>
+        /// Renders the navigation.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
         private void RenderNavigation(HtmlTextWriter writer)
         {
             writer.WriteBeginTag("div");
