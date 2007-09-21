@@ -13,7 +13,7 @@
 #HeaderContainer
 {
 	background-color: #83acca;
-	padding: 10px 15px 5px 15px;
+	padding:  10px 15px 5px 15px;
 	min-height: 30px;
 }
 /* site title */
@@ -64,6 +64,7 @@
 	text-decoration: none;
 }
 /* breadcrumb trail home > opensource > dotnetkicks */
+
 #BreadcrumbNavigation
 {
 	padding: 2px 15px 2px 15px;

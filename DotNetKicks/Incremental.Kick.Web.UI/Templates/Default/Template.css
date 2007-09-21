@@ -1,4 +1,5 @@
-﻿
+﻿* html .visualIEFloatFix { height: 0.01%; }
+
 body
 {
 	padding: 0px 0px 0px 0px;
@@ -222,8 +223,60 @@ body, td, th, h3, textarea, input, select {
 #headerTagLine { color: White; margin-left:8px; font-weight: bold; font-size: .9em; font-family: "Trebuchet MS", Sans-Serif, Verdana; }
 #headerLinks A { padding: 8px 8px 8px 8px; }
 
-#breadcrumbs { width: 100%; font-size: 1.1em; padding: 1px 0px 1px 0px; background-color: #A8CC45; background-image: url(images/gradients/green.gif); color: Black; font-weight: bold; }
-#breadcrumbs A { color: White; font-weight: bold; }
+#BreadcrumbsNavigationAndWelcome
+{
+	padding: 5px  15px 5px 15px;
+	background-image: url(images/gradients/green.gif);
+	background-color: #a3c84e;
+	color: Black; 
+	font-size: 1em; 
+}
+#BreadcrumbsNavigationAndWelcome a
+{
+	color: #ffffff;
+	font-weight: bold;
+}
+#UserWelcome
+{
+	display:block;
+	float:right;
+}
+#BreadcrumbNavigation
+{
+	display:block;
+}
+#BreadcrumbNavigation ul
+{
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+	border: none;
+}
+#BreadcrumbNavigation ul li
+{
+	margin-left: 0;
+	padding-left: 2px;
+	border: none;
+	list-style: none;
+	display: inline;
+}
+ /* auto insert the >> character */
+#BreadcrumbNavigation ul li:before
+{
+	content: "\0020 \0020 \0020 \00BB \0020";
+}
+/* except for first bullet, put whitespace there */
+#BreadcrumbNavigation ul li.first:before
+{
+	content: " ";
+}
+
+/*
+#BreadcrumbNavigation { width: 100%; font-size: 1.1em; padding: 1px 0px 1px 0px; 
+background-color: #A8CC45; background-image: url(images/gradients/green.gif); color: Black; font-weight: bold; }
+#BreadcrumbNavigation A { color: White; font-weight: bold; }
+*/
+
 
 #topAds { margin: 18px 0px 18px 0px; width:99%; text-align: center; background-color: #FFFFFF;}
 

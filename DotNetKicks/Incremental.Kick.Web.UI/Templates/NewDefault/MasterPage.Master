@@ -20,7 +20,7 @@
             <asp:Literal ID="litSiteTagLine" runat="server"/></h2>
         
         <div id="HeaderNavigation">
-            <ul>
+            <ul>            
                 <%-- TODO: fix this to code behind --%>
                 <% if (this.Page.User.Identity.IsAuthenticated) { %>
                     <li><img src="/static/images/icons/new.gif" width="28" height="11" /><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your profile</a></li>                
@@ -40,13 +40,11 @@
         </div>        
     </div>
     
-    <!-- Breadcrumbs -->
-    <div id="BreadcrumbNavigation">
-        <ul>
-            <li class="first">Home</li>
-            <li>Test</li>
-        </ul>
+    <div id="BreadcrumbsNavigationAndWelcome">
+      <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />
+      <Kick:UserWelcome id="UserWelcomeMessage" runat="server" />
     </div>
+   
                 
                 
     <asp:ContentPlaceHolder ID="MainContent" runat="server">    
