@@ -19,7 +19,7 @@ namespace Incremental.Kick.Web.UI.Controls {
         private int _storyID;
 
         protected string LoginUrl {
-            get { return UrlFactory.CreateUrl(UrlFactory.PageName.Login, this.Request.Url.ToString()); }
+            get { return UrlFactory.CreateUrl(UrlFactory.PageName.Login, this.Request.Path); }
         }
 
         protected string RegisterUrl {
