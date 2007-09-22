@@ -44,7 +44,7 @@ namespace Incremental.Kick.Web.Controls {
                     if (userAction.UserID != null)
                         user = UserCache.GetUser(userAction.UserID.Value);
 
-                    if (user == null || (!user.IsBanned || this.KickPage.KickUserProfile.IsModerator)) {
+                    if (user == null || (!user.IsBanned || _showModeratorActions)) {
                         writer.WriteLine(@"<div class=""userAction userAction{0}"">", userAction.UserActionType.ToString());
                         if (user != null)
                             new UserLink(user).RenderControl(writer);
