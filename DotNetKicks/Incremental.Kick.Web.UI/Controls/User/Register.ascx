@@ -4,44 +4,35 @@
 <script type="text/javascript">
 function checkUsernameExists(sender, args)
 {
-   /*
-   NOTE: GJ: turning off client side validation. We are now using Jayrock and it dosen't seem (on first inspection) to support a content argument 
-    var context = {sender:sender, args:args};
+    StartLoading();
+    var context = {sender:sender, args:args, message: "The username already exists, please choose another one."};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckUsernameExists(args.Value, checkUsernameExistsCallback, context);   */
-}
-
-function checkUsernameExistsCallback(response)
-{
-    if(response.value)
-    {
-        response.context.sender.innerHTML = "The username already exists, please choose another one.";
-        response.context.args.IsValid = false;
-        
-        response.context.sender.style.display = '';
-    }
-    else
-        response.context.sender.style.display = 'none';    
+    new AjaxServices().checkUsernameExists(args.Value, function(response)
+    { response.context = context; checkUserDataCallback(response); });
 }
 
 function checkEmailExists(sender, args)
 {
-    /*var context = {sender:sender, args:args};
+    StartLoading();
+    var context = {sender:sender, args:args, message: "The email already exists, please use another one or use the forgotten password page to reset your password."};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.CheckEmailExists(args.Value, checkEmailExistsCallback, context);   */
+    new AjaxServices().checkEmailExists(args.Value, function(response)
+    { response.context = context; checkUserDataCallback(response); });
 }
 
-function checkEmailExistsCallback(response)
+function checkUserDataCallback(response)
 {
-    if(response.value)
+    if(response.result)
     {
-        response.context.sender.innerHTML = "The email already exists, please use another one or use the forgotten password page to reset your password.";
+        response.context.sender.innerHTML = response.context.message;
         response.context.args.IsValid = false;
         
         response.context.sender.style.display = '';
     }
     else
         response.context.sender.style.display = 'none';    
+
+    FinishLoading();
 }
 </script>
 
