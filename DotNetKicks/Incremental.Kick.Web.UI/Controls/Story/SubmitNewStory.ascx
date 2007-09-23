@@ -4,24 +4,26 @@
 <script type="text/javascript">
 function checkStoryExists(sender, args)
 {
-   /*
-   NOTE: GJ: turning off client side validation. We are now using Jayrock and it dosen't seem (on first inspection) to support a content argument 
+    StartLoading();
     var context = {sender:sender, args:args};
 
-    Incremental.Kick.Web.UI.Services.Ajax.AjaxServices.FetchKickedStoryUrlByUrl(args.Value, checkStoryExistsCallback, context); */  
+    new AjaxServices().fetchKickedStoryUrlByUrl(args.Value, function(response) 
+    { response.context = context; checkStoryExistsCallback(response); });  
 }
 
 function checkStoryExistsCallback(response)
 {
-    if(response.value)
+    if(response.result)
     {
-        response.context.sender.innerHTML = "The story already exists. You may want to <a href='" + response.value + "'>kick it</a> instead";
+        response.context.sender.innerHTML = "The story already exists. You may want to <a href='" + response.result + "'>kick it</a> instead";
         response.context.args.IsValid = false;
         
         response.context.sender.style.display = '';
     }
     else
-        response.context.sender.style.display = 'none';    
+        response.context.sender.style.display = 'none'; 
+        
+    FinishLoading();   
 }
 </script>
 
