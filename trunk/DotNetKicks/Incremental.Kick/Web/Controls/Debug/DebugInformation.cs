@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Caching;
+using System.Reflection;
 
 namespace Incremental.Kick.Web.Controls {
     public class DebugInformation : KickHtmlControl {
@@ -35,6 +36,7 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine("<br/>AppDomainID: {0}", AppDomain.CurrentDomain.Id);
             writer.WriteLine("<br/>AdsenseID: {0}", this.KickUIPage.AdSenseID);
             writer.WriteLine("<br/>Url: {0}", this.KickPage.Request.Url);
+            writer.WriteLine("<br/>Assembly Version: {0}", this.KickUIPage.AssemblyVersion);
         }
     }
 }
