@@ -129,20 +129,4 @@ function Failure() {
     alert("oops, an error has occured.");
 }
 
-
-function JsonToObject(json) {
-    return eval('(' + json + ')');
-}
-
-
-
-function TrimString(rawString) {
-  rawString = rawString.replace( /^\s+/g, "" );
-  return rawString.replace( /\s+$/g, "" );
-}
-
-function Trace(message){
-  if( typeof( jsTrace ) != 'undefined' ){
-    jsTrace.send(message);
-  }
-}
+var ajaxServices = new AjaxServices();
