@@ -10,11 +10,9 @@ using Incremental.Kick.Dal.Entities;
 using System.Web;
 using SubSonic.Sugar;
 
-namespace Incremental.Kick.Web.Controls
-{
+namespace Incremental.Kick.Web.Controls {
 
-    public class StorySummary : KickWebControl
-    {
+    public class StorySummary : KickWebControl {
 
         #region [rgn] Fields (4)
 
@@ -36,8 +34,7 @@ namespace Incremental.Kick.Web.Controls
         /// If <c>false</c> then displays a shorter story summary as shown in Zeitgeist.
         /// Default is <c>true</c>.
         /// </remarks>
-        public bool ShowFullSummary
-        {
+        public bool ShowFullSummary {
             get { return _showFullSummary; }
             set { _showFullSummary = value; }
         }
@@ -46,8 +43,7 @@ namespace Incremental.Kick.Web.Controls
         /// Gets or sets a value indicating whether to display the [show more link].
         /// </summary>
         /// <value><c>true</c> if [show more link]; otherwise, <c>false</c>.</value>
-        public bool ShowMoreLink
-        {
+        public bool ShowMoreLink {
             get { return this._showMoreLink; }
             set { this._showMoreLink = value; }
         }
@@ -62,8 +58,7 @@ namespace Incremental.Kick.Web.Controls
         /// binds the datas
         /// </summary>
         /// <param name="story">The story.</param>
-        public void DataBind(Story story)
-        {
+        public void DataBind(Story story) {
             this.DataBind(story, true);
         }
 
@@ -72,8 +67,7 @@ namespace Incremental.Kick.Web.Controls
         /// </summary>
         /// <param name="story">The story.</param>
         /// <param name="isOddRow">if set to <c>true</c> [is odd row].</param>
-        public void DataBind(Story story, bool isOddRow)
-        {
+        public void DataBind(Story story, bool isOddRow) {
             this._story = story;
             this._isOddRow = isOddRow;
         }
@@ -84,8 +78,7 @@ namespace Incremental.Kick.Web.Controls
         /// Renders the control to the specified HTML writer.
         /// </summary>
         /// <param name="writer">The <see cref="T:System.Web.UI.HtmlTextWriter"></see> object that receives the control content.</param>
-        protected override void Render(HtmlTextWriter writer)
-        {
+        protected override void Render(HtmlTextWriter writer) {
             if (_showFullSummary)
                 RenderFullSummary(writer);
             else
@@ -96,8 +89,7 @@ namespace Incremental.Kick.Web.Controls
         /// Renders the full story summary.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        protected void RenderFullSummary(HtmlTextWriter writer)
-        {
+        protected void RenderFullSummary(HtmlTextWriter writer) {
             Category category = CategoryCache.GetCategory(this._story.CategoryID, this.KickPage.HostProfile.HostID);
             string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, category.CategoryIdentifier);
             string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, UserCache.GetUser(this._story.UserID).Username);
@@ -109,8 +101,7 @@ namespace Incremental.Kick.Web.Controls
 
             string kickItCssClass = "visible";
             string kickedCssClass = "hidden";
-            if (isKicked)
-            {
+            if (isKicked) {
                 kickItCssClass = "hidden";
                 kickedCssClass = "isible";
             }
@@ -170,12 +161,9 @@ namespace Incremental.Kick.Web.Controls
 
             writer.WriteLine(@"<img src=""{0}/comment.png"" alt=""Add a comment"" width=""16"" height=""16"" border=""0"" /> ", this.KickPage.StaticIconRootUrl);
 
-            if (this._story.CommentCount == 0)
-            {
+            if (this._story.CommentCount == 0) {
                 writer.WriteLine(@"<a href=""{0}"">add a comment</a>", kickStoryUrl);
-            }
-            else
-            {
+            } else {
                 if (this._story.CommentCount == 1)
                     writer.WriteLine(@"<a href=""{0}"">1 comment</a>", kickStoryUrl);
                 else
@@ -183,19 +171,16 @@ namespace Incremental.Kick.Web.Controls
             }
 
             string categoryIcon = "";
-            if (category.IconNameSpecified)
-            {
+            if (category.IconNameSpecified) {
                 categoryIcon = String.Format(@"<a href=""{0}""><img src=""{1}/{2}"" width=""16"" height=""16"" border=""0"" /></a>", categoryUrl, this.KickPage.StaticIconRootUrl, category.IconName);
             }
             writer.WriteLine(@" | 
                 category: {0} <a href=""{1}"" rel=""tag"">{2}</a>", categoryIcon, categoryUrl, category.Name);
 
-            writer.WriteLine(@" |
-                            <span class=""ReportAsSpamLink""><a href=""javascript:ReportAsSpam({0});"">report as spam</a></span>
-            ", this._story.StoryID);
+            if (this.KickPage.IsAuthenticated)
+                writer.WriteLine(@" | <span class=""ReportAsSpamLink""><a href=""javascript:ReportAsSpam({0});"">report as spam</a></span>", this._story.StoryID);
 
-            if (this.KickPage.IsHostModerator)
-            {
+            if (this.KickPage.IsHostModerator) {
                 string deleteText = "delete";
                 if (this._story.SpamCount > 0)
                     deleteText += " (spam count is " + this._story.SpamCount.ToString() + ")";
@@ -239,8 +224,7 @@ namespace Incremental.Kick.Web.Controls
         /// Renders the short story summary.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        protected void RenderShortSummary(HtmlTextWriter writer)
-        {
+        protected void RenderShortSummary(HtmlTextWriter writer) {
             string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._story.StoryIdentifier, this._story.Category.CategoryIdentifier);
             string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, UserCache.GetUser(this._story.UserID).Username);
             string kickCountClass = this.GetKickCountClass(this._story.KickCount);
@@ -270,12 +254,9 @@ namespace Incremental.Kick.Web.Controls
 
             writer.WriteLine(@" {0}</div><div class=""storyActions"">", Dates.ReadableDiff(this._story.CreatedOn, DateTime.Now));
 
-            if (this._story.CommentCount == 0)
-            {
+            if (this._story.CommentCount == 0) {
                 writer.WriteLine("0 comments");
-            }
-            else
-            {
+            } else {
                 if (this._story.CommentCount == 1)
                     writer.WriteLine(@"1 comment");
                 else
@@ -292,8 +273,7 @@ namespace Incremental.Kick.Web.Controls
         /// </summary>
         /// <param name="kickCount">The kick count.</param>
         /// <returns></returns>
-        private string GetKickCountClass(int kickCount)
-        {
+        private string GetKickCountClass(int kickCount) {
             string cssClass = "storyKickCount1";
             if (this._story.KickCount > 9)
                 cssClass += "0";
