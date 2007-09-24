@@ -1,8 +1,9 @@
 ﻿
 function KickIt(storyID, isAuthenticated) {
     if(isAuthenticated) {
+        StartLoading();
         HideElement(GetStoryKickItElement(storyID));
-        Ajax_KickStory(storyID, true, KickIt_End, Failure);
+        ajaxServices.kickStory(storyID, true, function(response) { KickIt_End(storyID, response.result); });
     } else {
         document.location = WEB_BASE_URL + "login?ReturnUrl=" + document.URL;
     }
@@ -15,8 +16,9 @@ function KickIt_End(storyID, kickCount) {
 }
 
 function UnKickIt(storyID) {
+    StartLoading();
     HideElement(GetStoryUnKickItElement(storyID));
-    Ajax_KickStory(storyID, false, UnKickIt_End, Failure);
+    ajaxServices.kickStory(storyID, false, function(response) { UnKickIt_End(storyID, response.result); });
 }
 
 function UnKickIt_End(storyID, kickCount) {
@@ -32,18 +34,14 @@ function SetStoryKickCountText(storyID, kickCount) {
 }
 
 function ReportAsSpam(storyID) {
-    Ajax_ReportAsSpam(storyID, ReportAsSpam_End, Failure);
+    StartLoading();
+    ajaxServices.reportAsSpam(storyID, function(response) { ReportAsSpam_End(storyID); });
 }
 
 function ReportAsSpam_End(storyID) {
     alert("Thanks, the story has been flagged as potential spam and may be removed from the site in the near future.");
     FinishLoading();
 }
-
-
-
-
-
 
 
 function GetStoryKickCountElement(storyID) { return document.getElementById(storyID + "_KickCount"); }

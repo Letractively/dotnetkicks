@@ -22,24 +22,22 @@ namespace Incremental.Kick.Web.Controls {
         public void DataBind(ShoutCollection shouts) {
             this._shouts = shouts;
         }
-        
+
         protected override void Render(System.Web.UI.HtmlTextWriter writer) {
             if (_renderContainer)
                 writer.WriteLine(@"<div id=""shoutList"">");
 
             for (int i = 0; i < this._shouts.Count; i++) {
-                if (i < 30) {
-                    Shout shout = this._shouts[i];
-                    if (shout.IsSpam)
-                        shout.Message = "<em>[shout removed]</em>";
+                Shout shout = this._shouts[i];
+                if (shout.IsSpam)
+                    shout.Message = "<em>[shout removed]</em>";
 
-                    writer.WriteLine(@"<div class=""shout"">");
-                    new UserLink(shout.FromUserID).RenderControl(writer);
-                    writer.WriteLine(@" said <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(shout.CreatedOn, DateTime.Now));
+                writer.WriteLine(@"<div class=""shout"">");
+                new UserLink(shout.FromUserID).RenderControl(writer);
+                writer.WriteLine(@" said <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(shout.CreatedOn, DateTime.Now));
 
-                    writer.WriteLine(@"<div class=""shoutMessage"">{0}</div>", shout.Message);
-                    writer.WriteLine("</div>");
-                }
+                writer.WriteLine(@"<div class=""shoutMessage"">{0}</div>", shout.Message);
+                writer.WriteLine("</div>");
             }
 
             if (_renderContainer)

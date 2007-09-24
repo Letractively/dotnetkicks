@@ -87,15 +87,9 @@ namespace Incremental.Kick.Web.Controls {
 
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/jQuery/jquery-1.2.min.js");
 
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Dojo/Dojo.js");
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Ajax.js");
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Common.js");
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Tagging.js");
-
-            //TODO: GJ: add some booleans
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Controls/PopularStoryHeader.js");
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Controls/PopularStoryNavigator.js");
 
             if (this.IsHostModerator)
                 this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Moderator/HostModerator.js");

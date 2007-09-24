@@ -25,7 +25,7 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine(@"</td><td class=""editableTagListTD"">");
 
             EditableTagList editableTagList = new EditableTagList();
-            editableTagList.DataBind(this._storyID);
+            editableTagList.DataBind(this._storyID, this.KickPage.KickUserProfile.Username);
             this.Controls.Add(editableTagList);
             editableTagList.RenderControl(writer);
 

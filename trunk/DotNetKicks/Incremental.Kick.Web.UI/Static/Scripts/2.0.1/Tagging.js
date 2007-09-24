@@ -10,10 +10,11 @@ function ToggleStoryTags(storyID) {
         if(IS_USER_AUTHENTICATED) {
             GetStoryTagInputElement(storyID).focus();       
             if(IsElementHidden(GetEditableTagList(storyID))) {
+                StartLoading();
                 var editableTagListElement = GetEditableTagList(storyID);
                 editableTagListElement.innerHTML = "retreiving your tags....";
                 ShowElement(editableTagListElement);
-                Ajax_GetUserStoryTags(storyID, GetUserStoryTags_End, Failure);
+                ajaxServices.getUserStoryTags(storyID, function(response) { GetUserStoryTags_End(storyID, response.result); });    
             }
         }
     }
@@ -30,8 +31,9 @@ function GetUserStoryTags_End(storyID, userTagsHtml) {
 function AddUserStoryTags(storyID) {
     var tagInput = GetStoryTagInputElement(storyID).value;
     if(tagInput.length > 0) {
+        StartLoading();
         GetAddTagButton(storyID).disabled = true;
-        Ajax_AddUserStoryTags(storyID, tagInput, AddUserStoryTags_End, Failure);       
+        ajaxServices.tagStory(storyID, tagInput, function(response) { AddUserStoryTags_End(storyID, response.result); });    
     }
 }
 
@@ -47,7 +49,8 @@ function AddUserStoryTags_End(storyID, userTagsHtml) {
 }
 
 function RemoveUserStoryTag(storyID, tagID) {
-    Ajax_RemoveUserStoryTag(storyID, tagID, RemoveUserStoryTag_End, Failure);
+    StartLoading();
+    ajaxServices.unTagStory(storyID, tagID, function(response) { RemoveUserStoryTag_End(storyID, tagID); });    
 }
 
 function RemoveUserStoryTag_End(storyID, tagID) {

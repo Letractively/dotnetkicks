@@ -208,6 +208,7 @@ namespace Incremental.Kick.BusinessLogic {
                 story.Save();
 
                 UserAction.RecordStoryDeletion(hostID, story, moderator);
+                EmailHelper.SendStoryDeletedEmail(Story.FetchByID(storyID), HostCache.GetHost(hostID));
             }
         }
 
