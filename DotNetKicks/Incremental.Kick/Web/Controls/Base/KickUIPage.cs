@@ -94,9 +94,6 @@ namespace Incremental.Kick.Web.Controls {
             if (this.IsHostModerator)
                 this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Moderator/HostModerator.js");
 
-            if (this.KickUserProfile.IsAdministrator)
-                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Admin/Kick.js");
-
             if (!String.IsNullOrEmpty(this.RssFeedUrl)) {
                 if(this.RssFeedUrl.StartsWith("http:"))
                     this.AddRssUrl(this.RssFeedUrl);
