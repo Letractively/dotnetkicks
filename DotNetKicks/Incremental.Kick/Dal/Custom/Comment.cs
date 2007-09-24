@@ -29,14 +29,10 @@ namespace Incremental.Kick.Dal {
             if (user.IsBanned)
                 throw new SecurityException("A banned user can not post a comment");
 
-            comment = System.Web.HttpUtility.HtmlEncode(comment);
-
             if (comment.Length > 4000)
                 comment = comment.Substring(0, 4000);
 
-            //TODO: add a word filter (a series of RegExs)
-            comment = TextHelper.Urlify(comment);
-            comment = comment.Replace("\n", "<br/>");
+            comment = TextHelper.EncodeAndReplaceComment(comment);
 
             Comment newComment = new Comment();
             newComment.HostID = hostID;
