@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Reflection;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickUIPage : KickPage {
@@ -28,10 +29,19 @@ namespace Incremental.Kick.Web.Controls {
             get { return !String.IsNullOrEmpty(this.RssFeedUrl); }
         }
 
+        private string _assemblyVersion;
+        public string AssemblyVersion {
+            get {
+                if (String.IsNullOrEmpty(_assemblyVersion))
+                    _assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return _assemblyVersion;
+            }
+        }
+
         public void AddJavaScript(string relativeUrl) {
             HtmlGenericControl script = new HtmlGenericControl("script");
             script.Attributes["type"] = "text/javascript";
-            script.Attributes["src"] = this.ResolveUrl(relativeUrl);
+            script.Attributes["src"] = this.ResolveUrl(relativeUrl) + "?" + this.AssemblyVersion;
 
             this.Header.Controls.Add(script);
 
@@ -42,7 +52,7 @@ namespace Incremental.Kick.Web.Controls {
 
         public void AddStyleSheet(string relativeUrl) {
             HtmlLink cssLink = new HtmlLink();
-            cssLink.Href = this.ResolveUrl(relativeUrl);
+            cssLink.Href = this.ResolveUrl(relativeUrl) + "?" + this.AssemblyVersion;
             cssLink.Attributes["type"] = "text/css";
             cssLink.Attributes["rel"] = "stylesheet";
 
