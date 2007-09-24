@@ -5,7 +5,7 @@ namespace Incremental.Kick.Caching {
     public class ShoutCache {
 
         public static ShoutCollection GetLatestShouts(int hostID) {
-            return GetLatestShouts(hostID, null, 1, 50);
+            return GetLatestShouts(hostID, null, 1, 100);
         }
 
         public static ShoutCollection GetLatestShouts(int hostID, string username) {
