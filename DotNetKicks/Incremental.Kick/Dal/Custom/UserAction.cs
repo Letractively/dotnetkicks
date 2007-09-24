@@ -117,9 +117,9 @@ namespace Incremental.Kick.Dal {
             return userAction;
         }
 
-        public static UserAction RecordShout(int hostID, User user, User forUser) {
+        public static UserAction RecordShout(int hostID, User user, User toUser) {
             UserAction userAction = Create(hostID, user.UserID, ActionType.Shout);
-            UserLink userLink = new UserLink(forUser);
+            UserLink userLink = new UserLink(toUser);
             userAction.Message = String.Format("shouted something on {0}'s profile", ControlHelper.RenderControl(userLink));
             userAction.Save();
             return userAction;
