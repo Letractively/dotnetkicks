@@ -277,6 +277,7 @@
     </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.designer.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
@@ -318,6 +319,7 @@
     </Compile>
     <Compile Include="Controls\User\Register.ascx.cs">
       <DependentUpon>Register.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\User\Register.ascx.designer.cs">
       <DependentUpon>Register.ascx</DependentUpon>

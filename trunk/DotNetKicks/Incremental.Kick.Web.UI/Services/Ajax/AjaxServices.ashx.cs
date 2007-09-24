@@ -11,54 +11,22 @@ using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: we are now using Jayrock for Ajax services. Please see http://jayrock.berlios.de/ for more info
-
     public class AjaxServices : KickJsonRpcHandler {
 
         #region Shout Box
 
-        //NOTE: GJ: Work in progress - lots of refactoring needed
         [JsonRpcMethod("addShout")]
         public string AddShout(int hostID, string message) {
             this.DemandUserAuthentication();
-                
-            if (!String.IsNullOrEmpty(message))
-                //TODO: GJ: move to model and add some regex replacements (links are good, line breaks become <br>)
-                if (!KickUserProfile.IsBanned) {
-                    Shout shout = new Shout();
-                    shout.HostID = hostID;
-                    message = HttpUtility.HtmlEncode(message);
-                    message = TextHelper.Urlify(message);
-                    shout.Message = message.Replace("\n", "<br/>");
-                    shout.FromUserID = KickUserProfile.UserID;
-                    shout.Save();
-                    ShoutCache.Remove(hostID);
-
-                    UserAction.RecordShout(hostID, KickUserProfile);
-                }
-            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID)));
+            Shout.AddShout(this.KickUserProfile, hostID, message);
+            return GetLatestShouts(hostID);
         }
 
         [JsonRpcMethod("addShoutForUser")]
         public string AddShoutForUser(int hostID, string message, string username) {
             this.DemandUserAuthentication();
-
-            if (!String.IsNullOrEmpty(message))
-                //TODO: GJ: move to model and add some regex replacements (links are good, line breaks become <br>)
-                if (!KickUserProfile.IsBanned) {
-                    Shout shout = new Shout();
-                    shout.HostID = hostID;
-                    message = HttpUtility.HtmlEncode(message);
-                    message = TextHelper.Urlify(message);
-                    shout.Message = message.Replace("\n", "<br/>");
-                    User forUser = UserCache.GetUserByUsername(username);
-                    shout.ToUserID = forUser.UserID;
-                    shout.FromUserID = KickUserProfile.UserID;
-                    shout.Save();
-                    ShoutCache.Remove(hostID, username);
-
-                    UserAction.RecordShout(hostID, KickUserProfile, forUser);
-                }
-            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(hostID, username)));
+            Shout.AddShout(this.KickUserProfile, hostID, message, username);
+            return GetLatestShoutsForUser(hostID, username);
         }
 
         [JsonRpcMethod("getLatestShouts")]

@@ -14,12 +14,11 @@
     }
     
     function refreshShoutbox() {
-        //note: gj: a quick hack to get the refresh working
         StartLoading();
         if(forUsername) 
-            ajaxServices.addShoutForUser(<%= KickPage.HostProfile.HostID %>, '', forUsername, addShout_complete);
+            ajaxServices.getLatestShoutsForUser(<%= KickPage.HostProfile.HostID %>, forUsername, addShout_complete);
         else
-            ajaxServices.addShout(<%= KickPage.HostProfile.HostID %>, '', addShout_complete);       
+            ajaxServices.getLatestShouts(<%= KickPage.HostProfile.HostID %>,  addShout_complete);       
     }
     
     function addShout_complete(response) {
