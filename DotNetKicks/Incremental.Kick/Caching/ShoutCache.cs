@@ -4,12 +4,14 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Caching {
     public class ShoutCache {
 
+        private static int DEFAULT_CACHE_ITEM_SIZE = 100;
+
         public static ShoutCollection GetLatestShouts(int hostID) {
-            return GetLatestShouts(hostID, null, 1, 100);
+            return GetLatestShouts(hostID, null, 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         public static ShoutCollection GetLatestShouts(int hostID, string username) {
-            return GetLatestShouts(hostID, UserCache.GetUserID(username), 1, 50);
+            return GetLatestShouts(hostID, UserCache.GetUserID(username), 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         private static ShoutCollection GetLatestShouts(int hostID, int pageIndex, int pageSize) {
@@ -31,11 +33,11 @@ namespace Incremental.Kick.Caching {
         }
 
         public static void Remove(int hostID) {
-            Remove(hostID, null, 1, 50);
+            Remove(hostID, null, 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         public static void Remove(int hostID, string username) {
-            Remove(hostID, UserCache.GetUserID(username), 1, 50);
+            Remove(hostID, UserCache.GetUserID(username), 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         private static void Remove(int hostID, int pageIndex, int pageSize) {

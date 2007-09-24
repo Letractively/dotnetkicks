@@ -8,17 +8,17 @@
     function addShout() {
         StartLoading();
         if(forUsername)
-            ajaxServices.addShoutForUser(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), forUsername, addShout_complete);
+            ajaxServices.addShoutForUser($("#shout_message").val(), forUsername, addShout_complete);
         else
-            ajaxServices.addShout(<%= KickPage.HostProfile.HostID %>, $("#shout_message").val(), addShout_complete);
+            ajaxServices.addShout($("#shout_message").val(), addShout_complete);
     }
     
     function refreshShoutbox() {
         StartLoading();
         if(forUsername) 
-            ajaxServices.getLatestShoutsForUser(<%= KickPage.HostProfile.HostID %>, forUsername, addShout_complete);
+            ajaxServices.getLatestShoutsForUser(forUsername, addShout_complete);
         else
-            ajaxServices.getLatestShouts(<%= KickPage.HostProfile.HostID %>,  addShout_complete);       
+            ajaxServices.getLatestShouts(addShout_complete);       
     }
     
     function addShout_complete(response) {
