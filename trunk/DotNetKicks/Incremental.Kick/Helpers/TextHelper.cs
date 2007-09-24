@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Incremental.Kick.Helpers {
     public class TextHelper {
@@ -21,6 +22,14 @@ namespace Incremental.Kick.Helpers {
             }
 
             return input;
+        }
+
+        public static string EncodeAndReplaceComment(string message) {
+            message = HttpUtility.HtmlEncode(message);
+            message = TextHelper.Urlify(message);
+            message = message.Replace("\n", "<br/>");
+            //TODO: GJ: add reg ex replacements here
+            return message;
         }
     }
 }

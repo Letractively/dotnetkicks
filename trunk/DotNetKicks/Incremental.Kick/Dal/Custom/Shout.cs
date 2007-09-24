@@ -29,10 +29,7 @@ namespace Incremental.Kick.Dal {
             if (!String.IsNullOrEmpty(message) && (!fromUser.IsBanned)) {
                 Shout shout = new Shout();
                 shout.HostID = hostID;
-                //TODO:GJ: move replace rules to helper
-                message = HttpUtility.HtmlEncode(message);
-                message = TextHelper.Urlify(message);
-                shout.Message = message.Replace("\n", "<br/>");
+                shout.Message = TextHelper.EncodeAndReplaceComment(message);
                 shout.FromUserID = fromUser.UserID;
 
                 User toUser = null;
