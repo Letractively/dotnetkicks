@@ -4,7 +4,7 @@
  <script type="text/javascript">
     function refreshSpy() {
         StartLoading();
-        new AjaxServices().getSpyHtml(<%= KickPage.HostProfile.HostID %>, getSpyHtml_complete);
+        ajaxServices.getSpyHtml(<%= KickPage.HostProfile.HostID %>, getSpyHtml_complete);
     }
     
     function getSpyHtml_complete(response) {

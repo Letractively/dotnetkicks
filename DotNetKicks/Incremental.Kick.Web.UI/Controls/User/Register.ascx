@@ -7,7 +7,7 @@ function checkUsernameExists(sender, args)
     StartLoading();
     var context = {sender:sender, args:args, message: "The username already exists, please choose another one."};
 
-    new AjaxServices().checkUsernameExists(args.Value, function(response)
+    ajaxServices.checkUsernameExists(args.Value, function(response)
     { response.context = context; checkUserDataCallback(response); });
 }
 
@@ -16,7 +16,7 @@ function checkEmailExists(sender, args)
     StartLoading();
     var context = {sender:sender, args:args, message: "The email already exists, please use another one or use the forgotten password page to reset your password."};
 
-    new AjaxServices().checkEmailExists(args.Value, function(response)
+    ajaxServices.checkEmailExists(args.Value, function(response)
     { response.context = context; checkUserDataCallback(response); });
 }
 

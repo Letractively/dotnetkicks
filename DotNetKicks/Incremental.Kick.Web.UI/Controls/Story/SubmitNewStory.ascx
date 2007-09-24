@@ -7,7 +7,7 @@ function checkStoryExists(sender, args)
     StartLoading();
     var context = {sender:sender, args:args};
 
-    new AjaxServices().fetchKickedStoryUrlByUrl(args.Value, function(response) 
+    ajaxServices.fetchKickedStoryUrlByUrl(args.Value, function(response) 
     { response.context = context; checkStoryExistsCallback(response); });  
 }
 
