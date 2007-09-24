@@ -219,7 +219,6 @@
     <Content Include="Static\Images\StyledPanel\whiteTL.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTM.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTR.gif" />
-    <Content Include="Static\Scripts\2.0.1\Admin\Kick.js" />
     <Content Include="Static\Scripts\2.0.1\Common.js" />
     <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js" />
     <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js.uncompressed.js" />
@@ -865,6 +864,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Static\Scripts\2.0.1\Admin\" />
     <Folder Include="Static\Scripts\2.0.1\Controls\" />
     <Folder Include="Templates\Simple\images\" />
   </ItemGroup>
