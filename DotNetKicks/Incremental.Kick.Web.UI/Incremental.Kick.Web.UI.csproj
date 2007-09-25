@@ -750,7 +750,6 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
-    <Content Include="Static\Scripts\2.0.2\AjaxServicesProxy.js" />
     <Content Include="Static\Scripts\2.0.2\Common.js" />
     <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js" />
     <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js.uncompressed.js" />
