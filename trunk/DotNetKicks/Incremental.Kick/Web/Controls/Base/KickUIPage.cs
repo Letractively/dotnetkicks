@@ -94,16 +94,16 @@ namespace Incremental.Kick.Web.Controls {
             this.AddStyleSheet(this.MasterPageBaseCssUrl);
             this.AddStyleSheet(this.MasterPageTemplateCssUrl);
 
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/jQuery/jquery-1.2.min.js");
+            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/jQuery/jquery-1.2.min.js"));
 
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
-            this.AddJavaScript(this.ResolveUrl(this.StaticScriptRootUrl + "/2.0.2/json.js"));
+            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/json.js"));
             this.AddJavaScript(this.ResolveUrl("~/services/ajax/ajaxservices.ashx?proxy"), false);
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Common.js");
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Tagging.js");
+            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Common.js"));
+            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Tagging.js"));
 
             if (this.IsHostModerator)
-                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Moderator/HostModerator.js");
+                this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Moderator/HostModerator.js"));
 
             if (!String.IsNullOrEmpty(this.RssFeedUrl)) {
                 if(this.RssFeedUrl.StartsWith("http:"))
