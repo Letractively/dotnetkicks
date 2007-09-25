@@ -52,7 +52,7 @@ namespace Incremental.Kick.Web.Controls {
                 string gravatarHash = FormsAuthentication.HashPasswordForStoringInConfigFile(this._user.GravatarEmail, "MD5").ToLower();
                 return String.Format("{0}/gravatar/{1}/{2}", root, gravatarHash, this._size);
             } else {
-                return String.Format("{0}/static/images/cache/defaultgravatars/gravatar_{0}.jpg", root, this._size);
+                return String.Format("{0}/static/images/cache/defaultgravatars/gravatar_{1}.jpg", root, this._size);
             }
         }
     }
