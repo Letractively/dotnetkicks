@@ -7,8 +7,6 @@
        <meta name="description" content="" />
        <meta name="keywords" content="" />
     </asp:ContentPlaceHolder>
-    <script type="text/javascript" src="/Static/Scripts/2.0.1/json.js"></script>
-    <script type="text/javascript" src="/Static/Scripts/2.0.1/AjaxServicesProxy.js">  </script>  
 </head>
 <body id="<%= this.KickPage.PageName %>">
     <form id="PageForm" runat="server">

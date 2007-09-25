@@ -37,12 +37,16 @@ namespace Incremental.Kick.Web.Controls {
                 return _assemblyVersion;
             }
         }
-
         public void AddJavaScript(string relativeUrl) {
+            this.AddJavaScript(relativeUrl, true);
+        }
+        public void AddJavaScript(string relativeUrl, bool includeAssemblyVersion) {
             HtmlGenericControl script = new HtmlGenericControl("script");
             script.Attributes["type"] = "text/javascript";
-            script.Attributes["src"] = this.ResolveUrl(relativeUrl) + "?" + this.AssemblyVersion;
-
+            script.Attributes["src"] = this.ResolveUrl(relativeUrl);
+            if (includeAssemblyVersion)
+                script.Attributes["src"] += "?" + this.AssemblyVersion;
+            
             this.Header.Controls.Add(script);
 
             Literal literal = new Literal();
@@ -51,8 +55,13 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         public void AddStyleSheet(string relativeUrl) {
+            this.AddStyleSheet(relativeUrl, true);
+        }
+        public void AddStyleSheet(string relativeUrl, bool includeAssemblyVersion) {
             HtmlLink cssLink = new HtmlLink();
-            cssLink.Href = this.ResolveUrl(relativeUrl) + "?" + this.AssemblyVersion;
+            cssLink.Href = this.ResolveUrl(relativeUrl);
+            if (includeAssemblyVersion)
+                cssLink.Href += "?" + this.AssemblyVersion;
             cssLink.Attributes["type"] = "text/css";
             cssLink.Attributes["rel"] = "stylesheet";
 
@@ -88,6 +97,8 @@ namespace Incremental.Kick.Web.Controls {
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/jQuery/jquery-1.2.min.js");
 
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
+            this.AddJavaScript(this.ResolveUrl(this.StaticScriptRootUrl + "/2.0.2/json.js"));
+            this.AddJavaScript(this.ResolveUrl("~/services/ajax/ajaxservices.ashx?proxy"), false);
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Common.js");
             this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Tagging.js");
 
