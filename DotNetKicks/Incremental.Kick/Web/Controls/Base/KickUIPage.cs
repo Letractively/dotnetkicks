@@ -85,14 +85,14 @@ namespace Incremental.Kick.Web.Controls {
             this.AddStyleSheet(this.MasterPageBaseCssUrl);
             this.AddStyleSheet(this.MasterPageTemplateCssUrl);
 
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/jQuery/jquery-1.2.min.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/jQuery/jquery-1.2.min.js");
 
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Common.js");
-            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Tagging.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Common.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Tagging.js");
 
             if (this.IsHostModerator)
-                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Moderator/HostModerator.js");
+                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.2/Moderator/HostModerator.js");
 
             if (!String.IsNullOrEmpty(this.RssFeedUrl)) {
                 if(this.RssFeedUrl.StartsWith("http:"))
