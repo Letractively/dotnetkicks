@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Common.Enums;
 using SubSonic;
+using Incremental.Kick.Caching;
+using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Dal {
     public partial class Story {
+
+        public Incremental.Kick.Dal.Entities.DataTransferObjects.Story ToDto() {
+            Host host = HostCache.GetHost(this.HostID);
+            return new Incremental.Kick.Dal.Entities.DataTransferObjects.Story(
+                this.Title, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this.StoryIdentifier, CategoryCache.GetCategory(this.CategoryID, this.HostID).CategoryIdentifier), this.Description, 
+                this.CreatedOn, this.PublishedOn, this.IsPublishedToHomepage, this.KickCount, UserCache.GetUser(this.UserID).ToDto(host));
+        }
+
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
         }

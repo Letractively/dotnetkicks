@@ -91,12 +91,16 @@
     <Compile Include="Dal\Custom\Comment.cs" />
     <Compile Include="Dal\Custom\Shout.cs" />
     <Compile Include="Dal\Custom\Story.cs" />
+    <Compile Include="Dal\Custom\StoryCollection.cs" />
     <Compile Include="Dal\Custom\StoryKick.cs" />
     <Compile Include="Dal\Custom\StoryUserHostTag.cs" />
     <Compile Include="Dal\Custom\Tag.cs" />
     <Compile Include="Dal\Custom\TagCollection.cs" />
     <Compile Include="Dal\Custom\User.cs" />
     <Compile Include="Dal\Custom\UserAction.cs" />
+    <Compile Include="Dal\Entities\DataTransferObjects\Story.cs" />
+    <Compile Include="Dal\Entities\DataTransferObjects\StoryList.cs" />
+    <Compile Include="Dal\Entities\DataTransferObjects\User.cs" />
     <Compile Include="Dal\Entities\WeightedTag.cs" />
     <Compile Include="Dal\Entities\WeightedTagList.cs" />
     <Compile Include="Dal\Generated\Controllers\CategoryController.cs" />

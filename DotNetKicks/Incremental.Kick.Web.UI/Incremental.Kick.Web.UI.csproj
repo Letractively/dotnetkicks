@@ -697,6 +697,10 @@
     <Compile Include="Services\Images\ViewGravitar.ashx.cs">
       <DependentUpon>ViewGravitar.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Json\JsonServices.ashx.cs">
+      <DependentUpon>JsonServices.ashx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Templates\Default\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -749,6 +753,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Scripts\2.0.2\Common.js" />
     <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js" />

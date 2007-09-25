@@ -126,5 +126,7 @@ function IsElementHidden(element) {
 function Failure() {
     alert("oops, an error has occured.");
 }
-
-var ajaxServices = new AjaxServices();
+var ajaxServices;
+$(function() {
+   ajaxServices = new AjaxServices();
+});

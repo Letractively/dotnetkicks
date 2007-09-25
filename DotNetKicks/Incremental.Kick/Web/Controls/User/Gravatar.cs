@@ -38,5 +38,22 @@ namespace Incremental.Kick.Web.Controls {
                 writer.Write(@"<img src=""/static/images/cache/defaultgravatars/gravatar_{0}.jpg"" alt=""{1}"" class=""userGravatar"" width=""{0}"" height=""{0}"" />", this._size, this.User.Username);
             }
         }
+
+        public string GravatarUrl() {
+            return GravatarUrl(null);
+        }
+
+        public string GravatarUrl(Host host) {
+            string root = "";
+            if (host != null)
+                root = host.RootUrl;
+
+            if (this.User.UseGravatar) {
+                string gravatarHash = FormsAuthentication.HashPasswordForStoringInConfigFile(this._user.GravatarEmail, "MD5").ToLower();
+                return String.Format("{0}/gravatar/{1}/{2}", root, gravatarHash, this._size);
+            } else {
+                return String.Format("{0}/static/images/cache/defaultgravatars/gravatar_{0}.jpg", root, this._size);
+            }
+        }
     }
 }

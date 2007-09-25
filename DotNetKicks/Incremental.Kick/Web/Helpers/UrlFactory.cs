@@ -224,7 +224,7 @@ namespace Incremental.Kick.Web.Helpers {
                 mappedPath = relativeUrl;
             }
 
-            mappedPath = mappedPath.TrimEnd("/".ToCharArray());
+            mappedPath = mappedPath.TrimEnd('/');
 
             if (mappedPath.Length == 0)
                 mappedPath = "/";

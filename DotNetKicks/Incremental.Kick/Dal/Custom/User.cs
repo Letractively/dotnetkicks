@@ -5,6 +5,8 @@ using System.Data;
 using SubSonic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Helpers;
+using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Web.Controls;
 
 namespace Incremental.Kick.Dal {
     public partial class User {
@@ -197,6 +199,10 @@ namespace Incremental.Kick.Dal {
 
             UserCache.RemoveUser(this.UserID);
             UserCache.RemoveUser(friendID);
+        }
+
+        public Incremental.Kick.Dal.Entities.DataTransferObjects.User ToDto(Host host) {
+            return new Incremental.Kick.Dal.Entities.DataTransferObjects.User(this.Username, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Username), new Gravatar(this, 50).GravatarUrl(host));
         }
     }
 }
