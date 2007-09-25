@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SubmitNewStory.ascx.cs"
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SubmitNewStory.ascx.cs"
     Inherits="Incremental.Kick.Web.UI.Controls.SubmitNewStory" %>
 
 <script type="text/javascript">

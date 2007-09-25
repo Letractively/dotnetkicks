@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AddComment.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.AddComment" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddComment.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.AddComment" %>
 
 <br />
 <br />
