@@ -219,13 +219,6 @@
     <Content Include="Static\Images\StyledPanel\whiteTL.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTM.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTR.gif" />
-    <Content Include="Static\Scripts\2.0.1\Common.js" />
-    <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js" />
-    <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js.uncompressed.js" />
-    <Content Include="Static\Scripts\2.0.1\Dojo\jsTrace.js" />
-    <Content Include="Static\Scripts\2.0.1\Moderator\HostModerator.js" />
-    <Content Include="Static\Scripts\2.0.1\Stories.js" />
-    <Content Include="Static\Scripts\2.0.1\Tagging.js" />
     <Content Include="Static\Tools\FeedFlare\KickItFlare.xml" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -757,9 +750,16 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
-    <Content Include="Static\Scripts\2.0.1\AjaxServicesProxy.js" />
-    <Content Include="Static\Scripts\2.0.1\jQuery\jquery-1.2.min.js" />
-    <Content Include="Static\Scripts\2.0.1\json.js" />
+    <Content Include="Static\Scripts\2.0.2\AjaxServicesProxy.js" />
+    <Content Include="Static\Scripts\2.0.2\Common.js" />
+    <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js" />
+    <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js.uncompressed.js" />
+    <Content Include="Static\Scripts\2.0.2\Dojo\jsTrace.js" />
+    <Content Include="Static\Scripts\2.0.2\jQuery\jquery-1.2.min.js" />
+    <Content Include="Static\Scripts\2.0.2\json.js" />
+    <Content Include="Static\Scripts\2.0.2\Moderator\HostModerator.js" />
+    <Content Include="Static\Scripts\2.0.2\Stories.js" />
+    <Content Include="Static\Scripts\2.0.2\Tagging.js" />
     <Content Include="Templates\NewDefault\MasterPage.Master" />
     <Content Include="Controls\Admin\Cache.ascx" />
     <Content Include="Controls\Admin\Tasks.ascx" />
@@ -864,8 +864,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Static\Scripts\2.0.1\Admin\" />
-    <Folder Include="Static\Scripts\2.0.1\Controls\" />
+    <Folder Include="Static\Scripts\2.0.2\Admin\" />
+    <Folder Include="Static\Scripts\2.0.2\Controls\" />
     <Folder Include="Templates\Simple\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
