@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Register.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Register" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Register.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Register" %>
 
  
 <script type="text/javascript">

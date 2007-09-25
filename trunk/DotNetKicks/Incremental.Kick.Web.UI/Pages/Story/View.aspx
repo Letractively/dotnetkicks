@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="View.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Story.View" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Story.View" MasterPageFile="~/Templates/MasterPage.master" %>
 <%@ Register Src="../../Controls/Story/AddComment.ascx" TagName="AddComment" TagPrefix="uc1" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
