@@ -51,6 +51,7 @@ namespace Incremental.Kick.Caching {
 
 
         public static StoryCollection GetAllStories(bool isPublished, int hostID, int pageNumber, int pageSize) {
+            pageSize = TrimPageSize(pageSize);
             string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}", isPublished, hostID, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
@@ -65,6 +66,7 @@ namespace Incremental.Kick.Caching {
         }
 
         public static StoryCollection GetPopularStories(int hostID, bool isPublished, StoryListSortBy sortBy, int pageNumber, int pageSize) {
+            pageSize = TrimPageSize(pageSize);
             string cacheKey = String.Format("StoryCollection_{0}_{1}_{2}_{3}_{4}", hostID, isPublished, sortBy, pageNumber, pageSize);
 
             CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
@@ -77,6 +79,12 @@ namespace Incremental.Kick.Caching {
 
 
             return stories;
+        }
+
+        public static int TrimPageSize(int pageSize) {
+            if (pageSize > 200)
+                pageSize = 200;
+            return pageSize;
         }
 
         public static int GetPopularStoriesCount(int hostID, bool isPublished, StoryListSortBy sortBy) {
