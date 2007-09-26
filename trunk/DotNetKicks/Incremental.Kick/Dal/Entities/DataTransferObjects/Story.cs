@@ -8,7 +8,7 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
 
         public Story() { }
 
-        public Story(string title, string url, string description, DateTime createdOn, DateTime publishedOn, bool isPublished, int kickCount, User user) {
+        public Story(string title, string url, string description, DateTime createdOn, DateTime publishedOn, bool isPublished, int kickCount, int commentCount, User user) {
             this._title = title;
             this._url = url;
             this._description = description;
@@ -16,6 +16,7 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
             if(isPublished)
                 this._publishedOn = publishedOn;
             this._kickCount = kickCount;
+            this._commentCount = commentCount;
             this._user = user;
         }
 
@@ -53,6 +54,12 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
         public int KickCount {
             get { return _kickCount; }
             set { _kickCount = value; }
+        }
+
+        private int _commentCount;
+        public int CommentCount {
+            get { return _commentCount; }
+            set { _commentCount = value; }
         }
 
         private User _user;

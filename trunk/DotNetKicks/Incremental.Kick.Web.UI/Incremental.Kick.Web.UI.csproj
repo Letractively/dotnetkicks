@@ -35,11 +35,11 @@
     </Reference>
     <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.dll</HintPath>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.9225.1530\Jayrock.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.8316\Jayrock.Json.dll</HintPath>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.9225.1530\Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="Subkismet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
