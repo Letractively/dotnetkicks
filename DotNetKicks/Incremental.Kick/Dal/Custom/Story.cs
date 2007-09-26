@@ -13,7 +13,7 @@ namespace Incremental.Kick.Dal {
             Host host = HostCache.GetHost(this.HostID);
             return new Incremental.Kick.Dal.Entities.DataTransferObjects.Story(
                 this.Title, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this.StoryIdentifier, CategoryCache.GetCategory(this.CategoryID, this.HostID).CategoryIdentifier), this.Description, 
-                this.CreatedOn, this.PublishedOn, this.IsPublishedToHomepage, this.KickCount, UserCache.GetUser(this.UserID).ToDto(host));
+                this.CreatedOn, this.PublishedOn, this.IsPublishedToHomepage, this.KickCount, this.CommentCount, UserCache.GetUser(this.UserID).ToDto(host));
         }
 
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
