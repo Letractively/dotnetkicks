@@ -38,15 +38,6 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault {
         protected global::System.Web.UI.WebControls.Literal litSiteTagLine;
         
         /// <summary>
-        /// Breadcrumbs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.Controls.Breadcrumbs Breadcrumbs;
-        
-        /// <summary>
         /// UserWelcomeMessage control.
         /// </summary>
         /// <remarks>
@@ -56,13 +47,67 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault {
         protected global::Incremental.Kick.Web.Controls.UserWelcome UserWelcomeMessage;
         
         /// <summary>
-        /// MainContent control.
+        /// Breadcrumbs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::Incremental.Kick.Web.Controls.Breadcrumbs Breadcrumbs;
+        
+        /// <summary>
+        /// pnlSiteAnnouncement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSiteAnnouncement;
+        
+        /// <summary>
+        /// litSiteAnnouncement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litSiteAnnouncement;
+        
+        /// <summary>
+        /// googleTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.GoogleAdSense googleTop;
+        
+        /// <summary>
+        /// pnlPageCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPageCaption;
+        
+        /// <summary>
+        /// litPageCaption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litPageCaption;
+        
+        /// <summary>
+        /// RssFeedIcon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.RssFeedIcon RssFeedIcon;
         
         /// <summary>
         /// LeftContent control.
@@ -74,6 +119,24 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContent;
         
         /// <summary>
+        /// litFeedBurnerCounter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFeedBurnerCounter;
+        
+        /// <summary>
+        /// pnlSideAds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSideAds;
+        
+        /// <summary>
         /// RightContent control.
         /// </summary>
         /// <remarks>
@@ -81,5 +144,23 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder RightContent;
+        
+        /// <summary>
+        /// googleSide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Incremental.Kick.Web.Controls.GoogleAdSense googleSide;
+        
+        /// <summary>
+        /// MainContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }

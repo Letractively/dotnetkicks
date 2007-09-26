@@ -149,6 +149,7 @@
     <Compile Include="Security\Cipher.cs" />
     <Compile Include="Security\Rijndael.cs" />
     <Compile Include="Security\SecurityToken.cs" />
+    <Compile Include="Web\Controls\Ads\GoogleAdSense.cs" />
     <Compile Include="Web\Controls\Ads\GoogleLeaderBoard.cs" />
     <Compile Include="Web\Controls\Ads\GoogleWideSkyscraper.cs" />
     <Compile Include="Web\Controls\Base\JavaScriptFeedHandler.cs" />
