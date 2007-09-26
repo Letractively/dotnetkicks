@@ -13,7 +13,7 @@
 #HeaderContainer
 {
 	background-color: #83acca;
-	padding:  10px 15px 5px 15px;
+	padding: 10px 15px 5px 15px;
 	min-height: 30px;
 }
 /* site title */
@@ -65,11 +65,28 @@
 }
 /* breadcrumb trail home > opensource > dotnetkicks */
 
+#BreadcrumbsNavigationAndWelcome
+{
+	padding: 5px 15px 5px 15px;
+	background-image: url(images/gradients/green.gif);
+	background-color: #a3c84e;
+	color: Black;
+	font-size: 1em;
+	width: 100%;
+}
+#UserWelcome
+{
+	display: block;
+	float: right;
+}
+#BreadcrumbsNavigationAndWelcome a
+{
+	color: #ffffff;
+	font-weight: bold;
+}
 #BreadcrumbNavigation
 {
-	padding: 2px 15px 2px 15px;
-	background-color: #a3c84e;
-	color: #ffffff;
+	display: block;
 }
 #BreadcrumbNavigation ul
 {
@@ -86,24 +103,80 @@
 	list-style: none;
 	display: inline;
 }
-#BreadcrumbNavigation ul li a
-{
-	color: #ffffff;
-	text-decoration: none;
-}
 /* auto insert the >> character */
 #BreadcrumbNavigation ul li:before
 {
 	content: "\0020 \0020 \0020 \00BB \0020";
-	color: #ffffff;
 }
 /* except for first bullet, put whitespace there */
 #BreadcrumbNavigation ul li.first:before
 {
 	content: " ";
 }
-/************************* main body content *************************/
+/*********************** general items ******************************/
+#SidebarA
+{
+	width: 200px;
+	float: left;
+	padding: 5px;
+}
+#SidebarB
+{
+	width: 200px;
+	float: right;
+	padding: 5px;
+}
 
+/************************* main body content *************************/
+#PrimaryContent
+{
+	vertical-align: top;
+	min-width: 800px;
+	width: 100%;
+	padding-right: 4px;
+	padding: 5px 15px 15px 15px;
+}
+/* site announcments splash text */
+.SiteAnnouncement
+{
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin: 0px 0px 8px 0px;
+}
+.SiteAnnouncementNotice
+{
+	background: #fff6bf url(images/icons/exclamation.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #ffd324;
+	border-bottom-color: #ffd324;
+}
+
+.SiteAnnouncementInformation
+{
+	background: #eee url(images/icons/information.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #bbb;
+	border-bottom-color: #bbb;
+	margin: 16px;
+}
+
+.SiteAnnouncementError
+{
+	background: #ffd1c4 url(images/icons/error.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #f00;
+	border-bottom-color: #f00;
+}
+
+.PageCaption
+{
+	font-size: 2em;
+	width: 100%;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
 /*********************** general items ******************************/
 body
 {

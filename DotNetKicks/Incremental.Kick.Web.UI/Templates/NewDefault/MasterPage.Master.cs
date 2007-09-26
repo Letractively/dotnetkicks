@@ -20,6 +20,26 @@ namespace Incremental.Kick.Web.UI.Templates.NewDefault
             this.hypSiteTitle.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Home);
             this.hypSiteTitle.Text = this.KickPage.HostProfile.SiteTitle;
             this.litSiteTagLine.Text = this.KickPage.HostProfile.TagLine;
+            this.litFeedBurnerCounter.Text = this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml;
+
+            this.pnlSideAds.Visible = this.KickPage.DisplaySideAds;
+
+            this.googleTop.AdSenseId = this.KickPage.AdSenseID;
+            this.googleSide.AdSenseId = this.KickPage.AdSenseID;
+
+            if (this.KickPage.DisplayAnnouncement && !String.IsNullOrEmpty(this.KickPage.HostProfile.AnnouncementHtml))
+            {
+                this.pnlSiteAnnouncement.Visible = true;
+                this.litSiteAnnouncement.Text = this.KickPage.HostProfile.AnnouncementHtml;
+            }
+
+            if (this.KickPage.Caption.Length > 0)
+            {
+                this.pnlPageCaption.Visible = true;
+                this.litPageCaption.Text = this.KickPage.Caption;
+                this.RssFeedIcon.Visible = this.KickPage.HasRssFeed;
+            }
+
         }
 
         private string BuildHyperlink(string href, string text)
