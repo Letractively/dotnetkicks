@@ -1,15 +1,9 @@
 using System;
-using System.Data;
-using System.Web;
-using System.Collections;
-using System.Web.Services;
-using System.Web.Services.Protocols;
-using System.IO;
-using System.Drawing.Design;
-using System.Drawing.Imaging;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
-using Incremental.Kick.BusinessLogic;
+using System.IO;
+using System.Web;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Web.UI.Services.Images
@@ -207,13 +201,13 @@ namespace Incremental.Kick.Web.UI.Services.Images
                 _borderWidth, _borderWidth, img.Width - (_borderWidth * 2), img.Height - (_borderWidth * 2));
 
             //draw text for label ("kick it")
-            g.DrawString(_text, this.TextFont, new SolidBrush(_textForegroundColor), 1, 1);
+            g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
 
             //draw number of kicks
             Story story = Story.FetchStoryByUrl(url);
 
             //get counts
-            string count = this.GetKickCountDisplayCharacters(story);
+            string count = GetKickCountDisplayCharacters(story);
             float countWidth = g.MeasureString(count, _countFont).Width;
 
             //draw background behind count
@@ -238,17 +232,22 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// <param name="urlValue">The URL value.</param>
         /// <param name="defaultColor">Color of the default.</param>
         /// <returns></returns>
-        private Color ConvertHexToColor(string urlValue, Color defaultColor)
+        private static Color ConvertHexToColor(string urlValue, Color defaultColor)
         {
-            Color myColor = defaultColor;
+            Color myColor;
+
             try
             {
                 if (!urlValue.StartsWith("#"))
                     urlValue = string.Concat("#", urlValue);
+
                 myColor = ColorTranslator.FromHtml(urlValue);
             }
-            catch { }     
-            //if error in color value, then just return default color
+            catch
+            {
+                myColor = defaultColor;
+            }
+
             return myColor;
         }
 
@@ -257,11 +256,9 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// </summary>
         /// <param name="story">The story.</param>
         /// <returns></returns>
-        private string GetKickCountDisplayCharacters(Story story)
+        private static string GetKickCountDisplayCharacters(Story story)
         {
-            if (story == null)
-                return "0";
-            return story.KickCount.ToString();
+            return story == null ? "0" : story.KickCount.ToString();
         }
 
         #endregion
