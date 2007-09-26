@@ -129,7 +129,7 @@ namespace Incremental.Kick.Caching {
 
             return stories;
         }
-        public static int GetFriendsKickedStoriesPageCount(string userIdentifier, int hostID) {
+        public static int GetFriendsKickedStoriesCount(string userIdentifier, int hostID) {
             string cacheKey = String.Format("Kick_Story_FriendsKickedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
@@ -155,7 +155,7 @@ namespace Incremental.Kick.Caching {
 
             return stories;
         }
-        public static int GetFriendsSubmittedStoriesPageCount(string userIdentifier, int hostID) {
+        public static int GetFriendsSubmittedStoriesCount(string userIdentifier, int hostID) {
             string cacheKey = String.Format("Kick_Story_FriendsSubmittedCount_{0}_{1}", userIdentifier, hostID);
             CacheManager<string, int?> countCache = GetCountCache();
 
