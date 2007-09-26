@@ -119,7 +119,7 @@ function checkStoryExistsCallback(response)
             Simple copy and paste this HTML into your blog post.
             <br />
             <br />
-            <asp:TextBox ID="LiveImage" runat="server" Columns="80" Rows="4" TextMode="MultiLine" />
+            <asp:TextBox ID="LiveImage" onclick="this.select();" runat="server" Columns="80" Rows="4" TextMode="MultiLine" />
         </p>
     </div>
 </asp:Panel>
