@@ -10,11 +10,10 @@ using System.IO;
 namespace Incremental.Kick.Helpers {
     public class TrackbackHelper {
 
-        delegate void SendTrackbackPingDelegate(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName);
-
         public static void SendTrackbackPing_Begin(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName) {
-            SendTrackbackPingDelegate sendTrackbackPingDelegate = new SendTrackbackPingDelegate(SendTrackbackPing);
-            AsyncHelper.FireAndForget(sendTrackbackPingDelegate, resourceUrl, storyTitle, storyUrl, storyExcerpt, siteName);
+            AsyncHelper.FireAndForget(delegate {
+                SendTrackbackPing(resourceUrl, storyTitle, storyUrl, storyExcerpt, siteName);
+            });
         }
 
         private static void SendTrackbackPing(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName) {

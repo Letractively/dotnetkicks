@@ -69,9 +69,8 @@ namespace Incremental.Kick.Helpers {
             Send(new MailMessage(from, to, subject, body), host);
         }
 
-        delegate void SendDelegate(string from, string to, string subject, string body, Host host);
         public static void Send_Begin(string from, string to, string subject, string body, Host host) {
-            AsyncHelper.FireAndForget(new SendDelegate(Send), from, to, subject, body, host);
+            AsyncHelper.FireAndForget(delegate { Send(from, to, subject, body, host); });
         }
 
         internal static void SendPasswordResetEmail(string toEmail, string username, DateTime createdDateTime, Host host) {
