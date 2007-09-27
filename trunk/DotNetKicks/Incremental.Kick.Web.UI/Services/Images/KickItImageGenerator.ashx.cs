@@ -188,40 +188,48 @@ namespace Incremental.Kick.Web.UI.Services.Images
                 _countForegroundColor = ConvertHexToColor(context.Request["cfgcolor"], CountForegroundColor);
 
             //TODO: GJ: turn off remote caching, turn on local caching (reluctant cache)
-            Image img = new Bitmap(_width, _height, 1, PixelFormat.Format32bppArgb, new IntPtr());
-            Graphics g = Graphics.FromImage(img);
+            using (Image img = new Bitmap(_width, _height, 1, PixelFormat.Format32bppArgb, new IntPtr()))
+            {
+                using (Graphics g = Graphics.FromImage(img))
+                {
+                    g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    //draw border
+                    g.FillRectangle(new SolidBrush(_borderColor), 0, 0, img.Width, img.Height);
 
-            //draw border
-            g.FillRectangle(new SolidBrush(_borderColor), 0, 0, img.Width, img.Height);
+                    //draw inner color
+                    g.FillRectangle(new SolidBrush(_textBackgroundColor),
+                        _borderWidth, _borderWidth, img.Width - (_borderWidth * 2), img.Height - (_borderWidth * 2));
 
-            //draw inner color
-            g.FillRectangle(new SolidBrush(_textBackgroundColor),
-                _borderWidth, _borderWidth, img.Width - (_borderWidth * 2), img.Height - (_borderWidth * 2));
+                    //draw text for label ("kick it")
+                    g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
 
-            //draw text for label ("kick it")
-            g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
+                    //draw number of kicks
+                    Story story = Story.FetchStoryByUrl(url);
 
-            //draw number of kicks
-            Story story = Story.FetchStoryByUrl(url);
+                    //get counts
+                    string count = GetKickCountDisplayCharacters(story);
+                    float countWidth = g.MeasureString(count, _countFont).Width;
 
-            //get counts
-            string count = GetKickCountDisplayCharacters(story);
-            float countWidth = g.MeasureString(count, _countFont).Width;
+                    //draw background behind count
+                    g.FillRectangle(new SolidBrush(_countBackgroundColor),
+                        img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
 
-            //draw background behind count
-            g.FillRectangle(new SolidBrush(_countBackgroundColor),
-                img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
+                    //if published, make bold
+                    if (story.IsPublishedToHomepage)
+                        _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
 
-            //draw count
-            g.DrawString(count, _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
+                    //draw count
+                    g.DrawString(count, _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
 
-            MemoryStream s = new MemoryStream();
-            img.Save(s, ImageFormat.Png);
-
-            context.Response.ContentType = "image/PNG";
-            context.Response.BinaryWrite(s.GetBuffer());
+                    using (MemoryStream s = new MemoryStream())
+                    {
+                        img.Save(s, ImageFormat.Png);
+                        context.Response.ContentType = "image/PNG";
+                        context.Response.BinaryWrite(s.GetBuffer());
+                    }
+                }
+            }
         }
 
         // Private Methods 
