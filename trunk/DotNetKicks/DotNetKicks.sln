@@ -43,6 +43,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Web.UI.Tests", "Incremental.Kick.Web.UI.Tests\Incremental.Kick.Web.UI.Tests.csproj", "{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,11 +77,17 @@ Global
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{054403EB-5B34-4B73-9F4F-4E925E3F6C3A} = {3B44ABEF-5844-4B3B-BF09-3D252B6D485E}
+		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989} = {08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}
+		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C} = {08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}
 	EndGlobalSection
 EndGlobal
