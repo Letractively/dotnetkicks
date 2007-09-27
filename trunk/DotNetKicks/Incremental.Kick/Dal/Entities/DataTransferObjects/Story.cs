@@ -44,8 +44,8 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
             set { _createdOn = value; }
         }
 
-        private DateTime _publishedOn;
-        public DateTime PublishedOn {
+        private DateTime? _publishedOn;
+        public DateTime? PublishedOn {
             get { return _publishedOn; }
             set { _publishedOn = value; }
         }
