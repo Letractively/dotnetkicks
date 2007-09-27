@@ -1,5 +1,7 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SubmitNewStory.ascx.cs"
+<%@ Control Language="C#" AutoEventWireup="true" Codebehind="SubmitNewStory.ascx.cs"
     Inherits="Incremental.Kick.Web.UI.Controls.SubmitNewStory" %>
+<%@ Register Src="KickItImagePersonalization.ascx" TagName="KickItImagePersonalization"
+    TagPrefix="uc1" %>
 
 <script type="text/javascript">
 function checkStoryExists(sender, args)
@@ -105,22 +107,8 @@ function checkStoryExistsCallback(response)
         <asp:HyperLink ID="UpcomingStoryQueue" runat="server" />
         shortly.
         <p>
-            &nbsp;&nbsp;&nbsp;
-            <asp:HyperLink ID="StoryLink" Text="View the story" runat="server" />
-        </p>
-        <br />
-        <p>
-            &nbsp;&nbsp;&nbsp;<img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28"
-                height="11" border="0" />
-            Add a live kick counter to your blog -->
-            <img alt="livekickit" src="<%=KickPage.StaticIconRootUrl%>/LiveKickIt.png" />
-        </p>
-        <p>
-            Simple copy and paste this HTML into your blog post.
-            <br />
-            <br />
-            <asp:TextBox ID="LiveImage" onclick="this.select();" runat="server" Columns="80" Rows="4" TextMode="MultiLine" />
-        </p>
+            <asp:HyperLink ID="StoryLink" Text="View the story" runat="server" /></p>
+        <uc1:KickItImagePersonalization ID="KickItImagePersonalization1" runat="server"></uc1:KickItImagePersonalization>
     </div>
 </asp:Panel>
 &nbsp;

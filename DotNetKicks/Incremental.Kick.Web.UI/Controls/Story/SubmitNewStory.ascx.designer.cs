@@ -173,12 +173,12 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.HyperLink StoryLink;
         
         /// <summary>
-        /// LiveImage control.
+        /// KickItImagePersonalization1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LiveImage;
+        protected global::Incremental.Kick.Web.UI.Controls.KickItImagePersonalization KickItImagePersonalization1;
     }
 }
