@@ -264,6 +264,13 @@
     <Compile Include="Controls\Story\AddComment.ascx.designer.cs">
       <DependentUpon>AddComment.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Story\KickItImagePersonalization.ascx.cs">
+      <DependentUpon>KickItImagePersonalization.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Story\KickItImagePersonalization.ascx.designer.cs">
+      <DependentUpon>KickItImagePersonalization.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -753,6 +760,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Scripts\2.0.2\Common.js" />

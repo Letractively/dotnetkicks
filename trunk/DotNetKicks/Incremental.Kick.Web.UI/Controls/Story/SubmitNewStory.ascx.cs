@@ -1,10 +1,7 @@
 using System;
-using System.Web;
 using System.Web.UI.WebControls;
-using Incremental.Common.Web.Helpers;
 using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
-using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 
@@ -56,9 +53,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 UpcomingStoryQueue.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.NewStories);
                 UpcomingStoryQueue.Text = "upcoming queue";
                 StoryLink.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, storyIdentifier, categoryName);
-
-                LiveImage.Text =
-                    ControlHelper.RenderControl(new StoryDynamicImage(HttpUtility.UrlPathEncode(Url.Text), KickPage.HostProfile));
+                KickItImagePersonalization1.StoryUrl = Url.Text;           
             }
         }
 
@@ -75,7 +70,7 @@ namespace Incremental.Kick.Web.UI.Controls
         protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
             // Retrieve the story given the url
-            Story story = Story.FetchStoryByUrl(args.Value);
+            Dal.Story story = Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
             if(story != null)
