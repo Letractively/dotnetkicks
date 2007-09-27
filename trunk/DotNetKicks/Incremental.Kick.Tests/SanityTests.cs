@@ -3,7 +3,7 @@ using MbUnit.Framework;
 using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Tests {
-    [TestFixture]
+    [TestFixture("Ensure that test and database enviroments are available")]
     public class SanityTests {
 
         [Test]
