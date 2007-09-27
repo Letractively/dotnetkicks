@@ -216,7 +216,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
                         img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
 
                     //if published, make bold
-                    if (story.IsPublishedToHomepage)
+                    if (story != null && story.IsPublishedToHomepage)
                         _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
 
                     //draw count
