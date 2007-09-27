@@ -16,7 +16,8 @@ namespace Incremental.Kick.Web.Security {
     public class SecurityManager {
 
         public static void Logout() {
-            UserCache.RemoveUser(SecurityToken);
+            if(HttpContext.Current.Request.IsAuthenticated)
+                UserCache.RemoveUser(SecurityToken);
             FormsAuthentication.SignOut();
         }
 
