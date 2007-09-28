@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Incremental.Kick.Web.Helpers;
 
-namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
-    public class Story {
+namespace Incremental.Kick.Dal.Entities.Api {
+    public class ApiStory {
 
-        public Story() { }
+        public ApiStory() { }
 
-        public Story(string title, string url, string description, DateTime createdOn, DateTime publishedOn, bool isPublished, int kickCount, int commentCount, User user) {
+        public ApiStory(string title, string url, string description, DateTime createdOn, DateTime publishedOn, bool isPublished, int kickCount, int commentCount, ApiUser user) {
             this._title = title;
             this._url = url;
             this._description = description;
@@ -62,8 +62,8 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
             set { _commentCount = value; }
         }
 
-        private User _user;
-        public User User {
+        private ApiUser _user;
+        public ApiUser User {
             get { return _user; }
             set { _user = value; }
         }

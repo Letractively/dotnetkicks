@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
-    public class StoryList {
-
+namespace Incremental.Kick.Dal.Entities.Api {
+    public class ApiPagedList<T> {
         private int _total;
         public int Total {
             get { return _total; }
@@ -17,8 +16,10 @@ namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
             set { _timeStamp = value; }
         }
 
-
-        public List<Story> Stories = new List<Story>();
-       
+        private List<T> _items;
+        public List<T> Items {
+            get { return this._items; }
+            set { this._items = value; }
+        }
     }
 }
