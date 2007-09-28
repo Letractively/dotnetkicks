@@ -10,125 +10,129 @@ using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Common.Enums;
 using System.Collections.Generic;
+using Incremental.Kick.Dal.Entities.Api;
 
 namespace Incremental.Kick.Web.UI.Services.Json {
     public class JsonServices : KickJsonRpcHandler {
         [JsonRpcMethod("getFrontPageStories", Idempotent = true)]
-        [JsonRpcHelp("Returns a list of the most popular pubished stories from the last 30 days")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetFrontPageStories() {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetAllStories(true, this.HostProfile.HostID, 1, 16).ToDto();
-            storyList.Total = StoryCache.GetStoryCount(this.HostProfile.HostID, true);
-            return storyList;
-       } 
+        [JsonRpcHelp("Returns a list of recently published stories to the homepage")]
+        public ApiPagedList<ApiStory> GetFrontPageStories() {
+            return Story.Api.GetFrontPageStories(this.HostProfile.HostID);
+        }
+
+        [JsonRpcMethod("getFrontPageStoriesPaged", Idempotent = true)]
+        [JsonRpcHelp("Returns a paged list of recently published stories to the homepage")]
+        public ApiPagedList<ApiStory> GetFrontPageStoriesPaged(int pageNumber, int pageSize) {
+            return Story.Api.GetFrontPageStoriesPaged(this.HostProfile.HostID, pageNumber, pageSize);
+        }
+
+        [JsonRpcMethod("getUpcomingPageStories", Idempotent = true)]
+        [JsonRpcHelp("Returns a list of recently submitted stories to the site")]
+        public ApiPagedList<ApiStory> GetUpcomingPageStories() {
+            return Story.Api.GetUpcomingPageStories(this.HostProfile.HostID);
+        }
+
+        [JsonRpcMethod("getUpcomingPageStoriesPaged", Idempotent = true)]
+        [JsonRpcHelp("Returns a paged list of recently submitted stories to the site")]
+        public ApiPagedList<ApiStory> GetUpcomingPageStoriesPaged(int pageNumber, int pageSize) {
+            return Story.Api.GetUpcomingPageStoriesPaged(this.HostProfile.HostID, pageNumber, pageSize);
+        }
 
         [JsonRpcMethod("getPopularStories", Idempotent = true)]
-        [JsonRpcHelp("Returns a list of the most popular pubished stories from the last 30 days")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList getPopularStories() {
-            return getPopularStoriesPaged(1, 16);
+        [JsonRpcHelp("Returns a list of the most popular published stories from the last 30 days")]
+        public ApiPagedList<ApiStory> GetPopularStories() {
+            return Story.Api.GetPopularStories(this.HostProfile.HostID);
         }
 
         [JsonRpcMethod("getPopularStoriesPaged", Idempotent = true)]
-        [JsonRpcHelp("Returns a paged list of the most popular pubished stories from the last 30 days")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList getPopularStoriesPaged(int pageNumber, int pageSize) {
-            return getPopularStoriesPagedAndSorted(pageNumber, pageSize, StoryListSortBy.PastMonth);
+        [JsonRpcHelp("Returns a paged list of the most popular published stories from the last 30 days")]
+        public ApiPagedList<ApiStory> GetPopularStoriesPaged(int pageNumber, int pageSize) {
+            return Story.Api.GetPopularStoriesPaged(this.HostProfile.HostID, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getPopularStoriesPagedFromTimePeriod", Idempotent = true)]
-        [JsonRpcHelp("Returns a paged list of the most popular pubished stories from a time period")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList getPopularStoriesPagedAndSorted(int pageNumber, int pageSize, StoryListSortBy timePeriod) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetPopularStories(this.HostProfile.HostID, true, timePeriod, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetPopularStoriesCount(this.HostProfile.HostID, true, timePeriod);
-            return storyList;
+        [JsonRpcHelp("Returns a paged list of the most popular published stories from a time period")]
+        public ApiPagedList<ApiStory> GetPopularStoriesPagedAndSorted(int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+            return Story.Api.GetPopularStoriesPagedAndSorted(this.HostProfile.HostID, pageNumber, pageSize, timePeriod);
         }
 
         [JsonRpcMethod("getUpcomingStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most popular upcoming stories from the last 30 days")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUpcomingStories() {
-            return GetUpcomingStoriesPaged(1, 16);
+        public ApiPagedList<ApiStory> GetUpcomingStories() {
+            return Story.Api.GetUpcomingStories(this.HostProfile.HostID);
         }
 
         [JsonRpcMethod("getUpcomingStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most popular upcoming stories from the last 30 days")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUpcomingStoriesPaged(int pageNumber, int pageSize) {
-            return GetUpcomingStoriesPagedAndSorted(pageNumber, pageSize, StoryListSortBy.PastYear);
+        public ApiPagedList<ApiStory> GetUpcomingStoriesPaged(int pageNumber, int pageSize) {
+            return Story.Api.GetUpcomingStoriesPaged(this.HostProfile.HostID, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getUpcomingStoriesPagedFromTimePeriod", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most popular upcoming stories from a time period")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUpcomingStoriesPagedAndSorted(int pageNumber, int pageSize, StoryListSortBy timePeriod) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetPopularStories(this.HostProfile.HostID, false, timePeriod, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetPopularStoriesCount(this.HostProfile.HostID, false, timePeriod);
-            return storyList;
+        public ApiPagedList<ApiStory> GetUpcomingStoriesPagedAndSorted(int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+            return Story.Api.GetUpcomingStoriesPagedAndSorted(this.HostProfile.HostID, pageNumber, pageSize, timePeriod);
         }
 
         [JsonRpcMethod("getUserKickedStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most recent stories kicked by a user")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserKickedStories(string username) {
-            return GetUserKickedStoriesPaged(username, 1, 16);
+        public ApiPagedList<ApiStory> GetUserKickedStories(string username) {
+            return Story.Api.GetUserKickedStories(this.HostProfile.HostID, username);
         }
 
         [JsonRpcMethod("getUserKickedStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most recent stories kicked by a user")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserKickedStoriesPaged(string username, int pageNumber, int pageSize) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetUserKickedStories(username, this.HostProfile.HostID, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetUserKickedStoriesCount(username, this.HostProfile.HostID);
-            return storyList;
+        public ApiPagedList<ApiStory> GetUserKickedStoriesPaged(string username, int pageNumber, int pageSize) {
+            return Story.Api.GetUserKickedStoriesPaged(this.HostProfile.HostID, username, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getUserSubmittedStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most recent stories submitted by a user")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserSubmittedStories(string username) {
-            return GetUserSubmittedStoriesPaged(username, 1, 16);
+        public ApiPagedList<ApiStory> GetUserSubmittedStories(string username) {
+            return Story.Api.GetUserSubmittedStories(this.HostProfile.HostID, username);
         }
 
         [JsonRpcMethod("getUserSubmittedStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most recent stories submitted by a user")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserSubmittedStoriesPaged(string username, int pageNumber, int pageSize) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetUserSubmittedStories(username, this.HostProfile.HostID, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetUserSubmittedStoriesCount(username, this.HostProfile.HostID);
-            return storyList;
+        public ApiPagedList<ApiStory> GetUserSubmittedStoriesPaged(string username, int pageNumber, int pageSize) {
+            return Story.Api.GetUserSubmittedStoriesPaged(this.HostProfile.HostID, username, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getUserFriendsKickedStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most recent stories kicked by a user's friends")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserFriendsKickedStories(string username) {
-            return GetUserFriendsKickedStoriesPaged(username, 1, 16);
+        public ApiPagedList<ApiStory> GetUserFriendsKickedStories(string username) {
+            return Story.Api.GetUserFriendsKickedStories(this.HostProfile.HostID, username);
+
         }
 
         [JsonRpcMethod("getUserFriendsKickedStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most recent stories kicked by a user's friends")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserFriendsKickedStoriesPaged(string username, int pageNumber, int pageSize) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetFriendsKickedStories(username, this.HostProfile.HostID, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetFriendsKickedStoriesCount(username, this.HostProfile.HostID);
-            return storyList;
+        public ApiPagedList<ApiStory> GetUserFriendsKickedStoriesPaged(string username, int pageNumber, int pageSize) {
+            return Story.Api.GetUserFriendsKickedStoriesPaged(this.HostProfile.HostID, username, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getUserFriendsSubmittedStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most recent stories submitted by a user's friends")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserFriendsSubmittedStories(string username) {
-            return GetUserFriendsSubmittedStoriesPaged(username, 1, 16);
+        public ApiPagedList<ApiStory> GetUserFriendsSubmittedStories(string username) {
+            return Story.Api.GetUserFriendsSubmittedStories(this.HostProfile.HostID, username);
         }
 
         [JsonRpcMethod("getUserFriendsSubmittedStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the most recent stories submitted by a user's friends")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetUserFriendsSubmittedStoriesPaged(string username, int pageNumber, int pageSize) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetFriendsSubmittedStories(username, this.HostProfile.HostID, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetFriendsSubmittedStoriesCount(username, this.HostProfile.HostID);
-            return storyList;
+        public ApiPagedList<ApiStory> GetUserFriendsSubmittedStoriesPaged(string username, int pageNumber, int pageSize) {
+            return Story.Api.GetUserFriendsSubmittedStoriesPaged(this.HostProfile.HostID, username, pageNumber, pageSize);
         }
 
         [JsonRpcMethod("getTaggedStories", Idempotent = true)]
         [JsonRpcHelp("Returns a list of the most recent stories tagged with a tag")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetTaggedStories(string tag) {
-            return GetTaggedStoriesPaged(tag, 1, 16);
+        public ApiPagedList<ApiStory> GetTaggedStories(string tag) {
+            return Story.Api.GetTaggedStories(this.HostProfile.HostID, tag);
         }
 
         [JsonRpcMethod("getTaggedStoriesPaged", Idempotent = true)]
         [JsonRpcHelp("Returns a paged list of the recent stories tagged with a tag")]
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList GetTaggedStoriesPaged(string tag, int pageNumber, int pageSize) {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storyList = StoryCache.GetTaggedStories(tag, this.HostProfile.HostID, pageNumber, pageSize).ToDto();
-            storyList.Total = StoryCache.GetTaggedStoryCount(tag, this.HostProfile.HostID);
-            return storyList;
+        public ApiPagedList<ApiStory> GetTaggedStoriesPaged(string tag, int pageNumber, int pageSize) {
+            return Story.Api.GetTaggedStoriesPaged(this.HostProfile.HostID, tag, pageNumber, pageSize);
         }
     }
 }

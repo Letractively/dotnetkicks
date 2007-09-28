@@ -1,17 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Incremental.Kick.Dal.Entities.Api;
 
 namespace Incremental.Kick.Dal {
     public partial class StoryCollection {
-
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList ToDto() {
-            Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList storieDtos = new Incremental.Kick.Dal.Entities.DataTransferObjects.StoryList();
-
+        public List<ApiStory> ToApi() {
+            List<ApiStory> stories = new List<ApiStory>();
             foreach (Story s in this) {
-                storieDtos.Stories.Add(s.ToDto());
+                stories.Add(s.ToApi());
             }
-            return storieDtos;
+            return stories;
+        }
+    }
+
+    public class PagedStoryCollection : PagedCollection<StoryCollection> {
+        public ApiPagedList<ApiStory> ToApi() {
+            ApiPagedList<ApiStory> storiesPage = new ApiPagedList<ApiStory>();
+            storiesPage.Items = this.Items.ToApi();
+            storiesPage.Total = this.Total;
+            return storiesPage;
         }
     }
 }

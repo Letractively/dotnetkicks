@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Incremental.Kick.Dal.Entities.DataTransferObjects {
-    public class User {
-        public User() {}
+namespace Incremental.Kick.Dal.Entities.Api {
+    public class ApiUser {
+        public ApiUser() {}
 
-        public User(string username, string profileUrl, string avatarUrl) {
+        public ApiUser(string username, string profileUrl, string avatarUrl) {
             this._username = username;
             this._profileUrl = profileUrl;
             this._avatarUrl = avatarUrl;

@@ -5,16 +5,132 @@ using Incremental.Kick.Common.Enums;
 using SubSonic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Dal.Entities.Api;
 
 namespace Incremental.Kick.Dal {
     public partial class Story {
 
-        public Incremental.Kick.Dal.Entities.DataTransferObjects.Story ToDto() {
+        #region API Methods
+
+        public ApiStory ToApi() {
             Host host = HostCache.GetHost(this.HostID);
-            return new Incremental.Kick.Dal.Entities.DataTransferObjects.Story(
-                this.Title, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this.StoryIdentifier, CategoryCache.GetCategory(this.CategoryID, this.HostID).CategoryIdentifier), this.Description, 
-                this.CreatedOn, this.PublishedOn, this.IsPublishedToHomepage, this.KickCount, this.CommentCount, UserCache.GetUser(this.UserID).ToDto(host));
+            return new ApiStory(
+                this.Title, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this.StoryIdentifier, CategoryCache.GetCategory(this.CategoryID, this.HostID).CategoryIdentifier), this.Description,
+                this.CreatedOn, this.PublishedOn, this.IsPublishedToHomepage, this.KickCount, this.CommentCount, UserCache.GetUser(this.UserID).ToApi(host));
         }
+
+        public static class Api {
+            //TODO : GJ : store pagedCollection in the cache instead of both the list and count
+            public static ApiPagedList<ApiStory> GetFrontPageStories(int hostID) {
+                return GetFrontPageStoriesPaged(hostID, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetFrontPageStoriesPaged(int hostID, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetAllStories(true, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetStoryCount(hostID, true);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetUpcomingPageStories(int hostID) {
+                return GetUpcomingPageStoriesPaged(hostID, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUpcomingPageStoriesPaged(int hostID, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetAllStories(false, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetStoryCount(hostID, false);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetPopularStories(int hostID) {
+                return GetPopularStoriesPaged(hostID, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetPopularStoriesPaged(int hostID, int pageNumber, int pageSize) {
+                return GetPopularStoriesPagedAndSorted(hostID, pageNumber, pageSize, StoryListSortBy.PastMonth);
+            }
+
+            public static ApiPagedList<ApiStory> GetPopularStoriesPagedAndSorted(int hostID, int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetPopularStories(hostID, true, timePeriod, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetPopularStoriesCount(hostID, true, timePeriod);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetUpcomingStories(int hostID) {
+                return GetUpcomingStoriesPaged(hostID, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUpcomingStoriesPaged(int hostID, int pageNumber, int pageSize) {
+                return GetUpcomingStoriesPagedAndSorted(hostID, pageNumber, pageSize, StoryListSortBy.PastMonth);
+            }
+
+            public static ApiPagedList<ApiStory> GetUpcomingStoriesPagedAndSorted(int hostID, int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetPopularStories(hostID, false, timePeriod, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetPopularStoriesCount(hostID, false, timePeriod);
+                return pagedCollection.ToApi();
+            }
+            
+            public static ApiPagedList<ApiStory> GetUserKickedStories(int hostID, string username) {
+                return GetUserKickedStoriesPaged(hostID, username, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUserKickedStoriesPaged(int hostID, string username, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetUserKickedStories(username, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetUserKickedStoriesCount(username, hostID);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetUserSubmittedStories(int hostID, string username) {
+                return GetUserSubmittedStoriesPaged(hostID, username, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUserSubmittedStoriesPaged(int hostID, string username, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetUserSubmittedStories(username, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetUserSubmittedStoriesCount(username, hostID);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetUserFriendsKickedStories(int hostID, string username) {
+                return GetUserFriendsKickedStoriesPaged(hostID, username, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUserFriendsKickedStoriesPaged(int hostID, string username, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetFriendsKickedStories(username, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetFriendsKickedStoriesCount(username, hostID);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetUserFriendsSubmittedStories(int hostID, string username) {
+                return GetUserFriendsSubmittedStoriesPaged(hostID, username, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetUserFriendsSubmittedStoriesPaged(int hostID, string username, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetFriendsSubmittedStories(username, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetFriendsSubmittedStoriesCount(username, hostID);
+                return pagedCollection.ToApi();
+            }
+
+            public static ApiPagedList<ApiStory> GetTaggedStories(int hostID, string tag) {
+                return GetTaggedStoriesPaged(hostID, tag, 1, 16);
+            }
+
+            public static ApiPagedList<ApiStory> GetTaggedStoriesPaged(int hostID, string tag, int pageNumber, int pageSize) {
+                PagedStoryCollection pagedCollection = new PagedStoryCollection();
+                pagedCollection.Items = StoryCache.GetTaggedStories(tag, hostID, pageNumber, pageSize);
+                pagedCollection.Total = StoryCache.GetTaggedStoryCount(tag, hostID);
+                return pagedCollection.ToApi();
+            }
+        }
+        #endregion
+
+        
 
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
