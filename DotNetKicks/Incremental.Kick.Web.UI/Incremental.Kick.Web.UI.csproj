@@ -432,6 +432,13 @@
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\Docs\FrequentlyAskedQuestions.aspx.cs">
+      <DependentUpon>FrequentlyAskedQuestions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\FrequentlyAskedQuestions.aspx.designer.cs">
+      <DependentUpon>FrequentlyAskedQuestions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Docs\InProgress.aspx.cs">
       <DependentUpon>InProgress.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -761,6 +768,7 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
+    <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Scripts\2.0.2\Common.js" />
