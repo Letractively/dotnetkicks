@@ -162,12 +162,12 @@ namespace Incremental.Kick.Web.Controls {
             writer.WriteLine(@"<img src=""{0}/comment.png"" alt=""Add a comment"" width=""16"" height=""16"" border=""0"" /> ", this.KickPage.StaticIconRootUrl);
 
             if (this._story.CommentCount == 0) {
-                writer.WriteLine(@"<a href=""{0}"">add a comment</a>", kickStoryUrl);
+                writer.WriteLine(@"<a href=""{0}#comments"">add a comment</a>", kickStoryUrl);
             } else {
                 if (this._story.CommentCount == 1)
-                    writer.WriteLine(@"<a href=""{0}"">1 comment</a>", kickStoryUrl);
+                    writer.WriteLine(@"<a href=""{0}#comments"">1 comment</a>", kickStoryUrl);
                 else
-                    writer.WriteLine(@"<a href=""{0}"">{1} comments</a>", kickStoryUrl, this._story.CommentCount);
+                    writer.WriteLine(@"<a href=""{0}#comments"">{1} comments</a>", kickStoryUrl, this._story.CommentCount);
             }
 
             string categoryIcon = "";

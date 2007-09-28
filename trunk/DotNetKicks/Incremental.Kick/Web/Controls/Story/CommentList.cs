@@ -19,7 +19,7 @@ namespace Incremental.Kick.Web.Controls {
 
         protected override void Render(HtmlTextWriter writer) {
             
-            writer.WriteLine(@"<br /><div class=""PageSmallCaption"">Comments:</div>");
+            writer.WriteLine(@"<br /><div id=""comments"" class=""PageSmallCaption"">Comments:</div>");
 
             bool isOddRow = true;
 
