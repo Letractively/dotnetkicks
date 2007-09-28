@@ -15,7 +15,12 @@ namespace Incremental.Kick.Tests.HelperTests {
         [Row("http://iol.ie.", @"<a href=""http://iol.ie"" target=""_new"">http://iol.ie</a>.")]
         [Row("http://iol.ie/.", @"<a href=""http://iol.ie/"" target=""_new"">http://iol.ie/</a>.")]
 
+        //testing bracket and period at the end of a link 
+        //NOTE: GJ: FAILING TEST!!!
+        [Row("(http://code.google.com/p/dotnetkicks/issues/detail?id=112).", @"(<a href=""http://code.google.com/p/dotnetkicks/issues/detail?id=112"" target=""_new"">http://code.google.com/p/dotnetkicks/issues/detail?id=112</a>).")]
+                
         //Testing two links on a line
+        //NOTE: GJ: FAILING TEST!!!
         [Row("This is a link http://www.iol.ie/ and this is another one: http://www.iol.ie/.",
             @"This is a link <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a> and this is another one: <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a>.")]
 
