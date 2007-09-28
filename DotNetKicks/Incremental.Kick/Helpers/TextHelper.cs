@@ -7,7 +7,11 @@ using System.Web;
 namespace Incremental.Kick.Helpers {
     public class TextHelper {
         public static string Urlify(string input) {
+            //NOTE: GJ: this regex fails 'period at the end of a link' unit test
             return RegExReplace(input, @"((ht|f)tp(s?))\://([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(/\S*)?", @"<a href=""{0}"" target=""_new"">{0}</a>");
+
+            //NOTE: GJ: this regex fails 'two links on a line' unit test            
+            //return RegExReplace(input, @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?", @"<a href=""{0}"" target=""_new"">{0}</a>");
         }
 
         public static string RegExReplace(string input, string regExPattern, string outputPattern) {
