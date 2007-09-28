@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="BrowserActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityTests\UserAuthorisationTests.cs" />
     <Compile Include="SecurityTests\UserAuthenticationTests.cs" />
     <Compile Include="SetUpAndCleanUp.cs" />
   </ItemGroup>
