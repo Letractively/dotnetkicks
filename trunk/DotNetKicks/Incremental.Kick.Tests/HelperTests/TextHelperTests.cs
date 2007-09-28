@@ -11,8 +11,13 @@ namespace Incremental.Kick.Tests.HelperTests {
         [Row("no link", "no link")]
         [Row("htp://www.ireland.com/", "htp://www.ireland.com/")] //only valid links should be replaced
 
+        //testing period at the end of a link
         [Row("http://iol.ie.", @"<a href=""http://iol.ie"" target=""_new"">http://iol.ie</a>.")]
         [Row("http://iol.ie/.", @"<a href=""http://iol.ie/"" target=""_new"">http://iol.ie/</a>.")]
+
+        //Testing two links on a line
+        [Row("This is a link http://www.iol.ie/ and this is another one: http://www.iol.ie/.",
+            @"This is a link <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a> and this is another one: <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a>.")]
 
         //Valid Links:
         [Row("http://www.ireland.com/", @"<a href=""http://www.ireland.com/"" target=""_new"">http://www.ireland.com/</a>")]
