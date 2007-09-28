@@ -12,6 +12,7 @@
 .FaqCategory
 {
     font-size: medium;
+    font-size: medium;
     font-weight: bold;
 }
 .FaqQuestion
@@ -24,8 +25,8 @@
 </style>
     <h2>
         DotNetKicks FAQ</h2>
-    <a name="FAQ_Top"></a>Topics:
-    <dl class="FaqCategories">
+    Topics:
+    <dl id="FAQ_Top" class="FaqCategories">
         <dt><a href="#FAQ_Meta">FAQ Meta</a></dt>
         <dd>
             This section are questions relating to this FAQ document.</dd>
@@ -83,8 +84,7 @@
 -->
     </dl>
     <hr />
-    <a name="FAQ_Meta"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_Meta" class="FaqCategory">
         FAQ Meta</h3>
     <p class="FaqQuestion">
         What is a FAQ?</p>
@@ -101,8 +101,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_StoryKicks"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_StoryKicks" class="FaqCategory">
         Story Kicks</h3>
     <p class="FaqQuestion">
         What is a Kick?</p>
@@ -122,8 +121,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_StorySubmission"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_StorySubmission" class="FaqCategory">
         Story Submission</h3>
     <p class="FaqQuestion">
         How do I submit stories to DotNetKicks?</p>
@@ -151,8 +149,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_StoryCategories"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_StoryCategories" class="FaqCategory">
         Story Categories</h3>
     <p class="FaqQuestion">
         What is a category for?</p>
@@ -168,8 +165,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_StoryTags"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_StoryTags" class="FaqCategory">
         Story Tags</h3>
     <p class="FaqQuestion">
         What is a tag for?</p>
@@ -183,15 +179,13 @@
         How do I remove a tag?</p>
     <p class="FaqAnswer">
         Placeholder</p>
-    <a name="FAQ_UserBanning"></a>
-    <p class="FaqQuestion">
+    <p id="FAQ_UserBanning" class="FaqQuestion">
         Why was I banned?</p>
     <p class="FaqAnswer">
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_UserProfile"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_UserProfile" class="FaqCategory">
         User Profile</h3>
     <p class="FaqQuestion">
         I forgot my password!</p>
@@ -231,8 +225,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_UserComments"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_UserComments" class="FaqCategory">
         User Comments</h3>
     <p class="FaqQuestion">
         How do I add a comment?</p>
@@ -256,8 +249,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_UserKarma"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_UserKarma" class="FaqCategory">
         User Karma Points</h3>
     <p class="FaqQuestion">
         What is Karma?</p>
@@ -277,8 +269,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_UserFriends"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_UserFriends" class="FaqCategory">
         User Friends</h3>
     <p class="FaqQuestion">
         What is a friend?</p>
@@ -294,8 +285,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_SiteWebFeeds"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_SiteWebFeeds" class="FaqCategory">
         Web Feeds</h3>
     <p class="FaqQuestion">
         What is a Web Feed?</p>
@@ -319,8 +309,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_EarnMoney"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_EarnMoney" class="FaqCategory">
         Earn Money</h3>
     <p class="FaqQuestion">
         How can I earn money?</p>
@@ -336,8 +325,7 @@
         Placeholder</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
-    <a name="FAQ_Helping"></a>
-    <h3 class="FaqCategory">
+    <h3 id="FAQ_Helping" class="FaqCategory">
         Helping DotNetKicks</h3>
     <p class="FaqQuestion">
         How can I help DotNetKicks?</p>
