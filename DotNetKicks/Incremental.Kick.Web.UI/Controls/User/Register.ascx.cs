@@ -26,7 +26,9 @@ namespace Incremental.Kick.Web.UI.Controls
 
         protected void UsernameExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = !User.FetchByParameter(User.Columns.Username, args.Value).Read();
+            // Username is valid only if it has not taken yet AND if it's not one of the reserved usernames
+            args.IsValid = !User.FetchByParameter(User.Columns.Username, args.Value).Read() &&
+                           !ReservedUsername.FetchByParameter(ReservedUsername.Columns.Username, args.Value).Read();
         }
 
         protected void EmailExists_ServerValidate(object source, ServerValidateEventArgs args)

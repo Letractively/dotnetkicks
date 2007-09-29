@@ -109,6 +109,7 @@
     <Compile Include="Dal\SubSonic\Generated\Controllers\CommentController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\Elmah_ErrorController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\HostController.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Controllers\ReservedUsernameController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\SettingController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\ShoutController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\StoredProcedures.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Dal\SubSonic\Generated\Models\Comment.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Elmah_Error.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Host.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Models\ReservedUsername.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Setting.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Shout.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Story.cs" />
