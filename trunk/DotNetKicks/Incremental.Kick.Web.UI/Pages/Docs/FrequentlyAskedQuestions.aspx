@@ -1,6 +1,8 @@
 <%@ Page Language="C#" AutoEventWireup="true" Codebehind="FrequentlyAskedQuestions.aspx.cs"
     Inherits="Incremental.Kick.Web.UI.Pages.Docs.FrequentlyAskedQuestions" MasterPageFile="~/Templates/MasterPage.master" %>
 
+<%@ Import Namespace="Incremental.Kick.Web.Controls" %>
+<%@ Import Namespace="Incremental.Common.Web.Helpers" %>
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="Server">
     <style type="text/css">
@@ -97,14 +99,14 @@ will be moved to .css file once things have been more finalized */
     <p class="FaqQuestion">
         I have a question that is not answered in this FAQ. What should I do?</p>
     <p class="FaqAnswer">
-        You can post the question on the Kick Shoutbox or email your question to <a href="mailto:<%=this.HostProfile.Email %>">
-            <%=this.HostProfile.Email%>
+        You can post the question on the Kick Shoutbox or email your question to <a href="mailto:<%=HostProfile.Email %>">
+            <%=HostProfile.Email%>
         </a>.</p>
     <p class="FaqQuestion">
         Who is responsible for the FAQ?</p>
     <p class="FaqAnswer">
         This document is maintained by the
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         development team.</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
@@ -138,11 +140,11 @@ will be moved to .css file once things have been more finalized */
         How many Kicks does it take to get to the front page?</p>
     <p class="FaqAnswer">
         The promotion algorithm determines when a story is promoted to the front page.
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         requires a story to have
-        <%=this.HostProfile.Publish_KickScore%>
+        <%=HostProfile.Publish_KickScore%>
         kicks and
-        <%=this.HostProfile.Publish_CommentScore%>
+        <%=HostProfile.Publish_CommentScore%>
         comments to be promoted from the upcoming stories to the front page.</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
@@ -158,15 +160,32 @@ will be moved to .css file once things have been more finalized */
         How do I add a "Kick It" link and image to my own page?</p>
     <p class="FaqAnswer">
         When you submit a story, you are provided with the HTML needed to add a "Kick It"
-        image and link to your web page. You can use the below HTML code as a template,
-        just remember to replace "MyURL" with the exact URL as the submitted story.
+        image and link to your web page, that you can customize by choosing the colors you
+        prefer. You can use the below HTML code as a template, just remember to replace
+        "MyURL" with the exact URL as the submitted story.
     </p>
     <p class="FaqAnswer">
-        &lt;a href="<%=this.HostProfile.RootUrl %>/kick/?url=MyURL"&gt;&lt;img src="<%=this.HostProfile.RootUrl %>/Services/Images/KickItImageGenerator.ashx?url=MyUrl"
-        alt="kick it on
-        <%=this.HostProfile.SiteTitle%>
-        " border="0"&gt;&lt;/a&gt;
+        <%= HttpUtility.HtmlEncode(ControlHelper.RenderControl(new StoryDynamicImage("MyURL", HostProfile))) %>
     </p>
+    <p class="FaqQuestion">
+        How do I automatically add a "Kick It" link to each of my FeedBurner feed entries?</p>
+    <p class="FaqAnswer">
+        FeedBurner has a feature called FeedFlare which lets you easily add links to the
+        bottom of each entry in your feed. To add a "Kick it" link to each of your feed
+        entries you need to configure your feed accordingly following these steps:
+    </p>
+    <ul>
+        <li>Open your feed in FeedBurner and go to the Optimize section. </li>
+        <li>On the side menu there's an option called FeedFlare, click on it. </li>
+        <li>You will be shown a list of available flares, among which you can find Email, Del.icio.us,
+            Digg. </li>
+        <li>Scroll down the page, and in the "Personal FeedFlare" input field type the following:
+            <a href="http://static.dotnetkicks.com/tools/feedflare/kickitflare.xml">http://static.dotnetkicks.com/tools/feedflare/kickitflare.xml</a> </li>
+        <li>Click on the "Add new Flare" button, and enable the new flare by cheking the corresponding
+            checkbox. </li>
+        <li>Remember to activate this features using the "Activate" button at the bottom of
+            the page. </li>
+    </ul>
     <p class="FaqQuestion">
         How do I customize the "Kick It" image to match my web site's color scheme?</p>
     <p class="FaqAnswer">
@@ -198,10 +217,10 @@ will be moved to .css file once things have been more finalized */
         An example is provided below.
     </p>
     <p class="FaqAnswer">
-        &lt;img src="<%=this.HostProfile.RootUrl %>/Services/Images/KickItImageGenerator.ashx?url=MyURL
+        &lt;img src="<%=HostProfile.RootUrl %>/Services/Images/KickItImageGenerator.ashx?url=MyURL
         &amp;border=000033&amp;bgcolor=0099FF &amp;fgcolor=000033 &amp;cbgcolor=FFFFCC&amp;cfgcolor=000033"
         border="0" alt="kick it on
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         " /&gt;
     </p>
     <p class="FaqQuestion">
@@ -214,8 +233,8 @@ will be moved to .css file once things have been more finalized */
     <p class="FaqAnswer">
         Any story that is not related to the specific topic of this site can be deleted
         by site moderators and administrators. If you believe your story was incorrectly
-        marked as SPAM please contact the team at <a href="mailto:<%=this.HostProfile.Email %>">
-            <%=this.HostProfile.Email%>
+        marked as SPAM please contact the team at <a href="mailto:<%=HostProfile.Email %>">
+            <%=HostProfile.Email%>
         </a>
     </p>
     <a href="#FAQ_Top">Return to Topic List</a>
@@ -275,7 +294,7 @@ will be moved to .css file once things have been more finalized */
     <p class="FaqQuestion">
         I forgot my password!</p>
     <p class="FaqAnswer">
-        Click the link labeled '<a href="<%=this.HostProfile.RootUrl %>/forgotpassword">Forgot
+        Click the link labeled '<a href="<%=HostProfile.RootUrl %>/forgotpassword">Forgot
             your password</a>' to retrieve your password.</p>
     <p class="FaqQuestion">
         I don’t want any cookies!</p>
@@ -414,18 +433,18 @@ will be moved to .css file once things have been more finalized */
         How do I subscribe to a DotNetKicks Web Feed?</p>
     <p class="FaqAnswer">
         Most
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         pages contain a RSS icon that looks like:
-        <img src="<%= this.StaticIconRootUrl %>/rss.jpg" />. To subscribe to the web feed,
+        <img src="<%= StaticIconRootUrl %>/rss.jpg" />. To subscribe to the web feed,
         just click this image and your default Web Feed/RSS Reader will activate.
     </p>
     <p class="FaqQuestion">
         How do I subscribe to a DotNetKicks category only Web Feed?</p>
     <p class="FaqAnswer">
         Most
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         pages contain a RSS icon that looks like:
-        <img src="<%= this.StaticIconRootUrl %>/rss.jpg" />. To subscribe to the web feed,
+        <img src="<%= StaticIconRootUrl %>/rss.jpg" />. To subscribe to the web feed,
         just click this image and your default Web Feed/RSS Reader will activate.</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
@@ -434,7 +453,7 @@ will be moved to .css file once things have been more finalized */
     <p class="FaqQuestion">
         How can I earn money?</p>
     <p class="FaqAnswer">
-        <%=this.HostProfile.SiteTitle%>
+        <%=HostProfile.SiteTitle%>
         uses a revenue sharing system. You will receive 50% of the advertisement revenue
         on this site for all stories that you submit. How it works is simple. Your AdSense
         account ID is used 50% of the time for all views of your submitted stories. As people
@@ -449,7 +468,7 @@ will be moved to .css file once things have been more finalized */
     <p class="FaqQuestion">
         How do I enter my Google AdSense id?</p>
     <p class="FaqAnswer">
-        First, you must have a valid account. Second, visit the <a href="<%=this.HostProfile.RootUrl %>/docs/earnmoney">
+        First, you must have a valid account. Second, visit the <a href="<%=HostProfile.RootUrl %>/docs/earnmoney">
             Earn Money</a> page to enter your Google AdSense id.</p>
     <a href="#FAQ_Top">Return to Topic List</a>
     <hr />
@@ -489,8 +508,8 @@ will be moved to .css file once things have been more finalized */
         How do I submit comments?</p>
     <p class="FaqAnswer">
         We would be delighted to hear your suggestions or comments, we can be reached at
-        <a href="mailto:<%=this.HostProfile.Email %>">
-            <%=this.HostProfile.Email%>
+        <a href="mailto:<%=HostProfile.Email %>">
+            <%=HostProfile.Email%>
         </a>.</p>
     <a href="#FAQ_Top">Return to Topic List</a>
 </asp:Content>
