@@ -13,7 +13,7 @@
     <tr>
         <td class="FormTitle FormTD">Custom Gravatar Email:</td>
         <td class="FormInput FormTD"><asp:TextBox ID="GravatarCustomEmail" runat="server" size="60"></asp:TextBox>
-        <br><span class="FormHelp">(leave blank if you wish to use <em><asp:Label ID="UserEmail" runat="server" /></em>)</span>
+        <br /><span class="FormHelp">(leave blank if you wish to use <em><asp:Label ID="UserEmail" runat="server" /></em>)</span>
 </td>
     </tr>
     <tr>
@@ -23,17 +23,22 @@
     <tr>
         <td class="FormTitle FormTD">Website:</td>
         <td class="FormInput FormTD"><asp:TextBox ID="WebsiteURL" runat="server" size="60" />
-        <br><span class="FormHelp">eg. <em>http://www.dotnetkicks.com/</em></span></td>
+        <br /><span class="FormHelp">eg. <em>http://www.dotnetkicks.com/</em></span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD">Blog</td>
         <td class="FormInput FormTD"><asp:TextBox ID="BlogUrl" runat="server" size="60" />
-        <br><span class="FormHelp">eg. <em>http://blog.incremental.ie/</em></span></td>
+        <br /><span class="FormHelp">eg. <em>http://blog.incremental.ie/</em></span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD">Blog Feed</td>
         <td class="FormInput FormTD"><asp:TextBox ID="BlogFeedUrl" runat="server" size="60" />
-        <br><span class="FormHelp">eg. <em>http://feeds.feedburner.com/dotnetkicks</em></span></td>
+        <br /><span class="FormHelp">eg. <em>http://feeds.feedburner.com/dotnetkicks</em></span></td>
+    </tr>
+    <tr>
+        <td class="FormTitle FormTD">Appear online</td>
+        <td class="FormInput FormTD"><asp:CheckBox ID="AppearOnline" runat="server" />
+        <br /><span class="FormHelp">Disable this to prevent other people from seeing your online status</span></td>
     </tr>
     <tr>
         <td class="FormTitle FormTD"></td>

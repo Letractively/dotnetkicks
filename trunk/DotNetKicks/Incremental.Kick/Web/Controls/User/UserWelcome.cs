@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
@@ -24,13 +22,13 @@ namespace Incremental.Kick.Web.Controls
             writer.WriteAttribute("id", "UserWelcome");
             writer.Write(HtmlTextWriter.TagRightChar);
 
-            if (this.KickPage.User.Identity.IsAuthenticated)
+            if (KickPage.User.Identity.IsAuthenticated)
             {
                 writer.Write("Welcome ");
                 writer.WriteBeginTag("a");
-                writer.WriteAttribute("href", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.KickUserProfile.Username));
+                writer.WriteAttribute("href", UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.KickUserProfile.Username));
                 writer.Write(HtmlTextWriter.TagRightChar);    
-                writer.Write(this.KickPage.KickUserProfile.Username);
+                writer.Write(KickPage.KickUserProfile.Username);
                 writer.WriteEndTag("a");
             }
             else
@@ -48,7 +46,7 @@ namespace Incremental.Kick.Web.Controls
             writer.WriteBeginTag("a");
             writer.WriteAttribute("href", UrlFactory.CreateUrl(UrlFactory.PageName.WhoIsOnline));
             writer.Write(HtmlTextWriter.TagRightChar);
-            writer.Write(Strings.Pluralize(UserCache.GetOnlineUsersCount(30, this.KickPage.HostProfile.HostID), "user"));
+            writer.Write(Strings.Pluralize(UserCache.GetOnlineUsersCount(30, KickPage.HostProfile.HostID, KickPage.KickUserProfile), "user"));
             writer.Write(" online");
             writer.WriteEndTag("a");
 

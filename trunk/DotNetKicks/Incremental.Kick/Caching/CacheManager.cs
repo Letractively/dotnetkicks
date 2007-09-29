@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web;
 using System.Web.Caching;
 
@@ -25,7 +23,7 @@ namespace Incremental.Kick.Caching {
         }
 
         public void Insert(K key, V value, int cacheDurationInSeconds) {
-            this.Insert(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
+            Insert(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
         }
 
         public void Insert(K key, V value, int cacheDurationInSeconds, CacheItemPriority priority) {
@@ -48,7 +46,7 @@ namespace Incremental.Kick.Caching {
         }
 
         private static string CreateKey(K key) {
-            return key.ToString() +  typeof(K).ToString() + key.GetHashCode().ToString();
+            return key +  typeof(K).ToString() + key.GetHashCode();
         }
     }
 }

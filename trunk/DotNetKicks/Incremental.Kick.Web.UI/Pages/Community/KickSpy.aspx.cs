@@ -1,27 +1,18 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.UI.Pages.Community {
-    public partial class KickSpy : Incremental.Kick.Web.Controls.KickUIPage {
+    public partial class KickSpy : Web.Controls.KickUIPage {
         protected void Page_Load(object sender, EventArgs e) {
-            this.DisplayAds = false;
-            this.DisplaySideAds = false;
-            this.Title = this.HostProfile.SiteTitle + " : Kick Spy!";
-            this.PageName = UrlFactory.PageName.KickSpy;
+            DisplayAds = false;
+            DisplaySideAds = false;
+            Title = HostProfile.SiteTitle + " : Kick Spy!";
+            PageName = UrlFactory.PageName.KickSpy;
 
-            this.UserOnlineList.DataBind(UserCache.GetOnlineUsers(30, this.HostProfile.HostID));
+            UserOnlineList.DataBind(UserCache.GetOnlineUsers(30, HostProfile.HostID, KickUserProfile));
 
-            this.Shoutbox.DataBind((ShoutCache.GetLatestShouts(this.HostProfile.HostID)));
+            Shoutbox.DataBind((ShoutCache.GetLatestShouts(HostProfile.HostID)));
         }
     }
 }

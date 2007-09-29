@@ -5,7 +5,7 @@
 
 <asp:content id="MainContent" contentplaceholderid="MainContent" runat="Server">
 <span style="font-size: 1.2em;"><em>
-<strong><%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(30, this.HostProfile.HostID) %> users are online now, <%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(1440, this.HostProfile.HostID) %> were on today.
+<strong><%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(30, HostProfile.HostID, KickUserProfile) %> users are online now, <%= Incremental.Kick.Caching.UserCache.GetOnlineUsersCount(1440, HostProfile.HostID, KickUserProfile) %> were on today.
 </strong></em></span>
    
 
