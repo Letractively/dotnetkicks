@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
@@ -23,7 +21,7 @@ namespace Incremental.Kick.Caching {
             return user;
         }
 
-        private static object _getUserLock = new object();
+        private static readonly object _getUserLock = new object();
         public static User GetUser(int userID) {
             CacheManager<string, User> userCache = GetUserCache();
             string cacheKey = GetUserProfileCacheKey(userID);
@@ -71,7 +69,6 @@ namespace Incremental.Kick.Caching {
             GetUserCache().Remove(GetUserProfileCacheKey(userID));
         }
 
-
         private static string GetUserProfileCacheKey() {
             return "UserProfile_Anonymous";
         }
@@ -87,7 +84,7 @@ namespace Incremental.Kick.Caching {
 
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
-            UserAction.RecordKick(hostID, UserCache.GetUser(userID), Story.FetchByID(storyID));
+            UserAction.RecordKick(hostID, GetUser(userID), Story.FetchByID(storyID));
 
             return StoryBR.IncrementKickCount(storyID);
         }
@@ -98,7 +95,7 @@ namespace Incremental.Kick.Caching {
 
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
-            UserAction.RecordUnKick(hostID, UserCache.GetUser(userID), Story.FetchByID(storyID));
+            UserAction.RecordUnKick(hostID, GetUser(userID), Story.FetchByID(storyID));
             return StoryBR.DecrementKickCount(storyID);
         }
 
