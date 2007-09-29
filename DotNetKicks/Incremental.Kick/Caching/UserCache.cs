@@ -12,16 +12,11 @@ namespace Incremental.Kick.Caching {
             if (!String.IsNullOrEmpty(securityToken))
                 userID = SecurityToken.FromString(securityToken).UserID;
 
-            User user;
-            if (userID.HasValue)
-                user = GetUser(userID.Value);
-            else
-                user = GetUser(0);
-
-            return user;
+            return userID.HasValue ? GetUser(userID.Value) : GetUser(0);
         }
 
         private static readonly object _getUserLock = new object();
+
         public static User GetUser(int userID) {
             CacheManager<string, User> userCache = GetUserCache();
             string cacheKey = GetUserProfileCacheKey(userID);
@@ -149,21 +144,29 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID) {
+        public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID, User userProfile) {
             string cacheKey = String.Format("OnlineUsers_{0}_{1}", minutesSinceLastActive, hostID);
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection users = userCollectionCache[cacheKey];
 
             if (users == null) {
+
                 users = User.FetchOnlineUsers(minutesSinceLastActive, hostID);
                 userCollectionCache.Insert(cacheKey, users, 60, System.Web.Caching.CacheItemPriority.NotRemovable);
             }
 
+            // If current user has permissions show all online users
+            if (userProfile.IsModerator || userProfile.IsAdministrator)
+                return users;
+
+            // Otherwise show only users who choose to appear online
+            users.RemoveAll(delegate(User user) { return !user.AppearOnline; });
             return users;
         }
 
-        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID) {
-            return GetOnlineUsers(minutesSinceLastActive, hostID).Count;
+        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID, User userProfile)
+        {
+            return GetOnlineUsers(minutesSinceLastActive, hostID, userProfile).Count;
         }
 
         private static CacheManager<string, UserCollection> GetUserCollectionCache() {
