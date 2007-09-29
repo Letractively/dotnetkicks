@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Common.Enums;
@@ -151,6 +152,85 @@ namespace Incremental.Kick.Caching
 
 
         /// <summary>
+        /// Gets the most used tags.
+        /// </summary>
+        /// <param name="hostID">The host ID.</param>
+        /// <param name="tagCount">The tag count.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        public static Dictionary<string, int> GetMostUsedTags(int hostID, int tagCount, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_MostUsedTags_{0}_{1}_{2}_{3}_{4}", hostID, tagCount, year, month, day);
+            CacheManager<string, Dictionary<string, int>> tagCache = GetTagCollectionCache();
+            Dictionary<string, int> tags = tagCache[cacheKey];
+
+            if (tags == null)
+            {
+                //very messy need support for Group By and Joins in SubSonic
+                StringBuilder sqlSelect = new StringBuilder(128);
+                //select
+                sqlSelect.AppendFormat("SELECT TOP {0} COUNT(0) AS TagCount, {1}.{2} ",
+                    tagCount.ToString(),
+                    Tag.Schema.TableName, Tag.Columns.TagIdentifier);
+
+                //from
+                sqlSelect.AppendFormat("FROM {0} INNER JOIN {1} on {0}.{2}={1}.{3} ",
+                        StoryUserHostTag.Schema.TableName, Story.Schema.TableName,
+                        StoryUserHostTag.Columns.StoryID, Story.Columns.StoryID);
+                sqlSelect.AppendFormat("INNER JOIN {0} on {0}.{1}={2}.{3} ",
+                        Tag.Schema.TableName, Tag.Columns.TagID,
+                        StoryUserHostTag.Schema.TableName, StoryUserHostTag.Columns.TagID);
+
+                //where
+                sqlSelect.AppendFormat("WHERE {0}.{1} >= @StartingDate AND {0}.{1} <= @EndingDate ",
+                    Story.Schema.TableName, Story.Columns.CreatedOn);
+
+                sqlSelect.AppendFormat("AND {0}.{1} = 0 AND {0}.{2} = @HostId ",
+                  Story.Schema.TableName, Story.Columns.IsSpam,
+                  Story.Columns.HostID);
+
+                //group by
+                sqlSelect.AppendFormat("GROUP BY {0} ", Tag.Columns.TagIdentifier);
+
+                //order by
+                sqlSelect.Append("ORDER BY COUNT(0) DESC");
+
+                /* 
+                 * SELECT TOP 10 COUNT(0) AS TagCount, Kick_Tag.TagIdentifier 
+                 * FROM Kick_StoryUserHostTag INNER JOIN Kick_Story on Kick_StoryUserHostTag.StoryID=Kick_Story.StoryID 
+                 * INNER JOIN Kick_Tag on Kick_Tag.TagID=Kick_StoryUserHostTag.TagID 
+                 * WHERE Kick_Story.CreatedOn >= @StartingDate AND Kick_Story.CreatedOn <= @EndingDate 
+                 * AND Kick_Story.IsSpam = 0 AND Kick_Story.HostID = @HostId 
+                 * GROUP BY TagIdentifier 
+                 * ORDER BY COUNT(0) DESC
+                 */ 
+                //System.Diagnostics.Debug.WriteLine(sqlSelect.ToString());
+
+                QueryCommand qry = new QueryCommand(sqlSelect.ToString());
+                qry.AddParameter("@StartingDate", StartingDate(year, month, day));
+                qry.AddParameter("@EndingDate", EndingDate(year, month, day));
+                qry.AddParameter("@HostId", hostID);
+
+                tags = new Dictionary<string, int>();
+
+                IDataReader reader = DataService.GetInstance("DotNetKicks").GetReader(qry);
+                while (reader.Read())
+                {
+                    tags.Add(reader[1].ToString(), int.Parse(reader[0].ToString()));//1=TagIdentifier (key), 0=TagCount (value)
+                }
+                reader.Close();
+
+                tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return tags;
+        }
+
+
+
+        /// <summary>
         /// Gets the most commented on stories.
         /// </summary>
         /// <param name="hostID">The host ID.</param>
@@ -199,7 +279,14 @@ namespace Incremental.Kick.Caching
         {
             return CacheManager<string, int?>.GetInstance();
         }
-
+        /// <summary>
+        /// Gets the tag collection cache.
+        /// </summary>
+        /// <returns></returns>
+        private static CacheManager<string, Dictionary<string, int>> GetTagCollectionCache()
+        {
+            return CacheManager<string, Dictionary<string, int>>.GetInstance();
+        }
         /// <summary>
         /// Gets the starting date for the Zeitgeist query
         /// </summary>
