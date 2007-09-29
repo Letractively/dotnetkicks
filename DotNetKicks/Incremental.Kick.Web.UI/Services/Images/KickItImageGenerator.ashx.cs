@@ -215,6 +215,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
                     g.FillRectangle(new SolidBrush(_countBackgroundColor),
                         img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
 
+                    //make sure story != null before calling IsPublishedToHomepage 
                     //if published, make bold
                     if (story != null && story.IsPublishedToHomepage)
                         _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
