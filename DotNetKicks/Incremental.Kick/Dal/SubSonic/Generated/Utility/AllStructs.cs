@@ -28,6 +28,8 @@ namespace Incremental.Kick.Dal
         
 		public static string Host = @"Kick_Host";
         
+		public static string ReservedUsername = @"Kick_ReservedUsername";
+        
 		public static string Setting = @"Kick_Setting";
         
 		public static string Shout = @"Kick_Shout";
