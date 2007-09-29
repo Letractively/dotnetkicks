@@ -375,6 +375,20 @@ namespace Incremental.Kick.Dal
 				colvarBlogFeedURL.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarBlogFeedURL);
 				
+				TableSchema.TableColumn colvarAppearOnline = new TableSchema.TableColumn(schema);
+				colvarAppearOnline.ColumnName = "AppearOnline";
+				colvarAppearOnline.DataType = DbType.Boolean;
+				colvarAppearOnline.MaxLength = 0;
+				colvarAppearOnline.AutoIncrement = false;
+				colvarAppearOnline.IsNullable = false;
+				colvarAppearOnline.IsPrimaryKey = false;
+				colvarAppearOnline.IsForeignKey = false;
+				colvarAppearOnline.IsReadOnly = false;
+				
+						colvarAppearOnline.DefaultSetting = @"((1))";
+				colvarAppearOnline.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAppearOnline);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -597,6 +611,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("AppearOnline")]
+		public bool AppearOnline 
+		{
+			get { return GetColumnValue<bool>(Columns.AppearOnline); }
+
+			set { SetColumnValue(Columns.AppearOnline, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -707,7 +731,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline)
 		{
 			User item = new User();
 			
@@ -751,6 +775,8 @@ namespace Incremental.Kick.Dal
 			
 			item.BlogFeedURL = varBlogFeedURL;
 			
+			item.AppearOnline = varAppearOnline;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -762,7 +788,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline)
 		{
 			User item = new User();
 			
@@ -808,6 +834,8 @@ namespace Incremental.Kick.Dal
 			
 				item.BlogFeedURL = varBlogFeedURL;
 			
+				item.AppearOnline = varAppearOnline;
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -840,6 +868,7 @@ namespace Incremental.Kick.Dal
 			 public static string WebsiteURL = @"WebsiteURL";
 			 public static string BlogURL = @"BlogURL";
 			 public static string BlogFeedURL = @"BlogFeedURL";
+			 public static string AppearOnline = @"AppearOnline";
 						
 		}
 
