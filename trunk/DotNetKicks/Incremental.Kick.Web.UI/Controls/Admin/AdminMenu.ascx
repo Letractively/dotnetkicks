@@ -7,4 +7,5 @@
     <li><a href="/admin/hosts">Hosts</a></li>
     <li><a href="/admin/categories">Categories</a></li>
     <li><a href="/admin/users">Users</a></li>
+    <li><a href="/admin/reservedusernames">Reserved Usernames</a></li>
 </ul>

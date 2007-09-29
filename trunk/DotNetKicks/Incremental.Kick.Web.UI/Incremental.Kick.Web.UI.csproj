@@ -351,6 +351,13 @@
     <Compile Include="Pages\Admin\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\ReservedUsernames.aspx.cs">
+      <DependentUpon>ReservedUsernames.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Admin\ReservedUsernames.aspx.designer.cs">
+      <DependentUpon>ReservedUsernames.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -768,6 +775,7 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
+    <Content Include="Pages\Admin\ReservedUsernames.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
