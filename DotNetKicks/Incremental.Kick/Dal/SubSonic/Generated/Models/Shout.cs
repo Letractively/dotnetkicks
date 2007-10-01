@@ -390,6 +390,74 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn ShoutIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn FromUserIDColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ToUserIDColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn HostIDColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn MessageColumn
+        {
+            get { return Schema.Columns[4]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CreatedOnColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IsSpamColumn
+        {
+            get { return Schema.Columns[6]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{

@@ -293,6 +293,47 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn UserFriendIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UserIDColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn FriendIDColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CreatedOnColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{

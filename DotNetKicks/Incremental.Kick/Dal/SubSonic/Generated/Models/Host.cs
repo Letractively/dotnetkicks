@@ -1182,6 +1182,335 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn HostIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn HostNameColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn RootUrlColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SiteTitleColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SiteDescriptionColumn
+        {
+            get { return Schema.Columns[4]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TagLineColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn LogoPathColumn
+        {
+            get { return Schema.Columns[6]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CreatedOnColumn
+        {
+            get { return Schema.Columns[7]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn BlogUrlColumn
+        {
+            get { return Schema.Columns[8]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn EmailColumn
+        {
+            get { return Schema.Columns[9]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TemplateColumn
+        {
+            get { return Schema.Columns[10]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ShowAdsColumn
+        {
+            get { return Schema.Columns[11]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CultureColumn
+        {
+            get { return Schema.Columns[12]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UICultureColumn
+        {
+            get { return Schema.Columns[13]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumStoryAgeInHoursColumn
+        {
+            get { return Schema.Columns[14]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MaximumStoryAgeInHoursColumn
+        {
+            get { return Schema.Columns[15]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MaximumSimultaneousStoryPublishCountColumn
+        {
+            get { return Schema.Columns[16]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumStoryScoreColumn
+        {
+            get { return Schema.Columns[17]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumStoryKickCountColumn
+        {
+            get { return Schema.Columns[18]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumStoryCommentCountColumn
+        {
+            get { return Schema.Columns[19]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumAverageStoryKicksPerHourColumn
+        {
+            get { return Schema.Columns[20]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimunAverageCommentsPerHourColumn
+        {
+            get { return Schema.Columns[21]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_MinimumViewCountColumn
+        {
+            get { return Schema.Columns[22]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_KickScoreColumn
+        {
+            get { return Schema.Columns[23]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn Publish_CommentScoreColumn
+        {
+            get { return Schema.Columns[24]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn AdsenseIDColumn
+        {
+            get { return Schema.Columns[25]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TrackingHtmlColumn
+        {
+            get { return Schema.Columns[26]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn AnnouncementHtmlColumn
+        {
+            get { return Schema.Columns[27]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn FeedBurnerMainRssFeedUrlColumn
+        {
+            get { return Schema.Columns[28]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn FeedBurnerMainRssFeedCountHtmlColumn
+        {
+            get { return Schema.Columns[29]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UseStaticRootColumn
+        {
+            get { return Schema.Columns[30]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SmtpHostColumn
+        {
+            get { return Schema.Columns[31]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SmtpPortColumn
+        {
+            get { return Schema.Columns[32]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SmtpUsernameColumn
+        {
+            get { return Schema.Columns[33]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SmtpPasswordColumn
+        {
+            get { return Schema.Columns[34]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SmtpEnableSslColumn
+        {
+            get { return Schema.Columns[35]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{
