@@ -3,6 +3,7 @@ using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
 using System.Security;
+using System.Collections.Generic;
 
 namespace Incremental.Kick.Caching {
     public class UserCache {
@@ -35,6 +36,14 @@ namespace Incremental.Kick.Caching {
             }
 
             return user;
+        }
+
+        public static UserCollection GetUsers(List<int> userIDs) {
+            UserCollection users = new UserCollection();
+            foreach (int id in userIDs) {
+                users.Add(UserCache.GetUser(id));
+            }
+            return users;
         }
 
 
@@ -83,7 +92,7 @@ namespace Incremental.Kick.Caching {
 
             return StoryBR.IncrementKickCount(storyID);
         }
-        
+
         public static int UnKickStory(int storyID, int userID, int hostID) {
             if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID))
                 throw new SecurityException("There is no kick to unkick!");
@@ -131,19 +140,6 @@ namespace Incremental.Kick.Caching {
             return storyKicks;
         }
 
-        public static UserCollection GetUsersWhoKicked(int? storyId) {
-            string cacheKey = String.Format("UsersWhoKicked_Story_{0}", storyId);
-            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
-            UserCollection users = userCollectionCache[cacheKey];
-
-            if (users == null) {
-                users = UserBR.GetUsersWhoKicked(storyId);
-                userCollectionCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return users;
-        }
-
         public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID, User userProfile) {
             string cacheKey = String.Format("OnlineUsers_{0}_{1}", minutesSinceLastActive, hostID);
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
@@ -164,8 +160,7 @@ namespace Incremental.Kick.Caching {
             return users;
         }
 
-        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID, User userProfile)
-        {
+        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID, User userProfile) {
             return GetOnlineUsers(minutesSinceLastActive, hostID, userProfile).Count;
         }
 

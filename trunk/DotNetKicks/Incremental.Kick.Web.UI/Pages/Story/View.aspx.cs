@@ -31,7 +31,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
 
             this.Title = story.Title;
             this.Caption = "";
-            this.UsersWhoKicked.DataBind(UserCache.GetUsersWhoKicked(story.StoryID));
+            this.UsersWhoKicked.DataBind(story.UsersWhoKicked);
             this.StorySummary.DataBind(story);
             this.StorySummary.ShowMoreLink = false;
             this.CommentList.DataBind(StoryCache.GetComments(story.StoryID));
