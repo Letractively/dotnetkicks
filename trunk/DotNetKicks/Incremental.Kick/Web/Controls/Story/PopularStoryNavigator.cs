@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Dal;
 
@@ -8,7 +5,7 @@ namespace Incremental.Kick.Web.Controls {
     public class PopularStoryNavigator : KickWebControl {
 
 
-        private StoryList _storyList = new StoryList();
+        private readonly StoryList _storyList = new StoryList();
         public StoryList StoryList {
             get { return this._storyList; }
         }

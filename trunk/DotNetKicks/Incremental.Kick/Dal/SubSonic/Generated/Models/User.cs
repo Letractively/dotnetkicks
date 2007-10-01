@@ -389,6 +389,20 @@ namespace Incremental.Kick.Dal
 				colvarAppearOnline.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarAppearOnline);
 				
+				TableSchema.TableColumn colvarShowStoryThumbnail = new TableSchema.TableColumn(schema);
+				colvarShowStoryThumbnail.ColumnName = "ShowStoryThumbnail";
+				colvarShowStoryThumbnail.DataType = DbType.Boolean;
+				colvarShowStoryThumbnail.MaxLength = 0;
+				colvarShowStoryThumbnail.AutoIncrement = false;
+				colvarShowStoryThumbnail.IsNullable = false;
+				colvarShowStoryThumbnail.IsPrimaryKey = false;
+				colvarShowStoryThumbnail.IsForeignKey = false;
+				colvarShowStoryThumbnail.IsReadOnly = false;
+				
+						colvarShowStoryThumbnail.DefaultSetting = @"((1))";
+				colvarShowStoryThumbnail.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarShowStoryThumbnail);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -621,6 +635,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("ShowStoryThumbnail")]
+		public bool ShowStoryThumbnail 
+		{
+			get { return GetColumnValue<bool>(Columns.ShowStoryThumbnail); }
+
+			set { SetColumnValue(Columns.ShowStoryThumbnail, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -731,7 +755,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
 		{
 			User item = new User();
 			
@@ -777,6 +801,8 @@ namespace Incremental.Kick.Dal
 			
 			item.AppearOnline = varAppearOnline;
 			
+			item.ShowStoryThumbnail = varShowStoryThumbnail;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -788,7 +814,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
 		{
 			User item = new User();
 			
@@ -836,6 +862,8 @@ namespace Incremental.Kick.Dal
 			
 				item.AppearOnline = varAppearOnline;
 			
+				item.ShowStoryThumbnail = varShowStoryThumbnail;
+			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -869,6 +897,7 @@ namespace Incremental.Kick.Dal
 			 public static string BlogURL = @"BlogURL";
 			 public static string BlogFeedURL = @"BlogFeedURL";
 			 public static string AppearOnline = @"AppearOnline";
+			 public static string ShowStoryThumbnail = @"ShowStoryThumbnail";
 						
 		}
 
