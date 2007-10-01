@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Incremental.Kick.Helpers;
+using MbUnit.Core.Exceptions;
 using MbUnit.Framework;
 
 namespace Incremental.Kick.Tests.HelperTests {
@@ -41,6 +40,28 @@ namespace Incremental.Kick.Tests.HelperTests {
       @"<a href=""http://www.aaa.com/page.php?forum_id=15&thread_id=12537&pid=40798#post_40798"" target=""_new"">http://www.aaa.com/page.php?forum_id=15&thread_id=12537&pid=40798#post_40798</a>")]       
         public void UrlifyTest(string input, string expected) {
             Assert.AreEqual(expected, TextHelper.Urlify(input));
+        }
+
+        [Row("", "")]
+        [Row(@":,(", "<img src=\"/cry.gif\" border=\"0\" />")]
+        [Row(@":)", "<img src=\"/glad.gif\" border=\"0\" />")]
+        [Row(@":D", "<img src=\"/happy.gif\" border=\"0\" />")]
+        [Row(@";(", "<img src=\"/nervous.gif\" border=\"0\" />")]
+        [Row(@";)", "<img src=\"/ok.gif\" border=\"0\" />")]
+        [Row(@":(", "<img src=\"/sad.gif\" border=\"0\" />")]
+        [Row(@"=)", "<img src=\"/satisfied.gif\" border=\"0\" />")]
+        [Row(@"=):)", "<img src=\"/satisfied.gif\" border=\"0\" /><img src=\"/glad.gif\" border=\"0\" />")]
+        [RowTest]
+        public void ReplaceEmoticonsTest(string input, string expected)
+        {
+            Assert.AreEqual(expected, TextHelper.ReplaceEmoticons(input, ""));
+        }
+
+        [Row(@":d", "<img src=\"/happy.gif\" border=\"0\" />")]
+        [RowTest]
+        public void ReplaceEmoticonsTestInvalid(string input, string expected)
+        {
+            Assert.AreNotEqual(expected, TextHelper.ReplaceEmoticons(input, ""));
         }
     }
 }
