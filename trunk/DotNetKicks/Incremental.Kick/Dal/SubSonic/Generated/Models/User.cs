@@ -872,6 +872,218 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn UserIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UsernameColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn EmailColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn PasswordColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn PasswordSaltColumn
+        {
+            get { return Schema.Columns[4]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IsGeneratedPasswordColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IsValidatedColumn
+        {
+            get { return Schema.Columns[6]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IsBannedColumn
+        {
+            get { return Schema.Columns[7]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn AdsenseIDColumn
+        {
+            get { return Schema.Columns[8]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ReceiveEmailNewsletterColumn
+        {
+            get { return Schema.Columns[9]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn RolesColumn
+        {
+            get { return Schema.Columns[10]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn HostIDColumn
+        {
+            get { return Schema.Columns[11]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn LastActiveOnColumn
+        {
+            get { return Schema.Columns[12]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CreatedOnColumn
+        {
+            get { return Schema.Columns[13]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ModifiedOnColumn
+        {
+            get { return Schema.Columns[14]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn LocationColumn
+        {
+            get { return Schema.Columns[15]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UseGravatarColumn
+        {
+            get { return Schema.Columns[16]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn GravatarCustomEmailColumn
+        {
+            get { return Schema.Columns[17]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn WebsiteURLColumn
+        {
+            get { return Schema.Columns[18]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn BlogURLColumn
+        {
+            get { return Schema.Columns[19]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn BlogFeedURLColumn
+        {
+            get { return Schema.Columns[20]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn AppearOnlineColumn
+        {
+            get { return Schema.Columns[21]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ShowStoryThumbnailColumn
+        {
+            get { return Schema.Columns[22]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{

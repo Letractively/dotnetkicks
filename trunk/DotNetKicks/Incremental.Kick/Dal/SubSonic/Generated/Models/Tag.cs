@@ -219,6 +219,29 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn TagIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TagIdentifierColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{

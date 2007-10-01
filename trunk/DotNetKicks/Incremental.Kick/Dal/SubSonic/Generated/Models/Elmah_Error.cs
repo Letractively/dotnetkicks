@@ -451,6 +451,110 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn ErrorIdColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ApplicationColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn HostColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TypeColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SourceColumn
+        {
+            get { return Schema.Columns[4]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn MessageColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn UserColumn
+        {
+            get { return Schema.Columns[6]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn StatusCodeColumn
+        {
+            get { return Schema.Columns[7]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TimeUtcColumn
+        {
+            get { return Schema.Columns[8]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn SequenceColumn
+        {
+            get { return Schema.Columns[9]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn AllXmlColumn
+        {
+            get { return Schema.Columns[10]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{

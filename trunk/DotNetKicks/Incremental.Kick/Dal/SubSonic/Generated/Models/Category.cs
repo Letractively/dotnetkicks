@@ -400,6 +400,83 @@ namespace Incremental.Kick.Dal
 		}
 
 		#endregion
+        
+        #region Typed Columns
+        
+        
+        public static TableSchema.TableColumn CategoryIDColumn
+        {
+            get { return Schema.Columns[0]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn HostIDColumn
+        {
+            get { return Schema.Columns[1]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn CategoryIdentifierColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn NameColumn
+        {
+            get { return Schema.Columns[3]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn DescriptionColumn
+        {
+            get { return Schema.Columns[4]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IconNameColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn OrderPriorityColumn
+        {
+            get { return Schema.Columns[6]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn TagIdentifierColumn
+        {
+            get { return Schema.Columns[7]; }
+
+        }
+
+        
+        
+        
+        #endregion
 		#region Columns Struct
 		public struct Columns
 		{
