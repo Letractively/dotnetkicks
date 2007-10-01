@@ -31,6 +31,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 BlogFeedUrl.Text = UserProfile.BlogFeedURL;
                 UserEmail.Text = UserProfile.Email;
                 AppearOnline.Checked = UserProfile.AppearOnline;
+                ShowStoryThumbnail.Checked = UserProfile.ShowStoryThumbnail;
             }
         }
 
@@ -43,6 +44,7 @@ namespace Incremental.Kick.Web.UI.Controls
             UserProfile.BlogURL = BlogUrl.Text;
             UserProfile.BlogFeedURL = BlogFeedUrl.Text;
             UserProfile.AppearOnline = AppearOnline.Checked;
+            UserProfile.ShowStoryThumbnail = ShowStoryThumbnail.Checked;
             UserProfile.Save();
 
             UserCache.RemoveUser(UserProfile.UserID);
