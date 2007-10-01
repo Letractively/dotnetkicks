@@ -6,6 +6,7 @@ using SubSonic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities.Api;
+using System.Data;
 
 namespace Incremental.Kick.Dal {
     public partial class Story {
@@ -72,7 +73,7 @@ namespace Incremental.Kick.Dal {
                 pagedCollection.Total = StoryCache.GetPopularStoriesCount(hostID, false, timePeriod);
                 return pagedCollection.ToApi();
             }
-            
+
             public static ApiPagedList<ApiStory> GetUserKickedStories(int hostID, string username) {
                 return GetUserKickedStoriesPaged(hostID, username, 1, 16);
             }
@@ -130,7 +131,29 @@ namespace Incremental.Kick.Dal {
         }
         #endregion
 
+        #region Cached Properties
         
+        //NOTE: GJ: These properties are lazy-loaded from the cache
+        private UserCollection _usersWhoKicked;
+        public UserCollection UsersWhoKicked {
+            get {
+                if (_usersWhoKicked == null) {
+                    Query query = new Query(StoryKick.Schema, User.UserIDColumn, StoryKick.StoryKickIDColumn).WHERE(StoryKick.Columns.StoryID, this.StoryID);
+
+                    IDataReader dataReader = query.ExecuteReader();
+                    List<int> userIDs = new List<int>();
+
+                    while (dataReader.Read()) {
+                        userIDs.Add(dataReader.GetInt32(0));
+                    }
+
+                    _usersWhoKicked = UserCache.GetUsers(userIDs);
+                }
+                return _usersWhoKicked;
+            }
+        }
+
+        #endregion
 
         public static Story FetchStoryByIdentifier(string storyIdentifier) {
             return Story.FetchStoryByParameter(Story.Columns.StoryIdentifier, storyIdentifier);
