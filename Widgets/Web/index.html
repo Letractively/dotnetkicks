@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Live DotNetKicks</title>
+    <link rel="stylesheet" type="text/css" href="default.css" />
+    <script type="text/javascript" src="dojo/dojo.js"></script>
+    <script type="text/javascript" src="json.js"></script>
+    <script type="text/javascript" src="string.js"></script>
+    <script type="text/javascript" src="date.js"></script>
+    <script type="text/javascript" src="http://www.dotnetkicks.com/services/json/jsonservices.ashx?proxy"></script>    
+    <script type="text/javascript">
+dojo.require("dojo.io.script");
+
+var HTML = {
+    a : function(href, child) {
+        var e = document.createElement('a');
+        e.href = href;
+        if (child)
+            e.appendChild(typeof(child) === 'string' ? document.createTextNode(child) : child);
+        return e;
+    },
+    img : function(src, alt) {
+        var e = document.createElement('img');
+        e.src = src;
+        if (alt && alt.length > 0) e.alt = alt;
+        e.border = '0';
+        return e;
+    },
+    p : function(child) {
+        var e = document.createElement('p');
+        if (child)
+            e.appendChild(typeof(child) === 'string' ? document.createTextNode(child) : child);
+        return e;
+    },
+    span : function(text) {
+        var e = document.createElement('span');
+        e.appendChild(document.createTextNode(text));
+        return e;
+    }
+};
+
+function displayStories(target, stories) {
+    for (var i = 0; i < stories.length; i++) {
+        var story = stories[i];
+        var h = document.createElement('h3');
+        h.appendChild(HTML.a(story.url, story.title));
+        target.appendChild(h);
+        target.appendChild(HTML.p(story.description.replace(/[\n\r]/g, '')));
+        var info = document.createElement('p');
+        info.appendChild(document.createTextNode("Published on " + Date.parseISO(story.createdOn).toLocaleString() + " by "));
+        info.appendChild(HTML.a(story.user.profileUrl, story.user.username));
+        info.appendChild(document.createTextNode(" and got "));
+        var kicks = HTML.span(story.kickCount + " " + (story.kickCount == 1 ? "kick" : "kicks"));
+        kicks.className = 'kicks';
+        info.appendChild(kicks);
+        /*
+        info.appendChild(HTML.p(
+            HTML.a("http://www.dotnetkicks.com/kick/?url=" + encodeURIComponent(story.url), 
+                HTML.img("http://www.dotnetkicks.com/Services/Images/KickItImageGenerator.ashx?url=" + encodeURIComponent(story.url) + "&amp;border=&amp;fgcolor=&amp;bgcolor=&amp;cfgcolor=&amp;cbgcolor=", "kick it on DotNetKicks.com"))));
+        */
+        target.appendChild(info);
+    }
+}
+
+function DojoScriptChannel() {
+    this.rpc = function(call) { 
+        dojo.io.script.get({ 
+            url: call.url + "/" + call.request.method,
+            callbackParamName: "jsonp", 
+            timeout: 20 /* seconds */ * 1000,
+            handle: function(response, args) {
+                call.callback(response);
+            }
+        }); 
+    } 
+}
+
+var DNK = new JsonServices();
+DNK.channel = new DojoScriptChannel();
+
+function window_onload(sender) {
+    function storyMaker(id) {
+        return function(response) { 
+            if (response.error) {
+                alert(response.error.message);
+                return;
+            }
+            var result = response.result;
+            var stories = result.items;
+            var e = document.getElementById(id);
+            document.getElementById(id + 'Loading').style.display = 'none';
+            displayStories(e, stories) 
+        }
+    }
+    DNK.getUpcomingPageStories(storyMaker('Upcoming'));
+    DNK.getPopularStories(storyMaker('Popular'));
+    DNK.getFrontPageStories(storyMaker('FrontPage'));
+}
+    </script>
+</head>
+<body onload="window_onload(this)">
+    <h1><span class="alive">Live</span> Kicks! <em>alpha</em></h1>
+    <div class="header">
+        <p>
+            This is a sample web page that uses the 
+            <a href="http://www.dotnetkicks.com/services/json/jsonservices.ashx">JSON Services</a> of 
+            <a href="http://www.dotnetkicks.com/">DotNetKicks.com</a>
+            to mash-up a live display using Ajax techniques 
+            (<a href="http://en.wikipedia.org/wiki/Cross-site_scripting"><acronym title="cross-domain scripting">XSS</acronym></a>, 
+            <a href="http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/">JSONP</a>,
+            JavaScript, DHTML, <a href="http://www.dojotoolkit.org/">Dojo</a> on the client
+            and <a href="http://jayrock.berlios.de/">Jayrock</a> serving up from the server).
+            <a href="http://code.google.com/p/dotnetkicks/downloads/list">Download now</a> for your playing pleasure.</p>
+    </div>
+    <div class="column" id="FrontPage">
+        <h2>Front Page</h2>
+        <p class="loading" id="FrontPageLoading">Loading&hellip;</p>
+    </div>
+    <div class="column" id="Popular">
+        <h2>Popular</h2>
+        <p class="loading" id="PopularLoading">Loading&hellip;</p>
+    </div>
+    <div class="column" id="Upcoming">
+        <h2>Upcoming</h2>
+        <p class="loading" id="UpcomingLoading">Loading&hellip;</p>
+    </div>
+</body>
+</html>
