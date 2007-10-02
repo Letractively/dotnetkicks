@@ -21,6 +21,9 @@ namespace Incremental.Kick.Tests.HelperTests {
         [Row("This is a link http://www.iol.ie/ and this is another one: http://www.iol.ie/.",
             @"This is a link <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a> and this is another one: <a href=""http://www.iol.ie/"" target=""_new"">http://www.iol.ie/</a>.")]
 
+        [Row("http://iol.ie/foo.bar(vs.80).aspx", @"<a href=""http://iol.ie/foo.bar(vs.80).aspx"" target=""_new"">http://iol.ie/foo.bar(vs.80).aspx</a>")]
+
+
         //Valid Links:
         [Row("http://www.ireland.com/", @"<a href=""http://www.ireland.com/"" target=""_new"">http://www.ireland.com/</a>")]
         [Row("http://ireland.com/", @"<a href=""http://ireland.com/"" target=""_new"">http://ireland.com/</a>")]

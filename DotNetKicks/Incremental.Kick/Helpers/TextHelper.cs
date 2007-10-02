@@ -23,7 +23,7 @@ namespace Incremental.Kick.Helpers
         {
             return
                 RegExReplace(input,
-                             @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?",
+                             @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#\(\)]*[\w\-\@?^=%&amp;/~\+#])?",
                              @"<a href=""{0}"" target=""_new"">{0}</a>");
         }
 
