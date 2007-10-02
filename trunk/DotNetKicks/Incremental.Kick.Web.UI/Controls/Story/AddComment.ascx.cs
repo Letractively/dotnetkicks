@@ -1,5 +1,6 @@
 using System;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Helpers;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 
@@ -42,10 +43,13 @@ namespace Incremental.Kick.Web.UI.Controls
         {
             if(Page.IsValid)
             {
-                Comment.Text = Comment.Text.Trim();
+                string comment = Comment.Text.Trim();
+
+                comment = TextHelper.EncodeAndReplaceComment(comment);
+                comment = TextHelper.ReplaceEmoticons(comment, KickPage.StaticEmoticonsRootUrl);
 
                 int commentID =
-                    Dal.Comment.CreateComment(KickPage.HostProfile.HostID, _storyID, KickPage.KickUserProfile, Comment.Text);
+                    Dal.Comment.CreateComment(KickPage.HostProfile.HostID, _storyID, KickPage.KickUserProfile, comment);
 
                 //now clear the cache for this story (NOTE: in the future, we can just update the cache too)
                 StoryCache.RemoveStory(_storyID, KickPage.UrlParameters.StoryIdentifier);

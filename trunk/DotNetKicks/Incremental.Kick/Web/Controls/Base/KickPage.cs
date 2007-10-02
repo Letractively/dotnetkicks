@@ -232,6 +232,15 @@ namespace Incremental.Kick.Web.Controls
         }
 
         /// <summary>
+        /// Gets the static emoticons root URL.
+        /// </summary>
+        /// <value>The static emoticons root URL.</value>
+        public string StaticEmoticonsRootUrl
+        {
+            get { return this.StaticImageRootUrl + "/Emoticons"; }
+        }
+
+        /// <summary>
         /// Gets the static image root URL.
         /// </summary>
         /// <value>The static image root URL.</value>

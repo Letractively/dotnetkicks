@@ -779,6 +779,13 @@
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
+    <Content Include="Static\Images\Emoticons\cry.gif" />
+    <Content Include="Static\Images\Emoticons\glad.gif" />
+    <Content Include="Static\Images\Emoticons\happy.gif" />
+    <Content Include="Static\Images\Emoticons\nervous.gif" />
+    <Content Include="Static\Images\Emoticons\ok.gif" />
+    <Content Include="Static\Images\Emoticons\sad.gif" />
+    <Content Include="Static\Images\Emoticons\satisfied.gif" />
     <Content Include="Static\Scripts\2.0.2\Common.js" />
     <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js" />
     <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js.uncompressed.js" />

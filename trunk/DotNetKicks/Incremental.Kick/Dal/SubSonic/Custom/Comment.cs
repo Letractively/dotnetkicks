@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Incremental.Kick.Common.Enums;
 using SubSonic;
 using System.Security;
-using Incremental.Kick.Helpers;
 using Incremental.Kick.BusinessLogic;
-using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Dal {
     public partial class Comment {
@@ -15,8 +9,8 @@ namespace Incremental.Kick.Dal {
         }
 
         public static int GetUserCommentsCount(int userID, int hostID) {
-            Query query = new Query(Comment.Schema).WHERE(Comment.Columns.UserID, userID).AND(Comment.Columns.HostID, hostID);
-            return (int)query.GetCount(Comment.Columns.CommentID);
+            Query query = new Query(Schema).WHERE(Columns.UserID, userID).AND(Columns.HostID, hostID);
+            return query.GetCount(Columns.CommentID);
         }
 
         public static CommentCollection GetUserComments(int userID, int hostID, int pageNumber, int pageSize) {
@@ -31,8 +25,6 @@ namespace Incremental.Kick.Dal {
 
             if (comment.Length > 4000)
                 comment = comment.Substring(0, 4000);
-
-            comment = TextHelper.EncodeAndReplaceComment(comment);
 
             Comment newComment = new Comment();
             newComment.HostID = hostID;

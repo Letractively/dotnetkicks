@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Dal;
-using Incremental.Kick.Helpers;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
 using SubSonic.Sugar;
 
 namespace Incremental.Kick.Web.Controls {
     public class Comment : KickWebControl {
-        private Incremental.Kick.Dal.Comment _comment;
+        private Dal.Comment _comment;
         private bool _useAlternativeStyle;
 
-        public void DataBind(Incremental.Kick.Dal.Comment comment, bool useAlternativeStyle) {
-            this._comment = comment;
-            this._useAlternativeStyle = useAlternativeStyle;
+        public void DataBind(Dal.Comment comment, bool useAlternativeStyle) {
+            _comment = comment;
+            _useAlternativeStyle = useAlternativeStyle;
         }
 
-        public void DataBind(Incremental.Kick.Dal.Comment comment) {
-            this._comment = comment;
+        public void DataBind(Dal.Comment comment) {
+            _comment = comment;
         }
 
         public bool DisplayStoryTitle
@@ -27,41 +24,42 @@ namespace Incremental.Kick.Web.Controls {
             get { return _displayStoryTitle; }
             set { _displayStoryTitle = value; }
         }
+
         private bool _displayStoryTitle = false;
 
         protected override void Render(HtmlTextWriter writer) {
-            if (this._comment.IsSpam)
-                this._comment.CommentX = "<em>[comment removed]</em>";
+            if (_comment.IsSpam)
+                _comment.CommentX = "<em>[comment removed]</em>";
 
             string alternativeCssClass = "";
-            if (this._useAlternativeStyle)
+            if (_useAlternativeStyle)
                 alternativeCssClass = "CommentAlt";
 
-            writer.WriteLine(@"<a name=""Comment_{0}""></a><div class=""Comment {0}"">", this._comment.CommentID, alternativeCssClass);
+            writer.WriteLine(@"<a name=""Comment_{0}""></a><div class=""Comment {0}"">", _comment.CommentID, alternativeCssClass);
 
             //when displaying user comments
             //need to show which story they commented on
             if (_displayStoryTitle)
             {
                 //build local URL to story
-                Category category = CategoryCache.GetCategory(this._comment.Story.CategoryID, this.KickPage.HostProfile.HostID);
+                Category category = CategoryCache.GetCategory(_comment.Story.CategoryID, KickPage.HostProfile.HostID);
                 string categoryIdentifier = category.CategoryIdentifier;
-                string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, this._comment.Story.StoryIdentifier, categoryIdentifier);
+                string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, _comment.Story.StoryIdentifier, categoryIdentifier);
 
                 //story title
                 writer.Write(@"<div class=""storyTitle""><a href=""{0}#Comment_{1}"">{2}</a></div><br/>",
-                        kickStoryUrl, this._comment.CommentID, this._comment.Story.Title);
+                        kickStoryUrl, _comment.CommentID, _comment.Story.Title);
 
 
             }
             writer.WriteLine(@"<div class=""CommentText"">{0}</div>
-                    <div class=""CommentAuthor"">posted by ", this._comment.CommentX);
+                    <div class=""CommentAuthor"">posted by ", _comment.CommentX);
 
             UserLink userLink = new UserLink();
-            userLink.DataBind(UserCache.GetUser(this._comment.UserID));
+            userLink.DataBind(UserCache.GetUser(_comment.UserID));
             userLink.RenderControl(writer);
 
-            writer.WriteLine(@" {0}</div></div>", Dates.ReadableDiff(this._comment.CreatedOn, DateTime.Now));
+            writer.WriteLine(@" {0}</div></div>", Dates.ReadableDiff(_comment.CreatedOn, DateTime.Now));
         }
     }
 }
