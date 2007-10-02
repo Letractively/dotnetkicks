@@ -6,17 +6,17 @@ namespace Incremental.Kick.Helpers
 {
     public class TextHelper
     {
-        private static readonly Hashtable emoticons = new Hashtable();
+        public static readonly Hashtable Emoticons = new Hashtable();
 
         static TextHelper()
         {
-            emoticons[@":,("] = "cry.gif";
-            emoticons[":)"] = "glad.gif";
-            emoticons[":D"] = "happy.gif";
-            emoticons[";("] = "nervous.gif";
-            emoticons[";)"] = "ok.gif";
-            emoticons[":("] = "sad.gif";
-            emoticons["=)"] = "satisfied.gif";
+            Emoticons[@":,("] = "cry.gif";
+            Emoticons[":)"] = "glad.gif";
+            Emoticons[":D"] = "happy.gif";
+            Emoticons[";("] = "nervous.gif";
+            Emoticons[";)"] = "ok.gif";
+            Emoticons[":("] = "sad.gif";
+            Emoticons["=)"] = "satisfied.gif";
         }
 
         public static string Urlify(string input)
@@ -36,8 +36,8 @@ namespace Incremental.Kick.Helpers
                                       delegate(Match match)
                                           {
                                               return
-                                                  string.Format("<img src=\"{0}/{1}\" border=\"0\" />", emoticonsRoot,
-                                                                emoticons[match.Value]);
+                                                  string.Format("<img src=\"{0}/{1}\" border=\"0\" style=\"vertical-align:sub;\" />", emoticonsRoot,
+                                                                Emoticons[match.Value]);
                                           });
         }
 
