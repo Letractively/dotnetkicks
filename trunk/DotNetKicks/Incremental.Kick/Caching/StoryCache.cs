@@ -12,7 +12,7 @@ namespace Incremental.Kick.Caching {
             GetCommentCollectionCache().Remove(GetCommentCacheKey(storyID));
         }
 
-        public static Story GetStory(string storyIdentifier) {
+        public static Story GetStory(string storyIdentifier, int hostID) {
             string cacheKey = GetStoryCacheKey(storyIdentifier);
             CacheManager<string, Story> storyCache = GetStoryCache();
 
@@ -23,6 +23,9 @@ namespace Incremental.Kick.Caching {
                 if (story != null)
                     storyCache.Insert(cacheKey, story, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
+
+            if (hostID != story.HostID)
+                throw new ArgumentException("The story does not belong to the host");
 
             return story;
         }
