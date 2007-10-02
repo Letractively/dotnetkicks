@@ -6,6 +6,7 @@ using System.Text;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Common.Enums;
 using SubSonic;
+using System.Text.RegularExpressions;
 
 namespace Incremental.Kick.Caching
 {
@@ -14,8 +15,45 @@ namespace Incremental.Kick.Caching
     /// </summary>
     public class ZeitgeistCache
     {
+        
+		#region Methods 
 
-        /// <summary>
+		// [rgn] Public Methods (9)
+
+		/// <summary>
+        /// Gets the most commented on stories.
+        /// </summary>
+        /// <param name="hostID">The host ID.</param>
+        /// <param name="storyCount">The story count.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        public static StoryCollection GetMostCommentedOnStories(int hostID, int storyCount, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_MostCommentedOn_{0}_{1}_{2}_{3}_{4}", hostID, storyCount, year, month, day);
+            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
+            StoryCollection stories = storyCache[cacheKey];
+
+            if (stories == null)
+            {
+                Query qry = new Query(Story.Schema);
+                qry.Top = storyCount.ToString();
+                qry.OrderBy = OrderBy.Desc(Story.Columns.CommentCount);
+                qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                qry.AddWhere(Story.Columns.CommentCount, Comparison.GreaterOrEquals, 1);
+                stories = new StoryCollection();
+                stories.LoadAndCloseReader(Story.FetchByQuery(qry));
+                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return stories;
+        }
+		
+		/// <summary>
         /// Gets the most kicked stories.
         /// </summary>
         /// <param name="hostID">The host ID.</param>
@@ -47,111 +85,76 @@ namespace Incremental.Kick.Caching
 
             return stories;
         }
-
-        /// <summary>
-        /// Gets the number of stories submitted.
+		
+		/// <summary>
+        /// Gets the most popular domains.
+        /// Measured by number of kicks per domain
         /// </summary>
-        /// <param name="hostId">The host id.</param>
-        /// <returns></returns>
-        public static int GetNumberOfStoriesSubmitted(int hostID, int year, int? month, int? day)
-        {
-            string cacheKey = String.Format("Zeitgeist_SubmittedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
-            CacheManager<string, int?> countCache = GetStoryCountCache();
-            int? count = countCache[cacheKey];
-
-            if (count == null)
-            {
-                Query qry = new Query(Story.Schema);
-                qry.AddWhere(Story.Columns.IsSpam, false);
-                qry.AddWhere(Story.Columns.HostID, hostID);
-                qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
-                qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
-                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return count.Value;
-        }
-        /// <summary>
-        /// Gets the number of stories published.
-        /// </summary>
-        /// <param name="hostId">The host id.</param>
-        /// <returns></returns>
-        public static int GetNumberOfStoriesPublished(int hostID, int year, int? month, int? day)
-        {
-            string cacheKey = String.Format("Zeitgeist_PublishedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
-            CacheManager<string, int?> countCache = GetStoryCountCache();
-            int? count = countCache[cacheKey];
-
-            if (count == null)
-            {
-                Query qry = new Query(Story.Schema);
-                qry.AddWhere(Story.Columns.IsSpam, false);
-                qry.AddWhere(Story.Columns.HostID, hostID);
-                qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
-                qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                qry.AddWhere(Story.Columns.IsPublishedToHomepage, true);
-                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
-                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return count.Value;
-        }
-        /// <summary>
-        /// Gets the number of kicks.
-        /// </summary>
-        /// <param name="hostId">The host id.</param>
+        /// <param name="hostID">The host ID.</param>
+        /// <param name="storyCount">The story count.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns></returns>
-        public static int GetNumberOfKicks(int hostID, int year, int? month, int? day)
+        public static Dictionary<string, int> GetMostPopularDomains(int hostID, int storyCount, int year, int? month, int? day)
         {
-            string cacheKey = String.Format("Zeitgeist_KickCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
-            CacheManager<string, int?> countCache = GetStoryCountCache();
-            int? count = countCache[cacheKey];
+            string cacheKey = String.Format("Zeitgeist_MostPopularDomains_{0}_{1}_{2}_{3}_{4}", hostID, storyCount, year, month, day);
+            CacheManager<string, Dictionary<string, int>> domainCache = GetMostPopularDomainsCache();
+            Dictionary<string, int> domainList = domainCache[cacheKey];
 
-            if (count == null)
+            if (domainList == null)
             {
-                Query qry = new Query(StoryKick.Schema);
+                //get all stories, then loop and make our own domain list
+                Query qry = new Query(Story.Schema);     
+                qry.OrderBy = OrderBy.Desc(Story.Columns.KickCount);
+                qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.HostID, hostID);
-                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
-                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                count = qry.GetRecordCount();// GetCount(StoryKick.Columns.StoryKickID);
-                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                qry.AddWhere(Story.Columns.KickCount, Comparison.GreaterOrEquals, 1);
+                StoryCollection stories = new StoryCollection();
+                stories.LoadAndCloseReader(Story.FetchByQuery(qry));
+
+                domainList = new Dictionary<string, int>();
+                Regex rx = new Regex(@"^(?=[^&])(?:(?<scheme>[^:/?#]+):)?(?://(?<authority>[^/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?");
+                string authority;
+
+                foreach (Story s in stories)
+                {
+                    Match uriMatch = rx.Match(s.Url);
+                    if (!uriMatch.Success)
+                        continue;
+                    authority = uriMatch.Groups["authority"].Value;
+                    
+                    if(string.IsNullOrEmpty(authority))
+                        continue;
+
+                    if (domainList.ContainsKey(authority))
+                        domainList[authority] += s.KickCount;
+                    else
+                        domainList.Add(authority, s.KickCount);
+                }
+                //sort and trim to   storyCount
+                List<KeyValuePair<string, int>> sortedPairs = new List<KeyValuePair<string, int>>(domainList);
+                sortedPairs.Sort(
+                   delegate(KeyValuePair<string, int> obj1, KeyValuePair<string, int> obj2)
+                   { return obj2.Value.CompareTo(obj1.Value); }
+                );
+
+                domainList.Clear();//clear and add top X values
+                if (sortedPairs.Count < storyCount)
+                    storyCount = sortedPairs.Count;
+
+                for(int i=0;i<storyCount;i++)
+                    domainList.Add( sortedPairs[i].Key, sortedPairs[i].Value);
+
+                domainCache.Insert(cacheKey, domainList, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
-            return count.Value;
+            return domainList;
         }
-        /// <summary>
-        /// Gets the number of comments.
-        /// </summary>
-        /// <param name="hostId">The host id.</param>
-        /// <param name="year">The year.</param>
-        /// <param name="month">The month.</param>
-        /// <param name="day">The day.</param>
-        /// <returns></returns>
-        public static int GetNumberOfComments(int hostID, int year, int? month, int? day)
-        {
-            string cacheKey = String.Format("Zeitgeist_CommentCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
-            CacheManager<string, int?> countCache = GetStoryCountCache();
-            int? count = countCache[cacheKey];
-
-            if (count == null)
-            {
-                Query qry = new Query(Comment.Schema);
-                qry.AddWhere(Story.Columns.HostID, hostID);
-                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
-                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                count = qry.GetRecordCount();// GetCount(Comment.Columns.CommentID);
-                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
-            }
-
-            return count.Value;
-        }
-
-
-        /// <summary>
+		
+		/// <summary>
         /// Gets the most used tags.
         /// </summary>
         /// <param name="hostID">The host ID.</param>
@@ -205,7 +208,7 @@ namespace Incremental.Kick.Caching
                  * AND Kick_Story.IsSpam = 0 AND Kick_Story.HostID = @HostId 
                  * GROUP BY TagIdentifier 
                  * ORDER BY COUNT(0) DESC
-                 */ 
+                 */
                 //System.Diagnostics.Debug.WriteLine(sqlSelect.ToString());
 
                 QueryCommand qry = new QueryCommand(sqlSelect.ToString());
@@ -227,83 +230,143 @@ namespace Incremental.Kick.Caching
 
             return tags;
         }
-
-
-
-        /// <summary>
-        /// Gets the most commented on stories.
+		
+		/// <summary>
+        /// Gets the number of comments.
         /// </summary>
-        /// <param name="hostID">The host ID.</param>
-        /// <param name="storyCount">The story count.</param>
+        /// <param name="hostId">The host id.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns></returns>
-        public static StoryCollection GetMostCommentedOnStories(int hostID, int storyCount, int year, int? month, int? day)
+        public static int GetNumberOfComments(int hostID, int year, int? month, int? day)
         {
-            string cacheKey = String.Format("Zeitgeist_MostCommentedOn_{0}_{1}_{2}_{3}_{4}", hostID, storyCount, year, month, day);
-            CacheManager<string, StoryCollection> storyCache = GetStoryCollectionCache();
-            StoryCollection stories = storyCache[cacheKey];
+            string cacheKey = String.Format("Zeitgeist_CommentCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
 
-            if (stories == null)
+            if (count == null)
+            {
+                Query qry = new Query(Comment.Schema);
+                qry.AddWhere(Comment.Columns.HostID, hostID);
+                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(Comment.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();// GetCount(Comment.Columns.CommentID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+		
+		/// <summary>
+        /// Gets the number of kicks.
+        /// </summary>
+        /// <param name="hostId">The host id.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        public static int GetNumberOfKicks(int hostID, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_KickCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
+
+            if (count == null)
+            {
+                Query qry = new Query(StoryKick.Schema);
+                qry.AddWhere(StoryKick.Columns.HostID, hostID);
+                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(StoryKick.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();// GetCount(StoryKick.Columns.StoryKickID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+		
+		/// <summary>
+        /// Gets the number of stories published.
+        /// </summary>
+        /// <param name="hostId">The host id.</param>
+        /// <returns></returns>
+        public static int GetNumberOfStoriesPublished(int hostID, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_PublishedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
+
+            if (count == null)
             {
                 Query qry = new Query(Story.Schema);
-                qry.Top = storyCount.ToString();
-                qry.OrderBy = OrderBy.Desc(Story.Columns.CommentCount);
                 qry.AddWhere(Story.Columns.IsSpam, false);
                 qry.AddWhere(Story.Columns.HostID, hostID);
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
                 qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
-                qry.AddWhere(Story.Columns.CommentCount, Comparison.GreaterOrEquals, 1);
-                stories = new StoryCollection();
-                stories.LoadAndCloseReader(Story.FetchByQuery(qry));
-                storyCache.Insert(cacheKey, stories, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                qry.AddWhere(Story.Columns.IsPublishedToHomepage, true);
+                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
-            return stories;
+            return count.Value;
         }
+		
+		/// <summary>
+        /// Gets the number of stories submitted.
+        /// </summary>
+        /// <param name="hostId">The host id.</param>
+        /// <returns></returns>
+        public static int GetNumberOfStoriesSubmitted(int hostID, int year, int? month, int? day)
+        {
+            string cacheKey = String.Format("Zeitgeist_SubmittedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
+            CacheManager<string, int?> countCache = GetStoryCountCache();
+            int? count = countCache[cacheKey];
 
-        /// <summary>
-        /// Gets the story collection cache.
-        /// </summary>
-        /// <returns></returns>
-        private static CacheManager<string, StoryCollection> GetStoryCollectionCache()
-        {
-            return CacheManager<string, StoryCollection>.GetInstance();
+            if (count == null)
+            {
+                Query qry = new Query(Story.Schema);
+                qry.AddWhere(Story.Columns.IsSpam, false);
+                qry.AddWhere(Story.Columns.HostID, hostID);
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(Story.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();// GetCount(Story.Columns.StoryID);
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
         }
-        /// <summary>
-        /// Gets the story count cache.
+		
+		/// <summary>
+        /// Gets the number of user registrations.
         /// </summary>
-        /// <returns></returns>
-        private static CacheManager<string, int?> GetStoryCountCache()
-        {
-            return CacheManager<string, int?>.GetInstance();
-        }
-        /// <summary>
-        /// Gets the tag collection cache.
-        /// </summary>
-        /// <returns></returns>
-        private static CacheManager<string, Dictionary<string, int>> GetTagCollectionCache()
-        {
-            return CacheManager<string, Dictionary<string, int>>.GetInstance();
-        }
-        /// <summary>
-        /// Gets the starting date for the Zeitgeist query
-        /// </summary>
+        /// <param name="hostID">The host ID.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
         /// <returns></returns>
-        private static DateTime StartingDate(int year, int? month, int? day)
+        public static int GetNumberOfUserRegistrations(int hostID, int year, int? month, int? day)
         {
-            if (month == null || month < 0 || month > 12)
-                month = 1;
-            if (day == null || day < 0 || day > DateTime.DaysInMonth(year, month.Value))
-                day = 1;
-            return new DateTime(year, month.Value, day.Value);
-        }
+            string cacheKey = String.Format("Zeitgeist_UserRegistrationCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
+            CacheManager<string, int?> countCache = GetUserRegistrationCountCache();
+            int? count = countCache[cacheKey];
 
-        /// <summary>
+            if (count == null)
+            {
+                Query qry = new Query(User.Schema);
+                qry.AddWhere(User.Columns.IsBanned, false);
+                qry.AddWhere(User.Columns.HostID, hostID);
+                qry.AddWhere(User.Columns.CreatedOn, Comparison.GreaterOrEquals, StartingDate(year, month, day));
+                qry.AddWhere(User.Columns.CreatedOn, Comparison.LessOrEquals, EndingDate(year, month, day));
+                count = qry.GetRecordCount();
+                countCache.Insert(cacheKey, count.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return count.Value;
+        }
+		
+		// [rgn] Private Methods (7)
+
+		/// <summary>
         /// Gets the ending date for the Zeitgeist query
         /// </summary>
         /// <param name="year">The year.</param>
@@ -321,5 +384,71 @@ namespace Incremental.Kick.Caching
 
             return new DateTime(year, month.Value, day.Value);
         }
+		
+		/// <summary>
+        /// Gets the most popular domains cache.
+        /// </summary>
+        /// <returns></returns>
+         private static CacheManager<string, Dictionary<string, int>> GetMostPopularDomainsCache()
+        {
+            return CacheManager<string, Dictionary<string, int>>.GetInstance();
+        }
+		
+		/// <summary>
+        /// Gets the story collection cache.
+        /// </summary>
+        /// <returns></returns>
+        private static CacheManager<string, StoryCollection> GetStoryCollectionCache()
+        {
+            return CacheManager<string, StoryCollection>.GetInstance();
+        }
+		
+		/// <summary>
+        /// Gets the story count cache.
+        /// </summary>
+        /// <returns></returns>
+        private static CacheManager<string, int?> GetStoryCountCache()
+        {
+            return CacheManager<string, int?>.GetInstance();
+        }
+		
+		/// <summary>
+        /// Gets the tag collection cache.
+        /// </summary>
+        /// <returns></returns>
+        private static CacheManager<string, Dictionary<string, int>> GetTagCollectionCache()
+        {
+            return CacheManager<string, Dictionary<string, int>>.GetInstance();
+        }
+		
+		/// <summary>
+        /// Gets the user registration count cache.
+        /// </summary>
+        /// <returns></returns>
+        private static CacheManager<string, int?> GetUserRegistrationCountCache()
+        {
+            return CacheManager<string, int?>.GetInstance();
+        }
+		
+		/// <summary>
+        /// Gets the starting date for the Zeitgeist query
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="day">The day.</param>
+        /// <returns></returns>
+        private static DateTime StartingDate(int year, int? month, int? day)
+        {
+            if (month == null || month < 0 || month > 12)
+                month = 1;
+            if (day == null || day < 0 || day > DateTime.DaysInMonth(year, month.Value))
+                day = 1;
+            return new DateTime(year, month.Value, day.Value);
+        }
+		
+		#endregion
+
     }
+
+  
 }

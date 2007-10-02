@@ -25,11 +25,13 @@ namespace Incremental.Kick.Web.Controls
         private int _commentsCount;
         private int? _day;
         private int _kicksCount;
+        private int _userRegistrationCount;
         private DateTime _minDate = new DateTime(2006, 1, 1);
         private int? _month = System.DateTime.Now.Month;
         private StoryCollection _mostCommentedOnStories;
         private StoryCollection _mostKickedStories;
         private Dictionary<string, int> _mostUsedTags;
+        private Dictionary<string, int> _mostPopularDomains;
         private int _storiesPublishedCount;
         private int _storiesSubmittedCount;
         private string _title = "";
@@ -151,12 +153,13 @@ namespace Incremental.Kick.Web.Controls
             _mostKickedStories = ZeitgeistCache.GetMostKickedStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostCommentedOnStories = ZeitgeistCache.GetMostCommentedOnStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostUsedTags = ZeitgeistCache.GetMostUsedTags(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
+            _mostPopularDomains = ZeitgeistCache.GetMostPopularDomains(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
 
             _storiesSubmittedCount = ZeitgeistCache.GetNumberOfStoriesSubmitted(hostId, this.Year.Value, this.Month, this.Day);
             _storiesPublishedCount = ZeitgeistCache.GetNumberOfStoriesPublished(hostId, this.Year.Value, this.Month, this.Day);
             _kicksCount = ZeitgeistCache.GetNumberOfKicks(hostId, this.Year.Value, this.Month, this.Day);
             _commentsCount = ZeitgeistCache.GetNumberOfComments(hostId, this.Year.Value, this.Month, this.Day);
-
+            _userRegistrationCount = ZeitgeistCache.GetNumberOfUserRegistrations(hostId, this.Year.Value, this.Month, this.Day);
         }
 
         // [rgn] Protected Methods (1)
@@ -240,6 +243,12 @@ namespace Incremental.Kick.Web.Controls
             writer.Write("Number of Story Comments: ");
             writer.Write(_commentsCount);
             writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
+            writer.Write("Number of User Registrations: ");
+            writer.Write(_userRegistrationCount);
+            writer.RenderBeginTag(HtmlTextWriterTag.Br);
+
+            
 
             writer.RenderEndTag();    //p
 
@@ -386,7 +395,7 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="writer">The writer.</param>
         /// <param name="title">The title.</param>
         /// <param name="reader">The reader.</param>
-        private void RenderStoryListItems(HtmlTextWriter writer, StoryCollection stories, string title, string itemType)
+        private void RenderStoryListItems(HtmlTextWriter writer, StoryCollection stories, string valueCountField, string title, string itemType)
         {
             //render top 10 lists
             writer.RenderBeginTag(HtmlTextWriterTag.H3);
@@ -415,6 +424,7 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(HtmlTextWriter.TagRightChar);
                 writer.Write(s.Title);
                 writer.WriteEndTag("a");
+                writer.Write(" (" + s.GetColumnValue<string>(valueCountField) + ")");
                 writer.RenderEndTag();
             }
             writer.RenderEndTag();
@@ -500,19 +510,65 @@ namespace Incremental.Kick.Web.Controls
             writer.Write(HtmlTextWriter.TagRightChar);
 
             //most kicked during time period
-            RenderStoryListItems(writer, _mostKickedStories, "Most Kicked Stories", "kicks");
+            RenderStoryListItems(writer, _mostKickedStories, Story.Columns.KickCount, "Most Kicked Stories", "kicks");
 
             //do next top 10 list
-            RenderStoryListItems(writer, _mostCommentedOnStories, "Most Commented On Stories", "comments");
+            RenderStoryListItems(writer, _mostCommentedOnStories, Story.Columns.CommentCount, "Most Commented On Stories", "comments");
 
             //most used tags
             RenderTagListItems(writer, _mostUsedTags, "Most Used Tags");
+
+            //most popular domains
+            RenderDictionaryListItems(writer, _mostPopularDomains, "Most Popular Domains");
+            
 
             //footer
             writer.Write("<p><i>Aggregate statistics are based on the item date. For example, the number of kicks listed is based on the exact time period and are totalled without regard to the story's submission date.</i></p>");
             writer.Write("<p><i>Story lists are calculated based on the the story's submission date.</i></p>");
 
             writer.WriteEndTag("div");
+        }
+
+        /// <summary>
+        /// Simple renders for a dictionary where key is the text and value is the count.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="dictionaryList">The dictionary list.</param>
+        /// <param name="p">The p.</param>
+        private void RenderDictionaryListItems(HtmlTextWriter writer, Dictionary<string, int> dictionaryList, string title)
+        {
+            //render top 10 lists
+            writer.RenderBeginTag(HtmlTextWriterTag.H3);
+            writer.Write(title);
+            writer.Write(" for ");
+
+            if (Month == null)
+                writer.Write(Year);
+            else if (Day == null)
+                writer.Write(new DateTime(Year.Value, Month.Value, 1).ToString("MMMM yyyy"));
+            else
+                writer.Write(new DateTime(Year.Value, Month.Value, Day.Value).ToString("MMMM d, yyyy"));
+            writer.RenderEndTag();
+
+            //just plain OL with tag links
+            writer.RenderBeginTag(HtmlTextWriterTag.Ol);
+            foreach (KeyValuePair<string, int> kvp in dictionaryList)
+            {
+                string tagUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewTag,
+                        kvp.Key);
+                writer.RenderBeginTag(HtmlTextWriterTag.Li);
+                writer.Write(kvp.Key);
+                writer.Write(" (" + kvp.Value.ToString() + ")");
+                writer.RenderEndTag();
+            }
+            writer.RenderEndTag();
+
+            if (dictionaryList.Count.Equals(0))
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.P);
+                writer.Write(this.NoDataCaption);
+                writer.RenderEndTag();
+            }
         }
 
         #endregion [rgn]
