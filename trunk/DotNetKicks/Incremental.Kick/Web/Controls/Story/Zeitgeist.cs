@@ -32,6 +32,8 @@ namespace Incremental.Kick.Web.Controls
         private StoryCollection _mostKickedStories;
         private Dictionary<string, int> _mostUsedTags;
         private Dictionary<string, int> _mostPopularDomains;
+        private Dictionary<string, int> _mostPublishedDomains;
+        private Dictionary<string, int> _mostPublishedUsers;
         private int _storiesPublishedCount;
         private int _storiesSubmittedCount;
         private string _title = "";
@@ -150,10 +152,12 @@ namespace Incremental.Kick.Web.Controls
             this.Year = year;
             this.Day = day;
 
-            _mostKickedStories = ZeitgeistCache.GetMostKickedStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
+            _mostKickedStories = ZeitgeistCache.GetMostPopularStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostCommentedOnStories = ZeitgeistCache.GetMostCommentedOnStories(hostId, this.NumberOfItems, this.Year.Value, this.Month, this.Day);
             _mostUsedTags = ZeitgeistCache.GetMostUsedTags(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
             _mostPopularDomains = ZeitgeistCache.GetMostPopularDomains(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
+            _mostPublishedDomains = ZeitgeistCache.GetMostPublishedDomains(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
+            _mostPublishedUsers = ZeitgeistCache.GetMostPublishedUsers(hostId, this.numberOfItems, this.Year.Value, this.Month, this.Day);
 
             _storiesSubmittedCount = ZeitgeistCache.GetNumberOfStoriesSubmitted(hostId, this.Year.Value, this.Month, this.Day);
             _storiesPublishedCount = ZeitgeistCache.GetNumberOfStoriesPublished(hostId, this.Year.Value, this.Month, this.Day);
@@ -424,7 +428,7 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(HtmlTextWriter.TagRightChar);
                 writer.Write(s.Title);
                 writer.WriteEndTag("a");
-                writer.Write(" (" + s.GetColumnValue<string>(valueCountField) + ")");
+                writer.Write(" (" + SubSonic.Sugar.Strings.Pluralize(s.GetColumnValue<int>(valueCountField), itemType) + ")");
                 writer.RenderEndTag();
             }
             writer.RenderEndTag();
@@ -486,12 +490,59 @@ namespace Incremental.Kick.Web.Controls
                 writer.Write(HtmlTextWriter.TagRightChar);
                 writer.Write(kvp.Key);
                 writer.WriteEndTag("a");
-                writer.Write(" (" + kvp.Value.ToString() + ")");
+                writer.Write(" (" + SubSonic.Sugar.Strings.Pluralize(kvp.Value, "tag") + ")");
                 writer.RenderEndTag();
             }
             writer.RenderEndTag();
 
             if (tags.Count.Equals(0))
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.P);
+                writer.Write(this.NoDataCaption);
+                writer.RenderEndTag();
+            }
+        }
+
+        /// <summary>
+        /// Renders the user list items.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="users">The users.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="itemType">Type of the item.</param>
+        private void RenderUserListItems(HtmlTextWriter writer, Dictionary<string, int> users, string title, string itemType)
+        {
+            //render top 10 lists
+            writer.RenderBeginTag(HtmlTextWriterTag.H3);
+            writer.Write(title);
+            writer.Write(" for ");
+
+            if (Month == null)
+                writer.Write(Year);
+            else if (Day == null)
+                writer.Write(new DateTime(Year.Value, Month.Value, 1).ToString("MMMM yyyy"));
+            else
+                writer.Write(new DateTime(Year.Value, Month.Value, Day.Value).ToString("MMMM d, yyyy"));
+            writer.RenderEndTag();
+
+            //just plain OL with tag links
+            writer.RenderBeginTag(HtmlTextWriterTag.Ol);
+            foreach (KeyValuePair<string, int> kvp in users)
+            {
+                string userUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserHome,
+                        kvp.Key);
+                writer.RenderBeginTag(HtmlTextWriterTag.Li);
+                writer.WriteBeginTag("a");
+                writer.WriteAttribute("href", userUrl);
+                writer.Write(HtmlTextWriter.TagRightChar);
+                writer.Write(kvp.Key);
+                writer.WriteEndTag("a");
+                writer.Write(" (" + SubSonic.Sugar.Strings.Pluralize(kvp.Value, itemType) + ")");
+                writer.RenderEndTag();
+            }
+            writer.RenderEndTag();
+
+            if (users.Count.Equals(0))
             {
                 writer.RenderBeginTag(HtmlTextWriterTag.P);
                 writer.Write(this.NoDataCaption);
@@ -510,17 +561,22 @@ namespace Incremental.Kick.Web.Controls
             writer.Write(HtmlTextWriter.TagRightChar);
 
             //most kicked during time period
-            RenderStoryListItems(writer, _mostKickedStories, Story.Columns.KickCount, "Most Kicked Stories", "kicks");
+            RenderStoryListItems(writer, _mostKickedStories, Story.Columns.KickCount, "Most Popular Stories", "kick");
 
             //do next top 10 list
-            RenderStoryListItems(writer, _mostCommentedOnStories, Story.Columns.CommentCount, "Most Commented On Stories", "comments");
+            RenderStoryListItems(writer, _mostCommentedOnStories, Story.Columns.CommentCount, "Most Commented On Stories", "comment");
 
             //most used tags
-            RenderTagListItems(writer, _mostUsedTags, "Most Used Tags");
+            RenderTagListItems(writer, _mostUsedTags, "Most Popular Tags");
+
+            //most published users
+            RenderUserListItems(writer, _mostPublishedUsers, "Most Published Users", "story");            
 
             //most popular domains
-            RenderDictionaryListItems(writer, _mostPopularDomains, "Most Popular Domains");
+            RenderDictionaryListItems(writer, _mostPopularDomains, "Most Popular Domains", "story kick");
             
+            //most published domains
+            RenderDictionaryListItems(writer, _mostPublishedDomains, "Most Published Domains", "story");
 
             //footer
             writer.Write("<p><i>Aggregate statistics are based on the item date. For example, the number of kicks listed is based on the exact time period and are totalled without regard to the story's submission date.</i></p>");
@@ -535,7 +591,7 @@ namespace Incremental.Kick.Web.Controls
         /// <param name="writer">The writer.</param>
         /// <param name="dictionaryList">The dictionary list.</param>
         /// <param name="p">The p.</param>
-        private void RenderDictionaryListItems(HtmlTextWriter writer, Dictionary<string, int> dictionaryList, string title)
+        private void RenderDictionaryListItems(HtmlTextWriter writer, Dictionary<string, int> dictionaryList, string title, string itemType)
         {
             //render top 10 lists
             writer.RenderBeginTag(HtmlTextWriterTag.H3);
@@ -558,7 +614,7 @@ namespace Incremental.Kick.Web.Controls
                         kvp.Key);
                 writer.RenderBeginTag(HtmlTextWriterTag.Li);
                 writer.Write(kvp.Key);
-                writer.Write(" (" + kvp.Value.ToString() + ")");
+                writer.Write(" (" + SubSonic.Sugar.Strings.Pluralize( kvp.Value, itemType) + ")");
                 writer.RenderEndTag();
             }
             writer.RenderEndTag();
