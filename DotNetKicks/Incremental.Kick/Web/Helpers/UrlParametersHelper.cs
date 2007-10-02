@@ -52,6 +52,9 @@ namespace Incremental.Kick.Web.Helpers {
             if (!String.IsNullOrEmpty(request["day"]))
                 urlParameters.Day = int.Parse(request["day"].Replace("/", ""));
 
+            if (!String.IsNullOrEmpty(request["chatid"]))
+                urlParameters.ChatID = int.Parse(request["chatid"].Replace("/", ""));
+
             return urlParameters;
         }
     }

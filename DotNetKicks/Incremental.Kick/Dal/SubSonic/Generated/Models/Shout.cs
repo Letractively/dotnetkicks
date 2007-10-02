@@ -193,6 +193,19 @@ namespace Incremental.Kick.Dal
 				colvarIsSpam.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarIsSpam);
 				
+				TableSchema.TableColumn colvarChatID = new TableSchema.TableColumn(schema);
+				colvarChatID.ColumnName = "ChatID";
+				colvarChatID.DataType = DbType.Int32;
+				colvarChatID.MaxLength = 0;
+				colvarChatID.AutoIncrement = false;
+				colvarChatID.IsNullable = true;
+				colvarChatID.IsPrimaryKey = false;
+				colvarChatID.IsForeignKey = false;
+				colvarChatID.IsReadOnly = false;
+				colvarChatID.DefaultSetting = @"";
+				colvarChatID.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarChatID);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -275,6 +288,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("ChatID")]
+		public int? ChatID 
+		{
+			get { return GetColumnValue<int?>(Columns.ChatID); }
+
+			set { SetColumnValue(Columns.ChatID, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -337,7 +360,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam)
+		public static void Insert(int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam,int? varChatID)
 		{
 			Shout item = new Shout();
 			
@@ -353,6 +376,8 @@ namespace Incremental.Kick.Dal
 			
 			item.IsSpam = varIsSpam;
 			
+			item.ChatID = varChatID;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -364,7 +389,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varShoutID,int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam)
+		public static void Update(int varShoutID,int varFromUserID,int? varToUserID,int varHostID,string varMessage,DateTime varCreatedOn,bool varIsSpam,int? varChatID)
 		{
 			Shout item = new Shout();
 			
@@ -381,6 +406,8 @@ namespace Incremental.Kick.Dal
 				item.CreatedOn = varCreatedOn;
 			
 				item.IsSpam = varIsSpam;
+			
+				item.ChatID = varChatID;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -457,6 +484,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn ChatIDColumn
+        {
+            get { return Schema.Columns[7]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -468,6 +504,7 @@ namespace Incremental.Kick.Dal
 			 public static string Message = @"Message";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string IsSpam = @"IsSpam";
+			 public static string ChatID = @"ChatID";
 						
 		}
 

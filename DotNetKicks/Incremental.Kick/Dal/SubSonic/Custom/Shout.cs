@@ -6,10 +6,12 @@ using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Dal {
     public partial class Shout {
-        public static ShoutCollection GetPage(int hostID, int? toUserID, int pageIndex, int pageSize) {
+        public static ShoutCollection GetPage(int hostID, int? toUserID, int? chatID, int pageIndex, int pageSize) {
             Query query = new Query(Shout.Schema).WHERE(Shout.Columns.HostID, hostID).ORDER_BY(Shout.Columns.CreatedOn, "DESC");
             if (toUserID.HasValue)
                 query = query.WHERE(Shout.Columns.ToUserID, toUserID.Value);
+            else if(chatID.HasValue)
+                query = query.WHERE(Shout.Columns.ChatID, chatID.Value);
             else
                 query = query.WHERE(Shout.Columns.ToUserID, Comparison.Is, null);
 
@@ -22,10 +24,10 @@ namespace Incremental.Kick.Dal {
         }
 
         public static void AddShout(User fromUser, int hostID, string message) {
-            AddShout(fromUser, hostID, message, null);
+            AddShout(fromUser, hostID, message, null, null);
         }
 
-        public static void AddShout(User fromUser, int hostID, string message, string toUsername) {
+        public static void AddShout(User fromUser, int hostID, string message, string toUsername, int? chatID) {
             if (!String.IsNullOrEmpty(message) && (!fromUser.IsBanned)) {
                 Shout shout = new Shout();
                 shout.HostID = hostID;
@@ -38,15 +40,17 @@ namespace Incremental.Kick.Dal {
                     shout.ToUserID = toUser.UserID;
                 }
 
+                if (chatID.HasValue)
+                    shout.ChatID = chatID;
+
                 shout.Save();
-                
-                if (toUser == null) {
+
+                if (toUser == null) 
                     UserAction.RecordShout(hostID, fromUser);
-                    ShoutCache.Remove(hostID);
-                } else {
+                else
                     UserAction.RecordShout(hostID, fromUser, toUser);
-                    ShoutCache.Remove(hostID, toUsername);
-                }
+
+                ShoutCache.Remove(hostID, shout.ToUserID, chatID);
             }
         }
     }

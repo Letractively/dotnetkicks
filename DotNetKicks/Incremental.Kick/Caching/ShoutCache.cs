@@ -7,25 +7,43 @@ namespace Incremental.Kick.Caching {
         private static int DEFAULT_CACHE_ITEM_SIZE = 100;
 
         public static ShoutCollection GetLatestShouts(int hostID) {
-            return GetLatestShouts(hostID, null, 1, DEFAULT_CACHE_ITEM_SIZE);
+            return GetLatestShouts(hostID, null, null);
         }
 
         public static ShoutCollection GetLatestShouts(int hostID, string username) {
-            return GetLatestShouts(hostID, UserCache.GetUserID(username), 1, DEFAULT_CACHE_ITEM_SIZE);
+            return GetLatestShouts(hostID, username, null);
+        }
+
+        public static ShoutCollection GetLatestShouts(int hostID, int chatID) {
+            return GetLatestShouts(hostID, null, chatID);
+        }
+
+        public static ShoutCollection GetLatestShouts(int hostID, string username, int? chatID) {
+            return GetLatestShouts(hostID, username, chatID, 1);
+        }
+
+        public static ShoutCollection GetLatestShouts(int hostID, string username, int? chatID, int pageIndex) {
+            int? userID;
+            if (String.IsNullOrEmpty(username))
+                userID = null;
+            else
+                userID = UserCache.GetUserID(username);
+
+            return GetLatestShouts(hostID, userID, chatID, pageIndex, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         private static ShoutCollection GetLatestShouts(int hostID, int pageIndex, int pageSize) {
-            return GetLatestShouts(hostID, null, pageIndex, pageSize);
+            return GetLatestShouts(hostID, null, null, pageIndex, pageSize);
         }
 
-        private static ShoutCollection GetLatestShouts(int hostID, int? toUserID, int pageIndex, int pageSize) {
-            string cacheKey = GetCacheKey(hostID, toUserID, pageIndex, pageSize);
+        private static ShoutCollection GetLatestShouts(int hostID, int? toUserID, int? chatID, int pageIndex, int pageSize) {
+            string cacheKey = GetCacheKey(hostID, toUserID, chatID, pageIndex, pageSize);
 
             CacheManager<string, ShoutCollection> cache = GetShoutCache();
 
             ShoutCollection shouts = cache[cacheKey];
             if (shouts == null) {
-                shouts = Shout.GetPage(hostID, toUserID, pageIndex, pageSize);
+                shouts = Shout.GetPage(hostID, toUserID, chatID, pageIndex, pageSize);
                 cache.Insert(cacheKey, shouts, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -33,25 +51,33 @@ namespace Incremental.Kick.Caching {
         }
 
         public static void Remove(int hostID) {
-            Remove(hostID, null, 1, DEFAULT_CACHE_ITEM_SIZE);
+            Remove(hostID, null, null, 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         public static void Remove(int hostID, string username) {
-            Remove(hostID, UserCache.GetUserID(username), 1, DEFAULT_CACHE_ITEM_SIZE);
+            Remove(hostID, UserCache.GetUserID(username), null, 1, DEFAULT_CACHE_ITEM_SIZE);
+        }
+
+        public static void Remove(int hostID, int chatID) {
+            Remove(hostID, null, chatID, 1, DEFAULT_CACHE_ITEM_SIZE);
+        }
+
+        public static void Remove(int hostID, int? toUserID, int? chatID) {
+            Remove(hostID, toUserID, chatID, 1, DEFAULT_CACHE_ITEM_SIZE);
         }
 
         private static void Remove(int hostID, int pageIndex, int pageSize) {
-            Remove(hostID, null, pageIndex, pageSize);
+            Remove(hostID, null, null, pageIndex, pageSize);
         }
-        private static void Remove(int hostID, int? toUserID, int pageIndex, int pageSize) {
-            GetShoutCache().Remove(GetCacheKey(hostID, toUserID, pageIndex, pageSize));
+        private static void Remove(int hostID, int? toUserID, int? chatID, int pageIndex, int pageSize) {
+            GetShoutCache().Remove(GetCacheKey(hostID, toUserID, chatID, pageIndex, pageSize));
         }
 
         private static string GetCacheKey(int hostID, int pageIndex, int pageSize) {
-            return GetCacheKey(hostID, null, pageIndex, pageSize);
+            return GetCacheKey(hostID, null, null, pageIndex, pageSize);
         }
-        private static string GetCacheKey(int hostID, int? toUserID, int pageIndex, int pageSize) {
-            return String.Format("ShoutsCollection_{0}_{1}_{2}_{3}", hostID, toUserID, pageIndex, pageSize);
+        private static string GetCacheKey(int hostID, int? toUserID, int? chatID, int pageIndex, int pageSize) {
+            return String.Format("ShoutsCollection_{0}_{1}_{2}_{3}_{4}", hostID, toUserID, chatID, pageIndex, pageSize);
         }
 
         private static CacheManager<string, ShoutCollection> GetShoutCache() {

@@ -6,6 +6,7 @@ using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;
 using Incremental.Kick.BusinessLogic;
+using System;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: we are now using Jayrock for Ajax services. Please see http://jayrock.berlios.de/ for more info
@@ -14,27 +15,15 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         #region Shout Box
 
         [JsonRpcMethod("addShout")]
-        public string AddShout(string message) {
+        public string AddShoutNew(string message, string toUsername, int chatID) {
             DemandUserAuthentication();
-            Shout.AddShout(KickUserProfile, HostProfile.HostID, message);
-            return GetLatestShouts();
-        }
-
-        [JsonRpcMethod("addShoutForUser")]
-        public string AddShoutForUser(string message, string username) {
-            DemandUserAuthentication();
-            Shout.AddShout(KickUserProfile, HostProfile.HostID, message, username);
-            return GetLatestShoutsForUser(username);
+            Shout.AddShout(KickUserProfile, HostProfile.HostID, message, toUsername, ToNullable(chatID));
+            return GetLatestShouts(toUsername, chatID);
         }
 
         [JsonRpcMethod("getLatestShouts")]
-        public string GetLatestShouts() {
-            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(HostProfile.HostID)));
-        }
-
-        [JsonRpcMethod("getLatestShoutsForUser")]
-        public string GetLatestShoutsForUser(string username) {
-            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(HostProfile.HostID, username)));
+        public string GetLatestShouts(string toUsername, int chatID) {
+            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(HostProfile.HostID, toUsername, ToNullable(chatID))));
         }
 
         #endregion

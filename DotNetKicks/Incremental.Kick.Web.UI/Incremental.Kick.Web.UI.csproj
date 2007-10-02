@@ -351,6 +351,13 @@
     <Compile Include="Pages\Admin\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Chats.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Chats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Chats.aspx.designer.cs">
+      <DependentUpon>Chats.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\ReservedUsernames.aspx.cs">
       <DependentUpon>ReservedUsernames.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -399,6 +406,20 @@
     </Compile>
     <Compile Include="Pages\Category\ViewNewStories.aspx.designer.cs">
       <DependentUpon>ViewNewStories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Chats\List.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Chats\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Chats\Room.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Room.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Chats\Room.aspx.designer.cs">
+      <DependentUpon>Room.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Community\KickSpy.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -775,7 +796,10 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
+    <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\ReservedUsernames.aspx" />
+    <Content Include="Pages\Chats\List.aspx" />
+    <Content Include="Pages\Chats\Room.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
