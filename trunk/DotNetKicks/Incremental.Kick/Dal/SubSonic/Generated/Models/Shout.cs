@@ -200,10 +200,11 @@ namespace Incremental.Kick.Dal
 				colvarChatID.AutoIncrement = false;
 				colvarChatID.IsNullable = true;
 				colvarChatID.IsPrimaryKey = false;
-				colvarChatID.IsForeignKey = false;
+				colvarChatID.IsForeignKey = true;
 				colvarChatID.IsReadOnly = false;
 				colvarChatID.DefaultSetting = @"";
-				colvarChatID.ForeignKeyTableName = "";
+				
+					colvarChatID.ForeignKeyTableName = "Kick_Chat";
 				schema.Columns.Add(colvarChatID);
 				
 				BaseSchema = schema;
@@ -305,6 +306,20 @@ namespace Incremental.Kick.Dal
 			
 		
 		#region ForeignKey Properties
+		
+		/// <summary>
+		/// Returns a Chat ActiveRecord object related to this Shout
+		/// 
+		/// </summary>
+		public Incremental.Kick.Dal.Chat Chat
+		{
+			get { return Incremental.Kick.Dal.Chat.FetchByID(this.ChatID); }
+
+			set { SetColumnValue("ChatID", value.ChatID); }
+
+		}
+
+		
 		
 		/// <summary>
 		/// Returns a Host ActiveRecord object related to this Shout

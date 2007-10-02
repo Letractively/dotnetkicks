@@ -347,6 +347,14 @@ namespace Incremental.Kick.Dal
 		
 		#region PrimaryKey Methods
 		
+		private Incremental.Kick.Dal.ShoutCollection colShoutRecords;
+		public Incremental.Kick.Dal.ShoutCollection ShoutRecords()
+		{
+			if(colShoutRecords == null)
+				colShoutRecords = new Incremental.Kick.Dal.ShoutCollection().Where(Shout.Columns.ChatID, ChatID).Load();
+			return colShoutRecords;
+		}
+
 		private Incremental.Kick.Dal.UserActionCollection colUserActionRecords;
 		public Incremental.Kick.Dal.UserActionCollection UserActionRecords()
 		{
