@@ -16,6 +16,8 @@ namespace Incremental.Kick.Web.UI.Pages.Chats {
             this.Title = this.HostProfile.SiteTitle + " - Chat Room (todo: add chat name)";
             //this.PageName = UrlFactory.PageName.SubmitStory;
             this.DisplayAds = false;
+            this.DisplaySideAds = false;
+            this.DisplayAnnouncement = false;
         }
 
         protected void Page_Load(object sender, EventArgs e) {
