@@ -3,6 +3,7 @@ using SubSonic;
 using Incremental.Kick.Caching;
 using System.Web;
 using Incremental.Kick.Helpers;
+using Incremental.Kick.Dal.Entities.Api;
 
 namespace Incremental.Kick.Dal {
     public partial class Shout {
@@ -57,6 +58,11 @@ namespace Incremental.Kick.Dal {
 
                 ShoutCache.Remove(hostID, shout.ToUserID, chatID);
             }
+        }
+
+        public ApiShout ToApi(Host host) {
+            //NOTE: GJ: PERFORMANCE: should we be hitting the cache here, we could defer until later and just add the id here
+            return new ApiShout(this.ShoutID, UserCache.GetUser(this.FromUserID).ToApi(host), this.Message, this.CreatedOn);
         }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\CategoryCache.cs" />
+    <Compile Include="Caching\ChatCache.cs" />
     <Compile Include="Caching\HostCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
     <Compile Include="Caching\ShoutCache.cs" />
@@ -87,9 +88,12 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Enums\StoryListSortBy.cs" />
     <Compile Include="Common\Exceptions\Exceptions.cs" />
+    <Compile Include="Dal\Entities\Api\ApiChat.cs" />
     <Compile Include="Dal\Entities\Api\ApiPagedList.cs" />
+    <Compile Include="Dal\Entities\Api\ApiShout.cs" />
     <Compile Include="Dal\Entities\Api\ApiStory.cs" />
     <Compile Include="Dal\Entities\Api\ApiUser.cs" />
+    <Compile Include="Dal\SubSonic\Custom\Chat.cs" />
     <Compile Include="Dal\SubSonic\Custom\PagedCollection.cs" />
     <Compile Include="Dal\Entities\WeightedTag.cs" />
     <Compile Include="Dal\Entities\WeightedTagList.cs" />
