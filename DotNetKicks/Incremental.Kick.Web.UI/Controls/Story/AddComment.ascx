@@ -40,7 +40,7 @@ function countChars() {
             <td class="FormButtons FormTD">
                 <span class="ValidationMessage">
                     <asp:CustomValidator ID="CommentLength" runat="server" EnableClientScript="false"
-                        Display="Dynamic" ControlToValidate="Comment" OnServerValidate="CommentLength_ServerValidate" ValidateEmptyText="True">The comment must be between 4 and 2500 characters long.</asp:CustomValidator>
+                        Display="Dynamic" ControlToValidate="Comment" OnServerValidate="CommentLength_ServerValidate" ValidateEmptyText="True" Text="The comment must be between {0} and {1} characters long." />
                 </span>
                 <asp:Button ID="AddCommentButton" runat="server" Text="Add Comment" OnClick="AddComment_Click" />
             </td>
