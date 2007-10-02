@@ -10,10 +10,13 @@ namespace Incremental.Kick.Dal {
             Query query = new Query(Shout.Schema).WHERE(Shout.Columns.HostID, hostID).ORDER_BY(Shout.Columns.CreatedOn, "DESC");
             if (toUserID.HasValue)
                 query = query.WHERE(Shout.Columns.ToUserID, toUserID.Value);
-            else if(chatID.HasValue)
-                query = query.WHERE(Shout.Columns.ChatID, chatID.Value);
             else
                 query = query.WHERE(Shout.Columns.ToUserID, Comparison.Is, null);
+
+            if (chatID.HasValue)
+                query = query.WHERE(Shout.Columns.ChatID, chatID.Value);
+            else
+                query = query.WHERE(Shout.Columns.ChatID, Comparison.Is, null);
 
             query.PageIndex = pageIndex;
             query.PageSize = pageSize;
@@ -45,10 +48,12 @@ namespace Incremental.Kick.Dal {
 
                 shout.Save();
 
-                if (toUser == null) 
-                    UserAction.RecordShout(hostID, fromUser);
-                else
-                    UserAction.RecordShout(hostID, fromUser, toUser);
+                if (!chatID.HasValue) {
+                    if (toUser == null)
+                        UserAction.RecordShout(hostID, fromUser);
+                    else
+                        UserAction.RecordShout(hostID, fromUser, toUser);
+                }
 
                 ShoutCache.Remove(hostID, shout.ToUserID, chatID);
             }
