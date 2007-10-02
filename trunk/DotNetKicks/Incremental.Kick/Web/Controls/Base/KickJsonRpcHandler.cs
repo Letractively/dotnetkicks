@@ -46,5 +46,14 @@ namespace Incremental.Kick.Web.Controls {
             if (!this.KickUserProfile.IsModerator)
                 throw new SecurityException("You must be a moderator in to perform this operation");
         }
+
+
+        //Jayrock doesn't support nullable types
+        public int? ToNullable(int value) {
+            if (value == 0)
+                return null;
+            else 
+                return value;
+        }
     }
 }

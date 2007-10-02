@@ -27,6 +27,7 @@ namespace Incremental.Kick.Web.Helpers {
         private int? _year;
         private int? _month;
         private int? _day;
+        private int? _chatID;
 
         public string UserIdentifier {
             get { return this._userIdentifier; }
@@ -94,20 +95,21 @@ namespace Incremental.Kick.Web.Helpers {
             get { return this._skin; }
             set { this._skin = value; }
         }
-        public int? Year
-        {
+        public int? Year {
             get { return this._year; }
             set { this._year = value; }
         }
-        public int? Month
-        {
+        public int? Month {
             get { return this._month; }
             set { this._month = value; }
         }
-        public int? Day
-        {
+        public int? Day {
             get { return this._day; }
             set { this._day = value; }
+        }
+        public int? ChatID {
+            get { return this._chatID; }
+            set { this._chatID = value; }
         }
         public bool SkinSpecified {
             get { return !String.IsNullOrEmpty(this.Skin); }

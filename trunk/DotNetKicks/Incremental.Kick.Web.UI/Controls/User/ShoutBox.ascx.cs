@@ -28,5 +28,14 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected void Page_Load(object sender, EventArgs e) {
             this.SaySomethingPanel.Visible = this.KickPage.IsAuthenticated;
         }
+
+        public string JavaScriptChatID {
+            get {
+                if (this.KickPage.UrlParameters.ChatID.HasValue)
+                    return this.KickPage.UrlParameters.ChatID.ToString();
+                else
+                    return "null";
+            }
+        }
     }
 }

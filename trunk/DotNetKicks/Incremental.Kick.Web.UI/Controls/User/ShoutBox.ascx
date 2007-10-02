@@ -4,21 +4,16 @@
 
 <script type="text/javascript">
     var forUsername = "<%= KickPage.UrlParameters.UserIdentifier %>";
+    var chatID = <%= this.JavaScriptChatID %>;
 
     function addShout() {
         StartLoading();
-        if(forUsername)
-            ajaxServices.addShoutForUser($("#shout_message").val(), forUsername, addShout_complete);
-        else
-            ajaxServices.addShout($("#shout_message").val(), addShout_complete);
+        ajaxServices.addShout($("#shout_message").val(), forUsername, chatID, addShout_complete);
     }
     
     function refreshShoutbox() {
         StartLoading();
-        if(forUsername) 
-            ajaxServices.getLatestShoutsForUser(forUsername, addShout_complete);
-        else
-            ajaxServices.getLatestShouts(addShout_complete);       
+        ajaxServices.getLatestShouts(forUsername, chatID, addShout_complete);      
     }
     
     function addShout_complete(response) {
