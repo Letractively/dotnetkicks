@@ -3,14 +3,12 @@
 <head>
     <title>Live DotNetKicks</title>
     <link rel="stylesheet" type="text/css" href="default.css" />
-    <script type="text/javascript" src="dojo/dojo.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="json.js"></script>
     <script type="text/javascript" src="string.js"></script>
     <script type="text/javascript" src="date.js"></script>
     <script type="text/javascript" src="http://www.dotnetkicks.com/services/json/jsonservices.ashx?proxy"></script>    
     <script type="text/javascript">
-dojo.require("dojo.io.script");
-
 var HTML = {
     a : function(href, child) {
         var e = document.createElement('a');
@@ -40,8 +38,7 @@ var HTML = {
 };
 
 function displayStories(target, stories) {
-    for (var i = 0; i < stories.length; i++) {
-        var story = stories[i];
+    $.each(stories, function(i, story) {
         var h = document.createElement('h3');
         h.appendChild(HTML.a(story.url, story.title));
         target.appendChild(h);
@@ -59,46 +56,52 @@ function displayStories(target, stories) {
                 HTML.img("http://www.dotnetkicks.com/Services/Images/KickItImageGenerator.ashx?url=" + encodeURIComponent(story.url) + "&amp;border=&amp;fgcolor=&amp;bgcolor=&amp;cfgcolor=&amp;cbgcolor=", "kick it on DotNetKicks.com"))));
         */
         target.appendChild(info);
-    }
+    });
 }
 
-function DojoScriptChannel() {
-    this.rpc = function(call) { 
-        dojo.io.script.get({ 
-            url: call.url + "/" + call.request.method,
-            callbackParamName: "jsonp", 
-            timeout: 20 /* seconds */ * 1000,
-            handle: function(response, args) {
-                call.callback(response);
-            }
-        }); 
-    } 
-}
+function Column(e, loader) {
+    
+    if ('string' === typeof(e))
+        e = document.getElementById(e);
 
-var DNK = new JsonServices();
-DNK.channel = new DojoScriptChannel();
+    var pb = document.getElementById(e.id + 'Loading');
 
-function window_onload(sender) {
-    function storyMaker(id) {
-        return function(response) { 
+    this.reload = function() {
+        if (pb) pb.style.display = '';
+        loader(function (response) { 
+            if (pb) pb.style.display = 'none';
             if (response.error) {
                 alert(response.error.message);
                 return;
             }
-            var result = response.result;
-            var stories = result.items;
-            var e = document.getElementById(id);
-            document.getElementById(id + 'Loading').style.display = 'none';
-            displayStories(e, stories) 
-        }
+            displayStories(e, response.result.items) 
+        });
     }
-    DNK.getUpcomingPageStories(storyMaker('Upcoming'));
-    DNK.getPopularStories(storyMaker('Popular'));
-    DNK.getFrontPageStories(storyMaker('FrontPage'));
 }
+
+function JQueryScriptChannel() {
+    this.rpc = function(call) { 
+        $.getJSON(call.url + "/" + call.request.method + "?jsonp=?", 
+            function(response) {
+                call.callback(response);
+            }); 
+    } 
+}
+
+var DNK = new JsonServices();
+DNK.channel = new JQueryScriptChannel();
+
+$(document).ready(function() {
+    var cols = [ 
+        new Column('FrontPage', DNK.getFrontPageStories),
+        new Column('Popular',   DNK.getPopularStories),
+        new Column('Upcoming',  DNK.getUpcomingPageStories)
+    ];
+    $.each(cols, function(i, col) { col.reload(); });
+});
     </script>
 </head>
-<body onload="window_onload(this)">
+<body>
     <h1><span class="alive">Live</span> Kicks! <em>alpha</em></h1>
     <div class="header">
         <p>
@@ -108,7 +111,7 @@ function window_onload(sender) {
             to mash-up a live display using Ajax techniques 
             (<a href="http://en.wikipedia.org/wiki/Cross-site_scripting"><acronym title="cross-domain scripting">XSS</acronym></a>, 
             <a href="http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/">JSONP</a>,
-            JavaScript, DHTML, <a href="http://www.dojotoolkit.org/">Dojo</a> on the client
+            JavaScript, DHTML, <a href="http://jquery.com/">jQuery</a> on the client
             and <a href="http://jayrock.berlios.de/">Jayrock</a> serving up from the server).
             <a href="http://code.google.com/p/dotnetkicks/downloads/list">Download now</a> for your playing pleasure.</p>
     </div>
