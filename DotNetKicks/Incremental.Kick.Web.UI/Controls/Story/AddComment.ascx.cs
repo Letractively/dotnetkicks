@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Text;
+
 namespace Incremental.Kick.Web.UI.Controls
 {
     using System;
@@ -34,6 +37,16 @@ namespace Incremental.Kick.Web.UI.Controls
             {
                 CommentLength.Text = string.Format(CommentLength.Text,
                     MinLength.ToString("N0"), MaxLength.ToString("N0"));
+
+                StringBuilder emoticons = new StringBuilder();
+
+                foreach(DictionaryEntry emoticon in TextHelper.Emoticons)
+                    emoticons.AppendFormat("<img src=\"{0}/{1}\" border=\"0\" style=\"vertical-align:sub; cursor:pointer;\" onclick=\"insertEmoticonCode('{2}');\" title=\"{2} {3}\" />",
+                                           KickPage.StaticEmoticonsRootUrl, emoticon.Value, emoticon.Key,
+                                           emoticon.Value.ToString().Substring(0, emoticon.Value.ToString().LastIndexOf("."))).
+                        Append("  ");
+
+                Emoticons.InnerHtml = emoticons.ToString();
             }
 
             bool authenticated = KickPage.IsAuthenticated;
@@ -49,7 +62,6 @@ namespace Incremental.Kick.Web.UI.Controls
             string comment = Comment.Text.Trim();
 
             comment = TextHelper.EncodeAndReplaceComment(comment);
-            comment = TextHelper.ReplaceEmoticons(comment, KickPage.StaticEmoticonsRootUrl);
 
             int commentID =
                 Dal.Comment.CreateComment(KickPage.HostProfile.HostID, _storyID, KickPage.KickUserProfile, comment);

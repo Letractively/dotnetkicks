@@ -2,6 +2,7 @@ using System;
 using System.Web.UI;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Helpers;
 using Incremental.Kick.Web.Helpers;
 using SubSonic.Sugar;
 
@@ -52,8 +53,9 @@ namespace Incremental.Kick.Web.Controls {
 
 
             }
+
             writer.WriteLine(@"<div class=""CommentText"">{0}</div>
-                    <div class=""CommentAuthor"">posted by ", _comment.CommentX);
+                    <div class=""CommentAuthor"">posted by ", TextHelper.ReplaceEmoticons(_comment.CommentX, KickPage.StaticEmoticonsRootUrl));
 
             UserLink userLink = new UserLink();
             userLink.DataBind(UserCache.GetUser(_comment.UserID));
