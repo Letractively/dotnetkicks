@@ -16,12 +16,22 @@ namespace Incremental.Kick.Web.UI.Controls {
         private ShoutCollection _shouts = new ShoutCollection();
 
         public void DataBind(ShoutCollection shouts) {
-            this.ShoutList.DataBind(shouts);
+            _shouts = shouts;
+            this.ShoutList.DataBind(_shouts);
         }
 
         public void DataBind(ShoutCollection shouts, int toUserID) {
             this.DataBind(shouts);
             this._toUserID = toUserID;
+        }
+
+        public int MostRecentShoutID {
+            get {
+                if (this._shouts.Count > 0)
+                    return this._shouts[0].ShoutID;
+                else
+                    return 0;
+            }
         }
            
         

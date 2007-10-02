@@ -7,6 +7,8 @@ using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;
 using Incremental.Kick.BusinessLogic;
 using System;
+using System.Collections.Generic;
+using Incremental.Kick.Dal.Entities.Api;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: we are now using Jayrock for Ajax services. Please see http://jayrock.berlios.de/ for more info
@@ -15,15 +17,15 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         #region Shout Box
 
         [JsonRpcMethod("addShout")]
-        public string AddShoutNew(string message, string toUsername, int chatID) {
+        public List<ApiShout> AddShout(string message, string toUsername, int chatID, int lastReceivedShoutID) {
             DemandUserAuthentication();
             Shout.AddShout(KickUserProfile, HostProfile.HostID, message, toUsername, ToNullable(chatID));
-            return GetLatestShouts(toUsername, chatID);
+            return GetDeltaShouts(toUsername, chatID, lastReceivedShoutID);
         }
 
-        [JsonRpcMethod("getLatestShouts")]
-        public string GetLatestShouts(string toUsername, int chatID) {
-            return ControlHelper.RenderControl(new ShoutList(ShoutCache.GetLatestShouts(HostProfile.HostID, toUsername, ToNullable(chatID))));
+        [JsonRpcMethod("getDeltaShouts")]
+        public List<ApiShout> GetDeltaShouts(string toUsername, int chatID, int lastReceivedShoutID) {
+            return ShoutCache.GetDeltaShouts(HostProfile.HostID, toUsername, ToNullable(chatID), lastReceivedShoutID);
         }
 
         #endregion
