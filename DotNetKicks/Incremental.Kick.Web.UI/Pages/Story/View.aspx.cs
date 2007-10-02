@@ -23,7 +23,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-            Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier);
+            Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier, this.HostProfile.HostID);
 
             if (story == null || story.IsSpam)
                 Response.Redirect("/missingstory");
