@@ -62,7 +62,7 @@ namespace Incremental.Kick.Web.UI.Controls
 
         protected void CommentLength_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
         {
-            args.IsValid = args.Value.Length >= 4 && args.Value.Length <= 2500;
+            args.IsValid = args.Value.Trim().Length >= 4 && args.Value.Trim().Length <= 2500;
         }
     }
 }
