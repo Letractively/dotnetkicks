@@ -36,7 +36,7 @@ namespace Incremental.Kick.Helpers
                                       delegate(Match match)
                                           {
                                               return
-                                                  string.Format("<img src=\"{0}/{1}\" border=\"0\" style=\"vertical-align:sub;\" />", emoticonsRoot,
+                                                  string.Format("<img src=\"{0}/{1}\" border=\"0\" />", emoticonsRoot,
                                                                 Emoticons[match.Value]);
                                           });
         }

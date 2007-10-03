@@ -41,7 +41,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 StringBuilder emoticons = new StringBuilder();
 
                 foreach(DictionaryEntry emoticon in TextHelper.Emoticons)
-                    emoticons.AppendFormat("<img src=\"{0}/{1}\" border=\"0\" style=\"vertical-align:sub; cursor:pointer;\" onclick=\"insertEmoticonCode('{2}');\" title=\"{2} {3}\" />",
+                    emoticons.AppendFormat("<img src=\"{0}/{1}\" border=\"0\" style=\"cursor:pointer;\" onclick=\"insertEmoticonCode('{2}');\" title=\"{2} {3}\" />",
                                            KickPage.StaticEmoticonsRootUrl, emoticon.Value, emoticon.Key,
                                            emoticon.Value.ToString().Substring(0, emoticon.Value.ToString().LastIndexOf("."))).
                         Append("  ");
