@@ -48,10 +48,8 @@ namespace Incremental.Kick.Web.Controls {
                 string kickStoryUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, _comment.Story.StoryIdentifier, categoryIdentifier);
 
                 //story title
-                writer.Write(@"<div class=""storyTitle""><a href=""{0}#Comment_{1}"">{2}</a></div><br/>",
+                writer.Write(@"<div class=""storyTitle""><a href=""{0}#Comment_{1}"">{2}</a></div><br />",
                         kickStoryUrl, _comment.CommentID, _comment.Story.Title);
-
-
             }
 
             writer.WriteLine(@"<div class=""CommentText"">{0}</div>
