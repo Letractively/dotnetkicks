@@ -20,13 +20,31 @@ namespace Incremental.Kick.Web.UI.Controls {
     public partial class Profile {
         
         /// <summary>
-        /// mvProfileViews control.
+        /// mvUserProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView mvProfileViews;
+        protected global::System.Web.UI.WebControls.MultiView mvUserProfile;
+        
+        /// <summary>
+        /// viewUserProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewUserProfile;
+        
+        /// <summary>
+        /// mvProfileEditAndFriends control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView mvProfileEditAndFriends;
         
         /// <summary>
         /// viewProfileEdit control.
@@ -72,5 +90,14 @@ namespace Incremental.Kick.Web.UI.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkAddFriend;
+        
+        /// <summary>
+        /// viewBannedUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewBannedUser;
     }
 }

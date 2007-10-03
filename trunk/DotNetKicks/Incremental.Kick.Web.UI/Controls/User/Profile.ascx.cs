@@ -18,17 +18,22 @@ namespace Incremental.Kick.Web.UI.Controls {
             this._userProfile = userProfile;
         }
 
-        protected void Page_Load(object sender, EventArgs e) {
+        protected void Page_Load(object sender, EventArgs e) 
+        {
+            //if user is banned (and viewing user isn't admin or moderator) then hide profile
+            if (_userProfile.IsBanned && !(this.KickPage.KickUserProfile.IsAdministrator || this.KickPage.KickUserProfile.IsModerator))
+                mvUserProfile.SetActiveView(this.viewBannedUser);
+
             //don't display edit/add friend/remove friend, if not logged in
-            this.mvProfileViews.Visible = !this.UserProfile.IsGuest;
+            this.mvProfileEditAndFriends.Visible = !this.UserProfile.IsGuest;
 
             //if looking at own profile page, don't display friends
             if (this.KickPage.KickUserProfile.UserID == this.UserProfile.UserID) //self
-                this.mvProfileViews.SetActiveView(this.viewProfileEdit);
+                this.mvProfileEditAndFriends.SetActiveView(this.viewProfileEdit);
             else if (this.KickPage.KickUserProfile.IsFriendOf(this.UserProfile.UserID)) //if looking at friend's profile
-                this.mvProfileViews.SetActiveView(this.viewProfileIsAFriend);
+                this.mvProfileEditAndFriends.SetActiveView(this.viewProfileIsAFriend);
             else  //looking at non-friend's profile
-                this.mvProfileViews.SetActiveView(this.viewProfileIsNotAFriend);
+                this.mvProfileEditAndFriends.SetActiveView(this.viewProfileIsNotAFriend);
         }
 
         protected void lnkAddFriend_Click(object sender, EventArgs e) {
