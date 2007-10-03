@@ -23,7 +23,7 @@
         </td>
     </tr>
     <% } %>
-    <% if (!String.IsNullOrEmpty(this.UserProfile.WebsiteURL)) { %>
+    <% if (!String.IsNullOrEmpty(this.UserProfile.WebsiteURL) && !this.UserProfile.IsBanned ) { %>
     <tr>
         <td class="FormTitle FormTD">
             Website:</td>
@@ -34,7 +34,7 @@
         </td>
     </tr>
     <% } %>
-    <% if (!String.IsNullOrEmpty(this.UserProfile.BlogURL)) { %>
+    <% if (!String.IsNullOrEmpty(this.UserProfile.BlogURL) && !this.UserProfile.IsBanned ){ %>
     <tr>
         <td class="FormTitle FormTD">
             Blog:</td>
