@@ -16,6 +16,7 @@ namespace Incremental.Kick.Web.Controls
         private bool _isOddRow;
         private bool _showFullSummary = true;
         private bool _showMoreLink = true;
+        private bool _showGetKickImageCodeLink = false;
         private Story _story;
 
         #endregion [rgn]
@@ -45,6 +46,12 @@ namespace Incremental.Kick.Web.Controls
         {
             get { return _showMoreLink; }
             set { _showMoreLink = value; }
+        }
+
+        public bool ShowGetKickImageCodeLink
+        {
+            get { return _showGetKickImageCodeLink; }
+            set { _showGetKickImageCodeLink = value; }
         }
 
         #endregion [rgn]
@@ -107,7 +114,7 @@ namespace Incremental.Kick.Web.Controls
             if(isKicked)
             {
                 kickItCssClass = "hidden";
-                kickedCssClass = "isible";
+                kickedCssClass = "visible";
             }
 
             string adminHtml = "";
@@ -119,6 +126,7 @@ namespace Incremental.Kick.Web.Controls
                 tableClass += "Even";
 
             //TODO: remove inline style from table
+            // Render kick it side image
             writer.WriteLine(
                 @"
                 <table class=""" + tableClass +
@@ -136,12 +144,14 @@ namespace Incremental.Kick.Web.Controls
             string publishedHtml = "";
             string linkAttributes = "";
 
+            // Create published date string
             if(_story.IsPublishedToHomepage)
                 publishedHtml = "published " + Dates.ReadableDiff(_story.PublishedOn, DateTime.Now) + ", ";
             else
                 linkAttributes = "rel=\"nofollow\"";
 
             //TODO: remove inline style from table
+            // Render submitted by link
             writer.WriteLine(
                 @"
                     <td class=""storySummaryMainTD""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
@@ -150,14 +160,17 @@ namespace Incremental.Kick.Web.Controls
             ",
                 _story.Url, _story.Title, publishedHtml, KickPage.StaticIconRootUrl, linkAttributes);
 
+            // Render user link
             UserLink userLink = new UserLink();
             userLink.DataBind(UserCache.GetUser(_story.UserID));
             userLink.RenderControl(writer);
 
+            // Render read more link
             string moreLink = "";
             if(ShowMoreLink)
                 moreLink = String.Format(@" <a href=""{0}"">read more...</a>", kickStoryUrl);
 
+            // Rended add comment/number of comments link
             writer.WriteLine(
                 @"
                 {0}</div>
@@ -179,6 +192,7 @@ namespace Incremental.Kick.Web.Controls
             else
                 writer.WriteLine(@"<a href=""{0}#comments"">{1} comments</a>", kickStoryUrl, _story.CommentCount);
 
+            // Render category html
             string categoryIcon = "";
             if(category.IconNameSpecified)
                 categoryIcon =
@@ -188,11 +202,18 @@ namespace Incremental.Kick.Web.Controls
                 category: {0} <a href=""{1}"" rel=""tag"">{2}</a>", categoryIcon, categoryUrl,
                              category.Name);
 
+            // Render Get Kick Image html
+            if(_showGetKickImageCodeLink)
+                writer.WriteLine(@" | <a href=""javascript:;"" onclick=""$('#kickImagePersonalization').toggle();"">Get KickIt image code</a>");
+
+            // Render report as spam link
             if(KickPage.IsAuthenticated)
                 writer.WriteLine(
                     @" | <span class=""ReportAsSpamLink""><a href=""javascript:ReportAsSpam({0});"">report as spam</a></span>",
                     _story.StoryID);
 
+
+            // Render delete story link
             if(KickPage.IsHostModerator)
             {
                 string deleteText = "delete";
@@ -206,6 +227,8 @@ namespace Incremental.Kick.Web.Controls
                     _story.StoryID, deleteText);
             }
 
+
+            // Render story thumbnail
             //writer.WriteLine(@"</td><td width=""94""><a href=""http://{0}""><img src=""http://thumboo.com/?size=t&url={0}"" width=""92"" height=""70"" class=""Thumbnail"" /></a></td></tr></table>", this._storyRow.Url.Replace("http://", ""));
             // writer.WriteLine(@"</td><td width=""94""><a href=""{0}""><img src=""http://images.websnapr.com/?size=t&url={0}"" width=""92"" height=""70"" class=""Thumbnail"" /></a></td></tr></table>", this._story.Url);
             if(!KickPage.IsAuthenticated || KickPage.KickUserProfile.ShowStoryThumbnail)
@@ -215,6 +238,7 @@ namespace Incremental.Kick.Web.Controls
 
             writer.WriteLine(@"</td></tr></table>", _story.Url);
 
+            // Render tag list html
             writer.WriteLine(@"<span class=""TagListSummary"">");
             WeightedTagList tags = TagCache.GetStoryTags(_story.StoryID);
 
