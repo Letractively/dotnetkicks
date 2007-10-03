@@ -11,18 +11,22 @@ $(function() { $("#<%= Comment.ClientID %>").change(countChars).keyup(countChars
 
 function countChars() {
     var commentField = $("#<%= Comment.ClientID %>");
-    var comment = commentField.val();
-    var maxLength = <%= Comment.MaxLength %>;
-    var availableChars;
+    
+    if(commentField.length != 0)
+    {
+        var comment = commentField.val();
+        var maxLength = <%= Comment.MaxLength %>;
+        var availableChars;
 
-    if (comment.length > maxLength) {
-        commentField.val(comment.substring(0, maxLength));
-        availableChars = 0;
+        if (comment.length > maxLength) {
+            commentField.val(comment.substring(0, maxLength));
+            availableChars = 0;
+        }
+        else {
+            availableChars = maxLength - comment.length;
+        }
+        $("#availableChars").text(availableChars);
     }
-    else {
-        availableChars = maxLength - comment.length;
-    }
-    $("#availableChars").text(availableChars);
 }
  
 function insertEmoticonCode(code) {
