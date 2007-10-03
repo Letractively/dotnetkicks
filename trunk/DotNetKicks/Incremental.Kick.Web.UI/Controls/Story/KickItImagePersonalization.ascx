@@ -99,7 +99,7 @@ width:10px;
     <img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28" height="11"
         border="0" />
     Add a live kick counter to your blog >>
-    <img id="liveImage" style="vertical-align: sub;" alt="liveImage" src="<%= LiveImage.ImageUrl %>" />
+    <img id="liveImage" alt="liveImage" style="vertical-align:middle;" src="<%= LiveImage.ImageUrl %>" />
 </p>
 <p>
     You can even customize the image by choosing your own colors, and then clicking
@@ -1434,36 +1434,36 @@ width:10px;
         <input id="kickTextRadio" class="radioButton" type="radio" checked="checked" name="radioColor" />
         <input type="text" id="kickTextText" style="width: 80px;" onfocus="document.getElementById('kickTextRadio').checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
-        <input type="text" readonly="readonly" id="kickTextColor" style="cursor: default; width: 20px; border: 1px solid;
-            margin-right: 5px;" />
+        <input type="text" readonly="readonly" id="kickTextColor" style="cursor: default;
+            width: 20px; border: 1px solid; margin-right: 5px;" />
         "Kick It" text </li>
     <li>
         <input id="kickBackgroundRadio" class="radioButton" type="radio" name="radioColor" />
         <input type="text" id="kickBackgroundText" style="width: 80px;" onfocus="document.getElementById('kickBackgroundRadio').checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
-        <input type="text" readonly="readonly" id="kickBackgroundColor" style="cursor: default; width: 20px;
-            border: 1px solid; margin-right: 5px;" />
+        <input type="text" readonly="readonly" id="kickBackgroundColor" style="cursor: default;
+            width: 20px; border: 1px solid; margin-right: 5px;" />
         "Kick It" background </li>
     <li>
         <input id="countTextRadio" class="radioButton" type="radio" name="radioColor" />
         <input type="text" id="countTextText" style="width: 80px;" onfocus="document.getElementById('countTextRadio').checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
-        <input type="text" readonly="readonly" id="countTextColor" style="cursor: default; width: 20px; border: 1px solid;
-            margin-right: 5px;" />
+        <input type="text" readonly="readonly" id="countTextColor" style="cursor: default;
+            width: 20px; border: 1px solid; margin-right: 5px;" />
         kick count text </li>
     <li>
         <input id="countBackgroundRadio" class="radioButton" type="radio" name="radioColor" />
         <input type="text" id="countBackgroundText" style="width: 80px;" onfocus="document.getElementById('countBackgroundRadio').checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
-        <input type="text" readonly="readonly" id="countBackgroundColor" style="cursor: default; width: 20px;
-            border: 1px solid; margin-right: 5px;" />
+        <input type="text" readonly="readonly" id="countBackgroundColor" style="cursor: default;
+            width: 20px; border: 1px solid; margin-right: 5px;" />
         kick count background </li>
     <li>
         <input id="borderRadio" class="radioButton" type="radio" name="radioColor" />
         <input type="text" id="borderText" style="width: 80px;" onfocus="document.getElementById('borderRadio').checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
-        <input type="text" readonly="readonly" id="borderColor" style="cursor: default; width: 20px; border: 1px solid;
-            margin-right: 5px;" />
+        <input type="text" readonly="readonly" id="borderColor" style="cursor: default; width: 20px;
+            border: 1px solid; margin-right: 5px;" />
         border </li>
 </ul>
 <div style="clear: both;">

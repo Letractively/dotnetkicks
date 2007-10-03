@@ -78,6 +78,19 @@ input, select, textarea
 	width: 100%;
 }
 
+/* ================ kick it image customization ================= */
+
+.KickItImageCustomization 
+{
+	display: none;
+	border-style: solid;
+	border-color: #CCCCCC;
+	background: #f7f7f7;
+	border-width: 1px;
+	padding-left: 20px; 
+	margin-top: -15px;
+}
+
 /* ================ spy ================== */
 #userActionList {}
 .userAction { padding: 4px; }
