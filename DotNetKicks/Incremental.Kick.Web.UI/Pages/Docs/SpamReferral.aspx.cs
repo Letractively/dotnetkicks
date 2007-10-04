@@ -7,7 +7,7 @@ namespace Incremental.Kick.Web.UI.Pages.Docs
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Title = HostProfile.SiteTitle + " - access blocked";
         }
     }
 }
