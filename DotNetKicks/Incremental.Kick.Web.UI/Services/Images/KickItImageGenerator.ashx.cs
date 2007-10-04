@@ -13,7 +13,6 @@ namespace Incremental.Kick.Web.UI.Services.Images
     /// </summary>
     public class KickItImageGenerator : IHttpHandler
     {
-
         #region Fields
 
         private Color _borderColor = Color.Black;
@@ -271,6 +270,5 @@ namespace Incremental.Kick.Web.UI.Services.Images
         }
 
         #endregion
-
     }
 }
