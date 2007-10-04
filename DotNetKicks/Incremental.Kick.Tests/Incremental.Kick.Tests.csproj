@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +57,7 @@
     <Compile Include="DalTests\StoryTests.cs" />
     <Compile Include="DalTests\UserActionTests.cs" />
     <Compile Include="DalTests\UserTests.cs" />
-    <Compile Include="HelperTests\PasswordGeneratorTest.cs" />
+    <Compile Include="HelperTests\PasswordGeneratorTests.cs" />
     <Compile Include="HelperTests\TagHelperTests.cs" />
     <Compile Include="HelperTests\TextHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
