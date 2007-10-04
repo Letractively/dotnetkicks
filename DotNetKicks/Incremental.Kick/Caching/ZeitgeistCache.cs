@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Incremental.Kick.Dal;
-using Incremental.Kick.Common.Enums;
 using SubSonic;
 using System.Text.RegularExpressions;
 
@@ -117,14 +115,13 @@ namespace Incremental.Kick.Caching
 
                 domainList = new Dictionary<string, int>();
                 Regex rx = new Regex(@"^(?=[^&])(?:(?<scheme>[^:/?#]+):)?(?://(?<authority>[^/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?");
-                string authority;
 
                 foreach (Story s in stories)
                 {
                     Match uriMatch = rx.Match(s.Url);
                     if (!uriMatch.Success)
                         continue;
-                    authority = uriMatch.Groups["authority"].Value;
+                    string authority = uriMatch.Groups["authority"].Value;
 
                     if (string.IsNullOrEmpty(authority))
                         continue;
@@ -184,14 +181,13 @@ namespace Incremental.Kick.Caching
 
                 domainList = new Dictionary<string, int>();
                 Regex rx = new Regex(@"^(?=[^&])(?:(?<scheme>[^:/?#]+):)?(?://(?<authority>[^/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?");
-                string authority;
 
                 foreach (Story s in stories)
                 {
                     Match uriMatch = rx.Match(s.Url);
                     if (!uriMatch.Success)
                         continue;
-                    authority = uriMatch.Groups["authority"].Value;
+                    string authority = uriMatch.Groups["authority"].Value;
 
                     if (string.IsNullOrEmpty(authority))
                         continue;
@@ -226,7 +222,7 @@ namespace Incremental.Kick.Caching
         /// Measured by number of published stories per user
         /// </summary>
         /// <param name="hostID">The host ID.</param>
-        /// <param name="storyCount">The story count.</param>
+        /// <param name="userCount">The story count.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
@@ -303,7 +299,7 @@ namespace Incremental.Kick.Caching
                 StringBuilder sqlSelect = new StringBuilder(128);
                 //select
                 sqlSelect.AppendFormat("SELECT TOP {0} COUNT(0) AS TagCount, {1}.{2} ",
-                    tagCount.ToString(),
+                    tagCount,
                     Tag.Schema.TableName, Tag.Columns.TagIdentifier);
 
                 //from
@@ -362,7 +358,7 @@ namespace Incremental.Kick.Caching
         /// <summary>
         /// Gets the number of comments.
         /// </summary>
-        /// <param name="hostId">The host id.</param>
+        /// <param name="hostID">The host id.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
@@ -389,7 +385,7 @@ namespace Incremental.Kick.Caching
         /// <summary>
         /// Gets the number of kicks.
         /// </summary>
-        /// <param name="hostId">The host id.</param>
+        /// <param name="hostID">The host id.</param>
         /// <param name="year">The year.</param>
         /// <param name="month">The month.</param>
         /// <param name="day">The day.</param>
@@ -416,8 +412,11 @@ namespace Incremental.Kick.Caching
         /// <summary>
         /// Gets the number of stories published.
         /// </summary>
-        /// <param name="hostId">The host id.</param>
+        /// <param name="hostID">The host id.</param>
         /// <returns></returns>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
         public static int GetNumberOfStoriesPublished(int hostID, int year, int? month, int? day)
         {
             string cacheKey = String.Format("Zeitgeist_PublishedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);
@@ -442,8 +441,11 @@ namespace Incremental.Kick.Caching
         /// <summary>
         /// Gets the number of stories submitted.
         /// </summary>
-        /// <param name="hostId">The host id.</param>
+        /// <param name="hostID">The host id.</param>
         /// <returns></returns>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
         public static int GetNumberOfStoriesSubmitted(int hostID, int year, int? month, int? day)
         {
             string cacheKey = String.Format("Zeitgeist_SubmittedCount_{0}_{1}_{2}_{3}", hostID, year, month, day);

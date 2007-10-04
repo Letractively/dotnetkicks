@@ -96,8 +96,7 @@ width:10px;
 </script>
 
 <p>
-    <img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28" height="11"
-        border="0" />
+    <img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28" height="11" border="0" />
     Add a live kick counter to your blog >>
     <img id="liveImage" alt="liveImage" style="vertical-align:middle;" src="<%= LiveImage.ImageUrl %>" />
 </p>

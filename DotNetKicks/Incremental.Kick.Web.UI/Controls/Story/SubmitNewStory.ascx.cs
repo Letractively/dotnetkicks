@@ -2,6 +2,7 @@ using System;
 using System.Web.UI.WebControls;
 using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 
@@ -9,17 +10,29 @@ namespace Incremental.Kick.Web.UI.Controls
 {
     public partial class SubmitNewStory : KickUserControl
     {
+        protected static string NewStoryUrl
+        {
+            get { return UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory); }
+        }
+
+        protected static string ToolsUrl
+        {
+            get { return UrlFactory.CreateUrl(UrlFactory.PageName.Tools); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
             {
+                // Bind list of categories
                 Category.DataSource = CategoryCache.GetCategories(KickPage.HostProfile.HostID);
-                Category.DataTextField = "Name";
-                Category.DataValueField = "CategoryID";
                 Category.DataBind();
 
+                // Retrieve story information if story was submitted with the bookmarklet
                 Url.Text = Request.QueryString["url"];
+
                 Title.Text = Request.QueryString["title"];
+
                 if(Title.Text.Length > 70)
                     Title.Text = Title.Text.Substring(0, 70);
 
@@ -53,24 +66,16 @@ namespace Incremental.Kick.Web.UI.Controls
                 UpcomingStoryQueue.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.NewStories);
                 UpcomingStoryQueue.Text = "upcoming queue";
                 StoryLink.NavigateUrl = UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, storyIdentifier, categoryName);
-                KickItImagePersonalization1.StoryUrl = Url.Text;           
+
+                // Bind the story original url to the image customization user control
+                KickItImagePersonalization.StoryUrl = Url.Text;
             }
-        }
-
-        protected string NewStoryUrl
-        {
-            get { return UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory); }
-        }
-
-        protected string ToolsUrl
-        {
-            get { return UrlFactory.CreateUrl(UrlFactory.PageName.Tools); }
         }
 
         protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
             // Retrieve the story given the url
-            Dal.Story story = Dal.Story.FetchStoryByUrl(args.Value);
+            Story story = Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
             if(story != null)
@@ -80,7 +85,7 @@ namespace Incremental.Kick.Web.UI.Controls
 
                 // Let user kick the existing story by providing a link to it
                 StoryAlreadyExists.ErrorMessage =
-                    string.Format("The story already exists. You might want to <a href='{0}'>kick it</a> instead.",
+                    string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.",
                                   UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
                                                        story.Category.CategoryIdentifier));
             }

@@ -5,22 +5,14 @@ using Incremental.Kick.Dal;
 
 namespace Incremental.Kick.Web.Controls
 {
-    /// <summary>
-    ///  Story Dynamic Image     
-    /// </summary>
     public class StoryDynamicImage : HtmlControl
     {
         private readonly Host _hostProfile;
         private readonly string _url;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StoryDynamicImage"/> class.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="hostProfile">The host profile.</param>
         public StoryDynamicImage(string url, Host hostProfile)
         {
-            _url = HttpUtility.UrlPathEncode(url);
+            _url = HttpUtility.UrlEncode(url);
             _hostProfile = hostProfile;
         }
 
@@ -65,12 +57,6 @@ namespace Incremental.Kick.Web.Controls
             }
         }
 
-        /// <summary>
-        /// Writes content to render on a client to the specified 
-        /// <see cref="T:System.Web.UI.HtmlTextWriter"></see> object.
-        /// </summary>
-        /// <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"></see> 
-        /// that contains the output stream to render on the client.</param>
         protected override void Render(HtmlTextWriter writer)
         {
             writer.WriteLine(HtmlCodeClientSideFormatString, ImageUrl);

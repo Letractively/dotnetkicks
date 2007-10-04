@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Web.UI;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
-using SubSonic.Sugar;
 
 namespace Incremental.Kick.Web.Controls
 {
@@ -39,11 +38,9 @@ namespace Incremental.Kick.Web.Controls
 
             RenderBreadcrumbItem("home", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
 
-            string categoryName = "";
-            if (this.KickPage.UrlParameters.CategoryID != null)
-                categoryName = CategoryCache.GetCategory(this.KickPage.UrlParameters.CategoryID, this.KickPage.HostProfile.HostID).Name.ToLower();
+            string categoryName = CategoryCache.GetCategory(KickPage.UrlParameters.CategoryID, KickPage.HostProfile.HostID).Name.ToLower();
 
-            switch (this.KickPage.PageName)
+            switch (KickPage.PageName)
             {
 
                 //---------------- category trail
@@ -54,7 +51,7 @@ namespace Incremental.Kick.Web.Controls
 
                 //view popular (main) trail
                 case UrlFactory.PageName.PopularToday:
-                    this.RenderBreadcrumbItem("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
+                    RenderBreadcrumbItem("popular stories", UrlFactory.CreateUrl(UrlFactory.PageName.Home), writer);
                     RenderBreadcrumbItem("today", writer);
                     break;
                 case UrlFactory.PageName.PopularWeek:
@@ -76,10 +73,10 @@ namespace Incremental.Kick.Web.Controls
 
                 //-------------- view upcoming trail
                 case UrlFactory.PageName.ViewCategoryNewStories:
-                    if (this.KickPage.UrlParameters.CategoryIdentifierSpecified)
+                    if (KickPage.UrlParameters.CategoryIdentifierSpecified)
                     {
                         RenderBreadcrumbItem(categoryName,
-                            UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, this.KickPage.UrlParameters.CategoryIdentifier), writer);
+                            UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, KickPage.UrlParameters.CategoryIdentifier), writer);
                     }
                     RenderBreadcrumbItem("upcoming stories", writer);
                     break;
@@ -96,41 +93,42 @@ namespace Incremental.Kick.Web.Controls
                 //----------------- view story trail
                 case UrlFactory.PageName.ViewStory:
                     RenderBreadcrumbItem(categoryName,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, this.KickPage.UrlParameters.CategoryIdentifier), writer);
+                        UrlFactory.CreateUrl(UrlFactory.PageName.ViewCategory, KickPage.UrlParameters.CategoryIdentifier), writer);
                     RenderBreadcrumbItem("view story", writer);
                     break;
 
                 //--------------- tag trail
                 case UrlFactory.PageName.ViewTag:
                     RenderBreadcrumbItem("tags", UrlFactory.CreateUrl(UrlFactory.PageName.ViewTags), writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.TagIdentifier, writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.TagIdentifier, writer);
                     break;
 
                 //--------------- zeitgeist trail
                 case UrlFactory.PageName.Zeitgeist:
-                    if (this.KickPage.UrlParameters.Year == null)
+                    if (KickPage.UrlParameters.Year == null)
                         RenderBreadcrumbItem("zeitgeist", writer);
-                    else if (this.KickPage.UrlParameters.Month == null)
+                    else if (KickPage.UrlParameters.Month == null)
                     {
                         RenderBreadcrumbItem("zeitgeist", UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist), writer);
-                        RenderBreadcrumbItem(this.KickPage.UrlParameters.Year.ToString(), writer);
+                        RenderBreadcrumbItem(KickPage.UrlParameters.Year.ToString(), writer);
                     }
-                    else if (this.KickPage.UrlParameters.Day == null)
+                    else if (KickPage.UrlParameters.Day == null)
                     {
                         RenderBreadcrumbItem("zeitgeist", UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist), writer);
-                        RenderBreadcrumbItem(this.KickPage.UrlParameters.Year.ToString(), UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, this.KickPage.UrlParameters.Year.ToString()), writer);
-                        RenderBreadcrumbItem(new DateTime(this.KickPage.UrlParameters.Year.Value, this.KickPage.UrlParameters.Month.Value, 1).ToString("MMMM"), writer);
+                        RenderBreadcrumbItem(KickPage.UrlParameters.Year.ToString(), UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, KickPage.UrlParameters.Year.ToString()), writer);
+                        RenderBreadcrumbItem(new DateTime(KickPage.UrlParameters.Year.Value, KickPage.UrlParameters.Month.Value, 1).ToString("MMMM"), writer);
                     }
                     else
                     {
                         RenderBreadcrumbItem("zeitgeist", UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist), writer);
-                        RenderBreadcrumbItem(this.KickPage.UrlParameters.Year.ToString(),
-                            UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, this.KickPage.UrlParameters.Year.ToString()), writer);
-                        RenderBreadcrumbItem(new DateTime(this.KickPage.UrlParameters.Year.Value,
-                            this.KickPage.UrlParameters.Month.Value, 1).ToString("MMMM"),
-                            UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, this.KickPage.UrlParameters.Year.ToString(),
-                            this.KickPage.UrlParameters.Month.ToString()), writer);
-                        RenderBreadcrumbItem(this.KickPage.UrlParameters.Day.ToString(), writer);
+                        RenderBreadcrumbItem(KickPage.UrlParameters.Year.ToString(),
+                            UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, KickPage.UrlParameters.Year.ToString()), writer);
+                        RenderBreadcrumbItem(new DateTime(KickPage.UrlParameters.Year.Value,
+                            
+                            KickPage.UrlParameters.Month.Value, 1).ToString("MMMM"),
+                            UrlFactory.CreateUrl(UrlFactory.PageName.Zeitgeist, KickPage.UrlParameters.Year.ToString(),
+                            KickPage.UrlParameters.Month.ToString()), writer);
+                        RenderBreadcrumbItem(KickPage.UrlParameters.Day.ToString(), writer);
                     }
                     break;
 
@@ -161,52 +159,52 @@ namespace Incremental.Kick.Web.Controls
                 //----------------- user profile trail
                 case UrlFactory.PageName.UserProfile:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier, writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier, writer);
                     break;
                 case UrlFactory.PageName.UserComments:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("comments", writer);
                     break;
                 case UrlFactory.PageName.UserSubmittedStories:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("submitted stories", writer);
                     break;
                 case UrlFactory.PageName.UserKickedStories:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("kicked stories", writer);
                     break;
                 case UrlFactory.PageName.UserFriends:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("friends", writer);
                     break;
                 case UrlFactory.PageName.FriendsKickedStories:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("friends",
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, this.KickPage.UrlParameters.UserIdentifier), writer);
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("kicked by friends", writer);
                     break;
                 case UrlFactory.PageName.FriendsSubmittedStories:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("friends",
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, this.KickPage.UrlParameters.UserIdentifier), writer);
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserFriends, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("submitted by friends", writer);
                     break;
                 case UrlFactory.PageName.UserTags:
                     RenderBreadcrumbItem("users", "#", writer);
-                    RenderBreadcrumbItem(this.KickPage.UrlParameters.UserIdentifier,
-                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, this.KickPage.UrlParameters.UserIdentifier), writer);
+                    RenderBreadcrumbItem(KickPage.UrlParameters.UserIdentifier,
+                        UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("tags", writer);
                     break;
             }
@@ -254,7 +252,7 @@ namespace Incremental.Kick.Web.Controls
         /// Renders the spacer.
         /// </summary>
         /// <param name="writer">The writer.</param>
-        private void RenderSpacer(HtmlTextWriter writer)
+        private static void RenderSpacer(TextWriter writer)
         {
             //HACK I really hate MSIE
             //needed to add this here, because IE doesn't support before/after in CSS
