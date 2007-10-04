@@ -37,18 +37,21 @@ namespace Incremental.Kick.Web.UI.Controls
 
         protected void UpdateProfile_Click(object sender, EventArgs e)
         {
-            UserProfile.UseGravatar = UseGravatar.Checked;
-            UserProfile.GravatarCustomEmail = GravatarCustomEmail.Text;
-            UserProfile.Location = Location.Text;
-            UserProfile.WebsiteURL = WebsiteURL.Text;
-            UserProfile.BlogURL = BlogUrl.Text;
-            UserProfile.BlogFeedURL = BlogFeedUrl.Text;
-            UserProfile.AppearOnline = AppearOnline.Checked;
-            UserProfile.ShowStoryThumbnail = ShowStoryThumbnail.Checked;
-            UserProfile.Save();
+            if (Page.IsValid)
+            {
+                UserProfile.UseGravatar = UseGravatar.Checked;
+                UserProfile.GravatarCustomEmail = GravatarCustomEmail.Text;
+                UserProfile.Location = Location.Text;
+                UserProfile.WebsiteURL = WebsiteURL.Text;
+                UserProfile.BlogURL = BlogUrl.Text;
+                UserProfile.BlogFeedURL = BlogFeedUrl.Text;
+                UserProfile.AppearOnline = AppearOnline.Checked;
+                UserProfile.ShowStoryThumbnail = ShowStoryThumbnail.Checked;
+                UserProfile.Save();
 
-            UserCache.RemoveUser(UserProfile.UserID);
-            Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username));
+                UserCache.RemoveUser(UserProfile.UserID);
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username));
+            }
         }
     }
 }
