@@ -81,7 +81,7 @@ function checkStoryExistsCallback(response)
             <td class="FormTitle FormTD">
                 Category:</td>
             <td class="FormInput FormTD">
-                <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" />
+                <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" DataTextField="Name" DataValueField="CategoryID" />
                 <asp:RequiredFieldValidator ID="CategoryRequired" runat="server" ControlToValidate="Category"
                     ErrorMessage="Please choose a category for this story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 <br />
@@ -108,7 +108,7 @@ function checkStoryExistsCallback(response)
         shortly.
         <p>
             <asp:HyperLink ID="StoryLink" Text="View the story" runat="server" /></p>
-        <uc1:KickItImagePersonalization ID="KickItImagePersonalization1" runat="server"></uc1:KickItImagePersonalization>
+        <uc1:KickItImagePersonalization ID="KickItImagePersonalization" runat="server"></uc1:KickItImagePersonalization>
     </div>
 </asp:Panel>
 &nbsp;
