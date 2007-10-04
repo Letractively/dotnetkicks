@@ -490,6 +490,13 @@
       <DependentUpon>SiteMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Pages\Docs\SpamReferral.aspx.cs">
+      <DependentUpon>SpamReferral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Docs\SpamReferral.aspx.designer.cs">
+      <DependentUpon>SpamReferral.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Docs\Terms.aspx.cs">
       <DependentUpon>Terms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -801,6 +808,7 @@
     <Content Include="Pages\Chats\List.aspx" />
     <Content Include="Pages\Chats\Room.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
+    <Content Include="Pages\Docs\SpamReferral.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Images\Emoticons\cry.gif" />
