@@ -14,6 +14,12 @@ namespace Incremental.Kick.Web.Controls {
             set { _renderContainer = value; }
         }
 
+        private bool _showTime = true;
+        public bool ShowTime {
+            get { return _showTime; }
+            set { _showTime = value; }
+        }
+
         public ShoutList() { }
         public ShoutList(ShoutCollection shouts) {
             this.DataBind(shouts);
@@ -34,8 +40,10 @@ namespace Incremental.Kick.Web.Controls {
 
                 writer.WriteLine(@"<div class=""shout"">");
                 new UserLink(shout.FromUserID).RenderControl(writer);
-                writer.WriteLine(@" said <span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(shout.CreatedOn, DateTime.Now));
-
+                writer.WriteLine(" said ");
+                if(_showTime)
+                    writer.WriteLine(@"<span style=""font-size:smaller"">({0})</span>:", Dates.ReadableDiff(shout.CreatedOn, DateTime.Now));
+                
                 writer.WriteLine(@"<div class=""shoutMessage"">{0}</div>", shout.Message);
                 writer.WriteLine("</div>");
             }

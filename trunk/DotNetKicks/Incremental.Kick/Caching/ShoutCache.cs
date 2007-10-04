@@ -52,24 +52,22 @@ namespace Incremental.Kick.Caching {
             return shouts;
         
         }
-        // Returns a list of shouts since a particular lastReceivedShoutID
-        public static List<ApiShout> GetDeltaShouts(int hostID, string username, int? chatID, int lastReceivedShoutID) {
-            List<ApiShout> deltaShouts = new List<ApiShout>();
 
+        public static ShoutCollection GetDeltaShouts(int hostID, string username, int? chatID, int lastReceivedShoutID) {
             //TODO: GJ: PERFORMANCE: we should check a token in the cache before retreiving the full list. 
             //                       This would remove the need to retreive a full page of shouts from the cache just to check the newest ID
-
-            ShoutCollection latestShouts = GetLatestShouts(hostID, username, chatID); //TODO: GJ: use API types
+            ShoutCollection deltaShouts = new ShoutCollection();
+            ShoutCollection latestShouts = GetLatestShouts(hostID, username, chatID);
 
             if (latestShouts.Count > 0 && latestShouts[0].ShoutID > lastReceivedShoutID) {
                 foreach (Shout shout in latestShouts) {
                     if (shout.ShoutID > lastReceivedShoutID)
-                        deltaShouts.Add(shout.ToApi(HostCache.GetHost(hostID)));
+                        deltaShouts.Add(shout);
                 }
             }
 
             return deltaShouts;
-        }
+        } 
 
         public static void Remove(int hostID) {
             Remove(hostID, null, null, 1, DEFAULT_CACHE_ITEM_SIZE);
