@@ -50,49 +50,67 @@ width:10px;
          if (!colorFormatRegex.test(color)) 
              return;
          
-         if(document.getElementById('kickTextRadio').checked)
+         if($('#kickTextRadio')[0].checked)
          {
-            document.getElementById('kickTextColor').style.backgroundColor = 
-            document.getElementById('kickTextText').value = color;
+            $('#kickTextColor')[0].style.backgroundColor = 
+            $('#kickTextText')[0].value = color;
          }
-         else if(document.getElementById('kickBackgroundRadio').checked)
+         else if($('#kickBackgroundRadio')[0].checked)
          {
-            document.getElementById('kickBackgroundColor').style.backgroundColor = 
-            document.getElementById('kickBackgroundText').value = color;
+            $('#kickBackgroundColor')[0].style.backgroundColor = 
+            $('#kickBackgroundText')[0].value = color;
          }
-         else if(document.getElementById('countTextRadio').checked)
+         else if($('#countTextRadio')[0].checked)
          {
-            document.getElementById('countTextColor').style.backgroundColor = 
-            document.getElementById('countTextText').value = color;
+            $('#countTextColor')[0].style.backgroundColor = 
+            $('#countTextText')[0].value = color;
          }
-         else if(document.getElementById('countBackgroundRadio').checked)
+         else if($('#countBackgroundRadio')[0].checked)
          {
-            document.getElementById('countBackgroundColor').style.backgroundColor = 
-            document.getElementById('countBackgroundText').value = color;
+            $('#countBackgroundColor')[0].style.backgroundColor = 
+            $('#countBackgroundText')[0].value = color;
          }
-         else if(document.getElementById('borderRadio').checked)
+         else if($('#borderRadio')[0].checked)
          {
-            document.getElementById('borderColor').style.backgroundColor = 
-            document.getElementById('borderText').value = color;
+            $('#borderColor')[0].style.backgroundColor = 
+            $('#borderText')[0].value = color;
          }
     }
 
     function updateImageAndHtmlCode()
     {
-        document.getElementById('liveImage').src = String.format(imageUrlFormatString,
-          document.getElementById('borderText').value != defaultColors.border ? "&border=" + stripHexChar(document.getElementById('borderText').value) : "",
-          document.getElementById('kickTextText').value != defaultColors.kickText ? "&fgcolor=" + stripHexChar(document.getElementById('kickTextText').value) : "",
-          document.getElementById('kickBackgroundText').value != defaultColors.kickBackground ? "&bgcolor=" + stripHexChar(document.getElementById('kickBackgroundText').value) : "",
-          document.getElementById('countTextText').value != defaultColors.countText ? "&cfgcolor=" + stripHexChar(document.getElementById('countTextText').value) : "",
-          document.getElementById('countBackgroundText').value != defaultColors.countBackground ? "&cbgcolor=" + stripHexChar(document.getElementById('countBackgroundText').value) : "");
+        $('#liveImage')[0].src = String.format(imageUrlFormatString,
+          $('#borderText')[0].value != defaultColors.border ? "&border=" + stripHexChar($('#borderText')[0].value) : "",
+          $('#kickTextText')[0].value != defaultColors.kickText ? "&fgcolor=" + stripHexChar($('#kickTextText')[0].value) : "",
+          $('#kickBackgroundText')[0].value != defaultColors.kickBackground ? "&bgcolor=" + stripHexChar($('#kickBackgroundText')[0].value) : "",
+          $('#countTextText')[0].value != defaultColors.countText ? "&cfgcolor=" + stripHexChar($('#countTextText')[0].value) : "",
+          $('#countBackgroundText')[0].value != defaultColors.countBackground ? "&cbgcolor=" + stripHexChar($('#countBackgroundText')[0].value) : "");
     
-        document.getElementById('htmlCode').value = String.format(htmlCodeFormatString, document.getElementById('liveImage').src);
+        $('#htmlCode')[0].value = String.format(htmlCodeFormatString, $('#liveImage')[0].src);
     }
     
     function stripHexChar(str)
     {
         return str.substr(1);
     }
+    
+    $(function()
+    {
+        $('#kickTextColor')[0].style.backgroundColor = 
+        $('#kickTextText')[0].value = defaultColors.kickText;
+
+        $('#kickBackgroundColor')[0].style.backgroundColor = 
+        $('#kickBackgroundText')[0].value = defaultColors.kickBackground;
+
+        $('#countTextColor')[0].style.backgroundColor = 
+        $('#countTextText')[0].value = defaultColors.countText;
+
+        $('#countBackgroundColor')[0].style.backgroundColor = 
+        $('#countBackgroundText')[0].value = defaultColors.countBackground;
+
+        $('#borderColor')[0].style.backgroundColor = 
+        $('#borderText')[0].value = defaultColors.border;
+    });
 </script>
 
 <p>
@@ -1431,35 +1449,35 @@ width:10px;
 <ul style="list-style-type: none">
     <li>
         <input id="kickTextRadio" class="radioButton" type="radio" checked="checked" name="radioColor" />
-        <input type="text" id="kickTextText" style="width: 80px;" onfocus="document.getElementById('kickTextRadio').checked=true;"
+        <input type="text" id="kickTextText" style="width: 80px;" onfocus="$('#kickTextRadio')[0].checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
         <input type="text" readonly="readonly" id="kickTextColor" style="cursor: default;
             width: 20px; border: 1px solid; margin-right: 5px;" />
         "Kick It" text </li>
     <li>
         <input id="kickBackgroundRadio" class="radioButton" type="radio" name="radioColor" />
-        <input type="text" id="kickBackgroundText" style="width: 80px;" onfocus="document.getElementById('kickBackgroundRadio').checked=true;"
+        <input type="text" id="kickBackgroundText" style="width: 80px;" onfocus="$('#kickBackgroundRadio')[0].checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
         <input type="text" readonly="readonly" id="kickBackgroundColor" style="cursor: default;
             width: 20px; border: 1px solid; margin-right: 5px;" />
         "Kick It" background </li>
     <li>
         <input id="countTextRadio" class="radioButton" type="radio" name="radioColor" />
-        <input type="text" id="countTextText" style="width: 80px;" onfocus="document.getElementById('countTextRadio').checked=true;"
+        <input type="text" id="countTextText" style="width: 80px;" onfocus="$('#countTextRadio')[0].checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
         <input type="text" readonly="readonly" id="countTextColor" style="cursor: default;
             width: 20px; border: 1px solid; margin-right: 5px;" />
         kick count text </li>
     <li>
         <input id="countBackgroundRadio" class="radioButton" type="radio" name="radioColor" />
-        <input type="text" id="countBackgroundText" style="width: 80px;" onfocus="document.getElementById('countBackgroundRadio').checked=true;"
+        <input type="text" id="countBackgroundText" style="width: 80px;" onfocus="$('#countBackgroundRadio')[0].checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
         <input type="text" readonly="readonly" id="countBackgroundColor" style="cursor: default;
             width: 20px; border: 1px solid; margin-right: 5px;" />
         kick count background </li>
     <li>
         <input id="borderRadio" class="radioButton" type="radio" name="radioColor" />
-        <input type="text" id="borderText" style="width: 80px;" onfocus="document.getElementById('borderRadio').checked=true;"
+        <input type="text" id="borderText" style="width: 80px;" onfocus="$('#borderRadio')[0].checked=true;"
             onkeyup="assignColor(this.value)" value="99CCFF" maxlength="7" />
         <input type="text" readonly="readonly" id="borderColor" style="cursor: default; width: 20px;
             border: 1px solid; margin-right: 5px;" />
@@ -1474,21 +1492,3 @@ width:10px;
     <br />
     <textarea id="htmlCode" onclick="this.select();" cols="80" rows="4"><%= ControlHelper.RenderControl(LiveImage) %></textarea>
 </p>
-
-<script type="text/javascript">
-    document.getElementById('kickTextColor').style.backgroundColor = 
-    document.getElementById('kickTextText').value = defaultColors.kickText;
-
-    document.getElementById('kickBackgroundColor').style.backgroundColor = 
-    document.getElementById('kickBackgroundText').value = defaultColors.kickBackground;
-
-    document.getElementById('countTextColor').style.backgroundColor = 
-    document.getElementById('countTextText').value = defaultColors.countText;
-
-    document.getElementById('countBackgroundColor').style.backgroundColor = 
-    document.getElementById('countBackgroundText').value = defaultColors.countBackground;
-
-    document.getElementById('borderColor').style.backgroundColor = 
-    document.getElementById('borderText').value = defaultColors.border;
-</script>
-
