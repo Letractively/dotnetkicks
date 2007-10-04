@@ -9,6 +9,7 @@ using Incremental.Kick.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using Incremental.Kick.Dal.Entities.Api;
+using System.Web.UI;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: we are now using Jayrock for Ajax services. Please see http://jayrock.berlios.de/ for more info
@@ -17,17 +18,32 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         #region Shout Box
 
         [JsonRpcMethod("addShout")]
-        public List<ApiShout> AddShout(string message, string toUsername, int chatID, int lastReceivedShoutID) {
+        public DeltaShoutsHtml AddShout(string message, string toUsername, int chatID, int lastReceivedShoutID) {
             DemandUserAuthentication();
             Shout.AddShout(KickUserProfile, HostProfile.HostID, message, toUsername, ToNullable(chatID));
             return GetDeltaShouts(toUsername, chatID, lastReceivedShoutID);
         }
 
         [JsonRpcMethod("getDeltaShouts")]
-        public List<ApiShout> GetDeltaShouts(string toUsername, int chatID, int lastReceivedShoutID) {
-            return ShoutCache.GetDeltaShouts(HostProfile.HostID, toUsername, ToNullable(chatID), lastReceivedShoutID);
+        public DeltaShoutsHtml GetDeltaShouts(string toUsername, int chatID, int lastReceivedShoutID) {
+            ShoutCollection shouts = ShoutCache.GetDeltaShouts(HostProfile.HostID, toUsername, ToNullable(chatID), lastReceivedShoutID);
+                DeltaShoutsHtml deltaShoutsHtml = new DeltaShoutsHtml();
+
+            if (shouts.Count > 0) {
+                ShoutList shoutList = new ShoutList(shouts);
+                shoutList.ShowTime = false;
+                deltaShoutsHtml.Html = ControlHelper.RenderControl(shoutList);
+                deltaShoutsHtml.LatestShout = shouts[0].ToApi(this.HostProfile);
+            }
+            return deltaShoutsHtml;
         }
 
+        public class DeltaShoutsHtml {
+            public ApiShout LatestShout;
+            public string Html;
+        }
+
+        
         #endregion
 
         #region KickSpy!
