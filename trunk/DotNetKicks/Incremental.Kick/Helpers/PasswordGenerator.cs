@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Incremental.Kick.Helpers {
     public class PasswordGenerator {
-        public static string Generate(int passwordLength) {
+        public static string Generate(byte passwordLength) {
             char[] vowels = new char[] { 'a', 'e', 'i', 'o', 'u' };
             char[] consonants = new char[] { 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v' };
             char[] doubleConsonants = new char[] { 'c', 'd', 'f', 'g', 'l', 'm', 'n', 'p', 'r', 's', 't' };

@@ -251,11 +251,9 @@ namespace Incremental.Kick.Caching
                 stories.LoadAndCloseReader(Story.FetchByQuery(qry));
 
                 userList = new Dictionary<string, int>();
-                Regex rx = new Regex(@"^(?=[^&])(?:(?<scheme>[^:/?#]+):)?(?://(?<authority>[^/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?");
-                string authority;
 
                 foreach (Story s in stories)
-                {                    
+                {
                     if (userList.ContainsKey(s.User.Username))
                         userList[s.User.Username] += 1;
                     else
@@ -281,7 +279,7 @@ namespace Incremental.Kick.Caching
             return userList;
         }
 
-       
+
 
 
         /// <summary>
