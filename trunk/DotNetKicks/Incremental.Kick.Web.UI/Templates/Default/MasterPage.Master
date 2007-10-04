@@ -60,14 +60,14 @@
     <%= this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml %>
         
         <% if(this.KickPage.DisplaySideAds) { %>
-            <br />
-            <!-- DNK TheLounge -->
+            <!--<br />
+            <!-- DNK TheLounge
             <div id="wedje_div_thelounge"></div>
             <script type="text/javascript" src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d=" defer="defer"></script>
             <p class="tlp">
 	            <a href='http://www.montylounge.com/thelounge/' title="Ads via the lounge" class="adsvia">Ads Via The Lounge</a>    
             </p>
-            <hr />
+            <hr /> -->
         <% } %>
         
         
