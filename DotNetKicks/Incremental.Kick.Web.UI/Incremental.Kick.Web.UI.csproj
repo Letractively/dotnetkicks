@@ -250,6 +250,13 @@
     <Compile Include="Controls\Admin\Tasks.ascx.designer.cs">
       <DependentUpon>Tasks.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Api\ApiMenu.ascx.cs">
+      <DependentUpon>ApiMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Api\ApiMenu.ascx.designer.cs">
+      <DependentUpon>ApiMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Community\KickSpy.ascx.cs">
       <DependentUpon>KickSpy.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -406,6 +413,20 @@
     </Compile>
     <Compile Include="Pages\Admin\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Api\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Api\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Api\GenerateKey.aspx.cs">
+      <DependentUpon>GenerateKey.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Api\GenerateKey.aspx.designer.cs">
+      <DependentUpon>GenerateKey.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Category\ViewKickedStories.aspx.cs">
       <DependentUpon>ViewKickedStories.aspx</DependentUpon>
@@ -823,11 +844,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Controls\Api\ApiMenu.ascx" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
     <Content Include="Controls\User\VerifyEmail.ascx" />
     <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\BlockedReferrals.aspx" />
     <Content Include="Pages\Admin\ReservedUsernames.aspx" />
+    <Content Include="Pages\Api\Default.aspx" />
+    <Content Include="Pages\Api\GenerateKey.aspx" />
     <Content Include="Pages\Chats\List.aspx" />
     <Content Include="Pages\Chats\Room.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />

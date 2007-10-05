@@ -70,7 +70,10 @@ namespace Incremental.Kick.Web.Helpers {
 
             ViewTagRss,
             NotAuthorised,
-            Admin
+            Admin,
+
+            ApiOverview,
+            ApiGenerateKey
         }
 
         public static string CreateUrl(PageName pageName) {
@@ -120,6 +123,12 @@ namespace Incremental.Kick.Web.Helpers {
                 case PageName.WhoIsOnline:
                 case PageName.KickSpy:
                     return MapPath("/spy");
+                
+                case PageName.ApiOverview:
+                    return MapPath("/api");
+                case PageName.ApiGenerateKey:
+                    return MapPath("/api/key");
+
                 default:
                     throw new Exception("not enough params to create url");
             }
