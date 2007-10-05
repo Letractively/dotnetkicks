@@ -93,9 +93,9 @@ DNK.channel = new JQueryScriptChannel();
 
 $(document).ready(function() {
     var cols = [ 
-        new Column('FrontPage', DNK.getFrontPageStories),
-        new Column('Popular',   DNK.getPopularStories),
-        new Column('Upcoming',  DNK.getUpcomingPageStories)
+        new Column('FrontPage', function(cb) { return DNK.getFrontPageStories(1, 16, cb); }),
+        new Column('Popular',   function(cb) { return DNK.getPopularStories(1, 16, cb); }),
+        new Column('Upcoming',  function(cb) { return DNK.getUpcomingPageStories(1, 16, cb); })
     ];
     $.each(cols, function(i, col) { col.reload(); });
 });
