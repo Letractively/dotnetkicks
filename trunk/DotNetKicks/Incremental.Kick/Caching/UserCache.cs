@@ -53,7 +53,10 @@ namespace Incremental.Kick.Caching {
 
             int? userID = userIDCache[cacheKey];
             if (!userID.HasValue) {
-                userID = User.FetchUserByUsername(username).UserID;
+                User user = User.FetchUserByUsername(username);
+                if (user == null)
+                    throw new ArgumentException("Invalid username");
+                userID = user.UserID;
                 userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
             }
 

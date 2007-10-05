@@ -46,6 +46,7 @@ namespace Incremental.Kick.Dal {
             }
 
             public static ApiPagedList<ApiStory> GetPopularStoriesPagedAndSorted(int hostID, int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+                ApplyPageLimits(ref pageNumber, ref pageSize);
                 PagedStoryCollection pagedCollection = new PagedStoryCollection();
                 pagedCollection.Items = StoryCache.GetPopularStories(hostID, true, timePeriod, pageNumber, pageSize);
                 pagedCollection.Total = StoryCache.GetPopularStoriesCount(hostID, true, timePeriod);
@@ -58,6 +59,7 @@ namespace Incremental.Kick.Dal {
             }
 
             public static ApiPagedList<ApiStory> GetUpcomingStoriesPagedAndSorted(int hostID, int pageNumber, int pageSize, StoryListSortBy timePeriod) {
+                ApplyPageLimits(ref pageNumber, ref pageSize);
                 PagedStoryCollection pagedCollection = new PagedStoryCollection();
                 pagedCollection.Items = StoryCache.GetPopularStories(hostID, false, timePeriod, pageNumber, pageSize);
                 pagedCollection.Total = StoryCache.GetPopularStoriesCount(hostID, false, timePeriod);
@@ -115,7 +117,7 @@ namespace Incremental.Kick.Dal {
         #endregion
 
         #region Cached Properties
-        
+
         //NOTE: GJ: These properties are lazy-loaded from the cache
         private UserCollection _usersWhoKicked;
         public UserCollection UsersWhoKicked {
@@ -251,23 +253,33 @@ namespace Incremental.Kick.Dal {
             return (int)GetStoryQuery(hostID, isPublished, categoryID).GetCount(Story.Columns.StoryID);
         }
 
-        public static StoryCollection GetTaggedStories(int tagID, int hostID, int pageNumber, int pageSize) {
+        public static StoryCollection GetTaggedStories(int? tagID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
-            stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostID(tagID, hostID, pageNumber, pageSize).GetReader());
+            
+            if(tagID.HasValue)
+                stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostID(tagID, hostID, pageNumber, pageSize).GetReader());
             return stories;
         }
-        public static int GetTaggedStoryCount(int tagID, int hostID) {
+        public static int GetTaggedStoryCount(int? tagID, int hostID) {
+            if (!tagID.HasValue)
+                return 0;
+
             Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.TagID, tagID).AND(StoryUserHostTag.Columns.HostID, hostID);
             return (int)query.GetCount(StoryUserHostTag.Columns.StoryUserHostTagID);
         }
 
-        public static StoryCollection GetUserTaggedStories(int tagID, int userID, int hostID, int pageNumber, int pageSize) {
+        public static StoryCollection GetUserTaggedStories(int? tagID, int userID, int hostID, int pageNumber, int pageSize) {
             StoryCollection stories = new StoryCollection();
-            stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostIDAndUserID(tagID, hostID, userID, pageNumber, pageSize).GetReader());
+            if (tagID.HasValue) {
+                stories.Load(SPs.Kick_GetPagedStoriesByTagIDAndHostIDAndUserID(tagID, hostID, userID, pageNumber, pageSize).GetReader());
+            }
             return stories;
         }
 
-        public static int GetUserTaggedStoryCount(int tagID, int userID, int hostID) {
+        public static int GetUserTaggedStoryCount(int? tagID, int userID, int hostID) {
+            if (!tagID.HasValue)
+                return 0;
+
             Query query = new Query(StoryUserHostTag.Schema).WHERE(StoryUserHostTag.Columns.TagID, tagID).AND(StoryUserHostTag.Columns.HostID, hostID).AND(StoryUserHostTag.Columns.UserID, userID);
             return (int)query.GetCount(StoryUserHostTag.Columns.StoryUserHostTagID);
         }
