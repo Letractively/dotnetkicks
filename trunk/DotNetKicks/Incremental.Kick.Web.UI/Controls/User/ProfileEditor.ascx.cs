@@ -34,6 +34,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 UserEmail.Text = UserProfile.Email;
                 AppearOnline.Checked = UserProfile.AppearOnline;
                 ShowStoryThumbnail.Checked = UserProfile.ShowStoryThumbnail;
+                CurrentEmail.Text = UserProfile.Email;
             }
         }
 
