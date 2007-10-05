@@ -84,18 +84,21 @@ namespace Incremental.Kick.Caching {
             return tags;
         }
 
-        public static int GetTagID(string tagIdentifier) {
+        public static int? GetTagID(string tagIdentifier) {
             string cacheKey = GetCacheKey("TagID", tagIdentifier);
             CacheManager<string, int?> tagCache = GetTagIDCache();
 
             int? tagID = tagCache[cacheKey];
 
             if (tagID == null) {
-                tagID = Tag.FetchTagByIdentifier(tagIdentifier).TagID;
-                tagCache.Insert(cacheKey, tagID.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                Tag tag = Tag.FetchTagByIdentifier(tagIdentifier);
+                if (tag != null) {
+                    tagID = tag.TagID;
+                    tagCache.Insert(cacheKey, tagID.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
+                }
             }
 
-            return tagID.Value;
+            return tagID;
         }
 
         public static WeightedTagList GetUserTags(int userID) {
