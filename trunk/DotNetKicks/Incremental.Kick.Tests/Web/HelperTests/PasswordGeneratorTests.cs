@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Incremental.Kick.Helpers;
+using Incremental.Kick.Web.Helpers;
 using MbUnit.Framework;
 
-namespace Incremental.Kick.Tests.HelperTests
+namespace Incremental.Kick.Tests.Web.HelperTests
 {
     [TestFixture]
     public class PasswordGeneratorTests
