@@ -207,6 +207,16 @@ namespace Incremental.Kick.Web.Controls
                         UrlFactory.CreateUrl(UrlFactory.PageName.UserHome, KickPage.UrlParameters.UserIdentifier), writer);
                     RenderBreadcrumbItem("tags", writer);
                     break;
+
+                    //api
+                case UrlFactory.PageName.ApiOverview:
+                    RenderBreadcrumbItem("API", "#", writer);               
+                    break;
+                case UrlFactory.PageName.ApiGenerateKey:
+                    RenderBreadcrumbItem("API", UrlFactory.CreateUrl(UrlFactory.PageName.ApiOverview), writer);
+                    RenderBreadcrumbItem("generate key", "#", writer);
+                    break;
+
             }
             writer.RenderEndTag();//ul
             writer.WriteEndTag("div");//navigationbreadcrumbs
