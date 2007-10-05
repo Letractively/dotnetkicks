@@ -1,6 +1,7 @@
 using System;
-using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Helpers;
+using Incremental.Kick.Web.Helpers;
 
 namespace Incremental.Kick.Web.UI.Pages.Story {
     public partial class View : Web.Controls.KickUIPage {

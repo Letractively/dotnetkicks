@@ -23,5 +23,12 @@ namespace Incremental.Kick.Helpers {
                 return random.Next(minValue, maxValue);
             }
         }
+
+        public static bool FlickCoin() {
+            if (Next(0, 2) >= 1)
+                return true;
+            else
+                return false;
+        }
     }
 }

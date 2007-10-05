@@ -232,7 +232,6 @@
     <Compile Include="Web\Controls\User\UserWelcome.cs" />
     <Compile Include="Web\Helpers\GravatarHelper.cs" />
     <Compile Include="Web\Helpers\HostHelper.cs" />
-    <Compile Include="Web\Helpers\PasswordGenerator.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\ExceptionCollection.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\RssCategoryCollection.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\RssChannelCollection.cs" />
@@ -264,7 +263,6 @@
     <Compile Include="Web\Helpers\Rss\Shared\RssElement.cs" />
     <Compile Include="Web\Helpers\Rss\Shared\RssEnumerators.cs" />
     <Compile Include="Web\Helpers\Rss\StoryDataTableToRss2.cs" />
-    <Compile Include="Web\Helpers\ThreadSafeRandom.cs" />
     <Compile Include="Web\Helpers\UrlFactory.cs" />
     <Compile Include="Web\Helpers\UrlParameters.cs" />
     <Compile Include="Web\Helpers\UrlParametersHelper.cs" />
