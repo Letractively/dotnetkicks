@@ -285,6 +285,13 @@
     <Compile Include="Controls\Story\SubmitNewStory.ascx.designer.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\ChangeEmail.ascx.cs">
+      <DependentUpon>ChangeEmail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\ChangeEmail.ascx.designer.cs">
+      <DependentUpon>ChangeEmail.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\User\ChangePassword.ascx.cs">
       <DependentUpon>ChangePassword.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -610,6 +617,13 @@
     <Compile Include="Pages\Upcoming.aspx.designer.cs">
       <DependentUpon>Upcoming.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\ChangeEmail.aspx.cs">
+      <DependentUpon>ChangeEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\ChangeEmail.aspx.designer.cs">
+      <DependentUpon>ChangeEmail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -846,6 +860,7 @@
     <None Include="elmah.axd" />
     <Content Include="Controls\Api\ApiMenu.ascx" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
+    <Content Include="Controls\User\ChangeEmail.ascx" />
     <Content Include="Controls\User\VerifyEmail.ascx" />
     <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\BlockedReferrals.aspx" />
@@ -856,6 +871,7 @@
     <Content Include="Pages\Chats\Room.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Pages\Docs\SpamReferral.aspx" />
+    <Content Include="Pages\User\ChangeEmail.aspx" />
     <Content Include="Pages\User\VerifyEmail.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />

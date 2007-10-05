@@ -1,12 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Profile.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Profile" %>
 <asp:MultiView ID="mvUserProfile" runat="server" ActiveViewIndex="0">
     <asp:View ID="viewUserProfile" runat="server">
-        <!--<asp:Panel ID="SuccessPanel" runat="server" Visible="False">
-            <div class="HelpDiv">A verification email has been sent, please check it to verify your new address.
-        </div></asp:Panel>
-        <asp:Panel ID="FailedPanel" runat="server" Visible="False">
-            <div class="HelpDiv">A verification email could not be sent.  Either that address already in use or could not be sent at this time.
-        </div></asp:Panel>-->
           <table class="FormTable">
             <tr>
                 <td class="FormTitle FormTD">
@@ -73,7 +67,9 @@
                 <h2>
                     <asp:MultiView ID="mvProfileEditAndFriends" runat="server" ActiveViewIndex="0">
                         <asp:View ID="viewProfileEdit" runat="server">
-                            <a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a>
+                            <a href="/users/<%= this.KickPage.KickUserProfile.Username %>/profile/edit">Edit Profile</a><br />
+                            <a href="/changepassword">Change Password</a><br />
+                            <a href="/changeemail">Change Email</a>
                         </asp:View>
                         <asp:View ID="viewProfileIsAFriend" runat="server">
                             <asp:LinkButton ID="lnkRemoveFriend" runat="server" OnClick="lnkRemoveFriend_Click">Remove <%= this.KickPage.UrlParameters.UserIdentifier%> as a Friend</asp:LinkButton>
