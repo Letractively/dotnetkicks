@@ -352,16 +352,52 @@
             Logs an error in log for the application.
             </summary>
         </member>
+        <member name="M:Elmah.ErrorLog.BeginLog(Elmah.Error,System.AsyncCallback,System.Object)">
+            <summary>
+            When overridden in a subclass, begins an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.Log(Elmah.Error)"/>.
+            </summary>
+        </member>
+        <member name="M:Elmah.ErrorLog.EndLog(System.IAsyncResult)">
+            <summary>
+            When overridden in a subclass, ends an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.Log(Elmah.Error)"/>.
+            </summary>
+        </member>
         <member name="M:Elmah.ErrorLog.GetError(System.String)">
             <summary>
             Retrieves a single application error from log given its 
             identifier, or null if it does not exist.
             </summary>
         </member>
+        <member name="M:Elmah.ErrorLog.BeginGetError(System.String,System.AsyncCallback,System.Object)">
+            <summary>
+            When overridden in a subclass, begins an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.GetError(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:Elmah.ErrorLog.EndGetError(System.IAsyncResult)">
+            <summary>
+            When overridden in a subclass, ends an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.GetError(System.String)"/>.
+            </summary>
+        </member>
         <member name="M:Elmah.ErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)">
             <summary>
             Retrieves a page of application errors from the log in 
             descending order of logged time.
+            </summary>
+        </member>
+        <member name="M:Elmah.ErrorLog.BeginGetErrors(System.Int32,System.Int32,System.Collections.IList,System.AsyncCallback,System.Object)">
+            <summary>
+            When overridden in a subclass, begins an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)"/>.
+            </summary>
+        </member>
+        <member name="M:Elmah.ErrorLog.EndGetErrors(System.IAsyncResult)">
+            <summary>
+            When overridden in a subclass, ends an asynchronous version 
+            of <see cref="M:Elmah.ErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)"/>.
             </summary>
         </member>
         <member name="P:Elmah.ErrorLog.Name">
@@ -777,6 +813,20 @@
             for more information.
             </remarks>
         </member>
+        <member name="T:Elmah.HttpRequestSecurity">
+            <summary>
+            Security-related helper methods for web requests.
+            </summary>
+        </member>
+        <member name="M:Elmah.HttpRequestSecurity.IsLocal(System.Web.HttpRequest)">
+            <summary>
+            Determines whether the request is from the local computer or not.
+            </summary>
+            <remarks>
+            This method is primarily for .NET Framework 1.x where the
+            <see cref="P:System.Web.HttpRequest.IsLocal"/> was not available.
+            </remarks>
+        </member>
         <member name="T:Elmah.HttpValuesCollection">
             <summary>
             A name-values collection implementation suitable for web-based collections 
@@ -877,6 +927,12 @@
             Renders the contents of the control into the specified writer.
             </summary>
         </member>
+        <member name="T:Elmah.SecuritySectionHandler">
+            <summary>
+            Handler for the &lt;security&gt; section of the
+            configuration file.
+            </summary>
+        </member>
         <member name="T:Elmah.SimpleServiceProviderFactory">
             <summary>
             A simple factory for creating instances of types specified in a 
@@ -917,6 +973,16 @@
             of logged time.
             </summary>
         </member>
+        <member name="M:Elmah.SqlErrorLog.BeginGetErrors(System.Int32,System.Int32,System.Collections.IList,System.AsyncCallback,System.Object)">
+            <summary>
+            Begins an asynchronous version of <see cref="M:Elmah.SqlErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)"/>.
+            </summary>
+        </member>
+        <member name="M:Elmah.SqlErrorLog.EndGetErrors(System.IAsyncResult)">
+            <summary>
+            Ends an asynchronous version of <see cref="M:Elmah.ErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)"/>.
+            </summary>
+        </member>
         <member name="M:Elmah.SqlErrorLog.GetError(System.String)">
             <summary>
             Returns the specified error from the database, or null 
@@ -939,6 +1005,71 @@
             </summary>
         </member>
         <member name="P:Elmah.SqlErrorLog.ConnectionString">
+            <summary>
+            Gets the connection string used by the log to connect to the database.
+            </summary>
+        </member>
+        <member name="T:Elmah.StringTranslation">
+            <summary>
+            Provides translation from multiple representations of a string to a
+            single base representation.
+            </summary>
+        </member>
+        <member name="T:Elmah.SQLiteErrorLog">
+            <summary>
+            An <see cref="T:Elmah.ErrorLog"/> implementation that uses SQLite as its backing store.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.#ctor(System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SQLiteErrorLog"/> class
+            using a dictionary of configured settings.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SQLiteErrorLog"/> class
+            to use a specific connection string for connecting to the database.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.Log(Elmah.Error)">
+            <summary>
+            Logs an error to the database.
+            </summary>
+            <remarks>
+            Use the stored procedure called by this implementation to set a
+            policy on how long errors are kept in the log. The default
+            implementation stores all errors for an indefinite time.
+            </remarks>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)">
+            <summary>
+            Returns a page of errors from the databse in descending order 
+            of logged time.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.GetError(System.String)">
+            <summary>
+            Returns the specified error from the database, or null 
+            if it does not exist.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.NewError">
+            <summary>
+            Creates a new and empty instance of the <see cref="T:Elmah.Error"/> class.
+            </summary>
+        </member>
+        <member name="M:Elmah.SQLiteErrorLog.GetConnectionString(System.Collections.IDictionary)">
+            <summary>
+            Gets the connection string from the given configuration.
+            </summary>
+        </member>
+        <member name="P:Elmah.SQLiteErrorLog.Name">
+            <summary>
+            Gets the name of this error log implementation.
+            </summary>
+        </member>
+        <member name="P:Elmah.SQLiteErrorLog.ConnectionString">
             <summary>
             Gets the connection string used by the log to connect to the database.
             </summary>
