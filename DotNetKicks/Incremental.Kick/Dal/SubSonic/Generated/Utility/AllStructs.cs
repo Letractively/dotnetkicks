@@ -20,6 +20,8 @@ namespace Incremental.Kick.Dal
 		
 		public static string Elmah_Error = @"ELMAH_Error";
         
+		public static string BlockedReferral = @"Kick_BlockedReferral";
+        
 		public static string Category = @"Kick_Category";
         
 		public static string Chat = @"Kick_Chat";

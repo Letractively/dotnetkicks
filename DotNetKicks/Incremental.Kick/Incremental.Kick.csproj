@@ -108,6 +108,7 @@
     <Compile Include="Dal\SubSonic\Custom\TagCollection.cs" />
     <Compile Include="Dal\SubSonic\Custom\User.cs" />
     <Compile Include="Dal\SubSonic\Custom\UserAction.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Controllers\BlockedReferralController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\CategoryController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\ChatController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\CommentController.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserActionController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserFriendController.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Models\BlockedReferral.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Category.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Chat.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Comment.cs" />

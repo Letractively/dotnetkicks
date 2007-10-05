@@ -403,6 +403,19 @@ namespace Incremental.Kick.Dal
 				colvarShowStoryThumbnail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarShowStoryThumbnail);
 				
+				TableSchema.TableColumn colvarAPIKey = new TableSchema.TableColumn(schema);
+				colvarAPIKey.ColumnName = "APIKey";
+				colvarAPIKey.DataType = DbType.Guid;
+				colvarAPIKey.MaxLength = 0;
+				colvarAPIKey.AutoIncrement = false;
+				colvarAPIKey.IsNullable = true;
+				colvarAPIKey.IsPrimaryKey = false;
+				colvarAPIKey.IsForeignKey = false;
+				colvarAPIKey.IsReadOnly = false;
+				colvarAPIKey.DefaultSetting = @"";
+				colvarAPIKey.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAPIKey);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -645,6 +658,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("APIKey")]
+		public Guid? APIKey 
+		{
+			get { return GetColumnValue<Guid?>(Columns.APIKey); }
+
+			set { SetColumnValue(Columns.APIKey, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -755,7 +778,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey)
 		{
 			User item = new User();
 			
@@ -803,6 +826,8 @@ namespace Incremental.Kick.Dal
 			
 			item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
+			item.APIKey = varAPIKey;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -814,7 +839,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey)
 		{
 			User item = new User();
 			
@@ -863,6 +888,8 @@ namespace Incremental.Kick.Dal
 				item.AppearOnline = varAppearOnline;
 			
 				item.ShowStoryThumbnail = varShowStoryThumbnail;
+			
+				item.APIKey = varAPIKey;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1083,6 +1110,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn APIKeyColumn
+        {
+            get { return Schema.Columns[23]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -1110,6 +1146,7 @@ namespace Incremental.Kick.Dal
 			 public static string BlogFeedURL = @"BlogFeedURL";
 			 public static string AppearOnline = @"AppearOnline";
 			 public static string ShowStoryThumbnail = @"ShowStoryThumbnail";
+			 public static string APIKey = @"APIKey";
 						
 		}
 
