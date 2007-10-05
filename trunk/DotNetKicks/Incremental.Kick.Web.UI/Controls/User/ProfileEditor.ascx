@@ -40,7 +40,7 @@ function checkUserDataCallback(response)
                 Display="Dynamic" ErrorMessage="RegularExpressionValidator" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">You must enter a valid email address</asp:RegularExpressionValidator><br /><span class="FormHelp">(leave blank if you wish to use <em><asp:Label ID="UserEmail" runat="server" /></em>)</span>
 </td>
     </tr>
-    <tr>
+    <!--<tr>
         <td class="FormTitle FormTD">Change Email Address:</td>
         <td class="FormInput FormTD"><asp:TextBox ID="ChangeEmail" runat="server" size="60"></asp:TextBox>
         <span class="ValidationMessage">
@@ -52,7 +52,7 @@ function checkUserDataCallback(response)
                         Display="Dynamic" ErrorMessage="The email already exists, please use another one."
                         OnServerValidate="EmailExists_ServerValidate"></asp:CustomValidator></span>
         <br /><span class="FormHelp">We will send a validation email, so please use a real one.<br /><span class="FormHelp">(Your email is currently set to <em><asp:Label ID="CurrentEmail" runat="server" /></em>)</span></td>
-    </tr>
+    </tr>-->
     <tr>
         <td class="FormTitle FormTD">Location:</td>
         <td class="FormInput FormTD"><asp:TextBox ID="Location" runat="server" size="60"></asp:TextBox></td>

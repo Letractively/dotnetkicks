@@ -36,11 +36,11 @@ namespace Incremental.Kick.Web.UI.Controls {
                 this.mvProfileEditAndFriends.SetActiveView(this.viewProfileIsNotAFriend);
 
             // Check to see if we sent a EmailVerification
-            string sentEmail = Convert.ToString(this.Request.QueryString["EmailSent"]);
+           /* string sentEmail = Convert.ToString(this.Request.QueryString["EmailSent"]);
             if (sentEmail == "1")
                 SuccessPanel.Visible = true;
             else if (sentEmail == "2")
-                FailedPanel.Visible = true;
+                FailedPanel.Visible = true;*/
         }
 
         protected void lnkAddFriend_Click(object sender, EventArgs e) {
