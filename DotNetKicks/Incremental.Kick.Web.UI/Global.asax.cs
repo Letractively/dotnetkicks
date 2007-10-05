@@ -10,7 +10,8 @@ namespace Incremental.Kick.Web.UI
 {
     public class Global : HttpApplication
     {
-        private static readonly string[] blockedReferrals = new string[] { "socialposter", "socialmarker", "cashsurf" };
+        private static readonly string[] blockedReferrals =
+            new string[] { "socialposter", "socialmarker", "cashsurf", "web2me2", "tagenie", "mashable", "marketingiso" };
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
@@ -21,8 +22,8 @@ namespace Incremental.Kick.Web.UI
 
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
-            if (Request.UrlReferrer != null &&
-              Array.Exists(blockedReferrals, delegate(string referral) { return Request.UrlReferrer.Host.Contains(referral); }))
+            if(Request.UrlReferrer != null &&
+               Array.Exists(blockedReferrals, delegate(string referral) { return Request.UrlReferrer.Host.Contains(referral); }))
                 Server.Transfer("~/Pages/Docs/SpamReferral.aspx");
         }
 
