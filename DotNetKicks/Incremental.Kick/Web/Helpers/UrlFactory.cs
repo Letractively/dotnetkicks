@@ -65,6 +65,7 @@ namespace Incremental.Kick.Web.Helpers {
             PopularYear,
 
             VerifyEmail,
+			ChangeEmail,
 
             Zeitgeist,
 
@@ -123,6 +124,9 @@ namespace Incremental.Kick.Web.Helpers {
                 case PageName.WhoIsOnline:
                 case PageName.KickSpy:
                     return MapPath("/spy");
+
+				case PageName.ChangeEmail:
+					return MapPath("/changeemail");
                 
                 case PageName.ApiOverview:
                     return MapPath("/api");

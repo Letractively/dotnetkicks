@@ -12,92 +12,74 @@ namespace Incremental.Kick.Web.UI.Controls {
     
     
     /// <summary>
-    /// Profile class.
+    /// ChangeEmail class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Profile {
+    public partial class ChangeEmail {
         
         /// <summary>
-        /// mvUserProfile control.
+        /// ChangeEmailPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView mvUserProfile;
+        protected global::System.Web.UI.WebControls.Panel ChangeEmailPanel;
         
         /// <summary>
-        /// viewUserProfile control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewUserProfile;
+        protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// mvProfileEditAndFriends control.
+        /// EmailValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView mvProfileEditAndFriends;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailValidator;
         
         /// <summary>
-        /// viewProfileEdit control.
+        /// CurrentEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewProfileEdit;
+        protected global::System.Web.UI.WebControls.Label CurrentEmail;
         
         /// <summary>
-        /// viewProfileIsAFriend control.
+        /// btnChangeEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewProfileIsAFriend;
+        protected global::System.Web.UI.WebControls.Button btnChangeEmail;
         
         /// <summary>
-        /// lnkRemoveFriend control.
+        /// SuccessPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkRemoveFriend;
+        protected global::System.Web.UI.WebControls.Panel SuccessPanel;
         
         /// <summary>
-        /// viewProfileIsNotAFriend control.
+        /// FailedPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewProfileIsNotAFriend;
-        
-        /// <summary>
-        /// lnkAddFriend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAddFriend;
-        
-        /// <summary>
-        /// viewBannedUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.View viewBannedUser;
+        protected global::System.Web.UI.WebControls.Panel FailedPanel;
     }
 }
