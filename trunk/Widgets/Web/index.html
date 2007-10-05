@@ -80,6 +80,7 @@ function Column(e, loader) {
 }
 
 function JQueryScriptChannel() {
+    // FIXME! This channel only work for a call that doesn't expect parameters.
     this.rpc = function(call) { 
         $.getJSON(call.url + "/" + call.request.method + "?jsonp=?", 
             function(response) {
