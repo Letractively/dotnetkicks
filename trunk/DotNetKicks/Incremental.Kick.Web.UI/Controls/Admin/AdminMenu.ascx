@@ -9,4 +9,5 @@
     <li><a href="/admin/users">Users</a></li>
     <li><a href="/admin/chats">Chats</a></li>
     <li><a href="/admin/reservedusernames">Reserved Usernames</a></li>
+    <li><a href="/admin/blockedreferrals">Blocked referrals</a></li>
 </ul>

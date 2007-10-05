@@ -4,15 +4,13 @@ using System.Globalization;
 using System.Net;
 using System.Web;
 using System.Web.Hosting;
+using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Security;
 
 namespace Incremental.Kick.Web.UI
 {
     public class Global : HttpApplication
     {
-        private static readonly string[] blockedReferrals =
-            new string[] { "socialposter", "socialmarker", "cashsurf", "web2me2", "tagenie", "mashable", "marketingiso" };
-
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             if(Request.PhysicalPath.EndsWith(".aspx") || Request.PhysicalPath.EndsWith(".axd") ||
@@ -22,8 +20,10 @@ namespace Incremental.Kick.Web.UI
 
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
+            // If the referrer url is marked as blocked then redirect the user to another location
             if(Request.UrlReferrer != null &&
-               Array.Exists(blockedReferrals, delegate(string referral) { return Request.UrlReferrer.Host.Contains(referral); }))
+               new BlockedReferralCollection().Load().Exists(
+                   delegate(BlockedReferral referral) { return Request.UrlReferrer.Host.Contains(referral.BlockedReferralHostname); }))
                 Server.Transfer("~/Pages/Docs/SpamReferral.aspx");
         }
 
