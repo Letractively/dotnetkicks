@@ -64,6 +64,8 @@ namespace Incremental.Kick.Web.Helpers {
             PopularMonth,
             PopularYear,
 
+            VerifyEmail,
+
             Zeitgeist,
 
             ViewTagRss,
@@ -184,6 +186,8 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/users/{0}/tags/{1}", identifier1, identifier2));
                 case PageName.Zeitgeist:
                     return MapPath(String.Format("/zeitgeist/{0}/{1}", identifier1, identifier2));
+                case PageName.UserProfile:
+                    return MapPath(String.Format("/users/{0}/profile?EmailSent={1}", identifier1, identifier2));
                 default:
                     throw new Exception("not enough params to create url");
             }
