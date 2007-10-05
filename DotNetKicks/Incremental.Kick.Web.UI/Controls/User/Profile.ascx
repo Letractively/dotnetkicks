@@ -1,12 +1,12 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Profile.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Profile" %>
 <asp:MultiView ID="mvUserProfile" runat="server" ActiveViewIndex="0">
     <asp:View ID="viewUserProfile" runat="server">
-        <asp:Panel ID="SuccessPanel" runat="server" Visible="False">
+        <!--<asp:Panel ID="SuccessPanel" runat="server" Visible="False">
             <div class="HelpDiv">A verification email has been sent, please check it to verify your new address.
         </div></asp:Panel>
         <asp:Panel ID="FailedPanel" runat="server" Visible="False">
             <div class="HelpDiv">A verification email could not be sent.  Either that address already in use or could not be sent at this time.
-        </div></asp:Panel>
+        </div></asp:Panel>-->
           <table class="FormTable">
             <tr>
                 <td class="FormTitle FormTD">

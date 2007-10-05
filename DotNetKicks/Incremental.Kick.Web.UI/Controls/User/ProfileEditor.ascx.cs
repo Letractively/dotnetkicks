@@ -54,7 +54,8 @@ namespace Incremental.Kick.Web.UI.Controls
 
                 UserCache.RemoveUser(UserProfile.UserID);
 
-                if (!String.IsNullOrEmpty(ChangeEmail.Text))
+                //NOTE: GJ: I think that the change email should be on its own page. It dosen't really fit in the user profile page
+                /*if (!String.IsNullOrEmpty(ChangeEmail.Text))
                 {
                     Incremental.Kick.Dal.User userTable = UserBR.GetUserByEmail(ChangeEmail.Text.Trim());
 
@@ -65,8 +66,8 @@ namespace Incremental.Kick.Web.UI.Controls
                     }else
                         Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username, "2"));
                 }
-                else
-                    Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username));
+                else*/
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username));
             }
         }
 
