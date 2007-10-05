@@ -334,6 +334,13 @@
     <Compile Include="Controls\User\UserAdmin.ascx.designer.cs">
       <DependentUpon>UserAdmin.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\User\VerifyEmail.ascx.cs">
+      <DependentUpon>VerifyEmail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\User\VerifyEmail.ascx.designer.cs">
+      <DependentUpon>VerifyEmail.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -687,6 +694,13 @@
     <Compile Include="Pages\User\SubmittedStories.aspx.designer.cs">
       <DependentUpon>SubmittedStories.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\VerifyEmail.aspx.cs">
+      <DependentUpon>VerifyEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\VerifyEmail.aspx.designer.cs">
+      <DependentUpon>VerifyEmail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\ViewTag.aspx.cs">
       <DependentUpon>ViewTag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -803,12 +817,14 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
+    <Content Include="Controls\User\VerifyEmail.ascx" />
     <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\ReservedUsernames.aspx" />
     <Content Include="Pages\Chats\List.aspx" />
     <Content Include="Pages\Chats\Room.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Pages\Docs\SpamReferral.aspx" />
+    <Content Include="Pages\User\VerifyEmail.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Images\Emoticons\cry.gif" />

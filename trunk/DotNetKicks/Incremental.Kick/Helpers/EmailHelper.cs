@@ -113,5 +113,22 @@ namespace Incremental.Kick.Helpers {
                 String.Format(@"
                 A moderator has un-banned you from {0}. Welcome back!!", host.SiteTitle), host);
         }
+
+        public static void SendChangedEmailEmail(string toEmail, string username, string currentEmail, Host host)
+        {
+            // Send a verify email address.  Add a 64bit encryption "hash" to verify when they click it.
+            Send(host.Email, toEmail, host.SiteTitle + " has requested you to verify your email",
+                String.Format(@"
+                This is to verify that the email address you have selected is valid.                
+                
+                Please click on the link below to verify this email address:
+
+                {0}
+
+                If you did not request to change your email address, pleas disreguard this message.
+
+                Thanks,
+                {1}", host.RootUrl + "/verifyemail/" + Security.Cipher.EncryptToBase64(username + "#" + currentEmail + "#" + toEmail), host.SiteTitle), host);
+        }
     }
 }
