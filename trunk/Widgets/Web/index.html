@@ -74,6 +74,16 @@ DNK.channel = new JQueryScriptChannel();
 DNK.kwargs = true; // send args by name
 
 $(document).ready(function() {
+
+    var aa = document.createElement('div');
+    aa.id = 'AjaxAni';
+    aa.title = 'Working\u2026';
+    document.body.appendChild(aa);
+
+    $('#' + aa.id)
+        .ajaxStart(function() { $(this).show(); })
+        .ajaxStop (function() { $(this).hide(); });
+
     var cols = [ 
         new Column('FrontPage', function(cb) { return DNK.getFrontPageStories(1, 16, cb); }),
         new Column('Popular',   function(cb) { return DNK.getPopularStories(1, 16, cb); }),
@@ -86,7 +96,7 @@ $(document).ready(function() {
 <body>
     <h1><span class="alive">Live</span> Kicks! <em>alpha</em></h1>
     <div class="header">
-        <p>
+        <p id="Lead">
             This is a sample web page that uses the 
             <a href="http://www.dotnetkicks.com/services/json/jsonservices.ashx">JSON Services</a> of 
             <a href="http://www.dotnetkicks.com/">DotNetKicks.com</a>
