@@ -74,7 +74,10 @@ namespace Incremental.Kick.Web.Helpers {
             Admin,
 
             ApiOverview,
-            ApiGenerateKey
+            ApiGenerateKey,
+            
+            JsonServices,
+            LiveKicks
         }
 
         public static string CreateUrl(PageName pageName) {
@@ -132,6 +135,11 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath("/api");
                 case PageName.ApiGenerateKey:
                     return MapPath("/api/key");
+                
+                case PageName.JsonServices:
+                    return MapPath("/services/json/jsonservices.ashx");
+                case PageName.LiveKicks:
+                    return "http://widgets.dotnetkicks.com/";
 
                 default:
                     throw new Exception("not enough params to create url");

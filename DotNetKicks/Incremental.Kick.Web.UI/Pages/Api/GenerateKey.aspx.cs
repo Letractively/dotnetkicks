@@ -16,6 +16,31 @@ namespace Incremental.Kick.Web.UI.Pages.Api
             this.Caption = this.Title;
             this.PageName = UrlFactory.PageName.ApiGenerateKey;
             this.DisplayAds = false;
+
+            //default is not user
+            if (!this.KickUserProfile.IsGuest)
+            {
+                this.mvGenerateKey.SetActiveView(viewShowKey);
+                //this.txtApiKey.Text = this.KickUserProfile.ApiKey.ToString();
+                //TODO need to update DAL with ApiKey field from user profile
+            }
+
+        }
+
+        /// <summary>
+        /// Handles the Click event of the butGenerateNewKey control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected void butGenerateNewKey_Click(object sender, EventArgs e)
+        {
+            Guid newKey = Guid.NewGuid();
+            //TODO need to update DAL with ApiKey field from user profile
+            //this.KickUserProfile.ApiKey = newKey;
+            this.KickUserProfile.Save();
+            this.mvGenerateKey.SetActiveView(viewShowKey);
+            //this.txtApiKey.Text = this.KickUserProfile.ApiKey.ToString(); 
+            //TODO need to update DAL with ApiKey field from user profile
         }
     }
 }

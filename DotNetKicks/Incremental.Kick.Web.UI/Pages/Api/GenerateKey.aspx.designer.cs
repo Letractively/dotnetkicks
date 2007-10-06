@@ -20,6 +20,51 @@ namespace Incremental.Kick.Web.UI.Pages.Api {
     public partial class GenerateKey {
         
         /// <summary>
+        /// mvGenerateKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView mvGenerateKey;
+        
+        /// <summary>
+        /// viewNotLoggedIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewNotLoggedIn;
+        
+        /// <summary>
+        /// viewShowKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View viewShowKey;
+        
+        /// <summary>
+        /// txtApiKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtApiKey;
+        
+        /// <summary>
+        /// butGenerateNewKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button butGenerateNewKey;
+        
+        /// <summary>
         /// ApiMenu1 control.
         /// </summary>
         /// <remarks>
