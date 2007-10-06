@@ -46,7 +46,16 @@ h3 a:hover {
 .alive {
     color: #FF0000;
 }
-.header 
-{
+.header {
     margin: 0 1em;
+}
+#AjaxAni {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    width: 41px;
+    height: 39px;
+    background-image: url(images/ajax.gif);
+    background-repeat: no-repeat;
+    display: none;
 }
