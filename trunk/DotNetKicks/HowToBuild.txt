@@ -1,0 +1,1 @@
+You can either build the solution into Visual Studio 2005 or run Build.bat.
