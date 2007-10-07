@@ -22,7 +22,7 @@ If you have a Google AdSense account, please enter the ID below. You will find y
 
 Your AdSense ID: <asp:textbox id="AdSenseIDTextBox" runat="server"></asp:textbox>
 <asp:button id="UpdateAdSenseID" onclick="UpdateAdSenseID_Click" runat="server" text="Update" /><br />
-<asp:RequiredFieldValidator runat="server" id="AdSenseIDRequiredValidator" ErrorMessage="Please enter your AdSense ID or signup for an AdSense account below" ControlToValidate="AdSenseID" Display="Dynamic"></asp:RequiredFieldValidator>
+<asp:RequiredFieldValidator runat="server" id="AdSenseIDRequiredValidator" ErrorMessage="Please enter your AdSense ID or signup for an AdSense account below" ControlToValidate="AdSenseIDTextBox" Display="Dynamic"></asp:RequiredFieldValidator>
 
 </asp:panel>
 
