@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<project name="DotNetKicks" default="all" xmlns="http://nant.sf.net/schemas/nant.xsd">
-		
-	<target name="all" description="Build">
-        <loadtasks assembly="../3rdParty/NantContrib/NAnt.Contrib.Tasks.dll" />
-		<msbuild project="DotNetKicks.sln" />
-	</target>
-	
-</project>
