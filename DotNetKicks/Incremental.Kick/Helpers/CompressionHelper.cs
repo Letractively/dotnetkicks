@@ -3,7 +3,7 @@ using System.IO.Compression;
 using System.Text;
 
 namespace Incremental.Kick.Helpers {
-    public class CompressonHelper {
+    public static class CompressionHelper {
         public static string Inflate(string encoded) {
             return BytesToString(Inflate(StringToBytes(encoded)));
         }
