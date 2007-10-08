@@ -38,7 +38,7 @@ namespace Incremental.Kick.Helpers {
             } catch (Exception ex) {
                 System.Diagnostics.Trace.WriteLine("An exception occured posting a trackback:" + ex.ToString());
             } finally {
-                streamWriter.Close();
+                if (streamWriter != null) streamWriter.Close();
             }
         }
 
