@@ -8,42 +8,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Pages.Admin {
+namespace Incremental.Kick.Web.UI.Controls.Story {
     
     
     /// <summary>
-    /// Default class.
+    /// SearchInput class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Default {
+    public partial class SearchInput {
         
         /// <summary>
-        /// Tasks control.
+        /// txtSearchTerm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.Tasks Tasks;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchTerm;
         
         /// <summary>
-        /// CacheControl control.
+        /// chkUserSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.Cache CacheControl;
+        protected global::System.Web.UI.WebControls.CheckBox chkUserSearch;
         
         /// <summary>
-        /// AdminMenu1 control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.AdminMenu AdminMenu1;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
     }
 }

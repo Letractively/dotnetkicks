@@ -118,6 +118,86 @@ namespace Incremental.Kick.Dal {
 
         #region Cached Properties
 
+        /// <summary>
+        /// Gets a count of all stories in the database not marked
+        /// as spam
+        /// </summary>
+        /// <param name="hostID"></param>
+        /// <returns></returns>
+        public static int GetAllStoriesCount(int hostID)
+        {
+            Query q = GetStoryQuery(hostID);
+            return q.GetCount(Story.Columns.StoryID);
+        }
+
+        /// <summary>
+        /// Get all the stories for a given host
+        /// </summary>
+        /// <param name="hostID"></param>
+        /// <returns></returns>
+        public static StoryCollection GetAllStories(int hostID, int pageIndex, int pageSize)
+        {
+            Query q = Story.Query();
+            q.WHERE(Story.Columns.HostID, hostID).AND(Story.Columns.IsSpam, false);
+            q.PageIndex = pageIndex;
+            q.PageSize = pageSize;
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(q.ExecuteReader());
+            return stories;
+        }
+
+
+        public static int GetUpdatedStoriesCount(int hostID, DateTime updatedAfter)
+        {
+            Query q = Story.Query();
+            q.WHERE(Story.Columns.HostID, hostID).AND(Story.Columns.UpdatedOn, Comparison.GreaterOrEquals, updatedAfter);
+            return q.GetCount(Story.Columns.StoryID);
+        }
+
+        /// <summary>
+        /// Returns a StoryCollection of stories that have been modified after the
+        /// given DateTime value
+        /// </summary>
+        /// <remarks>this is used by lucene to create an incremental update of the search
+        /// index without having to do a full index again</remarks>
+        /// <param name="updatedAfter"></param>
+        /// <returns></returns>
+        public static StoryCollection GetUpdatedStories(int hostID, DateTime updatedAfter, int pageIndex, int pageSize)
+        {
+            Query q = Story.Query();
+            q.WHERE(Story.Columns.HostID, hostID).AND(Story.Columns.UpdatedOn, Comparison.GreaterOrEquals, updatedAfter);
+            q.PageIndex = pageIndex;
+            q.PageSize = pageSize;
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(q.ExecuteReader());
+            return stories;
+        }
+
+
+        /// <summary>
+        /// Returns a StoryCollection for a given IList of storyIds
+        /// </summary>
+        /// <param name="storyId"></param>
+        /// <returns></returns>
+        public static StoryCollection GetStoriesByIds(IList<int> storyId)
+        {
+            Query q = Story.Query();
+
+            object[] storyIdArray = new object[storyId.Count];
+            for (int i = 0; i < storyId.Count; i++)
+            {
+                storyIdArray[i] = storyId[i];
+            }
+
+            q.IN("storyID", storyIdArray);
+
+            StoryCollection stories = new StoryCollection();
+            stories.Load(q.ExecuteReader());
+            return stories;
+        }
+
         //NOTE: GJ: These properties are lazy-loaded from the cache
         private UserCollection _usersWhoKicked;
         public UserCollection UsersWhoKicked {

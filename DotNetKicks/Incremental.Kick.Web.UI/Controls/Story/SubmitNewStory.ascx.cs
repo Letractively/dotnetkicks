@@ -75,7 +75,7 @@ namespace Incremental.Kick.Web.UI.Controls
         protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
             // Retrieve the story given the url
-            Story story = Story.FetchStoryByUrl(args.Value);
+            Incremental.Kick.Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
             if(story != null)

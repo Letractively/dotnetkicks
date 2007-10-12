@@ -321,7 +321,7 @@ namespace Incremental.Kick.Web.Controls
         /// </summary>
         /// <param name="pageNumber">The page number.</param>
         /// <returns></returns>
-        private string PageUrl(int pageNumber)
+        protected virtual string PageUrl(int pageNumber)
         {
             if (pageNumber < 1 || pageNumber > this.PageCount)
                 return "#";

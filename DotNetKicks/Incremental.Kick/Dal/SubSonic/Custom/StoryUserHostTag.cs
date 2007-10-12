@@ -12,6 +12,11 @@ namespace Incremental.Kick.Dal {
             StoryUserHostTag storyUserHostTag = new StoryUserHostTag();
             storyUserHostTag.LoadAndCloseReader(StoryUserHostTag.FetchByQuery(query));
             StoryUserHostTag.Destroy(storyUserHostTag.StoryUserHostTagID);
+
+            //update the story for the next crawl to pickup the change
+            Story story = Story.FetchByID(storyID);
+            story.UpdatedOn = DateTime.Now;
+            story.Save();
         }
     }
 }
