@@ -194,6 +194,8 @@ namespace Incremental.Kick.Web.Helpers {
                 
                 case PageName.Zeitgeist:
                     return MapPath(String.Format("/zeitgeist/{0}", value));
+                case PageName.Search:
+                    return MapPath(String.Format("/search?q={0}", value));
                 default:
                     throw new Exception("not enough params to create url");
             }

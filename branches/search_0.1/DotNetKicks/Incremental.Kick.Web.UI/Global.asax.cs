@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Hosting;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Security;
+using Incremental.Kick.Search;
+
+using log4net;
 
 namespace Incremental.Kick.Web.UI
 {
@@ -16,6 +19,19 @@ namespace Incremental.Kick.Web.UI
             if(Request.PhysicalPath.EndsWith(".aspx") || Request.PhysicalPath.EndsWith(".axd") ||
                Request.PhysicalPath.EndsWith(".ashx"))
                 SecurityManager.SetPrincipal();
+        }
+
+
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            //create a new search index
+            log4net.Config.XmlConfigurator.Configure();
+            SearchUpdate update = SearchUpdate.Instance;            
+        }
+
+        protected void Application_End(object sender, EventArgs e)
+        {
+            SearchUpdate.Instance.Dispose();
         }
 
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
