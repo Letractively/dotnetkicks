@@ -647,19 +647,22 @@ background-color: #A8CC45; background-image: url(images/gradients/green.gif); co
 
 
 /* The Lounge CSS */
-.tlp, .adsvia{ font-size: 10px; font-family: verdana, arial;}    
-.tli{ 
-    float: none;
-    margin-left: 0px;
-    margin-right: 10px;
-    margin-top: 5px;    
-}
-.tlp{ 
-    display: block;
-    font-size: 10px;
-    line-height: 15px;
-    margin-top: 5px;
-}
+    .tlp{ font-size: 10px; font-family: verdana, arial; }    
 
-#wedje_div_thelounge{ width: 140px; }
-.adsvia{ margin-top: 10px;}
+    .tli{
+	    float: none;
+	    margin-left: 0px;
+	    margin-right: 10px;
+	    margin-top: 5px;    
+    }
+    .tlp{
+	    display: block;
+	    font-size: 10px;
+	    line-height: 15px;
+	    margin-top: 5px;
+    }
+    
+    #wedje_div_thelounge{ width: 160px; text-align: center; margin-left: 20px; }
+    
+    .adsvia{ margin-top: 10px;}
+
