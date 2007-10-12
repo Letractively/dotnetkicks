@@ -1,0 +1,1 @@
+I had someone from getafreelancer.com translate the current site into XHTML/CSS. There are also two other slightly different skins here.

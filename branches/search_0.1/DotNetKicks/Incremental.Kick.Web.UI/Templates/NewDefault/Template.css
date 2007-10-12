@@ -1,0 +1,187 @@
+#LoadingIndicator
+{
+	display: none;
+	visibility: hidden;
+	background-color: #CC3333;
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #ffffff;
+	padding: 2px;
+}
+/************************* header content *************************/
+#HeaderContainer
+{
+	background-color: #83acca;
+	padding: 10px 15px 5px 15px;
+	min-height: 30px;
+}
+/* site title */
+#HeaderContainer h1
+{
+	display: inline;
+}
+#HeaderContainer h1 a
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+/* site tag line */
+#HeaderContainer h2
+{
+	padding-left: 5px;
+	display: inline;
+	font-size: smaller;
+	color: #ffffff;
+}
+/* navigation links in header area */
+#HeaderNavigation
+{
+	display: inline;
+	position: relative;
+	top: -30px;
+	float: right;
+	color: #ffffff;
+}
+#HeaderNavigation ul
+{
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+}
+#HeaderNavigation ul li
+{
+	font-weight: bold;
+	margin-left: 0;
+	margin-bottom: 0;
+	padding: 2px 5px 5px 0px;
+	list-style: none;
+	display: inline;
+}
+#HeaderNavigation ul li a
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+/* breadcrumb trail home > opensource > dotnetkicks */
+
+#BreadcrumbsNavigationAndWelcome
+{
+	padding: 5px 15px 5px 15px;
+	background-image: url(images/gradients/green.gif);
+	background-color: #a3c84e;
+	color: Black;
+	font-size: 1em;
+	width: 100%;
+}
+#UserWelcome
+{
+	display: block;
+	float: right;
+}
+#BreadcrumbsNavigationAndWelcome a
+{
+	color: #ffffff;
+	font-weight: bold;
+}
+#BreadcrumbNavigation
+{
+	display: block;
+}
+#BreadcrumbNavigation ul
+{
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+	border: none;
+}
+#BreadcrumbNavigation ul li
+{
+	margin-left: 0;
+	padding-left: 2px;
+	border: none;
+	list-style: none;
+	display: inline;
+}
+/* auto insert the >> character */
+#BreadcrumbNavigation ul li:before
+{
+	content: "\0020 \0020 \0020 \00BB \0020";
+}
+/* except for first bullet, put whitespace there */
+#BreadcrumbNavigation ul li.first:before
+{
+	content: " ";
+}
+/*********************** general items ******************************/
+#SidebarA
+{
+	width: 200px;
+	float: left;
+	padding: 5px;
+}
+#SidebarB
+{
+	width: 200px;
+	float: right;
+	padding: 5px;
+}
+
+/************************* main body content *************************/
+#PrimaryContent
+{
+	vertical-align: top;
+	min-width: 800px;
+	width: 100%;
+	padding-right: 4px;
+	padding: 5px 15px 15px 15px;
+}
+/* site announcments splash text */
+.SiteAnnouncement
+{
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin: 0px 0px 8px 0px;
+}
+.SiteAnnouncementNotice
+{
+	background: #fff6bf url(images/icons/exclamation.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #ffd324;
+	border-bottom-color: #ffd324;
+}
+
+.SiteAnnouncementInformation
+{
+	background: #eee url(images/icons/information.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #bbb;
+	border-bottom-color: #bbb;
+	margin: 16px;
+}
+
+.SiteAnnouncementError
+{
+	background: #ffd1c4 url(images/icons/error.png) center no-repeat;
+	background-position: 15px 50%;
+	border-top-color: #f00;
+	border-bottom-color: #f00;
+}
+
+.PageCaption
+{
+	font-size: 2em;
+	width: 100%;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+/*********************** general items ******************************/
+body
+{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	font-family: Sans-Serif, Verdana;
+	font-size: .85em;
+}

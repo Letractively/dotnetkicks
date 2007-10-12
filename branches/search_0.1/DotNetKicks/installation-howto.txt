@@ -1,0 +1,23 @@
+1. Create a new SQL 2005 Database called 'DotNetKicks'
+
+2. Execute the '001.DotNetKicks.Schema.SQL.2005.sql' each additional script in order of its number prefix - these scripts will be rolled up for major releases.
+
+	Scripts can be found in 'svn:\\trunk\DotNetKicks\Database'
+
+3. Execute the '999.DotNetKicks.Data.SQL.2005.sql' script against the database
+
+4. Open 'DotNetKicks.sln' in Visual Studio 2005.
+
+5. Update the 'DotNetKicks' connection string in the web.config to reflect your SQL server name
+
+6. Build the solution
+
+7. Run the 'Incremental.Kick.Web.UI' web application
+
+8. There are 22 users already setup:
+
+	username: admin password: admin
+	username: moderator password: moderator
+	username: user1 password: user1
+
+9. Configure SMTP settings in the Kick_Host table
