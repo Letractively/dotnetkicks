@@ -57,7 +57,7 @@ function JQueryScriptChannel() {
             throw new Error('Positional parameters are not supported.');
         var params = [];
         $.each(call.request.params, function(k, v) {
-            params.push(k + '=' + v);
+            if (v) params.push(k + '=' + v);
         });
         params.push('jsonp=?');
         $.getJSON(call.url + '/' + call.request.method + '?' + params.join('&'),
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
     var cols = [ 
         new Column('FrontPage', function(cb) { return DNK.getFrontPageStories(1, 16, cb); }),
-        new Column('Popular',   function(cb) { return DNK.getPopularStories(1, 16, cb); }),
+        new Column('Popular',   function(cb) { return DNK.getPopularStories(1, 16, null, cb); }),
         new Column('Upcoming',  function(cb) { return DNK.getUpcomingPageStories(1, 16, cb); })
     ];
     $.each(cols, function(i, col) { col.reload(); });
