@@ -2,7 +2,6 @@ using System;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
-using System.Security;
 using System.Collections.Generic;
 
 namespace Incremental.Kick.Caching {
@@ -41,7 +40,7 @@ namespace Incremental.Kick.Caching {
         public static UserCollection GetUsers(List<int> userIDs) {
             UserCollection users = new UserCollection();
             foreach (int id in userIDs) {
-                users.Add(UserCache.GetUser(id));
+                users.Add(GetUser(id));
             }
             return users;
         }
@@ -85,9 +84,13 @@ namespace Incremental.Kick.Caching {
         }
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
+        //TODO: simone.busoli: no more sps, right?
         public static int KickStory(int storyID, int userID, int hostID) {
+            // If the user has already kicked the story return the current number of kicks
+            // This may happen if the user has two browser windows opened on the same story and
+            // tries to kick on both pages
             if (StoryBR.DoesStoryKickExist(storyID, userID, hostID))
-                throw new SecurityException("The story has already been kicked!");
+                return Story.FetchByID(storyID).KickCount;
 
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
@@ -97,8 +100,11 @@ namespace Incremental.Kick.Caching {
         }
 
         public static int UnKickStory(int storyID, int userID, int hostID) {
+            // If the user has already unkicked the story return the current number of kicks
+            // This may happen if the user has two browser windows opened on the same story and
+            // tries to unkick on both pages
             if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID))
-                throw new SecurityException("There is no kick to unkick!");
+                return Story.FetchByID(storyID).KickCount;
 
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
