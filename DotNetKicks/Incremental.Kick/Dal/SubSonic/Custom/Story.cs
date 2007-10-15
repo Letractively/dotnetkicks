@@ -143,7 +143,7 @@ namespace Incremental.Kick.Dal {
             q.PageSize = pageSize;
 
             StoryCollection stories = new StoryCollection();
-            stories.Load(q.ExecuteReader());
+            stories.LoadAndCloseReader(q.ExecuteReader());
             return stories;
         }
 
@@ -171,7 +171,7 @@ namespace Incremental.Kick.Dal {
             q.PageSize = pageSize;
 
             StoryCollection stories = new StoryCollection();
-            stories.Load(q.ExecuteReader());
+            stories.LoadAndCloseReader(q.ExecuteReader());
             return stories;
         }
 
@@ -194,7 +194,7 @@ namespace Incremental.Kick.Dal {
             q.IN("storyID", storyIdArray);
 
             StoryCollection stories = new StoryCollection();
-            stories.Load(q.ExecuteReader());
+            stories.LoadAndCloseReader(q.ExecuteReader());
             return stories;
         }
 
@@ -211,6 +211,8 @@ namespace Incremental.Kick.Dal {
                     while (dataReader.Read()) {
                         userIDs.Add(dataReader.GetInt32(0));
                     }
+
+                    dataReader.Close();
 
                     _usersWhoKicked = UserCache.GetUsers(userIDs);
                 }
