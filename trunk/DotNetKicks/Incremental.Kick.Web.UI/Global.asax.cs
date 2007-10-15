@@ -4,7 +4,9 @@ using System.Globalization;
 using System.Net;
 using System.Web;
 using System.Web.Hosting;
+using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Web.Security;
 
 namespace Incremental.Kick.Web.UI
@@ -21,8 +23,8 @@ namespace Incremental.Kick.Web.UI
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
             // If the referrer url is marked as blocked then redirect the user to another location
-            if(Request.UrlReferrer != null &&
-               new BlockedReferralCollection().Load().Exists(
+            if(Request.UrlReferrer != null && 
+               BlockedReferralCache.GetBlockedReferrals(HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID).Exists(
                    delegate(BlockedReferral referral) { return Request.UrlReferrer.Host.Contains(referral.BlockedReferralHostname); }))
                 Server.Transfer("~/Pages/Docs/SpamReferral.aspx");
         }
