@@ -21,7 +21,7 @@ namespace Incremental.Kick.Caching
         public static StoryCollection GetStoryCollectionSearchResultsByUser(string query, string username, int hostId, int page, int pageSize)
         {
             string cacheKey = string.Format("SearchUserStoryCollection_{0}_{1}_{2}_{3}_{4}", CleanUpQuery(query), hostId, page, pageSize, username);
-            string cacheCountKey = string.Format("SearchUserStoryCollectionCount_{0}_{1}_{2}_{3}_{4}", CleanUpQuery(query), hostId, page, pageSize, username);
+            string cacheCountKey = string.Format("SearchUserStoryCollectionCount_{0}_{1}_{2}", CleanUpQuery(query), hostId, username);
 
             CacheManager<string, StoryCollection> cache = GetSearchStoryCollectionCache();
             StoryCollection results = cache[cacheKey];
@@ -62,7 +62,7 @@ namespace Incremental.Kick.Caching
         public static StoryCollection GetStoryCollectionSearchResults(string query, int hostId, int page, int pageSize)
         {
             string cacheKey = string.Format("SearchStoryCollection_{0}_{1}_{2}_{3}", CleanUpQuery(query), hostId, page, pageSize);
-            string cacheCountKey = string.Format("SearchStoryCollectionCount_{0}_{1}_{2}_{3}", CleanUpQuery(query), hostId, page, pageSize);
+            string cacheCountKey = string.Format("SearchStoryCollectionCount_{0}_{1}", CleanUpQuery(query), hostId);
 
 
             CacheManager<string, StoryCollection> cache = GetSearchStoryCollectionCache();
@@ -95,7 +95,7 @@ namespace Incremental.Kick.Caching
 
         public static int GetStoryCollectionSearchResultsCountByUser(string query, string username, int hostId, int page, int pageSize)
         {
-            string cacheKey = string.Format("SearchUserStoryCollectionCount_{0}_{1}_{2}_{3}_{4}", CleanUpQuery(query), hostId, page, pageSize, username);
+            string cacheKey = string.Format("SearchUserStoryCollectionCount_{0}_{1}_{2}", CleanUpQuery(query), hostId, username);
 
             CacheManager<string, int?> cache = GetSearchStoryCountCache();
             int searchResultsCount;
@@ -125,7 +125,7 @@ namespace Incremental.Kick.Caching
         /// <returns></returns>
         public static int GetStoryCollectionSearchResultsCount(string query, int hostId, int page, int pageSize)
         {
-            string cacheKey = string.Format("SearchStoryCollectionCount_{0}_{1}_{2}_{3}", CleanUpQuery(query), hostId, page, pageSize);
+            string cacheKey = string.Format("SearchStoryCollectionCount_{0}_{1}", CleanUpQuery(query), hostId);
 
             CacheManager<string, int?> cache = GetSearchStoryCountCache();
             int searchResultsCount;
