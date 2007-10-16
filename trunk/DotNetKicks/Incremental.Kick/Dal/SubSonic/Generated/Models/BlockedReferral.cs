@@ -124,6 +124,19 @@ namespace Incremental.Kick.Dal
 				colvarBlockedReferralHostname.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarBlockedReferralHostname);
 				
+				TableSchema.TableColumn colvarHostID = new TableSchema.TableColumn(schema);
+				colvarHostID.ColumnName = "HostID";
+				colvarHostID.DataType = DbType.Int32;
+				colvarHostID.MaxLength = 0;
+				colvarHostID.AutoIncrement = false;
+				colvarHostID.IsNullable = true;
+				colvarHostID.IsPrimaryKey = false;
+				colvarHostID.IsForeignKey = false;
+				colvarHostID.IsReadOnly = false;
+				colvarHostID.DefaultSetting = @"";
+				colvarHostID.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarHostID);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -156,6 +169,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("HostID")]
+		public int? HostID 
+		{
+			get { return GetColumnValue<int?>(Columns.HostID); }
+
+			set { SetColumnValue(Columns.HostID, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -174,11 +197,13 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varBlockedReferralHostname)
+		public static void Insert(string varBlockedReferralHostname,int? varHostID)
 		{
 			BlockedReferral item = new BlockedReferral();
 			
 			item.BlockedReferralHostname = varBlockedReferralHostname;
+			
+			item.HostID = varHostID;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -191,13 +216,15 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(short varBlockedReferralID,string varBlockedReferralHostname)
+		public static void Update(short varBlockedReferralID,string varBlockedReferralHostname,int? varHostID)
 		{
 			BlockedReferral item = new BlockedReferral();
 			
 				item.BlockedReferralID = varBlockedReferralID;
 			
 				item.BlockedReferralHostname = varBlockedReferralHostname;
+			
+				item.HostID = varHostID;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -229,12 +256,22 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn HostIDColumn
+        {
+            get { return Schema.Columns[2]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
 		{
 			 public static string BlockedReferralID = @"BlockedReferralID";
 			 public static string BlockedReferralHostname = @"BlockedReferralHostname";
+			 public static string HostID = @"HostID";
 						
 		}
 

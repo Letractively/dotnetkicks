@@ -90,11 +90,13 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string BlockedReferralHostname)
+	    public void Insert(string BlockedReferralHostname,int? HostID)
 	    {
 		    BlockedReferral item = new BlockedReferral();
 		    
             item.BlockedReferralHostname = BlockedReferralHostname;
+            
+            item.HostID = HostID;
             
 	    
 		    item.Save(UserName);
@@ -105,13 +107,15 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(short BlockedReferralID,string BlockedReferralHostname)
+	    public void Update(short BlockedReferralID,string BlockedReferralHostname,int? HostID)
 	    {
 		    BlockedReferral item = new BlockedReferral();
 		    
 				item.BlockedReferralID = BlockedReferralID;
 				
 				item.BlockedReferralHostname = BlockedReferralHostname;
+				
+				item.HostID = HostID;
 				
 		    item.MarkOld();
 		    item.Save(UserName);
