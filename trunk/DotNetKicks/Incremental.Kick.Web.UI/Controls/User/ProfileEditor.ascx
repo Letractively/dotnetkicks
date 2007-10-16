@@ -49,6 +49,11 @@
         <br /><span class="FormHelp">Disable this to hide story thumbnails on the homepage</span></td>
     </tr>
     <tr>
+        <td class="FormTitle FormTD">Show emoticons:</td>
+        <td class="FormInput FormTD"><asp:CheckBox ID="ShowEmoticons" runat="server" />
+        <br /><span class="FormHelp">Disable this to hide emoticons</span></td>
+    </tr>
+    <tr>
         <td class="FormTitle FormTD"></td>
         <td class="FormInput FormTD"><asp:Button ID="UpdateProfile" runat="server" Text="Update Profile" OnClick="UpdateProfile_Click" /></td>
     </tr>
