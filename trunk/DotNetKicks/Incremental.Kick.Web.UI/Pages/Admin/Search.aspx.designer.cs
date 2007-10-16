@@ -12,30 +12,21 @@ namespace Incremental.Kick.Web.UI.Pages.Admin {
     
     
     /// <summary>
-    /// Default class.
+    /// Search class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class Default {
+    public partial class Search {
         
         /// <summary>
-        /// Tasks control.
+        /// SearchDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.Tasks Tasks;
-        
-        /// <summary>
-        /// CacheControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Admin.Cache CacheControl;
+        protected global::Incremental.Kick.Web.UI.Controls.Admin.Search SearchDetails;
         
         /// <summary>
         /// AdminMenu1 control.

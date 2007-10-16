@@ -8,51 +8,60 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Templates.Simple {
+namespace Incremental.Kick.Web.UI.Controls.Admin {
     
     
     /// <summary>
-    /// MasterPage class.
+    /// Search class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class MasterPage {
+    public partial class Search {
         
         /// <summary>
-        /// MainContent control.
+        /// lblBaseDirectory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Label lblBaseDirectory;
         
         /// <summary>
-        /// LeftContent control.
+        /// lblRecrawlRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContent;
+        protected global::System.Web.UI.WebControls.Label lblRecrawlRate;
         
         /// <summary>
-        /// searchInput control.
+        /// lblLastCrawl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Story.SearchInput searchInput;
+        protected global::System.Web.UI.WebControls.Label lblLastCrawl;
         
         /// <summary>
-        /// RightContent control.
+        /// rptDeleteIndex control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightContent;
+        protected global::System.Web.UI.WebControls.Repeater rptDeleteIndex;
+        
+        /// <summary>
+        /// lblDeleteOutput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeleteOutput;
     }
 }

@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.Json.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Subkismet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Subkismet\0.2.2.beta\Subkismet.dll</HintPath>
@@ -48,6 +52,10 @@
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
+    </Reference>
+    <Reference Include="Subtext.Web.Controls, Version=1.9.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\InvisibleCaptcha\Subtext.Web.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -243,6 +251,13 @@
     <Compile Include="Controls\Admin\Cache.ascx.designer.cs">
       <DependentUpon>Cache.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Admin\Search.ascx.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Admin\Search.ascx.designer.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Admin\Tasks.ascx.cs">
       <DependentUpon>Tasks.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -277,6 +292,13 @@
     </Compile>
     <Compile Include="Controls\Story\KickItImagePersonalization.ascx.designer.cs">
       <DependentUpon>KickItImagePersonalization.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Story\SearchInput.ascx.cs">
+      <DependentUpon>SearchInput.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Story\SearchInput.ascx.designer.cs">
+      <DependentUpon>SearchInput.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
@@ -406,6 +428,13 @@
     </Compile>
     <Compile Include="Pages\Admin\Hosts.aspx.designer.cs">
       <DependentUpon>Hosts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Search.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Admin\Stories.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -554,6 +583,13 @@
     <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Story\Search.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Story\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Story\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -567,13 +603,6 @@
     </Compile>
     <Compile Include="Pages\Story\Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Story\Search.aspx.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Story\Search.aspx.designer.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Story\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
@@ -859,6 +888,7 @@
   <ItemGroup>
     <None Include="elmah.axd" />
     <Content Include="Controls\Api\ApiMenu.ascx" />
+    <Content Include="Controls\Admin\Search.ascx" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
     <Content Include="Controls\User\ChangeEmail.ascx" />
     <Content Include="Controls\User\VerifyEmail.ascx" />
@@ -869,10 +899,13 @@
     <Content Include="Pages\Api\GenerateKey.aspx" />
     <Content Include="Pages\Chats\List.aspx" />
     <Content Include="Pages\Chats\Room.aspx" />
+    <Content Include="Controls\Story\SearchInput.ascx" />
+    <Content Include="Pages\Admin\Search.aspx" />
     <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
     <Content Include="Pages\Docs\SpamReferral.aspx" />
     <Content Include="Pages\User\ChangeEmail.aspx" />
     <Content Include="Pages\User\VerifyEmail.aspx" />
+    <Content Include="Pages\Story\Search.aspx" />
     <Content Include="Services\Json\JsonServices.ashx" />
     <Content Include="Services\Ajax\AjaxServices.ashx" />
     <Content Include="Static\Images\Emoticons\cry.gif" />
@@ -962,7 +995,6 @@
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\Story\New.aspx" />
     <Content Include="Pages\Story\Redirect.aspx" />
-    <Content Include="Pages\Story\Search.aspx" />
     <Content Include="Pages\Story\View.aspx" />
     <Content Include="Pages\Story\ViewOrAdd.aspx" />
     <Content Include="Pages\Tag\View.aspx" />
@@ -995,6 +1027,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Static\Scripts\2.0.2\Admin\" />
     <Folder Include="Static\Scripts\2.0.2\Controls\" />
     <Folder Include="Templates\Simple\images\" />

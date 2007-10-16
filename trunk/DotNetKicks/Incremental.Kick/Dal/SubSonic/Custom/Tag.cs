@@ -34,7 +34,7 @@ namespace Incremental.Kick.Dal {
 
         public static TagCollection FetchStoryTags(int storyID) {
             TagCollection tags = new TagCollection();
-            tags.Load(SPs.Kick_GetTagsByStoryID(storyID).GetReader());
+            tags.LoadAndCloseReader(SPs.Kick_GetTagsByStoryID(storyID).GetReader());
             return tags;
         }
 

@@ -46,6 +46,7 @@ namespace Incremental.Kick.BusinessLogic {
             story.IsSpam = false;
             story.AdsenseID = user.AdsenseID;
             story.PublishedOn = DateTime.Now;
+            story.UpdatedOn = DateTime.Now;
             story.Save();
 
             UserAction.RecordStorySubmission(hostID, user, story);
@@ -195,6 +196,7 @@ namespace Incremental.Kick.BusinessLogic {
         public static int IncrementKickCount(int storyID, short delta) {
             Story story = Story.FetchByID(storyID);
             story.KickCount += delta;
+            story.UpdatedOn = DateTime.Now;
             story.Save();
             return story.KickCount;
         }
@@ -205,6 +207,7 @@ namespace Incremental.Kick.BusinessLogic {
                 throw new ArgumentException("The story does not belong to the host");
             else {
                 story.IsSpam = true;
+                story.UpdatedOn = DateTime.Now;
                 story.Save();
 
                 UserAction.RecordStoryDeletion(hostID, story, moderator);
