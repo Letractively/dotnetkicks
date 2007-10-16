@@ -4,10 +4,10 @@ using System.Text;
 namespace Incremental.Kick.Web.UI.Controls
 {
     using System;
-    using Incremental.Kick.Caching;
-    using Incremental.Kick.Helpers;
-    using Incremental.Kick.Web.Controls;
-    using Incremental.Kick.Web.Helpers;
+    using Caching;
+    using Kick.Helpers;
+    using Web.Controls;
+    using Helpers;
 
     public partial class AddComment : KickUserControl
     {
@@ -21,7 +21,7 @@ namespace Incremental.Kick.Web.UI.Controls
             get { return UrlFactory.CreateUrl(UrlFactory.PageName.Login, Request.Path); }
         }
 
-        protected string RegisterUrl
+        protected static string RegisterUrl
         {
             get { return UrlFactory.CreateUrl(UrlFactory.PageName.Register); }
         }
@@ -59,9 +59,7 @@ namespace Incremental.Kick.Web.UI.Controls
             if (!Page.IsValid)
                 return;
 
-            string comment = Comment.Text.Trim();
-
-            comment = TextHelper.EncodeAndReplaceComment(comment);
+            string comment = TextHelper.EncodeAndReplaceComment(Comment.Text);
 
             int commentID =
                 Dal.Comment.CreateComment(KickPage.HostProfile.HostID, _storyID, KickPage.KickUserProfile, comment);
