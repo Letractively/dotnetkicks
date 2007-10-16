@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -6,7 +6,10 @@ namespace Incremental.Kick.Helpers
 {
     public class TextHelper
     {
-        public static readonly Hashtable Emoticons = new Hashtable();
+        private const string urlPattern = @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#\(\)]*[\w\-\@?^=%&amp;/~\+#])?";
+        private const string emoticonPattern = @":,\(|:\)|:D|;\(|;\)|:\(|=\)";
+
+        public static readonly StringDictionary Emoticons = new StringDictionary();
 
         static TextHelper()
         {
@@ -21,15 +24,12 @@ namespace Incremental.Kick.Helpers
 
         public static string Urlify(string input)
         {
-            return
-                RegExReplace(input,
-                             @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#\(\)]*[\w\-\@?^=%&amp;/~\+#])?",
-                             @"<a href=""{0}"" target=""_new"">{0}</a>");
+            return RegExReplace(input, urlPattern, @"<a href=""{0}"" target=""_new"">{0}</a>");
         }
 
         public static string ReplaceEmoticons(string input, string emoticonsRoot)
         {
-            Regex emoticonRegex = new Regex(@":,\(|:\)|:D|;\(|;\)|:\(|=\)");
+            Regex emoticonRegex = new Regex(emoticonPattern);
 
             return
                 emoticonRegex.Replace(input,
@@ -53,7 +53,7 @@ namespace Incremental.Kick.Helpers
 
         public static string EncodeAndReplaceComment(string message)
         {
-            message = HttpUtility.HtmlEncode(message);
+            message = HttpUtility.HtmlEncode(message.Trim());
             message = Urlify(message);
             message = message.Replace("\n", "<br />");
             //TODO: GJ: add reg ex replacements here
