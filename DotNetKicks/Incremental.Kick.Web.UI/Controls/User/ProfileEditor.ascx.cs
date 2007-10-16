@@ -3,7 +3,6 @@ using System.Web.UI.WebControls;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Caching;
-using Incremental.Kick.BusinessLogic;
 
 namespace Incremental.Kick.Web.UI.Controls
 {
@@ -34,6 +33,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 UserEmail.Text = UserProfile.Email;
                 AppearOnline.Checked = UserProfile.AppearOnline;
                 ShowStoryThumbnail.Checked = UserProfile.ShowStoryThumbnail;
+                ShowEmoticons.Checked = UserProfile.ShowEmoticons;
             }
         }
 
@@ -49,6 +49,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 UserProfile.BlogFeedURL = BlogFeedUrl.Text;
                 UserProfile.AppearOnline = AppearOnline.Checked;
                 UserProfile.ShowStoryThumbnail = ShowStoryThumbnail.Checked;
+                UserProfile.ShowEmoticons = ShowEmoticons.Checked;
                 UserProfile.Save();
 
                 UserCache.RemoveUser(UserProfile.UserID);
@@ -56,7 +57,6 @@ namespace Incremental.Kick.Web.UI.Controls
                 Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, UserProfile.Username));
             }
         }
-
 
         protected void EmailExists_ServerValidate(object source, ServerValidateEventArgs args)
         {

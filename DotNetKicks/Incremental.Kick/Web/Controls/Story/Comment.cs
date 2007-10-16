@@ -53,7 +53,7 @@ namespace Incremental.Kick.Web.Controls {
             }
 
             writer.WriteLine(@"<div class=""CommentText"">{0}</div>
-                    <div class=""CommentAuthor"">posted by ", TextHelper.ReplaceEmoticons(_comment.CommentX, KickPage.StaticEmoticonsRootUrl));
+                    <div class=""CommentAuthor"">posted by ", KickPage.KickUserProfile.ShowEmoticons ? TextHelper.ReplaceEmoticons(_comment.CommentX, KickPage.StaticEmoticonsRootUrl) : _comment.CommentX);
 
             UserLink userLink = new UserLink();
             userLink.DataBind(UserCache.GetUser(_comment.UserID));

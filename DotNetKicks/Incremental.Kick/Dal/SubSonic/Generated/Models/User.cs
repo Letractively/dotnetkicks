@@ -403,6 +403,20 @@ namespace Incremental.Kick.Dal
 				colvarShowStoryThumbnail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarShowStoryThumbnail);
 				
+				TableSchema.TableColumn colvarShowEmoticons = new TableSchema.TableColumn(schema);
+				colvarShowEmoticons.ColumnName = "ShowEmoticons";
+				colvarShowEmoticons.DataType = DbType.Boolean;
+				colvarShowEmoticons.MaxLength = 0;
+				colvarShowEmoticons.AutoIncrement = false;
+				colvarShowEmoticons.IsNullable = false;
+				colvarShowEmoticons.IsPrimaryKey = false;
+				colvarShowEmoticons.IsForeignKey = false;
+				colvarShowEmoticons.IsReadOnly = false;
+				
+						colvarShowEmoticons.DefaultSetting = @"((1))";
+				colvarShowEmoticons.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarShowEmoticons);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -645,6 +659,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("ShowEmoticons")]
+		public bool ShowEmoticons 
+		{
+			get { return GetColumnValue<bool>(Columns.ShowEmoticons); }
+
+			set { SetColumnValue(Columns.ShowEmoticons, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -755,7 +779,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons)
 		{
 			User item = new User();
 			
@@ -803,6 +827,8 @@ namespace Incremental.Kick.Dal
 			
 			item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
+			item.ShowEmoticons = varShowEmoticons;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -814,7 +840,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons)
 		{
 			User item = new User();
 			
@@ -863,6 +889,8 @@ namespace Incremental.Kick.Dal
 				item.AppearOnline = varAppearOnline;
 			
 				item.ShowStoryThumbnail = varShowStoryThumbnail;
+			
+				item.ShowEmoticons = varShowEmoticons;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1083,6 +1111,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn ShowEmoticonsColumn
+        {
+            get { return Schema.Columns[24]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -1110,6 +1147,7 @@ namespace Incremental.Kick.Dal
 			 public static string BlogFeedURL = @"BlogFeedURL";
 			 public static string AppearOnline = @"AppearOnline";
 			 public static string ShowStoryThumbnail = @"ShowStoryThumbnail";
+			 public static string ShowEmoticons = @"ShowEmoticons";
 						
 		}
 
