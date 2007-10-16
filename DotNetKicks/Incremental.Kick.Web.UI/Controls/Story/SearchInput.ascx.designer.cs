@@ -8,51 +8,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Incremental.Kick.Web.UI.Templates.Simple {
+namespace Incremental.Kick.Web.UI.Controls.Story {
     
     
     /// <summary>
-    /// MasterPage class.
+    /// SearchInput class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class MasterPage {
+    public partial class SearchInput {
         
         /// <summary>
-        /// MainContent control.
+        /// txtSearchTerm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchTerm;
         
         /// <summary>
-        /// LeftContent control.
+        /// chkUserSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder LeftContent;
+        protected global::System.Web.UI.WebControls.CheckBox chkUserSearch;
         
         /// <summary>
-        /// searchInput control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Incremental.Kick.Web.UI.Controls.Story.SearchInput searchInput;
-        
-        /// <summary>
-        /// RightContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder RightContent;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
     }
 }

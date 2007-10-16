@@ -61,6 +61,32 @@ input, select, textarea
 	padding: 1px;
 }
 
+/* ================ search ===================== */
+.searchResultsSummary
+{
+	font-size: 0.9em;
+	background-color: #E7F0F7;
+	padding: 2px;
+	text-align: right;
+}
+
+.searchOnlyMyStories
+
+{
+font-size: 0.85em;
+}
+
+.searchButton
+{
+margin: 10 0 0 0px;
+}
+
+.searchNoResults
+{
+font-size: 1.2em;
+padding: 10 0 10 5px;
+}
+
 /* ================ shout box ================== */
 #shoutList
 {

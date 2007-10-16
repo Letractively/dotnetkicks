@@ -12,6 +12,22 @@ namespace Incremental.Kick.Dal {
             }
             return stories;
         }
+
+        /// <summary>
+        /// Returns all the stories flagged as spam in a collection
+        /// </summary>
+        /// <returns></returns>
+        public StoryCollection SpamStories()
+        {
+            StoryCollection spamStories = new StoryCollection();
+            foreach (Story s in this)
+            {
+                if (s.IsSpam)
+                    spamStories.Add(s);
+            }
+
+            return spamStories;
+        }
     }
 
     public class PagedStoryCollection : PagedCollection<StoryCollection> {

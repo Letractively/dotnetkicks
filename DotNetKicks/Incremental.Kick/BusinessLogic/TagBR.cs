@@ -79,6 +79,12 @@ namespace Incremental.Kick.BusinessLogic {
 
             UserAction.RecordTag(hostID, user, Story.FetchByID(storyID), tags);
 
+            //when a user adds a tag, we need to mark the story as updated
+            //so update the index during the incremental crawl
+            Story story = Story.FetchByID(storyID);
+            story.UpdatedOn = DateTime.Now;
+            story.Save();
+
             return tags;
         }
     }

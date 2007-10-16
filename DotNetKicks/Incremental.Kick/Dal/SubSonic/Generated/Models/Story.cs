@@ -324,6 +324,20 @@ namespace Incremental.Kick.Dal
 				colvarPublishedOn.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarPublishedOn);
 				
+				TableSchema.TableColumn colvarUpdatedOn = new TableSchema.TableColumn(schema);
+				colvarUpdatedOn.ColumnName = "UpdatedOn";
+				colvarUpdatedOn.DataType = DbType.DateTime;
+				colvarUpdatedOn.MaxLength = 0;
+				colvarUpdatedOn.AutoIncrement = false;
+				colvarUpdatedOn.IsNullable = false;
+				colvarUpdatedOn.IsPrimaryKey = false;
+				colvarUpdatedOn.IsForeignKey = false;
+				colvarUpdatedOn.IsReadOnly = false;
+				
+						colvarUpdatedOn.DefaultSetting = @"(getdate())";
+				colvarUpdatedOn.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarUpdatedOn);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -506,6 +520,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("UpdatedOn")]
+		public DateTime UpdatedOn 
+		{
+			get { return GetColumnValue<DateTime>(Columns.UpdatedOn); }
+
+			set { SetColumnValue(Columns.UpdatedOn, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -604,7 +628,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
+		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn)
 		{
 			Story item = new Story();
 			
@@ -640,6 +664,8 @@ namespace Incremental.Kick.Dal
 			
 			item.PublishedOn = varPublishedOn;
 			
+			item.UpdatedOn = varUpdatedOn;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -651,7 +677,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn)
+		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn)
 		{
 			Story item = new Story();
 			
@@ -688,6 +714,8 @@ namespace Incremental.Kick.Dal
 				item.CreatedOn = varCreatedOn;
 			
 				item.PublishedOn = varPublishedOn;
+			
+				item.UpdatedOn = varUpdatedOn;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -875,6 +903,7 @@ namespace Incremental.Kick.Dal
 			 public static string AdsenseID = @"AdsenseID";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string PublishedOn = @"PublishedOn";
+			 public static string UpdatedOn = @"UpdatedOn";
 						
 		}
 

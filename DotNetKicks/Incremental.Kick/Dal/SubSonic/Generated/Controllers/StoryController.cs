@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int HostID,string StoryIdentifier,string Title,string Description,string Url,short CategoryID,int UserID,int KickCount,int SpamCount,int ViewCount,int CommentCount,bool IsPublishedToHomepage,bool IsSpam,string AdsenseID,DateTime CreatedOn,DateTime PublishedOn)
+	    public void Insert(int HostID,string StoryIdentifier,string Title,string Description,string Url,short CategoryID,int UserID,int KickCount,int SpamCount,int ViewCount,int CommentCount,bool IsPublishedToHomepage,bool IsSpam,string AdsenseID,DateTime CreatedOn,DateTime PublishedOn,DateTime UpdatedOn)
 	    {
 		    Story item = new Story();
 		    
@@ -126,6 +126,8 @@ namespace Incremental.Kick.Dal
             
             item.PublishedOn = PublishedOn;
             
+            item.UpdatedOn = UpdatedOn;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -135,7 +137,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int StoryID,int HostID,string StoryIdentifier,string Title,string Description,string Url,short CategoryID,int UserID,int KickCount,int SpamCount,int ViewCount,int CommentCount,bool IsPublishedToHomepage,bool IsSpam,string AdsenseID,DateTime CreatedOn,DateTime PublishedOn)
+	    public void Update(int StoryID,int HostID,string StoryIdentifier,string Title,string Description,string Url,short CategoryID,int UserID,int KickCount,int SpamCount,int ViewCount,int CommentCount,bool IsPublishedToHomepage,bool IsSpam,string AdsenseID,DateTime CreatedOn,DateTime PublishedOn,DateTime UpdatedOn)
 	    {
 		    Story item = new Story();
 		    
@@ -172,6 +174,8 @@ namespace Incremental.Kick.Dal
 				item.CreatedOn = CreatedOn;
 				
 				item.PublishedOn = PublishedOn;
+				
+				item.UpdatedOn = UpdatedOn;
 				
 		    item.MarkOld();
 		    item.Save(UserName);
