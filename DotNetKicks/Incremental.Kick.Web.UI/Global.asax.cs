@@ -23,10 +23,15 @@ namespace Incremental.Kick.Web.UI
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
             // If the referrer url is marked as blocked then redirect the user to another location
-            if(Request.UrlReferrer != null && 
-               BlockedReferralCache.GetBlockedReferrals(HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID).Exists(
-                   delegate(BlockedReferral referral) { return Request.UrlReferrer.Host.Contains(referral.BlockedReferralHostname); }))
-                Server.Transfer("~/Pages/Docs/SpamReferral.aspx");
+            // Check only pages referred by some website, pages referred by external hosts, and requests for .aspx pages
+            if (Request.UrlReferrer != null && Request.UrlReferrer.Host != Request.Url.Host && Request.PhysicalPath.EndsWith(".aspx"))
+            {
+                BlockedReferralCollection blockedReferrals =
+                    BlockedReferralCache.GetBlockedReferrals(HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID);
+                if(blockedReferrals.Exists(
+                       delegate(BlockedReferral referral) { return Request.UrlReferrer.Host.Contains(referral.BlockedReferralHostname); }))
+                    Server.Transfer("~/Pages/Docs/SpamReferral.aspx");
+            }
         }
 
         protected void Application_Error(object sender, EventArgs e)
