@@ -882,6 +882,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn UpdatedOnColumn
+        {
+            get { return Schema.Columns[17]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
