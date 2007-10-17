@@ -779,7 +779,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons)
 		{
 			User item = new User();
 			
@@ -840,7 +840,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons)
 		{
 			User item = new User();
 			
@@ -1113,7 +1113,7 @@ namespace Incremental.Kick.Dal
         
         public static TableSchema.TableColumn ShowEmoticonsColumn
         {
-            get { return Schema.Columns[24]; }
+            get { return Schema.Columns[23]; }
 
         }
 
