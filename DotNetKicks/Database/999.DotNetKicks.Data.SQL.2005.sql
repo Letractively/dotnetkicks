@@ -110,11 +110,11 @@ SET IDENTITY_INSERT [dbo].[Kick_Host] OFF
 GO
 
 -- [dbo].[Kick_Setting] (3 rows)
-SET IDENTITY_INSERT [dbo].[Kick_Setting] ON
-INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (1, N'Security.Cipher.PassPhrase', N'TODO**change')
-INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (2, N'Security.Cipher.Salt', N'TODO**change')
-INSERT INTO [dbo].[Kick_Setting] ([SettingID], [Name], [Value]) VALUES (3, N'Security.Cipher.InitVector', N'abcdefghijklmnop')
-SET IDENTITY_INSERT [dbo].[Kick_Setting] OFF
+
+INSERT INTO [dbo].[Kick_Setting] ([Name], [Value]) VALUES (N'Security.Cipher.PassPhrase', N'TODO**change')
+INSERT INTO [dbo].[Kick_Setting] ([Name], [Value]) VALUES (N'Security.Cipher.Salt', N'TODO**change')
+INSERT INTO [dbo].[Kick_Setting] ([Name], [Value]) VALUES (N'Security.Cipher.InitVector', N'abcdefghijklmnop')
+
 GO
 
 -- [dbo].[Kick_Shout] (6 rows)
