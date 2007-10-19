@@ -1,4 +1,4 @@
-using System.Collections.Specialized;
+using System.Collections;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -9,7 +9,7 @@ namespace Incremental.Kick.Helpers
         private const string urlPattern = @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#\(\)]*[\w\-\@?^=%&amp;/~\+#])?";
         private const string emoticonPattern = @":,\(|:\)|:D|;\(|;\)|:\(|=\)";
 
-        public static readonly StringDictionary Emoticons = new StringDictionary();
+        public static readonly Hashtable Emoticons = new Hashtable();
 
         static TextHelper()
         {
