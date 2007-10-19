@@ -403,6 +403,19 @@ namespace Incremental.Kick.Dal
 				colvarShowStoryThumbnail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarShowStoryThumbnail);
 				
+				TableSchema.TableColumn colvarAPIKey = new TableSchema.TableColumn(schema);
+				colvarAPIKey.ColumnName = "APIKey";
+				colvarAPIKey.DataType = DbType.Guid;
+				colvarAPIKey.MaxLength = 0;
+				colvarAPIKey.AutoIncrement = false;
+				colvarAPIKey.IsNullable = true;
+				colvarAPIKey.IsPrimaryKey = false;
+				colvarAPIKey.IsForeignKey = false;
+				colvarAPIKey.IsReadOnly = false;
+				colvarAPIKey.DefaultSetting = @"";
+				colvarAPIKey.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAPIKey);
+				
 				TableSchema.TableColumn colvarShowEmoticons = new TableSchema.TableColumn(schema);
 				colvarShowEmoticons.ColumnName = "ShowEmoticons";
 				colvarShowEmoticons.DataType = DbType.Boolean;
@@ -416,6 +429,71 @@ namespace Incremental.Kick.Dal
 						colvarShowEmoticons.DefaultSetting = @"((1))";
 				colvarShowEmoticons.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarShowEmoticons);
+				
+				TableSchema.TableColumn colvarKickItTextColor = new TableSchema.TableColumn(schema);
+				colvarKickItTextColor.ColumnName = "KickItTextColor";
+				colvarKickItTextColor.DataType = DbType.String;
+				colvarKickItTextColor.MaxLength = 50;
+				colvarKickItTextColor.AutoIncrement = false;
+				colvarKickItTextColor.IsNullable = true;
+				colvarKickItTextColor.IsPrimaryKey = false;
+				colvarKickItTextColor.IsForeignKey = false;
+				colvarKickItTextColor.IsReadOnly = false;
+				colvarKickItTextColor.DefaultSetting = @"";
+				colvarKickItTextColor.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarKickItTextColor);
+				
+				TableSchema.TableColumn colvarKickItBackgroundColor = new TableSchema.TableColumn(schema);
+				colvarKickItBackgroundColor.ColumnName = "KickItBackgroundColor";
+				colvarKickItBackgroundColor.DataType = DbType.String;
+				colvarKickItBackgroundColor.MaxLength = 50;
+				colvarKickItBackgroundColor.AutoIncrement = false;
+				colvarKickItBackgroundColor.IsNullable = true;
+				colvarKickItBackgroundColor.IsPrimaryKey = false;
+				colvarKickItBackgroundColor.IsForeignKey = false;
+				colvarKickItBackgroundColor.IsReadOnly = false;
+				colvarKickItBackgroundColor.DefaultSetting = @"";
+				colvarKickItBackgroundColor.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarKickItBackgroundColor);
+				
+				TableSchema.TableColumn colvarKickCountTextColor = new TableSchema.TableColumn(schema);
+				colvarKickCountTextColor.ColumnName = "KickCountTextColor";
+				colvarKickCountTextColor.DataType = DbType.String;
+				colvarKickCountTextColor.MaxLength = 50;
+				colvarKickCountTextColor.AutoIncrement = false;
+				colvarKickCountTextColor.IsNullable = true;
+				colvarKickCountTextColor.IsPrimaryKey = false;
+				colvarKickCountTextColor.IsForeignKey = false;
+				colvarKickCountTextColor.IsReadOnly = false;
+				colvarKickCountTextColor.DefaultSetting = @"";
+				colvarKickCountTextColor.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarKickCountTextColor);
+				
+				TableSchema.TableColumn colvarKickCountBackgroundColor = new TableSchema.TableColumn(schema);
+				colvarKickCountBackgroundColor.ColumnName = "KickCountBackgroundColor";
+				colvarKickCountBackgroundColor.DataType = DbType.String;
+				colvarKickCountBackgroundColor.MaxLength = 50;
+				colvarKickCountBackgroundColor.AutoIncrement = false;
+				colvarKickCountBackgroundColor.IsNullable = true;
+				colvarKickCountBackgroundColor.IsPrimaryKey = false;
+				colvarKickCountBackgroundColor.IsForeignKey = false;
+				colvarKickCountBackgroundColor.IsReadOnly = false;
+				colvarKickCountBackgroundColor.DefaultSetting = @"";
+				colvarKickCountBackgroundColor.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarKickCountBackgroundColor);
+				
+				TableSchema.TableColumn colvarKickImageBorderColor = new TableSchema.TableColumn(schema);
+				colvarKickImageBorderColor.ColumnName = "KickImageBorderColor";
+				colvarKickImageBorderColor.DataType = DbType.String;
+				colvarKickImageBorderColor.MaxLength = 50;
+				colvarKickImageBorderColor.AutoIncrement = false;
+				colvarKickImageBorderColor.IsNullable = true;
+				colvarKickImageBorderColor.IsPrimaryKey = false;
+				colvarKickImageBorderColor.IsForeignKey = false;
+				colvarKickImageBorderColor.IsReadOnly = false;
+				colvarKickImageBorderColor.DefaultSetting = @"";
+				colvarKickImageBorderColor.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarKickImageBorderColor);
 				
 				BaseSchema = schema;
 				//add this schema to the provider
@@ -660,12 +738,72 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
+		[XmlAttribute("APIKey")]
+		public Guid? APIKey 
+		{
+			get { return GetColumnValue<Guid?>(Columns.APIKey); }
+
+			set { SetColumnValue(Columns.APIKey, value); }
+
+		}
+
+		  
 		[XmlAttribute("ShowEmoticons")]
 		public bool ShowEmoticons 
 		{
 			get { return GetColumnValue<bool>(Columns.ShowEmoticons); }
 
 			set { SetColumnValue(Columns.ShowEmoticons, value); }
+
+		}
+
+		  
+		[XmlAttribute("KickItTextColor")]
+		public string KickItTextColor 
+		{
+			get { return GetColumnValue<string>(Columns.KickItTextColor); }
+
+			set { SetColumnValue(Columns.KickItTextColor, value); }
+
+		}
+
+		  
+		[XmlAttribute("KickItBackgroundColor")]
+		public string KickItBackgroundColor 
+		{
+			get { return GetColumnValue<string>(Columns.KickItBackgroundColor); }
+
+			set { SetColumnValue(Columns.KickItBackgroundColor, value); }
+
+		}
+
+		  
+		[XmlAttribute("KickCountTextColor")]
+		public string KickCountTextColor 
+		{
+			get { return GetColumnValue<string>(Columns.KickCountTextColor); }
+
+			set { SetColumnValue(Columns.KickCountTextColor, value); }
+
+		}
+
+		  
+		[XmlAttribute("KickCountBackgroundColor")]
+		public string KickCountBackgroundColor 
+		{
+			get { return GetColumnValue<string>(Columns.KickCountBackgroundColor); }
+
+			set { SetColumnValue(Columns.KickCountBackgroundColor, value); }
+
+		}
+
+		  
+		[XmlAttribute("KickImageBorderColor")]
+		public string KickImageBorderColor 
+		{
+			get { return GetColumnValue<string>(Columns.KickImageBorderColor); }
+
+			set { SetColumnValue(Columns.KickImageBorderColor, value); }
 
 		}
 
@@ -779,7 +917,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor)
 		{
 			User item = new User();
 			
@@ -827,7 +965,19 @@ namespace Incremental.Kick.Dal
 			
 			item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
+			item.APIKey = varAPIKey;
+			
 			item.ShowEmoticons = varShowEmoticons;
+			
+			item.KickItTextColor = varKickItTextColor;
+			
+			item.KickItBackgroundColor = varKickItBackgroundColor;
+			
+			item.KickCountTextColor = varKickCountTextColor;
+			
+			item.KickCountBackgroundColor = varKickCountBackgroundColor;
+			
+			item.KickImageBorderColor = varKickImageBorderColor;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -840,7 +990,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor)
 		{
 			User item = new User();
 			
@@ -890,7 +1040,19 @@ namespace Incremental.Kick.Dal
 			
 				item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
+				item.APIKey = varAPIKey;
+			
 				item.ShowEmoticons = varShowEmoticons;
+			
+				item.KickItTextColor = varKickItTextColor;
+			
+				item.KickItBackgroundColor = varKickItBackgroundColor;
+			
+				item.KickCountTextColor = varKickCountTextColor;
+			
+				item.KickCountBackgroundColor = varKickCountBackgroundColor;
+			
+				item.KickImageBorderColor = varKickImageBorderColor;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1111,9 +1273,63 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn ShowEmoticonsColumn
+        public static TableSchema.TableColumn APIKeyColumn
         {
             get { return Schema.Columns[23]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn ShowEmoticonsColumn
+        {
+            get { return Schema.Columns[24]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn KickItTextColorColumn
+        {
+            get { return Schema.Columns[25]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn KickItBackgroundColorColumn
+        {
+            get { return Schema.Columns[26]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn KickCountTextColorColumn
+        {
+            get { return Schema.Columns[27]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn KickCountBackgroundColorColumn
+        {
+            get { return Schema.Columns[28]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn KickImageBorderColorColumn
+        {
+            get { return Schema.Columns[29]; }
 
         }
 
@@ -1147,7 +1363,13 @@ namespace Incremental.Kick.Dal
 			 public static string BlogFeedURL = @"BlogFeedURL";
 			 public static string AppearOnline = @"AppearOnline";
 			 public static string ShowStoryThumbnail = @"ShowStoryThumbnail";
+			 public static string APIKey = @"APIKey";
 			 public static string ShowEmoticons = @"ShowEmoticons";
+			 public static string KickItTextColor = @"KickItTextColor";
+			 public static string KickItBackgroundColor = @"KickItBackgroundColor";
+			 public static string KickCountTextColor = @"KickCountTextColor";
+			 public static string KickCountBackgroundColor = @"KickCountBackgroundColor";
+			 public static string KickImageBorderColor = @"KickImageBorderColor";
 						
 		}
 
