@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Jayrock.JsonRpc.Web;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security.Principal;
@@ -15,26 +12,26 @@ namespace Incremental.Kick.Web.Controls {
         private User _userProfile;
         public User KickUserProfile {
             get {
-                if (this._userProfile == null) {
-                    this._userProfile = ((IKickPrincipal)base.User).KickUserProfile;
+                if (_userProfile == null) {
+                    _userProfile = ((IKickPrincipal)User).KickUserProfile;
                 }
-                return this._userProfile;
+                return _userProfile;
             }
         }
 
         private Host _hostProfile;
         public Host HostProfile {
             get {
-                if (this._hostProfile == null) {
-                    this._hostProfile = HostCache.GetHost(HostHelper.GetHostAndPort(this.Request.Url));
+                if (_hostProfile == null) {
+                    _hostProfile = HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url));
                 }
 
-                return this._hostProfile;
+                return _hostProfile;
             }
         }
 
         public bool IsAuthenticated {
-            get { return this.User.Identity.IsAuthenticated; }
+            get { return User.Identity.IsAuthenticated; }
         }
 
         public void DemandUserAuthentication() {
@@ -43,10 +40,9 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         public void DemandModeratorRole() {
-            if (!this.KickUserProfile.IsModerator)
+            if (!KickUserProfile.IsModerator)
                 throw new SecurityException("You must be a moderator in to perform this operation");
         }
-
 
         //Jayrock doesn't support nullable types
         public int? ToNullable(int value) {

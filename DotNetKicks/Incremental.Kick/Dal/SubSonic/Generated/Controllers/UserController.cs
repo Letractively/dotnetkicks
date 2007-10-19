@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons)
+	    public void Insert(string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,Guid? APIKey,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor)
 	    {
 		    User item = new User();
 		    
@@ -138,7 +138,19 @@ namespace Incremental.Kick.Dal
             
             item.ShowStoryThumbnail = ShowStoryThumbnail;
             
+            item.APIKey = APIKey;
+            
             item.ShowEmoticons = ShowEmoticons;
+            
+            item.KickItTextColor = KickItTextColor;
+            
+            item.KickItBackgroundColor = KickItBackgroundColor;
+            
+            item.KickCountTextColor = KickCountTextColor;
+            
+            item.KickCountBackgroundColor = KickCountBackgroundColor;
+            
+            item.KickImageBorderColor = KickImageBorderColor;
             
 	    
 		    item.Save(UserName);
@@ -149,7 +161,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int UserID,string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons)
+	    public void Update(int UserID,string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,Guid? APIKey,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor)
 	    {
 		    User item = new User();
 		    
@@ -199,7 +211,19 @@ namespace Incremental.Kick.Dal
 				
 				item.ShowStoryThumbnail = ShowStoryThumbnail;
 				
+				item.APIKey = APIKey;
+				
 				item.ShowEmoticons = ShowEmoticons;
+				
+				item.KickItTextColor = KickItTextColor;
+				
+				item.KickItBackgroundColor = KickItBackgroundColor;
+				
+				item.KickCountTextColor = KickCountTextColor;
+				
+				item.KickCountBackgroundColor = KickCountBackgroundColor;
+				
+				item.KickImageBorderColor = KickImageBorderColor;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

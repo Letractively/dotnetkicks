@@ -125,6 +125,21 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
             return Incremental.Kick.Dal.User.FetchByParameter(Incremental.Kick.Dal.User.Columns.Email, email).Read();
         }
 
+        [JsonRpcMethod("saveColorPreferences")]
+        public void SaveColorPreferences(string kickItTextColor, string kickItBackgroundColor, string kickCountTextColor, string kickCountBackgroundColor, string borderColor)
+        {
+            if(!KickUserProfile.IsGuest)
+            {
+                KickUserProfile.KickItTextColor = kickItTextColor;
+                KickUserProfile.KickItBackgroundColor = kickItBackgroundColor;
+                KickUserProfile.KickCountTextColor = kickCountTextColor;
+                KickUserProfile.KickCountBackgroundColor = kickCountBackgroundColor;
+                KickUserProfile.KickImageBorderColor = borderColor;
+
+                KickUserProfile.Save();
+            }
+        }
+
         #endregion
     }
 }

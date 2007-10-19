@@ -17,6 +17,12 @@ width:10px;
                           countText: '#000000', 
                           countBackground: '#D4E1ED',
                           border: '#000000' };
+
+    var customColors = {  kickText: '#<%= KickPage.KickUserProfile.KickItTextColor ??  "FFFFFF" %>', 
+                          kickBackground: '#<%= KickPage.KickUserProfile.KickItBackgroundColor ??  "A3C952" %>', 
+                          countText: '#<%= KickPage.KickUserProfile.KickCountTextColor ??  "000000" %>', 
+                          countBackground: '#<%= KickPage.KickUserProfile.KickCountBackgroundColor ??  "D4E1ED" %>',
+                          border: '#<%= KickPage.KickUserProfile.KickImageBorderColor ??  "000000" %>' };
                           
     var imageUrlFormatString = "<%= LiveImage.ImageUrlClientSideFormatString %>";
     var htmlCodeFormatString = '<%= LiveImage.HtmlCodeClientSideFormatString %>';
@@ -78,7 +84,7 @@ width:10px;
     }
 
     function updateImageAndHtmlCode()
-    {
+    {    
         $('#liveImage')[0].src = String.format(imageUrlFormatString,
           $('#borderText')[0].value != defaultColors.border ? "&border=" + stripHexChar($('#borderText')[0].value) : "",
           $('#kickTextText')[0].value != defaultColors.kickText ? "&fgcolor=" + stripHexChar($('#kickTextText')[0].value) : "",
@@ -94,29 +100,55 @@ width:10px;
         return str.substr(1);
     }
     
+    function saveColorPreferences()
+    {
+        StartLoading();
+        $('#saveColors')[0].disabled = "disabled";
+        
+        ajaxServices.saveColorPreferences(  stripHexChar($('#kickTextText')[0].value), 
+                                            stripHexChar($('#kickBackgroundText')[0].value), 
+                                            stripHexChar($('#countTextText')[0].value), 
+                                            stripHexChar($('#countBackgroundText')[0].value), 
+                                            stripHexChar($('#borderText')[0].value), 
+                                            saveColorPreferencesCallback);
+    }
+    
+    function saveColorPreferencesCallback(response)
+    {
+        FinishLoading();
+        
+        $('#saveColorsFeedback').text(response.error == null ? "Preferences saved successfully" : "Error saving preferences");
+        
+        if(response.error != null)
+            $('#saveColors')[0].disabled = "";
+    }
+    
     $(function()
     {
         $('#kickTextColor')[0].style.backgroundColor = 
-        $('#kickTextText')[0].value = defaultColors.kickText;
+        $('#kickTextText')[0].value = customColors.kickText;
 
         $('#kickBackgroundColor')[0].style.backgroundColor = 
-        $('#kickBackgroundText')[0].value = defaultColors.kickBackground;
+        $('#kickBackgroundText')[0].value = customColors.kickBackground;
 
         $('#countTextColor')[0].style.backgroundColor = 
-        $('#countTextText')[0].value = defaultColors.countText;
+        $('#countTextText')[0].value = customColors.countText;
 
         $('#countBackgroundColor')[0].style.backgroundColor = 
-        $('#countBackgroundText')[0].value = defaultColors.countBackground;
+        $('#countBackgroundText')[0].value = customColors.countBackground;
 
         $('#borderColor')[0].style.backgroundColor = 
-        $('#borderText')[0].value = defaultColors.border;
+        $('#borderText')[0].value = customColors.border;
+        
+        updateImageAndHtmlCode();
     });
 </script>
 
 <p>
-    <img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28" height="11" border="0" />
+    <img alt="new" src="<%=KickPage.StaticIconRootUrl %>/new.gif" width="28" height="11"
+        border="0" />
     Add a live kick counter to your blog >>
-    <img id="liveImage" alt="liveImage" style="vertical-align:middle;" src="<%= LiveImage.ImageUrl %>" />
+    <img id="liveImage" alt="liveImage" style="vertical-align: middle;" />
 </p>
 <p>
     You can even customize the image by choosing your own colors, and then clicking
@@ -1485,10 +1517,15 @@ width:10px;
 </ul>
 <div style="clear: both;">
 </div>
-<input type="button" onclick="updateImageAndHtmlCode();" value="Update live image!" />
+<input type="button" onclick="$('#saveColors').attr('disabled', '');updateImageAndHtmlCode();" value="Update live image!" />
+<% if (!KickPage.KickUserProfile.IsGuest)
+   { %>
+   <input type="button" id="saveColors" onclick="saveColorPreferences();" disabled="disabled" value="Save color preferences" />
+   <span id="saveColorsFeedback" style="color:Red;"></span>
+<% } %>
 <p>
     Simply copy and paste this HTML into your blog post.
     <br />
     <br />
-    <textarea id="htmlCode" onclick="this.select();" cols="80" rows="4"><%= ControlHelper.RenderControl(LiveImage) %></textarea>
+    <textarea id="htmlCode" onclick="this.select();" cols="80" rows="4"></textarea>
 </p>
