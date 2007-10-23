@@ -81,7 +81,8 @@ function checkStoryExistsCallback(response)
             <td class="FormTitle FormTD">
                 Category:</td>
             <td class="FormInput FormTD">
-                <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" DataTextField="Name" DataValueField="CategoryID" />
+                <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" DataTextField="Name"
+                    DataValueField="CategoryID" />
                 <asp:RequiredFieldValidator ID="CategoryRequired" runat="server" ControlToValidate="Category"
                     ErrorMessage="Please choose a category for this story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 <br />
