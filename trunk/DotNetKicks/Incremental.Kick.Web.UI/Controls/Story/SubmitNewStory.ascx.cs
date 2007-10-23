@@ -2,7 +2,6 @@ using System;
 using System.Web.UI.WebControls;
 using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
-using Incremental.Kick.Dal;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 
@@ -24,13 +23,18 @@ namespace Incremental.Kick.Web.UI.Controls
         {
             if(!Page.IsPostBack)
             {
+                // First, in case the story already exists redirect the user to the story page
+                Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(Request.QueryString["url"].Trim());
+
+                if(story != null)
+                    Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, story.Category.CategoryIdentifier), true);
+
                 // Bind list of categories
                 Category.DataSource = CategoryCache.GetCategories(KickPage.HostProfile.HostID);
                 Category.DataBind();
 
                 // Retrieve story information if story was submitted with the bookmarklet
                 Url.Text = Request.QueryString["url"];
-
                 Title.Text = Request.QueryString["title"];
 
                 if(Title.Text.Length > 70)
@@ -75,7 +79,7 @@ namespace Incremental.Kick.Web.UI.Controls
         protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
             // Retrieve the story given the url
-            Incremental.Kick.Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
+            Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
             if(story != null)
