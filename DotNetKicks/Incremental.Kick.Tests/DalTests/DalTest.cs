@@ -13,14 +13,14 @@ namespace Incremental.Kick.Tests.DalTests {
         protected Story _story;
         protected Host _host;
 
-        [SetUp]
-        public void Setup() {
-            _normalUser = User.FetchUserByUsername("user1");
-            _administratorUser = User.FetchUserByUsername("admin");
-            _moderatorUser = User.FetchUserByUsername("moderator");
-            _bannedUser = User.FetchUserByUsername("user5"); //TODO: GJ: add a 'banned' username to the test data
-            _story = Story.FetchStoryByIdentifier("Story_with_20_comments");
-            _host = Host.FetchByID(1);
-        }
+//        [SetUp]
+//        public void Setup() {
+//            _normalUser = User.FetchUserByUsername("user1");
+//            _administratorUser = User.FetchUserByUsername("admin");
+//            _moderatorUser = User.FetchUserByUsername("moderator");
+//            _bannedUser = User.FetchUserByUsername("user5"); //TODO: GJ: add a 'banned' username to the test data
+//            _story = Story.FetchStoryByIdentifier("Story_with_20_comments");
+//            _host = Host.FetchByID(1);
+//        }
     }
 }
