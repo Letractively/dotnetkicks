@@ -11,9 +11,9 @@ namespace Incremental.Kick.Tests {
             Assert.AreEqual(1, 1);
         }
 
-        [Test]
-        public void CanAccessDatabaseTest() {
-            Assert.GreaterEqualThan(User.GetTotalCount(), 0);
-        }
+//        [Test]
+//        public void CanAccessDatabaseTest() {
+//            Assert.GreaterEqualThan(User.GetTotalCount(), 0);
+//        }
     }
 }
