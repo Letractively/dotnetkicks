@@ -6,12 +6,12 @@ using MbUnit.Framework;
 
 namespace Incremental.Kick.Tests.DalTests {
     public abstract class DalTest {
-        protected User _normalUser;
-        protected User _administratorUser;
-        protected User _moderatorUser;
-        protected User _bannedUser;
-        protected Story _story;
-        protected Host _host;
+//        protected User _normalUser;
+//        protected User _administratorUser;
+//        protected User _moderatorUser;
+//        protected User _bannedUser;
+//        protected Story _story;
+//        protected Host _host;
 
 //        [SetUp]
 //        public void Setup() {
