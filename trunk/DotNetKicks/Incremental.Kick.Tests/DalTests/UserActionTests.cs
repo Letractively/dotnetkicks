@@ -10,11 +10,11 @@ namespace Incremental.Kick.Tests.DalTests {
     [TestFixture]
     public class UserActionTests : DalTest {
 
-        [Test, RollBack2]
-        public void RecordKickInsertsRecord() {
-            UserAction userAction = UserAction.RecordKick(_host.HostID, _normalUser, _story);
-            Assert.IsNotNull(userAction);
-        }
+        //[Test, RollBack2]
+        //public void RecordKickInsertsRecord() {
+        //    UserAction userAction = UserAction.RecordKick(_host.HostID, _normalUser, _story);
+        //    Assert.IsNotNull(userAction);
+        //}
 
        
     }
