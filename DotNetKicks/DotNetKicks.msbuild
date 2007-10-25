@@ -15,6 +15,7 @@
            RuleLibraries="@(FxCopRuleAssemblies)" 
            AnalysisReportFileName="fxcop-results.xml"
            FailOnError="True"
+           TypeList="Incremental.Kick.BusinessLogic.*"
            DirectOutputToConsole="True"
            ToolPath="..\3rdParty\FxCop\" />
   </Target>
