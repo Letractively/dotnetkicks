@@ -1,1 +1,1 @@
-%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.sln
+%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.msbuild /t:Build,Tests
