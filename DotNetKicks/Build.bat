@@ -1,1 +1,2 @@
-%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.msbuild /t:Build,Tests,FxCop
+%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.msbuild
+PAUSE
