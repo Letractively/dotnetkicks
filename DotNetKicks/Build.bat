@@ -1,19 +1,24 @@
 @echo off
 
-ECHO 1: Build and run all tests and analysis
-ECHO 2: Build Only
-ECHO 3: Build and run tests
-ECHO 4: Build and run FxCop analysis
+echo 1: Build Only (default)
+echo 2: Build and run tests
+echo 3: Build and run FxCop analysis
+echo 4: Build and run all tests and analysis
+echo.
 
-set buildtype=BuildAll
-set /p choice=Choose a build type: 
+set target=Build
+set /p choice=Choose a build target or press enter to run the default target: 
 
-if %choice% EQU 2 set buildtype=Build
-if %choice% EQU 3 set buildtype=Tests
-if %choice% EQU 4 set buildtype=FxCop
+if %choice% EQU 2 set target=Tests
+if %choice% EQU 3 set target=FxCop
+if %choice% EQU 4 set target=BuildAll
 
 :build 
-echo Building target %buildtype%
-%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.msbuild /t:%buildtype%
-echo Built target %buildtype%
+echo.
+echo Building target: %target%
+echo.
+%windir%\Microsoft.NET\Framework\v2.0.50727\MSBuild DotNetKicks.msbuild /t:%target%
+echo.
+echo Built target: %target%
+echo.
 pause
