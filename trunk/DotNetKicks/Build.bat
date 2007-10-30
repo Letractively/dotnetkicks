@@ -7,6 +7,7 @@ echo 4: Build and run all tests and analysis
 echo.
 
 set target=Build
+set choice=1
 set /p choice=Choose a build target or press enter to run the default target: 
 
 if %choice% EQU 2 set target=Tests
