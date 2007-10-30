@@ -116,6 +116,9 @@ namespace Incremental.Kick.Dal {
             //TODO: GJ: PERFORMANCE: update in one sql statement (low priority)
             foreach (Story story in this.StoryRecords()) {
                 story.IsSpam = isSpam;
+                //fix to Issue 22 where banned users stories are included in the
+                //search results.
+                story.UpdatedOn = DateTime.Now;
                 story.Save();
             }
             foreach (Comment comment in this.CommentRecords()) {
