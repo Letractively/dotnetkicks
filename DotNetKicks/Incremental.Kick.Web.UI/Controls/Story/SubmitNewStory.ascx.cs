@@ -23,11 +23,19 @@ namespace Incremental.Kick.Web.UI.Controls
         {
             if(!Page.IsPostBack)
             {
-                // First, in case the story already exists redirect the user to the story page
-                Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(Request.QueryString["url"].Trim());
+                // In case a url is passed on the querystring check if the story 
+                // already exists and in that case redirect the user to the story page
+                string url = Request.QueryString["url"];
 
-                if(story != null)
-                    Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, story.Category.CategoryIdentifier), true);
+                if (!string.IsNullOrEmpty(url))
+                {
+                    Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(url.Trim());
+
+                    if(story != null)
+                        Response.Redirect(
+                            UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
+                                                 story.Category.CategoryIdentifier), true);
+                }
 
                 // Bind list of categories
                 Category.DataSource = CategoryCache.GetCategories(KickPage.HostProfile.HostID);
