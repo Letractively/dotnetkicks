@@ -160,6 +160,7 @@ namespace Incremental.Kick.BusinessLogic {
             }
         }
 
+
         public static int IncrementStoryCommentCount(int storyID) {
             Story story = Story.FetchByID(storyID);
             story.CommentCount++;
