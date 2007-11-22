@@ -6,6 +6,8 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Caching {
     public class HostCache {
         public static Host GetHost(string hostAndPort) {
+            if (!Hosts.ContainsKey(hostAndPort))
+                throw new ArgumentException("The Host table does not have a record matching " + hostAndPort);
             return Hosts[hostAndPort];
         }
 
