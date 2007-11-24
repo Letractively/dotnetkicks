@@ -152,13 +152,12 @@ namespace Incremental.Kick.Web.Controls
 
             //TODO: remove inline style from table
             // Render submitted by link
-            writer.WriteLine(
-                @"
+			writer.WriteLine(
+				@"
                     <td class=""storySummaryMainTD""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
-                        <div class=""storyTitle""><a href=""{0}"" {4}>{1}</a> <a href=""{0}""><img src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
-                        <div class=""storySubmitted"">{2} submitted by 
-            ",
-                _story.Url, _story.Title, publishedHtml, KickPage.StaticIconRootUrl, linkAttributes);
+                        <div class=""storyTitle""><a onclick=""plusViewCount({5});"" target=""_blank"" href=""{0}"" {4}>{1}</a> <a href=""{0}""><img src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
+                        <div class=""storySubmitted"">{2} submitted by ",
+				_story.Url, _story.Title, publishedHtml, KickPage.StaticIconRootUrl, linkAttributes, _story.StoryID);
 
             // Render user link
             UserLink userLink = new UserLink();
@@ -198,9 +197,9 @@ namespace Incremental.Kick.Web.Controls
                 categoryIcon =
                     String.Format(@"<a href=""{0}""><img src=""{1}/{2}"" width=""16"" height=""16"" border=""0"" /></a>",
                                   categoryUrl, KickPage.StaticIconRootUrl, category.IconName);
-            writer.WriteLine(@" | 
-                category: {0} <a href=""{1}"" rel=""tag"">{2}</a>", categoryIcon, categoryUrl,
-                             category.Name);
+			writer.WriteLine(@" | 
+                category: {0} <a href=""{1}"" rel=""tag"">{2}</a> | Views: {3}", categoryIcon, categoryUrl,
+							 category.Name, _story.ViewCount);
 
             // Render Get Kick Image html
             if(_showGetKickImageCodeLink)
