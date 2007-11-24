@@ -110,6 +110,12 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
             StoryBR.MarkAsSpam(storyID, HostProfile.HostID, KickUserProfile);
         }
 
+		[JsonRpcMethod("viewCount")]
+		public void ViewCount(int storyID)
+		{
+			StoryBR.IncrementViewCount(storyID);
+		}
+
         #endregion
 
         #region User

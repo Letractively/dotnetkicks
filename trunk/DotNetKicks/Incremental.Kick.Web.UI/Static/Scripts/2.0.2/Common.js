@@ -53,6 +53,7 @@ function GetLoadingElement() { return document.getElementById("LoadingSpan"); }
 function GetEditableTagList(storyID) { return document.getElementById(storyID + "_EditableTagList"); }
 function GetEditableTagListNoTags(storyID) { return document.getElementById(storyID + "_EditableTagListNoTags"); }
 
+function plusViewCount(storyID) { ajaxServices.viewCount(storyID); }
 //common:
 
 function StartLoading() {
