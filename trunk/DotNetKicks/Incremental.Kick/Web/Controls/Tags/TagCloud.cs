@@ -10,6 +10,12 @@ namespace Incremental.Kick.Web.Controls {
     public class TagCloud : KickHtmlControl {
         private WeightedTagList _tags;
 
+        /// <summary>
+        /// Binds this tag cloud control to a list of weighted tags.
+        /// </summary>
+        /// <remarks>Callers can use the TagCache to retrieve a current list of tags for the current host:
+        /// <code>this.TagCloud.DataBind(TagCache.GetHostTags(this.HostProfile.HohstID));</code></remarks>
+        /// <param name="tags">The <seealso cref="WeightedTagList"/> to bind to.</param>
         public void DataBind(WeightedTagList tags) {
             this._tags = tags;
         }
