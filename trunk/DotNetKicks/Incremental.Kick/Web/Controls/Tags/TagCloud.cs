@@ -8,9 +8,19 @@ using Incremental.Kick.Dal.Entities;
 
 namespace Incremental.Kick.Web.Controls {
     public class TagCloud : KickHtmlControl {
-        private WeightedTagList _tags;
+        
+		#region  Properties and variables (1)
 
         /// <summary>
+        /// The list of weighted tags that this tag cloud displays
+        /// </summary>
+		private WeightedTagList _tags;
+
+		#endregion 
+
+		#region  Methods (2)
+
+		/// <summary>
         /// Binds this tag cloud control to a list of weighted tags.
         /// </summary>
         /// <remarks>Callers can use the TagCache to retrieve a current list of tags for the current host:
@@ -20,7 +30,11 @@ namespace Incremental.Kick.Web.Controls {
             this._tags = tags;
         }
 
-        protected override void Render(HtmlTextWriter writer) {
+        /// <summary>
+        /// Writes content to render on a client to the specified <see cref="T:System.Web.UI.HtmlTextWriter"></see> object.
+        /// </summary>
+        /// <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"></see> that contains the output stream to render on the client.</param>
+		protected override void Render(HtmlTextWriter writer) {
             writer.WriteLine(@"<div class=""TagCloud"">");
 
 
@@ -62,6 +76,9 @@ namespace Incremental.Kick.Web.Controls {
             }
             writer.WriteLine("</div>");
         }
+		
+		#endregion 
+
     }
 }
 
