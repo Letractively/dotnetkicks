@@ -48,8 +48,11 @@ namespace Incremental.Kick.Web.UI.Controls
                 if(Title.Text.Length > 70)
                     Title.Text = Title.Text.Substring(0, 70);
 
-                if(Title.Text.Length > 0)
-                    TitleNoteLabel.Text = "NOTE: Is this title correct?";
+                if (Title.Text.Length > 0)
+                {
+                    TitleNoteLabel.Text = "NOTE: Is this title correct?<br/>";
+                    TitleNoteLabel.Visible = true;
+                }
 
                 Description.Text = Request.QueryString["description"];
 
