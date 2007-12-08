@@ -39,14 +39,14 @@ function checkStoryExistsCallback(response)
             <td class="FormInput FormTD">
                 <asp:TextBox ID="Url" Text="http://" Width="100%" runat="server"></asp:TextBox>
                 <span class="ValidationMessage">
-                    <asp:RegularExpressionValidator ID="UrlValidator" runat="server" ErrorMessage="Please enter a valid URL."
+                    <asp:RegularExpressionValidator ID="UrlValidator" runat="server" ErrorMessage="Please enter a valid URL.<br/>"
                         ControlToValidate="Url" ValidationExpression="^http\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,4}(/\S*)?$"
-                        Display="Dynamic"></asp:RegularExpressionValidator>
+                        Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="UrlRequired" runat="server" ControlToValidate="Url"
-                        ErrorMessage="Please enter the URL of the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
+                        ErrorMessage="Please enter the URL of the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                     <asp:CustomValidator ID="StoryAlreadyExists" runat="server" ControlToValidate="Url"
-                        Display="Dynamic" ErrorMessage="The story already exists." ValidationGroup="SubmitStoryValidation"
-                        ClientValidationFunction="checkStoryExists" OnServerValidate="StoryAlreadyExists_ServerValidate"></asp:CustomValidator></span><br />
+                        Display="Dynamic" ErrorMessage="The story already exists.<br/>" ValidationGroup="SubmitStoryValidation"
+                        ClientValidationFunction="checkStoryExists" OnServerValidate="StoryAlreadyExists_ServerValidate"></asp:CustomValidator></span>
                 <span class="FormHelp">The URL to the story.</span>
             </td>
         </tr>
@@ -54,13 +54,13 @@ function checkStoryExistsCallback(response)
             <td class="FormTitle FormTD">
                 Title:</td>
             <td class="FormInput FormTD">
-                <asp:TextBox ID="Title" Columns="60" MaxLength="70" runat="server"></asp:TextBox>
-                <asp:Label ID="TitleNoteLabel" runat="server" EnableViewState="False" ForeColor="Blue"></asp:Label>
+                <asp:TextBox ID="Title" Columns="60" MaxLength="70" Width="100%" runat="server"></asp:TextBox>
+                <asp:Label ID="TitleNoteLabel" runat="server" Visible="false" EnableViewState="False"
+                    ForeColor="Blue"></asp:Label>
                 <span class="ValidationMessage">
                     <asp:RequiredFieldValidator ID="TitleRequired" runat="server" ControlToValidate="Title"
-                        ErrorMessage="Please enter a title for the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
+                        ErrorMessage="Please enter a title for the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 </span>
-                <br />
                 <span class="FormHelp">The title of the story.</span>
             </td>
         </tr>
@@ -68,12 +68,14 @@ function checkStoryExistsCallback(response)
             <td class="FormTitle FormTD">
                 Description:</td>
             <td class="FormInput FormTD">
-                <asp:TextBox ID="Description" TextMode="MultiLine" Columns="60" Rows="7" runat="server"></asp:TextBox>
+                <asp:TextBox ID="Description" TextMode="MultiLine" Columns="60" Rows="7" Width="100%" runat="server"></asp:TextBox>
                 <span class="ValidationMessage">
                     <asp:RequiredFieldValidator ID="DescriptionRequired" runat="server" ControlToValidate="Description"
-                        ErrorMessage="Please enter a description for the story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
-                </span>
-                <br />
+                        ErrorMessage="Please enter a description for the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="descriptionTitleDifferent" runat="server" ControlToCompare="Title"
+                        ControlToValidate="Description" ErrorMessage="The story title and description cannot be the same.<br/>"
+                        Operator="NotEqual" SetFocusOnError="True" ToolTip="Tell us something more about the story"
+                        ValidationGroup="SubmitStoryValidation" Display="Dynamic"></asp:CompareValidator></span>
                 <span class="FormHelp">In your own word, provide a brief description of the story.</span>
             </td>
         </tr>
@@ -84,8 +86,7 @@ function checkStoryExistsCallback(response)
                 <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" DataTextField="Name"
                     DataValueField="CategoryID" />
                 <asp:RequiredFieldValidator ID="CategoryRequired" runat="server" ControlToValidate="Category"
-                    ErrorMessage="Please choose a category for this story." Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
-                <br />
+                    ErrorMessage="Please choose a category for this story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 <span class="FormHelp">Select the best category that this story belong to.</span>
             </td>
         </tr>
