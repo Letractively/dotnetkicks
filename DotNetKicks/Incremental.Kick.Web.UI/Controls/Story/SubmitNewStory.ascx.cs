@@ -4,6 +4,7 @@ using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.UI.Controls
 {
@@ -21,7 +22,7 @@ namespace Incremental.Kick.Web.UI.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
                 // In case a url is passed on the querystring check if the story 
                 // already exists and in that case redirect the user to the story page
@@ -31,7 +32,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 {
                     Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(url.Trim());
 
-                    if(story != null)
+                    if (story != null)
                         Response.Redirect(
                             UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
                                                  story.Category.CategoryIdentifier), true);
@@ -45,7 +46,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 Url.Text = Request.QueryString["url"];
                 Title.Text = Request.QueryString["title"];
 
-                if(Title.Text.Length > 70)
+                if (Title.Text.Length > 70)
                     Title.Text = Title.Text.Substring(0, 70);
 
                 if (Title.Text.Length > 0)
@@ -56,9 +57,9 @@ namespace Incremental.Kick.Web.UI.Controls
 
                 Description.Text = Request.QueryString["description"];
 
-                if(Url.Text.Length == 0)
+                if (Url.Text.Length == 0)
                     Url.Focus();
-                else if(Title.Text.Length == 0)
+                else if (Title.Text.Length == 0)
                     Title.Focus();
                 else
                     Description.Focus();
@@ -67,7 +68,7 @@ namespace Incremental.Kick.Web.UI.Controls
 
         protected void SubmitStory_Click(object sender, EventArgs e)
         {
-            if(Page.IsValid)
+            if (Page.IsValid)
             {
                 short categoryID = short.Parse(Category.SelectedValue);
                 string storyIdentifier =
@@ -87,22 +88,38 @@ namespace Incremental.Kick.Web.UI.Controls
             }
         }
 
-        protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
+
+        protected void UrlCheck_ServerValidate(object source, ServerValidateEventArgs args)
         {
+
             // Retrieve the story given the url
             Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
-            if(story != null)
+            if (story != null)
             {
                 // Make page invalid
                 args.IsValid = false;
 
                 // Let user kick the existing story by providing a link to it
-                StoryAlreadyExists.ErrorMessage =
-                    string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.",
+                UrlCheck.ErrorMessage =
+                    string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.<br/>",
                                   UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
                                                        story.Category.CategoryIdentifier));
+                return;
+            }
+
+            // check to see its bannination status
+            bool banninated = BannedUrlHelper.IsUrlBanninated(args.Value, HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID);
+
+            // If the url matches
+            if (banninated)
+            {
+                // Make page invalid
+                args.IsValid = false;
+
+                // Let user kick the existing story by providing a link to it
+                UrlCheck.ErrorMessage = "This URL cannot be submitted.<br/>";
             }
         }
     }
