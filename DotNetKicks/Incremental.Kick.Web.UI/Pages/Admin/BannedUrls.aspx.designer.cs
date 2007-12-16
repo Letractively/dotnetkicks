@@ -20,13 +20,13 @@ namespace Incremental.Kick.Web.UI.Pages.Admin {
     public partial class BannedUrls {
         
         /// <summary>
-        /// damnit control.
+        /// Scaffold1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView damnit;
+        protected global::SubSonic.Scaffold Scaffold1;
         
         /// <summary>
         /// AdminMenu1 control.

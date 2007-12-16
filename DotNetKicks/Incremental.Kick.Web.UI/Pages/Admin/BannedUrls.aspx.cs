@@ -7,15 +7,15 @@ namespace Incremental.Kick.Web.UI.Pages.Admin
     {
         protected void Page_OnLoad()
         {
-            if (!IsPostBack)
-            {
-                Query BannedUrlPatternQuery = BannedUrlPattern.CreateQuery();
+            //if (!IsPostBack)
+            //{
+            //    Query BannedUrlPatternQuery = BannedUrlPattern.CreateQuery();
 
-                BannedUrlPatternCollection BannedUrlPatterns = new BannedUrlPatternCollection();
-                BannedUrlPatterns.LoadAndCloseReader(BannedUrlPatternQuery.ExecuteReader());
-                damnit.DataSource = BannedUrlPatterns;
-                damnit.DataBind();
-            }
+            //    BannedUrlPatternCollection BannedUrlPatterns = new BannedUrlPatternCollection();
+            //    BannedUrlPatterns.LoadAndCloseReader(BannedUrlPatternQuery.ExecuteReader());
+            //    damnit.DataSource = BannedUrlPatterns;
+            //    damnit.DataBind();
+            //}
         }
     }
 }

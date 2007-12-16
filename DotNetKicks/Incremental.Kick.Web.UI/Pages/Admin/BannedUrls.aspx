@@ -3,8 +3,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="Server">
 
-    <%--<SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_BannedUrlPattern" />--%>
-    <asp:GridView id="damnit" runat="server"></asp:GridView>
+    <SubSonic:Scaffold ID="Scaffold1" runat="server" TableName="Kick_BannedUrlPattern" />
 </asp:Content>
 
 <asp:Content id="RightContent" ContentPlaceHolderID="RightContent" runat="Server">
