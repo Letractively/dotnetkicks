@@ -1,13 +1,17 @@
-/****** Object:  Table [dbo].[Kick_BannedUrlPattern]    Script Date: 12/15/2007 16:58:33 ******/
+/****** Object:  Table [dbo].[Kick_BannedUrlPattern]    Script Date: 12/16/2007 02:38:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Kick_BannedUrlPattern](
 	[PatternId] [int] IDENTITY(1,1) NOT NULL,
-	[HostId] [int] NOT NULL,
+	[HostId] [int] NULL,
 	[Description] [nvarchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL CONSTRAINT [DF_Kick_BannedUrlPattern_Description]  DEFAULT (N'(No description given)'),
-	[BannedUrlRegex] [nvarchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+	[BannedUrlRegex] [nvarchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+ CONSTRAINT [PK_Kick_BannedUrlPattern] PRIMARY KEY CLUSTERED 
+(
+	[PatternId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
