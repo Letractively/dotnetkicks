@@ -666,7 +666,11 @@ INSERT INTO [dbo].[Kick_UserFriend] ([UserFriendID], [UserID], [FriendID], [Crea
 INSERT INTO [dbo].[Kick_UserFriend] ([UserFriendID], [UserID], [FriendID], [CreatedOn]) VALUES (32, 12, 11, '2007-09-16T16:03:38')
 SET IDENTITY_INSERT [dbo].[Kick_UserFriend] OFF
 GO
-
+-- [dbo].[Kick_BannedUrlPattern] (2 rows)
+SET IDENTITY_INSERT [dbo].[Kick_BannedUrlPattern] ON
+INSERT INTO [dbo].[Kick_BannedUrlPattern] ([HostId],[Description],[BannedUrlRegex]) VALUES (null,N'Lemon party',N'.*lemonparty.*')
+INSERT INTO [dbo].[Kick_BannedUrlPattern] ([HostId],[Description],[BannedUrlRegex]) VALUES (null,N'2girls1cup',N'.*2girls1cup.*')
+SET IDENTITY_INSERT [dbo].[Kick_BannedUrlPattern] OFF
 
 -- [Constraints ENABLE]
 ALTER TABLE [dbo].[Kick_Category] CHECK CONSTRAINT ALL
