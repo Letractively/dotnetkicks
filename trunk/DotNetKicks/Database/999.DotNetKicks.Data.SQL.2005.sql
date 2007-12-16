@@ -77,7 +77,11 @@ INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (4, 13, 21, N'Scotland have a good chance now', '2007-09-15T13:25:11', 1, 0)
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (5, 9, 21, N'He''ll do it too', '2007-09-15T13:37:17', 1, 0)
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (6, 18, 3, N'It is curtains for England now', '2007-09-15T13:41:43', 1, 0)
-INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (7, 18, 10, N'Comment link should now work :<br/><br/><a href="http://www.ireland.com/" target="_new">http://www.ireland.com/</a><br/><br/><a href="http://www.dotnetkicks.com/spy" target="_new">http://www.dotnetkicks.com/spy</a>', '2007-09-15T15:50:58', 1, 0)
+INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (7, 18, 10, N'Comment link should now work :
+<br/>
+<br/><a href="http://www.ireland.com/" target="_new">http://www.ireland.com/</a>
+<br/>
+<br/><a href="http://www.dotnetkicks.com/spy" target="_new">http://www.dotnetkicks.com/spy</a>', '2007-09-15T15:50:58', 1, 0)
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (8, 23, 12, N'Sunderland needed the points', '2007-09-16T14:36:58', 1, 0)
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (9, 44, 1, N'Comment 1', '2007-09-16T15:52:56', 1, 0)
 INSERT INTO [dbo].[Kick_Comment] ([CommentID], [StoryID], [UserID], [Comment], [CreatedOn], [HostID], [IsSpam]) VALUES (10, 44, 1, N'Comment 2', '2007-09-16T15:53:04', 1, 0)
