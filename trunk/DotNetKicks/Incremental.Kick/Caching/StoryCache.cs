@@ -24,7 +24,7 @@ namespace Incremental.Kick.Caching {
                     storyCache.Insert(cacheKey, story, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
-            if (hostID != story.HostID)
+            if (story != null && hostID != story.HostID)
                 throw new ArgumentException("The story does not belong to the host");
 
             return story;

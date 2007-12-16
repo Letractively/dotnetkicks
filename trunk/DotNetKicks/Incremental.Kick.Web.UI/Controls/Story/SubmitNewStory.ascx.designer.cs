@@ -56,13 +56,13 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator UrlRequired;
         
         /// <summary>
-        /// StoryAlreadyExists control.
+        /// UrlCheck control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator StoryAlreadyExists;
+        protected global::System.Web.UI.WebControls.CustomValidator UrlCheck;
         
         /// <summary>
         /// Title control.

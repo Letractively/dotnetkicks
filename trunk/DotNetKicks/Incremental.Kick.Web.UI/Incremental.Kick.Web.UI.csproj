@@ -27,6 +27,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elmah, Version=1.0.8925.0, Culture=neutral, processorArchitecture=MSIL">
@@ -382,6 +383,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\BannedUrls.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>BannedUrls.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\BannedUrls.aspx.designer.cs">
+      <DependentUpon>BannedUrls.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Admin\Categories.aspx.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
@@ -883,11 +891,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="App_Data\LolKicks.mdf">
+    </Content>
+    <Content Include="App_Data\LolKicks_log.ldf">
+      <DependentUpon>LolKicks.mdf</DependentUpon>
+    </Content>
     <Content Include="Controls\Api\ApiMenu.ascx" />
     <Content Include="Controls\Admin\Search.ascx" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
     <Content Include="Controls\User\ChangeEmail.ascx" />
     <Content Include="Controls\User\VerifyEmail.ascx" />
+    <Content Include="Pages\Admin\BannedUrls.aspx" />
     <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\BlockedReferrals.aspx" />
     <Content Include="Pages\Admin\ReservedUsernames.aspx" />
@@ -1023,7 +1037,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Static\Scripts\2.0.2\Admin\" />
     <Folder Include="Static\Scripts\2.0.2\Controls\" />
     <Folder Include="Templates\Simple\images\" />

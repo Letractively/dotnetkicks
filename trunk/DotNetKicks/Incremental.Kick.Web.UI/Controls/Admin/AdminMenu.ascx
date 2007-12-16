@@ -10,5 +10,6 @@
     <li><a href="/admin/chats">Chats</a></li>
     <li><a href="/admin/reservedusernames">Reserved Usernames</a></li>
     <li><a href="/admin/blockedreferrals">Blocked referrals</a></li>
+    <li><a href="/admin/bannedurls">Banned URLs</a></li>
     <li><a href="/admin/search">Search</a></li>
 </ul>

@@ -17,7 +17,8 @@ namespace Incremental.Kick.Dal
 	#region Tables Struct
 	public partial struct Tables
 	{
-		
+        public static string BannedUrlPattern = @"Kick_BannedUrlPattern";
+
 		public static string Elmah_Error = @"ELMAH_Error";
         
 		public static string BlockedReferral = @"Kick_BlockedReferral";

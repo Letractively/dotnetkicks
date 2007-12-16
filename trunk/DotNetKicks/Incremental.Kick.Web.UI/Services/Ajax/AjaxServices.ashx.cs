@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using Incremental.Kick.Dal.Entities.Api;
 using System.Web.UI;
+using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.UI.Services.Ajax {
     //NOTE: GJ: we are now using Jayrock for Ajax services. Please see http://jayrock.berlios.de/ for more info
@@ -56,13 +57,22 @@ namespace Incremental.Kick.Web.UI.Services.Ajax {
         #endregion
 
         #region Story
-
-        [JsonRpcMethod("fetchKickedStoryUrlByUrl")]
-        public string FetchKickedStoryUrlByUrl(string url) {
+        [JsonRpcMethod("checkStory")]
+        public string CheckStory(string url)
+        {
+            // check for dupes
             Story story = Story.FetchStoryByUrl(url);
-            return story != null
-                    ? UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier, story.Category.CategoryIdentifier)
-                    : null;
+            if (story != null)
+            {
+                return string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.<br/>",
+                                  UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
+                                                       story.Category.CategoryIdentifier));
+            }
+            // check for bannination
+            if (BannedUrlHelper.IsUrlBanninated(url, HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID))
+                return "This url cannot be submitted.<br/>";
+            // returning null = everything's otay
+            return null;
         }
 
         [JsonRpcMethod("kickStory")]
