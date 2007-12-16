@@ -4,7 +4,6 @@ using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
-using Incremental.Kick.Helpers;
 
 namespace Incremental.Kick.Web.UI.Controls
 {
@@ -88,38 +87,22 @@ namespace Incremental.Kick.Web.UI.Controls
             }
         }
 
-
-        protected void UrlCheck_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void StoryAlreadyExists_ServerValidate(object source, ServerValidateEventArgs args)
         {
-
             // Retrieve the story given the url
             Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
-            if (story != null)
+            if(story != null)
             {
                 // Make page invalid
                 args.IsValid = false;
 
                 // Let user kick the existing story by providing a link to it
-                UrlCheck.ErrorMessage =
-                    string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.<br/>",
+                StoryAlreadyExists.ErrorMessage =
+                    string.Format("The story already exists. You might want to <a href=\"{0}\">kick it</a> instead.",
                                   UrlFactory.CreateUrl(UrlFactory.PageName.ViewStory, story.StoryIdentifier,
                                                        story.Category.CategoryIdentifier));
-                return;
-            }
-
-            // check to see its bannination status
-            bool banninated = BannedUrlHelper.IsUrlBanninated(args.Value, HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID);
-
-            // If the url matches
-            if (banninated)
-            {
-                // Make page invalid
-                args.IsValid = false;
-
-                // Let user kick the existing story by providing a link to it
-                UrlCheck.ErrorMessage = "This URL cannot be submitted.<br/>";
             }
         }
     }

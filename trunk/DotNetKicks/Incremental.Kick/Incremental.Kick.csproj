@@ -26,40 +26,39 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CipherLite, Version=1.5.0.0, Culture=neutral, PublicKeyToken=29e81a0118de2e3b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
+      <HintPath>..\..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.dll</HintPath>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.dll</HintPath>
     </Reference>
     <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.Json.dll</HintPath>
+      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.Json.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\log4net\log4net.dll</HintPath>
+      <HintPath>..\..\3rdParty\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Lucene\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\3rdParty\Lucene\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>
+      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces.dll</HintPath>
+      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -82,7 +81,6 @@
     <Compile Include="BusinessLogic\StoryKickBR.cs" />
     <Compile Include="BusinessLogic\TagBR.cs" />
     <Compile Include="BusinessLogic\UserBR.cs" />
-    <Compile Include="Caching\BannedUrlPatternCache.cs" />
     <Compile Include="Caching\BlockedReferralCache.cs" />
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
@@ -120,7 +118,6 @@
     <Compile Include="Dal\SubSonic\Custom\TagCollection.cs" />
     <Compile Include="Dal\SubSonic\Custom\User.cs" />
     <Compile Include="Dal\SubSonic\Custom\UserAction.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\BannedUrlPatternController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\BlockedReferralController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\CategoryController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\ChatController.cs" />
@@ -138,7 +135,6 @@
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserActionController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserFriendController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\BannedUrlPattern.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\BlockedReferral.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Category.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Chat.cs" />
@@ -157,7 +153,6 @@
     <Compile Include="Dal\SubSonic\Generated\Models\UserFriend.cs" />
     <Compile Include="Dal\SubSonic\Generated\Utility\AllStructs.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
-    <Compile Include="Helpers\BannedUrlHelper.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="Helpers\ControlHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
