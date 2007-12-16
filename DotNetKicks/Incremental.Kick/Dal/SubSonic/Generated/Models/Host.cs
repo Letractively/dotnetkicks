@@ -965,6 +965,14 @@ namespace Incremental.Kick.Dal
 		
 		#region PrimaryKey Methods
 		
+		private Incremental.Kick.Dal.BannedUrlPatternCollection colBannedUrlPatternRecords;
+		public Incremental.Kick.Dal.BannedUrlPatternCollection BannedUrlPatternRecords()
+		{
+			if(colBannedUrlPatternRecords == null)
+				colBannedUrlPatternRecords = new Incremental.Kick.Dal.BannedUrlPatternCollection().Where(BannedUrlPattern.Columns.HostId, HostID).Load();
+			return colBannedUrlPatternRecords;
+		}
+
 		private Incremental.Kick.Dal.CategoryCollection colCategoryRecords;
 		public Incremental.Kick.Dal.CategoryCollection CategoryRecords()
 		{

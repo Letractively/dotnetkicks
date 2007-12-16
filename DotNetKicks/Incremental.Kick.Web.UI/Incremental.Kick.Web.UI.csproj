@@ -383,6 +383,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\BlockedUrlPatterns.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>BlockedUrlPatterns.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\BlockedUrlPatterns.aspx.designer.cs">
+      <DependentUpon>BlockedUrlPatterns.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Categories.aspx.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -888,6 +895,7 @@
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
     <Content Include="Controls\User\ChangeEmail.ascx" />
     <Content Include="Controls\User\VerifyEmail.ascx" />
+    <Content Include="Pages\Admin\BlockedUrlPatterns.aspx" />
     <Content Include="Pages\Admin\Chats.aspx" />
     <Content Include="Pages\Admin\BlockedReferrals.aspx" />
     <Content Include="Pages\Admin\ReservedUsernames.aspx" />
