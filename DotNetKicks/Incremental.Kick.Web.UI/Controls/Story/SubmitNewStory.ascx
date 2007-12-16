@@ -4,21 +4,20 @@
     TagPrefix="uc1" %>
 
 <script type="text/javascript">
-
-function checkStory(sender, args)
+function checkStoryExists(sender, args)
 {
     StartLoading();
     var context = {sender:sender, args:args};
 
-    ajaxServices.checkStory(args.Value, function(response) 
-    { response.context = context; checkStoryCallback(response); });  
+    ajaxServices.fetchKickedStoryUrlByUrl(args.Value, function(response) 
+    { response.context = context; checkStoryExistsCallback(response); });  
 }
 
-function checkStoryCallback(response)
+function checkStoryExistsCallback(response)
 {
     if(response.result)
     {
-        response.context.sender.innerHTML = response.result;
+        response.context.sender.innerHTML = "The story already exists. You may want to <a href='" + response.result + "'>kick it</a> instead";
         response.context.args.IsValid = false;
         
         response.context.sender.style.display = '';
@@ -28,7 +27,6 @@ function checkStoryCallback(response)
         
     FinishLoading();   
 }
-
 </script>
 
 <br />
@@ -46,9 +44,9 @@ function checkStoryCallback(response)
                         Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="UrlRequired" runat="server" ControlToValidate="Url"
                         ErrorMessage="Please enter the URL of the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
-                    <asp:CustomValidator ID="UrlCheck" runat="server" ControlToValidate="Url"
-                        Display="Dynamic" ErrorMessage="You cannot submit this URL.<br/>" ValidationGroup="SubmitStoryValidation"
-                        ClientValidationFunction="checkStory" OnServerValidate="UrlCheck_ServerValidate"></asp:CustomValidator></span>
+                    <asp:CustomValidator ID="StoryAlreadyExists" runat="server" ControlToValidate="Url"
+                        Display="Dynamic" ErrorMessage="The story already exists.<br/>" ValidationGroup="SubmitStoryValidation"
+                        ClientValidationFunction="checkStoryExists" OnServerValidate="StoryAlreadyExists_ServerValidate"></asp:CustomValidator></span>
                 <span class="FormHelp">The URL to the story.</span>
             </td>
         </tr>
@@ -62,19 +60,18 @@ function checkStoryCallback(response)
                 <span class="ValidationMessage">
                     <asp:RequiredFieldValidator ID="TitleRequired" runat="server" ControlToValidate="Title"
                         ErrorMessage="Please enter a title for the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
-                </span><span class="FormHelp">The title of the story.</span>
+                </span>
+                <span class="FormHelp">The title of the story.</span>
             </td>
         </tr>
         <tr>
             <td class="FormTitle FormTD">
                 Description:</td>
             <td class="FormInput FormTD">
-                <asp:TextBox ID="Description" TextMode="MultiLine" Columns="60" Rows="7" Width="100%"
-                    runat="server"></asp:TextBox>
+                <asp:TextBox ID="Description" TextMode="MultiLine" Columns="60" Rows="7" Width="100%" runat="server"></asp:TextBox>
                 <span class="ValidationMessage">
                     <asp:RequiredFieldValidator ID="DescriptionRequired" runat="server" ControlToValidate="Description"
-                        ErrorMessage="Please enter a description for the story.<br/>" Display="Dynamic"
-                        ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
+                        ErrorMessage="Please enter a description for the story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                     <asp:CompareValidator ID="descriptionTitleDifferent" runat="server" ControlToCompare="Title"
                         ControlToValidate="Description" ErrorMessage="The story title and description cannot be the same.<br/>"
                         Operator="NotEqual" SetFocusOnError="True" ToolTip="Tell us something more about the story"
@@ -89,8 +86,7 @@ function checkStoryCallback(response)
                 <asp:RadioButtonList ID="Category" runat="server" RepeatColumns="5" DataTextField="Name"
                     DataValueField="CategoryID" />
                 <asp:RequiredFieldValidator ID="CategoryRequired" runat="server" ControlToValidate="Category"
-                    ErrorMessage="Please choose a category for this story.<br/>" Display="Dynamic"
-                    ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
+                    ErrorMessage="Please choose a category for this story.<br/>" Display="Dynamic" ValidationGroup="SubmitStoryValidation"></asp:RequiredFieldValidator>
                 <span class="FormHelp">Select the best category that this story belong to.</span>
             </td>
         </tr>
