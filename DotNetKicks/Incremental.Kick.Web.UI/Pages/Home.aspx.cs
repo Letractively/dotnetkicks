@@ -60,7 +60,9 @@ namespace Incremental.Kick.Web.UI.Pages {
                     break;
             }
 
-            this.SubCaption = String.Format(@"<a href=""{0}"" class=""highlight"">View {1} >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), Strings.Pluralize(StoryCache.GetUpcomingStoryCount(this.HostProfile), "upcoming stories"));
+            //this.SubCaption = String.Format(@"<a href=""{0}"" class=""highlight"">View {1} >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), Strings.Pluralize(StoryCache.GetUpcomingStoryCount(this.HostProfile), "upcoming stories"));
+            this.SubCaption = String.Format(@"<a href=""{0}"" class=""highlight"">View {1} >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), String.Format("{0:#,###}", StoryCache.GetUpcomingStoryCount(this.HostProfile)) + " upcoming stories");
+            //String.Format("{0:#,###}", StoryCache.GetUpcomingStoryCount(this.HostProfile))
         }
     }
 }

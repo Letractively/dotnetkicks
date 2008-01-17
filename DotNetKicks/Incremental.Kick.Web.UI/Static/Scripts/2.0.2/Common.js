@@ -56,6 +56,56 @@ function GetEditableTagListNoTags(storyID) { return document.getElementById(stor
 function plusViewCount(storyID) { ajaxServices.viewCount(storyID); }
 //common:
 
+function opacity(id, opacStart, opacEnd, millisec) {
+    //speed for each frame
+    var speed = Math.round(millisec / 100);
+    var timer = 0;
+    //determine the direction for the blending, if start and end are the same nothing happens
+    if(opacStart > opacEnd) {
+        for(i = opacStart; i >= opacEnd; i--) {
+            setTimeout("changeOpac(" + i + ",'" + id + "')",(timer * speed));
+            timer++;
+        }
+    } else if(opacStart < opacEnd) {
+        for(i = opacStart; i <= opacEnd; i++)
+            {
+            setTimeout("changeOpac(" + i + ",'" + id + "')",(timer * speed));
+            timer++;
+        }
+    }
+}
+
+//change the opacity for different browsers
+function changeOpac(opacity, id) {
+    var object = document.getElementById(id).style;
+    object.opacity = (opacity / 100);
+    object.MozOpacity = (opacity / 100);
+    object.KhtmlOpacity = (opacity / 100);
+    object.filter = "alpha(opacity=" + opacity + ")";
+} 
+
+function shiftOpacity(id, millisec) {
+    opacity(id, 100, 0, millisec);
+    setTimeout("HideDiv('" + id + "')",(millisec));
+} 
+
+function ReportAsSpam(storyID) {
+    StartLoading();
+    ajaxServices.reportAsSpam(storyID, function(response) { ReportAsSpam_End(storyID); });
+}
+
+function ReportAsSpam_End(storyID) {
+    alert("Thanks, the media has been flagged as potential spam and may be removed from the site in the near future.");
+    shiftOpacity('m_' + storyID, 1000);
+    FinishLoading();
+}
+
+function HideDiv(divID) {
+	var d = document.getElementById('PopularStoryListDiv');
+	var olddiv = document.getElementById(divID);
+	d.removeChild(olddiv);
+}
+
 function StartLoading() {
     ShowElement(GetLoadingElement());
 }

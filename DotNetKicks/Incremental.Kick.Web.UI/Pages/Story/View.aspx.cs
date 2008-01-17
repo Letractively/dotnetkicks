@@ -16,7 +16,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
         protected void Page_Load(object sender, EventArgs e) {
             Dal.Story story = StoryCache.GetStory(UrlParameters.StoryIdentifier, HostProfile.HostID);
 
-            if (story == null || story.IsSpam)
+            if (story == null || story.IsSpam && !this.KickUserProfile.IsModerator)
                 Response.Redirect("/missingstory");
 
 
