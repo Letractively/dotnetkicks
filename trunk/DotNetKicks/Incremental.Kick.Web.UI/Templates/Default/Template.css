@@ -1,5 +1,7 @@
 ﻿* html .visualIEFloatFix { height: 0.01%; }
 
+.source { font-size: .8em; color: gray; }
+
 body
 {
 	padding: 0px 0px 0px 0px;

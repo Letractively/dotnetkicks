@@ -216,6 +216,19 @@ namespace Incremental.Kick.BusinessLogic {
             }
         }
 
+        public static void UnMarkAsSpam(int storyID, int hostID, User moderator)
+        {
+            Story story = Story.FetchByID(storyID);
+            if (story.HostID != hostID)
+                throw new ArgumentException("The media does not belong to the host");
+            else
+            {
+                story.IsSpam = false;
+                story.UpdatedOn = DateTime.Now;
+                story.Save();
+            }
+        }
+
         private static bool IsWeakStory(Story story, Host host) {
             if ((story.KickCount < host.Publish_MinimumStoryKickCount) || (story.CommentCount < host.Publish_MinimumStoryCommentCount))
                 return true;

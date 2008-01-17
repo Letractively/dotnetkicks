@@ -135,6 +135,13 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
             StoryBR.MarkAsSpam(storyID, HostProfile.HostID, KickUserProfile);
         }
 
+        [JsonRpcMethod("moderatorUnMarkAsSpam")]
+        public void ModeratorUnMarkAsSpam(int storyID)
+        {
+            DemandModeratorRole();
+            StoryBR.UnMarkAsSpam(storyID, HostProfile.HostID, KickUserProfile);
+        }
+
         [JsonRpcMethod("viewCount")]
         public void ViewCount(int storyID)
         {
