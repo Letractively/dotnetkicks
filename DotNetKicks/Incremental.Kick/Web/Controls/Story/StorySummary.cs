@@ -11,17 +11,11 @@ namespace Incremental.Kick.Web.Controls
 {
     public class StorySummary : KickWebControl
     {
-        #region [rgn] Fields (4)
-
         private bool _isOddRow;
         private bool _showFullSummary = true;
         private bool _showMoreLink = true;
         private bool _showGetKickImageCodeLink = false;
         private Story _story;
-
-        #endregion [rgn]
-
-        #region [rgn] Properties (2)
 
         /// <summary>
         /// Gets or sets a value indicating whether [show full summary].
@@ -53,10 +47,6 @@ namespace Incremental.Kick.Web.Controls
             get { return _showGetKickImageCodeLink; }
             set { _showGetKickImageCodeLink = value; }
         }
-
-        #endregion [rgn]
-
-        #region [rgn] Methods (6)
 
         // [rgn] Public Methods (2)
 
@@ -155,7 +145,7 @@ namespace Incremental.Kick.Web.Controls
 			writer.WriteLine(
                 @"
                     <td class=""storySummaryMainTD""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
-                        <div class=""storyTitle""><a onclick=""plusViewCount({5});"" target=""_blank"" href=""{0}"" {4}>{1}</a> <a href=""{0}""><img onclick=""plusViewCount({5});"" src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
+                        <div class=""storyTitle""><a onclick=""plusViewCount({5});"" href=""{0}"" {4}>{1}</a> <a href=""{0}""><img onclick=""plusViewCount({5});"" src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
                         <div class=""storySubmitted"">{2} submitted by ",
 				_story.Url, _story.Title, publishedHtml, KickPage.StaticIconRootUrl, linkAttributes, _story.StoryID);
 
@@ -352,7 +342,5 @@ namespace Incremental.Kick.Web.Controls
 
             return cssClass;
         }
-
-        #endregion [rgn]
     }
 }

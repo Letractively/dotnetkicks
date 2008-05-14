@@ -838,6 +838,34 @@
       <DependentUpon>JsonServices.ashx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Templates\Ruby\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Ruby\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Ruby\SideAds.ascx.cs">
+      <DependentUpon>SideAds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Ruby\SideAds.ascx.designer.cs">
+      <DependentUpon>SideAds.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Ruby\TopAds.ascx.cs">
+      <DependentUpon>TopAds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Ruby\TopAds.ascx.designer.cs">
+      <DependentUpon>TopAds.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Ruby\TopMenu.ascx.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Ruby\TopMenu.ascx.designer.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Default\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -890,6 +918,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Templates\Ruby\MasterPage.Master" />
     <Content Include="Controls\Api\ApiMenu.ascx" />
     <Content Include="Controls\Admin\Search.ascx" />
     <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
@@ -928,6 +957,20 @@
     <Content Include="Static\Scripts\2.0.2\Moderator\HostModerator.js" />
     <Content Include="Static\Scripts\2.0.2\Stories.js" />
     <Content Include="Static\Scripts\2.0.2\Tagging.js" />
+    <Content Include="Templates\Ruby\images\divider.gif" />
+    <Content Include="Templates\Ruby\images\gradients\blue.gif" />
+    <Content Include="Templates\Ruby\images\gradients\formBackground.gif" />
+    <Content Include="Templates\Ruby\images\gradients\green.gif" />
+    <Content Include="Templates\Ruby\images\gradients\GreenPanel.gif" />
+    <Content Include="Templates\Ruby\images\gradients\storyKickCount1.gif" />
+    <Content Include="Templates\Ruby\images\gradients\storyKickCount10.gif" />
+    <Content Include="Templates\Ruby\images\icons\error.png" />
+    <Content Include="Templates\Ruby\images\icons\exclamation.png" />
+    <Content Include="Templates\Ruby\images\icons\information.png" />
+    <Content Include="Templates\Ruby\SideAds.ascx" />
+    <Content Include="Templates\Ruby\Template.css" />
+    <Content Include="Templates\Ruby\TopAds.ascx" />
+    <Content Include="Templates\Ruby\TopMenu.ascx" />
     <Content Include="Templates\NewDefault\MasterPage.Master" />
     <Content Include="Controls\Admin\Cache.ascx" />
     <Content Include="Controls\Admin\Tasks.ascx" />
