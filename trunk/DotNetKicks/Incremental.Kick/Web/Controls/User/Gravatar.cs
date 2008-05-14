@@ -33,7 +33,7 @@ namespace Incremental.Kick.Web.Controls {
         protected override void Render(System.Web.UI.HtmlTextWriter writer) {
             if (this.User.UseGravatar) {
                 string gravatarHash = FormsAuthentication.HashPasswordForStoringInConfigFile(this._user.GravatarEmail, "MD5").ToLower();
-                writer.Write(@"<img src=""/gravatar/{0}/{1}"" alt=""{2}"" class=""userGravatar"" width=""{1}"" height=""{1}"" />", gravatarHash, this._size, this.User.Username);
+                writer.Write(@"<img src=""/gravatar/{0}/{1}"" alt=""{2}"" class=""userGravatar photo"" width=""{1}"" height=""{1}"" />", gravatarHash, this._size, this.User.Username);
             } else {
                 writer.Write(@"<img src=""/static/images/cache/defaultgravatars/gravatar_{0}.jpg"" alt=""{1}"" class=""userGravatar"" width=""{0}"" height=""{0}"" />", this._size, this.User.Username);
             }
