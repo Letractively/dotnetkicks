@@ -30,7 +30,7 @@
                 <td class="FormTitle FormTD">
                     Website:</td>
                 <td class="FormInput FormTD">
-                    <a href="<%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %>" rel="nofollow">
+                    <a href="<%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %>" rel="nofollow" rel="me">
                         <%= Server.HtmlEncode(this.UserProfile.WebsiteURL) %>
                     </a>
                 </td>
@@ -41,7 +41,7 @@
                 <td class="FormTitle FormTD">
                     Blog:</td>
                 <td class="FormInput FormTD">
-                    <a href="<%= Server.HtmlEncode(this.UserProfile.BlogURL) %>" rel="nofollow">
+                    <a href="<%= Server.HtmlEncode(this.UserProfile.BlogURL) %>" rel="nofollow" rel="me">
                         <%= Server.HtmlEncode(this.UserProfile.BlogURL) %>
                     </a>
                     <% if (!String.IsNullOrEmpty(this.UserProfile.BlogFeedURL)) { %>

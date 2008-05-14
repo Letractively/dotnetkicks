@@ -61,19 +61,7 @@
     <%= this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml %>
         
         <uc1:SearchInput ID="searchInput" runat="server" />
-        
-        <% if(this.KickPage.DisplaySideAds) { %>
-            <div id="wedje_div_thelounge"></div>
-            <script type="text/javascript" defer="defer"
-            src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx">
-            </script>
-
-            <p class="tlp">
-            <a href='http://www.montylounge.com/thelounge/' class="adsvia">Ads via The Lounge</a>
-            </p>
-
-        <% } %>
-        
+         
         
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>
