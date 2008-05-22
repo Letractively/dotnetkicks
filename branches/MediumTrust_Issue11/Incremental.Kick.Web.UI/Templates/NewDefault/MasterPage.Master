@@ -1,0 +1,99 @@
+<%@ Master Language="C#" AutoEventWireup="true" Codebehind="MasterPage.master.cs"
+    Inherits="Incremental.Kick.Web.UI.Templates.NewDefault.MasterPage" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Register Src="~/Controls/Story/SearchInput.ascx" TagName="SearchInput" TagPrefix="uc1" %>
+<%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
+<%-- 
+                        New Default Template 
+--%>
+<asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
+    <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
+</asp:Content>
+<asp:Content ID="HeaderOutline" ContentPlaceHolderID="Header" runat="server">
+    <div id="LoadingIndicator">
+        Loading...</div>
+    <%-- the section formerly known as Top Menu --%>
+    <div id="HeaderContainer">
+        <h1>
+            <asp:HyperLink ID="hypSiteTitle" runat="server" /></h1>
+        <h2>
+            <asp:Literal ID="litSiteTagLine" runat="server" /></h2>
+        <div id="HeaderNavigation">
+            <ul>
+                <%-- TODO: fix this to code behind --%>
+                <% if (this.Page.User.Identity.IsAuthenticated)
+                   { %>
+                <li>
+                    <img src="/static/images/icons/new.gif" width="28" height="11" /><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your
+                        profile</a></li>
+                <% if (this.KickPage.KickUserProfile.IsAdministrator)
+                   { %>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Admin)%>">admin</a></li>
+                <% } %>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Logout)%>">logout</a></li>
+                <% }
+                   else
+                   { %>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Login)%>">login</a> </li>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Register)%>">register</a></li>
+                <% } %>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory)%>">submit a story</a></li>
+                <li><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.About)%>">about</a></li>
+                <li>
+                    <%=this.BlogLink%>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="BreadcrumbsNavigationAndWelcome">
+        <Kick:UserWelcome id="UserWelcomeMessage" runat="server" />
+        <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />
+    </div>
+</asp:Content>
+<asp:Content ID="MainContentOutline" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="ContentContainer">
+        <asp:Panel ID="pnlSiteAnnouncement" runat="server" Visible="false" CssClass="SiteAnnouncement SiteAnnouncementInformation">
+            <asp:Literal ID="litSiteAnnouncement" runat="server" />
+        </asp:Panel>
+        <Kick:GoogleAdSense runat="server" id="googleTop" AdFormat="728x90_as" />
+        <asp:Panel ID="pnlPageCaption" runat="server" Visible="false" CssClass="PageCaption">
+            <asp:Literal ID="litPageCaption" runat="server" />
+            <Kick:RssFeedIcon id="RssFeedIcon" runat="server" />
+        </asp:Panel>
+        <div id="SidebarA">
+            <asp:ContentPlaceHolder ID="LeftContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="SidebarB">
+            <div id="FeedBurner">
+                <asp:Literal ID="litFeedBurnerCounter" runat="server" />
+            </div>
+            <uc1:SearchInput ID="searchInput" runat="server" />
+            <asp:Panel ID="pnlSideAds" runat="server" Visible="false">
+                <div id="SideAdSection">
+                    <!-- DNK TheLounge -->
+                    <div id="wedje_div_thelounge">
+                    </div>
+
+                    <script type="text/javascript" src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d="
+                        defer="defer"></script>
+
+                    <p>
+                        <a href='http://www.montylounge.com/thelounge/' title="Ads via the lounge">Ads Via The
+                            Lounge</a>
+                    </p>
+                </div>
+            </asp:Panel>
+            <asp:ContentPlaceHolder ID="RightContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <div id="SiteLinks">
+                <a href="http://www.subsonicproject.com/" title="SubSonic - The Zero-Code Data Access Layer">
+                    <img src="<%=this.KickPage.StaticImageRootUrl %>/logos/subsonic.gif" alt="SubSonic" /></a>
+            </div>
+            <Kick:GoogleAdSense runat="server" AdFormat="160x600_as" id="googleSide" />
+        </div>
+        <div id="PrimaryContent">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+</asp:Content>

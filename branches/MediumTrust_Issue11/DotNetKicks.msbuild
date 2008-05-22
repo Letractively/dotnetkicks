@@ -1,0 +1,31 @@
+<Project DefaultTarget="BuildAll" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <UsingTask TaskName="MbUnit.MSBuild.Tasks.MbUnit" AssemblyFile="..\3rdParty\MbUnit\MbUnit.MSBuild.Tasks.dll" />
+  <Import Project="..\3rdParty\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  
+  <Target Name="BuildAll" 
+          DependsOnTargets="Build;Tests;FxCop" />
+  
+  <Target Name="Build">
+    <MSBuild Targets="Rebuild" 
+             Projects="DotNetKicks.sln" />
+  </Target>
+  
+  <Target Name="Tests">
+    <MbUnit Assemblies="Incremental.Kick.Tests\bin\Debug\Incremental.Kick.Tests.dll" 
+            ReportTypes="xml" 
+            ReportFileNameFormat="mbunit-results" 
+            ReportOutputDirectory="." />
+  </Target>
+  
+  <Target Name="FxCop">
+    <FxCop TargetAssemblies="Incremental.Kick\bin\Debug\Incremental.Kick.dll"
+           RuleLibraries="@(FxCopRuleAssemblies)" 
+           AnalysisReportFileName="fxcop-results.xml"
+           FailOnError="True"
+           TypeList="Incremental.Kick.BusinessLogic.*"
+           DirectOutputToConsole="True"
+           ToolPath="..\3rdParty\FxCop\" />
+  </Target>
+  
+</Project>
