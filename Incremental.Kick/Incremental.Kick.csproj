@@ -1,14 +1,35 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{485BE7A0-08D8-438D-B5CC-55FB3A010130}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Incremental.Kick</RootNamespace>
     <AssemblyName>Incremental.Kick</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>http://localhost/Incremental.Kick/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,39 +53,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\CipherLite.NET 1.5\CipherLite.dll</HintPath>
     </Reference>
-    <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.dll</HintPath>
-    </Reference>
-    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\log4net\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Lucene\Lucene.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Microsoft.ApplicationBlocks\Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\185\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
@@ -76,118 +74,77 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="BusinessLogic\CommentBR.cs" />
     <Compile Include="BusinessLogic\Maintenance\DataUpdater.cs" />
     <Compile Include="BusinessLogic\StoryBR.cs" />
     <Compile Include="BusinessLogic\StoryKickBR.cs" />
     <Compile Include="BusinessLogic\TagBR.cs" />
     <Compile Include="BusinessLogic\UserBR.cs" />
-    <Compile Include="Caching\BannedUrlPatternCache.cs" />
-    <Compile Include="Caching\BlockedReferralCache.cs" />
     <Compile Include="Caching\CacheHelper.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\CategoryCache.cs" />
-    <Compile Include="Caching\ChatCache.cs" />
     <Compile Include="Caching\HostCache.cs" />
-    <Compile Include="Caching\SearchStoryCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
-    <Compile Include="Caching\ShoutCache.cs" />
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
-    <Compile Include="Caching\UserActionCache.cs" />
     <Compile Include="Caching\UserCache.cs" />
-    <Compile Include="Caching\ZeitgeistCache.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Enums\StoryListSortBy.cs" />
     <Compile Include="Common\Exceptions\Exceptions.cs" />
-    <Compile Include="Dal\Entities\Api\ApiChat.cs" />
-    <Compile Include="Dal\Entities\Api\ApiPagedList.cs" />
-    <Compile Include="Dal\Entities\Api\ApiShout.cs" />
-    <Compile Include="Dal\Entities\Api\ApiStory.cs" />
-    <Compile Include="Dal\Entities\Api\ApiUser.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Chat.cs" />
-    <Compile Include="Dal\SubSonic\Custom\PagedCollection.cs" />
+    <Compile Include="Config\ConfigReaderBase.cs" />
+    <Compile Include="Config\WebUIConfig.cs" />
+    <Compile Include="Dal\Custom\Category.cs" />
+    <Compile Include="Dal\Custom\Comment.cs" />
+    <Compile Include="Dal\Custom\Story.cs" />
+    <Compile Include="Dal\Custom\StoryKick.cs" />
+    <Compile Include="Dal\Custom\StoryUserHostTag.cs" />
+    <Compile Include="Dal\Custom\Tag.cs" />
+    <Compile Include="Dal\Custom\TagCollection.cs" />
+    <Compile Include="Dal\Custom\User.cs" />
     <Compile Include="Dal\Entities\WeightedTag.cs" />
     <Compile Include="Dal\Entities\WeightedTagList.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Category.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Comment.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Shout.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Story.cs" />
-    <Compile Include="Dal\SubSonic\Custom\StoryCollection.cs" />
-    <Compile Include="Dal\SubSonic\Custom\StoryKick.cs" />
-    <Compile Include="Dal\SubSonic\Custom\StoryUserHostTag.cs" />
-    <Compile Include="Dal\SubSonic\Custom\Tag.cs" />
-    <Compile Include="Dal\SubSonic\Custom\TagCollection.cs" />
-    <Compile Include="Dal\SubSonic\Custom\User.cs" />
-    <Compile Include="Dal\SubSonic\Custom\UserAction.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\BannedUrlPatternController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\BlockedReferralController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\CategoryController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\ChatController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\CommentController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\Elmah_ErrorController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\HostController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\ReservedUsernameController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\SettingController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\ShoutController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\StoredProcedures.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\StoryController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\StoryKickController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\StoryUserHostTagController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\TagController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\UserActionController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\UserController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Controllers\UserFriendController.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\BannedUrlPattern.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\BlockedReferral.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Category.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Chat.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Comment.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Elmah_Error.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Host.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\ReservedUsername.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Setting.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Shout.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Story.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\StoryKick.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\StoryUserHostTag.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\Tag.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\User.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\UserAction.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Models\UserFriend.cs" />
-    <Compile Include="Dal\SubSonic\Generated\Utility\AllStructs.cs" />
+    <Compile Include="Dal\Generated\Controllers\CategoryController.cs" />
+    <Compile Include="Dal\Generated\Controllers\CommentController.cs" />
+    <Compile Include="Dal\Generated\Controllers\Elmah_ErrorController.cs" />
+    <Compile Include="Dal\Generated\Controllers\HostController.cs" />
+    <Compile Include="Dal\Generated\Controllers\SettingController.cs" />
+    <Compile Include="Dal\Generated\Controllers\StoredProcedures.cs" />
+    <Compile Include="Dal\Generated\Controllers\StoryController.cs" />
+    <Compile Include="Dal\Generated\Controllers\StoryKickController.cs" />
+    <Compile Include="Dal\Generated\Controllers\StoryUserHostTagController.cs" />
+    <Compile Include="Dal\Generated\Controllers\TagController.cs" />
+    <Compile Include="Dal\Generated\Controllers\UserController.cs" />
+    <Compile Include="Dal\Generated\Models\Category.cs" />
+    <Compile Include="Dal\Generated\Models\Comment.cs" />
+    <Compile Include="Dal\Generated\Models\Elmah_Error.cs" />
+    <Compile Include="Dal\Generated\Models\Host.cs" />
+    <Compile Include="Dal\Generated\Models\Setting.cs" />
+    <Compile Include="Dal\Generated\Models\Story.cs" />
+    <Compile Include="Dal\Generated\Models\StoryKick.cs" />
+    <Compile Include="Dal\Generated\Models\StoryUserHostTag.cs" />
+    <Compile Include="Dal\Generated\Models\Tag.cs" />
+    <Compile Include="Dal\Generated\Models\User.cs" />
+    <Compile Include="Dal\Generated\Models\UserFriend.cs" />
+    <Compile Include="Dal\Generated\Utility\AllStructs.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
-    <Compile Include="Helpers\BannedUrlHelper.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="Helpers\ControlHelper.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\GoogleVideoHelper.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Helpers\RegExHelper.cs" />
     <Compile Include="Helpers\TagHelper.cs" />
-    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Helpers\ThreadSafeRandom.cs" />
     <Compile Include="Helpers\TrackbackHelper.cs" />
-    <Compile Include="Json\NullableImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\Analyzer\DnkAnalyzer.cs" />
-    <Compile Include="Search\Analyzer\DnkTokenizer.cs" />
-    <Compile Include="Search\QueryFactory.cs" />
-    <Compile Include="Search\SearchQuery.cs" />
-    <Compile Include="Search\SearchSettings.cs" />
-    <Compile Include="Search\SearchUpdate.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Security\Cipher.cs" />
     <Compile Include="Security\Rijndael.cs" />
     <Compile Include="Security\SecurityToken.cs" />
-    <Compile Include="Web\Controls\Ads\GoogleAdSense.cs" />
     <Compile Include="Web\Controls\Ads\GoogleLeaderBoard.cs" />
     <Compile Include="Web\Controls\Ads\GoogleWideSkyscraper.cs" />
     <Compile Include="Web\Controls\Base\JavaScriptFeedHandler.cs" />
-    <Compile Include="Web\Controls\Base\KickAdministrationPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Web\Controls\Base\KickApiPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -196,9 +153,6 @@
     </Compile>
     <Compile Include="Web\Controls\Base\KickHtmlControl.cs" />
     <Compile Include="Web\Controls\Base\KickHttpHandler.cs" />
-    <Compile Include="Web\Controls\Base\KickJsonRpcHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Web\Controls\Base\KickMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -221,13 +175,11 @@
     <Compile Include="Web\Controls\Base\KickWebService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Web\Controls\Community\UserActionList.cs" />
     <Compile Include="Web\Controls\Debug\DebugInformation.cs" />
     <Compile Include="Web\Controls\Docs\JavaScriptFeedList.cs" />
     <Compile Include="Web\Controls\Navigation\Breadcrumbs.cs" />
     <Compile Include="Web\Controls\Navigation\KickForStoriesMenu.cs" />
     <Compile Include="Web\Controls\Navigation\Paging.cs" />
-    <Compile Include="Web\Controls\Navigation\SearchPaging.cs" />
     <Compile Include="Web\Controls\Story\Comment.cs" />
     <Compile Include="Web\Controls\Story\CommentList.cs" />
     <Compile Include="Web\Controls\Story\PopularStoryHeader.cs" />
@@ -239,7 +191,6 @@
     <Compile Include="Web\Controls\Story\StoryTagList.cs" />
     <Compile Include="Web\Controls\Story\UpcomingStoryListHeader.cs" />
     <Compile Include="Web\Controls\Story\UsersWhoKicked.cs" />
-    <Compile Include="Web\Controls\Story\Zeitgeist.cs" />
     <Compile Include="Web\Controls\Tags\EditableTagList.cs" />
     <Compile Include="Web\Controls\Tags\TagCloud.cs" />
     <Compile Include="Web\Controls\Tags\TagCommaList.cs" />
@@ -248,14 +199,13 @@
     <Compile Include="Web\Controls\User\CreateUserWizard.cs" />
     <Compile Include="Web\Controls\User\Gravatar.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
-    <Compile Include="Web\Controls\User\ShoutList.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
     <Compile Include="Web\Controls\User\UserList.cs" />
     <Compile Include="Web\Controls\User\UserProfileHeader.cs" />
     <Compile Include="Web\Controls\User\UserProfileMenu.cs" />
-    <Compile Include="Web\Controls\User\UserWelcome.cs" />
     <Compile Include="Web\Helpers\GravatarHelper.cs" />
     <Compile Include="Web\Helpers\HostHelper.cs" />
+    <Compile Include="Web\Helpers\PasswordGenerator.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\ExceptionCollection.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\RssCategoryCollection.cs" />
     <Compile Include="Web\Helpers\Rss\Collections\RssChannelCollection.cs" />
@@ -287,6 +237,7 @@
     <Compile Include="Web\Helpers\Rss\Shared\RssElement.cs" />
     <Compile Include="Web\Helpers\Rss\Shared\RssEnumerators.cs" />
     <Compile Include="Web\Helpers\Rss\StoryDataTableToRss2.cs" />
+    <Compile Include="Web\Helpers\ThreadSafeRandom.cs" />
     <Compile Include="Web\Helpers\UrlFactory.cs" />
     <Compile Include="Web\Helpers\UrlParameters.cs" />
     <Compile Include="Web\Helpers\UrlParametersHelper.cs" />
@@ -297,6 +248,27 @@
     <Compile Include="Web\Security\Principal\IKickPrincipal.cs" />
     <Compile Include="Web\Security\Principal\KickPrincipal.cs" />
     <Compile Include="Web\Security\SecurityManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\Atweb.Kick.config" />
+    <None Include="Config\webui.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

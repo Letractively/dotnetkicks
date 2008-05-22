@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tools.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Docs.Tools" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Tools.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Docs.Tools" MasterPageFile="~/Templates/MasterPage.master" %>
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
      

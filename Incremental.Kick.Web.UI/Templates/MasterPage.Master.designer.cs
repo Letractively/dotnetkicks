@@ -47,15 +47,6 @@ namespace Incremental.Kick.Web.UI.Templates {
         protected global::System.Web.UI.HtmlControls.HtmlForm PageForm;
         
         /// <summary>
-        /// phWebSiteAlert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phWebSiteAlert;
-        
-        /// <summary>
         /// Header control.
         /// </summary>
         /// <remarks>

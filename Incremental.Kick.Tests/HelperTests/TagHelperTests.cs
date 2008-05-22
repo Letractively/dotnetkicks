@@ -9,7 +9,6 @@ namespace Incremental.Kick.Tests.HelperTests {
 
         [Row("", false, new string[] { })]
         [Row("tag", false, new string[] { "tag" })] //Single tag
-        [Row("null", false, new string[] { "null" })] //single tag using "null"
         [Row("tag1 tag2", false, new string[] { "tag1", "tag2" })] //Two tags
         [Row("    tag1    tag2  tag3     ", false, new string[] { "tag1", "tag2", "tag3" })] //Whitespace removal
         [Row("tag1 tag2 tag1 tag2", false, new string[] { "tag1", "tag2" })] //Duplicate removal

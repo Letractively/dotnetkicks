@@ -4,7 +4,6 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 using Incremental.Kick.Dal;
-using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Helpers {
     public class EmailHelper {
@@ -59,9 +58,9 @@ namespace Incremental.Kick.Helpers {
         }
 
         public static void Send(MailMessage message, Host host) {
-            SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort);
+            SmtpClient smtpClient = new SmtpClient(host.SmtpHost, host.SmtpPort.Value);
             smtpClient.Credentials = new NetworkCredential(host.SmtpUsername, host.SmtpPassword);
-            smtpClient.EnableSsl = host.SmtpEnableSsl;
+            smtpClient.EnableSsl = true;
             smtpClient.Send(message);
         }
 
@@ -69,8 +68,9 @@ namespace Incremental.Kick.Helpers {
             Send(new MailMessage(from, to, subject, body), host);
         }
 
+        delegate void SendDelegate(string from, string to, string subject, string body, Host host);
         public static void Send_Begin(string from, string to, string subject, string body, Host host) {
-            AsyncHelper.FireAndForget(delegate { Send(from, to, subject, body, host); });
+            AsyncHelper.FireAndForget(new SendDelegate(Send), from, to, subject, body, host);
         }
 
         internal static void SendPasswordResetEmail(string toEmail, string username, DateTime createdDateTime, Host host) {
@@ -98,37 +98,6 @@ namespace Incremental.Kick.Helpers {
                 You can log in to kick at the following location : {2}
 
                 {3}", username, password, host.RootUrl + "/login", host.SiteTitle), host);
-        }
-
-        public static void SendUserBanEmail(User user, Host host) {
-            Send_Begin(host.Email, user.Email, "[" + host.SiteTitle + "]",
-                String.Format(@"
-                A moderator has banned you from {0}.
-
-                Please let us know if you think this was in error.", host.SiteTitle), host);
-        }
-
-        public static void SendUserUnBanEmail(User user, Host host) {
-            Send_Begin(host.Email, user.Email, "[" + host.SiteTitle + "]",
-                String.Format(@"
-                A moderator has un-banned you from {0}. Welcome back!!", host.SiteTitle), host);
-        }
-
-        public static void SendChangedEmailEmail(string toEmail, string username, string currentEmail, Host host)
-        {
-            // Send a verify email address.  Add a 64bit encryption "hash" to verify when they click it.
-            Send(host.Email, toEmail, host.SiteTitle + " has requested you to verify your email",
-                String.Format(@"
-                This is to verify that the email address you have selected is valid.                
-                
-                Please click on the link below to verify this email address:
-
-                {0}
-
-                If you did not request to change your email address, pleas disreguard this message.
-
-                Thanks,
-                {1}", host.RootUrl + "/verifyemail/" + Security.Cipher.EncryptToBase64(username + "#" + currentEmail + "#" + toEmail), host.SiteTitle), host);
         }
     }
 }

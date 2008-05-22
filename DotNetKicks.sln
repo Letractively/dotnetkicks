@@ -1,35 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick", "Incremental.Kick\Incremental.Kick.csproj", "{485BE7A0-08D8-438D-B5CC-55FB3A010130}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Web.UI", "Incremental.Kick.Web.UI\Incremental.Kick.Web.UI.csproj", "{0D66373E-E06F-4A6C-806A-F4F5855121A0}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.StoryPublisher.Console", "Incremental.Kick.StoryPublisher.Console\Incremental.Kick.StoryPublisher.Console.csproj", "{054403EB-5B34-4B73-9F4F-4E925E3F6C3A}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Tests", "Incremental.Kick.Tests\Incremental.Kick.Tests.csproj", "{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{118AB2A4-C3EF-4955-BDCC-F3C364B9A1B6}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 	ProjectSection(SolutionItems) = preProject
 		installation-howto.txt = installation-howto.txt
 		License.txt = License.txt
@@ -38,22 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{3B44ABEF-5844-4B3B-BF09-3D252B6D485E}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick", "Incremental.Kick\Incremental.Kick.csproj", "{485BE7A0-08D8-438D-B5CC-55FB3A010130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Web.UI.Tests", "Incremental.Kick.Web.UI.Tests\Incremental.Kick.Web.UI.Tests.csproj", "{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Web.UI", "Incremental.Kick.Web.UI\Incremental.Kick.Web.UI.csproj", "{0D66373E-E06F-4A6C-806A-F4F5855121A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.StoryPublisher.Console", "Incremental.Kick.StoryPublisher.Console\Incremental.Kick.StoryPublisher.Console.csproj", "{054403EB-5B34-4B73-9F4F-4E925E3F6C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incremental.Kick.Tests", "Incremental.Kick.Tests\Incremental.Kick.Tests.csproj", "{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,17 +41,11 @@ Global
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{054403EB-5B34-4B73-9F4F-4E925E3F6C3A} = {3B44ABEF-5844-4B3B-BF09-3D252B6D485E}
-		{2263082E-A4F8-4FAF-81F1-D5BB02A4B989} = {08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}
-		{8CC8691A-FECD-4E01-83BD-F67D6B4C897C} = {08DCDEF2-425D-4C6A-A284-6B7AEFA2006A}
 	EndGlobalSection
 EndGlobal

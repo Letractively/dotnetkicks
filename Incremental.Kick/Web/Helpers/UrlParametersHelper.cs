@@ -15,7 +15,7 @@ namespace Incremental.Kick.Web.Helpers {
         public static UrlParameters GetUrlParameters(HttpRequest request, string hostName) {
             UrlParameters urlParameters = new UrlParameters(hostName);
 
-            //TODO: (GJ): use constant values for these
+            //TODO: (GJ): use contant values for these
             if (!String.IsNullOrEmpty(request["useridentifier"]))
                 urlParameters.UserIdentifier = request["useridentifier"].Replace("/", "");
 
@@ -42,18 +42,6 @@ namespace Incremental.Kick.Web.Helpers {
 
             if (!String.IsNullOrEmpty(request["upcomingStoryListSortBy"]))
                 urlParameters.StoryListSortBy = (StoryListSortBy)System.Enum.Parse(typeof(StoryListSortBy), request["upcomingStoryListSortBy"], true);
-
-            if (!String.IsNullOrEmpty(request["year"]))
-                urlParameters.Year = int.Parse(request["year"].Replace("/", ""));
-
-            if (!String.IsNullOrEmpty(request["month"]))
-                urlParameters.Month = int.Parse(request["month"].Replace("/", ""));
-
-            if (!String.IsNullOrEmpty(request["day"]))
-                urlParameters.Day = int.Parse(request["day"].Replace("/", ""));
-
-            if (!String.IsNullOrEmpty(request["chatid"]))
-                urlParameters.ChatID = int.Parse(request["chatid"].Replace("/", ""));
 
             return urlParameters;
         }

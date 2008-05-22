@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Login" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Login.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Login" %>
 <table border="0" cellpadding="4">
 			<tbody><tr>
 				<td colspan="2" align="center"><strong>Log In</strong></td>

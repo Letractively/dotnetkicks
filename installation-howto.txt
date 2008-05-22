@@ -14,10 +14,9 @@
 
 7. Run the 'Incremental.Kick.Web.UI' web application
 
-8. There are 22 users already setup:
+8. There are two users already setup:
 
 	username: admin password: admin
-	username: moderator password: moderator
 	username: user1 password: user1
 
 9. Configure SMTP settings in the Kick_Host table

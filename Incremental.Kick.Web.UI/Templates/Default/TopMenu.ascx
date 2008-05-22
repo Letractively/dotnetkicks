@@ -12,22 +12,22 @@
         <td align="right">
             <span id="headerLinks">
                 <% if (this.Page.User.Identity.IsAuthenticated) { %>
+                <img src="/static/images/icons/new.gif" width="28" height="11" /><a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Page.User.Identity.Name)%>">your profile</a>
                 
                 <% if (this.KickPage.KickUserProfile.IsAdministrator) { %>
                      <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Admin)%>">admin</a>
                  <% } %> 
                     
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Logout)%>">logout</a>
-
+                     
+                 
+                 
                 <% } else { %>
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Login)%>">login</a> <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.Register)%>">
                     register</a>
                 <% } %>
                 
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory)%>">submit a story</a>
-                
-                <a href="/upcoming">upcoming stories</a>
-                
                 
                 
                 <a href="<%=UrlFactory.CreateUrl(UrlFactory.PageName.About)%>">about</a>

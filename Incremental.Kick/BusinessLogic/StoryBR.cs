@@ -17,6 +17,11 @@ namespace Incremental.Kick.BusinessLogic {
             if (user.IsBanned)
                 return GetStoryIdentifier(title); //to stop the spammers
 
+            return AddStory(hostID, title, description, url, categoryID, user.UserID, user.Username, user.AdsenseID);
+        }
+
+
+        public static string AddStory(int hostID, string title, string description, string url, short categoryID, int userID, string username, string adsenseID) {
             //TODO: improve the validation
             string storyIdentifier = GetStoryIdentifier(title);
 
@@ -37,24 +42,20 @@ namespace Incremental.Kick.BusinessLogic {
             story.Description = description;
             story.Url = url;
             story.CategoryID = categoryID;
-            story.UserID = user.UserID;
+            story.UserID = userID;
+            story.Username = username;
             story.KickCount = 0;
             story.SpamCount = 0;
             story.ViewCount = 0;
             story.CommentCount = 0;
             story.IsPublishedToHomepage = false;
             story.IsSpam = false;
-            story.AdsenseID = user.AdsenseID;
+            story.AdsenseID = adsenseID;
             story.PublishedOn = DateTime.Now;
-            story.UpdatedOn = DateTime.Now;
             story.Save();
 
-            UserAction.RecordStorySubmission(hostID, user, story);
 
-            UserCache.KickStory(story.StoryID, user.UserID, hostID);
-
-            TagBR.AddUserStoryTags(CategoryCache.GetCategory(categoryID, hostID).TagIdentifier, user, story.StoryID, hostID);
-
+            UserCache.KickStory(story.StoryID, userID, hostID);
 
             System.Diagnostics.Trace.WriteLine("AddStory: " + title);
 
@@ -65,7 +66,6 @@ namespace Incremental.Kick.BusinessLogic {
 
             return story.StoryIdentifier;
         }
-
 
         public static string GetStoryIdentifier(string title) {
             title = Regex.Replace(title, @"[^\w\s]", "_");
@@ -160,7 +160,6 @@ namespace Incremental.Kick.BusinessLogic {
             }
         }
 
-
         public static int IncrementStoryCommentCount(int storyID) {
             Story story = Story.FetchByID(storyID);
             story.CommentCount++;
@@ -197,36 +196,16 @@ namespace Incremental.Kick.BusinessLogic {
         public static int IncrementKickCount(int storyID, short delta) {
             Story story = Story.FetchByID(storyID);
             story.KickCount += delta;
-            story.UpdatedOn = DateTime.Now;
             story.Save();
             return story.KickCount;
         }
 
-        public static void MarkAsSpam(int storyID, int hostID, User moderator) {
+        public static void DeleteStory(int storyID, int hostID) {
             Story story = Story.FetchByID(storyID);
             if (story.HostID != hostID)
                 throw new ArgumentException("The story does not belong to the host");
-            else {
-                story.IsSpam = true;
-                story.UpdatedOn = DateTime.Now;
-                story.Save();
-
-                UserAction.RecordStoryDeletion(hostID, story, moderator);
-                EmailHelper.SendStoryDeletedEmail(Story.FetchByID(storyID), HostCache.GetHost(hostID));
-            }
-        }
-
-        public static void UnMarkAsSpam(int storyID, int hostID, User moderator)
-        {
-            Story story = Story.FetchByID(storyID);
-            if (story.HostID != hostID)
-                throw new ArgumentException("The media does not belong to the host");
             else
-            {
-                story.IsSpam = false;
-                story.UpdatedOn = DateTime.Now;
-                story.Save();
-            }
+                Story.Delete(storyID);
         }
 
         private static bool IsWeakStory(Story story, Host host) {
@@ -253,8 +232,6 @@ namespace Incremental.Kick.BusinessLogic {
             story.IsPublishedToHomepage = true;
             story.PublishedOn = DateTime.Now;
             story.Save();
-
-            UserAction.RecordStoryPromotion(story.HostID, story);
         }
 
         public static int GetStoryCount(int hostID, bool isPublished, DateTime startDate, DateTime endDate) {

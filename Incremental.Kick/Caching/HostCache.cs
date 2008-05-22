@@ -6,8 +6,6 @@ using Incremental.Kick.Dal;
 namespace Incremental.Kick.Caching {
     public class HostCache {
         public static Host GetHost(string hostAndPort) {
-            if (!Hosts.ContainsKey(hostAndPort))
-                throw new ArgumentException("The Host table does not have a record matching " + hostAndPort);
             return Hosts[hostAndPort];
         }
 
@@ -35,7 +33,8 @@ namespace Incremental.Kick.Caching {
                         hostDictionary.Add(host.HostName, host);
                     }
 
-                    cache.Insert(cacheKey, hostDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
+                    System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                    cache.Insert(cacheKey, hostDictionary, CacheHelper.CACHE_DURATION_IN_SECONDS);
                 }
 
                 return hostDictionary;

@@ -1,221 +1,4 @@
-﻿* html .visualIEFloatFix { height: 0.01%; }
-
-.source { font-size: .8em; color: gray; }
-
-body
-{
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
-}
-input, select, textarea
-{
-}
-
-.TODO
-{
-	background-color: yellow;
-	width: 100%;
-	padding: 4px 4px 4px 4px;
-}
-
-.Hidden
-{
-	display: none;
-	visibility: hidden;
-}
-.Visible
-{
-	visibility: visible;
-}
-
-.Highlight
-{
-	background-color: #FFFDDB;
-	padding: 4;
-	font-size: 1.1em;
-}
-
-/* ================ username display ================== */
-.user
-{
-	padding: padding: 3px 0 0 0;
-	white-space: nowrap;
-}
-.user a
-{
-	text-decoration: none;
-}
-.bannedUser a
-{
-	color: Red;
-	font-size: smaller;
-}
-.newUser a
-{
-	color: Green;
-}
-.userGravatar
-{
-	border: 1px solid #ddd;
-	vertical-align: middle;
-	margin-left: 2px;
-	margin-right: 1px;
-	padding: 1px;
-}
-
-/* ================ search ===================== */
-.searchResultsSummary
-{
-	font-size: 0.9em;
-	background-color: #E7F0F7;
-	padding: 2px;
-	text-align: right;
-}
-
-.searchOnlyMyStories
-
-{
-font-size: 0.85em;
-}
-
-.searchButton
-{
-margin: 10 0 0 0px;
-}
-
-.searchNoResults
-{
-font-size: 1.2em;
-padding: 10 0 10 5px;
-}
-
-/* ================ shout box ================== */
-#shoutList
-{
-}
-.shout
-{
-	padding: 5px;
-	font-size: small;
-}
-.shoutMessage
-{
-	background-color: #eee;
-	padding: 4px;
-	overflow: hidden;
-	width: 300px;
-}
-
-/* ================ kick it image customization ================= */
-
-.KickItImageCustomization 
-{
-	display: none;
-	border-style: solid;
-	border-color: #CCCCCC;
-	background: #f7f7f7;
-	border-width: 1px;
-	padding-left: 20px; 
-	margin-top: 0px;
-}
-
-/* ================ spy ================== */
-#userActionList {}
-.userAction { padding: 4px; }
-.userActionKick { background-color: #ecffec; }
-.userActionUnKick { background-color: #ffeeec; }
-.userActionComment { background-color: #ecf7ff; }
-.userActionStorySubmission { background-color: #ddebff; }
-.userActionStoryPromotion { background-color: #009900; color: White; }
-.userActionStoryPromotion a { color: White; font-weight: bold; }
-.userActionTag {}
-.userActionShout { background-color: #fcfae1; }
-.userActionUserRegistration { background-color: #9efe9e; }
-.userActionUserBan, .userActionUserUnBan, .userActionStoryDeletion { text-align: right; background-color: #d7d7d7; }
-
-/* ================ pagination ================== */
-.Paging
-{
-	padding: 2px;
-}
-
-.Paging ul
-{
-	margin: 0;
-	padding: 0;
-	text-align: right; /*Set to "right" or "left" to align pagination interface*/
-	font-size: 16px;
-}
-
-.Paging li
-{
-	margin: 2px;
-	list-style-type: none;
-	display: inline;
-	padding-bottom: 1px;
-}
-
-.Paging a, .Paging a:visited
-{
-	padding: 0 5px;
-	border: 1px solid #9aafe5;
-	text-decoration: none;
-	color: #2e6ab1;
-}
-
-.Paging a:hover, .Paging a:active
-{
-	border: 1px solid #2b66a5;
-	color: #000;
-	background-color: #FFFF80;
-}
-
-.Paging a.CurrentPage
-{
-	background-color: #2e6ab1;
-	color: #FFF !important;
-	border-color: #2b66a5;
-	font-weight: bold;
-	cursor: default;
-}
-
-.Paging a.disablelink, .Paging a.disablelink:hover
-{
-	background-color: white;
-	cursor: default;
-	color: #929292;
-	border-color: #929292;
-	font-weight: normal !important;
-}
-
-.Paging a.PagingNext
-{
-	font-weight: bold;
-}
-.Paging a.PagingPrevious
-{
-	font-weight: bold;
-}
-
-/* zeitgeist */
-.ZeitgeistNavigation
-{
-	float: left;
-	display: block;
-	background: #eeeeee;
-	padding-right : 15px;
-	margin-right: 30px;
-}
-.ZeitgeistLists
-{
-	padding-left: 15px;
-	margin-left: 15px;
-	display: table-cell;		   
-	_display: inline-block;/*hack for msie*/
-}
-
-/* =========== template.css original stuff below ================= */
-body { color: #333;	margin: 0; padding: 0; background: White;  }
+﻿body { color: #333;	margin: 0; padding: 0; background: White;  }
 
 a { color: #0066CC; }
 
@@ -248,7 +31,7 @@ body, td, th, h3, textarea, input, select {
 
 
 
-#PageContainer {
+#wrap {
 	position: relative;
 	text-align: left;
 	background: #fff;
@@ -264,60 +47,8 @@ body, td, th, h3, textarea, input, select {
 #headerTagLine { color: White; margin-left:8px; font-weight: bold; font-size: .9em; font-family: "Trebuchet MS", Sans-Serif, Verdana; }
 #headerLinks A { padding: 8px 8px 8px 8px; }
 
-#BreadcrumbsNavigationAndWelcome
-{
-	padding: 5px  15px 5px 15px;
-	background-image: url(images/gradients/green.gif);
-	background-color: #a3c84e;
-	color: Black; 
-	font-size: 1em; 
-}
-#BreadcrumbsNavigationAndWelcome a
-{
-	color: #ffffff;
-	font-weight: bold;
-}
-#UserWelcome
-{
-	display:block;
-	float:right;
-}
-#BreadcrumbNavigation
-{
-	display:block;
-}
-#BreadcrumbNavigation ul
-{
-	margin-left: 0;
-	padding-left: 0;
-	display: inline;
-	border: none;
-}
-#BreadcrumbNavigation ul li
-{
-	margin-left: 0;
-	padding-left: 2px;
-	border: none;
-	list-style: none;
-	display: inline;
-}
- /* auto insert the >> character */
-#BreadcrumbNavigation ul li:before
-{
-	content: "\0020 \0020 \0020 \00BB \0020";
-}
-/* except for first bullet, put whitespace there */
-#BreadcrumbNavigation ul li.first:before
-{
-	content: " ";
-}
-
-/*
-#BreadcrumbNavigation { width: 100%; font-size: 1.1em; padding: 1px 0px 1px 0px; 
-background-color: #A8CC45; background-image: url(images/gradients/green.gif); color: Black; font-weight: bold; }
-#BreadcrumbNavigation A { color: White; font-weight: bold; }
-*/
-
+#breadcrumbs { width: 100%; font-size: 1.1em; padding: 1px 0px 1px 0px; background-color: #A8CC45; background-image: url(images/gradients/green.gif); color: Black; font-weight: bold; }
+#breadcrumbs A { color: White; font-weight: bold; }
 
 #topAds { margin: 18px 0px 18px 0px; width:99%; text-align: center; background-color: #FFFFFF;}
 
@@ -675,22 +406,19 @@ background-color: #A8CC45; background-image: url(images/gradients/green.gif); co
 
 
 /* The Lounge CSS */
-    .tlp{ font-size: 10px; font-family: verdana, arial; }    
+.tlp, .adsvia{ font-size: 10px; font-family: verdana, arial;}    
+.tli{ 
+    float: none;
+    margin-left: 0px;
+    margin-right: 10px;
+    margin-top: 5px;    
+}
+.tlp{ 
+    display: block;
+    font-size: 10px;
+    line-height: 15px;
+    margin-top: 5px;
+}
 
-    .tli{
-	    float: none;
-	    margin-left: 0px;
-	    margin-right: 10px;
-	    margin-top: 5px;    
-    }
-    .tlp{
-	    display: block;
-	    font-size: 10px;
-	    line-height: 15px;
-	    margin-top: 5px;
-    }
-    
-    #wedje_div_thelounge{ width: 160px; text-align: center; margin-left: 20px; }
-    
-    .adsvia{ margin-top: 10px;}
-
+#wedje_div_thelounge{ width: 140px; }
+.adsvia{ margin-top: 10px;}

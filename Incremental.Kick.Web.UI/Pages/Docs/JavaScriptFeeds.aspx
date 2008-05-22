@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JavaScriptFeeds.aspx.cs"
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="JavaScriptFeeds.aspx.cs"
     Inherits="Incremental.Kick.Web.UI.Pages.Docs.JavaScriptFeeds" MasterPageFile="~/Templates/MasterPage.master" %>
 
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>

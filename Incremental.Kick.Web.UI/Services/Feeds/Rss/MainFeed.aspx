@@ -1,1 +1,1 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainFeed.aspx.cs" Inherits="Services_Feeds_Rss_MainFeed" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MainFeed.aspx.cs" Inherits="Services_Feeds_Rss_MainFeed" %>

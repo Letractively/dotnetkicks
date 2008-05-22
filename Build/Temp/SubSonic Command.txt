@@ -1,0 +1,5 @@
+Run from latest SubSonic folder in \3rdParty\SubSonic :
+
+sonic.exe generate /config sonic.exe.config  /out ..\..\..\DotNetKicks\Incremental.Kick\Dal\Generated
+
+

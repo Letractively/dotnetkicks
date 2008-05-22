@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security;
 using Incremental.Kick.BusinessLogic;
-using System.Collections.Generic;
+using System.Security;
 
 namespace Incremental.Kick.Caching {
     public class UserCache {
@@ -12,11 +14,16 @@ namespace Incremental.Kick.Caching {
             if (!String.IsNullOrEmpty(securityToken))
                 userID = SecurityToken.FromString(securityToken).UserID;
 
-            return userID.HasValue ? GetUser(userID.Value) : GetUser(0);
+            User user;
+            if (userID.HasValue)
+                user = GetUser(userID.Value);
+            else
+                user = GetUser(0);
+
+            return user;
         }
 
-        private static readonly object _getUserLock = new object();
-
+        private static object _getUserLock = new object();
         public static User GetUser(int userID) {
             CacheManager<string, User> userCache = GetUserCache();
             string cacheKey = GetUserProfileCacheKey(userID);
@@ -30,19 +37,12 @@ namespace Incremental.Kick.Caching {
                     } else {
                         user = User.FetchByID(userID);
                     }
-                    userCache.Insert(cacheKey, user, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
+                    System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                    userCache.Insert(cacheKey, user, CacheHelper.CACHE_DURATION_IN_SECONDS);
                 }
             }
 
             return user;
-        }
-
-        public static UserCollection GetUsers(List<int> userIDs) {
-            UserCollection users = new UserCollection();
-            foreach (int id in userIDs) {
-                users.Add(GetUser(id));
-            }
-            return users;
         }
 
 
@@ -52,11 +52,9 @@ namespace Incremental.Kick.Caching {
 
             int? userID = userIDCache[cacheKey];
             if (!userID.HasValue) {
-                User user = User.FetchUserByUsername(username);
-                if (user == null)
-                    throw new ArgumentException("Invalid username");
-                userID = user.UserID;
-                userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
+                userID = User.FetchUserByUsername(username).UserID;
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userIDCache.Insert(cacheKey, userID, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return userID.Value;
@@ -75,6 +73,7 @@ namespace Incremental.Kick.Caching {
             GetUserCache().Remove(GetUserProfileCacheKey(userID));
         }
 
+
         private static string GetUserProfileCacheKey() {
             return "UserProfile_Anonymous";
         }
@@ -84,31 +83,22 @@ namespace Incremental.Kick.Caching {
         }
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
-        //TODO: simone.busoli: no more sps, right?
         public static int KickStory(int storyID, int userID, int hostID) {
-            // If the user has already kicked the story return the current number of kicks
-            // This may happen if the user has two browser windows opened on the same story and
-            // tries to kick on both pages
             if (StoryBR.DoesStoryKickExist(storyID, userID, hostID))
-                return Story.FetchByID(storyID).KickCount;
+                throw new SecurityException("The story has already been kicked!");
 
             StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
             GetUserStoryKicks(userID).Add(storyKick);
-            UserAction.RecordKick(hostID, GetUser(userID), Story.FetchByID(storyID));
-
             return StoryBR.IncrementKickCount(storyID);
         }
 
+
         public static int UnKickStory(int storyID, int userID, int hostID) {
-            // If the user has already unkicked the story return the current number of kicks
-            // This may happen if the user has two browser windows opened on the same story and
-            // tries to unkick on both pages
             if (StoryBR.DoesStoryKickNotExist(storyID, userID, hostID))
-                return Story.FetchByID(storyID).KickCount;
+                throw new SecurityException("There is no kick to unkick!");
 
             StoryBR.DeleteStoryKick(storyID, userID, hostID);
             RemoveStoryKick(storyID, userID, hostID);
-            UserAction.RecordUnKick(hostID, GetUser(userID), Story.FetchByID(storyID));
             return StoryBR.DecrementKickCount(storyID);
         }
 
@@ -143,34 +133,43 @@ namespace Incremental.Kick.Caching {
             if (storyKicks == null) {
                 //TODO: get the latest n kicks for this userIdentifier
                 storyKicks = StoryKick.FetchByUserID(userID);
-                storyKickCache.Insert(cacheKey, storyKicks, CacheHelper.CACHE_DURATION_IN_SECONDS, System.Web.Caching.CacheItemPriority.NotRemovable);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                storyKickCache.Insert(cacheKey, storyKicks, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return storyKicks;
         }
 
-        public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID, User userProfile) {
+        public static UserCollection GetUsersWhoKicked(int? storyId) {
+            string cacheKey = String.Format("UsersWhoKicked_Story_{0}", storyId);
+            CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
+            UserCollection users = userCollectionCache[cacheKey];
+
+            if (users == null) {
+                users = UserBR.GetUsersWhoKicked(storyId);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userCollectionCache.Insert(cacheKey, users, CacheHelper.CACHE_DURATION_IN_SECONDS);
+            }
+
+            return users;
+        }
+
+        public static UserCollection GetOnlineUsers(int minutesSinceLastActive, int hostID) {
             string cacheKey = String.Format("OnlineUsers_{0}_{1}", minutesSinceLastActive, hostID);
             CacheManager<string, UserCollection> userCollectionCache = GetUserCollectionCache();
             UserCollection users = userCollectionCache[cacheKey];
 
             if (users == null) {
-
                 users = User.FetchOnlineUsers(minutesSinceLastActive, hostID);
-                userCollectionCache.Insert(cacheKey, users, 60, System.Web.Caching.CacheItemPriority.NotRemovable);
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                userCollectionCache.Insert(cacheKey, users, 60);
             }
 
-            // If current user has permissions show all online users
-            if (userProfile.IsModerator || userProfile.IsAdministrator)
-                return users;
-
-            // Otherwise show only users who choose to appear online
-            users.RemoveAll(delegate(User user) { return !user.AppearOnline; });
             return users;
         }
 
-        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID, User userProfile) {
-            return GetOnlineUsers(minutesSinceLastActive, hostID, userProfile).Count;
+        public static int GetOnlineUsersCount(int minutesSinceLastActive, int hostID) {
+            return GetOnlineUsers(minutesSinceLastActive, hostID).Count;
         }
 
         private static CacheManager<string, UserCollection> GetUserCollectionCache() {

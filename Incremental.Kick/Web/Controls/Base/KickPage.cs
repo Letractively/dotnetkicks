@@ -1,268 +1,193 @@
 using System;
 using System.Collections.Generic;
-using System.Web.UI;
+using System.Text;
+using System.Web;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Dal.Entities;
+using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Security.Principal;
-using Incremental.Kick.Web.Helpers;
 
-namespace Incremental.Kick.Web.Controls
-{
-    /// <summary>
-    /// KickPage is the base class for most pages within the project
-    /// </summary>
-    public class KickPage : Page
-    {
-        #region Fields
+namespace Incremental.Kick.Web.Controls {
+    public class KickPage : System.Web.UI.Page {
+        private UrlFactory.PageName _pageName;
+        public UrlFactory.PageName PageName {
+            get { return this._pageName; }
+            set { this._pageName = value; }
+        }
+
+        private List<string> _requiredRoles = new List<string>();
+        public List<string> RequiredRoles {
+            get { return this._requiredRoles; }
+            set { this._requiredRoles = value; }
+        }
+        public void RequiresAdministratorRole() {
+            this.RequiredRoles.Add("administrator");
+        }
+        public void RequiresModeratorRole() {
+            this.RequiredRoles.Add("moderator");
+        }
+
+        public bool IsAuthenticated {
+            get { return this.User.Identity.IsAuthenticated; }
+        }
+
+        private bool _isMemberPage = false;
+        public bool IsMemberPage {
+            get { return this._isMemberPage; }
+            set { this._isMemberPage = value; }
+        }
 
         private string _caption = "";
-        private bool _displayAds = true;
-        private bool _displayAnnouncement = true;
-        private bool _displaySideAds = true;
-        private Host _hostProfile;
-        private bool _isMemberPage = false;
-        private UrlFactory.PageName _pageName;
-        private List<string> _requiredRoles = new List<string>();
+        public string Caption {
+            get { return this._caption; }
+            set { this._caption = value; }
+        }
+
         private string _subCaption = "";
-        private UrlParameters _urlParameters;
-        private User _userProfile;
-
-        #endregion
-
-        #region Properties
+        public string SubCaption {
+            get { return this._subCaption; }
+            set { this._subCaption = value; }
+        }
 
         /*public bool IsCachedPage {
             get { return this._isCachedPage; }
             set { this._isCachedPage = value; }
         }
+        
         public bool IsCachedAuthenticatedPage {
             get { return this._isCachedAuthenticatedPage; }
             set { this._isCachedAuthenticatedPage = value; }
         }*/
 
-        public string Caption
-        {
-            get { return _caption; }
-            set { _caption = value; }
+        private User _userProfile;
+        public User KickUserProfile {
+            get {
+                if (this._userProfile == null) {
+                    this._userProfile = ((IKickPrincipal)base.User).KickUserProfile;
+                }
+                return this._userProfile;
+            }
         }
 
-        public bool DisplayAds
-        {
-            get
-            {
-                if(_displayAds)
-                    return HostProfile.ShowAds;
+        public bool IsHostModerator {
+            get { return this.KickUserProfile.IsHostModerator(this.HostProfile.HostName); }
+        }
+
+        private UrlParameters _urlParameters;
+        public UrlParameters UrlParameters {
+            get {
+                if (this._urlParameters == null)
+                    this._urlParameters = UrlParametersHelper.GetUrlParameters(this.Request, this.HostProfile.HostName);
+
+                return this._urlParameters;
+            }
+        }
+
+
+        public string Host {
+            get { return HostHelper.GetHostName(this.Request.Url); }
+        }
+
+        private Host _hostProfile;
+        public Host HostProfile {
+            get {
+                if (this._hostProfile == null) {
+                    this._hostProfile = HostCache.GetHost(HostHelper.GetHostAndPort(this.Request.Url));
+                }
+
+                return this._hostProfile;
+            }
+        }
+
+        private WebUIConfig _webUIConfig;
+        public WebUIConfig WebUIConfig {
+            get {
+                if (this._webUIConfig == null) {
+                    this._webUIConfig = WebUIConfigReader.GetConfig();
+                }
+
+                return this._webUIConfig;
+            }
+        }
+
+        public string StaticRootUrl {
+            get {
+                if (this.Host == "localhost")
+                    return this.ResolveUrl("http://localhost:8080/Static");
                 else
+                    return "http://static." + this.Host;
+            }
+        }
+
+        public string StaticScriptRootUrl {
+            get { return this.StaticRootUrl + "/Scripts"; }
+        }
+
+        public string StaticImageRootUrl {
+            get { return this.StaticRootUrl + "/Images"; }
+        }
+
+        public string StaticIconRootUrl {
+            get { return this.StaticImageRootUrl + "/Icons"; }
+        }
+
+        public string MasterPageBaseUrl {
+            get { return this.HostProfile.RootUrl + "/Templates"; }
+        }
+
+        public string MasterPageBaseCssUrl {
+            get { return this.MasterPageBaseUrl + @"/Default.css"; }
+        }
+
+        public string MasterPageTemplateUrl {
+            get { return this.MasterPageBaseUrl + "/" + this.HostProfile.Template; }
+        }
+
+        public string MasterPageTemplateCssUrl {
+            get { return this.MasterPageTemplateUrl + @"/Template.css"; }
+        }
+        private bool _displayAds = true;
+        public bool DisplayAds {
+            get {
+                if (this._displayAds) 
+                    return this.HostProfile.ShowAds;
+                else 
                     return false;
             }
-            set { _displayAds = value; }
+            set { this._displayAds = value; }
         }
 
-        public bool DisplayAnnouncement
-        {
-            get { return _displayAnnouncement; }
-            set { _displayAnnouncement = value; }
+        private bool _displaySideAds = true;
+        public bool DisplaySideAds {
+            get { return this._displaySideAds; }
+            set { this._displaySideAds = value; }
         }
 
-        public bool DisplaySideAds
-        {
-            get { return _displaySideAds; }
-            set { _displaySideAds = value; }
+        private bool _displayAnnouncement = true;
+        public bool DisplayAnnouncement {
+            get { return this._displayAnnouncement; }
+            set { this._displayAnnouncement = value; }
         }
 
-        public string Host
-        {
-            get { return HostHelper.GetHostName(Request.Url); }
-        }
-
-        public Host HostProfile
-        {
-            get
-            {
-                if(_hostProfile == null)
-                    _hostProfile = HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url));
-                return _hostProfile;
-            }
-        }
-
-        public bool IsAuthenticated
-        {
-            get { return User.Identity.IsAuthenticated; }
-        }
-
-        public bool IsHostModerator
-        {
-            get { return KickUserProfile.IsHostModerator(HostProfile.HostName); }
-        }
-
-        public bool IsMemberPage
-        {
-            get { return _isMemberPage; }
-            set { _isMemberPage = value; }
-        }
-
-        public User KickUserProfile
-        {
-            get
-            {
-                if(_userProfile == null)
-                    _userProfile = ((IKickPrincipal) User).KickUserProfile;
-                return _userProfile;
-            }
-        }
-
-        public string MasterPageBaseCssUrl
-        {
-            get { return MasterPageBaseUrl + @"/Default.css"; }
-        }
-
-        public string MasterPageBaseUrl
-        {
-            get { return HostProfile.RootUrl + "/Templates"; }
-        }
-
-        public string MasterPageTemplateCssUrl
-        {
-            get { return MasterPageTemplateUrl + @"/Template.css"; }
-        }
-
-        public string MasterPageTemplateUrl
-        {
-            get { return MasterPageBaseUrl + "/" + HostProfile.Template; }
-        }
-
-        public UrlFactory.PageName PageName
-        {
-            get { return _pageName; }
-            set { _pageName = value; }
-        }
-
-        public List<string> RequiredRoles
-        {
-            get { return _requiredRoles; }
-            set { _requiredRoles = value; }
-        }
-
-        public string StaticIconRootUrl
-        {
-            get { return StaticImageRootUrl + "/Icons"; }
-        }
-
-        public string StaticEmoticonsRootUrl
-        {
-            get { return StaticImageRootUrl + "/Emoticons"; }
-        }
-
-        public string StaticImageRootUrl
-        {
-            get { return StaticRootUrl + "/Images"; }
-        }
-
-        public string StaticRootUrl
-        {
-            get
-            {
-                if(Host == "localhost")
-                    return ResolveUrl("http://localhost:8080/Static");
-                else if(HostProfile.UseStaticRoot)
-                    return "http://static." + HostProfile.HostName;
-                else
-                    return ResolveUrl("/Static");
-            }
-        }
-
-        public string StaticScriptRootUrl
-        {
-            get { return StaticRootUrl + "/Scripts"; }
-        }
-
-        public string SubCaption
-        {
-            get { return _subCaption; }
-            set { _subCaption = value; }
-        }
-
-        public UrlParameters UrlParameters
-        {
-            get
-            {
-                if(_urlParameters == null)
-                    _urlParameters = UrlParametersHelper.GetUrlParameters(Request, HostProfile.HostName);
-
-                return _urlParameters;
-            }
-        }
-
-        #endregion
-
-        #region  Methods 
-
-        //  Public Methods 
-
-        /// <summary>
-        /// Demands the administrator role.
-        /// </summary>
-        public void DemandAdministratorRole()
-        {
-            if(!KickUserProfile.IsAdministrator)
-                NotAuthorisedRedirect();
-        }
-
-        /// <summary>
-        /// Demands the moderator role.
-        /// </summary>
-        public void DemandModeratorRole()
-        {
-            if(!KickUserProfile.IsModerator)
-                NotAuthorisedRedirect();
-        }
-
-        /// <summary>
-        /// Nots the authorised redirect.
-        /// </summary>
-        public void NotAuthorisedRedirect()
-        {
-            Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
-        }
-
-        /// <summary>
-        /// Requireses the administrator role.
-        /// </summary>
-        public void RequiresAdministratorRole()
-        {
-            RequiredRoles.Add("administrator");
-        }
-
-        /// <summary>
-        /// Requireses the moderator role.
-        /// </summary>
-        public void RequiresModeratorRole()
-        {
-            RequiredRoles.Add("moderator");
-        }
-
-        //  Protected Methods 
-
-        protected override void OnInitComplete(EventArgs e)
-        {
-            PerformSecurityChecks();
+        protected override void OnInitComplete(EventArgs e) {
+            this.PerformSecurityChecks();
             base.OnInitComplete(e);
         }
 
-        //  Private Methods 
+        private void PerformSecurityChecks() {
+            if (this.IsMemberPage && !this.IsAuthenticated)
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login, this.Request.Url.ToString()));
 
-        /// <summary>
-        /// Performs the security checks.
-        /// </summary>
-        private void PerformSecurityChecks()
-        {
-            if(IsMemberPage && !IsAuthenticated)
-                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.Login, Request.Url.ToString()));
-
-            if(!KickUserProfile.HasRoles(RequiredRoles))
-                NotAuthorisedRedirect();
+            if (!this.KickUserProfile.HasRoles(this.RequiredRoles))
+                this.NotAuthorisedRedirect();
         }
 
-        #endregion
+        public void NotAuthorisedRedirect() {
+            Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.NotAuthorised));
+        }
     }
 }

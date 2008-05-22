@@ -7,7 +7,7 @@ namespace Incremental.Kick.Web.Controls {
 
         public override string Password {
             get {
-                return Incremental.Kick.Helpers.PasswordGenerator.Generate(8);
+                return Incremental.Kick.Web.Helpers.PasswordGenerator.Generate(8);
               }
         }
 

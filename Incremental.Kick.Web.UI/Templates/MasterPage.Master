@@ -8,11 +8,10 @@
        <meta name="keywords" content="" />
     </asp:ContentPlaceHolder>
 </head>
-<body id="<%= this.KickPage.PageName %>">
+<body>
     <form id="PageForm" runat="server">
-           <div id="PageContainer">
-               <asp:PlaceHolder ID="phWebSiteAlert" runat="server"/>
-              
+           <div id="wrap">
+            
                 <asp:ContentPlaceHolder ID="Header" runat="server">
                 </asp:ContentPlaceHolder>
                     

@@ -10,10 +10,11 @@ using System.IO;
 namespace Incremental.Kick.Helpers {
     public class TrackbackHelper {
 
+        delegate void SendTrackbackPingDelegate(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName);
+
         public static void SendTrackbackPing_Begin(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName) {
-            AsyncHelper.FireAndForget(delegate {
-                SendTrackbackPing(resourceUrl, storyTitle, storyUrl, storyExcerpt, siteName);
-            });
+            SendTrackbackPingDelegate sendTrackbackPingDelegate = new SendTrackbackPingDelegate(SendTrackbackPing);
+            AsyncHelper.FireAndForget(sendTrackbackPingDelegate, resourceUrl, storyTitle, storyUrl, storyExcerpt, siteName);
         }
 
         private static void SendTrackbackPing(string resourceUrl, string storyTitle, string storyUrl, string storyExcerpt, string siteName) {
@@ -38,7 +39,7 @@ namespace Incremental.Kick.Helpers {
             } catch (Exception ex) {
                 System.Diagnostics.Trace.WriteLine("An exception occured posting a trackback:" + ex.ToString());
             } finally {
-                if (streamWriter != null) streamWriter.Close();
+                streamWriter.Close();
             }
         }
 

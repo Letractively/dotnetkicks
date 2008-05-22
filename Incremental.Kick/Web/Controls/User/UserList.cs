@@ -1,5 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Web.UI;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.Caching;
+using Incremental.Kick.Helpers;
+using Incremental.Kick.Dal.Entities;
+using System.Web;
 
 namespace Incremental.Kick.Web.Controls {
     public class UserList : KickWebControl {
@@ -7,11 +15,11 @@ namespace Incremental.Kick.Web.Controls {
 
         public UserList() { }
         public UserList(UserCollection users) {
-            DataBind(users);
+            this.DataBind(users);
         }
 
         public void DataBind(UserCollection users) {
-            _users = users;
+            this._users = users;
         }
 
         protected override void Render(HtmlTextWriter writer) {

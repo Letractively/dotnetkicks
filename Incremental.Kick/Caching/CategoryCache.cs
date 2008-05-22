@@ -45,6 +45,7 @@ namespace Incremental.Kick.Caching {
                 categories = new CategoryCollection();
                 SubSonic.OrderBy orderBy = SubSonic.OrderBy.Asc(Category.Columns.Name);
                 categories.LoadAndCloseReader(Category.FetchByParameter(Category.Columns.HostID, hostID, orderBy));
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 categoryCache.Insert(cacheKey, categories, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 

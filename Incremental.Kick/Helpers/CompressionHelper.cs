@@ -2,17 +2,24 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace Incremental.Kick.Helpers {
-    public static class CompressionHelper {
-        public static string Inflate(string encoded) {
+namespace Incremental.Kick.Helpers
+{
+    public class CompressonHelper
+    {
+        public static string Inflate(string encoded)
+        {
             return BytesToString(Inflate(StringToBytes(encoded)));
         }
 
-        public static byte[] Inflate(byte[] encoded) {
-            using (MemoryStream inputStream = new MemoryStream(encoded)) {
-                using (DeflateStream inflateStream = new DeflateStream(inputStream, CompressionMode.Decompress)) {
+        public static byte[] Inflate(byte[] encoded)
+        {
+            using (MemoryStream inputStream = new MemoryStream(encoded))
+            {
+                using (DeflateStream inflateStream = new DeflateStream(inputStream, CompressionMode.Decompress))
+                {
                     string inflatedString;
-                    using (StreamReader sr = new StreamReader(inflateStream, Encoding.Default)) {
+                    using (StreamReader sr = new StreamReader(inflateStream, Encoding.Default))
+                    {
                         inflatedString = sr.ReadToEnd();
                     }
                     return StringToBytes(inflatedString);
@@ -20,14 +27,19 @@ namespace Incremental.Kick.Helpers {
             }
         }
 
-        public static string Deflate(string value) {
+        public static string Deflate(string value)
+        {
             return BytesToString(Deflate(StringToBytes(value)));
         }
 
-        public static byte[] Deflate(byte[] bytes) {
-            using (MemoryStream outputStream = new MemoryStream()) {
-                using (DeflateStream deflateStream = new DeflateStream(outputStream, CompressionMode.Decompress)) {
-                    using (MemoryStream inputStream = new MemoryStream(bytes)) {
+        public static byte[] Deflate(byte[] bytes)
+        {
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                using (DeflateStream deflateStream = new DeflateStream(outputStream, CompressionMode.Decompress))
+                {
+                    using (MemoryStream inputStream = new MemoryStream(bytes))
+                    {
                         inputStream.WriteTo(deflateStream);
                     }
 
@@ -38,11 +50,13 @@ namespace Incremental.Kick.Helpers {
             }
         }
 
-        public static byte[] StringToBytes(string value) {
+        public static byte[] StringToBytes(string value)
+        {
             return Encoding.Default.GetBytes(value);
         }
 
-        public static string BytesToString(byte[] bytes) {
+        public static string BytesToString(byte[] bytes)
+        {
             return Encoding.Default.GetString(bytes);
         }
 

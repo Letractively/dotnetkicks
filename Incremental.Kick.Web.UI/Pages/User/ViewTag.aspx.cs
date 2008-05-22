@@ -26,7 +26,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
             this.Paging.RecordCount = StoryCache.GetUserTaggedStoryCount(this.UrlParameters.TagIdentifier, this.KickUserProfile.UserID, this.HostProfile.HostID);
             this.Paging.PageNumber = UrlParameters.PageNumber;
             this.Paging.PageSize = UrlParameters.PageSize;
-            this.Paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserTag, this.KickUserProfile.Username, HttpUtility.UrlEncode(this.UrlParameters.TagIdentifier));
+            this.Paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.UserTag, this.KickUserProfile.Username, this.UrlParameters.TagIdentifier);
         }
     }
 }

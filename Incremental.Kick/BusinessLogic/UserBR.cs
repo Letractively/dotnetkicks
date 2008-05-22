@@ -1,9 +1,8 @@
 using System;
-using System.Transactions;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
-using System.Security;
+using Incremental.Kick.Common.Exceptions;
 using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.BusinessLogic {
@@ -18,7 +17,7 @@ namespace Incremental.Kick.BusinessLogic {
 
 
             if (!skipUpdateLastActiveOn)
-                if (user.LastActiveOn < DateTime.Now.AddHours(-1)) {
+                if (user.LastActiveOn < System.DateTime.Now.AddHours(-1)) {
                     user.LastActiveOn = DateTime.Now;
                     user.Save();
                 }
@@ -26,17 +25,25 @@ namespace Incremental.Kick.BusinessLogic {
             return user;
         }
 
+        public static UserCollection GetUsersWhoKicked(int? storyId)
+        {
+            UserCollection users = new UserCollection();
+            users.Load(SPs.Kick_GetUsersWhoKicked(storyId).GetReader());
+            return users;
+        }
+
+
         public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
             //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
             username = username.Trim();
             email = email.Trim();
 
-            //TODO: We should be handling these exceptions in the UI
+            //TODO: GJ: extract to method
             //ensure that the username and email is unique
             if (User.FetchByParameter(User.Columns.Username, username).Read())
-                throw new ArgumentException("The username already exists");
+                throw new KickUsernameAlreadyExistsException();
             if (User.FetchByParameter(User.Columns.Email, email).Read())
-                throw new ArgumentException("The email already exists");
+                throw new KickEmailAlreadyExistsException();
 
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
@@ -52,17 +59,10 @@ namespace Incremental.Kick.BusinessLogic {
             user.IsBanned = false;
             user.ReceiveEmailNewsletter = receiveEmailNewsletter;
             user.HostID = host.HostID;
-            user.LastActiveOn = DateTime.Now;
 
-            using (TransactionScope scope = new TransactionScope()) {
-                user.Save();
+            user.Save();
 
-                EmailHelper.SendNewUserEmail(email, username, password, host);
-
-                UserAction.RecordUserRegistration(user.HostID, user);
-
-                scope.Complete();
-            }
+            EmailHelper.SendNewUserEmail(email, username, password, host);
         }
 
         public static string GetSecurityToken(string username, string password) {
@@ -82,9 +82,22 @@ namespace Incremental.Kick.BusinessLogic {
             if (!user.IsValidated)
                 user.IsValidated = true;
 
-
             user.Save();
             return new SecurityToken(user.UserID).ToString();
+        }
+
+        public static void BanUser(string username) {
+            User user = User.FetchUserByUsername(username);
+            user.IsBanned = true;
+            user.Save();
+
+            //TODO: GJ :delete their stories
+            //DeleteUserStories(userDS.Kick_User[0].UserID);
+        }
+
+        public static void DeleteUserStories(User user) {
+            //TODO: GJ: PERFORMANCE: update to delete in one sql statement (low priority)
+            throw new NotImplementedException();
         }
 
         public static void UpdatePassword(int userID, string newPassword, Host host) {
@@ -141,15 +154,15 @@ namespace Incremental.Kick.BusinessLogic {
             username = username.Trim();
             password = password.Trim();
 
-            User user = GetUserByUsername(username);
+            User user = UserBR.GetUserByUsername(username);
 
             if (user == null)
-                throw new SecurityException("Username [" + username + "] not found");
+                throw new Exception("Username [" + username + "] not found");
 
             string passwordHash = Cipher.Hash(password, user.PasswordSalt);
 
             if (!passwordHash.Equals(user.Password))
-                throw new SecurityException("Invalid password for username [" + username + "]");
+                throw new Exception("Invalid password for username [" + username + "]");
 
             if (!user.IsValidated) {
                 user.IsValidated = true;

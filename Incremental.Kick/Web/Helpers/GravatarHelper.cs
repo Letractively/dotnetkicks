@@ -6,10 +6,9 @@ using System.IO;
 
 namespace Incremental.Kick.Web.Helpers {
     public class GravatarHelper {
+        delegate void DownloadGravatarDelegate(string gravatarID, int size, string targetFolderPath);
         public static void DownloadGravatar_Begin(string gravatarID, int size, string targetFolderPath) {
-            AsyncHelper.FireAndForget(delegate {
-                DownloadGravatar(gravatarID, size, targetFolderPath);
-            });
+            AsyncHelper.FireAndForget(new DownloadGravatarDelegate(DownloadGravatar), gravatarID, size, targetFolderPath);
         }
 
         private static object _downloadLock = new object();
