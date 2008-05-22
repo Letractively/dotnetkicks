@@ -9,23 +9,21 @@ namespace Incremental.Kick.Web.Controls {
     public class EditableTagList : KickHtmlControl {
         private WeightedTagList _tags;
         private int _storyID;
-        private string _username;
 
-        public void DataBind(int storyID, string username) {
-            this.DataBind(new WeightedTagList(), storyID, username);
+        public void DataBind(int storyID) {
+            this.DataBind(new WeightedTagList(), storyID);
         }
 
-        public void DataBind(WeightedTagList tags, int storyID, string username) {
+        public void DataBind(WeightedTagList tags, int storyID) {
             this._tags = tags;
             this._storyID = storyID;
-            this._username = username;
         }
 
         protected override void Render(HtmlTextWriter writer) {
             if (this.Page.User.Identity.IsAuthenticated) {
                 writer.WriteLine(@"<div class=""EditableTagList Hidden"" id=""{0}_EditableTagList"">", this._storyID);
                 UserEditableTagList userTagList = new UserEditableTagList();
-                userTagList.DataBind(this._tags, this._storyID, this._username);
+                userTagList.DataBind(this._tags, this._storyID);
                 userTagList.RenderControl(writer);
                 writer.WriteLine("</div>");
 

@@ -11,7 +11,6 @@ using System.Web.UI.HtmlControls;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Common.Enums;
 using Incremental.Kick.Caching;
-using SubSonic.Sugar;
 
 namespace Incremental.Kick.Web.UI.Pages {
     public partial class Home : Incremental.Kick.Web.Controls.KickUIPage {
@@ -60,9 +59,7 @@ namespace Incremental.Kick.Web.UI.Pages {
                     break;
             }
 
-            //this.SubCaption = String.Format(@"<a href=""{0}"" class=""highlight"">View {1} >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), Strings.Pluralize(StoryCache.GetUpcomingStoryCount(this.HostProfile), "upcoming stories"));
-            this.SubCaption = String.Format(@"<a href=""{0}"" class=""highlight"">View {1} >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), String.Format("{0:#,###}", StoryCache.GetUpcomingStoryCount(this.HostProfile)) + " upcoming stories");
-            //String.Format("{0:#,###}", StoryCache.GetUpcomingStoryCount(this.HostProfile))
+            this.SubCaption = String.Format(@"<a href=""{0}"">View {1} upcoming stories >></a>", UrlFactory.CreateUrl(UrlFactory.PageName.NewStories), StoryCache.GetUpcomingStoryCount(this.HostProfile));
         }
     }
 }

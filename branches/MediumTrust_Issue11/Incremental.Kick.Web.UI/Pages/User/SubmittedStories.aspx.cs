@@ -20,7 +20,6 @@ namespace Incremental.Kick.Web.UI.Pages.User {
 
         protected void Page_Load(object sender, EventArgs e) {
             this.UserProfileHeader.User = this.UserProfile;
-            this.StoryListControl.NoStoriesCaption = string.Format("{0} has not submitted any stories.", this.UrlParameters.UserIdentifier);
             this.StoryListControl.Title = "Stories submitted by " + this.UrlParameters.UserIdentifier;
             this.StoryListControl.DataBind(StoryCache.GetUserSubmittedStories(this.UrlParameters.UserIdentifier, this.HostProfile.HostID, this.UrlParameters.PageNumber, this.UrlParameters.PageSize));
             this.Paging.RecordCount = StoryCache.GetUserSubmittedStoriesCount(this.UrlParameters.UserIdentifier, this.HostProfile.HostID);

@@ -21,7 +21,7 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         protected override void Render(HtmlTextWriter writer) {
-            writer.WriteLine(@"<table class=""vcard""><tr><td width=""50""><div style=""display:none"" class=""fn"">" + this.User.Username + "</div>");
+            writer.WriteLine(@"<table><tr><td width=""50"">");
             new Gravatar(this.User, 50).RenderControl(writer);
             writer.WriteLine("</td><td>");
 

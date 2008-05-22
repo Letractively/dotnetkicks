@@ -6,18 +6,17 @@ using System.Web.Security;
 using System.Security.Principal;
 using Incremental.Kick.Security.Principal;
 using Incremental.Kick.BusinessLogic;
+using Incremental.Kick.Config;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Dal.Entities;
 using Incremental.Kick.Dal;
-using System.Security;
 
 namespace Incremental.Kick.Web.Security {
     public class SecurityManager {
-
+        
         public static void Logout() {
-            if(HttpContext.Current.Request.IsAuthenticated)
-                UserCache.RemoveUser(SecurityToken);
+            UserCache.RemoveUser(SecurityToken);
             FormsAuthentication.SignOut();
         }
 
@@ -30,32 +29,31 @@ namespace Incremental.Kick.Web.Security {
         }
 
         public static bool Login(string username, string password, bool isPersistant) {
-            string securityToken;
             try {
-                securityToken = UserBR.AuthenticateUser(username, password);
-            } catch (SecurityException) {
+                string securityToken = UserBR.AuthenticateUser(username, password);
+
+                DateTime expiryDate = DateTime.Now;
+                if (isPersistant)
+                    expiryDate = expiryDate.AddYears(1);
+                else
+                    expiryDate = expiryDate.AddDays(1);
+
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                     1, username, DateTime.Now, expiryDate, isPersistant,
+                     securityToken, FormsAuthentication.FormsCookiePath);
+
+                string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+
+                if (isPersistant)
+                    cookie.Expires = expiryDate;
+                
+                HttpContext.Current.Response.Cookies.Add(cookie);
+
+                return true;
+            } catch {
                 return false;
             }
-
-            DateTime expiryDate = DateTime.Now;
-            if (isPersistant)
-                expiryDate = expiryDate.AddYears(1);
-            else
-                expiryDate = expiryDate.AddDays(1);
-
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                 1, username, DateTime.Now, expiryDate, isPersistant,
-                 securityToken, FormsAuthentication.FormsCookiePath);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-
-            if (isPersistant)
-                cookie.Expires = expiryDate;
-
-            HttpContext.Current.Response.Cookies.Add(cookie);
-
-            return true;
         }
 
         public static void SetPrincipal() {
@@ -70,7 +68,7 @@ namespace Incremental.Kick.Web.Security {
                 urlParameters.SecurityToken = (((FormsIdentity)identity).Ticket).UserData;
                 try {
                     userProfile = UserCache.GetUser(urlParameters.SecurityToken);
-                    userProfile.UpdateLastActiveOn();
+                    userProfile.UpdateLastActiveOn();                    
                     principal = new AuthenticatedKickPrincipal(identity, userProfile);
                 } catch {
                     //TODO: Log an exception

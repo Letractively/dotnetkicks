@@ -10,21 +10,15 @@ namespace Incremental.Kick.Web.Controls {
     class TagCommaList : KickHtmlControl {
         private WeightedTagList _tags;
         private int _storyID;
-        private bool _showTagIt = true;
         public void DataBind(WeightedTagList tags, int storyID) {
-            this.DataBind(tags, storyID, true);
-        }
-        public void DataBind(WeightedTagList tags, int storyID, bool showTagIt) {
             this._tags = tags;
             this._storyID = storyID;
-            this._showTagIt = showTagIt;
         }
 
         protected override void Render(HtmlTextWriter writer) {
 
             if (this._tags.Count > 0) {
-                if (_showTagIt)
-                    writer.WriteLine("tags: ");
+                writer.WriteLine("tags: ");
 
                 string tagClass;
                 //TODO: GJ: refactor the Tag rendering as the code is duplicated
@@ -39,7 +33,8 @@ namespace Incremental.Kick.Web.Controls {
                         tagClass += " namespaceTag";
 
                         foreach (string tagNamespace in this._tags[i].Namespaces) {
-                            //tagIcons += String.Format(@"<img src=""{0}/{1}_{2}.png"" width=""16"" height=""16"" border=""0""/> ", this.KickPage.StaticIconRootUrl, tagNamespace, this._tags[i].TagName);
+                            tagIcons += String.Format(@"<img src=""{0}/{1}.png"" width=""16"" height=""16"" border=""0""/> ", this.KickPage.StaticIconRootUrl, tagNamespace);
+                            
                             tagClass += " " + tagNamespace + "_NamespaceTag";
                         }
                     }
@@ -51,10 +46,11 @@ namespace Incremental.Kick.Web.Controls {
                         writer.Write(", ");
 
                 }
+
+                writer.WriteLine(" | ");
             }
 
-            if (_showTagIt)
-                writer.WriteLine(@" | <a href=""javascript:ToggleStoryTags({0});""><strong>tag it</strong></a>", this._storyID);
+            writer.WriteLine(@"<a href=""javascript:ToggleStoryTags({0});""><strong>tag it</strong></a>", this._storyID);
         }
     }
 }

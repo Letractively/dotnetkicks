@@ -16,7 +16,7 @@ namespace Incremental.Kick.Web.UI.Pages.Story {
     public partial class Redirect : Incremental.Kick.Web.Controls.KickUIPage {
 
         protected void Page_Load(object sender, EventArgs e) {
-            Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier, this.HostProfile.HostID);
+            Incremental.Kick.Dal.Story story = StoryCache.GetStory(this.UrlParameters.StoryIdentifier);
             System.Diagnostics.Trace.WriteLine("Redirecting to " + story.Url);
             this.Response.Redirect(story.Url);
         }

@@ -23,6 +23,7 @@ namespace Incremental.Kick.Caching {
             if (tags == null) {
                 tags = Tag.FetchTags(hostID, createdOnLower, createdOnUpper).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -40,6 +41,7 @@ namespace Incremental.Kick.Caching {
                 tags.Sort(new WeightedTagList.UsageCountComparer());
                 tags = tags.GetTopTags(numberOfTags);
                 tags.Sort(new WeightedTagList.AlphabeticalComparer());
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -62,6 +64,7 @@ namespace Incremental.Kick.Caching {
             if (tags == null) {
                 tags = Tag.FetchTags(userID, hostID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
@@ -78,27 +81,26 @@ namespace Incremental.Kick.Caching {
             if (tags == null) {
                 tags = Tag.FetchStoryTags(storyID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
             return tags;
         }
 
-        public static int? GetTagID(string tagIdentifier) {
+        public static int GetTagID(string tagIdentifier) {
             string cacheKey = GetCacheKey("TagID", tagIdentifier);
             CacheManager<string, int?> tagCache = GetTagIDCache();
 
             int? tagID = tagCache[cacheKey];
 
             if (tagID == null) {
-                Tag tag = Tag.FetchTagByIdentifier(tagIdentifier);
-                if (tag != null) {
-                    tagID = tag.TagID;
-                    tagCache.Insert(cacheKey, tagID.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
-                }
+                tagID = Tag.FetchTagByIdentifier(tagIdentifier).TagID;
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
+                tagCache.Insert(cacheKey, tagID.Value, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 
-            return tagID;
+            return tagID.Value;
         }
 
         public static WeightedTagList GetUserTags(int userID) {
@@ -110,6 +112,7 @@ namespace Incremental.Kick.Caching {
             if (tags == null) {
                 tags = Tag.FetchUserTags(userID).ToWeightedTagList();
                 //TODO: GJ: sort by alpha
+                System.Diagnostics.Trace.Write("Cache: inserting [" + cacheKey + "]");
                 tagCache.Insert(cacheKey, tags, CacheHelper.CACHE_DURATION_IN_SECONDS);
             }
 

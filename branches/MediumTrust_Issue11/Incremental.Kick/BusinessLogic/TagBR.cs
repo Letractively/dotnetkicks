@@ -9,13 +9,8 @@ using Incremental.Kick.Caching;
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class TagBR {
-
-        public static WeightedTagList GetOrInsertTags(string tagString) {
-            return GetOrInsertTags(tagString, false);
-        }
-        
-        public static WeightedTagList GetOrInsertTags(string tagString, bool isAdministrator) {
-            List<string> rawTags = TagHelper.DistillTagInput(tagString, isAdministrator);
+        public static WeightedTagList GetOrInsertTags(string tagString, User user) {
+            List<string> rawTags = TagHelper.DistillTagInput(tagString, user.IsAdministrator);
 
             WeightedTagList tags = new WeightedTagList();
             TagCollection newTags = new TagCollection();
@@ -62,7 +57,7 @@ namespace Incremental.Kick.BusinessLogic {
         }
 
         public static WeightedTagList AddUserStoryTags(string tagString, User user, int storyID, int hostID) {
-            WeightedTagList tags = GetOrInsertTags(tagString, user.IsAdministrator);
+            WeightedTagList tags = GetOrInsertTags(tagString, user);
 
             StoryUserHostTagCollection storyUserHostTags = new StoryUserHostTagCollection();
             foreach (WeightedTag tag in tags) {
@@ -76,15 +71,6 @@ namespace Incremental.Kick.BusinessLogic {
             }
 
             storyUserHostTags.BatchSave();
-
-            UserAction.RecordTag(hostID, user, Story.FetchByID(storyID), tags);
-
-            //when a user adds a tag, we need to mark the story as updated
-            //so update the index during the incremental crawl
-            Story story = Story.FetchByID(storyID);
-            story.UpdatedOn = DateTime.Now;
-            story.Save();
-
             return tags;
         }
     }

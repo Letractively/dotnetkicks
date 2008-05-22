@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DotNetKicks">
+</Property><Property Name="Solution File" Value="C:\_Personal\Development\Projects\Dotnetkicks\DotNetKicks.sln">
+</Property><Property Name="Date" Value="Monday, May 19, 2008">
+</Property><Property Name="Time" Value="13:33">
+</Property></Properties><Event ErrorLevel="0" Project="Incremental.Kick" Source="Incremental.Kick\Incremental.Kick.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Incremental.Kick" Source="Incremental.Kick\Incremental.Kick.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.Web.UI" Source="Incremental.Kick.Web.UI\Incremental.Kick.Web.UI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Incremental.Kick.Web.UI" Source="Incremental.Kick.Web.UI\Incremental.Kick.Web.UI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.StoryPublisher.Console" Source="Incremental.Kick.StoryPublisher.Console\Incremental.Kick.StoryPublisher.Console.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Incremental.Kick.StoryPublisher.Console" Source="Incremental.Kick.StoryPublisher.Console\Incremental.Kick.StoryPublisher.Console.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.Tests" Source="Incremental.Kick.Tests\Incremental.Kick.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Incremental.Kick.Tests" Source="Incremental.Kick.Tests\Incremental.Kick.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="DotNetKicks.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="DotNetKicks.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.StoryPublisher.Console" Source="Incremental.Kick.StoryPublisher.Console\Incremental.Kick.StoryPublisher.Console.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick" Source="Incremental.Kick\Incremental.Kick.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.Web.UI" Source="Incremental.Kick.Web.UI\Incremental.Kick.Web.UI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Incremental.Kick.Tests" Source="Incremental.Kick.Tests\Incremental.Kick.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

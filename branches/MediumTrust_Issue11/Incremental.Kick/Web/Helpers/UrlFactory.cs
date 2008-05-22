@@ -22,8 +22,7 @@ namespace Incremental.Kick.Web.Helpers {
             Tools,
             Search,
 
-            WhoIsOnline,
-            KickSpy,
+            CommunityWhoIsOnline,
 
             UserHome,
             UserProfile,
@@ -38,11 +37,6 @@ namespace Incremental.Kick.Web.Helpers {
             UserTags,
             Users,
 
-            FriendsKickedStories,
-            FriendsKickedStoriesRss,
-            FriendsSubmittedStories,
-            FriendsSubmittedStoriesRss,
-
             ViewCategory,
             ViewCategoryRss,
             ViewCategoryNewStories,
@@ -54,7 +48,6 @@ namespace Incremental.Kick.Web.Helpers {
             SubmitStory,
 
             NewStories,
-            NewStoriesRss,
             UpcomingWeek,
             UpcomingToday,
 
@@ -64,20 +57,9 @@ namespace Incremental.Kick.Web.Helpers {
             PopularMonth,
             PopularYear,
 
-            VerifyEmail,
-			ChangeEmail,
-
-            Zeitgeist,
-
             ViewTagRss,
             NotAuthorised,
-            Admin,
-
-            ApiOverview,
-            ApiGenerateKey,
-            
-            JsonServices,
-            LiveKicks
+            Admin
         }
 
         public static string CreateUrl(PageName pageName) {
@@ -112,8 +94,6 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath("/submit");
                 case PageName.NewStories:
                     return MapPath("/upcoming");
-                case PageName.NewStoriesRss:
-                    return MapPath("/upcoming/rss");
                 case PageName.ChangePassword:
                     return MapPath("/changepassword");
                 case PageName.ViewTags:
@@ -121,26 +101,7 @@ namespace Incremental.Kick.Web.Helpers {
                 case PageName.NotAuthorised:
                     return MapPath("/notauthorised");
                 case PageName.Admin:
-                    return MapPath("/admin");  
-                case PageName.Zeitgeist:
-                    return MapPath("/zeitgeist"); 
-                case PageName.WhoIsOnline:
-                case PageName.KickSpy:
-                    return MapPath("/spy");
-
-				case PageName.ChangeEmail:
-					return MapPath("/changeemail");
-                
-                case PageName.ApiOverview:
-                    return MapPath("/api");
-                case PageName.ApiGenerateKey:
-                    return MapPath("/api/key");
-                
-                case PageName.JsonServices:
-                    return MapPath("/services/json/jsonservices.ashx");
-                case PageName.LiveKicks:
-                    return "http://widgets.dotnetkicks.com/";
-
+                    return MapPath("/admin");
                 default:
                     throw new Exception("not enough params to create url");
             }
@@ -168,10 +129,6 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/users/{0}/comments/rss", value));
                 case PageName.UserTags:
                     return MapPath(String.Format("/users/{0}/tags", value));
-                case PageName.FriendsKickedStories:
-                    return MapPath(String.Format("/users/{0}/friends/kicked", value));
-                case PageName.FriendsSubmittedStories:
-                    return MapPath(String.Format("/users/{0}/friends/submitted", value));
                 case PageName.ViewCategory:
                     return MapPath(String.Format("/{0}", value));
                 case PageName.ViewCategoryRss:
@@ -191,11 +148,6 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/tags/{0}/feeds/rss", value));
                 case PageName.Login:
                     return MapPath(String.Format("/login?ReturnUrl={0}", HttpUtility.UrlEncode(value)));
-                
-                case PageName.Zeitgeist:
-                    return MapPath(String.Format("/zeitgeist/{0}", value));
-                case PageName.Search:
-                    return MapPath(String.Format("/search?q={0}", value));
                 default:
                     throw new Exception("not enough params to create url");
             }
@@ -207,24 +159,11 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/{1}/{0}", identifier1, identifier2));
                 case PageName.UserTag:
                     return MapPath(String.Format("/users/{0}/tags/{1}", identifier1, identifier2));
-                case PageName.Zeitgeist:
-                    return MapPath(String.Format("/zeitgeist/{0}/{1}", identifier1, identifier2));
-                case PageName.UserProfile:
-                    return MapPath(String.Format("/users/{0}/profile?EmailSent={1}", identifier1, identifier2));
                 default:
                     throw new Exception("not enough params to create url");
             }
         }
-        public static string CreateUrl(PageName pageName, string identifier1, string identifier2, string identifier3)
-        {
-            switch (pageName)
-            {
-                case PageName.Zeitgeist:
-                    return MapPath(String.Format("/zeitgeist/{0}/{1}/{2}", identifier1, identifier2, identifier3 ));
-                default:
-                    throw new Exception("not enough params to create url");
-            }
-        }
+
         public static string CreateUrl(PageName pageName, string storyIdentifier, string categoryIdentifier, int commentID) {
             switch (pageName) {
                 case PageName.ViewStory:
@@ -251,7 +190,7 @@ namespace Incremental.Kick.Web.Helpers {
                 mappedPath = relativeUrl;
             }
 
-            mappedPath = mappedPath.TrimEnd('/');
+            mappedPath = mappedPath.TrimEnd("/".ToCharArray());
 
             if (mappedPath.Length == 0)
                 mappedPath = "/";

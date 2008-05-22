@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ChangePassword.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.ChangePassword" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ChangePassword.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.ChangePassword" %>
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <br />
 <asp:Panel ID="ChangePasswordPanel" runat="server">

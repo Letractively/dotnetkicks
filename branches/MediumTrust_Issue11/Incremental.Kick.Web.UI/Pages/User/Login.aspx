@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.User.Login" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.User.Login" MasterPageFile="~/Templates/MasterPage.master" %>
 <%@ Register Src="../../Controls/User/Login.ascx" TagName="Register" TagPrefix="uc1" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
 

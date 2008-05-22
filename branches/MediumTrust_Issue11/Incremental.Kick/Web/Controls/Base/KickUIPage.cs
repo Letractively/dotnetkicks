@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Reflection;
 
 namespace Incremental.Kick.Web.Controls {
     public class KickUIPage : KickPage {
@@ -29,24 +28,11 @@ namespace Incremental.Kick.Web.Controls {
             get { return !String.IsNullOrEmpty(this.RssFeedUrl); }
         }
 
-        private string _assemblyVersion;
-        public string AssemblyVersion {
-            get {
-                if (String.IsNullOrEmpty(_assemblyVersion))
-                    _assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                return _assemblyVersion;
-            }
-        }
         public void AddJavaScript(string relativeUrl) {
-            this.AddJavaScript(relativeUrl, true);
-        }
-        public void AddJavaScript(string relativeUrl, bool includeAssemblyVersion) {
             HtmlGenericControl script = new HtmlGenericControl("script");
             script.Attributes["type"] = "text/javascript";
             script.Attributes["src"] = this.ResolveUrl(relativeUrl);
-            if (includeAssemblyVersion)
-                script.Attributes["src"] += "?" + this.AssemblyVersion;
-            
+
             this.Header.Controls.Add(script);
 
             Literal literal = new Literal();
@@ -55,13 +41,8 @@ namespace Incremental.Kick.Web.Controls {
         }
 
         public void AddStyleSheet(string relativeUrl) {
-            this.AddStyleSheet(relativeUrl, true);
-        }
-        public void AddStyleSheet(string relativeUrl, bool includeAssemblyVersion) {
             HtmlLink cssLink = new HtmlLink();
             cssLink.Href = this.ResolveUrl(relativeUrl);
-            if (includeAssemblyVersion)
-                cssLink.Href += "?" + this.AssemblyVersion;
             cssLink.Attributes["type"] = "text/css";
             cssLink.Attributes["rel"] = "stylesheet";
 
@@ -94,16 +75,21 @@ namespace Incremental.Kick.Web.Controls {
             this.AddStyleSheet(this.MasterPageBaseCssUrl);
             this.AddStyleSheet(this.MasterPageTemplateCssUrl);
 
-            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/jQuery/jquery-1.2.min.js"));
-
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Dojo/Dojo.js");
             this.AddJavaScript(this.ResolveUrl("~/Scripts/Constants.aspx"));
-            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/json.js"));
-            this.AddJavaScript(this.ResolveUrl("~/services/ajax/ajaxservices.ashx?proxy"), false);
-            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Common.js"));
-            this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Tagging.js"));
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Ajax.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Common.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Tagging.js");
+
+            //TODO: GJ: add some booleans
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Controls/PopularStoryHeader.js");
+            this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Controls/PopularStoryNavigator.js");
 
             if (this.IsHostModerator)
-                this.AddJavaScript(this.ResolveUrl("~/Static/Scripts/2.0.2/Moderator/HostModerator.js"));
+                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Moderator/HostModerator.js");
+
+            if (this.KickUserProfile.IsAdministrator)
+                this.AddJavaScript(this.StaticScriptRootUrl + "/2.0.1/Admin/Kick.js");
 
             if (!String.IsNullOrEmpty(this.RssFeedUrl)) {
                 if(this.RssFeedUrl.StartsWith("http:"))

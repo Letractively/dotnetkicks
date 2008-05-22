@@ -3,9 +3,6 @@
 <%@ Register Src="TopMenu.ascx" TagName="TopMenu" TagPrefix="uc1" %>
 <%@ Register Src="TopAds.ascx" TagName="TopAds" TagPrefix="uc1" %>
 <%@ Register Src="SideAds.ascx" TagName="SideAds" TagPrefix="uc1" %>
-<%@ Register Src="~/Controls/Story/SearchInput.ascx" TagName="SearchInput" TagPrefix="uc1" %>
-
-
 <%@ Import Namespace="Incremental.Kick.Web.Helpers" %>
 <asp:Content ID="PageHeadOutline" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
@@ -15,11 +12,7 @@
     <div id="LoadingSpan" class="Hidden">Loading...</div>
     
     <uc1:TopMenu ID="TopMenu" runat="server" />
-    
-    <div id="BreadcrumbsNavigationAndWelcome" class="visualIEFloatFix">
-        <Kick:UserWelcome id="UserWelcomeMessage" runat="server" />
-        <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />        
-    </div>    
+    <Kick:Breadcrumbs id="Breadcrumbs" runat="server" />
     
     <table>
         <tr>
@@ -60,19 +53,16 @@
     <td class="RightContentTD">
     <%= this.KickPage.HostProfile.FeedBurnerMainRssFeedCountHtml %>
         
-        <uc1:SearchInput ID="searchInput" runat="server" />
-        
         <% if(this.KickPage.DisplaySideAds) { %>
+            <br />
+            <!-- DNK TheLounge -->
             <div id="wedje_div_thelounge"></div>
-            <script type="text/javascript" defer="defer" src="http://infozerk.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx">
-            </script>
-
+            <script type="text/javascript" src="http://montylounge.com/thelounge/BackDoor/DOTNET/DNK/Entrance.ashx?d=" defer="defer"></script>
             <p class="tlp">
-            <a href='http://www.montylounge.com/thelounge/' class="adsvia">Ads via The Lounge</a>
+	            <a href='http://www.montylounge.com/thelounge/' title="Ads via the lounge" class="adsvia">Ads Via The Lounge</a>    
             </p>
-
+            <hr />
         <% } %>
-        
         
         <asp:ContentPlaceHolder ID="RightContent" runat="server">
         </asp:ContentPlaceHolder>

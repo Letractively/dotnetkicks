@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 namespace Incremental.Kick.Web.UI.Pages.Docs {
     public partial class MissingStory : Incremental.Kick.Web.Controls.KickUIPage {
         protected void Page_Load(object sender, EventArgs e) {
-            this.Response.Status = "404 Not Found";
+            
         }
     }
 }

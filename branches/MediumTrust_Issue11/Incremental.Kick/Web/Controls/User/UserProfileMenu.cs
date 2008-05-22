@@ -27,8 +27,6 @@ namespace Incremental.Kick.Web.Controls {
             this.RenderLink(UrlFactory.PageName.UserComments, "Comments", writer);
             this.RenderLink(UrlFactory.PageName.UserTags, "Tags", writer);
             this.RenderLink(UrlFactory.PageName.UserFriends, "Friends", writer);
-            this.RenderLink(UrlFactory.PageName.FriendsKickedStories, "Kicked By Friends", writer);
-            this.RenderLink(UrlFactory.PageName.FriendsSubmittedStories, "Submitted By Friends", writer);
 
             writer.WriteLine(@"</div>");
             writer.WriteLine(@"</td><td align=""right"">{0}</td></tr></table>", this.KickPage.SubCaption);

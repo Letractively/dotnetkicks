@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InProgress.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Docs.InProgress" MasterPageFile="~/Templates/MasterPage.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="InProgress.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.Docs.InProgress" MasterPageFile="~/Templates/MasterPage.master" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" Runat="Server">
     
     <br />

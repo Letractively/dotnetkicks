@@ -38,15 +38,6 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.TextBox GravatarCustomEmail;
         
         /// <summary>
-        /// EmailValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailValidator;
-        
-        /// <summary>
         /// UserEmail control.
         /// </summary>
         /// <remarks>
@@ -74,15 +65,6 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.TextBox WebsiteURL;
         
         /// <summary>
-        /// WebsiteValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator WebsiteValidator;
-        
-        /// <summary>
         /// BlogUrl control.
         /// </summary>
         /// <remarks>
@@ -92,15 +74,6 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected global::System.Web.UI.WebControls.TextBox BlogUrl;
         
         /// <summary>
-        /// BlogValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator BlogValidator;
-        
-        /// <summary>
         /// BlogFeedUrl control.
         /// </summary>
         /// <remarks>
@@ -108,42 +81,6 @@ namespace Incremental.Kick.Web.UI.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox BlogFeedUrl;
-        
-        /// <summary>
-        /// BlogFeedValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator BlogFeedValidator;
-        
-        /// <summary>
-        /// AppearOnline control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox AppearOnline;
-        
-        /// <summary>
-        /// ShowStoryThumbnail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ShowStoryThumbnail;
-        
-        /// <summary>
-        /// ShowEmoticons control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ShowEmoticons;
         
         /// <summary>
         /// UpdateProfile control.

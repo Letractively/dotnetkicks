@@ -1,8 +1,8 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0D66373E-E06F-4A6C-806A-F4F5855121A0}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -10,6 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Incremental.Kick.Web.UI</RootNamespace>
     <AssemblyName>Incremental.Kick.Web.UI</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,35 +39,38 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Elmah\Elmah.dll</HintPath>
     </Reference>
-    <Reference Include="Jayrock, Version=0.9.8316.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.dll</HintPath>
-    </Reference>
-    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Jayrock\0.9.9305.2127\Jayrock.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\log4net\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Subkismet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\Subkismet\0.2.2.beta\Subkismet.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
+      <HintPath>..\..\3rdParty\SubSonic\185\SubSonic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="UrlRewritingNet.UrlRewriter, Version=1.1.60329.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\UrlRewriter.Net\1.1\UrlRewritingNet.UrlRewriter.dll</HintPath>
@@ -223,6 +232,20 @@
     <Content Include="Static\Images\StyledPanel\whiteTL.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTM.gif" />
     <Content Include="Static\Images\StyledPanel\whiteTR.gif" />
+    <Content Include="Static\Scripts\2.0.1\Admin\Kick.js" />
+    <Content Include="Static\Scripts\2.0.1\Ajax.js" />
+    <Content Include="Static\Scripts\2.0.1\Common.js" />
+    <Content Include="Static\Scripts\2.0.1\Controls\PopularStoryHeader.js" />
+    <Content Include="Static\Scripts\2.0.1\Controls\PopularStoryNavigator.js" />
+    <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js" />
+    <Content Include="Static\Scripts\2.0.1\Dojo\dojo.js.uncompressed.js" />
+    <Content Include="Static\Scripts\2.0.1\Dojo\jsTrace.js" />
+    <Content Include="Static\Scripts\2.0.1\Moderator\HostModerator.js" />
+    <Content Include="Static\Scripts\2.0.1\Stories.js" />
+    <Content Include="Static\Scripts\2.0.1\Tagging.js" />
+    <Content Include="Static\Scripts\2.0\Ajax.js" />
+    <Content Include="Static\Scripts\2.0\Common.js" />
+    <Content Include="Static\Scripts\2.0\Tagging.js" />
     <Content Include="Static\Tools\FeedFlare\KickItFlare.xml" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -240,41 +263,6 @@
     <Compile Include="Controls\Admin\AdminMenu.ascx.designer.cs">
       <DependentUpon>AdminMenu.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Admin\Cache.ascx.cs">
-      <DependentUpon>Cache.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Admin\Cache.ascx.designer.cs">
-      <DependentUpon>Cache.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Admin\Search.ascx.cs">
-      <DependentUpon>Search.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Admin\Search.ascx.designer.cs">
-      <DependentUpon>Search.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Admin\Tasks.ascx.cs">
-      <DependentUpon>Tasks.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Admin\Tasks.ascx.designer.cs">
-      <DependentUpon>Tasks.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Api\ApiMenu.ascx.cs">
-      <DependentUpon>ApiMenu.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Api\ApiMenu.ascx.designer.cs">
-      <DependentUpon>ApiMenu.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Community\KickSpy.ascx.cs">
-      <DependentUpon>KickSpy.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Community\KickSpy.ascx.designer.cs">
-      <DependentUpon>KickSpy.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Story\AddComment.ascx.cs">
       <DependentUpon>AddComment.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -282,33 +270,12 @@
     <Compile Include="Controls\Story\AddComment.ascx.designer.cs">
       <DependentUpon>AddComment.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Story\KickItImagePersonalization.ascx.cs">
-      <DependentUpon>KickItImagePersonalization.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Story\KickItImagePersonalization.ascx.designer.cs">
-      <DependentUpon>KickItImagePersonalization.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Story\SearchInput.ascx.cs">
-      <DependentUpon>SearchInput.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\Story\SearchInput.ascx.designer.cs">
-      <DependentUpon>SearchInput.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Story\SubmitNewStory.ascx.designer.cs">
       <DependentUpon>SubmitNewStory.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\User\ChangeEmail.ascx.cs">
-      <DependentUpon>ChangeEmail.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\User\ChangeEmail.ascx.designer.cs">
-      <DependentUpon>ChangeEmail.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\User\ChangePassword.ascx.cs">
       <DependentUpon>ChangePassword.ascx</DependentUpon>
@@ -352,27 +319,6 @@
     <Compile Include="Controls\User\Register.ascx.designer.cs">
       <DependentUpon>Register.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\User\ShoutBox.ascx.cs">
-      <DependentUpon>ShoutBox.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\User\ShoutBox.ascx.designer.cs">
-      <DependentUpon>ShoutBox.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\User\UserAdmin.ascx.cs">
-      <DependentUpon>UserAdmin.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\User\UserAdmin.ascx.designer.cs">
-      <DependentUpon>UserAdmin.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\User\VerifyEmail.ascx.cs">
-      <DependentUpon>VerifyEmail.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\User\VerifyEmail.ascx.designer.cs">
-      <DependentUpon>VerifyEmail.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -382,41 +328,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\BlockedUrlPatterns.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>BlockedUrlPatterns.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\BlockedUrlPatterns.aspx.designer.cs">
-      <DependentUpon>BlockedUrlPatterns.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\Categories.aspx.cs">
-      <DependentUpon>Categories.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Admin\Categories.aspx.designer.cs">
-      <DependentUpon>Categories.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\Chats.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Chats.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\Chats.aspx.designer.cs">
-      <DependentUpon>Chats.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\BlockedReferrals.aspx.cs">
-      <DependentUpon>BlockedReferrals.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Admin\BlockedReferrals.aspx.designer.cs">
-      <DependentUpon>BlockedReferrals.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\ReservedUsernames.aspx.cs">
-      <DependentUpon>ReservedUsernames.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Admin\ReservedUsernames.aspx.designer.cs">
-      <DependentUpon>ReservedUsernames.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -432,13 +343,6 @@
     <Compile Include="Pages\Admin\Hosts.aspx.designer.cs">
       <DependentUpon>Hosts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Admin\Search.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Admin\Search.aspx.designer.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Admin\Stories.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Stories.aspx</DependentUpon>
@@ -453,20 +357,6 @@
     <Compile Include="Pages\Admin\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Api\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Api\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Api\GenerateKey.aspx.cs">
-      <DependentUpon>GenerateKey.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Api\GenerateKey.aspx.designer.cs">
-      <DependentUpon>GenerateKey.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Category\ViewKickedStories.aspx.cs">
       <DependentUpon>ViewKickedStories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -480,34 +370,6 @@
     </Compile>
     <Compile Include="Pages\Category\ViewNewStories.aspx.designer.cs">
       <DependentUpon>ViewNewStories.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Chats\List.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Chats\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Chats\Room.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Room.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Chats\Room.aspx.designer.cs">
-      <DependentUpon>Room.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Community\KickSpy.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>KickSpy.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Community\KickSpy.aspx.designer.cs">
-      <DependentUpon>KickSpy.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Community\ShoutBox.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>ShoutBox.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Community\ShoutBox.aspx.designer.cs">
-      <DependentUpon>ShoutBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Docs\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -534,13 +396,6 @@
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Docs\FrequentlyAskedQuestions.aspx.cs">
-      <DependentUpon>FrequentlyAskedQuestions.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Docs\FrequentlyAskedQuestions.aspx.designer.cs">
-      <DependentUpon>FrequentlyAskedQuestions.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Docs\InProgress.aspx.cs">
       <DependentUpon>InProgress.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -564,13 +419,6 @@
       <DependentUpon>SiteMap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Docs\SpamReferral.aspx.cs">
-      <DependentUpon>SpamReferral.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Docs\SpamReferral.aspx.designer.cs">
-      <DependentUpon>SpamReferral.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Docs\Terms.aspx.cs">
       <DependentUpon>Terms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -586,13 +434,6 @@
     <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Story\Search.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Story\Search.aspx.designer.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Story\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -607,6 +448,13 @@
     <Compile Include="Pages\Story\Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Story\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Story\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Story\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -620,13 +468,6 @@
     </Compile>
     <Compile Include="Pages\Story\ViewOrAdd.aspx.designer.cs">
       <DependentUpon>ViewOrAdd.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Story\Zeitgeist.aspx.cs">
-      <DependentUpon>Zeitgeist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Story\Zeitgeist.aspx.designer.cs">
-      <DependentUpon>Zeitgeist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tag\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
@@ -648,13 +489,6 @@
     </Compile>
     <Compile Include="Pages\Upcoming.aspx.designer.cs">
       <DependentUpon>Upcoming.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\ChangeEmail.aspx.cs">
-      <DependentUpon>ChangeEmail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\User\ChangeEmail.aspx.designer.cs">
-      <DependentUpon>ChangeEmail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
@@ -690,20 +524,6 @@
     </Compile>
     <Compile Include="Pages\User\Friends.aspx.designer.cs">
       <DependentUpon>Friends.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\FriendsKickedStories.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>FriendsKickedStories.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\FriendsKickedStories.aspx.designer.cs">
-      <DependentUpon>FriendsKickedStories.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\FriendsSubmittedStories.aspx.cs">
-      <DependentUpon>FriendsSubmittedStories.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\User\FriendsSubmittedStories.aspx.designer.cs">
-      <DependentUpon>FriendsSubmittedStories.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\User\KickedStories.aspx.cs">
       <DependentUpon>KickedStories.aspx</DependentUpon>
@@ -768,13 +588,6 @@
     <Compile Include="Pages\User\SubmittedStories.aspx.designer.cs">
       <DependentUpon>SubmittedStories.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\User\VerifyEmail.aspx.cs">
-      <DependentUpon>VerifyEmail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\User\VerifyEmail.aspx.designer.cs">
-      <DependentUpon>VerifyEmail.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\User\ViewTag.aspx.cs">
       <DependentUpon>ViewTag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -789,6 +602,13 @@
     <Compile Include="Pages\User\ViewTags.aspx.designer.cs">
       <DependentUpon>ViewTags.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Community\WhoIsOnline.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Community\WhoIsOnline.aspx.designer.cs">
+      <DependentUpon>WhoIsOnline.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Constants.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -797,9 +617,43 @@
     <Compile Include="Scripts\Constants.aspx.designer.cs">
       <DependentUpon>Constants.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Ajax\AjaxServices.ashx.cs">
-      <DependentUpon>AjaxServices.ashx</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="Services\Ajax\AddUserStoryTags.aspx.cs">
+      <DependentUpon>AddUserStoryTags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\GetPopularStories.aspx.cs">
+      <DependentUpon>GetPopularStories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\GetUserStoryTags.aspx.cs">
+      <DependentUpon>GetUserStoryTags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\KickIt.aspx.cs">
+      <DependentUpon>KickIt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\Moderator\DeleteStory.aspx.cs">
+      <DependentUpon>DeleteStory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\RemoveUserStoryTag.aspx.cs">
+      <DependentUpon>RemoveUserStoryTag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ReportAsSpam.aspx.cs">
+      <DependentUpon>ReportAsSpam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ReportAsSpam.aspx.designer.cs">
+      <DependentUpon>ReportAsSpam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Ajax\ViewIt.aspx.cs">
+      <DependentUpon>ViewIt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\Ajax\ViewIt.aspx.designer.cs">
+      <DependentUpon>ViewIt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services\Feeds\Rss\CategoryKickedFeed.aspx.cs">
       <DependentUpon>CategoryKickedFeed.aspx</DependentUpon>
@@ -833,38 +687,6 @@
     </Compile>
     <Compile Include="Services\Images\ViewGravitar.ashx.cs">
       <DependentUpon>ViewGravitar.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\Json\JsonServices.ashx.cs">
-      <DependentUpon>JsonServices.ashx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Templates\Ruby\MasterPage.Master.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Templates\Ruby\MasterPage.Master.designer.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Ruby\SideAds.ascx.cs">
-      <DependentUpon>SideAds.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Templates\Ruby\SideAds.ascx.designer.cs">
-      <DependentUpon>SideAds.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Ruby\TopAds.ascx.cs">
-      <DependentUpon>TopAds.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Templates\Ruby\TopAds.ascx.designer.cs">
-      <DependentUpon>TopAds.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Ruby\TopMenu.ascx.cs">
-      <DependentUpon>TopMenu.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Templates\Ruby\TopMenu.ascx.designer.cs">
-      <DependentUpon>TopMenu.ascx</DependentUpon>
     </Compile>
     <Compile Include="Templates\Default\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
@@ -908,84 +730,13 @@
     <Compile Include="Templates\Simple\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="Templates\NewDefault\MasterPage.Master.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Templates\NewDefault\MasterPage.Master.designer.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
-    <Content Include="Templates\Ruby\MasterPage.Master" />
-    <Content Include="Controls\Api\ApiMenu.ascx" />
-    <Content Include="Controls\Admin\Search.ascx" />
-    <Content Include="Controls\Story\KickItImagePersonalization.ascx" />
-    <Content Include="Controls\User\ChangeEmail.ascx" />
-    <Content Include="Controls\User\VerifyEmail.ascx" />
-    <Content Include="Pages\Admin\BlockedUrlPatterns.aspx" />
-    <Content Include="Pages\Admin\Chats.aspx" />
-    <Content Include="Pages\Admin\BlockedReferrals.aspx" />
-    <Content Include="Pages\Admin\ReservedUsernames.aspx" />
-    <Content Include="Pages\Api\Default.aspx" />
-    <Content Include="Pages\Api\GenerateKey.aspx" />
-    <Content Include="Pages\Chats\List.aspx" />
-    <Content Include="Pages\Chats\Room.aspx" />
-    <Content Include="Controls\Story\SearchInput.ascx" />
-    <Content Include="Pages\Admin\Search.aspx" />
-    <Content Include="Pages\Docs\FrequentlyAskedQuestions.aspx" />
-    <Content Include="Pages\Docs\SpamReferral.aspx" />
-    <Content Include="Pages\User\ChangeEmail.aspx" />
-    <Content Include="Pages\User\VerifyEmail.aspx" />
-    <Content Include="Pages\Story\Search.aspx" />
-    <Content Include="Services\Json\JsonServices.ashx" />
-    <Content Include="Services\Ajax\AjaxServices.ashx" />
-    <Content Include="Static\Images\Emoticons\cry.gif" />
-    <Content Include="Static\Images\Emoticons\glad.gif" />
-    <Content Include="Static\Images\Emoticons\happy.gif" />
-    <Content Include="Static\Images\Emoticons\nervous.gif" />
-    <Content Include="Static\Images\Emoticons\ok.gif" />
-    <Content Include="Static\Images\Emoticons\sad.gif" />
-    <Content Include="Static\Images\Emoticons\satisfied.gif" />
-    <Content Include="Static\Scripts\2.0.2\Common.js" />
-    <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js" />
-    <Content Include="Static\Scripts\2.0.2\Dojo\dojo.js.uncompressed.js" />
-    <Content Include="Static\Scripts\2.0.2\Dojo\jsTrace.js" />
-    <Content Include="Static\Scripts\2.0.2\jQuery\jquery-1.2.min.js" />
-    <Content Include="Static\Scripts\2.0.2\json.js" />
-    <Content Include="Static\Scripts\2.0.2\Moderator\HostModerator.js" />
-    <Content Include="Static\Scripts\2.0.2\Stories.js" />
-    <Content Include="Static\Scripts\2.0.2\Tagging.js" />
-    <Content Include="Templates\Ruby\images\divider.gif" />
-    <Content Include="Templates\Ruby\images\gradients\blue.gif" />
-    <Content Include="Templates\Ruby\images\gradients\formBackground.gif" />
-    <Content Include="Templates\Ruby\images\gradients\green.gif" />
-    <Content Include="Templates\Ruby\images\gradients\GreenPanel.gif" />
-    <Content Include="Templates\Ruby\images\gradients\storyKickCount1.gif" />
-    <Content Include="Templates\Ruby\images\gradients\storyKickCount10.gif" />
-    <Content Include="Templates\Ruby\images\icons\error.png" />
-    <Content Include="Templates\Ruby\images\icons\exclamation.png" />
-    <Content Include="Templates\Ruby\images\icons\information.png" />
-    <Content Include="Templates\Ruby\SideAds.ascx" />
-    <Content Include="Templates\Ruby\Template.css" />
-    <Content Include="Templates\Ruby\TopAds.ascx" />
-    <Content Include="Templates\Ruby\TopMenu.ascx" />
-    <Content Include="Templates\NewDefault\MasterPage.Master" />
-    <Content Include="Controls\Admin\Cache.ascx" />
-    <Content Include="Controls\Admin\Tasks.ascx" />
-    <Content Include="Controls\Community\KickSpy.ascx" />
     <Content Include="Controls\User\ProfileEditor.ascx" />
-    <Content Include="Controls\User\ShoutBox.ascx" />
-    <Content Include="Controls\User\UserAdmin.ascx" />
-    <Content Include="Pages\Admin\Categories.aspx" />
-    <Content Include="Pages\Community\KickSpy.aspx" />
-    <Content Include="Pages\Community\ShoutBox.aspx" />
-    <Content Include="Pages\Story\Zeitgeist.aspx" />
     <Content Include="Pages\User\EditProfile.aspx" />
+    <Content Include="Pages\Community\WhoIsOnline.aspx" />
     <Content Include="Pages\User\Friends.aspx" />
-    <Content Include="Pages\User\FriendsKickedStories.aspx" />
-    <Content Include="Pages\User\FriendsSubmittedStories.aspx" />
     <Content Include="Services\Images\ViewGravitar.ashx" />
     <Content Include="Controls\Admin\AdminMenu.ascx" />
     <Content Include="Controls\User\Profile.ascx" />
@@ -1018,7 +769,6 @@
     <Content Include="Templates\Default\images\icons\exclamation.png" />
     <Content Include="Templates\Default\images\icons\information.png" />
     <Content Include="Templates\Default\Template.css" />
-    <Content Include="Templates\NewDefault\Template.css" />
     <Content Include="Templates\Simple\MasterPage.Master" />
     <Content Include="Controls\Story\AddComment.ascx" />
     <Content Include="Controls\Story\SubmitNewStory.ascx" />
@@ -1042,6 +792,7 @@
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\Story\New.aspx" />
     <Content Include="Pages\Story\Redirect.aspx" />
+    <Content Include="Pages\Story\Search.aspx" />
     <Content Include="Pages\Story\View.aspx" />
     <Content Include="Pages\Story\ViewOrAdd.aspx" />
     <Content Include="Pages\Tag\View.aspx" />
@@ -1055,6 +806,14 @@
     <Content Include="Pages\User\ResetPassword.aspx" />
     <Content Include="Pages\User\ViewTag.aspx" />
     <Content Include="Pages\User\ViewTags.aspx" />
+    <Content Include="Services\Ajax\AddUserStoryTags.aspx" />
+    <Content Include="Services\Ajax\GetPopularStories.aspx" />
+    <Content Include="Services\Ajax\GetUserStoryTags.aspx" />
+    <Content Include="Services\Ajax\KickIt.aspx" />
+    <Content Include="Services\Ajax\Moderator\DeleteStory.aspx" />
+    <Content Include="Services\Ajax\RemoveUserStoryTag.aspx" />
+    <Content Include="Services\Ajax\ReportAsSpam.aspx" />
+    <Content Include="Services\Ajax\ViewIt.aspx" />
     <Content Include="Services\Feeds\Rss\CategoryKickedFeed.aspx" />
     <Content Include="Services\Feeds\Rss\CategoryNewFeed.aspx" />
     <Content Include="Services\Feeds\Rss\MainFeed.aspx" />
@@ -1074,13 +833,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Static\Scripts\2.0.2\Admin\" />
-    <Folder Include="Static\Scripts\2.0.2\Controls\" />
     <Folder Include="Templates\Simple\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" Condition="" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -1099,6 +855,7 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

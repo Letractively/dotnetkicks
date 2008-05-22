@@ -17,7 +17,7 @@ namespace Incremental.Kick.Security {
 
 
         public static string EncryptToBase64(string plaintext) {
-            byte[] plainBytes = CompressionHelper.StringToBytes(plaintext);
+            byte[] plainBytes = CompressonHelper.StringToBytes(plaintext);
             byte[] cipherBytes = Encrypt(plainBytes);
             return Convert.ToBase64String(cipherBytes);
         }
@@ -50,7 +50,7 @@ namespace Incremental.Kick.Security {
         }
 
         public static string Encrypt(string plaintext, bool compress) {
-            return CompressionHelper.BytesToString(Encrypt(CompressionHelper.StringToBytes(plaintext), compress));
+            return CompressonHelper.BytesToString(Encrypt(CompressonHelper.StringToBytes(plaintext), compress));
         }
 
         public static byte[] Encrypt(byte[] plainbytes, bool compress) {
@@ -59,13 +59,13 @@ namespace Incremental.Kick.Security {
             byte compressFlag;
             if (plainbytes.Length > MINIMUM_LENGTH_FOR_COMPRESSION) {
                 compressFlag = Convert.ToByte(COMPRESSED);
-                buffer = CompressionHelper.Deflate(plainbytes);
+                buffer = CompressonHelper.Deflate(plainbytes);
             } else {
                 compressFlag = Convert.ToByte(NOTCOMPRESSED);
                 buffer = plainbytes;
             }
 
-            byte[] encryptedBytes = Obviex.CipherLite.Rijndael.Encrypt(CompressionHelper.BytesToString(buffer),
+            byte[] encryptedBytes = Obviex.CipherLite.Rijndael.Encrypt(CompressonHelper.BytesToString(buffer),
                 SettingsCache.GetSetting("Security.Cipher.PassPhrase"), SettingsCache.GetSetting("Security.Cipher.InitVector"), KEY_SIZE, PASSWORD_ITERATIONS, SettingsCache.GetSetting("Security.Cipher.Salt"), HASH_ALGORITHM);
             byte[] toReturn = new byte[encryptedBytes.Length + 1];
 
@@ -92,7 +92,7 @@ namespace Incremental.Kick.Security {
         }
 
         public static string Decrypt(string ciphertext, bool compress) {
-            return Decrypt(CompressionHelper.StringToBytes(ciphertext), compress);
+            return Decrypt(CompressonHelper.StringToBytes(ciphertext), compress);
         }
 
         public static string Decrypt(byte[] cipherbytes, bool compress) {
@@ -106,7 +106,7 @@ namespace Incremental.Kick.Security {
             string decrypted = Obviex.CipherLite.Rijndael.Decrypt(buffer, SettingsCache.GetSetting("Security.Cipher.PassPhrase"), SettingsCache.GetSetting("Security.Cipher.InitVector"), KEY_SIZE, PASSWORD_ITERATIONS, SettingsCache.GetSetting("Security.Cipher.Salt"), HASH_ALGORITHM);
 
             if (cipherbytes[0] == COMPRESSED) {
-                return CompressionHelper.Inflate(decrypted);
+                return CompressonHelper.Inflate(decrypted);
             } else {
                 return decrypted;
             }

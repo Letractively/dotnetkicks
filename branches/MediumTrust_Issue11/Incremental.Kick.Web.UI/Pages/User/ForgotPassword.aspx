@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.User.ForgotPassword"
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ForgotPassword.aspx.cs" Inherits="Incremental.Kick.Web.UI.Pages.User.ForgotPassword"
     MasterPageFile="~/Templates/MasterPage.master" %>
 
 <%@ Register Src="../../Controls/User/ForgotPassword.ascx" TagName="ForgotPassword"

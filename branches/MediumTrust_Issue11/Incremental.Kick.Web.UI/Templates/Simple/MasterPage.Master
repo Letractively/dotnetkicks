@@ -1,5 +1,4 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Incremental.Kick.Web.UI.Templates.Simple.MasterPage" MasterPageFile="~/Templates/MasterPage.master" %>
-<%@ Register Src="~/Controls/Story/SearchInput.ascx" TagName="SearchInput" TagPrefix="uc1" %>
 <asp:Content ID="PageHead" ContentPlaceHolderID="PageHeadContent" runat="server">
     <meta name="description" content="<%=this.KickPage.HostProfile.SiteDescription %>" />
 </asp:Content>
@@ -24,7 +23,6 @@
 </asp:Content>
 <asp:Content ID="RightContentOutline" ContentPlaceHolderID="RightContent" runat="server">
     [Right Content]
-    <uc1:SearchInput ID="searchInput" runat="server" />
     <asp:ContentPlaceHolder ID="RightContent" runat="server" />
     [/Right Content]
 </asp:Content>
