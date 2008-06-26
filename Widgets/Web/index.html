@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Live DotNetKicks</title>
     <link rel="stylesheet" type="text/css" href="default.css" />
     <script type="text/javascript" src="jquery.js"></script>
@@ -12,9 +13,13 @@
 function displayStories(target, stories) {
     $.each(stories, function(i, story) {
         var h = document.createElement('h3');
-        h.appendChild(HTML.a(story.url, story.title));
+        var title = HTML.a(story.url);
+        $(title).html(story.title);
+        h.appendChild(title);
         target.appendChild(h);
-        target.appendChild(HTML.p(story.description.replace(/[\n\r]/g, '')));
+        var description = HTML.p();
+        $(description).html(story.description.replace(/[\n\r]/g, ''));
+        target.appendChild(description);
         var info = HTML.p();
         info.appendChild(HTML.text("Published on " + Date.parseISO(story.createdOn).toLocaleString() + " by "));
         var avatar = HTML.img(story.user.avatarUrl, story.user.username);
