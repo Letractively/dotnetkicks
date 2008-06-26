@@ -15,10 +15,10 @@ function displayStories(target, stories) {
         h.appendChild(HTML.a(story.url, story.title));
         target.appendChild(h);
         target.appendChild(HTML.p(story.description.replace(/[\n\r]/g, '')));
-        var info = document.createElement('p');
-        info.appendChild(document.createTextNode("Published on " + Date.parseISO(story.createdOn).toLocaleString() + " by "));
+        var info = HTML.p();
+        info.appendChild(HTML.text("Published on " + Date.parseISO(story.createdOn).toLocaleString() + " by "));
         info.appendChild(HTML.a(story.user.profileUrl, story.user.username));
-        info.appendChild(document.createTextNode(" and got "));
+        info.appendChild(HTML.text(" and got "));
         var kicks = HTML.span(story.kickCount + " " + (story.kickCount == 1 ? "kick" : "kicks"));
         kicks.className = 'kicks';
         info.appendChild(kicks);
