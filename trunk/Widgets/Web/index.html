@@ -17,6 +17,10 @@ function displayStories(target, stories) {
         target.appendChild(HTML.p(story.description.replace(/[\n\r]/g, '')));
         var info = HTML.p();
         info.appendChild(HTML.text("Published on " + Date.parseISO(story.createdOn).toLocaleString() + " by "));
+        var avatar = HTML.img(story.user.avatarUrl, story.user.username);
+        avatar.className = 'avatar';
+        info.appendChild(avatar);
+        info.appendChild(HTML.text(' '));
         info.appendChild(HTML.a(story.user.profileUrl, story.user.username));
         info.appendChild(HTML.text(" and got "));
         var kicks = HTML.span(story.kickCount + " " + (story.kickCount == 1 ? "kick" : "kicks"));
