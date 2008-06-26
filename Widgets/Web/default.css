@@ -59,3 +59,7 @@ h3 a:hover {
     background-repeat: no-repeat;
     display: none;
 }
+img.avatar {
+    width: 1em;
+    height: 1em;
+}
