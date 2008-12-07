@@ -8,9 +8,16 @@ namespace Incremental.Kick.Web.UI.Controls
 {
     public partial class Register : KickUserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Username.Focus();
+
+        protected void Page_Init(object sender, EventArgs e) {
+            if (this.KickPage.HostProfile.HasRecaptcha) {
+                this.recaptcha.PrivateKey = this.KickPage.HostProfile.ReCaptchaPrivateKey;
+                this.recaptcha.PublicKey = this.KickPage.HostProfile.ReCaptchaPublicKey;
+            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e) {
+            Username.Focus();           
         }
 
         protected void CreateAccount_Click(object sender, EventArgs e)
