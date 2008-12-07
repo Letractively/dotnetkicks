@@ -1,3 +1,5 @@
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
+
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Register.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Register" %>
 
  
@@ -76,6 +78,7 @@ function checkUserDataCallback(response)
                     use a real one.</span>
             </td>
         </tr>
+        
         <tr>
             <td>
             </td>
@@ -84,6 +87,14 @@ function checkUserDataCallback(response)
                     Text="Notify me when new features are added to the site" />
             </td>
         </tr>
+        <% if (this.KickPage.HostProfile.HasRecaptcha) { %>
+        <tr>
+			<td></td>
+			<td>
+    			<recaptcha:RecaptchaControl	ID="recaptcha" runat="server" PublicKey="_" PrivateKey="_" />
+			</td>
+        </tr>
+        <% } %>
         <tr>
             <td>
             </td>
