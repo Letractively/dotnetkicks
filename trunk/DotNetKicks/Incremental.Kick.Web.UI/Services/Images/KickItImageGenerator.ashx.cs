@@ -6,13 +6,11 @@ using System.IO;
 using System.Web;
 using Incremental.Kick.Dal;
 
-namespace Incremental.Kick.Web.UI.Services.Images
-{
+namespace Incremental.Kick.Web.UI.Services.Images {
     /// <summary>
     /// Genreates the Kick It images
     /// </summary>
-    public class KickItImageGenerator : IHttpHandler
-    {
+    public class KickItImageGenerator : IHttpHandler {
         #region Fields
 
         private Color _borderColor = Color.Black;
@@ -35,8 +33,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets the color of the border.
         /// </summary>
         /// <value>The color of the border.</value>
-        internal Color BorderColor
-        {
+        internal Color BorderColor {
             get { return _borderColor; }
             set { _borderColor = value; }
         }
@@ -45,8 +42,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public int BorderWidth
-        {
+        public int BorderWidth {
             get { return _borderWidth; }
             set { _borderWidth = value; }
         }
@@ -55,8 +51,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the color of the count background.
         /// </summary>
         /// <value>The color of the count background.</value>
-        public Color CountBackgroundColor
-        {
+        public Color CountBackgroundColor {
             get { return _countBackgroundColor; }
             set { _countBackgroundColor = value; }
         }
@@ -65,8 +60,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the count font.
         /// </summary>
         /// <value>The count font.</value>
-        public Font CountFont
-        {
+        public Font CountFont {
             get { return _countFont; }
             set { _countFont = value; }
         }
@@ -75,8 +69,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the color of the count foreground.
         /// </summary>
         /// <value>The color of the count foreground.</value>
-        public Color CountForegroundColor
-        {
+        public Color CountForegroundColor {
             get { return _countForegroundColor; }
             set { _countForegroundColor = value; }
         }
@@ -85,8 +78,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the height.
         /// </summary>
         /// <value>The height.</value>
-        internal int Height
-        {
+        internal int Height {
             get { return _height; }
             set { _height = value; }
         }
@@ -96,8 +88,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// </summary>
         /// <value></value>
         /// <returns>true if the <see cref="T:System.Web.IHttpHandler"></see> instance is reusable; otherwise, false.</returns>
-        public bool IsReusable
-        {
+        public bool IsReusable {
             get { return false; }
         }
 
@@ -105,8 +96,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the text.
         /// </summary>
         /// <value>The text.</value>
-        public string Text
-        {
+        public string Text {
             get { return _text; }
             set { _text = value; }
         }
@@ -115,8 +105,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the color of the text background.
         /// </summary>
         /// <value>The color of the background.</value>
-        public Color TextBackgroundColor
-        {
+        public Color TextBackgroundColor {
             get { return _textBackgroundColor; }
             set { _textBackgroundColor = value; }
         }
@@ -125,8 +114,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the font.
         /// </summary>
         /// <value>The font.</value>
-        internal Font TextFont
-        {
+        internal Font TextFont {
             get { return _textFont; }
             set { _textFont = value; }
         }
@@ -135,8 +123,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the color of the text foreground.
         /// </summary>
         /// <value>The color of the text foreground.</value>
-        public Color TextForegroundColor
-        {
+        public Color TextForegroundColor {
             get { return _textForegroundColor; }
             set { _textForegroundColor = value; }
         }
@@ -145,10 +132,19 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// Gets or sets the width.
         /// </summary>
         /// <value>The width.</value>
-        internal int Width
-        {
+        internal int Width {
             get { return _width; }
             set { _width = value; }
+        }
+
+        /// <summary>
+        /// A string key useful for caching
+        /// </summary>
+        internal string ImageKey { //NOTE: GJ: we are not yet including the fonts
+            get {
+                return string.Format("{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}_{8}", _text, _width, _height, _borderColor.ToArgb(), _borderWidth, _countBackgroundColor.ToArgb(),
+                    _countForegroundColor.ToArgb(), _textBackgroundColor.ToArgb(), _textForegroundColor.ToArgb());
+            }
         }
 
         #endregion
@@ -164,11 +160,8 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// <param name="context">An <see cref="T:System.Web.HttpContext"></see> object 
         /// that provides references to the intrinsic server objects (for example, Request, 
         /// Response, Session, and Server) used to service HTTP requests.</param>
-        public void ProcessRequest(HttpContext context)
-        {
+        public void ProcessRequest(HttpContext context) {
             string url = context.Request["url"].Trim();
-
-            ////TODO: GJ: check cache for image
 
             //can't use # in url, so need to check if its hex and prepend it
             if (context.Request["border"] != null)
@@ -186,50 +179,51 @@ namespace Incremental.Kick.Web.UI.Services.Images
             if (context.Request["cfgcolor"] != null)
                 _countForegroundColor = ConvertHexToColor(context.Request["cfgcolor"], CountForegroundColor);
 
-            //TODO: GJ: turn off remote caching, turn on local caching (reluctant cache)
-            using (Image img = new Bitmap(_width, _height, 1, PixelFormat.Format32bppArgb, new IntPtr()))
-            {
-                using (Graphics g = Graphics.FromImage(img))
-                {
-                    g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            Story story = Story.FetchStoryByUrl(url);
+            string imageName = String.Format("{0}_{1}.png", story.KickCount, this.ImageKey); 
+            string imagePath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\KickIt\" + imageName);
 
-                    //draw border
-                    g.FillRectangle(new SolidBrush(_borderColor), 0, 0, img.Width, img.Height);
+            if (!File.Exists(imagePath)) { //only create the image if needed
+                using (Image img = new Bitmap(_width, _height, 1, PixelFormat.Format32bppArgb, new IntPtr())) {
+                    using (Graphics g = Graphics.FromImage(img)) {
+                        g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                    //draw inner color
-                    g.FillRectangle(new SolidBrush(_textBackgroundColor),
-                        _borderWidth, _borderWidth, img.Width - (_borderWidth * 2), img.Height - (_borderWidth * 2));
+                        //draw border
+                        g.FillRectangle(new SolidBrush(_borderColor), 0, 0, img.Width, img.Height);
 
-                    //draw text for label ("kick it")
-                    g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
+                        //draw inner color
+                        g.FillRectangle(new SolidBrush(_textBackgroundColor),
+                            _borderWidth, _borderWidth, img.Width - (_borderWidth * 2), img.Height - (_borderWidth * 2));
 
-                    //draw number of kicks
-                    Story story = Story.FetchStoryByUrl(url);
+                        //draw text for label ("kick it")
+                        g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
 
-                    //get counts
-                    string count = GetKickCountDisplayCharacters(story);
-                    float countWidth = g.MeasureString(count, _countFont).Width;
+                        //draw number of kicks
+                        //get counts
+                        string count = GetKickCountDisplayCharacters(story);
+                        float countWidth = g.MeasureString(count, _countFont).Width;
 
-                    //draw background behind count
-                    g.FillRectangle(new SolidBrush(_countBackgroundColor),
-                        img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
+                        //draw background behind count
+                        g.FillRectangle(new SolidBrush(_countBackgroundColor),
+                            img.Width - countWidth - _borderWidth, _borderWidth, countWidth, img.Height - (_borderWidth * 2));
 
-                    //make sure story != null before calling IsPublishedToHomepage 
-                    //if published, make bold
-                    if (story != null && story.IsPublishedToHomepage)
-                        _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
+                        //make sure story != null before calling IsPublishedToHomepage 
+                        //if published, make bold
+                        if (story != null && story.IsPublishedToHomepage)
+                            _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
 
-                    //draw count
-                    g.DrawString(count, _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
+                        //draw count
+                        g.DrawString(count, _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
 
-                    using (MemoryStream s = new MemoryStream())
-                    {
-                        img.Save(s, ImageFormat.Png);
-                        context.Response.ContentType = "image/PNG";
-                        context.Response.BinaryWrite(s.GetBuffer());
-                    }
+                        using(FileStream fs = new FileStream(imagePath, FileMode.CreateNew))
+                            img.Save(fs, ImageFormat.Png);
+                     }
                 }
             }
+
+            //render the image
+            context.Response.ContentType = "image/PNG";
+            context.Response.WriteFile(imagePath);
         }
 
         // Private Methods 
@@ -240,19 +234,15 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// <param name="urlValue">The URL value.</param>
         /// <param name="defaultColor">Color of the default.</param>
         /// <returns></returns>
-        private static Color ConvertHexToColor(string urlValue, Color defaultColor)
-        {
+        private static Color ConvertHexToColor(string urlValue, Color defaultColor) {
             Color myColor;
 
-            try
-            {
+            try {
                 if (!urlValue.StartsWith("#"))
                     urlValue = string.Concat("#", urlValue);
 
                 myColor = ColorTranslator.FromHtml(urlValue);
-            }
-            catch
-            {
+            } catch {
                 myColor = defaultColor;
             }
 
@@ -264,8 +254,7 @@ namespace Incremental.Kick.Web.UI.Services.Images
         /// </summary>
         /// <param name="story">The story.</param>
         /// <returns></returns>
-        private static string GetKickCountDisplayCharacters(Story story)
-        {
+        private static string GetKickCountDisplayCharacters(Story story) {
             return story == null ? "0" : story.KickCount.ToString();
         }
 
