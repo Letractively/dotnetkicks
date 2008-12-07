@@ -3,7 +3,7 @@ This license is based on the new BSD template found here
 
 -----------------------------------------------------------------
 DotNetKicks (http://www.dotnetkicks.com/)
-Copyright (c) 2007
+Copyright (c) 2007-2008
 by Gavin Joyce (gavin@incremental.ie)
 
 All rights reserved.
