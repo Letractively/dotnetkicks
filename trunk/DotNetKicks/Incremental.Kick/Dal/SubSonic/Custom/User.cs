@@ -8,9 +8,53 @@ using Incremental.Kick.Helpers;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Dal.Entities.Api;
+using System.Collections.Specialized;
+using System.Web.Mvc;
 
 namespace Incremental.Kick.Dal {
     public partial class User {
+
+        #region Validation
+        public class UserValidationRules : ValidationSet {
+            string Username = "";
+            string Email = "";
+
+            protected override ValidatorCollection GetValidators() {
+                return new ValidatorCollection(
+                    new ValidatePattern("username") { ErrorMessageFormat = "The username must be greater than 4 characters and can only contain letters and numbers.", Pattern = @"^([a-zA-Z0-9._]{4,30})$" },
+                    new ValidateElement("email") { Required = true },
+                    new ValidatePattern("email") { ErrorMessageFormat = "Please enter a valid email address.", Pattern = @"^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" }
+                );
+            }
+
+            protected override void OnValidate() {
+                if (!User.IsUsernameAvailable(Username))
+                    throw new ValidatorException("username", "Sorry, that username is already taken.");
+                if (!User.IsEmailAvailable(Email))
+                    throw new ValidatorException("email", "Sorry, that email already axists. Please use the forgotten password page to reset your password.");
+            }
+        }
+
+        public override bool Validate() {
+            if (!base.Validate()) {
+                return false;
+            } else {
+                if(!this.IsNew)
+                    return true; //TODO: GJ: figure out how to run certain validation rules on an existing model
+
+                NameValueCollection values = new NameValueCollection();
+                foreach (SubSonic.TableSchema.TableColumnSetting column in this.GetColumnSettings()) 
+                    if (column.CurrentValue != null)
+                        values.Add(column.ColumnName, column.CurrentValue.ToString());
+
+                UserValidationRules validationRules = new UserValidationRules();
+                //TODO: GJ: add error messages to SubSonic model
+                //TODO: GJ: refactor to helper class
+                return validationRules.Validate(values); 
+            }
+        }
+        #endregion
+
         public static User FetchUserByUsername(string username) {
             return User.FetchUserByParameter(User.Columns.Username, username);
         }
@@ -207,6 +251,20 @@ namespace Incremental.Kick.Dal {
 
         public ApiUser ToApi(Host host) {
             return new ApiUser(this.Username, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Username), new Gravatar(this, 50).GravatarUrl(host));
+        }
+
+        public static bool IsUsernameAvailable(string username) {
+            return !(IsColumnValueUnique(User.Columns.Username, username) || ReservedUsername.IsColumnValueUnique(ReservedUsername.Columns.Username, username));
+        }
+
+        public static bool IsEmailAvailable(string email) {
+            return !IsColumnValueUnique(User.Columns.Email, email);
+        }
+
+        //TODO: GJ: refactor to helper class
+        public static bool IsColumnValueUnique(string columnName, object value) {
+            using(IDataReader reader = User.FetchByParameter(columnName, value)) 
+                return reader.Read();
         }
     }
 }

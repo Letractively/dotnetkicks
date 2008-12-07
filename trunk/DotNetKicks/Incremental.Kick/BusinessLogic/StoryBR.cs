@@ -13,7 +13,7 @@ namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
     public class StoryBR {
 
-        public static string AddStory(int hostID, string title, string description, string url, short categoryID, User user) {
+        public static string AddStory(int hostID, string title, string description, string url, short categoryID, User user, string ipAddress) {
             if (user.IsBanned)
                 return GetStoryIdentifier(title); //to stop the spammers
 
@@ -45,13 +45,14 @@ namespace Incremental.Kick.BusinessLogic {
             story.IsPublishedToHomepage = false;
             story.IsSpam = false;
             story.AdsenseID = user.AdsenseID;
+            story.IPAddress = ipAddress;
             story.PublishedOn = DateTime.Now;
             story.UpdatedOn = DateTime.Now;
             story.Save();
 
             UserAction.RecordStorySubmission(hostID, user, story);
 
-            UserCache.KickStory(story.StoryID, user.UserID, hostID);
+            UserCache.KickStory(story.StoryID, user.UserID, hostID, ipAddress);
 
             TagBR.AddUserStoryTags(CategoryCache.GetCategory(categoryID, hostID).TagIdentifier, user, story.StoryID, hostID);
 
@@ -102,11 +103,12 @@ namespace Incremental.Kick.BusinessLogic {
 
 
 
-        public static StoryKick AddStoryKick(int storyID, int userID, int hostID) {
+        public static StoryKick AddStoryKick(int storyID, int userID, int hostID, string ipAddress) {
             StoryKick storyKick = new StoryKick();
             storyKick.StoryID = storyID;
             storyKick.UserID = userID;
             storyKick.HostID = hostID;
+            storyKick.IPAddress = ipAddress;
             storyKick.Save();
             return storyKick;
         }

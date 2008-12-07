@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(int StoryID,int UserID,int HostID,DateTime CreatedOn)
+	    public void Insert(int StoryID,int UserID,int HostID,DateTime CreatedOn,string IPAddress)
 	    {
 		    StoryKick item = new StoryKick();
 		    
@@ -102,6 +102,8 @@ namespace Incremental.Kick.Dal
             
             item.CreatedOn = CreatedOn;
             
+            item.IPAddress = IPAddress;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -111,7 +113,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int StoryKickID,int StoryID,int UserID,int HostID,DateTime CreatedOn)
+	    public void Update(int StoryKickID,int StoryID,int UserID,int HostID,DateTime CreatedOn,string IPAddress)
 	    {
 		    StoryKick item = new StoryKick();
 		    
@@ -124,6 +126,8 @@ namespace Incremental.Kick.Dal
 				item.HostID = HostID;
 				
 				item.CreatedOn = CreatedOn;
+				
+				item.IPAddress = IPAddress;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

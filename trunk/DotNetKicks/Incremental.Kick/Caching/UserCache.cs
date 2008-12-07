@@ -85,14 +85,14 @@ namespace Incremental.Kick.Caching {
 
         //TODO: GJ: some improvements are needed here - a sproc would be better
         //TODO: simone.busoli: no more sps, right?
-        public static int KickStory(int storyID, int userID, int hostID) {
+        public static int KickStory(int storyID, int userID, int hostID, string ipAddress) {
             // If the user has already kicked the story return the current number of kicks
             // This may happen if the user has two browser windows opened on the same story and
             // tries to kick on both pages
             if (StoryBR.DoesStoryKickExist(storyID, userID, hostID))
                 return Story.FetchByID(storyID).KickCount;
 
-            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID);
+            StoryKick storyKick = StoryBR.AddStoryKick(storyID, userID, hostID, ipAddress);
             GetUserStoryKicks(userID).Add(storyKick);
             UserAction.RecordKick(hostID, GetUser(userID), Story.FetchByID(storyID));
 

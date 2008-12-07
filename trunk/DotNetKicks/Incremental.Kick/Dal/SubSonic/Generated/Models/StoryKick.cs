@@ -167,6 +167,19 @@ namespace Incremental.Kick.Dal
 				colvarCreatedOn.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarCreatedOn);
 				
+				TableSchema.TableColumn colvarIPAddress = new TableSchema.TableColumn(schema);
+				colvarIPAddress.ColumnName = "IPAddress";
+				colvarIPAddress.DataType = DbType.String;
+				colvarIPAddress.MaxLength = 50;
+				colvarIPAddress.AutoIncrement = false;
+				colvarIPAddress.IsNullable = true;
+				colvarIPAddress.IsPrimaryKey = false;
+				colvarIPAddress.IsForeignKey = false;
+				colvarIPAddress.IsReadOnly = false;
+				colvarIPAddress.DefaultSetting = @"";
+				colvarIPAddress.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIPAddress);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -229,6 +242,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("IPAddress")]
+		public string IPAddress 
+		{
+			get { return GetColumnValue<string>(Columns.IPAddress); }
+
+			set { SetColumnValue(Columns.IPAddress, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -277,7 +300,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn)
+		public static void Insert(int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn,string varIPAddress)
 		{
 			StoryKick item = new StoryKick();
 			
@@ -288,6 +311,8 @@ namespace Incremental.Kick.Dal
 			item.HostID = varHostID;
 			
 			item.CreatedOn = varCreatedOn;
+			
+			item.IPAddress = varIPAddress;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -300,7 +325,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varStoryKickID,int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn)
+		public static void Update(int varStoryKickID,int varStoryID,int varUserID,int varHostID,DateTime varCreatedOn,string varIPAddress)
 		{
 			StoryKick item = new StoryKick();
 			
@@ -313,6 +338,8 @@ namespace Incremental.Kick.Dal
 				item.HostID = varHostID;
 			
 				item.CreatedOn = varCreatedOn;
+			
+				item.IPAddress = varIPAddress;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -371,6 +398,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn IPAddressColumn
+        {
+            get { return Schema.Columns[5]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -380,6 +416,7 @@ namespace Incremental.Kick.Dal
 			 public static string UserID = @"UserID";
 			 public static string HostID = @"HostID";
 			 public static string CreatedOn = @"CreatedOn";
+			 public static string IPAddress = @"IPAddress";
 						
 		}
 

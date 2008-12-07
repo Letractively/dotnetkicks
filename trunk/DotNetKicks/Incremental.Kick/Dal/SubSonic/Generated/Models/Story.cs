@@ -338,6 +338,19 @@ namespace Incremental.Kick.Dal
 				colvarUpdatedOn.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarUpdatedOn);
 				
+				TableSchema.TableColumn colvarIPAddress = new TableSchema.TableColumn(schema);
+				colvarIPAddress.ColumnName = "IPAddress";
+				colvarIPAddress.DataType = DbType.String;
+				colvarIPAddress.MaxLength = 50;
+				colvarIPAddress.AutoIncrement = false;
+				colvarIPAddress.IsNullable = true;
+				colvarIPAddress.IsPrimaryKey = false;
+				colvarIPAddress.IsForeignKey = false;
+				colvarIPAddress.IsReadOnly = false;
+				colvarIPAddress.DefaultSetting = @"";
+				colvarIPAddress.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIPAddress);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -530,6 +543,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("IPAddress")]
+		public string IPAddress 
+		{
+			get { return GetColumnValue<string>(Columns.IPAddress); }
+
+			set { SetColumnValue(Columns.IPAddress, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -628,7 +651,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn)
+		public static void Insert(int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn,string varIPAddress)
 		{
 			Story item = new Story();
 			
@@ -666,6 +689,8 @@ namespace Incremental.Kick.Dal
 			
 			item.UpdatedOn = varUpdatedOn;
 			
+			item.IPAddress = varIPAddress;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -677,7 +702,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn)
+		public static void Update(int varStoryID,int varHostID,string varStoryIdentifier,string varTitle,string varDescription,string varUrl,short varCategoryID,int varUserID,int varKickCount,int varSpamCount,int varViewCount,int varCommentCount,bool varIsPublishedToHomepage,bool varIsSpam,string varAdsenseID,DateTime varCreatedOn,DateTime varPublishedOn,DateTime varUpdatedOn,string varIPAddress)
 		{
 			Story item = new Story();
 			
@@ -716,6 +741,8 @@ namespace Incremental.Kick.Dal
 				item.PublishedOn = varPublishedOn;
 			
 				item.UpdatedOn = varUpdatedOn;
+			
+				item.IPAddress = varIPAddress;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -891,6 +918,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn IPAddressColumn
+        {
+            get { return Schema.Columns[18]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -913,6 +949,7 @@ namespace Incremental.Kick.Dal
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string PublishedOn = @"PublishedOn";
 			 public static string UpdatedOn = @"UpdatedOn";
+			 public static string IPAddress = @"IPAddress";
 						
 		}
 
