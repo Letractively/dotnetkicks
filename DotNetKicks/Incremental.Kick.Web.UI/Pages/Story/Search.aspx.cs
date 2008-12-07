@@ -37,20 +37,20 @@ namespace Incremental.Kick.Web.UI.Pages
 
                 bool.TryParse(userRestricted, out isUserRestrictedSearch);
 
-                Title = string.Format("Search Results for - {0}", query);
+                Title = string.Format("Search Results for - {0}", HttpUtility.HtmlEncode(query));
 
                 LoadResults(query, isUserRestrictedSearch, pageNumber, this.UrlParameters.PageSize);
 
                 paging.RecordCount = resultTotalCount;
                 paging.PageSize = 16;
                 paging.PageNumber = pageNumber;
-                paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Search, query);
+                paging.BaseUrl = UrlFactory.CreateUrl(UrlFactory.PageName.Search, HttpUtility.UrlEncode(query));
 
                 lblSearchTerm.Text = string.Format("Results <strong>{0}</strong> - <strong>{1}</strong> of <strong>{2}</strong> for <strong>{3}</strong>", 
                                                     SearchStartIndex(pageNumber),
                                                     SearchEndIndex(pageNumber),
-                                                    resultTotalCount, 
-                                                    query);
+                                                    resultTotalCount,
+                                                    HttpUtility.HtmlEncode(query));
             }
         }
 
