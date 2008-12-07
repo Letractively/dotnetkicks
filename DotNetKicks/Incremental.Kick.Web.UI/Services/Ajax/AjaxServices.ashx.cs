@@ -89,7 +89,7 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
         {
             DemandUserAuthentication();
             if (isKick)
-                return UserCache.KickStory(storyID, KickUserProfile.UserID, HostProfile.HostID);
+                return UserCache.KickStory(storyID, KickUserProfile.UserID, HostProfile.HostID, this.IPAddress);
             else
                 return UserCache.UnKickStory(storyID, KickUserProfile.UserID, HostProfile.HostID);
         }
@@ -181,5 +181,16 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
         }
 
         #endregion
+
+
+        //TODO: GJ: refactor - also used in KickUIPage
+        public string IPAddress {
+            get {
+                string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (String.IsNullOrEmpty(ip))
+                    ip = Request.ServerVariables["REMOTE_ADDR"];
+                return ip;
+            }
+        }
     }
 }

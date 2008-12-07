@@ -403,19 +403,6 @@ namespace Incremental.Kick.Dal
 				colvarShowStoryThumbnail.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarShowStoryThumbnail);
 				
-				TableSchema.TableColumn colvarAPIKey = new TableSchema.TableColumn(schema);
-				colvarAPIKey.ColumnName = "APIKey";
-				colvarAPIKey.DataType = DbType.Guid;
-				colvarAPIKey.MaxLength = 0;
-				colvarAPIKey.AutoIncrement = false;
-				colvarAPIKey.IsNullable = true;
-				colvarAPIKey.IsPrimaryKey = false;
-				colvarAPIKey.IsForeignKey = false;
-				colvarAPIKey.IsReadOnly = false;
-				colvarAPIKey.DefaultSetting = @"";
-				colvarAPIKey.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarAPIKey);
-				
 				TableSchema.TableColumn colvarShowEmoticons = new TableSchema.TableColumn(schema);
 				colvarShowEmoticons.ColumnName = "ShowEmoticons";
 				colvarShowEmoticons.DataType = DbType.Boolean;
@@ -494,6 +481,32 @@ namespace Incremental.Kick.Dal
 				colvarKickImageBorderColor.DefaultSetting = @"";
 				colvarKickImageBorderColor.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarKickImageBorderColor);
+				
+				TableSchema.TableColumn colvarAPIKey = new TableSchema.TableColumn(schema);
+				colvarAPIKey.ColumnName = "APIKey";
+				colvarAPIKey.DataType = DbType.Guid;
+				colvarAPIKey.MaxLength = 0;
+				colvarAPIKey.AutoIncrement = false;
+				colvarAPIKey.IsNullable = true;
+				colvarAPIKey.IsPrimaryKey = false;
+				colvarAPIKey.IsForeignKey = false;
+				colvarAPIKey.IsReadOnly = false;
+				colvarAPIKey.DefaultSetting = @"";
+				colvarAPIKey.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAPIKey);
+				
+				TableSchema.TableColumn colvarIPAddress = new TableSchema.TableColumn(schema);
+				colvarIPAddress.ColumnName = "IPAddress";
+				colvarIPAddress.DataType = DbType.String;
+				colvarIPAddress.MaxLength = 50;
+				colvarIPAddress.AutoIncrement = false;
+				colvarIPAddress.IsNullable = true;
+				colvarIPAddress.IsPrimaryKey = false;
+				colvarIPAddress.IsForeignKey = false;
+				colvarIPAddress.IsReadOnly = false;
+				colvarIPAddress.DefaultSetting = @"";
+				colvarIPAddress.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIPAddress);
 				
 				BaseSchema = schema;
 				//add this schema to the provider
@@ -738,16 +751,6 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("APIKey")]
-		public Guid? APIKey 
-		{
-			get { return GetColumnValue<Guid?>(Columns.APIKey); }
-
-			set { SetColumnValue(Columns.APIKey, value); }
-
-		}
-
-		  
 		[XmlAttribute("ShowEmoticons")]
 		public bool ShowEmoticons 
 		{
@@ -804,6 +807,26 @@ namespace Incremental.Kick.Dal
 			get { return GetColumnValue<string>(Columns.KickImageBorderColor); }
 
 			set { SetColumnValue(Columns.KickImageBorderColor, value); }
+
+		}
+
+		  
+		[XmlAttribute("APIKey")]
+		public Guid? APIKey 
+		{
+			get { return GetColumnValue<Guid?>(Columns.APIKey); }
+
+			set { SetColumnValue(Columns.APIKey, value); }
+
+		}
+
+		  
+		[XmlAttribute("IPAddress")]
+		public string IPAddress 
+		{
+			get { return GetColumnValue<string>(Columns.IPAddress); }
+
+			set { SetColumnValue(Columns.IPAddress, value); }
 
 		}
 
@@ -917,7 +940,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress)
 		{
 			User item = new User();
 			
@@ -965,8 +988,6 @@ namespace Incremental.Kick.Dal
 			
 			item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
-			item.APIKey = varAPIKey;
-			
 			item.ShowEmoticons = varShowEmoticons;
 			
 			item.KickItTextColor = varKickItTextColor;
@@ -979,6 +1000,10 @@ namespace Incremental.Kick.Dal
 			
 			item.KickImageBorderColor = varKickImageBorderColor;
 			
+			item.APIKey = varAPIKey;
+			
+			item.IPAddress = varIPAddress;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -990,7 +1015,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,Guid? varAPIKey,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress)
 		{
 			User item = new User();
 			
@@ -1040,8 +1065,6 @@ namespace Incremental.Kick.Dal
 			
 				item.ShowStoryThumbnail = varShowStoryThumbnail;
 			
-				item.APIKey = varAPIKey;
-			
 				item.ShowEmoticons = varShowEmoticons;
 			
 				item.KickItTextColor = varKickItTextColor;
@@ -1053,6 +1076,10 @@ namespace Incremental.Kick.Dal
 				item.KickCountBackgroundColor = varKickCountBackgroundColor;
 			
 				item.KickImageBorderColor = varKickImageBorderColor;
+			
+				item.APIKey = varAPIKey;
+			
+				item.IPAddress = varIPAddress;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1273,7 +1300,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn APIKeyColumn
+        public static TableSchema.TableColumn ShowEmoticonsColumn
         {
             get { return Schema.Columns[23]; }
 
@@ -1282,7 +1309,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn ShowEmoticonsColumn
+        public static TableSchema.TableColumn KickItTextColorColumn
         {
             get { return Schema.Columns[24]; }
 
@@ -1291,7 +1318,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn KickItTextColorColumn
+        public static TableSchema.TableColumn KickItBackgroundColorColumn
         {
             get { return Schema.Columns[25]; }
 
@@ -1300,7 +1327,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn KickItBackgroundColorColumn
+        public static TableSchema.TableColumn KickCountTextColorColumn
         {
             get { return Schema.Columns[26]; }
 
@@ -1309,7 +1336,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn KickCountTextColorColumn
+        public static TableSchema.TableColumn KickCountBackgroundColorColumn
         {
             get { return Schema.Columns[27]; }
 
@@ -1318,7 +1345,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn KickCountBackgroundColorColumn
+        public static TableSchema.TableColumn KickImageBorderColorColumn
         {
             get { return Schema.Columns[28]; }
 
@@ -1327,9 +1354,18 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn KickImageBorderColorColumn
+        public static TableSchema.TableColumn APIKeyColumn
         {
             get { return Schema.Columns[29]; }
+
+        }
+
+        
+        
+        
+        public static TableSchema.TableColumn IPAddressColumn
+        {
+            get { return Schema.Columns[30]; }
 
         }
 
@@ -1363,13 +1399,14 @@ namespace Incremental.Kick.Dal
 			 public static string BlogFeedURL = @"BlogFeedURL";
 			 public static string AppearOnline = @"AppearOnline";
 			 public static string ShowStoryThumbnail = @"ShowStoryThumbnail";
-			 public static string APIKey = @"APIKey";
 			 public static string ShowEmoticons = @"ShowEmoticons";
 			 public static string KickItTextColor = @"KickItTextColor";
 			 public static string KickItBackgroundColor = @"KickItBackgroundColor";
 			 public static string KickCountTextColor = @"KickCountTextColor";
 			 public static string KickCountBackgroundColor = @"KickCountBackgroundColor";
 			 public static string KickImageBorderColor = @"KickImageBorderColor";
+			 public static string APIKey = @"APIKey";
+			 public static string IPAddress = @"IPAddress";
 						
 		}
 

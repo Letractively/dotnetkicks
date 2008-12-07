@@ -26,17 +26,9 @@ namespace Incremental.Kick.BusinessLogic {
             return user;
         }
 
-        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host) {
-            //TODO: GJ: add some RegEx validation here (will come from configuration or constant value)
+        public static void CreateUser(string username, string email, bool receiveEmailNewsletter, Host host, string ipAddress) {
             username = username.Trim();
             email = email.Trim();
-
-            //TODO: We should be handling these exceptions in the UI
-            //ensure that the username and email is unique
-            if (User.FetchByParameter(User.Columns.Username, username).Read())
-                throw new ArgumentException("The username already exists");
-            if (User.FetchByParameter(User.Columns.Email, email).Read())
-                throw new ArgumentException("The email already exists");
 
             string password = PasswordGenerator.Generate(8);
             string passwordSalt = Cipher.GenerateSalt();
@@ -52,13 +44,13 @@ namespace Incremental.Kick.BusinessLogic {
             user.IsBanned = false;
             user.ReceiveEmailNewsletter = receiveEmailNewsletter;
             user.HostID = host.HostID;
+            user.IPAddress = ipAddress;
             user.LastActiveOn = DateTime.Now;
 
             using (TransactionScope scope = new TransactionScope()) {
                 user.Save();
 
                 EmailHelper.SendNewUserEmail(email, username, password, host);
-
                 UserAction.RecordUserRegistration(user.HostID, user);
 
                 scope.Complete();

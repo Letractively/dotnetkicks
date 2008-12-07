@@ -73,7 +73,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 short categoryID = short.Parse(Category.SelectedValue);
                 string storyIdentifier =
                     StoryBR.AddStory(KickPage.HostProfile.HostID, Title.Text, Description.Text, Url.Text, categoryID,
-                                     KickPage.KickUserProfile);
+                                     KickPage.KickUserProfile, KickPage.IPAddress);
 
                 NewStoryPanel.Visible = false;
                 SuccessPanel.Visible = true;

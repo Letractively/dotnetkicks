@@ -17,7 +17,7 @@ namespace Incremental.Kick.Web.UI.Controls
         {
             if(Page.IsValid)
             {
-                UserBR.CreateUser(Username.Text, Email.Text, ReceiveEmailNewsletter.Checked, KickPage.HostProfile);
+                UserBR.CreateUser(Username.Text, Email.Text, ReceiveEmailNewsletter.Checked, KickPage.HostProfile, this.KickPage.IPAddress);
                 KickPage.Caption = "Thank you";
                 RegisterPanel.Visible = false;
                 SuccessPanel.Visible = true;

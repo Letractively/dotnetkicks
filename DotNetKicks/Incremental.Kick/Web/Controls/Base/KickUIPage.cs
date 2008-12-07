@@ -29,6 +29,15 @@ namespace Incremental.Kick.Web.Controls {
             get { return !String.IsNullOrEmpty(this.RssFeedUrl); }
         }
 
+        public string IPAddress {
+            get { 
+                string ip = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if(String.IsNullOrEmpty(ip))
+                    ip = Request.ServerVariables["REMOTE_ADDR"];
+                return ip;
+            }
+        }
+
         private string _assemblyVersion;
         public string AssemblyVersion {
             get {
