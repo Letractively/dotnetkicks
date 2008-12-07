@@ -68,7 +68,7 @@
             </script>
 
             <p class="tlp">
-            <a href='http://www.montylounge.com/thelounge/' class="adsvia">Ads via The Lounge</a>
+                <a href="http://theloungenet.com">Ads by The Lounge</a>
             </p>
 
         <% } %>
