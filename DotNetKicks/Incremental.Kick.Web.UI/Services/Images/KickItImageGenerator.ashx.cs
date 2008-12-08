@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Web;
 using Incremental.Kick.Dal;
+using Incremental.Kick.Caching;
 
 namespace Incremental.Kick.Web.UI.Services.Images {
     /// <summary>
@@ -179,8 +180,10 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             if (context.Request["cfgcolor"] != null)
                 _countForegroundColor = ConvertHexToColor(context.Request["cfgcolor"], CountForegroundColor);
 
-            Story story = Story.FetchStoryByUrl(url);
-            string imageName = String.Format("{0}_{1}.png", story.KickCount, this.ImageKey); 
+            Story story = Story.FetchStoryByUrl(url); //TODO: GJ: get from cache
+            int kickCount = (story != null) ? story.KickCount : 0;
+            string imageName = String.Format("{0}_{1}.png", kickCount, this.ImageKey); 
+
             string imagePath = Path.Combine(context.Request.PhysicalApplicationPath, @"Static\Images\Cache\KickIt\" + imageName);
 
             if (!File.Exists(imagePath)) { //only create the image if needed
@@ -199,9 +202,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
                         g.DrawString(_text, TextFont, new SolidBrush(_textForegroundColor), 1, 1);
 
                         //draw number of kicks
-                        //get counts
-                        string count = GetKickCountDisplayCharacters(story);
-                        float countWidth = g.MeasureString(count, _countFont).Width;
+                        float countWidth = g.MeasureString(kickCount.ToString(), _countFont).Width;
 
                         //draw background behind count
                         g.FillRectangle(new SolidBrush(_countBackgroundColor),
@@ -213,7 +214,7 @@ namespace Incremental.Kick.Web.UI.Services.Images {
                             _countFont = new Font(_countFont.FontFamily, _countFont.Size, FontStyle.Bold);
 
                         //draw count
-                        g.DrawString(count, _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
+                        g.DrawString(kickCount.ToString(), _countFont, new SolidBrush(_countForegroundColor), img.Width - countWidth, _borderWidth);
 
                         using(FileStream fs = new FileStream(imagePath, FileMode.CreateNew))
                             img.Save(fs, ImageFormat.Png);
@@ -247,15 +248,6 @@ namespace Incremental.Kick.Web.UI.Services.Images {
             }
 
             return myColor;
-        }
-
-        /// <summary>
-        /// Gets the kick count display characters.
-        /// </summary>
-        /// <param name="story">The story.</param>
-        /// <returns></returns>
-        private static string GetKickCountDisplayCharacters(Story story) {
-            return story == null ? "0" : story.KickCount.ToString();
         }
 
         #endregion
