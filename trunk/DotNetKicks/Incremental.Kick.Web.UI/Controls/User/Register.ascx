@@ -2,7 +2,6 @@
 
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Register.ascx.cs" Inherits="Incremental.Kick.Web.UI.Controls.Register" %>
 
- 
 <script type="text/javascript">
 function checkUsernameExists(sender, args)
 {
@@ -38,8 +37,12 @@ function checkUserDataCallback(response)
 }
 </script>
 
-<br />
 <asp:Panel ID="RegisterPanel" runat="server">
+
+    <% if (!String.IsNullOrEmpty(this.KickPage.HostProfile.JoinTheCommunityMessage)) { %>
+        <div class="flash flash-notice"><%= this.KickPage.HostProfile.JoinTheCommunityMessage %></div>
+    <% } %>
+
     <table class="FormTable">
         <tr>
             <td class="FormTitle FormTD">
