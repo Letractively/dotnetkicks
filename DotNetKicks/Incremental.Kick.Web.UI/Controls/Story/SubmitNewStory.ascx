@@ -34,6 +34,11 @@ function checkStoryCallback(response)
 <br />
 <br />
 <asp:Panel ID="NewStoryPanel" runat="server">
+
+    <% if (!String.IsNullOrEmpty(this.KickPage.HostProfile.SubmitAStoryMessage)) { %>
+        <div class="flash flash-information"><%= this.KickPage.HostProfile.SubmitAStoryMessage%></div>
+    <% } %>
+
     <table class="FormTable">
         <tr>
             <td class="FormTitle FormTD">
