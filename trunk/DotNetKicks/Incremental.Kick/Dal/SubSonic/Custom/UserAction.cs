@@ -24,7 +24,8 @@ namespace Incremental.Kick.Dal {
             ChatRoomOpening = 11,
             ChatRoomClosing = 12,
             UserUnBan = 13,
-            StoryDeletion = 14
+            StoryDeletion = 14,
+            UserPassedTest = 15
         }
 
         public ActionType UserActionType {
@@ -153,6 +154,14 @@ namespace Incremental.Kick.Dal {
         public static UserAction RecordStoryDeletion(int hostID, Story story, User moderator) {
             UserAction userAction = Create(hostID, moderator.UserID, ActionType.StoryDeletion);
             userAction.Message = String.Format(" deleted {0}", GetStoryLink(story));
+            userAction.Save();
+            return userAction;
+        }
+
+        public static UserAction RecordUserPassedTest(int hostID, User user) {
+            UserAction userAction = Create(hostID, user.UserID, ActionType.UserPassedTest);
+            UserLink userLink = new UserLink(user);
+            userAction.Message = String.Format("passed the test, congratulations!", ControlHelper.RenderControl(userLink));
             userAction.Save();
             return userAction;
         }

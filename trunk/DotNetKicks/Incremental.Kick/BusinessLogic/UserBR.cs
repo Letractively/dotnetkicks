@@ -166,5 +166,12 @@ namespace Incremental.Kick.BusinessLogic {
 			User user = User.FetchByID(userID);
 			user.Ban(moderator, host);
 		}
+
+        public static void UserPassedTest(User user, Host host) {
+            user.IsVetted = true;
+            user.Save();
+
+            UserAction.RecordUserPassedTest(host.HostID, user);
+        }
     }
 }

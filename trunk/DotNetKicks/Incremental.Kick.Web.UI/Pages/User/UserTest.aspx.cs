@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Incremental.Kick.Web.Helpers;
+using Incremental.Kick.BusinessLogic;
 
 namespace Incremental.Kick.Web.UI.Pages.User {
     public partial class UserTest : Incremental.Kick.Web.Controls.KickUserProfilePage {
@@ -57,8 +58,7 @@ namespace Incremental.Kick.Web.UI.Pages.User {
                 }
 
                 if (isCorrect) {
-                    this.KickUserProfile.IsVetted = true;
-                    this.KickUserProfile.Save();
+                    UserBR.UserPassedTest(this.KickUserProfile, this.HostProfile);
 
                     Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory));
                 }
