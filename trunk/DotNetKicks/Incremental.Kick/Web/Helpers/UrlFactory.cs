@@ -37,6 +37,7 @@ namespace Incremental.Kick.Web.Helpers {
             UserTag,
             UserTags,
             Users,
+            UserTest,
 
             FriendsKickedStories,
             FriendsKickedStoriesRss,
@@ -168,6 +169,8 @@ namespace Incremental.Kick.Web.Helpers {
                     return MapPath(String.Format("/users/{0}/comments/rss", value));
                 case PageName.UserTags:
                     return MapPath(String.Format("/users/{0}/tags", value));
+                case PageName.UserTest:
+                    return MapPath(String.Format("/users/{0}/test", value));
                 case PageName.FriendsKickedStories:
                     return MapPath(String.Format("/users/{0}/friends/kicked", value));
                 case PageName.FriendsSubmittedStories:

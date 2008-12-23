@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor,Guid? APIKey,string IPAddress)
+	    public void Insert(string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor,Guid? APIKey,string IPAddress,bool IsVetted)
 	    {
 		    User item = new User();
 		    
@@ -154,6 +154,8 @@ namespace Incremental.Kick.Dal
             
             item.IPAddress = IPAddress;
             
+            item.IsVetted = IsVetted;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -163,7 +165,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int UserID,string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor,Guid? APIKey,string IPAddress)
+	    public void Update(int UserID,string Username,string Email,string Password,string PasswordSalt,bool IsGeneratedPassword,bool IsValidated,bool IsBanned,string AdsenseID,bool ReceiveEmailNewsletter,string Roles,int HostID,DateTime LastActiveOn,DateTime CreatedOn,DateTime ModifiedOn,string Location,bool UseGravatar,string GravatarCustomEmail,string WebsiteURL,string BlogURL,string BlogFeedURL,bool AppearOnline,bool ShowStoryThumbnail,bool ShowEmoticons,string KickItTextColor,string KickItBackgroundColor,string KickCountTextColor,string KickCountBackgroundColor,string KickImageBorderColor,Guid? APIKey,string IPAddress,bool IsVetted)
 	    {
 		    User item = new User();
 		    
@@ -228,6 +230,8 @@ namespace Incremental.Kick.Dal
 				item.APIKey = APIKey;
 				
 				item.IPAddress = IPAddress;
+				
+				item.IsVetted = IsVetted;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

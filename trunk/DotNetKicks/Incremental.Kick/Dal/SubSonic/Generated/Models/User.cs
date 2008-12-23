@@ -508,6 +508,20 @@ namespace Incremental.Kick.Dal
 				colvarIPAddress.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarIPAddress);
 				
+				TableSchema.TableColumn colvarIsVetted = new TableSchema.TableColumn(schema);
+				colvarIsVetted.ColumnName = "IsVetted";
+				colvarIsVetted.DataType = DbType.Boolean;
+				colvarIsVetted.MaxLength = 0;
+				colvarIsVetted.AutoIncrement = false;
+				colvarIsVetted.IsNullable = false;
+				colvarIsVetted.IsPrimaryKey = false;
+				colvarIsVetted.IsForeignKey = false;
+				colvarIsVetted.IsReadOnly = false;
+				
+						colvarIsVetted.DefaultSetting = @"((1))";
+				colvarIsVetted.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarIsVetted);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -830,6 +844,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("IsVetted")]
+		public bool IsVetted 
+		{
+			get { return GetColumnValue<bool>(Columns.IsVetted); }
+
+			set { SetColumnValue(Columns.IsVetted, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -940,7 +964,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress)
+		public static void Insert(string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress,bool varIsVetted)
 		{
 			User item = new User();
 			
@@ -1004,6 +1028,8 @@ namespace Incremental.Kick.Dal
 			
 			item.IPAddress = varIPAddress;
 			
+			item.IsVetted = varIsVetted;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -1015,7 +1041,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress)
+		public static void Update(int varUserID,string varUsername,string varEmail,string varPassword,string varPasswordSalt,bool varIsGeneratedPassword,bool varIsValidated,bool varIsBanned,string varAdsenseID,bool varReceiveEmailNewsletter,string varRoles,int varHostID,DateTime varLastActiveOn,DateTime varCreatedOn,DateTime varModifiedOn,string varLocation,bool varUseGravatar,string varGravatarCustomEmail,string varWebsiteURL,string varBlogURL,string varBlogFeedURL,bool varAppearOnline,bool varShowStoryThumbnail,bool varShowEmoticons,string varKickItTextColor,string varKickItBackgroundColor,string varKickCountTextColor,string varKickCountBackgroundColor,string varKickImageBorderColor,Guid? varAPIKey,string varIPAddress,bool varIsVetted)
 		{
 			User item = new User();
 			
@@ -1080,6 +1106,8 @@ namespace Incremental.Kick.Dal
 				item.APIKey = varAPIKey;
 			
 				item.IPAddress = varIPAddress;
+			
+				item.IsVetted = varIsVetted;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1372,6 +1400,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn IsVettedColumn
+        {
+            get { return Schema.Columns[31]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -1407,6 +1444,7 @@ namespace Incremental.Kick.Dal
 			 public static string KickImageBorderColor = @"KickImageBorderColor";
 			 public static string APIKey = @"APIKey";
 			 public static string IPAddress = @"IPAddress";
+			 public static string IsVetted = @"IsVetted";
 						
 		}
 

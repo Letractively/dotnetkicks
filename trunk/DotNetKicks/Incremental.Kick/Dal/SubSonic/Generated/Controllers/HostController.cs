@@ -90,7 +90,7 @@ namespace Incremental.Kick.Dal
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedOn,string BlogUrl,string Email,string Template,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string AnnouncementHtml,string FeedBurnerMainRssFeedUrl,string FeedBurnerMainRssFeedCountHtml,bool UseStaticRoot,string SmtpHost,int SmtpPort,string SmtpUsername,string SmtpPassword,bool SmtpEnableSsl,string ReCaptchaPublicKey,string ReCaptchaPrivateKey,string SubmitAStoryMessage,string JoinTheCommunityMessage)
+	    public void Insert(string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedOn,string BlogUrl,string Email,string Template,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string AnnouncementHtml,string FeedBurnerMainRssFeedUrl,string FeedBurnerMainRssFeedCountHtml,bool UseStaticRoot,string SmtpHost,int SmtpPort,string SmtpUsername,string SmtpPassword,bool SmtpEnableSsl,string ReCaptchaPublicKey,string ReCaptchaPrivateKey,string SubmitAStoryMessage,string JoinTheCommunityMessage,bool AutoVetUsers)
 	    {
 		    Host item = new Host();
 		    
@@ -172,6 +172,8 @@ namespace Incremental.Kick.Dal
             
             item.JoinTheCommunityMessage = JoinTheCommunityMessage;
             
+            item.AutoVetUsers = AutoVetUsers;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -181,7 +183,7 @@ namespace Incremental.Kick.Dal
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int HostID,string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedOn,string BlogUrl,string Email,string Template,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string AnnouncementHtml,string FeedBurnerMainRssFeedUrl,string FeedBurnerMainRssFeedCountHtml,bool UseStaticRoot,string SmtpHost,int SmtpPort,string SmtpUsername,string SmtpPassword,bool SmtpEnableSsl,string ReCaptchaPublicKey,string ReCaptchaPrivateKey,string SubmitAStoryMessage,string JoinTheCommunityMessage)
+	    public void Update(int HostID,string HostName,string RootUrl,string SiteTitle,string SiteDescription,string TagLine,string LogoPath,DateTime CreatedOn,string BlogUrl,string Email,string Template,bool ShowAds,string Culture,string UICulture,short Publish_MinimumStoryAgeInHours,short Publish_MaximumStoryAgeInHours,short Publish_MaximumSimultaneousStoryPublishCount,short Publish_MinimumStoryScore,short Publish_MinimumStoryKickCount,short Publish_MinimumStoryCommentCount,short Publish_MinimumAverageStoryKicksPerHour,short Publish_MinimunAverageCommentsPerHour,short Publish_MinimumViewCount,short Publish_KickScore,short Publish_CommentScore,string AdsenseID,string TrackingHtml,string AnnouncementHtml,string FeedBurnerMainRssFeedUrl,string FeedBurnerMainRssFeedCountHtml,bool UseStaticRoot,string SmtpHost,int SmtpPort,string SmtpUsername,string SmtpPassword,bool SmtpEnableSsl,string ReCaptchaPublicKey,string ReCaptchaPrivateKey,string SubmitAStoryMessage,string JoinTheCommunityMessage,bool AutoVetUsers)
 	    {
 		    Host item = new Host();
 		    
@@ -264,6 +266,8 @@ namespace Incremental.Kick.Dal
 				item.SubmitAStoryMessage = SubmitAStoryMessage;
 				
 				item.JoinTheCommunityMessage = JoinTheCommunityMessage;
+				
+				item.AutoVetUsers = AutoVetUsers;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

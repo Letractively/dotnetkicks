@@ -639,6 +639,20 @@ namespace Incremental.Kick.Dal
 				colvarJoinTheCommunityMessage.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarJoinTheCommunityMessage);
 				
+				TableSchema.TableColumn colvarAutoVetUsers = new TableSchema.TableColumn(schema);
+				colvarAutoVetUsers.ColumnName = "AutoVetUsers";
+				colvarAutoVetUsers.DataType = DbType.Boolean;
+				colvarAutoVetUsers.MaxLength = 0;
+				colvarAutoVetUsers.AutoIncrement = false;
+				colvarAutoVetUsers.IsNullable = false;
+				colvarAutoVetUsers.IsPrimaryKey = false;
+				colvarAutoVetUsers.IsForeignKey = false;
+				colvarAutoVetUsers.IsReadOnly = false;
+				
+						colvarAutoVetUsers.DefaultSetting = @"((0))";
+				colvarAutoVetUsers.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarAutoVetUsers);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -1051,6 +1065,16 @@ namespace Incremental.Kick.Dal
 
 		}
 
+		  
+		[XmlAttribute("AutoVetUsers")]
+		public bool AutoVetUsers 
+		{
+			get { return GetColumnValue<bool>(Columns.AutoVetUsers); }
+
+			set { SetColumnValue(Columns.AutoVetUsers, value); }
+
+		}
+
 		
 		#endregion
 		
@@ -1113,7 +1137,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,bool varAutoVetUsers)
 		{
 			Host item = new Host();
 			
@@ -1195,6 +1219,8 @@ namespace Incremental.Kick.Dal
 			
 			item.JoinTheCommunityMessage = varJoinTheCommunityMessage;
 			
+			item.AutoVetUsers = varAutoVetUsers;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -1206,7 +1232,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,bool varAutoVetUsers)
 		{
 			Host item = new Host();
 			
@@ -1289,6 +1315,8 @@ namespace Incremental.Kick.Dal
 				item.SubmitAStoryMessage = varSubmitAStoryMessage;
 			
 				item.JoinTheCommunityMessage = varJoinTheCommunityMessage;
+			
+				item.AutoVetUsers = varAutoVetUsers;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -1662,6 +1690,15 @@ namespace Incremental.Kick.Dal
         
         
         
+        public static TableSchema.TableColumn AutoVetUsersColumn
+        {
+            get { return Schema.Columns[40]; }
+
+        }
+
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -1706,6 +1743,7 @@ namespace Incremental.Kick.Dal
 			 public static string ReCaptchaPrivateKey = @"ReCaptchaPrivateKey";
 			 public static string SubmitAStoryMessage = @"SubmitAStoryMessage";
 			 public static string JoinTheCommunityMessage = @"JoinTheCommunityMessage";
+			 public static string AutoVetUsers = @"AutoVetUsers";
 						
 		}
 
