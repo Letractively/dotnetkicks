@@ -29,7 +29,8 @@ namespace Incremental.Kick.Web.UI.Controls {
         protected void BanUser_Click(object sender, EventArgs e) {
             this.KickPage.DemandModeratorRole();
 
-            this._user.Ban(this.KickPage.KickUserProfile, this.KickPage.HostProfile);
+            //this._user.Ban(this.KickPage.KickUserProfile, this.KickPage.HostProfile);
+			UserBR.BanUser(this._user.UserID, this.KickPage.KickUserProfile, this.KickPage.HostProfile);
             this.KickPage.Reload();
         }
 
