@@ -17,12 +17,10 @@ namespace Incremental.Kick.Web.UI.Controls {
             get { return UrlFactory.CreateUrl(UrlFactory.PageName.Tools); }
         }
 
-        protected void Page_Init(object sender, EventArgs e) {
+        protected void Page_Load(object sender, EventArgs e) {
             if (!KickPage.KickUserProfile.IsVetted)
                 Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserTest, KickPage.KickUserProfile.Username));
-        }
 
-        protected void Page_Load(object sender, EventArgs e) {
             if (!Page.IsPostBack) {
                 // In case a url is passed on the querystring check if the story 
                 // already exists and in that case redirect the user to the story page
