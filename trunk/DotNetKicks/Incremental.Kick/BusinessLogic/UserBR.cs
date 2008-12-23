@@ -160,5 +160,10 @@ namespace Incremental.Kick.BusinessLogic {
         public static User GetUserByEmail(string email) {
             return User.FetchUserByParameter(User.Columns.Email, email);
         }
+
+		public static void BanUser(int userID, User moderator, Host host) {
+			User user = User.FetchByID(userID);
+			user.Ban(moderator, host);
+		}
     }
 }

@@ -118,7 +118,7 @@ namespace Incremental.Kick.Web.Controls
             //TODO: remove inline style from table
             // Render kick it side image
             writer.WriteLine(
-                @"<div id =""m_{3}"">
+                @"<div id =""m_{3}"" class=""u_{9}"">
                 <table class=""" + tableClass +
                 @"""><tr>
                     <td class=""storySummaryKickTD"">
@@ -129,7 +129,7 @@ namespace Incremental.Kick.Web.Controls
                     {8}</td>
             ",
                 kickStoryUrl, _story.KickCount, kickCountClass, _story.StoryID, kickItCssClass, kickedCssClass,
-                KickPage.User.Identity.IsAuthenticated.ToString().ToLower(), KickPage.StaticIconRootUrl, adminHtml);
+                KickPage.User.Identity.IsAuthenticated.ToString().ToLower(), KickPage.StaticIconRootUrl, adminHtml, _story.UserID);
 
             string publishedHtml = "";
             string linkAttributes = "";
@@ -204,8 +204,9 @@ namespace Incremental.Kick.Web.Controls
             // Render delete story link
             if (KickPage.IsHostModerator)
             {
-                string deleteText = "delete";
-                if (_story.SpamCount > 0)
+				string deleteText = "delete";
+				string banText = "ban";
+				if (_story.SpamCount > 0)
                     deleteText += " (spam count is " + _story.SpamCount + ")";
                 if (_story.IsSpam)
                 {
@@ -220,8 +221,10 @@ namespace Incremental.Kick.Web.Controls
                     writer.WriteLine(
                      @" |
                     <span class=""ModeratorLink""><a href=""javascript:Delete({0});"">{1}</a></span>
+                     |
+                    <span class=""BanLink""><a href=""javascript:Ban({2});"">{3}</a></span>
                     ",
-                     _story.StoryID, deleteText);
+                     _story.StoryID, deleteText, _story.UserID, banText);
                 }
             }
 

@@ -87,7 +87,18 @@ function changeOpac(opacity, id) {
 function shiftOpacity(id, millisec) {
     opacity(id, 100, 0, millisec);
     setTimeout("HideDiv('" + id + "')",(millisec));
+}
+
+function shiftOpacityByClass(className, millisec) {
+	var elements = getElementsByClass(className, null, 'div');
+	elements.forEach(function(curValue, curIndex, curArray) {
+		var id = curValue.id;
+		opacity(id, 100, 0, millisec);
+		setTimeout("HideDiv('" + id + "')", (millisec));
+	});
+	
 } 
+
 
 function ReportAsSpam(storyID) {
     StartLoading();
