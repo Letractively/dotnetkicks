@@ -780,6 +780,13 @@
     <Compile Include="Pages\User\SubmittedStories.aspx.designer.cs">
       <DependentUpon>SubmittedStories.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\User\UserTest.aspx.cs">
+      <DependentUpon>UserTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\UserTest.aspx.designer.cs">
+      <DependentUpon>UserTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\VerifyEmail.aspx.cs">
       <DependentUpon>VerifyEmail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -930,6 +937,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Pages\User\UserTest.aspx" />
     <Content Include="Templates\Ruby\MasterPage.Master" />
     <Content Include="Controls\Api\ApiMenu.ascx" />
     <Content Include="Controls\Admin\Search.ascx" />

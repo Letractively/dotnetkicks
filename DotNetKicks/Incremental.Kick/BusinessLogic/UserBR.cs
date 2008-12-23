@@ -46,6 +46,7 @@ namespace Incremental.Kick.BusinessLogic {
             user.HostID = host.HostID;
             user.IPAddress = ipAddress;
             user.LastActiveOn = DateTime.Now;
+            user.IsVetted = host.AutoVetUsers;
 
             using (TransactionScope scope = new TransactionScope()) {
                 user.Save();

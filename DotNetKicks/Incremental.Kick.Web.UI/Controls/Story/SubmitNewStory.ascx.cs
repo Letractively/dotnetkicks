@@ -5,31 +5,30 @@ using Incremental.Kick.Caching;
 using Incremental.Kick.Web.Controls;
 using Incremental.Kick.Web.Helpers;
 using Incremental.Kick.Helpers;
+using System.Security;
 
-namespace Incremental.Kick.Web.UI.Controls
-{
-    public partial class SubmitNewStory : KickUserControl
-    {
-        protected static string NewStoryUrl
-        {
+namespace Incremental.Kick.Web.UI.Controls {
+    public partial class SubmitNewStory : KickUserControl {
+        protected static string NewStoryUrl {
             get { return UrlFactory.CreateUrl(UrlFactory.PageName.SubmitStory); }
         }
 
-        protected static string ToolsUrl
-        {
+        protected static string ToolsUrl {
             get { return UrlFactory.CreateUrl(UrlFactory.PageName.Tools); }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
+        protected void Page_Init(object sender, EventArgs e) {
+            if (!KickPage.KickUserProfile.IsVetted)
+                Response.Redirect(UrlFactory.CreateUrl(UrlFactory.PageName.UserTest, KickPage.KickUserProfile.Username));
+        }
+
+        protected void Page_Load(object sender, EventArgs e) {
+            if (!Page.IsPostBack) {
                 // In case a url is passed on the querystring check if the story 
                 // already exists and in that case redirect the user to the story page
                 string url = Request.QueryString["url"];
 
-                if (!string.IsNullOrEmpty(url))
-                {
+                if (!string.IsNullOrEmpty(url)) {
                     Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(url.Trim());
 
                     if (story != null)
@@ -49,8 +48,7 @@ namespace Incremental.Kick.Web.UI.Controls
                 if (Title.Text.Length > 70)
                     Title.Text = Title.Text.Substring(0, 70);
 
-                if (Title.Text.Length > 0)
-                {
+                if (Title.Text.Length > 0) {
                     TitleNoteLabel.Text = "NOTE: Is this title correct?<br/>";
                     TitleNoteLabel.Visible = true;
                 }
@@ -66,10 +64,11 @@ namespace Incremental.Kick.Web.UI.Controls
             }
         }
 
-        protected void SubmitStory_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
+        protected void SubmitStory_Click(object sender, EventArgs e) {
+            if (Page.IsValid) {
+                if (!KickPage.KickUserProfile.IsVetted)
+                    throw new SecurityException("This user can't submit stories");
+
                 short categoryID = short.Parse(Category.SelectedValue);
                 string storyIdentifier =
                     StoryBR.AddStory(KickPage.HostProfile.HostID, Title.Text, Description.Text, Url.Text, categoryID,
@@ -89,15 +88,13 @@ namespace Incremental.Kick.Web.UI.Controls
         }
 
 
-        protected void UrlCheck_ServerValidate(object source, ServerValidateEventArgs args)
-        {
+        protected void UrlCheck_ServerValidate(object source, ServerValidateEventArgs args) {
 
             // Retrieve the story given the url
             Dal.Story story = Incremental.Kick.Dal.Story.FetchStoryByUrl(args.Value);
 
             // If the story already exists in the database
-            if (story != null)
-            {
+            if (story != null) {
                 // Make page invalid
                 args.IsValid = false;
 
@@ -113,8 +110,7 @@ namespace Incremental.Kick.Web.UI.Controls
             bool banninated = BannedUrlHelper.IsUrlBanninated(args.Value, HostCache.GetHost(HostHelper.GetHostAndPort(Request.Url)).HostID);
 
             // If the url matches
-            if (banninated)
-            {
+            if (banninated) {
                 // Make page invalid
                 args.IsValid = false;
 
