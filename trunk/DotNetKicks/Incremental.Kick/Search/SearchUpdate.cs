@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -198,6 +199,21 @@ namespace Incremental.Kick.Search
             {
                 bool indexExists = IndexExists(hostId);
 
+                if (indexExists)
+                {
+                    //logic to version the lucene index to allow
+                    //use to replace with a new version should we need to
+                    //this should be kind of value stored in settings table.
+                    //check if the version of the lucene index is the latest version
+                    indexExists = IsLuceneIndexCorrectVersion(hostId);
+
+                    if (!indexExists)
+                    {
+                        Log.Debug("Lucene index exists but is older version, need to overwrite with new document fields");
+                    }
+
+                }
+
                 StoryCollection stories = null;
 
                 if (!indexExists)
@@ -223,6 +239,10 @@ namespace Incremental.Kick.Search
 
                     isIncrementalCrawl = true;
                     storiesToIndexCount = Story.GetUpdatedStoriesCount(hostId, lastUpdateTime);
+
+                    Log.InfoFormat("Found: {0} stories to add to index since last update at: {1}",
+                                    storiesToIndexCount,
+                                    lastUpdateTime);
                 }
 
 
@@ -329,6 +349,8 @@ namespace Incremental.Kick.Search
                 doc.Add(new Field("category", story.Category.Name, Field.Store.NO, Field.Index.TOKENIZED));
                 doc.Add(new Field("tags", GetStoryTags(story), Field.Store.NO, Field.Index.TOKENIZED));
                 doc.Add(new Field("id", story.StoryID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED));
+                doc.Add(new Field("kickCount", story.KickCount.ToString(), Field.Store.NO, Field.Index.UN_TOKENIZED));
+                doc.Add(new Field("dateAdded", DateField.DateToString(story.CreatedOn), Field.Store.NO, Field.Index.UN_TOKENIZED));
 
                 modifier.AddDocument(doc);
                 Log.DebugFormat("StoryId {0} added to index", story.StoryID);
@@ -499,6 +521,26 @@ namespace Incremental.Kick.Search
                 hostCrawlError[hostId] = success;
             else
                 hostCrawlError.Add(hostId, success);
+        }
+
+        /// <summary>
+        /// Determines if the lucene index that exist in the file system is latest
+        /// version.
+        /// </summary>
+        /// <remarks>This is used to determine if we need to trigger a full crawl due to
+        /// a change in the documents fields in the lucene index. This has happen since
+        /// we are now allowing sorting which means we need additional fields
+        /// <para>If the index changes again then update this method with the logic
+        /// which can be used to determine if the index is the latest version</para></remarks>
+        /// <returns>returns true if the index is up to data, or false
+        /// if the next is old and needs to be replaced</returns>
+        private bool IsLuceneIndexCorrectVersion(int hostId)
+        {
+            IndexReader reader = IndexReader.Open(this.IndexHostPath(hostId));
+            ICollection collection = reader.GetFieldNames(IndexReader.FieldOption.ALL);
+            reader.Close();
+
+            return collection.Count == 9;
         }
 
 

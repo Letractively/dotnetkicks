@@ -37,12 +37,33 @@ namespace Incremental.Kick.Search
                         MethodBase.GetCurrentMethod().DeclaringType);
 
 
-
+        /// <summary>
+        /// Searches the index for any documents that match the query 
+        /// term. Returns a StoryCollection of matching stories. This method allows the
+        /// results to be sorted based on relevances or a given field in the index.
+        /// This method also allows the results to be limited to a given user that
+        /// has kicked the story.
+        /// </summary>
+        /// <param name="hostID">hostId for the site being searched</param>
+        /// <param name="queryTerm">query string to search the index for</param>
+        /// <param name="username">username that the search should be restricted to. If this
+        /// parameter is null then the search will not be restricted to a user</param>
+        /// <param name="page">Page of results to return</param>
+        /// <param name="pageSize">No of items to return for a page</param>
+        /// <param name="sortField">name of the field in the index to sort the results by. If this
+        /// field is null then the sorting will be by relevance</param>
+        /// <param name="revereseSortOrder">used to indicate that the sort field should be sorted
+        /// in the reverse order</param>
+        /// <param name="totalNoResults">Total no of hits found for the query term, this
+        /// value is outputted</param>
+        /// <returns></returns>
         public StoryCollection SearchIndex(int hostID, string queryTerm, string username, int page,
-                                            int pageSize, out int totalNoResults)
+                                            int pageSize, string sortField, bool revereseSortOrder,
+                                            out int totalNoResults)
         {
             totalNoResults = 0;
             Query query;
+            Hits hits;
 
             Log.Debug("Starting index search");
 
@@ -67,8 +88,18 @@ namespace Incremental.Kick.Search
 
             Log.DebugFormat("Querying the index for term:\"{0}\" page:{1} username:{2}", queryTerm, page, username);
 
-            Hits hits = searcher.Search(query);
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                //sort the results by the user defined field
+                Sort sortOrder = new Sort(sortField, revereseSortOrder);
+                hits = searcher.Search(query, sortOrder);
 
+                Log.DebugFormat("Sort results by: {0}, reversed sort order: {1}", sortField, revereseSortOrder);
+            }else  
+                //sort the results by relevances as determined by lucene
+                hits = searcher.Search(query);
+
+            
             Log.DebugFormat("No of results:{0} for term:\"{1}\"", hits.Length(), queryTerm);
 
             List<int> storyIds = new List<int>();
@@ -99,7 +130,8 @@ namespace Incremental.Kick.Search
         
         /// <summary>
         /// Searches the index for any documents that match the query 
-        /// term. Returns a StoryCollection of matching stories.
+        /// term. Returns a StoryCollection of matching stories. Stories
+        /// returned will be from the complete index and order by relevance.
         /// </summary>
         /// <param name="hostID">hostId for the site being searched</param>
         /// <param name="queryTerm">query string to search the index for</param>
@@ -110,52 +142,7 @@ namespace Incremental.Kick.Search
         /// <returns></returns>
         public StoryCollection SearchIndex(int hostID, string queryTerm, int page, int pageSize, out int totalNoResults)
         {
-            return SearchIndex(hostID, queryTerm, null, page, pageSize, out totalNoResults);
-            //totalNoResults = 0;
-
-            //Log.Debug("Starting index search");
-
-            //IndexSearcher searcher = GetSearcher(hostID);
-
-            //QueryFactory queryFactory = new QueryFactory(QueryFactory.QueryType.Stories);
-            //Query query = queryFactory.Parse(queryTerm, null);
-
-            //if (query == null)
-            //{
-            //    Log.Debug("No query term supplied, finished");
-            //    return null;
-            //}
-
-            //Log.DebugFormat("Querying the index for term:\"{0}\" page:{1}", queryTerm, page);
-
-            //Hits hits = searcher.Search(query);
-
-            //Log.DebugFormat("No of results:{0} for term:\"{1}\"", hits.Length(), queryTerm);
-
-            //List<int> storyIds = new List<int>();
-
-            ////calculate the starting index of the hits
-            //int startIndex = (page - 1) * pageSize;
-
-            //if (startIndex > hits.Length())
-            //    startIndex = 0;
-
-            ////calculate the ending index of the hits
-            //int endIndex;
-
-            //endIndex = (startIndex + pageSize);
-            //if (endIndex > hits.Length())
-            //    endIndex = hits.Length();
-
-            //for (int i = startIndex; i < endIndex; i++)
-            //{
-            //    Document doc = hits.Doc(i);
-            //    string id = doc.GetField("id").StringValue();
-            //    storyIds.Add(Int32.Parse(id));
-            //}
-
-            //totalNoResults = hits.Length();
-            //return LoadStorySearchResults(storyIds);
+            return SearchIndex(hostID, queryTerm, null, page, pageSize, null, false, out totalNoResults);
         }
 
 
@@ -235,7 +222,7 @@ namespace Incremental.Kick.Search
         /// </remarks>
         /// <returns></returns>
         public bool DeleteIndex(int hostID)
-        {
+        {   
             if (SearchUpdate.Instance.IsUpdateRunning)
                 return false;
 
@@ -256,7 +243,6 @@ namespace Incremental.Kick.Search
                 return false;
             }
         }
-
 
     }
 }
