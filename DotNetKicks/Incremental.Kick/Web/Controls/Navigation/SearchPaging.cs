@@ -28,8 +28,17 @@ namespace Incremental.Kick.Web.Controls
             //to stories that have been kicked by that user.
             string queryTerm = Context.Server.UrlEncode(Context.Request.QueryString["q"]);
             string userKickedStories = Context.Request.QueryString["user"];
+            string sortAscDirection = Context.Request.QueryString["sortReverse"];
+            string sortField = Context.Request.QueryString["sort"];
 
-            return string.Format("/search?q={0}&user={1}&page={2}", queryTerm, userKickedStories, pageNumber);
+            //return string.Format("/search?q={0}&user={1}&page={2}", queryTerm, userKickedStories, pageNumber);
+
+            return string.Format("/search?q={0}&user={1}&page={2}&sortReverse={3}&sort={4}",
+                                        queryTerm,
+                                        userKickedStories,
+                                        pageNumber,
+                                        sortAscDirection,
+                                        sortField);
         }
     }
 }
