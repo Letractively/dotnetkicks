@@ -161,7 +161,7 @@ namespace Incremental.Kick.Dal {
         public static UserAction RecordUserPassedTest(int hostID, User user) {
             UserAction userAction = Create(hostID, user.UserID, ActionType.UserPassedTest);
             UserLink userLink = new UserLink(user);
-            userAction.Message = String.Format("passed the test, congratulations!", ControlHelper.RenderControl(userLink));
+            userAction.Message = String.Format("passed the knowledge test, congratulations!", ControlHelper.RenderControl(userLink));
             userAction.Save();
             return userAction;
         }
