@@ -144,8 +144,8 @@ namespace Incremental.Kick.Web.Controls
             // Render submitted by link
 			writer.WriteLine(
                 @"
-                    <td class=""storySummaryMainTD""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
-                        <div class=""storyTitle""><a onclick=""plusViewCount({5});"" href=""{0}"" {4}>{1}</a> <a href=""{0}""><img onclick=""plusViewCount({5});"" src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
+                    <td class=""storySummaryMainTD xfolkentry""><table width=""100%"" class=""WideTable"" cellpadding=""0"" cellspacing=""0""><tr><td valign=""top"">
+                        <div class=""storyTitle""><a class=""taggedlink"" onclick=""plusViewCount({5});"" href=""{0}"" {4}>{1}</a> <a href=""{0}""><img onclick=""plusViewCount({5});"" src=""{3}/external.png"" width=""10"" height=""10"" border=""0""/></a></div>
                         <div class=""storySubmitted"">{2} submitted by ",
 				_story.Url, _story.Title, publishedHtml, KickPage.StaticIconRootUrl, linkAttributes, _story.StoryID);
 
@@ -163,7 +163,7 @@ namespace Incremental.Kick.Web.Controls
                 @"
                 {0}</div>
         
-                        <p>{1}</p>
+                        <p class=""description"">{1}</p>
 
                         <div class=""storyActions"">
                             <a href=""{2}"" class=""commentsLink"">
@@ -303,8 +303,8 @@ namespace Incremental.Kick.Web.Controls
 
             //TODO: remove inline style from table
             writer.WriteLine(
-                @"<div class=""storySummaryMainTD"">
-                        <div class=""storyTitle""><a href=""{0}"">{1}</a> <a href=""{0}""></a></div>
+                @"<div class=""storySummaryMainTD xfolkentry"">
+                        <div class=""storyTitle""><a href=""{0}"" class=""taggedlink"">{1}</a> <a href=""{0}""></a></div>
                         <div class=""storySubmitted"">{2} submitted by 
             ",
                 _story.Url, _story.Title, publishedHtml);
