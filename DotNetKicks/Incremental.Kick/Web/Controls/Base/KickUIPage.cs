@@ -94,6 +94,18 @@ namespace Incremental.Kick.Web.Controls {
             this.Header.Controls.Add(literal);
         }
 
+
+        public void AddOpenSearchLink()
+        {
+            HtmlLink openSearchLink = new HtmlLink();
+            openSearchLink.Href = "/Services/OpenSearch/Search.ashx";
+            openSearchLink.Attributes.Add("type", "application/opensearchdescription+xml");
+            openSearchLink.Attributes.Add("rel", "search");
+            openSearchLink.Attributes.Add("title", HostProfile.SiteTitle);
+
+            this.Header.Controls.Add(openSearchLink);
+        }
+
         protected override void OnPreInit(EventArgs e) {
             this.MasterPageFile = "~/Templates/" + this.HostProfile.Template + "/MasterPage.master";
             base.OnPreInit(e);
@@ -125,6 +137,8 @@ namespace Incremental.Kick.Web.Controls {
                 DebugInformation debugInfo = new DebugInformation();
                 this.Controls.Add(debugInfo);
             }
+
+            AddOpenSearchLink();
 
             base.OnPreRender(e);
         }

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0D66373E-E06F-4A6C-806A-F4F5855121A0}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -857,6 +857,9 @@
       <DependentUpon>JsonServices.ashx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\OpenSearch\Search.ashx.cs">
+      <DependentUpon>Search.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Ruby\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -937,6 +940,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="elmah.axd" />
+    <Content Include="Services\OpenSearch\Search.ashx" />
     <Content Include="Pages\User\UserTest.aspx" />
     <Content Include="Templates\Ruby\MasterPage.Master" />
     <Content Include="Controls\Api\ApiMenu.ascx" />
@@ -1119,9 +1123,6 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
