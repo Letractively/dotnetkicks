@@ -343,11 +343,11 @@ namespace Incremental.Kick.Search
                 Document doc = new Document();
 
                 doc.Add(new Field("url", story.Url, Field.Store.NO, Field.Index.TOKENIZED));
-                doc.Add(new Field("title", story.Title, Field.Store.NO, Field.Index.TOKENIZED));
+                doc.Add(new Field("title", story.Title, Field.Store.NO, Field.Index.TOKENIZED, Field.TermVector.YES));
                 doc.Add(new Field("description", story.Description, Field.Store.NO, Field.Index.TOKENIZED));
                 doc.Add(new Field("users", GetUserWhoKickedSearchString(story), Field.Store.NO, Field.Index.TOKENIZED));
                 doc.Add(new Field("category", story.Category.Name, Field.Store.NO, Field.Index.TOKENIZED));
-                doc.Add(new Field("tags", GetStoryTags(story), Field.Store.NO, Field.Index.TOKENIZED));
+                doc.Add(new Field("tags", GetStoryTags(story), Field.Store.NO, Field.Index.TOKENIZED, Field.TermVector.YES));
                 doc.Add(new Field("id", story.StoryID.ToString(), Field.Store.YES, Field.Index.UN_TOKENIZED));
                 doc.Add(new Field("kickCount", story.KickCount.ToString(), Field.Store.NO, Field.Index.UN_TOKENIZED));
                 doc.Add(new Field("dateAdded", DateField.DateToString(story.CreatedOn), Field.Store.NO, Field.Index.UN_TOKENIZED));
@@ -536,11 +536,35 @@ namespace Incremental.Kick.Search
         /// if the next is old and needs to be replaced</returns>
         private bool IsLuceneIndexCorrectVersion(int hostId)
         {
-            IndexReader reader = IndexReader.Open(this.IndexHostPath(hostId));
-            ICollection collection = reader.GetFieldNames(IndexReader.FieldOption.ALL);
-            reader.Close();
+            IndexReader reader = null;
+            bool isCurrentVersion = false;
 
-            return collection.Count == 9;
+            try
+            {
+                reader = IndexReader.Open(this.IndexHostPath(hostId));
+                ICollection collection = reader.GetFieldNames(IndexReader.FieldOption.ALL);
+
+                isCurrentVersion = collection.Count == 9;
+
+                //check we have termvectors for title and description, these are need for the 
+                //similar search
+                isCurrentVersion = isCurrentVersion & reader.GetTermFreqVector(0, "title") != null;
+                isCurrentVersion = isCurrentVersion & reader.GetTermFreqVector(0, "tags") != null;
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to determine if the index is the correct version", ex);
+                isCurrentVersion = false;
+            }
+            finally
+            {
+                if(reader!= null)
+                    reader.Close(); 
+            }           
+
+
+            return isCurrentVersion;
         }
 
 

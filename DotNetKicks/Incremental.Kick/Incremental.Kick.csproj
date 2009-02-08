@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{485BE7A0-08D8-438D-B5CC-55FB3A010130}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -72,6 +72,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\MvcValidatorToolkit\1.2.20080902\MvcValidatorToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="SimilarityNet, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\Lucene\SimilarityNet.dll</HintPath>
+    </Reference>
     <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\3rdParty\SubSonic\195\SubSonic.dll</HintPath>
@@ -122,6 +126,7 @@
     <Compile Include="Caching\SearchStoryCache.cs" />
     <Compile Include="Caching\SettingsCache.cs" />
     <Compile Include="Caching\ShoutCache.cs" />
+    <Compile Include="Caching\SimilarStoriesCache.cs" />
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserActionCache.cs" />
@@ -211,6 +216,7 @@
     <Compile Include="Search\SearchUpdate.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Search\SimilarStories.cs" />
     <Compile Include="Security\Cipher.cs" />
     <Compile Include="Security\Rijndael.cs" />
     <Compile Include="Security\SecurityToken.cs" />
@@ -265,6 +271,7 @@
     <Compile Include="Web\Controls\Story\CommentList.cs" />
     <Compile Include="Web\Controls\Story\PopularStoryHeader.cs" />
     <Compile Include="Web\Controls\Story\PopularStoryNavigator.cs" />
+    <Compile Include="Web\Controls\Story\RelatedStories.cs" />
     <Compile Include="Web\Controls\Story\RssFeedIcon.cs" />
     <Compile Include="Web\Controls\Story\StoryDynamicImage.cs" />
     <Compile Include="Web\Controls\Story\StoryList.cs" />

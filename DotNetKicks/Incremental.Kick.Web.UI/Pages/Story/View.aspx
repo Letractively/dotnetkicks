@@ -13,6 +13,8 @@
     <Kick:UsersWhoKicked ID="UsersWhoKicked" runat="server" />
     <Kick:CommentList ID="CommentList" runat="server" />
     <uc1:AddComment ID="AddComment" runat="server" />
+    <br />
+    <Kick:RelatedStories ID="RelatedStories" Title="Related Stories:" runat="server" />
 </asp:Content>
 <asp:Content ID="RightContent" ContentPlaceHolderID="RightContent" runat="Server">
     <Kick:KickForStoriesMenu ID="KickMenu" runat="Server" />
