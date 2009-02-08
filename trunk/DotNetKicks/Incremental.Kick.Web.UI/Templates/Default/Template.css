@@ -695,3 +695,13 @@ background-color: #A8CC45; background-image: url(images/gradients/green.gif); co
     .adsvia{ margin-top: 10px;}
 
 
+#relatedStoriesList{
+list-style: none;
+margin:0px;
+padding:3px;
+}
+
+#relatedStoriesList li{
+margin:0px;
+padding:1px;
+}

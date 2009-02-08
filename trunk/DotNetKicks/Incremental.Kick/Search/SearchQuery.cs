@@ -153,7 +153,7 @@ namespace Incremental.Kick.Search
         /// existing.
         /// </summary>
         /// <param name="hostID">hostID of the host to perform the search on</param>
-        private static IndexSearcher GetSearcher(int hostID)
+        internal static IndexSearcher GetSearcher(int hostID)
         {
 
             if (!searchers.ContainsKey(hostID))
@@ -190,7 +190,7 @@ namespace Incremental.Kick.Search
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private StoryCollection LoadStorySearchResults(IList<int> results)
+        internal static StoryCollection LoadStorySearchResults(IList<int> results)
         {
             if (results.Count == 0)
                 return null;
