@@ -546,10 +546,18 @@ namespace Incremental.Kick.Search
 
                 isCurrentVersion = collection.Count == 9;
 
-                //check we have termvectors for title and description, these are need for the 
+                //check we have termvectors for title and tag, these are need for the 
                 //similar search
-                isCurrentVersion = isCurrentVersion & reader.GetTermFreqVector(0, "title") != null;
-                isCurrentVersion = isCurrentVersion & reader.GetTermFreqVector(0, "tags") != null;
+
+                collection = reader.GetFieldNames(IndexReader.FieldOption.TERMVECTOR);
+
+                foreach (object name in collection)
+                {
+                    if (name.ToString() != "title" && name.ToString() != "tags")
+                    {
+                        isCurrentVersion = false;
+                    }
+                }
 
             }
             catch (Exception ex)
