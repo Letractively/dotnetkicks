@@ -29,7 +29,7 @@ namespace Incremental.Kick.Web.UI.Controls
 
                 //send a mail to the user with a link to change the password
                 UserBR.SendPasswordResetEmail(userTable.UserID, this.KickPage.HostProfile);
-                ConfirmationMessageLabel.Text = "An email has been sent to " + this.Email.Text + ", please check you mail.";
+                ConfirmationMessageLabel.Text = "An email has been sent to " + this.Email.Text + ", please check your mail.";
 
             }
             catch (Exception)
