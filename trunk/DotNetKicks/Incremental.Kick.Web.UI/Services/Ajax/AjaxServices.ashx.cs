@@ -187,6 +187,15 @@ namespace Incremental.Kick.Web.UI.Services.Ajax
             }
         }
 
+        [JsonRpcMethod("deleteUserAlertMessages")]
+        public void DeleteUserAlertMessages()
+        {
+            if (!KickUserProfile.IsGuest)
+            {
+                UserBR.RemoveUserAlertMessages(KickUserProfile.UserID);
+            }
+        }
+
         #endregion
 
 

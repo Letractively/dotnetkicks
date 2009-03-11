@@ -20,6 +20,8 @@ namespace Incremental.Kick.Dal
 		
 		public static string Elmah_Error = @"ELMAH_Error";
         
+		public static string AlertMessage = @"Kick_AlertMessage";
+        
 		public static string BannedUrlPattern = @"Kick_BannedUrlPattern";
         
 		public static string BlockedReferral = @"Kick_BlockedReferral";
@@ -50,6 +52,8 @@ namespace Incremental.Kick.Dal
         
 		public static string UserAction = @"Kick_UserAction";
         
+		public static string UserAlertMessage = @"Kick_UserAlertMessage";
+        
 		public static string UserFriend = @"Kick_UserFriend";
         
 	}
@@ -59,6 +63,8 @@ namespace Incremental.Kick.Dal
     public partial struct Views 
     {
 		
+		public static string UserAlertMessageView = @"Kick_UserAlertMessageView";
+        
     }
 
     #endregion

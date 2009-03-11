@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using SubSonic;
+using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Web.Helpers;
@@ -235,6 +236,8 @@ namespace Incremental.Kick.Dal {
 
         public void AddFriend(int friendID) {
             UserFriend.Insert(this.UserID, friendID, DateTime.Now);
+            UserBR.AddUserAlertMessage(friendID,
+                                       Incremental.Kick.Common.Enums.AlertMessageEnum.NewFriendRequest);
             UserCache.RemoveUser(this.UserID);
             UserCache.RemoveUser(friendID);
         }
@@ -251,6 +254,22 @@ namespace Incremental.Kick.Dal {
 
         public ApiUser ToApi(Host host) {
             return new ApiUser(this.Username, host.RootUrl + UrlFactory.CreateUrl(UrlFactory.PageName.UserProfile, this.Username), new Gravatar(this, 50).GravatarUrl(host));
+        }
+
+        /// <summary>
+        /// Returns a collection of alerts for the user
+        /// </summary>
+        /// <returns></returns>
+        public UserAlertMessageViewCollection AlertMessages()
+        {
+            Query query = UserAlertMessageView.Query();
+            query.WHERE(UserAlertMessageView.Columns.UserId, this.UserID);
+            query.ORDER_BY(UserAlertMessageView.Columns.AlertOrder, "ASC");
+
+            UserAlertMessageViewCollection alerts = new UserAlertMessageViewCollection();
+            alerts.LoadAndCloseReader(query.ExecuteReader());
+
+            return alerts;
         }
 
         public static bool IsUsernameAvailable(string username) {

@@ -130,10 +130,12 @@
     <Compile Include="Caching\StoryCache.cs" />
     <Compile Include="Caching\TagCache.cs" />
     <Compile Include="Caching\UserActionCache.cs" />
+    <Compile Include="Caching\UserAlertMessageCache.cs" />
     <Compile Include="Caching\UserCache.cs" />
     <Compile Include="Caching\ZeitgeistCache.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Enums\StoryListSortBy.cs" />
+    <Compile Include="Common\Enums\AlertMessageEnum.cs" />
     <Compile Include="Common\Exceptions\Exceptions.cs" />
     <Compile Include="Dal\Entities\Api\ApiChat.cs" />
     <Compile Include="Dal\Entities\Api\ApiPagedList.cs" />
@@ -157,6 +159,8 @@
     <Compile Include="Dal\SubSonic\Custom\TagCollection.cs" />
     <Compile Include="Dal\SubSonic\Custom\User.cs" />
     <Compile Include="Dal\SubSonic\Custom\UserAction.cs" />
+    <Compile Include="Dal\SubSonic\Custom\UserAlertMessageViewCollection.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Controllers\AlertMessageController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\BannedUrlPatternController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\BlockedReferralController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\CategoryController.cs" />
@@ -173,8 +177,10 @@
     <Compile Include="Dal\SubSonic\Generated\Controllers\StoryUserHostTagController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\TagController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserActionController.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Controllers\UserAlertMessageController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserController.cs" />
     <Compile Include="Dal\SubSonic\Generated\Controllers\UserFriendController.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Models\AlertMessage.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\BannedUrlPattern.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\BlockedReferral.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\Category.cs" />
@@ -191,6 +197,8 @@
     <Compile Include="Dal\SubSonic\Generated\Models\Tag.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\User.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\UserAction.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Models\UserAlertMessage.cs" />
+    <Compile Include="Dal\SubSonic\Generated\Models\UserAlertMessageView.cs" />
     <Compile Include="Dal\SubSonic\Generated\Models\UserFriend.cs" />
     <Compile Include="Dal\SubSonic\Generated\Utility\AllStructs.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
@@ -289,6 +297,7 @@
     <Compile Include="Web\Controls\User\Gravatar.cs" />
     <Compile Include="Web\Controls\User\LoginOrCreateAccount.cs" />
     <Compile Include="Web\Controls\User\ShoutList.cs" />
+    <Compile Include="Web\Controls\User\UserAlerts.cs" />
     <Compile Include="Web\Controls\User\UserLink.cs" />
     <Compile Include="Web\Controls\User\UserList.cs" />
     <Compile Include="Web\Controls\User\UserProfileHeader.cs" />

@@ -192,3 +192,15 @@ var ajaxServices;
 $(function() {
    ajaxServices = new AjaxServices();
 });
+
+function DeleteUserAlertMessages(){
+ ajaxServices.deleteUserAlertMessages();
+}
+
+jQuery(document).ready(function(){
+    jQuery("#alertClose").click(function(){
+        jQuery(".WebSiteAlert").fadeOut("normal");
+        DeleteUserAlertMessages();
+        return false;
+        });
+});
