@@ -651,6 +651,27 @@ background-color: #A8CC45; background-image: url(images/gradients/green.gif); co
 	margin: 0px 0px 8px 0px;
 }
 
+.flashLeft{
+width:560px;
+padding:0px;
+}
+
+.flashLeft ul{
+margin:0px;
+list-style:none;
+padding:0px;
+}
+
+.flashLeft ul li{
+padding:2px;
+}
+
+.flashRight{
+position:absolute;
+top:5px;
+right:20px;
+}
+
 .flash-notice {
 	background: #fff6bf url(images/icons/exclamation.png) center no-repeat;
 	background-position: 15px 50%;
@@ -664,6 +685,7 @@ background-color: #A8CC45; background-image: url(images/gradients/green.gif); co
 	border-top-color: #bbb;
 	border-bottom-color: #bbb;
 	margin: 16px;
+	position:relative;
 }
 
 .flash-error {

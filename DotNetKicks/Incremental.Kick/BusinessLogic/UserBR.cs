@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Transactions;
 using Incremental.Kick.Dal;
 using Incremental.Kick.Helpers;
 using Incremental.Kick.Security;
 using System.Security;
 using Incremental.Kick.Caching;
+using Incremental.Kick.Common.Enums;
 
 namespace Incremental.Kick.BusinessLogic {
     //NOTE: GJ: at some point I will be moving much of this logic into the SubSonic models
@@ -172,6 +174,42 @@ namespace Incremental.Kick.BusinessLogic {
             user.Save();
 
             UserAction.RecordUserPassedTest(host.HostID, user);
+        }
+
+        /// <summary>
+        /// Returns a list of string holding the alerts for the user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static IList<string> UserAlertMessages(int userId)
+        {
+            UserAlertMessageViewCollection alerts = UserAlertMessageCache.GetUserAlerts(userId);
+            if (alerts != null)
+                return alerts.DisplayAlertMessages();
+            else
+                return null;
+        }
+
+
+        /// <summary>
+        /// Adds an alert message for a given user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="alertMessage"></param>
+        public static void AddUserAlertMessage(int userId, AlertMessageEnum alertMessage)
+        {
+
+            SPs.Kick_AddAlertMessageForUser(userId, (int)alertMessage).Execute();
+            
+            //remove the cache for this user
+            UserAlertMessageCache.RemoveUser(userId);
+
+        }
+
+        public static void RemoveUserAlertMessages(int userId)
+        {
+            UserAlertMessage.Delete("userId", userId);
+            UserAlertMessageCache.RemoveUser(userId);
         }
     }
 }

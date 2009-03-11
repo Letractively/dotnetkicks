@@ -386,6 +386,21 @@ namespace Incremental.Kick.Dal{
         }
 
         
+        /// <summary>
+        /// Creates an object wrapper for the Kick_AddAlertMessageForUser Procedure
+        /// </summary>
+        public static StoredProcedure Kick_AddAlertMessageForUser(int? userId, int? alertMessageId)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("Kick_AddAlertMessageForUser" , DataService.GetInstance("DotNetKicks"));
+        	
+            sp.Command.AddParameter("@userId", userId,DbType.Int32);
+        	    
+            sp.Command.AddParameter("@alertMessageId", alertMessageId,DbType.Int32);
+        	    
+            return sp;
+        }
+
+        
     }
 
     

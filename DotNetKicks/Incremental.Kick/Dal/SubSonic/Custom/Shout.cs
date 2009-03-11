@@ -1,5 +1,6 @@
 using System;
 using SubSonic;
+using Incremental.Kick.BusinessLogic;
 using Incremental.Kick.Caching;
 using System.Web;
 using Incremental.Kick.Helpers;
@@ -42,6 +43,10 @@ namespace Incremental.Kick.Dal {
                 if (!string.IsNullOrEmpty(toUsername)) {
                     toUser = UserCache.GetUserByUsername(toUsername);
                     shout.ToUserID = toUser.UserID;
+
+                    //record the event as an alert
+                    UserBR.AddUserAlertMessage(toUser.UserID, 
+                                               Incremental.Kick.Common.Enums.AlertMessageEnum.ProfileShoutComment);
                 }
 
                 if (chatID.HasValue)

@@ -587,32 +587,6 @@ namespace Incremental.Kick.Dal
 				colvarSmtpEnableSsl.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSmtpEnableSsl);
 				
-				TableSchema.TableColumn colvarReCaptchaPublicKey = new TableSchema.TableColumn(schema);
-				colvarReCaptchaPublicKey.ColumnName = "ReCaptchaPublicKey";
-				colvarReCaptchaPublicKey.DataType = DbType.String;
-				colvarReCaptchaPublicKey.MaxLength = 100;
-				colvarReCaptchaPublicKey.AutoIncrement = false;
-				colvarReCaptchaPublicKey.IsNullable = true;
-				colvarReCaptchaPublicKey.IsPrimaryKey = false;
-				colvarReCaptchaPublicKey.IsForeignKey = false;
-				colvarReCaptchaPublicKey.IsReadOnly = false;
-				colvarReCaptchaPublicKey.DefaultSetting = @"";
-				colvarReCaptchaPublicKey.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarReCaptchaPublicKey);
-				
-				TableSchema.TableColumn colvarReCaptchaPrivateKey = new TableSchema.TableColumn(schema);
-				colvarReCaptchaPrivateKey.ColumnName = "ReCaptchaPrivateKey";
-				colvarReCaptchaPrivateKey.DataType = DbType.String;
-				colvarReCaptchaPrivateKey.MaxLength = 100;
-				colvarReCaptchaPrivateKey.AutoIncrement = false;
-				colvarReCaptchaPrivateKey.IsNullable = true;
-				colvarReCaptchaPrivateKey.IsPrimaryKey = false;
-				colvarReCaptchaPrivateKey.IsForeignKey = false;
-				colvarReCaptchaPrivateKey.IsReadOnly = false;
-				colvarReCaptchaPrivateKey.DefaultSetting = @"";
-				colvarReCaptchaPrivateKey.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarReCaptchaPrivateKey);
-				
 				TableSchema.TableColumn colvarSubmitAStoryMessage = new TableSchema.TableColumn(schema);
 				colvarSubmitAStoryMessage.ColumnName = "SubmitAStoryMessage";
 				colvarSubmitAStoryMessage.DataType = DbType.String;
@@ -638,6 +612,32 @@ namespace Incremental.Kick.Dal
 				colvarJoinTheCommunityMessage.DefaultSetting = @"";
 				colvarJoinTheCommunityMessage.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarJoinTheCommunityMessage);
+				
+				TableSchema.TableColumn colvarReCaptchaPublicKey = new TableSchema.TableColumn(schema);
+				colvarReCaptchaPublicKey.ColumnName = "ReCaptchaPublicKey";
+				colvarReCaptchaPublicKey.DataType = DbType.String;
+				colvarReCaptchaPublicKey.MaxLength = 100;
+				colvarReCaptchaPublicKey.AutoIncrement = false;
+				colvarReCaptchaPublicKey.IsNullable = true;
+				colvarReCaptchaPublicKey.IsPrimaryKey = false;
+				colvarReCaptchaPublicKey.IsForeignKey = false;
+				colvarReCaptchaPublicKey.IsReadOnly = false;
+				colvarReCaptchaPublicKey.DefaultSetting = @"";
+				colvarReCaptchaPublicKey.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarReCaptchaPublicKey);
+				
+				TableSchema.TableColumn colvarReCaptchaPrivateKey = new TableSchema.TableColumn(schema);
+				colvarReCaptchaPrivateKey.ColumnName = "ReCaptchaPrivateKey";
+				colvarReCaptchaPrivateKey.DataType = DbType.String;
+				colvarReCaptchaPrivateKey.MaxLength = 100;
+				colvarReCaptchaPrivateKey.AutoIncrement = false;
+				colvarReCaptchaPrivateKey.IsNullable = true;
+				colvarReCaptchaPrivateKey.IsPrimaryKey = false;
+				colvarReCaptchaPrivateKey.IsForeignKey = false;
+				colvarReCaptchaPrivateKey.IsReadOnly = false;
+				colvarReCaptchaPrivateKey.DefaultSetting = @"";
+				colvarReCaptchaPrivateKey.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarReCaptchaPrivateKey);
 				
 				TableSchema.TableColumn colvarAutoVetUsers = new TableSchema.TableColumn(schema);
 				colvarAutoVetUsers.ColumnName = "AutoVetUsers";
@@ -1026,26 +1026,6 @@ namespace Incremental.Kick.Dal
 		}
 
 		  
-		[XmlAttribute("ReCaptchaPublicKey")]
-		public string ReCaptchaPublicKey 
-		{
-			get { return GetColumnValue<string>(Columns.ReCaptchaPublicKey); }
-
-			set { SetColumnValue(Columns.ReCaptchaPublicKey, value); }
-
-		}
-
-		  
-		[XmlAttribute("ReCaptchaPrivateKey")]
-		public string ReCaptchaPrivateKey 
-		{
-			get { return GetColumnValue<string>(Columns.ReCaptchaPrivateKey); }
-
-			set { SetColumnValue(Columns.ReCaptchaPrivateKey, value); }
-
-		}
-
-		  
 		[XmlAttribute("SubmitAStoryMessage")]
 		public string SubmitAStoryMessage 
 		{
@@ -1062,6 +1042,26 @@ namespace Incremental.Kick.Dal
 			get { return GetColumnValue<string>(Columns.JoinTheCommunityMessage); }
 
 			set { SetColumnValue(Columns.JoinTheCommunityMessage, value); }
+
+		}
+
+		  
+		[XmlAttribute("ReCaptchaPublicKey")]
+		public string ReCaptchaPublicKey 
+		{
+			get { return GetColumnValue<string>(Columns.ReCaptchaPublicKey); }
+
+			set { SetColumnValue(Columns.ReCaptchaPublicKey, value); }
+
+		}
+
+		  
+		[XmlAttribute("ReCaptchaPrivateKey")]
+		public string ReCaptchaPrivateKey 
+		{
+			get { return GetColumnValue<string>(Columns.ReCaptchaPrivateKey); }
+
+			set { SetColumnValue(Columns.ReCaptchaPrivateKey, value); }
 
 		}
 
@@ -1137,7 +1137,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,bool varAutoVetUsers)
+		public static void Insert(string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,bool varAutoVetUsers)
 		{
 			Host item = new Host();
 			
@@ -1211,13 +1211,13 @@ namespace Incremental.Kick.Dal
 			
 			item.SmtpEnableSsl = varSmtpEnableSsl;
 			
-			item.ReCaptchaPublicKey = varReCaptchaPublicKey;
-			
-			item.ReCaptchaPrivateKey = varReCaptchaPrivateKey;
-			
 			item.SubmitAStoryMessage = varSubmitAStoryMessage;
 			
 			item.JoinTheCommunityMessage = varJoinTheCommunityMessage;
+			
+			item.ReCaptchaPublicKey = varReCaptchaPublicKey;
+			
+			item.ReCaptchaPrivateKey = varReCaptchaPrivateKey;
 			
 			item.AutoVetUsers = varAutoVetUsers;
 			
@@ -1232,7 +1232,7 @@ namespace Incremental.Kick.Dal
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,bool varAutoVetUsers)
+		public static void Update(int varHostID,string varHostName,string varRootUrl,string varSiteTitle,string varSiteDescription,string varTagLine,string varLogoPath,DateTime varCreatedOn,string varBlogUrl,string varEmail,string varTemplate,bool varShowAds,string varCulture,string varUICulture,short varPublish_MinimumStoryAgeInHours,short varPublish_MaximumStoryAgeInHours,short varPublish_MaximumSimultaneousStoryPublishCount,short varPublish_MinimumStoryScore,short varPublish_MinimumStoryKickCount,short varPublish_MinimumStoryCommentCount,short varPublish_MinimumAverageStoryKicksPerHour,short varPublish_MinimunAverageCommentsPerHour,short varPublish_MinimumViewCount,short varPublish_KickScore,short varPublish_CommentScore,string varAdsenseID,string varTrackingHtml,string varAnnouncementHtml,string varFeedBurnerMainRssFeedUrl,string varFeedBurnerMainRssFeedCountHtml,bool varUseStaticRoot,string varSmtpHost,int varSmtpPort,string varSmtpUsername,string varSmtpPassword,bool varSmtpEnableSsl,string varSubmitAStoryMessage,string varJoinTheCommunityMessage,string varReCaptchaPublicKey,string varReCaptchaPrivateKey,bool varAutoVetUsers)
 		{
 			Host item = new Host();
 			
@@ -1308,13 +1308,13 @@ namespace Incremental.Kick.Dal
 			
 				item.SmtpEnableSsl = varSmtpEnableSsl;
 			
-				item.ReCaptchaPublicKey = varReCaptchaPublicKey;
-			
-				item.ReCaptchaPrivateKey = varReCaptchaPrivateKey;
-			
 				item.SubmitAStoryMessage = varSubmitAStoryMessage;
 			
 				item.JoinTheCommunityMessage = varJoinTheCommunityMessage;
+			
+				item.ReCaptchaPublicKey = varReCaptchaPublicKey;
+			
+				item.ReCaptchaPrivateKey = varReCaptchaPrivateKey;
 			
 				item.AutoVetUsers = varAutoVetUsers;
 			
@@ -1654,7 +1654,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn ReCaptchaPublicKeyColumn
+        public static TableSchema.TableColumn SubmitAStoryMessageColumn
         {
             get { return Schema.Columns[36]; }
 
@@ -1663,7 +1663,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn ReCaptchaPrivateKeyColumn
+        public static TableSchema.TableColumn JoinTheCommunityMessageColumn
         {
             get { return Schema.Columns[37]; }
 
@@ -1672,7 +1672,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn SubmitAStoryMessageColumn
+        public static TableSchema.TableColumn ReCaptchaPublicKeyColumn
         {
             get { return Schema.Columns[38]; }
 
@@ -1681,7 +1681,7 @@ namespace Incremental.Kick.Dal
         
         
         
-        public static TableSchema.TableColumn JoinTheCommunityMessageColumn
+        public static TableSchema.TableColumn ReCaptchaPrivateKeyColumn
         {
             get { return Schema.Columns[39]; }
 
@@ -1739,10 +1739,10 @@ namespace Incremental.Kick.Dal
 			 public static string SmtpUsername = @"SmtpUsername";
 			 public static string SmtpPassword = @"SmtpPassword";
 			 public static string SmtpEnableSsl = @"SmtpEnableSsl";
-			 public static string ReCaptchaPublicKey = @"ReCaptchaPublicKey";
-			 public static string ReCaptchaPrivateKey = @"ReCaptchaPrivateKey";
 			 public static string SubmitAStoryMessage = @"SubmitAStoryMessage";
 			 public static string JoinTheCommunityMessage = @"JoinTheCommunityMessage";
+			 public static string ReCaptchaPublicKey = @"ReCaptchaPublicKey";
+			 public static string ReCaptchaPrivateKey = @"ReCaptchaPrivateKey";
 			 public static string AutoVetUsers = @"AutoVetUsers";
 						
 		}
