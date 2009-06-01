@@ -176,7 +176,16 @@ namespace Incremental.Kick.Search
             {
                 QueryParser qp = new QueryParser(fields[i], analyzer);
                 qp.SetDefaultOperator(QueryParser.Operator.AND);
-                Query fieldQuery = qp.Parse(queryTerm);
+                Query fieldQuery;
+                
+                try
+                {
+                    fieldQuery = qp.Parse(queryTerm);
+                }
+                catch(ParseException)
+                {
+                    fieldQuery = qp.Parse(QueryParser.Escape(queryTerm));
+                }
 
                 fieldQuery.SetBoost(weighting[i]);
 
