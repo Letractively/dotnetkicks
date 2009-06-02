@@ -685,7 +685,7 @@ right:20px;
 	border-top-color: #bbb;
 	border-bottom-color: #bbb;
 	margin: 16px;
-	position:relative;
+	/*position:relative;*/
 }
 
 .flash-error {
